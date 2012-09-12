@@ -26,6 +26,7 @@ public class Befehlswoerter
 		return Arrays.binarySearch(gueltigeBefehle, eingabe) >= 0;
 
 		/*
+		//binary search ist bessertoller
 		for(int i = 0; i < gueltigeBefehle.length; i++)
 		{
 			if(gueltigeBefehle[i].equals(eingabe))
