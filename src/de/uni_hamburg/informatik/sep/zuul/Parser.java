@@ -17,60 +17,70 @@ import java.util.StringTokenizer;
  * Objekt zurück.
  * 
  */
-public class Parser {
+public class Parser
+{
 
-    private Befehlswoerter befehle; // hält die gültigen Befehlswörter
+	private Befehlswoerter befehle; // hält die gültigen Befehlswörter
 
-    /**
-     * Erzeugt einen Parser.
-     */
-    public Parser() {
-        befehle = new Befehlswoerter();
-    }
+	/**
+	 * Erzeugt einen Parser.
+	 */
+	public Parser()
+	{
+		befehle = new Befehlswoerter();
+	}
 
-    /**
-     * Liest einen Befehl vom Benutzer ein und gibt ihn zurück.
-     * 
-     * @ensure Ergebnis != null
-     */
-    public Befehl liefereBefehl() {
-        String eingabezeile = ""; // für die gesamte Eingabezeile
-        String wort1;
-        String wort2;
+	/**
+	 * Liest einen Befehl vom Benutzer ein und gibt ihn zurück.
+	 * 
+	 * @ensure Ergebnis != null
+	 */
+	public Befehl liefereBefehl()
+	{
+		String eingabezeile = ""; // für die gesamte Eingabezeile
+		String wort1;
+		String wort2;
 
-        System.out.print("> "); // Eingabeaufforderung
+		System.out.print("> "); // Eingabeaufforderung
 
-        BufferedReader eingabe = new BufferedReader(new InputStreamReader(
-                System.in));
-        try {
-            eingabezeile = eingabe.readLine();
-        } catch (IOException exc) {
-            System.out.println("There was an error during reading: "
-                    + exc.getMessage());
-        }
+		BufferedReader eingabe = new BufferedReader(new InputStreamReader(
+				System.in));
+		try
+		{
+			eingabezeile = eingabe.readLine();
+		} catch(IOException exc)
+		{
+			System.out.println("There was an error during reading: "
+					+ exc.getMessage());
+		}
 
-        StringTokenizer tokenizer = new StringTokenizer(eingabezeile);
+		StringTokenizer tokenizer = new StringTokenizer(eingabezeile);
 
-        if (tokenizer.hasMoreTokens()) {
-            wort1 = tokenizer.nextToken(); // erstes Wort
-        } else {
-            wort1 = null;
-        }
-        if (tokenizer.hasMoreTokens()) {
-            wort2 = tokenizer.nextToken(); // zweites Wort
-        } else {
-            wort2 = null;
-        }
+		if(tokenizer.hasMoreTokens())
+		{
+			wort1 = tokenizer.nextToken(); // erstes Wort
+		} else
+		{
+			wort1 = null;
+		}
+		if(tokenizer.hasMoreTokens())
+		{
+			wort2 = tokenizer.nextToken(); // zweites Wort
+		} else
+		{
+			wort2 = null;
+		}
 
-        // Hinweis: Wir ignorieren den Rest der Zeile einfach.
+		// Hinweis: Wir ignorieren den Rest der Zeile einfach.
 
-        // Jetzt prüfen, ob der Befehl bekannt ist. Wenn ja, erzeugen
-        // wir das passende Befehl-Objekt. Wenn nicht, erzeugen wir
-        // einen unbekannten Befehl mit 'null'.
+		// Jetzt prüfen, ob der Befehl bekannt ist. Wenn ja, erzeugen
+		// wir das passende Befehl-Objekt. Wenn nicht, erzeugen wir
+		// einen unbekannten Befehl mit 'null'.
 
-        if (befehle.istBefehl(wort1)) {
-            return new Befehl(wort1, wort2);
-        }
-        return new Befehl(null, wort2);
-    }
+		if(befehle.istBefehl(wort1))
+		{
+			return new Befehl(wort1, wort2);
+		}
+		return new Befehl(null, wort2);
+	}
 }
