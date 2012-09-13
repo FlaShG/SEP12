@@ -37,11 +37,11 @@ public class Parser
 	 */
 	public Befehl liefereBefehl()
 	{
-		String eingabezeile = ""; // für die gesamte Eingabezeile
+		String eingabezeile = ""; // für die gesamte Eingabezeile 
 		String wort1;
 		String wort2;
 
-		System.out.print("> "); // Eingabeaufforderung
+		System.out.print("> "); // Eingabeaufforderung 
 
 		BufferedReader eingabe = new BufferedReader(new InputStreamReader(
 				System.in));
@@ -58,7 +58,7 @@ public class Parser
 
 		if(tokenizer.hasMoreTokens())
 		{
-			wort1 = tokenizer.nextToken(); // erstes Wort
+			wort1 = tokenizer.nextToken(); // erstes Wort 
 		} else
 		{
 			wort1 = null;
