@@ -135,10 +135,12 @@ public class Spiel
 		if(befehlswort.equals("help"))
 		{
 			hilfstextAusgeben();
-		} else if(befehlswort.equals("go"))
+		}
+		else if(befehlswort.equals("go"))
 		{
 			wechsleRaum(befehl);
-		} else if(befehlswort.equals("quit"))
+		}
+		else if(befehlswort.equals("quit"))
 		{
 			moechteBeenden = beenden(befehl);
 		}
@@ -179,7 +181,8 @@ public class Spiel
 		if(naechsterRaum == null)
 		{
 			System.out.println("Dort ist keine Tür!");
-		} else
+		}
+		else
 		{
 			aktuellerRaum = naechsterRaum;
 			zeigeRaumbeschreibung();

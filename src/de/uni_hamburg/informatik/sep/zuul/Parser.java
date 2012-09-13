@@ -48,7 +48,8 @@ public class Parser
 		try
 		{
 			eingabezeile = eingabe.readLine();
-		} catch(IOException exc)
+		}
+		catch(IOException exc)
 		{
 			System.out.println("There was an error during reading: "
 					+ exc.getMessage());
@@ -59,14 +60,16 @@ public class Parser
 		if(tokenizer.hasMoreTokens())
 		{
 			wort1 = tokenizer.nextToken(); // erstes Wort 
-		} else
+		}
+		else
 		{
 			wort1 = null;
 		}
 		if(tokenizer.hasMoreTokens())
 		{
 			wort2 = tokenizer.nextToken(); // zweites Wort
-		} else
+		}
+		else
 		{
 			wort2 = null;
 		}
