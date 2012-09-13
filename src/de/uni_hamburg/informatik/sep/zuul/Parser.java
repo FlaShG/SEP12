@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
 public class Parser
 {
 
-	private Befehlswoerter befehle; // hält die gültigen Befehlswörter
+	private Befehlswoerter befehle; // hält die gültigen Befehlswörter 
 
 	/**
 	 * Erzeugt einen Parser.
