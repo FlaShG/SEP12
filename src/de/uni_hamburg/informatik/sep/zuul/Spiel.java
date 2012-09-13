@@ -1,5 +1,11 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
+import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
+
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
  * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
@@ -18,44 +24,26 @@ package de.uni_hamburg.informatik.sep.zuul;
  */
 public class Spiel
 {
-	private Parser parser;
-	private Raum aktuellerRaum;
+	private Parser _parser;
+	private static final String[] _gueltigeBefehlswoerter = new String[] {"go", "help", "quit"};
+	private SpielKontext _kontext;
+	
 
 	/**
 	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
+	 * @param in InputStream
+	 * @param out OutputStream
 	 */
-	public Spiel()
+	public Spiel(InputStream in, PrintStream out)
 	{
-		legeRaeumeAn();
-		parser = new Parser();
+
+		
+		_parser = new Parser(in, out, new Befehlswoerter(_gueltigeBefehlswoerter));
+		
+		_kontext = new SpielKontext(in, out);
 	}
 
-	/**
-	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
-	 */
-	private void legeRaeumeAn()
-	{
-		Raum draussen, hoersaal, cafeteria, labor, buero;
 
-		// die Räume erzeugen
-		draussen = new Raum("vor dem Haupteingang der Universität");
-		hoersaal = new Raum("in einem Vorlesungssaal");
-		cafeteria = new Raum("in der Cafeteria der Uni");
-		labor = new Raum("in einem Rechnerraum");
-		buero = new Raum("im Verwaltungsbüro der Informatik");
-
-		// die Ausgänge initialisieren
-		draussen.setzeAusgang("east", hoersaal);
-		draussen.setzeAusgang("south", labor);
-		draussen.setzeAusgang("west", cafeteria);
-		hoersaal.setzeAusgang("west", draussen);
-		cafeteria.setzeAusgang("east", draussen);
-		labor.setzeAusgang("north", draussen);
-		labor.setzeAusgang("east", buero);
-		buero.setzeAusgang("west", labor);
-
-		aktuellerRaum = draussen; // das Spiel startet draussen
-	}
 
 	/**
 	 * Führt das Spiel aus.
@@ -70,10 +58,11 @@ public class Spiel
 		boolean beendet = false;
 		while(!beendet)
 		{
-			Befehl befehl = parser.liefereBefehl();
-			beendet = verarbeiteBefehl(befehl);
+			Befehl befehl = _parser.liefereBefehl();
+			verarbeiteBefehl(befehl);
+			beendet = _kontext.isSpielZuende();
 		}
-		System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
+		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
 	}
 
 	/**
@@ -81,135 +70,67 @@ public class Spiel
 	 */
 	private void zeigeWillkommenstext()
 	{
-		System.out.println();
-		System.out.println("Willkommen zu Zuul!");
-		System.out
-				.println("Zuul ist ein neues, unglaublich langweiliges Spiel.");
-		System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
-		System.out.println();
-		zeigeRaumbeschreibung();
+		_kontext.schreibeNL("");
+		_kontext.schreibeNL("Willkommen zu Zuul!");
+		_kontext.schreibeNL("Zuul ist ein neues, unglaublich langweiliges Spiel.");
+		_kontext.schreibeNL("Tippen sie 'help', wenn Sie Hilfe brauchen.");
+		_kontext.schreibeNL("");
+		_kontext.zeigeRaumbeschreibung();
 	}
 
-	/**
-	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
-	 * befindet.
-	 */
-	private void zeigeRaumbeschreibung()
-	{
-		System.out.println("Sie sind " + aktuellerRaum.gibBeschreibung());
-		System.out.print("Ausgänge: ");
-		if(aktuellerRaum.gibAusgang("north") != null)
-		{
-			System.out.print("north ");
-		}
-		if(aktuellerRaum.gibAusgang("east") != null)
-		{
-			System.out.print("east ");
-		}
-		if(aktuellerRaum.gibAusgang("south") != null)
-		{
-			System.out.print("south ");
-		}
-		if(aktuellerRaum.gibAusgang("west") != null)
-		{
-			System.out.print("west ");
-		}
-		System.out.println();
-	}
+
 
 	/**
 	 * Verarbeitet einen gegebenen Befehl (führt ihn aus). Wenn der Befehl das
 	 * Spiel beendet, wird 'true' zurückgeliefert, andernfalls 'false'.
 	 */
-	private boolean verarbeiteBefehl(Befehl befehl)
+	private void verarbeiteBefehl(Befehl befehl)
 	{
-		boolean moechteBeenden = false;
-
-		if(!befehl.istBekannt())
-		{
-			System.out.println("Ich weiß nicht, was Sie meinen...");
-			return false;
-		}
-
-		String befehlswort = befehl.gibBefehlswort();
-		if(befehlswort.equals("help"))
-		{
-			hilfstextAusgeben();
-		}
-		else if(befehlswort.equals("go"))
-		{
-			wechsleRaum(befehl);
-		}
-		else if(befehlswort.equals("quit"))
-		{
-			moechteBeenden = beenden(befehl);
-		}
-		return moechteBeenden;
-	}
-
-	// Implementierung der Benutzerbefehle:
-
-	/**
-	 * Gibt Hilfsinformationen aus.
-	 */
-	private void hilfstextAusgeben()
-	{
-		System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-		System.out.println("Sie irren auf dem Unigelände herum.");
-		System.out.println();
-		System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
-		System.out.println("   go quit help");
-	}
-
-	/**
-	 * Versucht, den Raum zu wechseln. Wenn es den Ausgang gibt, wird in den
-	 * Raum gewechselt, sonst wird dem Spieler eine Fehlermeldung angezeigt.
-	 */
-	private void wechsleRaum(Befehl befehl)
-	{
-		if(!befehl.hatZweitesWort())
-		{
-			// Gibt es kein zweites Wort, wissen wir nicht, wohin...
-			System.out.println("Wohin möchten Sie gehen?");
-			return;
-		}
-
-		String richtung = befehl.gibZweitesWort();
-
-		// Wir versuchen den Raum zu verlassen.
-		Raum naechsterRaum = aktuellerRaum.gibAusgang(richtung);
-		if(naechsterRaum == null)
-		{
-			System.out.println("Dort ist keine Tür!");
-		}
-		else
-		{
-			aktuellerRaum = naechsterRaum;
-			zeigeRaumbeschreibung();
-		}
-	}
-
-	/**
-	 * "quit" wurde eingegeben. Überprüft den Rest des Befehls, ob das Spiel
-	 * wirklich beendet werden soll. Liefert 'true', wenn der Befehl das Spiel
-	 * beendet, 'false' sonst.
-	 */
-	private boolean beenden(Befehl befehl)
-	{
-		if(befehl.hatZweitesWort())
-		{
-			System.out.println("Was soll beendet werden?");
-			return false;
-		}
-		return true; // Das Spiel soll beendet werden.
-	}
+		befehl.ausfuehren(_kontext);
+//		boolean moechteBeenden = false;
+//
+//		if(!befehl.istBekannt())
+//		{
+//			_out.println("Ich weiß nicht, was Sie meinen...");
+//			return false;
+//		}
+//
+//		String befehlswort = befehl.gibBefehlswort();
+//		if(befehlswort.equals("help"))
+//		{
+//			hilfstextAusgeben();
+//		}
+//		else if(befehlswort.equals("go"))
+//		{
+//			wechsleRaum(befehl);
+//		}
+//		else if(befehlswort.equals("quit"))
+//		{
+//			moechteBeenden = beenden(befehl);
+//		}
+//		return moechteBeenden;
+	} 
+	
 
 	/**
 	 * main-Methode zum Ausführen.
 	 */
 	public static void main(String[] args)
 	{
-		Spiel spiel = new Spiel();
+		Spiel spiel = new Spiel(System.in, System.out);
 		spiel.spielen();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
