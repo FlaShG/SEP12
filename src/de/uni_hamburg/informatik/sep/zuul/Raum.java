@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public class Raum
 {
-	private String beschreibung;
-	private Map<String, Raum> ausgaenge;
+	private String _beschreibung;
+	private Map<String, Raum> _ausgaenge;
 
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -25,8 +25,8 @@ public class Raum
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
 
-		this.beschreibung = beschreibung;
-		this.ausgaenge = new HashMap<String, Raum>();
+		this._beschreibung = beschreibung;
+		this._ausgaenge = new HashMap<String, Raum>();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Raum
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 		assert nachbar != null : "Vorbedingung verletzt: nachbar != null";
 
-		ausgaenge.put(richtung, nachbar);
+		_ausgaenge.put(richtung, nachbar);
 	}
 
 	/**
@@ -60,7 +60,12 @@ public class Raum
 	{
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 
-		return ausgaenge.get(richtung);
+		return _ausgaenge.get(richtung);
+	}
+	
+	public String[] gibMoeglicheAusgaenge()
+	{
+		return _ausgaenge.keySet().toArray(new String[0]);
 	}
 
 	/**
@@ -71,6 +76,6 @@ public class Raum
 	 */
 	public String gibBeschreibung()
 	{
-		return beschreibung;
+		return _beschreibung;
 	}
 }

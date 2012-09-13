@@ -7,14 +7,14 @@ import java.util.Arrays;
  */
 public class Befehlswoerter
 {
-	private static final String gueltigeBefehle[] = { "go", "quit", "help" };
+	final String[] _gueltigeBefehle;
 
 	/**
 	 * Erzeugt ein Objekt der Klasse Befehlswoerter.
 	 */
-	public Befehlswoerter()
+	public Befehlswoerter(String[] gueltigeBefehle)
 	{
-		Arrays.sort(gueltigeBefehle);
+		Arrays.sort(_gueltigeBefehle = gueltigeBefehle.clone());
 	}
 
 	/**
@@ -23,7 +23,7 @@ public class Befehlswoerter
 	 */
 	public boolean istBefehl(String eingabe)
 	{
-		return Arrays.binarySearch(gueltigeBefehle, eingabe) >= 0;
+		return Arrays.binarySearch(_gueltigeBefehle, eingabe) >= 0;
 
 		/*
 		//binary search ist bessertoller
@@ -38,5 +38,10 @@ public class Befehlswoerter
 		// in den gültigen Befehlswörtern gefunden.
 		return false;
 		*/
+	}
+	
+	public String[] gibGueltigeBefehlswoerter()
+	{
+		return _gueltigeBefehle.clone();
 	}
 }
