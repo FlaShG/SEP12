@@ -40,6 +40,21 @@ public class RaumTest
 		
 		assertEquals(raumNorden, raumWesten.gibAusgang("drölf"));
 	}
+	
+	@Test 
+	public void testVerbindeZweiRaeume()
+	{
+		//Hat noch keinen Ausgang im osten
+		assertNull(raumWesten.gibAusgang("east"));
+		
+		//Hat noch keinen Ausgang im Westen
+		assertNull(raumOsten.gibAusgang("west"));
+		
+		raumWesten.verbindeZweiRaeume("east", raumOsten, "west");
+		
+		assertEquals(raumOsten, raumWesten.gibAusgang("east"));
+		assertEquals(raumWesten, raumOsten.gibAusgang("west"));
+	}
 
 	@Test
 	public void testGibAusgang()
