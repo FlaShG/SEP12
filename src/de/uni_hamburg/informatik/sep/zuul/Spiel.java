@@ -1,5 +1,19 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
+import javax.swing.SwingUtilities;
+
+import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.ButtonPanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.EingabePanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
+
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
  * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
@@ -16,173 +30,213 @@ package de.uni_hamburg.informatik.sep.zuul;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public class Spiel {
-    private Parser parser;
-    private Raum aktuellerRaum;
+public class Spiel
+{
+	private Parser _parser;
+	private SpielKontext _kontext;
 
-    /**
-     * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
-     */
-    public Spiel() {
-        legeRaeumeAn();
-        parser = new Parser();
-    }
+	private Hauptfenster _hf;
+	private EingabePanel _ep;
+	private AusgabePanel _ap;
+	private ButtonPanel _bp;
 
-    /**
-     * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
-     */
-    private void legeRaeumeAn() {
-        Raum draussen, hoersaal, cafeteria, labor, buero;
+	/**
+	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
+	 * 
+	 * @param in
+	 *            InputStream
+	 * @param out
+	 *            OutputStream
+	 */
+	public Spiel()
+	{
 
-        // die Räume erzeugen
-        draussen = new Raum("vor dem Haupteingang der Universität");
-        hoersaal = new Raum("in einem Vorlesungssaal");
-        cafeteria = new Raum("in der Cafeteria der Uni");
-        labor = new Raum("in einem Rechnerraum");
-        buero = new Raum("im Verwaltungsbüro der Informatik");
+		_bp = new ButtonPanel(1024);
+		_ep = new EingabePanel(1024);
+		_ap = new AusgabePanel(1024);
+		
+		_hf = new Hauptfenster(_ap, _ep, _bp);
 
-        // die Ausgänge initialisieren
-        draussen.setzeAusgang("east", hoersaal);
-        draussen.setzeAusgang("south", labor);
-        draussen.setzeAusgang("west", cafeteria);
-        hoersaal.setzeAusgang("west", draussen);
-        cafeteria.setzeAusgang("east", draussen);
-        labor.setzeAusgang("north", draussen);
-        labor.setzeAusgang("east", buero);
-        buero.setzeAusgang("west", labor);
 
-        aktuellerRaum = draussen; // das Spiel startet draussen
-    }
+		_ep.getEnterButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				String str = _ep.getEingabeZeile().getText();
+				_ep.getEingabeZeile().setText("");
+				
+				verarbeiteEingabe(str);
+				
+			}
+		});
+		
+		_ep.getEingabeZeile().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_ep.getEnterButton().doClick();				
+			}
+		});
 
-    /**
-     * Führt das Spiel aus.
-     */
-    public void spielen() {
-        zeigeWillkommenstext();
+		
+		_bp.getNorthButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go north");
+			}
+		});
+		
+		_bp.getSouthButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go south");
+			}
+		});
+		
+		_bp.getEastButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go east");
+			}
+		});
+		
+		_bp.getWestButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go west");
+			}
+		});
+		
+		_bp.getQuitButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("quit");
+			}
+		});
+		
+		_bp.getHelpButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("help");
+			}
+		});
+		
+		_parser = new Parser();
 
-        // Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-        // und führen sie aus, bis das Spiel beendet wird.
+		_kontext = new SpielKontext(this);
 
-        boolean beendet = false;
-        while (!beendet) {
-            Befehl befehl = parser.liefereBefehl();
-            beendet = verarbeiteBefehl(befehl);
-        }
-        System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
-    }
 
-    /**
-     * Gibt einen Begrüßungstext für den Spieler aus.
-     */
-    private void zeigeWillkommenstext() {
-        System.out.println();
-        System.out.println("Willkommen zu Zuul!");
-        System.out
-                .println("Zuul ist ein neues, unglaublich langweiliges Spiel.");
-        System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
-        System.out.println();
-        zeigeRaumbeschreibung();
-    }
+	}
+	
 
-    /**
-     * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
-     * befindet.
-     */
-    private void zeigeRaumbeschreibung() {
-        System.out.println("Sie sind " + aktuellerRaum.gibBeschreibung());
-        System.out.print("Ausgänge: ");
-        if (aktuellerRaum.gibAusgang("north") != null) {
-            System.out.print("north ");
-        }
-        if (aktuellerRaum.gibAusgang("east") != null) {
-            System.out.print("east ");
-        }
-        if (aktuellerRaum.gibAusgang("south") != null) {
-            System.out.print("south ");
-        }
-        if (aktuellerRaum.gibAusgang("west") != null) {
-            System.out.print("west ");
-        }
-        System.out.println();
-    }
 
-    /**
-     * Verarbeitet einen gegebenen Befehl (führt ihn aus). Wenn der Befehl das
-     * Spiel beendet, wird 'true' zurückgeliefert, andernfalls 'false'.
-     */
-    private boolean verarbeiteBefehl(Befehl befehl) {
-        boolean moechteBeenden = false;
+	private void beendeSpiel()
+	{
 
-        if (!befehl.istBekannt()) {
-            System.out.println("Ich weiß nicht, was Sie meinen...");
-            return false;
-        }
+		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
+		
+		_ep.getEingabeZeile().setEnabled(false);
+		_ep.getEnterButton().setEnabled(false);
+		
+		_bp.getSouthButton().setEnabled(false);
+		_bp.getNorthButton().setEnabled(false);
+		_bp.getWestButton().setEnabled(false);
+		_bp.getEastButton().setEnabled(false);
+		_bp.getHelpButton().setEnabled(false);
+		_bp.getQuitButton().setEnabled(false);
 
-        String befehlswort = befehl.gibBefehlswort();
-        if (befehlswort.equals("help")) {
-            hilfstextAusgeben();
-        } else if (befehlswort.equals("go")) {
-            wechsleRaum(befehl);
-        } else if (befehlswort.equals("quit")) {
-            moechteBeenden = beenden(befehl);
-        }
-        return moechteBeenden;
-    }
+		
+		//TODO: Hauptfenster ausschalten (wie auch immer) Buttons + Eingabe sperren
+	}
+	
+	/**
+	 * Führt das Spiel aus.
+	 */
+	public void spielen()
+	{
+//		_hauptwerkzeug.zeigeFenster();
+		
+		zeigeWillkommenstext();
+	}
 
-    // Implementierung der Benutzerbefehle:
+	/**
+	 * Gibt einen Begrüßungstext für den Spieler aus.
+	 */
+	private void zeigeWillkommenstext()
+	{
+		_kontext.schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
+		_kontext.schreibeNL("");
+		_kontext.zeigeRaumbeschreibung();
+		_kontext.zeigeAusgaenge();
+	}
 
-    /**
-     * Gibt Hilfsinformationen aus.
-     */
-    private void hilfstextAusgeben() {
-        System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-        System.out.println("Sie irren auf dem Unigelände herum.");
-        System.out.println();
-        System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
-        System.out.println("   go quit help");
-    }
+	/**
+	 * main-Methode zum Ausführen.
+	 */
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{			
+			@Override
+			public void run()
+			{
+				Spiel spiel = new Spiel();
 
-    /**
-     * Versucht, den Raum zu wechseln. Wenn es den Ausgang gibt, wird in den
-     * Raum gewechselt, sonst wird dem Spieler eine Fehlermeldung angezeigt.
-     */
-    private void wechsleRaum(Befehl befehl) {
-        if (!befehl.hatZweitesWort()) {
-            // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin möchten Sie gehen?");
-            return;
-        }
+				spiel.spielen();				
+			}
+		});
 
-        String richtung = befehl.gibZweitesWort();
+	}
 
-        // Wir versuchen den Raum zu verlassen.
-        Raum naechsterRaum = aktuellerRaum.gibAusgang(richtung);
-        if (naechsterRaum == null) {
-            System.out.println("Dort ist keine Tür!");
-        } else {
-            aktuellerRaum = naechsterRaum;
-            zeigeRaumbeschreibung();
-        }
-    }
 
-    /**
-     * "quit" wurde eingegeben. Überprüft den Rest des Befehls, ob das Spiel
-     * wirklich beendet werden soll. Liefert 'true', wenn der Befehl das Spiel
-     * beendet, 'false' sonst.
-     */
-    private boolean beenden(Befehl befehl) {
-        if (befehl.hatZweitesWort()) {
-            System.out.println("Was soll beendet werden?");
-            return false;
-        }
-        return true; // Das Spiel soll beendet werden.
-    }
 
-    /**
-     * main-Methode zum Ausführen.
-     */
-    public static void main(String[] args) {
-        Spiel spiel = new Spiel();
-        spiel.spielen();
-    }
+	public void schreibeNL(String nachricht)
+	{
+		schreibe(nachricht);
+		_ap.getAnzeigeArea().append("\n");
+		
+	}
+
+
+
+	public void schreibe(String nachricht)
+	{
+		_ap.getAnzeigeArea().append(nachricht);		
+	}
+
+
+
+	private void verarbeiteEingabe(String str)
+	{	
+		
+		schreibeNL("> "+ str);
+		
+		Befehl befehl = _parser.liefereBefehl(str);
+		befehl.ausfuehren(_kontext);
+		
+		if(_kontext.isSpielZuende())
+			beendeSpiel();
+	}
 }

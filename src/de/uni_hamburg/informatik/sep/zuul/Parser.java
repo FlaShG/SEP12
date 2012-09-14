@@ -2,8 +2,14 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.StringTokenizer;
+
+import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 
 /**
  * Dieser Parser liest Benutzereingaben und wandelt sie in Befehle für das
@@ -17,60 +23,67 @@ import java.util.StringTokenizer;
  * Objekt zurück.
  * 
  */
-public class Parser {
+public class Parser
+{
+	/**
+	 * Liest einen Befehl vom Benutzer ein und gibt ihn zurück.
+	 * 
+	 * @ensure Ergebnis != null
+	 */
+//	public Befehl liefereBefehl()
+//	{
+//		String eingabezeile = leseEin();
+//
+//		return parseEingabezeile(eingabezeile);
+//	}
 
-    private Befehlswoerter befehle; // hält die gültigen Befehlswörter
+	/**
+	 * @param eingabezeile
+	 * @return geparster Befehl
+	 */
+	Befehl parseEingabezeile(String eingabezeile)
+	{
+		String[] input = eingabezeile.split(" +");
 
-    /**
-     * Erzeugt einen Parser.
-     */
-    public Parser() {
-        befehle = new Befehlswoerter();
-    }
+		String[] parameter = new String[0];
+		String befehl = "";
 
-    /**
-     * Liest einen Befehl vom Benutzer ein und gibt ihn zurück.
-     * 
-     * @ensure Ergebnis != null
-     */
-    public Befehl liefereBefehl() {
-        String eingabezeile = ""; // für die gesamte Eingabezeile
-        String wort1;
-        String wort2;
+		if(input.length > 0)
+		{
+			befehl = input[0];
+			if(input.length > 1)
+				parameter = Arrays.copyOfRange(input, 1, input.length);
 
-        System.out.print("> "); // Eingabeaufforderung
+		}
 
-        BufferedReader eingabe = new BufferedReader(new InputStreamReader(
-                System.in));
-        try {
-            eingabezeile = eingabe.readLine();
-        } catch (IOException exc) {
-            System.out.println("There was an error during reading: "
-                    + exc.getMessage());
-        }
+		return BefehlFactory.get(befehl, parameter);
+	}
 
-        StringTokenizer tokenizer = new StringTokenizer(eingabezeile);
+	/**
+	 * 
+	 * @return die gelesene Eingabezeile
+	 */
+	//String leseEin()
+//	{
+//		String result = null;
+//		//_out.print("> "); // Eingabeaufforderung //TODO fixme
+//
+//		//BufferedReader eingabe = new BufferedReader(new InputStreamReader(_in));
+//		try
+//		{
+//			result = eingabe.readLine();
+//		}
+//		catch(IOException exc)
+//		{
+//			//_out.println("There was an error during reading: "
+//			//		+ exc.getMessage());
+//		}
+//		return result;
+//	}
 
-        if (tokenizer.hasMoreTokens()) {
-            wort1 = tokenizer.nextToken(); // erstes Wort
-        } else {
-            wort1 = null;
-        }
-        if (tokenizer.hasMoreTokens()) {
-            wort2 = tokenizer.nextToken(); // zweites Wort
-        } else {
-            wort2 = null;
-        }
-
-        // Hinweis: Wir ignorieren den Rest der Zeile einfach.
-
-        // Jetzt prüfen, ob der Befehl bekannt ist. Wenn ja, erzeugen
-        // wir das passende Befehl-Objekt. Wenn nicht, erzeugen wir
-        // einen unbekannten Befehl mit 'null'.
-
-        if (befehle.istBefehl(wort1)) {
-            return new Befehl(wort1, wort2);
-        }
-        return new Befehl(null, wort2);
-    }
+	public Befehl liefereBefehl(String str)
+	{
+		return parseEingabezeile(str);
+		
+	}
 }
