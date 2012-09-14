@@ -141,6 +141,15 @@ public class Raum
 	}
 
 	/**
+	 * Setze das Item dieses Raumes auf {@link Item}.keins . Dies ist auch der
+	 * Raum-default Wert.
+	 */
+	public void loescheItem()
+	{
+		_item = Item.keins;
+	}
+
+	/**
 	 * Liefert die Beschreibung dieses Raums (die dem Konstruktor übergeben
 	 * wurde).
 	 * 

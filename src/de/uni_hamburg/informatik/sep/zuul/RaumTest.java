@@ -75,6 +75,33 @@ public class RaumTest
 	{
 		assertEquals(Item.keins, raum.getItem());
 		assertEquals(Item.keins, raumWesten.getItem());
+
+		raumOsten.setItem(Item.Kuchen);
+
+		assertEquals(Item.Kuchen, raumOsten.getItem());
 	}
+	
+	@Test
+	public void testSetItem()
+	{
+		raumOsten.setItem(Item.Kuchen);
+
+		assertEquals(Item.Kuchen, raumOsten.getItem());
+		
+		raumOsten.setItem(Item.Gegengift);
+
+		assertEquals(Item.Gegengift, raumOsten.getItem());
+	}
+	
+	@Test
+	public void testLoescheItem()
+	{
+		raumOsten.setItem(Item.Kuchen);
+		assertEquals(Item.Kuchen, raumOsten.getItem());
+		
+		raumOsten.loescheItem();
+		assertEquals(Item.keins, raumOsten.getItem());
+	}
+	
 
 }
