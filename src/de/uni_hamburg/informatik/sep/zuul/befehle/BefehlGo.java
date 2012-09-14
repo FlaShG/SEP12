@@ -32,7 +32,6 @@ final class BefehlGo extends Befehl
 		else
 		{
 			kontext.setAktuellerRaum(naechsterRaum);
-			kontext.zeigeRaumbeschreibung();
 		}
 	}
 }

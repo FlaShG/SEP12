@@ -8,6 +8,7 @@ public class SpielKontext
 {
 	private static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	private static final int KUCHEN_ENERGIE_GEWINN = 3;
+	private static final int START_ENERGIE = 8;
 	
 	private PrintStream _out;
 	private InputStream _in;
@@ -21,7 +22,7 @@ public class SpielKontext
 	{
 		_in = in;
 		_out = out;
-		_lebensEnergie = 5;
+		_lebensEnergie = START_ENERGIE;
 		legeRaeumeAn();
 	}
 
@@ -66,22 +67,28 @@ public class SpielKontext
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
 
-
+	/**
+	 * Gibt den aktuellen Raum zurück, in dem sich der Spieler befindet.
+	 * @return
+	 */
 	public Raum getAktuellerRaum()
 	{
 		return _aktuellerRaum;
 	}
 
-
+	/**
+	 * Ändert den aktuellen Raum, in dem sich der Spieler befindet.
+	 * Zeigt dessen Beschreibung an, welche Items eingesammelt werden
+	 * und zum Abschluss die Ausgänge.
+	 * @param aktuellerRaum der neue Raum, der betreten wird
+	 */
 	public void setAktuellerRaum(Raum aktuellerRaum)
 	{
 		_aktuellerRaum = aktuellerRaum;
 		zeigeRaumbeschreibung();
 		raumBetreten();
+		zeigeAusgaenge();
 	}
-	
-	
-
 
 	/**
 	 * @return the _spielZuende
@@ -108,13 +115,7 @@ public class SpielKontext
 	 */
 	public void zeigeRaumbeschreibung()
 	{
-		schreibeNL("Sie sind " + getAktuellerRaum().getBeschreibung());
-		schreibe("Ausgänge: ");
-		
-		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			schreibe(s+" ");
-		}
+		schreibeNL(getAktuellerRaum().getBeschreibung());
 
 		schreibeNL("");
 	}
@@ -141,7 +142,22 @@ public class SpielKontext
 		
 		if(_lebensEnergie <= 0)
 		{
-			beendeSpiel(TextVerwalter.BEENDENTEXT);
+			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
+	}
+	
+	/**
+	 * Zeig die Ausgänge des aktuellen Raums an
+	 */
+	private void zeigeAusgaenge()
+	{
+		schreibe("Ausgänge: ");
+		
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			schreibe(s+" ");
+		}
+		
+		schreibeNL("");
 	}
 }
