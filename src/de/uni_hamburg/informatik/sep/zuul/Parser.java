@@ -25,35 +25,17 @@ import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
  */
 public class Parser
 {
-
-	private InputStream _in;
-	private PrintStream _out;
-
-	/**
-	 * Erzeugt einen Parser.
-	 * 
-	 * @param in
-	 *            InputStream
-	 * @param out
-	 *            OutputStream
-	 */
-	public Parser(InputStream in, PrintStream out)
-	{
-		this._in = in;
-		this._out = out;
-	}
-
 	/**
 	 * Liest einen Befehl vom Benutzer ein und gibt ihn zurück.
 	 * 
 	 * @ensure Ergebnis != null
 	 */
-	public Befehl liefereBefehl()
-	{
-		String eingabezeile = leseEin();
-
-		return parseEingabezeile(eingabezeile);
-	}
+//	public Befehl liefereBefehl()
+//	{
+//		String eingabezeile = leseEin();
+//
+//		return parseEingabezeile(eingabezeile);
+//	}
 
 	/**
 	 * @param eingabezeile
@@ -81,21 +63,27 @@ public class Parser
 	 * 
 	 * @return die gelesene Eingabezeile
 	 */
-	String leseEin()
-	{
-		String result = null;
-		_out.print("> "); // Eingabeaufforderung 
+	//String leseEin()
+//	{
+//		String result = null;
+//		//_out.print("> "); // Eingabeaufforderung //TODO fixme
+//
+//		//BufferedReader eingabe = new BufferedReader(new InputStreamReader(_in));
+//		try
+//		{
+//			result = eingabe.readLine();
+//		}
+//		catch(IOException exc)
+//		{
+//			//_out.println("There was an error during reading: "
+//			//		+ exc.getMessage());
+//		}
+//		return result;
+//	}
 
-		BufferedReader eingabe = new BufferedReader(new InputStreamReader(_in));
-		try
-		{
-			result = eingabe.readLine();
-		}
-		catch(IOException exc)
-		{
-			_out.println("There was an error during reading: "
-					+ exc.getMessage());
-		}
-		return result;
+	public Befehl liefereBefehl(String str)
+	{
+		return parseEingabezeile(str);
+		
 	}
 }
