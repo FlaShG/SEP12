@@ -34,6 +34,11 @@ public class BefehlFactory
 		for(Befehl befehl : befehle)
 			_map.put(befehl.getBefehlsname(), befehl);
 
+		//Aliases
+		_map.put("n", _map.get("north"));
+		_map.put("s", _map.get("south"));
+		_map.put("w", _map.get("west"));
+		_map.put("e", _map.get("east"));
 	}
 
 	/**

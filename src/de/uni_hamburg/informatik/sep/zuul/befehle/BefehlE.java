@@ -9,7 +9,7 @@ final class BefehlE extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "e";
+		return "east";
 	}
 
 	@Override
