@@ -46,6 +46,8 @@ public class Raum
 
 		_ausgaenge.put(richtung, nachbar);
 	}
+	
+	
 
 	/**
 	 * Gibt den Nachbarraum zurück, der in der angegebenen Richtung liegt. Wenn
