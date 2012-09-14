@@ -136,7 +136,7 @@ public class SpielKontext
 		
 		if(_lebensEnergie <= 0)
 		{
-			beendeSpiel(TextVerwalter.BEENDENTEXT);
+			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
 	}
 }
