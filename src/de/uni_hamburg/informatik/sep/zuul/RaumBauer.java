@@ -79,6 +79,7 @@ public class RaumBauer
 		burerohausmeister.setzeAusgang("east", westfluegel);
 
 		besenkammerhausmeister.setzeAusgang("south", burerohausmeister);
+		besenkammerhausmeister.setItem(Item.Kuchen);
 		
 
 		gang.setzeAusgang("north", haupteingang);
@@ -93,6 +94,7 @@ public class RaumBauer
 		bibliothek.setzeAusgang("west", ostfluegel);
 
 		terasse.setzeAusgang("south", bibliothek);
+		terasse.setItem(Item.Kuchen);
 
 		flur.setzeAusgang("east", haupteingang);
 		flur.setzeAusgang("south", labor);
@@ -121,12 +123,16 @@ public class RaumBauer
 
 		flurchemie.setzeAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setzeAusgang(e, sekretariatchemie);
+		
+		buerovondoktorevenbigger.setzeAusgang(s, flurchemie);
+		buerovondoktorevenbigger.setItem(Item.Gegengift);
 
 		herrentiolette.setzeAusgang(n, ostfluegel);
 		herrentiolette.setzeAusgang(s, mensa);
 
 		mensa.setzeAusgang(n, herrentiolette);
 		mensa.setzeAusgang(w, vorlesungssaal);
+		mensa.setItem(Item.Kuchen);
 	}
 
 	public Raum getStartRaum()
