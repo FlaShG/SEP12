@@ -59,49 +59,49 @@ public class RaumBauer
 				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
 
 		// die Ausgänge initialisieren
-		String s = "south";
-		String n = "north";
-		String e = "east";
-		String w = "west";
+		String s = TextVerwalter.RICHTUNG_SUEDEN;
+		String n = TextVerwalter.RICHTUNG_NORDEN;
+		String e = TextVerwalter.RICHTUNG_OSTEN;
+		String w = TextVerwalter.RICHTUNG_WESTEN;
 
 		_startRaum = labor; // das Spiel startet draussen
-		labor.setAusgang("north", flur);
-		labor.setAusgang("east", gang);
-		labor.setAusgang("south", wohnung);
-		labor.setAusgang("west", westfluegel);
+		labor.setAusgang(TextVerwalter.RICHTUNG_NORDEN, flur);
+		labor.setAusgang(TextVerwalter.RICHTUNG_OSTEN, gang);
+		labor.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, wohnung);
+		labor.setAusgang(TextVerwalter.RICHTUNG_WESTEN, westfluegel);
 
-		westfluegel.setAusgang("east", labor);
-		westfluegel.setAusgang("west", burerohausmeister);
+		westfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, labor);
+		westfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, burerohausmeister);
 
-		burerohausmeister.setAusgang("north", besenkammerhausmeister);
-		burerohausmeister.setAusgang("east", westfluegel);
+		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_NORDEN, besenkammerhausmeister);
+		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_OSTEN, westfluegel);
 
-		besenkammerhausmeister.setAusgang("south", burerohausmeister);
+		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, burerohausmeister);
 		besenkammerhausmeister.setItem(Item.Kuchen);
 		
 
-		gang.setAusgang("north", haupteingang);
-		gang.setAusgang("east", ostfluegel);
-		gang.setAusgang("west", labor);
+		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
+		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
+		gang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, labor);
 
-		ostfluegel.setAusgang("east", bibliothek);
-		ostfluegel.setAusgang("south", herrentiolette);
-		ostfluegel.setAusgang("west", gang);
+		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
+		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
+		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
 
-		bibliothek.setAusgang("north", terasse);
-		bibliothek.setAusgang("west", ostfluegel);
+		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
+		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
 
-		terasse.setAusgang("south", bibliothek);
+		terasse.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, bibliothek);
 		terasse.setItem(Item.Kuchen);
 
-		flur.setAusgang("east", haupteingang);
-		flur.setAusgang("south", labor);
+		flur.setAusgang(TextVerwalter.RICHTUNG_OSTEN, haupteingang);
+		flur.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, labor);
 
-		haupteingang.setAusgang("south", gang);
-		haupteingang.setAusgang("west", flur);
+		haupteingang.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, gang);
+		haupteingang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, flur);
 
-		wohnung.setAusgang("south", konferenzraum);
-		wohnung.setAusgang("north", labor);
+		wohnung.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, konferenzraum);
+		wohnung.setAusgang(TextVerwalter.RICHTUNG_NORDEN, labor);
 
 		konferenzraum.setAusgang(e, vorlesungssaal);
 		konferenzraum.setAusgang(n, wohnung);
