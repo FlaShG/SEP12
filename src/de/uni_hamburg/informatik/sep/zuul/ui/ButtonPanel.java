@@ -5,7 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ButtonPanel extends JPanel
@@ -18,8 +20,10 @@ public class ButtonPanel extends JPanel
 	private JButton _quitButton;
 	private JButton _helpButton;
 
-	private final Dimension BUTTONGROESSE = new Dimension(80, 27);
-	private final int HOEHE = 200;
+	private JLabel _platzhalter;
+
+	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
+	private final int HOEHE = 260;
 
 	public ButtonPanel(int breite)
 	{
@@ -27,20 +31,30 @@ public class ButtonPanel extends JPanel
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));
 
+		_platzhalter = new JLabel(
+				"                                                 ");
+		_platzhalter.setVisible(true);
+
+		ImageIcon north = new ImageIcon("./res/north.png");
+		ImageIcon south = new ImageIcon("./res/south.png");
+		ImageIcon west = new ImageIcon("./res/west.png");
+		ImageIcon east = new ImageIcon("./res/east.png");
+
 		//Buttons initialisieren:
-		_northButton = new JButton("North");
+		_northButton = new JButton("North", north);
 		_northButton.setPreferredSize(BUTTONGROESSE);
-		_southButton = new JButton("South");
+		_southButton = new JButton("South", south);
 		_southButton.setPreferredSize(BUTTONGROESSE);
-		_westButton = new JButton("West");
+		_westButton = new JButton("West", west);
 		_westButton.setPreferredSize(BUTTONGROESSE);
-		_eastButton = new JButton("East");
+		_eastButton = new JButton("East", east);
 		_eastButton.setPreferredSize(BUTTONGROESSE);
 
 		_quitButton = new JButton("Quit");
-		_quitButton.setPreferredSize(BUTTONGROESSE);
+		_quitButton.setMinimumSize(BUTTONGROESSE);
+
 		_helpButton = new JButton("Help");
-		_helpButton.setPreferredSize(BUTTONGROESSE);
+		_helpButton.setMinimumSize(BUTTONGROESSE);
 
 		initialisiereUI();
 
@@ -71,6 +85,9 @@ public class ButtonPanel extends JPanel
 		c.gridx = 2;
 		c.gridy = 1;
 		add(_eastButton, c);
+
+		c.gridx = 3;
+		add(_platzhalter, c);
 
 		c.gridx = 4;
 		add(_helpButton, c);
