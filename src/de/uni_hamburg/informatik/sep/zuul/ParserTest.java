@@ -39,17 +39,14 @@ public class ParserTest
 		
 		
 		
-		parser = new Parser(inputStream, System.out, new Befehlswoerter(
-				new String[] { "go" }));
+		parser = new Parser(inputStream, System.out);
 	}
 
 	@Test
 	public void testLiefereBefehl()
 	{
 		Befehl befehl = parser.liefereBefehl();
-
-		assertNull(befehl.gibBefehlswort());
-		assertEquals("def", befehl.gibZweitesWort());
+		assertNull(befehl.gibBefehlsname());
 	}
 
 	@Test
@@ -57,8 +54,7 @@ public class ParserTest
 	{
 		Befehl befehl = parser.parseEingabezeile("go b");
 
-		assertEquals("go", befehl.gibBefehlswort());
-		assertEquals("b", befehl.gibZweitesWort());
+		assertEquals("go", befehl.gibBefehlsname());
 	}
 
 	@Test

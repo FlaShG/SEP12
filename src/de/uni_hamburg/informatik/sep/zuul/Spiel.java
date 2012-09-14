@@ -25,7 +25,6 @@ import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 public class Spiel
 {
 	private Parser _parser;
-	private static final String[] _gueltigeBefehlswoerter = new String[] {"go", "help", "quit"};
 	private SpielKontext _kontext;
 	
 
@@ -38,7 +37,7 @@ public class Spiel
 	{
 
 		
-		_parser = new Parser(in, out, new Befehlswoerter(_gueltigeBefehlswoerter));
+		_parser = new Parser(in, out);
 		
 		_kontext = new SpielKontext(in, out);
 	}
