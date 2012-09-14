@@ -46,7 +46,6 @@ public class BefehlFactory
 				else
 				{
 					kontext.setAktuellerRaum(naechsterRaum);
-					kontext.zeigeRaumbeschreibung();
 				}
 			}
 		},
