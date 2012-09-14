@@ -9,7 +9,6 @@ import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.gui.HauptfensterWerkzeug;
 import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.ui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.ui.EingabePanel;
