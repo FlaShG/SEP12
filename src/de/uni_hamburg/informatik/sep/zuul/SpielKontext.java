@@ -67,22 +67,28 @@ public class SpielKontext
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
 
-
+	/**
+	 * Gibt den aktuellen Raum zurück, in dem sich der Spieler befindet.
+	 * @return
+	 */
 	public Raum getAktuellerRaum()
 	{
 		return _aktuellerRaum;
 	}
 
-
+	/**
+	 * Ändert den aktuellen Raum, in dem sich der Spieler befindet.
+	 * Zeigt dessen Beschreibung an, welche Items eingesammelt werden
+	 * und zum Abschluss die Ausgänge.
+	 * @param aktuellerRaum der neue Raum, der betreten wird
+	 */
 	public void setAktuellerRaum(Raum aktuellerRaum)
 	{
 		_aktuellerRaum = aktuellerRaum;
 		zeigeRaumbeschreibung();
 		raumBetreten();
+		zeigeAusgaenge();
 	}
-	
-	
-
 
 	/**
 	 * @return the _spielZuende
@@ -110,12 +116,6 @@ public class SpielKontext
 	public void zeigeRaumbeschreibung()
 	{
 		schreibeNL(getAktuellerRaum().getBeschreibung());
-		schreibe("Ausgänge: ");
-		
-		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			schreibe(s+" ");
-		}
 
 		schreibeNL("");
 	}
@@ -144,5 +144,20 @@ public class SpielKontext
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
+	}
+	
+	/**
+	 * Zeig die Ausgänge des aktuellen Raums an
+	 */
+	private void zeigeAusgaenge()
+	{
+		schreibe("Ausgänge: ");
+		
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			schreibe(s+" ");
+		}
+		
+		schreibeNL("");
 	}
 }
