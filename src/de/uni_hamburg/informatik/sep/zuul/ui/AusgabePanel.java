@@ -38,6 +38,7 @@ public class AusgabePanel extends JPanel
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		_scrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		_scrollPane.setAutoscrolls(true);
 
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));
