@@ -51,6 +51,8 @@ public class Spiel
 
 		_kontext = new SpielKontext(this);
 
+		
+		
 		_hauptwerkzeug.addNeueEingabeListener(new ActionListener()
 		{
 			

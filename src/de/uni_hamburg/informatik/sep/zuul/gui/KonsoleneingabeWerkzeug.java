@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.gui;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
@@ -13,6 +14,8 @@ public class KonsoleneingabeWerkzeug
 	public KonsoleneingabeWerkzeug()
 	{
 		_konsoleneingabeUI = new KonsoleneingabeUI();
+		
+		setAreaListener();
 	}
 	
 	public JComponent getUI()
@@ -31,6 +34,20 @@ public class KonsoleneingabeWerkzeug
 		String str = field.getText();
 		field.setText("");
 		return str;
+	}
+	
+	private void setAreaListener()
+	{
+		_konsoleneingabeUI.getTextField().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_konsoleneingabeUI.getEnterButton().doClick();
+				
+			}
+		});
 	}
 
 
