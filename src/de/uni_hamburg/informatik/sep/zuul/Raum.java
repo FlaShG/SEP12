@@ -11,6 +11,7 @@ public class Raum
 {
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
+	private Item _item;
 
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -21,13 +22,14 @@ public class Raum
 	 * 
 	 * @require beschreibung != null
 	 */
-	public Raum(String beschreibung)
+	public Raum(String beschreibung, Item item)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
-		
+
+		_item = item;
 
 	}
 
@@ -117,6 +119,17 @@ public class Raum
 	}
 
 	/**
+	 * Gibt das Item zurück, welches der Raum hält. Gibt "keins" als Item
+	 * zurück, wenn kein Item im Raum liegt.
+	 * 
+	 * @return item im Raum.
+	 */
+	public Item getItem()
+	{
+		return _item;
+	}
+
+	/**
 	 * Liefert die Beschreibung dieses Raums (die dem Konstruktor übergeben
 	 * wurde).
 	 * 
@@ -126,5 +139,5 @@ public class Raum
 	{
 		return _beschreibung;
 	}
-	
+
 }
