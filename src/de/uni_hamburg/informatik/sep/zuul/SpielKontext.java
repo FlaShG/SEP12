@@ -144,7 +144,7 @@ public class SpielKontext
 		}
 		getAktuellerRaum().loescheItem();
 		
-		if(_lebensEnergie <= 0)
+		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
