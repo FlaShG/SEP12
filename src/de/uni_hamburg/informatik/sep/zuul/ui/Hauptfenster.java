@@ -34,6 +34,8 @@ public class Hauptfenster extends JFrame
 	{
 		super();
 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		_ausgabePanel = ausgabePanel;
 		_eingabePanel = eingabePanel;
 		_buttonPanel = buttonPanel;
@@ -57,8 +59,8 @@ public class Hauptfenster extends JFrame
 		content.add(_buttonPanel, BorderLayout.SOUTH);
 
 		setVisible(true);
-		setSize(1024, 860);
-		setPreferredSize(new Dimension(1024, 860));
-		setMinimumSize(new Dimension(1024, 860));
+		setSize(1024, 920);
+		setPreferredSize(new Dimension(1024, 920));
+		setMinimumSize(new Dimension(1024, 920));
 	}
 }
