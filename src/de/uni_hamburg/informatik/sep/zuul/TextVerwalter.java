@@ -8,8 +8,9 @@ public class TextVerwalter
 	public static final String KUCHENGEFUNDENTEXT = "Sie finden ein Stück Kuchen, essen es und gewinnen dadurch drei Lebensenergie dazu!";
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammen gebrochen. Starte erneut.";
-	public static final String BEENDENTEXT = "quit";
-	public static final String HILFETEXT = "help";
+	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
+	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Kuchen kann diese Anzahl aber wieder erhöht werden.";
+	public static final String RAUMWECHSELTEXT = "Sie können nun einen Raum weniger betreten. Sie können noch folgende Anzahl an Räumen betreten: ";
 	
 	public static final String BEFEHL_GEHEN = "go";
 	public static final String BEFEHL_HILFE = "help";
