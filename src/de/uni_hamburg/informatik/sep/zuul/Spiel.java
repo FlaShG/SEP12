@@ -32,6 +32,8 @@ import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
  */
 public class Spiel
 {
+	private static boolean onconsole;
+	
 	private Parser _parser;
 	private SpielKontext _kontext;
 
@@ -48,7 +50,7 @@ public class Spiel
 	 * @param out
 	 *            OutputStream
 	 */
-	public Spiel(boolean onconsole)
+	public Spiel()
 	{
 
 		_bp = new ButtonPanel(1024);
@@ -197,12 +199,13 @@ public class Spiel
 	 */
 	public static void main(String[] args)
 	{
+		onconsole = args.length > 0 && args[0].equals("onconsole");
 		SwingUtilities.invokeLater(new Runnable()
 		{			
 			@Override
 			public void run()
 			{
-				Spiel spiel = new Spiel(args.length > 0 && args[0].equals("onconsole"));
+				Spiel spiel = new Spiel();
 
 				spiel.spielen();				
 			}
