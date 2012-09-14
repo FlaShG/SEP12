@@ -48,7 +48,7 @@ public class Spiel
 	 * @param out
 	 *            OutputStream
 	 */
-	public Spiel()
+	public Spiel(boolean onconsole)
 	{
 
 		_bp = new ButtonPanel(1024);
@@ -202,7 +202,7 @@ public class Spiel
 			@Override
 			public void run()
 			{
-				Spiel spiel = new Spiel();
+				Spiel spiel = new Spiel(args.length > 0 && args[0].equals("onconsole"));
 
 				spiel.spielen();				
 			}
