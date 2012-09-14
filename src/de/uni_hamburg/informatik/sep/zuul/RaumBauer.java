@@ -19,7 +19,7 @@ public class RaumBauer
 		//
 		Raum herrentiolette = new Raum("Dr. little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
 		// 
-		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ätchzen.");
+		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
 		//
 		Raum terasse = new Raum(
 				"Dr. Little geht auf die Terasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.");
