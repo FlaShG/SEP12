@@ -46,7 +46,6 @@ public class BefehlFactory
 				else
 				{
 					kontext.setAktuellerRaum(naechsterRaum);
-					kontext.zeigeRaumbeschreibung();
 				}
 			}
 		},
@@ -88,7 +87,7 @@ public class BefehlFactory
 			@Override
 			public void ausfuehren(SpielKontext kontext)
 			{
-				kontext.beendeSpiel();
+				kontext.beendeSpiel("Sie haben wohl keine Lust mehr??");
 			}
 		}};
 
