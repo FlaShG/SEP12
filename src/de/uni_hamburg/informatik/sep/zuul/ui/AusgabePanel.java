@@ -14,7 +14,7 @@ public class AusgabePanel extends JPanel
 {
 	private JTextArea _anzeige;
 
-	private final int HOEHE = 570;
+	private final int HOEHE = 390;
 
 	public AusgabePanel(int breite)
 	{
