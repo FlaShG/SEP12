@@ -70,34 +70,8 @@ public class Raum
 	public void verbindeZweiRaeume(String richtung, Raum nachbar,
 			String gegenRichtung)
 	{
-		assert pruefeGegenrichtung(richtung, gegenRichtung) : "Vorbedingung verletzt: die Richtungen muessen gegenteilig sein.";
 		this.setAusgang(richtung, nachbar);
 		nachbar.setAusgang(gegenRichtung, this);
-	}
-
-	/**
-	 * Prueft ob zwei Himmelsrichtungen gegenüberliegend sind. Es müssen
-	 * englische Richtungsnamen verwendet werden.
-	 * 
-	 * @param richtung
-	 * @param gegenRichtung
-	 * @return true wenn gegenüberliegend.
-	 */
-	private boolean pruefeGegenrichtung(String richtung, String gegenRichtung)
-	{
-		Map<String, String> gegenTeile = new HashMap<String, String>();
-		gegenTeile.put(TextVerwalter.RICHTUNG_NORDEN, TextVerwalter.RICHTUNG_SUEDEN);
-		gegenTeile.put(TextVerwalter.RICHTUNG_SUEDEN,TextVerwalter.RICHTUNG_NORDEN);
-		gegenTeile.put(TextVerwalter.RICHTUNG_OSTEN, TextVerwalter.RICHTUNG_WESTEN);
-		gegenTeile.put(TextVerwalter.RICHTUNG_WESTEN, TextVerwalter.RICHTUNG_OSTEN);
-
-		richtung.toLowerCase(); // einheitliche Zeichengröße
-		gegenRichtung.toLowerCase();
-		if(gegenTeile.get(richtung).equals(gegenRichtung))
-		{
-			return true;
-		}
-		return false;
 
 	}
 
