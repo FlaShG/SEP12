@@ -27,28 +27,28 @@ public class RaumBauerTest
 		
 		assertNotNull(labor);
 		
-		Raum westfluegel = labor.gibAusgang(w);
-		Raum bueroHausmeister = westfluegel.gibAusgang(w);
-		Raum besenkammer = bueroHausmeister.gibAusgang(n);
-		Raum gang  = labor.gibAusgang(e);
-		Raum ostfluegel = gang.gibAusgang(e);
-		Raum bibliothek = ostfluegel.gibAusgang(e);
-		Raum terasse = bibliothek.gibAusgang(n);
-		Raum flur = labor.gibAusgang(n);
-		Raum haupteingang = flur.gibAusgang(e);
-		Raum herrenklo = ostfluegel.gibAusgang(s);
-		Raum mensa = herrenklo.gibAusgang(s);
-		Raum vorlesung = mensa.gibAusgang(w);
-		Raum konferenz = vorlesung.gibAusgang(e);
-		Raum wohnung = labor.gibAusgang(s);
-		Raum innenhof = vorlesung.gibAusgang(s);
-		Raum chemiegebaeude = innenhof.gibAusgang(s);
-		Raum sekretariat = chemiegebaeude.gibAusgang(w);
-		Raum flurchemie = sekretariat.gibAusgang(w);
-		Raum bueroGegner = flurchemie.gibAusgang(n);
+		Raum westfluegel = labor.getAusgang(w);
+		Raum bueroHausmeister = westfluegel.getAusgang(w);
+		Raum besenkammer = bueroHausmeister.getAusgang(n);
+		Raum gang  = labor.getAusgang(e);
+		Raum ostfluegel = gang.getAusgang(e);
+		Raum bibliothek = ostfluegel.getAusgang(e);
+		Raum terasse = bibliothek.getAusgang(n);
+		Raum flur = labor.getAusgang(n);
+		Raum haupteingang = flur.getAusgang(e);
+		Raum herrenklo = ostfluegel.getAusgang(s);
+		Raum mensa = herrenklo.getAusgang(s);
+		Raum vorlesung = mensa.getAusgang(w);
+		Raum konferenz = vorlesung.getAusgang(e);
+		Raum wohnung = labor.getAusgang(s);
+		Raum innenhof = vorlesung.getAusgang(s);
+		Raum chemiegebaeude = innenhof.getAusgang(s);
+		Raum sekretariat = chemiegebaeude.getAusgang(w);
+		Raum flurchemie = sekretariat.getAusgang(w);
+		Raum bueroGegner = flurchemie.getAusgang(n);
 		
 		
-		String[]  ausgaenge = labor.gibMoeglicheAusgaenge();
+		String[]  ausgaenge = labor.getMoeglicheAusgaenge();
 		
 		
 		

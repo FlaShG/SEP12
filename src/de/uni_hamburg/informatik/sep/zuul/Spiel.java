@@ -25,7 +25,6 @@ import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 public class Spiel
 {
 	private Parser _parser;
-	private static final String[] _gueltigeBefehlswoerter = new String[] {"go", "help", "quit"};
 	private SpielKontext _kontext;
 	
 
@@ -38,7 +37,7 @@ public class Spiel
 	{
 
 		
-		_parser = new Parser(in, out, new Befehlswoerter(_gueltigeBefehlswoerter));
+		_parser = new Parser(in, out);
 		
 		_kontext = new SpielKontext(in, out);
 	}
@@ -87,28 +86,6 @@ public class Spiel
 	private void verarbeiteBefehl(Befehl befehl)
 	{
 		befehl.ausfuehren(_kontext);
-//		boolean moechteBeenden = false;
-//
-//		if(!befehl.istBekannt())
-//		{
-//			_out.println("Ich weiß nicht, was Sie meinen...");
-//			return false;
-//		}
-//
-//		String befehlswort = befehl.gibBefehlswort();
-//		if(befehlswort.equals("help"))
-//		{
-//			hilfstextAusgeben();
-//		}
-//		else if(befehlswort.equals("go"))
-//		{
-//			wechsleRaum(befehl);
-//		}
-//		else if(befehlswort.equals("quit"))
-//		{
-//			moechteBeenden = beenden(befehl);
-//		}
-//		return moechteBeenden;
 	} 
 	
 
