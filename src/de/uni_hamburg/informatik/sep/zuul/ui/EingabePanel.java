@@ -39,6 +39,7 @@ public class EingabePanel extends JPanel
 		_enterButton = new JButton("Enter");
 		_enterButton.setSize(BUTTONGROESSE);
 		_enterButton.setPreferredSize(BUTTONGROESSE);
+		_enterButton.setFocusable(false);
 
 		initialisiereUI();
 
