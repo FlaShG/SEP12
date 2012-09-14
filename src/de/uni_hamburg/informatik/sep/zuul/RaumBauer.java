@@ -6,11 +6,9 @@ public class RaumBauer
 
 	public RaumBauer()
 	{
-		Raum draussen, hoersaal, cafeteria, labor, buero;
-
 		// die Räume erzeugen
 		// 
-		labor = new Raum(
+		Raum labor = new Raum(
 				"Dr. Little befindet sich in seinem Privatlabor an der Universität.");
 		// 
 		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
