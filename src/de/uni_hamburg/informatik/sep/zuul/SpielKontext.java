@@ -8,6 +8,7 @@ public class SpielKontext
 {
 	private static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	private static final int KUCHEN_ENERGIE_GEWINN = 3;
+	private static final int START_ENERGIE = 8;
 	
 	private PrintStream _out;
 	private InputStream _in;
@@ -21,7 +22,7 @@ public class SpielKontext
 	{
 		_in = in;
 		_out = out;
-		_lebensEnergie = 5;
+		_lebensEnergie = START_ENERGIE;
 		legeRaeumeAn();
 	}
 
