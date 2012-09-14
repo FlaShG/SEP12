@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.gui.HauptfensterWerkzeug;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -95,7 +96,14 @@ public class Spiel
 	public static void main(String[] args)
 	{
 		Spiel spiel = new Spiel(System.in, System.out);
+		
+		HauptfensterWerkzeug hauptfenster = new HauptfensterWerkzeug();
+		
 		spiel.spielen();
+		
+		
+		
+		
 	}
 }
 
