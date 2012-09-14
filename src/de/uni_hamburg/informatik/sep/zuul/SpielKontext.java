@@ -90,8 +90,9 @@ public class SpielKontext
 	/**
 	 * @param _spielZuende the _spielZuende to set
 	 */
-	public void beendeSpiel()
+	public void beendeSpiel(String nachricht)
 	{
+		schreibeNL(nachricht);
 		_spielZuende = true;
 	}
 	
@@ -128,14 +129,14 @@ public class SpielKontext
 				schreibeNL("Sie finden ein Stück Kuchen, essen es und gewinnen dadurch drei Lebensenergie dazu!");
 			break;
 			case Gegengift:
-				beendeSpiel();
+				beendeSpiel("Sie haben das Gegengift gefunden! Wunderbar!");
 			break;
 		}
 		getAktuellerRaum().removeItem();
 		
 		if(_lebensEnergie <= 0)
 		{
-			beendeSpiel();
+			beendeSpiel("Sie sind tot. Schade aber auch.");
 		}
 	}
 }
