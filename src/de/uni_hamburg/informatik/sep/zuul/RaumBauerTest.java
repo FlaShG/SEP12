@@ -13,7 +13,7 @@ public class RaumBauerTest
 	@Test
 	public void testRaumBauer()
 	{
-		
+
 	}
 
 	@Test
@@ -23,80 +23,67 @@ public class RaumBauerTest
 		String n = "north";
 		String e = "east";
 		String w = "west";
-		
+
 		RaumBauer bauer = new RaumBauer();
 		Raum labor = bauer.getStartRaum();
-		
+
 		assertNotNull(labor);
-		
-		Raum westfluegel = labor.gibAusgang(w);
-		Raum bueroHausmeister = westfluegel.gibAusgang(w);
-		Raum besenkammer = bueroHausmeister.gibAusgang(n);
-		Raum gang  = labor.gibAusgang(e);
-		Raum ostfluegel = gang.gibAusgang(e);
-		Raum bibliothek = ostfluegel.gibAusgang(e);
-		Raum terasse = bibliothek.gibAusgang(n);
-		Raum flur = labor.gibAusgang(n);
-		Raum haupteingang = flur.gibAusgang(e);
-		Raum herrenklo = ostfluegel.gibAusgang(s);
-		Raum mensa = herrenklo.gibAusgang(s);
-		Raum vorlesung = mensa.gibAusgang(w);
-		Raum konferenz = vorlesung.gibAusgang(e);
-		Raum wohnung = labor.gibAusgang(s);
-		Raum innenhof = vorlesung.gibAusgang(s);
-		Raum chemiegebaeude = innenhof.gibAusgang(s);
-		Raum sekretariat = chemiegebaeude.gibAusgang(w);
-		Raum flurchemie = sekretariat.gibAusgang(w);
-		Raum bueroGegner = flurchemie.gibAusgang(n);
-		
-		
-		LinkedList<String>  ausgaenge = getRichtungsListe(labor.gibMoeglicheAusgaenge());
+
+		Raum westfluegel = labor.getAusgang(w);
+		Raum bueroHausmeister = westfluegel.getAusgang(w);
+		Raum besenkammer = bueroHausmeister.getAusgang(n);
+		Raum gang = labor.getAusgang(e);
+		Raum ostfluegel = gang.getAusgang(e);
+		Raum bibliothek = ostfluegel.getAusgang(e);
+		Raum terasse = bibliothek.getAusgang(n);
+		Raum flur = labor.getAusgang(n);
+		Raum haupteingang = flur.getAusgang(e);
+		Raum herrenklo = ostfluegel.getAusgang(s);
+		Raum mensa = herrenklo.getAusgang(s);
+		Raum vorlesung = mensa.getAusgang(w);
+		Raum konferenz = vorlesung.getAusgang(e);
+		Raum wohnung = labor.getAusgang(s);
+		Raum innenhof = vorlesung.getAusgang(s);
+		Raum chemiegebaeude = innenhof.getAusgang(s);
+		Raum sekretariat = chemiegebaeude.getAusgang(w);
+		Raum flurchemie = sekretariat.getAusgang(w);
+		Raum bueroGegner = flurchemie.getAusgang(n);
+
+		LinkedList<String> ausgaenge = getRichtungsListe(labor
+				.getMoeglicheAusgaenge());
 		assertTrue(ausgaenge.contains(n));
 		assertTrue(ausgaenge.contains(e));
 		assertTrue(ausgaenge.contains(s));
 		assertTrue(ausgaenge.contains(w));
-		
-		ausgaenge = getRichtungsListe(westfluegel.gibMoeglicheAusgaenge());
+
+		ausgaenge = getRichtungsListe(westfluegel.getMoeglicheAusgaenge());
 		assertFalse(ausgaenge.contains(n));
 		assertTrue(ausgaenge.contains(e));
 		assertFalse(ausgaenge.contains(s));
 		assertTrue(ausgaenge.contains(w));
-		
-		ausgaenge = getRichtungsListe(bueroHausmeister.gibMoeglicheAusgaenge());
+
+		ausgaenge = getRichtungsListe(bueroHausmeister.getMoeglicheAusgaenge());
 		assertTrue(ausgaenge.contains(n));
 		assertTrue(ausgaenge.contains(e));
 		assertFalse(ausgaenge.contains(s));
 		assertFalse(ausgaenge.contains(w));
-		
-		ausgaenge = getRichtungsListe(besenkammer.gibMoeglicheAusgaenge());
+
+		ausgaenge = getRichtungsListe(besenkammer.getMoeglicheAusgaenge());
 		assertFalse(ausgaenge.contains(n));
 		assertFalse(ausgaenge.contains(e));
 		assertTrue(ausgaenge.contains(s));
 		assertFalse(ausgaenge.contains(w));
-		
-		ausgaenge = getRichtungsListe(flur.gibMoeglicheAusgaenge());
+
+		ausgaenge = getRichtungsListe(flur.getMoeglicheAusgaenge());
 		assertFalse(ausgaenge.contains(n));
 		assertTrue(ausgaenge.contains(e));
 		assertTrue(ausgaenge.contains(s));
 		assertFalse(ausgaenge.contains(w));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		//		String[]  ausgaenge = labor.getMoeglicheAusgaenge();
+
 	}
-	
+
 	private LinkedList<String> getRichtungsListe(String[] sArray)
 	{
 		LinkedList<String> sListe = new LinkedList<String>();
@@ -104,7 +91,7 @@ public class RaumBauerTest
 		{
 			sListe.add(s);
 		}
-		
+
 		return sListe;
 	}
 
