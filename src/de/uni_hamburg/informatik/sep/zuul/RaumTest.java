@@ -73,8 +73,8 @@ public class RaumTest
 	@Test
 	public void testGetItem()
 	{
-		assertEquals(Item.keins, raum.getItem());
-		assertEquals(Item.keins, raumWesten.getItem());
+		assertEquals(Item.Keins, raum.getItem());
+		assertEquals(Item.Keins, raumWesten.getItem());
 
 		raumOsten.setItem(Item.Kuchen);
 
@@ -100,7 +100,7 @@ public class RaumTest
 		assertEquals(Item.Kuchen, raumOsten.getItem());
 		
 		raumOsten.loescheItem();
-		assertEquals(Item.keins, raumOsten.getItem());
+		assertEquals(Item.Keins, raumOsten.getItem());
 	}
 	
 

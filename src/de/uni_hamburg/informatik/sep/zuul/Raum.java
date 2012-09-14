@@ -5,7 +5,9 @@ import java.util.Map;
 
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
- * verbunden, die in unterschiedlichen Richtungen liegen.
+ * verbunden, die in unterschiedlichen Richtungen liegen. In manchen Räumen
+ * liegen Items, die von dem Spieler automatisch eingesammelt werden.
+ * Standardmäßig sind die Räume leer.
  */
 public class Raum
 {
@@ -29,7 +31,7 @@ public class Raum
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_item = Item.keins;
+		_item = Item.Keins;
 
 	}
 
@@ -148,7 +150,7 @@ public class Raum
 	 */
 	public void loescheItem()
 	{
-		_item = Item.keins;
+		_item = Item.Keins;
 	}
 
 	/**
