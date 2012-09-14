@@ -26,12 +26,21 @@ public class SpielKontext
 		legeRaeumeAn();
 	}
 
-	
+	/**
+	 * Schreibt nachricht in den Output, hänge einen Zeilenumbruch an.
+	 * Vergleichbar mit PrintStream.println()
+	 * @param nachricht Die auszugebende Nachricht
+	 */
 	public void schreibeNL(String nachricht)
 	{
 		_out.println(nachricht);
 	}
 	
+	/**
+	 * Schreibt nachricht in den Output.
+	 * Vergleichbar mit PrintStream.print()
+	 * @param nachricht Die auszugebende Nachricht
+	 */
 	public void schreibe(String nachricht)
 	{
 		_out.print(nachricht);
@@ -42,38 +51,25 @@ public class SpielKontext
 	 */
 	private void legeRaeumeAn()
 	{
-//		Raum draussen, hoersaal, cafeteria, labor, buero;
-//
-//		// die Räume erzeugen
-//		draussen = new Raum("vor dem Haupteingang der Universität");
-//		hoersaal = new Raum("in einem Vorlesungssaal");
-//		cafeteria = new Raum("in der Cafeteria der Uni");
-//		labor = new Raum("in einem Rechnerraum");
-//		buero = new Raum("im Verwaltungsbüro der Informatik");
-//
-//		// die Ausgänge initialisieren
-//		draussen.setzeAusgang("east", hoersaal);
-//		draussen.setzeAusgang("south", labor);
-//		draussen.setzeAusgang("west", cafeteria);
-//		hoersaal.setzeAusgang("west", draussen);
-//		cafeteria.setzeAusgang("east", draussen);
-//		labor.setzeAusgang("north", draussen);
-//		labor.setzeAusgang("east", buero);
-//		buero.setzeAusgang("west", labor);
-//
-//		_aktuellerRaum = draussen; // das Spiel startet draussen
-		
 		RaumBauer raumbauer = new RaumBauer();
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
 
-
+	/**
+	 * Gibt den aktuellen Raum zurück, in dem sich der Spieler befindet.
+	 * @return
+	 */
 	public Raum getAktuellerRaum()
 	{
 		return _aktuellerRaum;
 	}
 
-
+	/**
+	 * Ändert den aktuellen Raum, in dem sich der Spieler befindet.
+	 * Zeigt dessen Beschreibung an, welche Items eingesammelt werden
+	 * und zum Abschluss die Ausgänge.
+	 * @param aktuellerRaum der neue Raum, der betreten wird
+	 */
 	public void setAktuellerRaum(Raum aktuellerRaum)
 	{
 		_aktuellerRaum = aktuellerRaum;
@@ -81,12 +77,10 @@ public class SpielKontext
 		raumBetreten();
 		zeigeAusgaenge();
 	}
-	
-	
-
 
 	/**
-	 * @return the _spielZuende
+	 * Gibt zurück, ob das Spiel zuende ist
+	 * @return true, wenn das Spiel zuende ist
 	 */
 	public boolean isSpielZuende()
 	{
@@ -95,7 +89,8 @@ public class SpielKontext
 
 
 	/**
-	 * @param _spielZuende the _spielZuende to set
+	 * Gibt eine Nachricht aus und beendet das Spiel
+	 * @param nachricht die Nachricht, die vor dem Spielende ausgegeben werden soll
 	 */
 	public void beendeSpiel(String nachricht)
 	{
