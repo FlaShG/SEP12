@@ -7,7 +7,7 @@ import java.util.Map;
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
  * verbunden, die in unterschiedlichen Richtungen liegen.
  */
-public class Raum extends RaumFoo
+public class Raum
 {
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
