@@ -59,8 +59,8 @@ public class Hauptfenster extends JFrame
 		content.add(_buttonPanel, BorderLayout.SOUTH);
 
 		setVisible(true);
-		setSize(1024, 920);
-		setPreferredSize(new Dimension(1024, 920));
-		setMinimumSize(new Dimension(1024, 920));
+		setSize(1024, 720);
+		setPreferredSize(new Dimension(1024, 720));
+		setMinimumSize(new Dimension(1024, 720));
 	}
 }
