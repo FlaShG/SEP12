@@ -57,38 +57,6 @@ public class Parser
 		}
 
 		return BefehlFactory.get(befehl, parameter);
-		//		String wort1;
-		//		String wort2;
-		//		StringTokenizer tokenizer = new StringTokenizer(eingabezeile);
-		//
-		//		if(tokenizer.hasMoreTokens())
-		//		{
-		//			wort1 = tokenizer.nextToken(); // erstes Wort 
-		//		}
-		//		else
-		//		{
-		//			wort1 = null;
-		//		}
-		//		if(tokenizer.hasMoreTokens())
-		//		{
-		//			wort2 = tokenizer.nextToken(); // zweites Wort
-		//		}
-		//		else
-		//		{
-		//			wort2 = null;
-		//		}
-		//
-		//		// Hinweis: Wir ignorieren den Rest der Zeile einfach.
-		//
-		//		// Jetzt prüfen, ob der Befehl bekannt ist. Wenn ja, erzeugen
-		//		// wir das passende Befehl-Objekt. Wenn nicht, erzeugen wir
-		//		// einen unbekannten Befehl mit 'null'.
-		//
-		//		if(_befehle.istBefehl(wort1))
-		//		{
-		//			return new Befehl(wort1, wort2);
-		//		}
-		//		return new Befehl(null, wort2);
 	}
 
 	/**
