@@ -41,7 +41,7 @@ public class RaumBauerTest
 		Raum herrenklo = ostfluegel.getAusgang(s);
 		Raum mensa = herrenklo.getAusgang(s);
 		Raum vorlesung = mensa.getAusgang(w);
-		Raum konferenz = vorlesung.getAusgang(e);
+		Raum konferenz = vorlesung.getAusgang(w);
 		Raum wohnung = labor.getAusgang(s);
 		Raum innenhof = vorlesung.getAusgang(s);
 		Raum chemiegebaeude = innenhof.getAusgang(s);
@@ -81,6 +81,104 @@ public class RaumBauerTest
 		assertFalse(ausgaenge.contains(w));
 
 		//		String[]  ausgaenge = labor.getMoeglicheAusgaenge();
+		
+		ausgaenge =getRichtungsListe(haupteingang.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(gang.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(ostfluegel.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(bibliothek.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(terasse.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(wohnung.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(konferenz.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(vorlesung.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(mensa.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(herrenklo.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(innenhof.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(chemiegebaeude.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(sekretariat.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(flurchemie.getMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(bueroGegner.getMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		
+		
+		
+				
+				
+		
+		
 
 	}
 
