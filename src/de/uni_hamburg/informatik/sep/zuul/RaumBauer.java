@@ -28,21 +28,21 @@ public class RaumBauer
 				"Dr. Little zwängt sich durch die schwere Eingangstür und steht nun vor dem Haupteingang der Universität.");
 		// 
 		Raum ostfluegel = new Raum(
-				"Dr. Little geht in den Ostflügel. Der Fußboden besteht aus Marmor; er spiegelt sich darin");
+				"Dr. Little geht in den Ostflügel. Der Fußboden besteht aus Marmor; er spiegelt sich darin.");
 		//
 		Raum vorlesungssaal = new Raum(
 				"Dr. Little stolpert in eine Vorlesung. Zum Glück sieht ihn keiner; er sollte sich trotzdem schnell aus dem Staub machen");
 		//
-		Raum innenhof = new Raum("Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf");
+		Raum innenhof = new Raum("Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf.");
 		//
 		Raum sekretariatchemie = new Raum(
 				"Dr. Little betritt das Chemiesekretariat. Die Frau am Tresen wundert sich, dass sich die Tür öffnet, doch sie kann ihn über den hohen Tresen hinweg nicht sehen.");
 		//
 		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
 		//
-		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Ein Ansammlung von Kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
+		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Ein Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
 		//
-		Raum flur = new Raum("Dr. Little betritt einen Flur");
+		Raum flur = new Raum("Dr. Little betritt einen Flur.");
 		//
 		Raum burerohausmeister = new Raum(
 				"Dr. Little betritt das Büro des Hausmeisters. Es ist niemand da. An der Wand stehen Besen und Putzmittel; der Boden ist mit Schwämmen bedeckt. Die Tür zur Besenkammer steht weit offen.");
