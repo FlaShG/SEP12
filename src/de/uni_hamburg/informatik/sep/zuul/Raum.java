@@ -86,10 +86,10 @@ public class Raum
 	private boolean pruefeGegenrichtung(String richtung, String gegenRichtung)
 	{
 		Map<String, String> gegenTeile = new HashMap<String, String>();
-		gegenTeile.put("north", "south");
-		gegenTeile.put("south", "north");
-		gegenTeile.put("east", "west");
-		gegenTeile.put("west", "east");
+		gegenTeile.put(TextVerwalter.RICHTUNG_NORDEN, TextVerwalter.RICHTUNG_SUEDEN);
+		gegenTeile.put(TextVerwalter.RICHTUNG_SUEDEN,TextVerwalter.RICHTUNG_NORDEN);
+		gegenTeile.put(TextVerwalter.RICHTUNG_OSTEN, TextVerwalter.RICHTUNG_WESTEN);
+		gegenTeile.put(TextVerwalter.RICHTUNG_WESTEN, TextVerwalter.RICHTUNG_OSTEN);
 
 		richtung.toLowerCase(); // einheitliche Zeichengröße
 		gegenRichtung.toLowerCase();
