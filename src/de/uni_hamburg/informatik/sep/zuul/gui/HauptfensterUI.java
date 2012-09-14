@@ -20,19 +20,28 @@ public class HauptfensterUI
 		_panel.setLayout(new BoxLayout(_panel, BoxLayout.PAGE_AXIS));
 		
 		_frame.setContentPane(_panel);
-		
-		
 	}
-	public void addFenster(JComponent component)
+	
+	/**
+	 * Fügt eine Komponente zum Panel hinzu
+	 * @param component Die hinzuzufügende Komponente
+	 */
+	public void addComponent(JComponent component)
 	{
 		_panel.add(component);
 	}
 	
+	/**
+	 * Zeigt das Fenster an
+	 */
 	public void zeigeFenter()
 	{
 		_frame.setVisible(true);
 	}
 	
+	/**
+	 * Versteckt das Fenster
+	 */
 	public void versteckeFenster()
 	{
 		_frame.setVisible(false);
