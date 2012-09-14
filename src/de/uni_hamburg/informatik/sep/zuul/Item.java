@@ -7,5 +7,5 @@ package de.uni_hamburg.informatik.sep.zuul;
  */
 public enum Item
 {
-	Kuchen, Gegengift, keins
+	Kuchen, Gegengift, Keins
 }
