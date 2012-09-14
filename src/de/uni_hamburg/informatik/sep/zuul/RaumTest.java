@@ -7,7 +7,7 @@ import org.junit.Test;
 
 /**
  * @author Felix Wiedemann<1wiedema@informatik.uni-hamburg.de>
- *
+ * 
  */
 public class RaumTest
 {
@@ -15,7 +15,7 @@ public class RaumTest
 	Raum raumOsten;
 	Raum raumWesten;
 	Raum raumNorden;
-	
+
 	@Before
 	public void setUp() throws Exception
 	{
@@ -23,11 +23,11 @@ public class RaumTest
 		raumOsten = new Raum("Ostblock");
 		raumWesten = new Raum("US und A");
 		raumNorden = new Raum("Nordpol");
-		
+
 		raum.setzeAusgang("osten", raumOsten);
 		raum.setzeAusgang("westen", raumWesten);
 		raum.setzeAusgang("norden", raumNorden);
-		
+
 		raumOsten.setzeAusgang("raus", raum);
 	}
 
@@ -35,17 +35,32 @@ public class RaumTest
 	public void testSetzeAusgang()
 	{
 		assertNull(raumWesten.gibAusgang("drölf"));
-		
+
 		raumWesten.setzeAusgang("drölf", raumNorden);
-		
+
 		assertEquals(raumNorden, raumWesten.gibAusgang("drölf"));
+	}
+
+	@Test
+	public void testVerbindeZweiRaeume()
+	{
+		//Hat noch keinen Ausgang im osten
+		assertNull(raumWesten.gibAusgang("east"));
+
+		//Hat noch keinen Ausgang im Westen
+		assertNull(raumOsten.gibAusgang("west"));
+
+		raumWesten.verbindeZweiRaeume("east", raumOsten, "west");
+
+		assertEquals(raumOsten, raumWesten.gibAusgang("east"));
+		assertEquals(raumWesten, raumOsten.gibAusgang("west"));
 	}
 
 	@Test
 	public void testGibAusgang()
 	{
 		assertNull(raum.gibAusgang("abc"));
-		
+
 		assertEquals(raumOsten, raum.gibAusgang("osten"));
 	}
 
@@ -54,5 +69,39 @@ public class RaumTest
 	{
 		assertEquals("Hauptraum", raum.gibBeschreibung());
 	}
+
+	@Test
+	public void testGetItem()
+	{
+		assertEquals(Item.keins, raum.getItem());
+		assertEquals(Item.keins, raumWesten.getItem());
+
+		raumOsten.setItem(Item.Kuchen);
+
+		assertEquals(Item.Kuchen, raumOsten.getItem());
+	}
+	
+	@Test
+	public void testSetItem()
+	{
+		raumOsten.setItem(Item.Kuchen);
+
+		assertEquals(Item.Kuchen, raumOsten.getItem());
+		
+		raumOsten.setItem(Item.Gegengift);
+
+		assertEquals(Item.Gegengift, raumOsten.getItem());
+	}
+	
+	@Test
+	public void testLoescheItem()
+	{
+		raumOsten.setItem(Item.Kuchen);
+		assertEquals(Item.Kuchen, raumOsten.getItem());
+		
+		raumOsten.loescheItem();
+		assertEquals(Item.keins, raumOsten.getItem());
+	}
+	
 
 }
