@@ -11,21 +11,21 @@ public class RaumBauer
 		// die Räume erzeugen
 		// 
 		labor = new Raum(
-				"Dr. Little findet sich in seinem Privatlabor an der Universität");
+				"Dr. Little findet sich in seinem Privatlabor an der Universität.");
 		// 
-		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang");
+		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
 		// Kuuchen?
-		Raum mensa = new Raum("Dr. Little findet sich in der Mensa wieder ");
+		Raum mensa = new Raum("Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.");
 		//
-		Raum herrentiolette = new Raum("Dr. little betritt die Herrentoilette");
+		Raum herrentiolette = new Raum("Dr. little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
 		// 
-		Raum westfluegel = new Raum("Dr. Little betritt den Westflügel");
+		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ätchzen.");
 		//
 		Raum terasse = new Raum(
-				"Dr. Little geht auf die Terasse hinaus. Es sind Möwen zu hören");
+				"Dr. Little geht auf die Terasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.");
 		// 
 		Raum haupteingang = new Raum(
-				"Dr. Little zwängt sich durch die schwere Eingangstür und steht nun vor dem Haupteingang der Universität");
+				"Dr. Little zwängt sich durch die schwere Eingangstür und steht nun vor dem Haupteingang der Universität.");
 		// 
 		Raum ostfluegel = new Raum(
 				"Dr. Little geht in den Ostflügel. Der Fußboden besteht aus Marmor; er spiegelt sich darin");
@@ -33,32 +33,32 @@ public class RaumBauer
 		Raum vorlesungssaal = new Raum(
 				"Dr. Little stolpert in eine Vorlesung. Zum Glück sieht ihn keiner; er sollte sich trotzdem schnell aus dem Staub machen");
 		//
-		Raum innenhof = new Raum("Dr. Little betritt den Innenhof");
+		Raum innenhof = new Raum("Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf");
 		//
 		Raum sekretariatchemie = new Raum(
-				"Dr. Little betritt das Chemiesekretariat");
+				"Dr. Little betritt das Chemiesekretariat. Die Frau am Tresen wundert sich, dass sich die Tür öffnet, doch sie kann ihn über den hohen Tresen hinweg nicht sehen.");
 		//
-		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur");
+		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
 		//
-		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude");
+		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Ein Ansammlung von Kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
 		//
 		Raum flur = new Raum("Dr. Little betritt einen Flur");
 		//
 		Raum burerohausmeister = new Raum(
-				"Dr. Little betritt das Büro des Hausmeisters");
+				"Dr. Little betritt das Büro des Hausmeisters. Es ist niemand da. An der Wand stehen Besen und Putzmittel; der Boden ist mit Schwämmen bedeckt. Die Tür zur Besenkammer steht weit offen.");
 		// 
 		Raum besenkammerhausmeister = new Raum(
-				"Dr. Little betritt die Besenkammer des Hausmeisters");
+				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank, offensichtlich der Rest des Mittagessens des Hausmeisters, liegt darin. Es ist dunkel.");
 		//
-		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek");
+		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckende Anblick.");
 		//
 		Raum wohnung = new Raum(
-				"Dr. Little betritt seine Wohnung auf dem Campus");
+				"Dr. Little betritt seine Wohnung auf dem Campus. Er wohnt seit Jahren dort, da er ja eh ständig in seinem angrenzenden Labor beschäftigt ist.");
 		//
-		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum");
+		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige geschäftige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
-				"Dr. Little betritt das Labor seines Konkurrenten Dr. Even Bigger");
+				"Dr. Little betritt das Labor seines Konkurrenten Dr. Even Bigger. Das Ziel ist erreicht.");
 
 		// die Ausgänge initialisieren
 		String s = "south";
@@ -67,71 +67,71 @@ public class RaumBauer
 		String w = "west";
 
 		_startRaum = labor; // das Spiel startet draussen
-		labor.setzeAusgang("north", flur);
-		labor.setzeAusgang("east", gang);
-		labor.setzeAusgang("south", wohnung);
-		labor.setzeAusgang("west", westfluegel);
+		labor.setAusgang("north", flur);
+		labor.setAusgang("east", gang);
+		labor.setAusgang("south", wohnung);
+		labor.setAusgang("west", westfluegel);
 
-		westfluegel.setzeAusgang("east", labor);
-		westfluegel.setzeAusgang("west", burerohausmeister);
+		westfluegel.setAusgang("east", labor);
+		westfluegel.setAusgang("west", burerohausmeister);
 
-		burerohausmeister.setzeAusgang("north", besenkammerhausmeister);
-		burerohausmeister.setzeAusgang("east", westfluegel);
+		burerohausmeister.setAusgang("north", besenkammerhausmeister);
+		burerohausmeister.setAusgang("east", westfluegel);
 
-		besenkammerhausmeister.setzeAusgang("south", burerohausmeister);
+		besenkammerhausmeister.setAusgang("south", burerohausmeister);
 		besenkammerhausmeister.setItem(Item.Kuchen);
 		
 
-		gang.setzeAusgang("north", haupteingang);
-		gang.setzeAusgang("east", ostfluegel);
-		gang.setzeAusgang("west", labor);
+		gang.setAusgang("north", haupteingang);
+		gang.setAusgang("east", ostfluegel);
+		gang.setAusgang("west", labor);
 
-		ostfluegel.setzeAusgang("east", bibliothek);
-		ostfluegel.setzeAusgang("south", herrentiolette);
-		ostfluegel.setzeAusgang("west", gang);
+		ostfluegel.setAusgang("east", bibliothek);
+		ostfluegel.setAusgang("south", herrentiolette);
+		ostfluegel.setAusgang("west", gang);
 
-		bibliothek.setzeAusgang("north", terasse);
-		bibliothek.setzeAusgang("west", ostfluegel);
+		bibliothek.setAusgang("north", terasse);
+		bibliothek.setAusgang("west", ostfluegel);
 
-		terasse.setzeAusgang("south", bibliothek);
+		terasse.setAusgang("south", bibliothek);
 		terasse.setItem(Item.Kuchen);
 
-		flur.setzeAusgang("east", haupteingang);
-		flur.setzeAusgang("south", labor);
+		flur.setAusgang("east", haupteingang);
+		flur.setAusgang("south", labor);
 
-		haupteingang.setzeAusgang("south", gang);
-		haupteingang.setzeAusgang("west", flur);
+		haupteingang.setAusgang("south", gang);
+		haupteingang.setAusgang("west", flur);
 
-		wohnung.setzeAusgang("south", konferenzraum);
-		wohnung.setzeAusgang("north", labor);
+		wohnung.setAusgang("south", konferenzraum);
+		wohnung.setAusgang("north", labor);
 
-		konferenzraum.setzeAusgang(e, vorlesungssaal);
-		konferenzraum.setzeAusgang(n, wohnung);
+		konferenzraum.setAusgang(e, vorlesungssaal);
+		konferenzraum.setAusgang(n, wohnung);
 
-		vorlesungssaal.setzeAusgang(e, mensa);
-		vorlesungssaal.setzeAusgang(s, innenhof);
-		vorlesungssaal.setzeAusgang(w, konferenzraum);
+		vorlesungssaal.setAusgang(e, mensa);
+		vorlesungssaal.setAusgang(s, innenhof);
+		vorlesungssaal.setAusgang(w, konferenzraum);
 
-		innenhof.setzeAusgang(n, vorlesungssaal);
-		innenhof.setzeAusgang(s, eingangchemie);
+		innenhof.setAusgang(n, vorlesungssaal);
+		innenhof.setAusgang(s, eingangchemie);
 
-		eingangchemie.setzeAusgang(n, innenhof);
-		eingangchemie.setzeAusgang(w, sekretariatchemie);
+		eingangchemie.setAusgang(n, innenhof);
+		eingangchemie.setAusgang(w, sekretariatchemie);
 
-		sekretariatchemie.setzeAusgang(e, eingangchemie);
-		sekretariatchemie.setzeAusgang(w, flurchemie);
+		sekretariatchemie.setAusgang(e, eingangchemie);
+		sekretariatchemie.setAusgang(w, flurchemie);
 
-		flurchemie.setzeAusgang(n, buerovondoktorevenbigger);
-		flurchemie.setzeAusgang(e, sekretariatchemie);
+		flurchemie.setAusgang(n, buerovondoktorevenbigger);
+		flurchemie.setAusgang(e, sekretariatchemie);
 		
-		buerovondoktorevenbigger.setzeAusgang(s, flurchemie);
+		buerovondoktorevenbigger.setAusgang(s, flurchemie);
 		buerovondoktorevenbigger.setItem(Item.Gegengift);
 
-		herrentiolette.setzeAusgang(n, ostfluegel);
-		herrentiolette.setzeAusgang(s, mensa);
+		herrentiolette.setAusgang(n, ostfluegel);
+		herrentiolette.setAusgang(s, mensa);
 
-		mensa.setzeAusgang(n, herrentiolette);
-		mensa.setzeAusgang(w, vorlesungssaal);
+		mensa.setAusgang(n, herrentiolette);
+		mensa.setAusgang(w, vorlesungssaal);
 		mensa.setItem(Item.Kuchen);
 	}
 

@@ -45,7 +45,7 @@ public class Raum
 	 * @require richtung != null
 	 * @require nachbar != null
 	 */
-	public void setzeAusgang(String richtung, Raum nachbar)
+	public void setAusgang(String richtung, Raum nachbar)
 	{
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 		assert nachbar != null : "Vorbedingung verletzt: nachbar != null";
@@ -71,8 +71,8 @@ public class Raum
 			String gegenRichtung)
 	{
 		assert pruefeGegenrichtung(richtung, gegenRichtung) : "Vorbedingung verletzt: die Richtungen muessen gegenteilig sein.";
-		this.setzeAusgang(richtung, nachbar);
-		nachbar.setzeAusgang(gegenRichtung, this);
+		this.setAusgang(richtung, nachbar);
+		nachbar.setAusgang(gegenRichtung, this);
 	}
 
 	/**
@@ -110,14 +110,14 @@ public class Raum
 	 *            die Richtung des Nachbarraums.
 	 * @require richtung != null
 	 */
-	public Raum gibAusgang(String richtung)
+	public Raum getAusgang(String richtung)
 	{
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 
 		return _ausgaenge.get(richtung);
 	}
-
-	public String[] gibMoeglicheAusgaenge()
+	
+	public String[] getMoeglicheAusgaenge()
 	{
 		return _ausgaenge.keySet().toArray(new String[0]);
 	}
@@ -159,7 +159,7 @@ public class Raum
 	 * 
 	 * @ensure ergebnis != null
 	 */
-	public String gibBeschreibung()
+	public String getBeschreibung()
 	{
 		return _beschreibung;
 	}

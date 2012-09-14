@@ -26,8 +26,6 @@ import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 public class Parser
 {
 
-	private Befehlswoerter _befehle; // hält die gültigen Befehlswörter
-
 	private InputStream _in;
 	private PrintStream _out;
 
@@ -39,10 +37,8 @@ public class Parser
 	 * @param out
 	 *            OutputStream
 	 */
-	public Parser(InputStream in, PrintStream out, Befehlswoerter befehlswoerter)
+	public Parser(InputStream in, PrintStream out)
 	{
-		_befehle = befehlswoerter;
-
 		this._in = in;
 		this._out = out;
 	}

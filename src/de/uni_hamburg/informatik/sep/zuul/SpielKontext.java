@@ -79,6 +79,8 @@ public class SpielKontext
 		zeigeRaumbeschreibung();
 		raumBetreten();
 	}
+	
+	
 
 
 	/**
@@ -106,10 +108,10 @@ public class SpielKontext
 	 */
 	public void zeigeRaumbeschreibung()
 	{
-		schreibeNL("Sie sind " + getAktuellerRaum().gibBeschreibung());
+		schreibeNL("Sie sind " + getAktuellerRaum().getBeschreibung());
 		schreibe("Ausgänge: ");
 		
-		for(String s: getAktuellerRaum().gibMoeglicheAusgaenge())
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
 		{
 			schreibe(s+" ");
 		}

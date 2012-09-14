@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.7.0_147-icedtea" class="java.beans.XMLDecoder">
+<java version="1.7.0_07" class="java.beans.XMLDecoder">
  <object class="com.horstmann.violet.ClassDiagramGraph">
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
@@ -85,9 +85,13 @@ zeigeRaumbeschreibung() : String</string>
     <void property="methods">
      <void property="text">
       <string>setzeAusgang(String, Raum) : void
+verbindeZweiRaeume(String, Raum, String) : void
 gibAusgang(String) : Raum
 gibMoeglicheAusgaenge() : String[]
 gibBeschreibung() : String
+getItem() : Item
+setItem(Item) : void
+loescheItem() : void
 </string>
      </void>
     </void>
@@ -107,15 +111,15 @@ gibBeschreibung() : String
         <void method="set">
          <object idref="Point2D$Double2">
           <void method="setLocation">
-           <double>527.5971270544948</double>
-           <double>384.6836839258726</double>
+           <double>508.59712705449476</double>
+           <double>382.6836839258726</double>
           </void>
          </object>
-         <double>384.6836839258726</double>
+         <double>382.6836839258726</double>
         </void>
        </void>
       </object>
-      <double>527.5971270544948</double>
+      <double>508.59712705449476</double>
      </void>
     </void>
    </object>
@@ -278,15 +282,15 @@ A gibBefehlsname() : String</string>
         <void method="set">
          <object idref="Point2D$Double7">
           <void method="setLocation">
-           <double>707.5782334266189</double>
-           <double>506.6022309911591</double>
+           <double>771.5782334266189</double>
+           <double>500.6022309911591</double>
           </void>
          </object>
-         <double>506.6022309911591</double>
+         <double>500.6022309911591</double>
         </void>
        </void>
       </object>
-      <double>707.5782334266189</double>
+      <double>771.5782334266189</double>
      </void>
     </void>
    </object>
@@ -445,15 +449,15 @@ A gibBefehlsname() : String</string>
         <void method="set">
          <object idref="Point2D$Double12">
           <void method="setLocation">
-           <double>762.2817607167441</double>
-           <double>255.67952972558504</double>
+           <double>750.2817607167441</double>
+           <double>251.67952972558504</double>
           </void>
          </object>
-         <double>255.67952972558504</double>
+         <double>251.67952972558504</double>
         </void>
        </void>
       </object>
-      <double>762.2817607167441</double>
+      <double>750.2817607167441</double>
      </void>
     </void>
    </object>
@@ -674,6 +678,44 @@ A gibBefehlsname() : String</string>
     </void>
    </object>
   </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode8">
+    <void property="attributes">
+     <void property="text">
+      <string>* Kuchen *
+* Gegengift *
+* Keins *</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>E Item</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double19">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double19">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double19">
+          <void method="setLocation">
+           <double>594.0</double>
+           <double>610.0</double>
+          </void>
+         </object>
+         <double>610.0</double>
+        </void>
+       </void>
+      </object>
+      <double>594.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
@@ -846,6 +888,18 @@ A gibBefehlsname() : String</string>
    </object>
    <object idref="ClassNode0"/>
    <object idref="ClassNode7"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode2"/>
+   <object idref="ClassNode8"/>
   </void>
  </object>
 </java>
