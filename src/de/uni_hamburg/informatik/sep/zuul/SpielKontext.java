@@ -121,7 +121,7 @@ public class SpielKontext
 	private void raumBetreten()
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		schreibeNL(TextVerwalter.RAUMGEWECHSELTTEXT);
+		schreibeNL(TextVerwalter.RAUMWECHSEL);
 		switch(getAktuellerRaum().getItem())
 		{
 			case Kuchen:
@@ -132,7 +132,7 @@ public class SpielKontext
 				beendeSpiel(TextVerwalter.SIEGTEXT);
 			break;
 		}
-		getAktuellerRaum().removeItem();
+		getAktuellerRaum().loescheItem();
 		
 		if(_lebensEnergie <= 0)
 		{
