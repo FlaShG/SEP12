@@ -44,7 +44,7 @@ public class BefehlFactory
 		}
 		
 		befehl = befehl.clone();
-		befehl.prepare(parameter);
+		befehl.setParameter(parameter);
 
 		return befehl;
 	}
