@@ -108,7 +108,7 @@ public class SpielKontext
 	 */
 	public void zeigeRaumbeschreibung()
 	{
-		schreibeNL("Sie sind " + getAktuellerRaum().getBeschreibung());
+		schreibeNL(getAktuellerRaum().getBeschreibung());
 		schreibe("Ausgänge: ");
 		
 		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
