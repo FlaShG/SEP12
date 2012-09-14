@@ -3,6 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul;
 import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
+import java.util.LinkedList;
+
 import org.junit.Test;
 
 public class RaumBauerTest
@@ -11,7 +13,7 @@ public class RaumBauerTest
 	@Test
 	public void testRaumBauer()
 	{
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
@@ -48,7 +50,35 @@ public class RaumBauerTest
 		Raum bueroGegner = flurchemie.gibAusgang(n);
 		
 		
-		String[]  ausgaenge = labor.gibMoeglicheAusgaenge();
+		LinkedList<String>  ausgaenge = getRichtungsListe(labor.gibMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(westfluegel.gibMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertTrue(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(bueroHausmeister.gibMoeglicheAusgaenge());
+		assertTrue(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertFalse(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(besenkammer.gibMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertFalse(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
+		
+		ausgaenge = getRichtungsListe(flur.gibMoeglicheAusgaenge());
+		assertFalse(ausgaenge.contains(n));
+		assertTrue(ausgaenge.contains(e));
+		assertTrue(ausgaenge.contains(s));
+		assertFalse(ausgaenge.contains(w));
 		
 		
 		
@@ -60,6 +90,22 @@ public class RaumBauerTest
 		
 		
 		
+		
+		
+		
+		
+		
+	}
+	
+	private LinkedList<String> getRichtungsListe(String[] sArray)
+	{
+		LinkedList<String> sListe = new LinkedList<String>();
+		for(String s : sArray)
+		{
+			sListe.add(s);
+		}
+		
+		return sListe;
 	}
 
 }
