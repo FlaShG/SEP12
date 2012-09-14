@@ -76,7 +76,10 @@ public class SpielKontext
 		_aktuellerRaum = aktuellerRaum;
 		zeigeRaumbeschreibung();
 		raumBetreten();
-		zeigeAusgaenge();
+		if(!isSpielZuende())
+		{
+			zeigeAusgaenge();
+		}
 	}
 
 	/**
