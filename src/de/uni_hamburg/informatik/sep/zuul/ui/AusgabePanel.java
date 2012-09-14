@@ -22,6 +22,8 @@ public class AusgabePanel extends JPanel
 
 		_anzeige = new JTextArea();
 		_anzeige.setEnabled(false);
+		_anzeige.setWrapStyleWord(true);
+		_anzeige.setAutoscrolls(true);
 
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));
