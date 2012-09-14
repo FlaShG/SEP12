@@ -11,7 +11,7 @@ public class RaumBauer
 		// die Räume erzeugen
 		// 
 		labor = new Raum(
-				"Dr. Little findet sich in seinem Privatlabor an der Universität.");
+				"Dr. Little befindet sich in seinem Privatlabor an der Universität.");
 		// 
 		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
 		// Kuuchen?
