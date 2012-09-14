@@ -43,18 +43,24 @@ public class ButtonPanel extends JPanel
 		//Buttons initialisieren:
 		_northButton = new JButton("North", north);
 		_northButton.setPreferredSize(BUTTONGROESSE);
+		_northButton.setFocusable(false);
 		_southButton = new JButton("South", south);
+		_southButton.setFocusable(false);
 		_southButton.setPreferredSize(BUTTONGROESSE);
 		_westButton = new JButton("West", west);
+		_westButton.setFocusable(false);
 		_westButton.setPreferredSize(BUTTONGROESSE);
 		_eastButton = new JButton("East", east);
 		_eastButton.setPreferredSize(BUTTONGROESSE);
+		_eastButton.setFocusable(false);
 
 		_quitButton = new JButton("Quit");
 		_quitButton.setMinimumSize(BUTTONGROESSE);
+		_quitButton.setFocusable(false);
 
 		_helpButton = new JButton("Help");
 		_helpButton.setMinimumSize(BUTTONGROESSE);
+		_helpButton.setFocusable(false);
 
 		initialisiereUI();
 
