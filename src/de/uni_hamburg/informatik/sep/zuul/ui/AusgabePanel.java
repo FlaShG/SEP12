@@ -14,14 +14,16 @@ public class AusgabePanel extends JPanel
 {
 	private JTextArea _anzeige;
 
-	private final int HOEHE = 570;
+	private final int HOEHE = 390;
 
 	public AusgabePanel(int breite)
 	{
 		super();
 
 		_anzeige = new JTextArea();
-		_anzeige.setEnabled(false);
+		_anzeige.setEditable(false);
+		_anzeige.setWrapStyleWord(true);
+		_anzeige.setAutoscrolls(true);
 
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));

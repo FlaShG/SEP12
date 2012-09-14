@@ -29,7 +29,7 @@ public class RaumBauer
 				"Dr. Little geht in den Ostflügel. Der Fußboden besteht aus Marmor; er spiegelt sich darin.");
 		//
 		Raum vorlesungssaal = new Raum(
-				"Dr. Little stolpert in eine Vorlesung. Zum Glück sieht ihn keiner; er sollte sich trotzdem schnell aus dem Staub machen");
+				"Dr. Little stolpert in eine Vorlesung. Zum Glück sieht ihn keiner; er sollte sich trotzdem schnell aus dem Staub machen.");
 		//
 		Raum innenhof = new Raum("Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf.");
 		//
