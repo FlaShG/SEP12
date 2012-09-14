@@ -61,6 +61,8 @@ public class Spiel
 			{
 				String str = _hauptwerkzeug.leseEingabeString();
 				
+				_hauptwerkzeug.schreibeNL("> "+ str);
+				
 				Befehl befehl = _parser.liefereBefehl(str);
 				befehl.ausfuehren(_kontext);
 				
