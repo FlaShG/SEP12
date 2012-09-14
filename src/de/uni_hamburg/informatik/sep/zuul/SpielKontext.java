@@ -47,14 +47,14 @@ public class SpielKontext
 		buero = new Raum("im Verwaltungsbüro der Informatik");
 
 		// die Ausgänge initialisieren
-		draussen.setzeAusgang("east", hoersaal);
-		draussen.setzeAusgang("south", labor);
-		draussen.setzeAusgang("west", cafeteria);
-		hoersaal.setzeAusgang("west", draussen);
-		cafeteria.setzeAusgang("east", draussen);
-		labor.setzeAusgang("north", draussen);
-		labor.setzeAusgang("east", buero);
-		buero.setzeAusgang("west", labor);
+		draussen.setAusgang("east", hoersaal);
+		draussen.setAusgang("south", labor);
+		draussen.setAusgang("west", cafeteria);
+		hoersaal.setAusgang("west", draussen);
+		cafeteria.setAusgang("east", draussen);
+		labor.setAusgang("north", draussen);
+		labor.setAusgang("east", buero);
+		buero.setAusgang("west", labor);
 
 		_aktuellerRaum = draussen; // das Spiel startet draussen
 	}
@@ -70,6 +70,8 @@ public class SpielKontext
 	{
 		_aktuellerRaum = aktuellerRaum;
 	}
+	
+	
 
 
 	/**
@@ -96,10 +98,10 @@ public class SpielKontext
 	 */
 	public void zeigeRaumbeschreibung()
 	{
-		schreibeNL("Sie sind " + getAktuellerRaum().gibBeschreibung());
+		schreibeNL("Sie sind " + getAktuellerRaum().getBeschreibung());
 		schreibe("Ausgänge: ");
 		
-		for(String s: getAktuellerRaum().gibMoeglicheAusgaenge())
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
 		{
 			schreibe(s+" ");
 		}

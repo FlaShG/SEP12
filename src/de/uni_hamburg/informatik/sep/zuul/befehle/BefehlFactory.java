@@ -12,7 +12,7 @@ public class BefehlFactory
 	{
 
 		@Override
-		public String gibBefehlsname()
+		public String getBefehlsname()
 		{
 			return null;
 		}
@@ -31,7 +31,7 @@ public class BefehlFactory
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
-			_map.put(befehl.gibBefehlsname(), befehl);
+			_map.put(befehl.getBefehlsname(), befehl);
 
 	}
 

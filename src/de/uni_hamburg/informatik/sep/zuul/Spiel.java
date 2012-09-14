@@ -86,28 +86,6 @@ public class Spiel
 	private void verarbeiteBefehl(Befehl befehl)
 	{
 		befehl.ausfuehren(_kontext);
-//		boolean moechteBeenden = false;
-//
-//		if(!befehl.istBekannt())
-//		{
-//			_out.println("Ich weiß nicht, was Sie meinen...");
-//			return false;
-//		}
-//
-//		String befehlswort = befehl.gibBefehlswort();
-//		if(befehlswort.equals("help"))
-//		{
-//			hilfstextAusgeben();
-//		}
-//		else if(befehlswort.equals("go"))
-//		{
-//			wechsleRaum(befehl);
-//		}
-//		else if(befehlswort.equals("quit"))
-//		{
-//			moechteBeenden = beenden(befehl);
-//		}
-//		return moechteBeenden;
 	} 
 	
 

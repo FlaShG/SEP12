@@ -46,7 +46,7 @@ public class ParserTest
 	public void testLiefereBefehl()
 	{
 		Befehl befehl = parser.liefereBefehl();
-		assertNull(befehl.gibBefehlsname());
+		assertNull(befehl.getBefehlsname());
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class ParserTest
 	{
 		Befehl befehl = parser.parseEingabezeile("go b");
 
-		assertEquals("go", befehl.gibBefehlsname());
+		assertEquals("go", befehl.getBefehlsname());
 	}
 
 	@Test

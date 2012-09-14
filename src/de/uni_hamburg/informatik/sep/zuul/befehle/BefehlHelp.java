@@ -5,7 +5,7 @@ import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
 final class BefehlHelp extends Befehl
 {
 	@Override
-	public String gibBefehlsname()
+	public String getBefehlsname()
 	{
 		return "help";
 	}

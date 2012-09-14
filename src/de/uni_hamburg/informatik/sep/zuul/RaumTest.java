@@ -24,35 +24,35 @@ public class RaumTest
 		raumWesten = new Raum("US und A");
 		raumNorden = new Raum("Nordpol");
 		
-		raum.setzeAusgang("osten", raumOsten);
-		raum.setzeAusgang("westen", raumWesten);
-		raum.setzeAusgang("norden", raumNorden);
+		raum.setAusgang("osten", raumOsten);
+		raum.setAusgang("westen", raumWesten);
+		raum.setAusgang("norden", raumNorden);
 		
-		raumOsten.setzeAusgang("raus", raum);
+		raumOsten.setAusgang("raus", raum);
 	}
 
 	@Test
 	public void testSetzeAusgang()
 	{
-		assertNull(raumWesten.gibAusgang("drölf"));
+		assertNull(raumWesten.getAusgang("drölf"));
 		
-		raumWesten.setzeAusgang("drölf", raumNorden);
+		raumWesten.setAusgang("drölf", raumNorden);
 		
-		assertEquals(raumNorden, raumWesten.gibAusgang("drölf"));
+		assertEquals(raumNorden, raumWesten.getAusgang("drölf"));
 	}
 
 	@Test
 	public void testGibAusgang()
 	{
-		assertNull(raum.gibAusgang("abc"));
+		assertNull(raum.getAusgang("abc"));
 		
-		assertEquals(raumOsten, raum.gibAusgang("osten"));
+		assertEquals(raumOsten, raum.getAusgang("osten"));
 	}
 
 	@Test
 	public void testGibBeschreibung()
 	{
-		assertEquals("Hauptraum", raum.gibBeschreibung());
+		assertEquals("Hauptraum", raum.getBeschreibung());
 	}
 
 }

@@ -6,7 +6,7 @@ import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
 final class BefehlGo extends Befehl
 {
 	@Override
-	public String gibBefehlsname()
+	public String getBefehlsname()
 	{
 		return "go";
 	}
@@ -24,7 +24,7 @@ final class BefehlGo extends Befehl
 		String richtung = getParameters()[0];
 
 		// Wir versuchen den Raum zu verlassen.
-		Raum naechsterRaum = kontext.getAktuellerRaum().gibAusgang(richtung);
+		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang(richtung);
 		if(naechsterRaum == null)
 		{
 			kontext.schreibeNL("Dort ist keine Tür!");

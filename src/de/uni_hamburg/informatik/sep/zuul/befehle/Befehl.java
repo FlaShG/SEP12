@@ -40,9 +40,9 @@ public abstract class Befehl
 	public abstract void ausfuehren(SpielKontext kontext);
 
 	/**
-	 * Gibt den Namen zurück.
+	 * gett den Namen zurück.
 	 */
-	public abstract String gibBefehlsname();
+	public abstract String getBefehlsname();
 
 	/**
 	 * @return the _parameter
@@ -59,14 +59,14 @@ public abstract class Befehl
 		if(obj instanceof Befehl)
 		{
 			Befehl other = (Befehl) obj;
-			result = other.gibBefehlsname().equals(gibBefehlsname()) && other.getParameters().equals(getParameters());
+			result = other.getBefehlsname().equals(getBefehlsname()) && other.getParameters().equals(getParameters());
 		}
 		return result;
 	}
 	@Override
 	public int hashCode()
 	{
-		return gibBefehlsname().hashCode() ^ getParameters().hashCode();
+		return getBefehlsname().hashCode() ^ getParameters().hashCode();
 	}
 	
 	@Override
@@ -98,14 +98,14 @@ public abstract class Befehl
 	@Override
 	public String toString()
 	{
-		return gibBefehlsname();
+		return getBefehlsname();
 	}
 	
 //	/**
 //	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
 //	 * zweites Wort gab.
 //	 */
-//	public String gibZweitesWort()
+//	public String getZweitesWort()
 //	{
 //		return _zweitesWort;
 //	}
