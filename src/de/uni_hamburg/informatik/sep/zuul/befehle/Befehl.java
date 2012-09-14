@@ -15,11 +15,11 @@ import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
  */
 public abstract class Befehl
 {
-	protected String[] _parameter;
+	private String[] _parameters;
 	
-	void prepare(String[] parameter)
+	void prepare(String[] parameters)
 	{
-		_parameter = parameter;
+		_parameters = parameters;
 	}
 //	protected String _zweitesWort;
 //	
@@ -40,15 +40,72 @@ public abstract class Befehl
 	public abstract void ausfuehren(SpielKontext kontext);
 
 	/**
-	 * Gibt den Namen zurück.
+	 * gett den Namen zurück.
 	 */
-	public abstract String gibBefehlsname();
+	public abstract String getBefehlsname();
+
+	/**
+	 * @return the _parameter
+	 */
+	public String[] getParameters()
+	{
+		return _parameters;
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean result = false;
+		if(obj instanceof Befehl)
+		{
+			Befehl other = (Befehl) obj;
+			result = other.getBefehlsname().equals(getBefehlsname()) && other.getParameters().equals(getParameters());
+		}
+		return result;
+	}
+	@Override
+	public int hashCode()
+	{
+		return getBefehlsname().hashCode() ^ getParameters().hashCode();
+	}
+	
+	@Override
+	public Befehl clone()
+	{
+		// TODO ugly!!
+		Befehl newBefehl = null;
+		try
+		{
+			newBefehl = this.getClass().newInstance();
+		}
+		catch(InstantiationException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(_parameters != null)
+			newBefehl._parameters = this._parameters.clone();
+		
+		return newBefehl;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getBefehlsname();
+	}
 	
 //	/**
 //	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
 //	 * zweites Wort gab.
 //	 */
-//	public String gibZweitesWort()
+//	public String getZweitesWort()
 //	{
 //		return _zweitesWort;
 //	}
