@@ -72,6 +72,7 @@ public class Raum
 	{
 		this.setAusgang(richtung, nachbar);
 		nachbar.setAusgang(gegenRichtung, this);
+
 	}
 
 	/**
