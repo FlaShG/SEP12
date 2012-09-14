@@ -61,7 +61,6 @@ public class Spiel
 			verarbeiteBefehl(befehl);
 			beendet = _kontext.isSpielZuende();
 		}
-		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
 	}
 
 	/**
@@ -69,12 +68,10 @@ public class Spiel
 	 */
 	private void zeigeWillkommenstext()
 	{
-		_kontext.schreibeNL("");
-		_kontext.schreibeNL("Willkommen zu Zuul!");
-		_kontext.schreibeNL("Zuul ist ein neues, unglaublich langweiliges Spiel.");
-		_kontext.schreibeNL("Tippen sie 'help', wenn Sie Hilfe brauchen.");
+		_kontext.schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
 		_kontext.schreibeNL("");
 		_kontext.zeigeRaumbeschreibung();
+		_kontext.zeigeAusgaenge();
 	}
 
 

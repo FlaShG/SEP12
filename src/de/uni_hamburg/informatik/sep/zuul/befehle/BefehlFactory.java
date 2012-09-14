@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
 
 public class BefehlFactory
 {
@@ -20,7 +21,7 @@ public class BefehlFactory
 		@Override
 		public void ausfuehren(SpielKontext kontext)
 		{
-			kontext.schreibeNL("Ich weiß nicht, was Sie meinen...");
+			kontext.schreibeNL(TextVerwalter.FALSCHEEINGABE);
 		}
 	};
 
