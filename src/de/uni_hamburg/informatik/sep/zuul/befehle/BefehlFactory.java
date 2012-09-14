@@ -35,6 +35,12 @@ public class BefehlFactory
 
 	}
 
+	/**
+	 * Gibt ein Befehlsobjeckt anhand des Befehlsnamens zurück
+	 * @param befehlsname Der Name des gewünschten Befehls
+	 * @param parameter Die Parameter, mit denen der Befehl ausgeführt werden soll
+	 * @return Das Befehlsobjekt
+	 */
 	public static Befehl get(String befehlsname, String[] parameter)
 	{
 		Befehl befehl = _map.get(befehlsname);
@@ -44,7 +50,7 @@ public class BefehlFactory
 		}
 		
 		befehl = befehl.clone();
-		befehl.prepare(parameter);
+		befehl.setParameter(parameter);
 
 		return befehl;
 	}

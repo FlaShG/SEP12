@@ -35,8 +35,6 @@ public class Spiel
 	 */
 	public Spiel(InputStream in, PrintStream out)
 	{
-
-		
 		_parser = new Parser(in, out);
 		
 		_kontext = new SpielKontext(in, out);

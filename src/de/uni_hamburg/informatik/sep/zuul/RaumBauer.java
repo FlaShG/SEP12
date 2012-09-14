@@ -133,6 +133,10 @@ public class RaumBauer
 		mensa.setItem(Item.Kuchen);
 	}
 
+	/**
+	 * Gibt den Startraum zurück, von dem aus der Spieler startet.
+	 * @return Der Startraum
+	 */
 	public Raum getStartRaum()
 	{
 		return _startRaum;
