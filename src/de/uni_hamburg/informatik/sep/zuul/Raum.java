@@ -22,14 +22,14 @@ public class Raum
 	 * 
 	 * @require beschreibung != null
 	 */
-	public Raum(String beschreibung, Item item)
+	public Raum(String beschreibung)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_item = item;
+		_item = Item.keins;
 
 	}
 
@@ -127,6 +127,17 @@ public class Raum
 	public Item getItem()
 	{
 		return _item;
+	}
+
+	/**
+	 * Setze ein Item in diesen Raum. Default ist {@link Item}.keins .
+	 * 
+	 * @param item
+	 *            Das neue Item
+	 */
+	public void setItem(Item item)
+	{
+		_item = item;
 	}
 
 	/**
