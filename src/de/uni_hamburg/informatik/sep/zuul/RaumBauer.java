@@ -20,7 +20,7 @@ public class RaumBauer
 		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
 		//
 		Raum terasse = new Raum(
-				"Dr. Little geht auf die Terasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.");
+				"Dr. Little geht auf die Terrasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.");
 		// 
 		Raum haupteingang = new Raum(
 				"Dr. Little zwängt sich durch die schwere Eingangstür und steht nun vor dem Haupteingang der Universität.");
