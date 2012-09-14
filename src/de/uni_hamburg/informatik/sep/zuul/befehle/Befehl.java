@@ -17,22 +17,14 @@ public abstract class Befehl
 {
 	private String[] _parameters;
 	
-	void prepare(String[] parameters)
+	/**
+	 * Setzt die Parameter, mit denen dieser Befehl ausgeführt werden soll
+	 * @param parameters die Parameter, mit denen dieser Befehl ausgeführt werden soll
+	 */
+	void setParameter(String[] parameters)
 	{
 		_parameters = parameters;
 	}
-//	protected String _zweitesWort;
-//	
-//	/**
-//	 * Erzeugt ein Befehlsobjekt. Beide Wörter müssen angegeben werden, aber
-//	 * jedes oder beide dürfen 'null' sein. Das Befehlswort sollte 'null' sein,
-//	 * wenn dieser Befehl als nicht vom Spiel erkannt gekennzeichnet werden
-//	 * soll.
-//	 */
-//	Befehl(String zweitesWort)
-//	{
-//		_zweitesWort = zweitesWort;
-//	}
 	
 	/**
 	 * Führt den Befehl aus.
@@ -40,14 +32,14 @@ public abstract class Befehl
 	public abstract void ausfuehren(SpielKontext kontext);
 
 	/**
-	 * gett den Namen zurück.
+	 * Gibt den Namen des Befehls zurück.
 	 */
 	public abstract String getBefehlsname();
 
 	/**
-	 * @return the _parameter
+	 * @return Die Parameter dieses Befehls
 	 */
-	public String[] getParameters()
+	protected String[] getParameters()
 	{
 		return _parameters;
 	}
@@ -59,14 +51,14 @@ public abstract class Befehl
 		if(obj instanceof Befehl)
 		{
 			Befehl other = (Befehl) obj;
-			result = other.getBefehlsname().equals(getBefehlsname()) && other.getParameters().equals(getParameters());
+			result = other.getBefehlsname().equals(getBefehlsname()) && other._parameters.equals(_parameters);
 		}
 		return result;
 	}
 	@Override
 	public int hashCode()
 	{
-		return getBefehlsname().hashCode() ^ getParameters().hashCode();
+		return getBefehlsname().hashCode() ^ _parameters.hashCode();
 	}
 	
 	@Override
@@ -80,17 +72,15 @@ public abstract class Befehl
 		}
 		catch(InstantiationException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch(IllegalAccessException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		if(_parameters != null)
-			newBefehl._parameters = this._parameters.clone();
+			newBefehl._parameters = _parameters.clone();
 		
 		return newBefehl;
 	}

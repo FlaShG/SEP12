@@ -26,12 +26,21 @@ public class SpielKontext
 		legeRaeumeAn();
 	}
 
-	
+	/**
+	 * Schreibt nachricht in den Output, hänge einen Zeilenumbruch an.
+	 * Vergleichbar mit PrintStream.println()
+	 * @param nachricht Die auszugebende Nachricht
+	 */
 	public void schreibeNL(String nachricht)
 	{
 		_out.println(nachricht);
 	}
 	
+	/**
+	 * Schreibt nachricht in den Output.
+	 * Vergleichbar mit PrintStream.print()
+	 * @param nachricht Die auszugebende Nachricht
+	 */
 	public void schreibe(String nachricht)
 	{
 		_out.print(nachricht);
@@ -42,27 +51,6 @@ public class SpielKontext
 	 */
 	private void legeRaeumeAn()
 	{
-//		Raum draussen, hoersaal, cafeteria, labor, buero;
-//
-//		// die Räume erzeugen
-//		draussen = new Raum("vor dem Haupteingang der Universität");
-//		hoersaal = new Raum("in einem Vorlesungssaal");
-//		cafeteria = new Raum("in der Cafeteria der Uni");
-//		labor = new Raum("in einem Rechnerraum");
-//		buero = new Raum("im Verwaltungsbüro der Informatik");
-//
-//		// die Ausgänge initialisieren
-//		draussen.setzeAusgang("east", hoersaal);
-//		draussen.setzeAusgang("south", labor);
-//		draussen.setzeAusgang("west", cafeteria);
-//		hoersaal.setzeAusgang("west", draussen);
-//		cafeteria.setzeAusgang("east", draussen);
-//		labor.setzeAusgang("north", draussen);
-//		labor.setzeAusgang("east", buero);
-//		buero.setzeAusgang("west", labor);
-//
-//		_aktuellerRaum = draussen; // das Spiel startet draussen
-		
 		RaumBauer raumbauer = new RaumBauer();
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
@@ -91,7 +79,8 @@ public class SpielKontext
 	}
 
 	/**
-	 * @return the _spielZuende
+	 * Gibt zurück, ob das Spiel zuende ist
+	 * @return true, wenn das Spiel zuende ist
 	 */
 	public boolean isSpielZuende()
 	{
@@ -100,7 +89,8 @@ public class SpielKontext
 
 
 	/**
-	 * @param _spielZuende the _spielZuende to set
+	 * Gibt eine Nachricht aus und beendet das Spiel
+	 * @param nachricht die Nachricht, die vor dem Spielende ausgegeben werden soll
 	 */
 	public void beendeSpiel(String nachricht)
 	{
@@ -116,6 +106,20 @@ public class SpielKontext
 	public void zeigeRaumbeschreibung()
 	{
 		schreibeNL(getAktuellerRaum().getBeschreibung());
+	}
+
+
+	/**
+	 * Zeigt die Ausgänge des aktuellen Raumes an.
+	 */
+	public void zeigeAusgaenge()
+	{
+		schreibe(TextVerwalter.AUSGAENGE + ": ");
+		
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			schreibe(s+" ");
+		}
 
 		schreibeNL("");
 	}
@@ -132,32 +136,17 @@ public class SpielKontext
 		{
 			case Kuchen:
 				_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT);
+				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT +_lebensEnergie);
 			break;
 			case Gegengift:
-				beendeSpiel(TextVerwalter.SIEGTEXT);
+				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 			break;
 		}
 		getAktuellerRaum().loescheItem();
 		
-		if(_lebensEnergie <= 0)
+		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
-	}
-	
-	/**
-	 * Zeig die Ausgänge des aktuellen Raums an
-	 */
-	private void zeigeAusgaenge()
-	{
-		schreibe("Ausgänge: ");
-		
-		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			schreibe(s+" ");
-		}
-		
-		schreibeNL("");
 	}
 }

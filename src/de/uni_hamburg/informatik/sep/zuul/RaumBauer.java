@@ -6,18 +6,16 @@ public class RaumBauer
 
 	public RaumBauer()
 	{
-		Raum draussen, hoersaal, cafeteria, labor, buero;
-
 		// die Räume erzeugen
 		// 
-		labor = new Raum(
+		Raum labor = new Raum(
 				"Dr. Little befindet sich in seinem Privatlabor an der Universität.");
 		// 
 		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
 		// Kuuchen?
 		Raum mensa = new Raum("Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.");
 		//
-		Raum herrentiolette = new Raum("Dr. little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
+		Raum herrentiolette = new Raum("Dr. Little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
 		// 
 		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
 		//
@@ -58,7 +56,7 @@ public class RaumBauer
 		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige geschäftige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
-				"Dr. Little betritt das Labor seines Konkurrenten Dr. Even Bigger. Das Ziel ist erreicht.");
+				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
 
 		// die Ausgänge initialisieren
 		String s = "south";
@@ -135,6 +133,10 @@ public class RaumBauer
 		mensa.setItem(Item.Kuchen);
 	}
 
+	/**
+	 * Gibt den Startraum zurück, von dem aus der Spieler startet.
+	 * @return Der Startraum
+	 */
 	public Raum getStartRaum()
 	{
 		return _startRaum;

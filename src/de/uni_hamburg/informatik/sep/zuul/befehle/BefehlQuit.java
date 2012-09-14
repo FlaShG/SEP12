@@ -8,7 +8,7 @@ final class BefehlQuit extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "quit";
+		return TextVerwalter.BEFEHL_BEENDEN;
 	}
 
 	@Override
