@@ -52,6 +52,8 @@ public class Raum
 
 		_ausgaenge.put(richtung, nachbar);
 	}
+	
+	
 
 	/**
 	 * Verbindet die beiden übergebenen Räume in der entsprechenden Richtung.
