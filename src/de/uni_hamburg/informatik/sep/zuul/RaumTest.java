@@ -19,10 +19,10 @@ public class RaumTest
 	@Before
 	public void setUp() throws Exception
 	{
-		raum = new Raum("Hauptraum", Item.Kuchen);
-		raumOsten = new Raum("Ostblock", Item.keins);
-		raumWesten = new Raum("US und A", Item.keins);
-		raumNorden = new Raum("Nordpol", Item.keins);
+		raum = new Raum("Hauptraum");
+		raumOsten = new Raum("Ostblock");
+		raumWesten = new Raum("US und A");
+		raumNorden = new Raum("Nordpol");
 
 		raum.setzeAusgang("osten", raumOsten);
 		raum.setzeAusgang("westen", raumWesten);
@@ -73,7 +73,7 @@ public class RaumTest
 	@Test
 	public void testGetItem()
 	{
-		assertEquals(Item.Kuchen, raum.getItem());
+		assertEquals(Item.keins, raum.getItem());
 		assertEquals(Item.keins, raumWesten.getItem());
 	}
 
