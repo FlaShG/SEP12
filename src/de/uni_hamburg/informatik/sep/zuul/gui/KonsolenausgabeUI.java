@@ -14,6 +14,7 @@ public class KonsolenausgabeUI
 	public KonsolenausgabeUI()
 	{
 		_textAusgabe = new JTextArea("Text", 10, 50);
+		_textAusgabe.setEditable(false);
 		
 		_panel = new JPanel();
 		
