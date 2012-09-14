@@ -16,12 +16,13 @@ public class SpielKontext
 	private Raum _aktuellerRaum;
 	private boolean _spielZuende;
 	private int _lebensEnergie;
+	private final Spiel _spiel;
 
+	
 
-	public SpielKontext(InputStream in, PrintStream out)
+	public SpielKontext(Spiel spiel)
 	{
-		_in = in;
-		_out = out;
+		_spiel = spiel;
 		_lebensEnergie = START_ENERGIE;
 		legeRaeumeAn();
 	}
@@ -33,7 +34,7 @@ public class SpielKontext
 	 */
 	public void schreibeNL(String nachricht)
 	{
-		_out.println(nachricht);
+		_spiel.schreibeNL(nachricht);
 	}
 	
 	/**
@@ -43,7 +44,7 @@ public class SpielKontext
 	 */
 	public void schreibe(String nachricht)
 	{
-		_out.print(nachricht);
+		_spiel.schreibe(nachricht);
 	}
 	
 	/**
