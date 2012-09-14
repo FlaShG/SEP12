@@ -107,6 +107,20 @@ public class SpielKontext
 	public void zeigeRaumbeschreibung()
 	{
 		schreibeNL(getAktuellerRaum().getBeschreibung());
+	}
+
+
+	/**
+	 * Zeigt die Ausgänge des aktuellen Raumes an.
+	 */
+	public void zeigeAusgaenge()
+	{
+		schreibe(TextVerwalter.AUSGAENGE + ": ");
+		
+		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			schreibe(s+" ");
+		}
 
 		schreibeNL("");
 	}
@@ -123,32 +137,17 @@ public class SpielKontext
 		{
 			case Kuchen:
 				_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT);
+				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT +_lebensEnergie);
 			break;
 			case Gegengift:
-				beendeSpiel(TextVerwalter.SIEGTEXT);
+				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 			break;
 		}
 		getAktuellerRaum().loescheItem();
 		
-		if(_lebensEnergie <= 0)
+		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
-	}
-	
-	/**
-	 * Zeigt die Ausgänge des aktuellen Raums an
-	 */
-	private void zeigeAusgaenge()
-	{
-		schreibe("Ausgänge: ");
-		
-		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			schreibe(s+" ");
-		}
-		
-		schreibeNL("");
 	}
 }
