@@ -28,7 +28,7 @@ public class KonsolenausgabeUI
 		return _panel;
 	}
 	
-	public JTextArea getTextfiel()
+	public JTextArea getTextArea()
 	{
 		return _textAusgabe;
 	}

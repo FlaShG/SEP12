@@ -1,8 +1,12 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+
+import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.gui.HauptfensterWerkzeug;
@@ -27,42 +31,61 @@ public class Spiel
 {
 	private Parser _parser;
 	private SpielKontext _kontext;
-	
+	private HauptfensterWerkzeug _hauptwerkzeug;
 
 	/**
 	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
-	 * @param in InputStream
-	 * @param out OutputStream
+	 * 
+	 * @param in
+	 *            InputStream
+	 * @param out
+	 *            OutputStream
 	 */
-	public Spiel(InputStream in, PrintStream out)
+	public Spiel()
+	{
+		
+		_hauptwerkzeug = new HauptfensterWerkzeug();
+
+		
+		_parser = new Parser();
+
+		_kontext = new SpielKontext(this);
+
+		_hauptwerkzeug.addNeueEingabeListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				String str = _hauptwerkzeug.leseEingabeString();
+				
+				Befehl befehl = _parser.liefereBefehl(str);
+				befehl.ausfuehren(_kontext);
+				
+				if(_kontext.isSpielZuende())
+					beendeSpiel();
+				
+			}
+		});
+	}
+	
+
+
+	private void beendeSpiel()
 	{
 
-		
-		_parser = new Parser(in, out);
-		
-		_kontext = new SpielKontext(in, out);
+		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
+		//TODO: Hauptfenster ausschalten (wie auch immer) Buttons + Eingabe sperren
 	}
-
-
-
+	
 	/**
 	 * Führt das Spiel aus.
 	 */
 	public void spielen()
 	{
+		_hauptwerkzeug.zeigeFenster();
+		
 		zeigeWillkommenstext();
-
-		// Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-		// und führen sie aus, bis das Spiel beendet wird.
-
-		boolean beendet = false;
-		while(!beendet)
-		{
-			Befehl befehl = _parser.liefereBefehl();
-			verarbeiteBefehl(befehl);
-			beendet = _kontext.isSpielZuende();
-		}
-		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
 	}
 
 	/**
@@ -78,44 +101,37 @@ public class Spiel
 		_kontext.zeigeRaumbeschreibung();
 	}
 
-
-
-	/**
-	 * Verarbeitet einen gegebenen Befehl (führt ihn aus). Wenn der Befehl das
-	 * Spiel beendet, wird 'true' zurückgeliefert, andernfalls 'false'.
-	 */
-	private void verarbeiteBefehl(Befehl befehl)
-	{
-		befehl.ausfuehren(_kontext);
-	} 
-	
-
 	/**
 	 * main-Methode zum Ausführen.
 	 */
 	public static void main(String[] args)
 	{
-		Spiel spiel = new Spiel(System.in, System.out);
+		SwingUtilities.invokeLater(new Runnable()
+		{			
+			@Override
+			public void run()
+			{
+				Spiel spiel = new Spiel();
+
+				spiel.spielen();				
+			}
+		});
+
+	}
+
+
+
+	public void schreibeNL(String nachricht)
+	{
+		_hauptwerkzeug.schreibeNL(nachricht);
 		
-		HauptfensterWerkzeug hauptfenster = new HauptfensterWerkzeug();
-		
-		spiel.spielen();
-		
-		
-		
+	}
+
+
+
+	public void schreibe(String nachricht)
+	{
+		_hauptwerkzeug.schreibe(nachricht);
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

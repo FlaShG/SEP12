@@ -34,4 +34,9 @@ public class KonsoleneingabeUI
 		return _enterButton;
 	}
 
+	public JTextField getTextField()
+	{
+		return _eingabeFeld;
+	}
+
 }
