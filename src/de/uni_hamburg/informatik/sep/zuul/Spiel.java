@@ -10,6 +10,10 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.gui.HauptfensterWerkzeug;
+import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.ButtonPanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.EingabePanel;
+import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -31,7 +35,11 @@ public class Spiel
 {
 	private Parser _parser;
 	private SpielKontext _kontext;
-	private HauptfensterWerkzeug _hauptwerkzeug;
+
+	private Hauptfenster _hf;
+	private EingabePanel _ep;
+	private AusgabePanel _ap;
+	private ButtonPanel _bp;
 
 	/**
 	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
@@ -43,32 +51,102 @@ public class Spiel
 	 */
 	public Spiel()
 	{
-		_hauptwerkzeug = new HauptfensterWerkzeug();
 
+		_bp = new ButtonPanel(1024);
+		_ep = new EingabePanel(1024);
+		_ap = new AusgabePanel(1024);
+		
+		_hf = new Hauptfenster(_ap, _ep, _bp);
+
+
+		_ep.getEnterButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				String str = _ep.getEingabeZeile().getText();
+				verarbeiteEingabe(str);
+				
+			}
+		});
+		
+		_ep.getEingabeZeile().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_ep.getEnterButton().doClick();				
+			}
+		});
+
+		
+		_bp.getNorthButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go north");
+			}
+		});
+		
+		_bp.getSouthButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go south");
+			}
+		});
+		
+		_bp.getEastButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go east");
+			}
+		});
+		
+		_bp.getWestButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("go west");
+			}
+		});
+		
+		_bp.getQuitButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("quit");
+			}
+		});
+		
+		_bp.getHelpButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe("help");
+			}
+		});
 		
 		_parser = new Parser();
 
 		_kontext = new SpielKontext(this);
 
-		
-		_hauptwerkzeug.addNeueEingabeListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				String str = _hauptwerkzeug.leseEingabeString();
-				
-				_hauptwerkzeug.schreibeNL("> "+ str);
-				
-				Befehl befehl = _parser.liefereBefehl(str);
-				befehl.ausfuehren(_kontext);
-				
-				if(_kontext.isSpielZuende())
-					beendeSpiel();
-				
-			}
-		});
+
 	}
 	
 
@@ -85,7 +163,7 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_hauptwerkzeug.zeigeFenster();
+//		_hauptwerkzeug.zeigeFenster();
 		
 		zeigeWillkommenstext();
 	}
@@ -123,7 +201,8 @@ public class Spiel
 
 	public void schreibeNL(String nachricht)
 	{
-		_hauptwerkzeug.schreibeNL(nachricht);
+		schreibe(nachricht);
+		_ap.getAnzeigeArea().append("\n");
 		
 	}
 
@@ -131,7 +210,22 @@ public class Spiel
 
 	public void schreibe(String nachricht)
 	{
-		_hauptwerkzeug.schreibe(nachricht);
+		_ap.getAnzeigeArea().append(nachricht);		
+	}
+
+
+
+	private void verarbeiteEingabe(String str)
+	{
+		_ep.getEingabeZeile().setText("");
 		
+		
+		schreibeNL("> "+ str);
+		
+		Befehl befehl = _parser.liefereBefehl(str);
+		befehl.ausfuehren(_kontext);
+		
+		if(_kontext.isSpielZuende())
+			beendeSpiel();
 	}
 }
