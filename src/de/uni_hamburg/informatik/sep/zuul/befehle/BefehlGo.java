@@ -2,13 +2,14 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.Raum;
 import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
 
 final class BefehlGo extends Befehl
 {
 	@Override
 	public String getBefehlsname()
 	{
-		return "go";
+		return TextVerwalter.BEFEHL_GEHEN;
 	}
 
 	@Override
@@ -17,7 +18,7 @@ final class BefehlGo extends Befehl
 		if(getParameters().length == 0)
 		{
 			// Gibt es kein zweites Wort, wissen wir nicht, wohin...
-			kontext.schreibeNL("Wohin möchten Sie gehen?");
+			kontext.schreibeNL(TextVerwalter.KEINERICHTUNG);
 			return;
 		}
 
@@ -27,7 +28,7 @@ final class BefehlGo extends Befehl
 		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang(richtung);
 		if(naechsterRaum == null)
 		{
-			kontext.schreibeNL("Dort ist keine Tür!");
+			kontext.schreibeNL(TextVerwalter.KEINETUER);
 		}
 		else
 		{

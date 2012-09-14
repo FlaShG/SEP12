@@ -15,7 +15,7 @@ public class RaumBauer
 		// Kuuchen?
 		Raum mensa = new Raum("Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.");
 		//
-		Raum herrentiolette = new Raum("Dr. little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
+		Raum herrentiolette = new Raum("Dr. Little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
 		// 
 		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
 		//
@@ -56,7 +56,7 @@ public class RaumBauer
 		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige geschäftige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
-				"Dr. Little betritt das Labor seines Konkurrenten Dr. Even Bigger. Das Ziel ist erreicht.");
+				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
 
 		// die Ausgänge initialisieren
 		String s = "south";
