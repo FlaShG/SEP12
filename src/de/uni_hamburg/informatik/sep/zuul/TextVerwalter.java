@@ -6,4 +6,6 @@ public class TextVerwalter
 	public static final String SIEGTEXT = "Gute Arbeit. Sie haben Dr. Little erfolgreich an sein Ziel gebracht. Sein Kollege Prof. Dr. Evenbigger verabreicht ihm nun das Gegenmittel und verhilft ihm wieder zu seiner vollen Größe.";
 	public static final String NIEDERLAGETEXT = "";
 	public static final String BEENDENTEXT = "";
+	public static final String KUCHENGEFUNDENTEXT = "Sie finden ein Stück Kuchen, essen es und gewinnen dadurch drei Lebensenergie dazu!";
+	public static final String RAUMGEWECHSELTTEXT = "Das Umherwandern zieht Ihnen einen Lebensenergiepunkt ab!";
 }

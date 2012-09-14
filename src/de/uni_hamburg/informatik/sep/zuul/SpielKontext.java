@@ -121,22 +121,22 @@ public class SpielKontext
 	private void raumBetreten()
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		schreibeNL("Das Umherwandern zieht Ihnen einen Lebensenergiepunkt ab!");
+		schreibeNL(TextVerwalter.RAUMGEWECHSELTTEXT);
 		switch(getAktuellerRaum().getItem())
 		{
 			case Kuchen:
 				_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-				schreibeNL("Sie finden ein Stück Kuchen, essen es und gewinnen dadurch drei Lebensenergie dazu!");
+				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT);
 			break;
 			case Gegengift:
-				beendeSpiel("Sie haben das Gegengift gefunden! Wunderbar!");
+				beendeSpiel(TextVerwalter.SIEGTEXT);
 			break;
 		}
 		getAktuellerRaum().removeItem();
 		
 		if(_lebensEnergie <= 0)
 		{
-			beendeSpiel("Sie sind tot. Schade aber auch.");
+			beendeSpiel(TextVerwalter.BEENDENTEXT);
 		}
 	}
 }
