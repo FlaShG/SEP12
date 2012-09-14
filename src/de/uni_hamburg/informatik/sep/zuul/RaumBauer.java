@@ -38,7 +38,7 @@ public class RaumBauer
 		//
 		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
 		//
-		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Ein Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
+		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Eine Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
 		//
 		Raum flur = new Raum("Dr. Little betritt einen Flur.");
 		//
