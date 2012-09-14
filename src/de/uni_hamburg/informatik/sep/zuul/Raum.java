@@ -5,7 +5,9 @@ import java.util.Map;
 
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
- * verbunden, die in unterschiedlichen Richtungen liegen.
+ * verbunden, die in unterschiedlichen Richtungen liegen. In manchen Räumen
+ * liegen Items, die von dem Spieler automatisch eingesammelt werden.
+ * Standardmäßig sind die Räume leer.
  */
 public class Raum
 {
