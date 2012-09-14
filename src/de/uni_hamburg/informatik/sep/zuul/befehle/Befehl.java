@@ -36,13 +36,13 @@ public abstract class Befehl
 	 */
 	public abstract String getBefehlsname();
 
-//	/**
-//	 * @return Die Parameter dieses Befehls
-//	 */
-//	private String[] getParameters()
-//	{
-//		return _parameters;
-//	}
+	/**
+	 * @return Die Parameter dieses Befehls
+	 */
+	protected String[] getParameters()
+	{
+		return _parameters;
+	}
 	
 	@Override
 	public boolean equals(Object obj)
