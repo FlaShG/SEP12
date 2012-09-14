@@ -109,7 +109,7 @@ public class SpielKontext
 	 */
 	public void zeigeRaumbeschreibung()
 	{
-		schreibeNL("Sie sind " + getAktuellerRaum().getBeschreibung());
+		schreibeNL(getAktuellerRaum().getBeschreibung());
 		schreibe("Ausgänge: ");
 		
 		for(String s: getAktuellerRaum().getMoeglicheAusgaenge())
@@ -142,7 +142,7 @@ public class SpielKontext
 		
 		if(_lebensEnergie <= 0)
 		{
-			beendeSpiel(TextVerwalter.BEENDENTEXT);
+			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
 	}
 }
