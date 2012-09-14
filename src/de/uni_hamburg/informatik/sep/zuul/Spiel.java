@@ -65,6 +65,8 @@ public class Spiel
 			public void actionPerformed(ActionEvent e)
 			{
 				String str = _ep.getEingabeZeile().getText();
+				_ep.getEingabeZeile().setText("");
+				
 				verarbeiteEingabe(str);
 				
 			}
@@ -154,6 +156,18 @@ public class Spiel
 	{
 
 		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
+		
+		_ep.getEingabeZeile().setEnabled(false);
+		_ep.getEnterButton().setEnabled(false);
+		
+		_bp.getSouthButton().setEnabled(false);
+		_bp.getNorthButton().setEnabled(false);
+		_bp.getWestButton().setEnabled(false);
+		_bp.getEastButton().setEnabled(false);
+		_bp.getHelpButton().setEnabled(false);
+		_bp.getQuitButton().setEnabled(false);
+
+		
 		//TODO: Hauptfenster ausschalten (wie auch immer) Buttons + Eingabe sperren
 	}
 	
@@ -215,9 +229,7 @@ public class Spiel
 
 
 	private void verarbeiteEingabe(String str)
-	{
-		_ep.getEingabeZeile().setText("");
-		
+	{	
 		
 		schreibeNL("> "+ str);
 		
