@@ -36,7 +36,7 @@ public abstract class Spiel
 
 	protected void beendeSpiel()
 	{
-		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
+		_kontext.schreibeNL(TextVerwalter.BEENDENTEXT);
 	}
 
 	/**
