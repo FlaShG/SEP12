@@ -73,4 +73,43 @@ public class Inventar
 	{
 		return _inhalt;
 	}
+	
+	public boolean hasAnyKuchen()
+	{
+		for(Item item: _inhalt)
+		{
+			switch (item)
+			{
+			case Kuchen:
+			case Giftkuchen:
+				return true;
+			default:
+				break;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * @require hasAnyKuchen()
+	 * @return
+	 */
+	public Item getAnyKuchen()
+	{
+		assert hasAnyKuchen();
+
+		for(Item item: _inhalt)
+		{
+			switch (item)
+			{	
+			case Kuchen:
+			case Giftkuchen:
+				_inhalt.remove(item);
+				return item;
+			default:
+				break;
+			}
+		}
+		return null;
+	}
 }

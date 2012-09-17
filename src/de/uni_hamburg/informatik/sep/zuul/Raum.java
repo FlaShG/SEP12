@@ -14,8 +14,9 @@ public class Raum
 {
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
-	private Stack<Item> _items; 
-
+	private Stack<Item> _items; 	
+	private Maus _maus;
+	
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -142,5 +143,29 @@ public class Raum
 		return _items.peek();
 	}
 	
+
+	public boolean hasMaus()
+	{
+		return _maus != null;
+	}
+	
+	/**
+	 * @return the _maus
+	 * @require hasMaus()
+	 */
+	public Maus getMaus()
+	{
+		assert hasMaus();
+		
+		return _maus;
+	}
+
+	/**
+	 * @param _maus the _maus to set
+	 */
+	public void setMaus(Maus maus)
+	{
+		_maus = maus;
+	}
 
 }
