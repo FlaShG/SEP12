@@ -1,7 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
-import javax.swing.SwingUtilities;
-
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
