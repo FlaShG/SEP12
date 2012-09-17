@@ -24,12 +24,14 @@ public class TextVerwalter
 	public static final String KEINETUER = "Dort ist keine Tür. Wählen Sie eine andere Richtung.";
 	public static final String AUSGAENGE = "Ausgänge";
 	
-	public static final String BEFEHL_GEHEN = "go";
-	public static final String BEFEHL_HILFE = "help";
-	public static final String BEFEHL_BEENDEN = "quit";
-	
-	public static final String RICHTUNG_NORDEN = "north";
-	public static final String RICHTUNG_SUEDEN = "south";
+
+	public static final String BEFEHL_GEHEN = "gehe";
+	public static final String BEFEHL_HILFE = "hilfe";
+	public static final String BEFEHL_BEENDEN = "beenden";
+
+	public static final String RICHTUNG_NORDEN = "nord";
+	public static final String RICHTUNG_SUEDEN = "sued";
+
 	public static final String RICHTUNG_WESTEN = "west";
-	public static final String RICHTUNG_OSTEN = "east";
+	public static final String RICHTUNG_OSTEN = "ost";
 }

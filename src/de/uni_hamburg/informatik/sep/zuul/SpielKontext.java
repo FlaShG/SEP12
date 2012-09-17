@@ -136,7 +136,7 @@ public class SpielKontext
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
 		schreibeNL(TextVerwalter.RAUMWECHSELTEXT+_lebensEnergie);
-		switch(getAktuellerRaum().getItem())
+		switch(getAktuellerRaum().getNaechstesItem())
 		{
 			case Krümel:
 				_lebensEnergie += Krümel_ENERGIE_GEWINN;

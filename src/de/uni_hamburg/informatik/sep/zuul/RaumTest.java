@@ -71,36 +71,36 @@ public class RaumTest
 	}
 
 	@Test
-	public void testGetItem()
+	public void testgetNaechstesItem()
 	{
-		assertEquals(Item.Keins, raum.getItem());
-		assertEquals(Item.Keins, raumWesten.getItem());
+		assertEquals(Item.Keins, raum.getNaechstesItem());
+		assertEquals(Item.Keins, raumWesten.getNaechstesItem());
 
-		raumOsten.setItem(Item.Krümel);
+		raumOsten.addItem(Item.Krümel);
 
-		assertEquals(Item.Krümel, raumOsten.getItem());
+		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
 	}
 	
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.setItem(Item.Krümel);
+		raumOsten.addItem(Item.Krümel);
 
-		assertEquals(Item.Krümel, raumOsten.getItem());
+		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
 		
-		raumOsten.setItem(Item.Gegengift);
+		raumOsten.addItem(Item.Gegengift);
 
-		assertEquals(Item.Gegengift, raumOsten.getItem());
+		assertEquals(Item.Gegengift, raumOsten.getNaechstesItem());
 	}
 	
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.setItem(Item.Krümel);
-		assertEquals(Item.Krümel, raumOsten.getItem());
+		raumOsten.addItem(Item.Krümel);
+		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
 		
 		raumOsten.loescheItem();
-		assertEquals(Item.Keins, raumOsten.getItem());
+		assertEquals(Item.Keins, raumOsten.getNaechstesItem());
 	}
 	
 

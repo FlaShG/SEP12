@@ -9,14 +9,14 @@ final class BefehlW extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "west";
+		return TextVerwalter.RICHTUNG_WESTEN;
 	}
 
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
 		// Wir versuchen den Raum zu verlassen.
-		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang("west");
+		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang(TextVerwalter.RICHTUNG_WESTEN);
 		if(naechsterRaum == null)
 		{
 			kontext.schreibeNL(TextVerwalter.KEINETUER);
