@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
@@ -13,16 +14,9 @@ public class Raum
 {
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
-	private Item _item;
-	
+	private Stack<Item> _items; 	
 	private Maus _maus;
 	
-	public Raum(String beschreibung, Maus maus)
-	{
-		this(beschreibung);
-		setMaus(maus);
-	}
-
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -39,7 +33,7 @@ public class Raum
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_item = Item.Keins;
+		_items = new Stack<Item>();
 
 	}
 
@@ -105,25 +99,14 @@ public class Raum
 	}
 
 	/**
-	 * Gibt das Item zurück, welches der Raum hält. Gibt "keins" als Item
-	 * zurück, wenn kein Item im Raum liegt.
-	 * 
-	 * @return item im Raum.
-	 */
-	public Item getItem()
-	{
-		return _item;
-	}
-
-	/**
 	 * Setze ein Item in diesen Raum. Default ist {@link Item}.keins .
 	 * 
 	 * @param item
 	 *            Das neue Item
 	 */
-	public void setItem(Item item)
+	public void addItem(Item item)
 	{
-		_item = item;
+		_items.push(item);
 	}
 
 	/**
@@ -132,7 +115,7 @@ public class Raum
 	 */
 	public void loescheItem()
 	{
-		_item = Item.Keins;
+		_items.pop();
 	}
 
 	/**
@@ -145,6 +128,21 @@ public class Raum
 	{
 		return _beschreibung;
 	}
+	
+	/**
+	 * liefert das Nächste Item, entfernt es jedoch nicht
+	 * @return Item
+	 * @ensure Item != null
+	 */
+	public Item getNaechstesItem()
+	{
+		if (_items.empty())
+		{
+			return Item.Keins;
+		}
+		return _items.peek();
+	}
+	
 
 	public boolean hasMaus()
 	{

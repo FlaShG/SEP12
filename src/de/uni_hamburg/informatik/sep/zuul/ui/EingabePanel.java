@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+
 public class EingabePanel extends JPanel
 {
 	private JTextField _eingabeZeile;
@@ -36,7 +38,7 @@ public class EingabePanel extends JPanel
 		_eingabeZeile.setSize(eingabeZeileGroesse);
 		_eingabeZeile.setPreferredSize(eingabeZeileGroesse);
 
-		_enterButton = new JButton("Enter");
+		_enterButton = new JButton(TextVerwalter.BUTTON_EINGEBEN);
 		_enterButton.setSize(BUTTONGROESSE);
 		_enterButton.setPreferredSize(BUTTONGROESSE);
 		_enterButton.setFocusable(false);
