@@ -41,6 +41,7 @@ public class TextVerwalter
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
 	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden. Um über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
 	public static final String RAUMWECHSELTEXT = "Anzahl betretbarer Räume: ";
+	public static final String IMMERNOCHKUCHENTEXT = "Dr. Little erahnt jedoch noch weitere Krümel in direkter Umgebung.";
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft." +
 			"\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
 	public static final String NICHTSZUMESSENTEXT = "Dr. Little sucht in seiner Tasche vergeblich nach einem Kuchenkrümel.";
@@ -65,9 +66,10 @@ public class TextVerwalter
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
 	
-	public static final String MAUS_GEFUNDEN = "Dr. Little hat eine Maus gefunden.";
+	public static final String MAUS_GEFUNDEN = "Eine kleine, pelzige Maus schaut hinter der Ecke hervor. Sie schaut hungrig auf Dr. Littles Tasche.";
 	public static final String MAUS_FRAGE = "Möchten Sie der Maus einen Krümel geben, damit sie Dr. Little den Weg weist?";
-	public static final String MAUS_RICHTUNGSANGABE = "Maus: 'Ich vermute, dass %s die richtige Richtung ist.'";
+	public static final String MAUS_RICHTUNGSANGABE = "Maus: \"Ich vermute, dass %s die richtige Richtung ist.\"";
 	public static final String MAUS_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er abgeben könnte...";
 	public static final String MAUS_KEINE_MAUS = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
+
 }
