@@ -97,12 +97,16 @@ public class RaumTest
 	public void testSetItem()
 	{
 		raumOsten.addItem(Item.Kuchen);
+		raumOsten.addItem(Item.Giftkuchen);
+		raumOsten.addItem(Item.Kuchen);
 
 		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 		
 		raumOsten.addItem(Item.Gegengift);
 
 		assertEquals(Item.Gegengift, raumOsten.getNaechstesItem());
+		
+		
 	}
 	
 	@Test
