@@ -10,9 +10,6 @@ public class SpielKontext
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	private PrintStream _out;
-	private InputStream _in;
-
 	private Raum _aktuellerRaum;
 	private boolean _spielZuende;
 	private int _lebensEnergie;
