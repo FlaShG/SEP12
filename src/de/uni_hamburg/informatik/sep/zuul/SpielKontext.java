@@ -6,7 +6,7 @@ import java.io.PrintStream;
 public class SpielKontext
 {
 	private static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
-	private static final int KUCHEN_ENERGIE_GEWINN = 3;
+	private static final int Krümel_ENERGIE_GEWINN = 3;
 	private static final int START_ENERGIE = 8;
 
 	private PrintStream _out;
@@ -138,15 +138,15 @@ public class SpielKontext
 	private void raumBetreten()
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		switch (getAktuellerRaum().getItem())
+		switch (getAktuellerRaum().getNaechstesItem())
 		{
 		case Keins:
 			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
 			break;
 
-		case Kuchen:
-			_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-			schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT + _lebensEnergie);
+		case Krümel:
+			_lebensEnergie += Krümel_ENERGIE_GEWINN;
+			schreibeNL(TextVerwalter.KRÜMELGEFUNDENTEXT + _lebensEnergie);
 			break;
 		case Gegengift:
 			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"

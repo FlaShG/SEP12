@@ -35,7 +35,8 @@ public class Inventar
 	{
 		assert item != null : "Vorbedingung verletzt: item != null";
 		
-		_inhalt.add(item);
+		if (item != Item.Keins)
+			_inhalt.add(item);
 	}
 	
 	/**
