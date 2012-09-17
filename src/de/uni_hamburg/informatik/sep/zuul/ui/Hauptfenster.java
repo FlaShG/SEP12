@@ -34,6 +34,7 @@ public class Hauptfenster extends JFrame
 	{
 		super();
 
+		setTitle("Zuul");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		_ausgabePanel = ausgabePanel;
