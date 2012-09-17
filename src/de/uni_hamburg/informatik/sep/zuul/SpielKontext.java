@@ -148,6 +148,13 @@ public class SpielKontext
 		}
 		getAktuellerRaum().loescheItem();
 		
+		// Maus
+		if(getAktuellerRaum().hasMaus())
+		{
+			schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
+			schreibeNL(TextVerwalter.MAUS_FRAGE);
+		}
+		
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);

@@ -14,6 +14,14 @@ public class Raum
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
 	private Item _item;
+	
+	private Maus _maus;
+	
+	public Raum(String beschreibung, Maus maus)
+	{
+		this(beschreibung);
+		_maus = maus;
+	}
 
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -136,6 +144,22 @@ public class Raum
 	public String getBeschreibung()
 	{
 		return _beschreibung;
+	}
+
+	public boolean hasMaus()
+	{
+		return _maus != null;
+	}
+	
+	/**
+	 * @return the _maus
+	 * @require hasMaus()
+	 */
+	public Maus getMaus()
+	{
+		assert hasMaus();
+		
+		return _maus;
 	}
 
 }
