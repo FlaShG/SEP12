@@ -28,7 +28,14 @@ public final class BefehlEat extends Befehl
 			break;
 			case Giftkuchen:
 				energie -= SpielKontext.GIFTKUCHEN_ENERGIE_VERLUST;
-				kontext.schreibeNL(TextVerwalter.giftkuchengegessentext(energie));
+				if(energie > 0)
+				{
+					kontext.schreibeNL(TextVerwalter.giftkuchengegessentext(energie));
+				}
+				else
+				{
+					kontext.beendeSpiel(TextVerwalter.KUCHENTODTEXT);
+				}
 			break;
 
 			default:
