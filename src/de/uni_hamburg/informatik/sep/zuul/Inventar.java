@@ -41,6 +41,7 @@ public class Inventar
 	
 	/**
 	 * Nimmt das zuletzt hinzugefügte Item aus dem Inventar.
+	 * Es wird dabei aus dem Inventar entfernt.
 	 * Wenn keines vorhanden ist, ist es {@link Item}.Keins.
 	 * 
 	 * @return	Das Item

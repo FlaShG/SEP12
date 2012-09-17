@@ -23,6 +23,7 @@ public final class BefehlTake extends Befehl
 			case Kuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+			break;
 			case Giftkuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);

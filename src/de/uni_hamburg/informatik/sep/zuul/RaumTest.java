@@ -63,6 +63,18 @@ public class RaumTest
 		
 		assertEquals(raumOsten, raum.getAusgang("osten"));
 	}
+	
+	@Test
+	public void testGetMoeglicheAusgaenge()
+	{
+		String[] ausgaenge = {"osten", "norden", "westen"};
+		assertArrayEquals(ausgaenge, raum.getMoeglicheAusgaenge());
+		
+		raum.setAusgang("gibtsNicht", raum);
+		
+		String[] ausgaenge2 = {"gibtsNicht", "osten", "norden", "westen"};
+		assertArrayEquals(ausgaenge2, raum.getMoeglicheAusgaenge());
+	}
 
 	@Test
 	public void testGibBeschreibung()
@@ -76,17 +88,17 @@ public class RaumTest
 		assertEquals(Item.Keins, raum.getNaechstesItem());
 		assertEquals(Item.Keins, raumWesten.getNaechstesItem());
 
-		raumOsten.addItem(Item.Krümel);
+		raumOsten.addItem(Item.Kuchen);
 
-		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 	}
 	
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.addItem(Item.Krümel);
+		raumOsten.addItem(Item.Kuchen);
 
-		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 		
 		raumOsten.addItem(Item.Gegengift);
 
@@ -96,8 +108,8 @@ public class RaumTest
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.addItem(Item.Krümel);
-		assertEquals(Item.Krümel, raumOsten.getNaechstesItem());
+		raumOsten.addItem(Item.Kuchen);
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 		
 		raumOsten.loescheItem();
 		assertEquals(Item.Keins, raumOsten.getNaechstesItem());
