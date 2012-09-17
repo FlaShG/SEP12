@@ -18,15 +18,17 @@ public final class BefehlTake extends Befehl
 	{
 		Raum raum = kontext.getAktuellerRaum();
 
-		switch (raum.getNaechstesItem())
+		switch(raum.getNaechstesItem())
 		{
 			case Kuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+				raum.loescheItem();
 			break;
 			case Giftkuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+				raum.loescheItem();
 			break;
 
 			default:

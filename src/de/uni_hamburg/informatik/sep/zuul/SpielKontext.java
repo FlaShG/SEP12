@@ -153,7 +153,6 @@ public class SpielKontext
 		{
 			case Kuchen: case Giftkuchen:
 				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
-				getAktuellerRaum().loescheItem();
 			break;
 		}
 
