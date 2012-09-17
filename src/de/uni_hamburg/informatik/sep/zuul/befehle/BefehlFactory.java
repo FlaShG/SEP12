@@ -35,10 +35,10 @@ public class BefehlFactory
 			_map.put(befehl.getBefehlsname(), befehl);
 
 		//Aliases
-		_map.put("n", _map.get("north"));
-		_map.put("s", _map.get("south"));
-		_map.put("w", _map.get("west"));
-		_map.put("e", _map.get("east"));
+		_map.put("n", _map.get(TextVerwalter.RICHTUNG_NORDEN));
+		_map.put("s", _map.get(TextVerwalter.RICHTUNG_SUEDEN));
+		_map.put("w", _map.get(TextVerwalter.RICHTUNG_WESTEN));
+		_map.put("o", _map.get(TextVerwalter.RICHTUNG_OSTEN));
 	}
 
 	/**
