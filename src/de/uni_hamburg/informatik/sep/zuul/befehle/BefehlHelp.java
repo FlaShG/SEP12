@@ -8,7 +8,7 @@ final class BefehlHelp extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "help";
+		return TextVerwalter.BEFEHL_HILFE;
 	}
 
 	@Override

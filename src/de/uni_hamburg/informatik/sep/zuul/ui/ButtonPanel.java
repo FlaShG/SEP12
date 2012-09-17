@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+
 public class ButtonPanel extends JPanel
 {
 	private JButton _northButton;
@@ -41,24 +43,24 @@ public class ButtonPanel extends JPanel
 		ImageIcon east = new ImageIcon("./res/east.png");
 
 		//Buttons initialisieren:
-		_northButton = new JButton("North", north);
+		_northButton = new JButton(TextVerwalter.RICHTUNG_NORDEN, north);
 		_northButton.setPreferredSize(BUTTONGROESSE);
 		_northButton.setFocusable(false);
-		_southButton = new JButton("South", south);
+		_southButton = new JButton(TextVerwalter.RICHTUNG_SUEDEN, south);
 		_southButton.setFocusable(false);
 		_southButton.setPreferredSize(BUTTONGROESSE);
-		_westButton = new JButton("West", west);
+		_westButton = new JButton(TextVerwalter.RICHTUNG_WESTEN, west);
 		_westButton.setFocusable(false);
 		_westButton.setPreferredSize(BUTTONGROESSE);
-		_eastButton = new JButton("East", east);
+		_eastButton = new JButton(TextVerwalter.RICHTUNG_OSTEN, east);
 		_eastButton.setPreferredSize(BUTTONGROESSE);
 		_eastButton.setFocusable(false);
 
-		_quitButton = new JButton("Quit");
+		_quitButton = new JButton(TextVerwalter.BEFEHL_BEENDEN);
 		_quitButton.setMinimumSize(BUTTONGROESSE);
 		_quitButton.setFocusable(false);
 
-		_helpButton = new JButton("Help");
+		_helpButton = new JButton(TextVerwalter.BEFEHL_HILFE);
 		_helpButton.setMinimumSize(BUTTONGROESSE);
 		_helpButton.setFocusable(false);
 
