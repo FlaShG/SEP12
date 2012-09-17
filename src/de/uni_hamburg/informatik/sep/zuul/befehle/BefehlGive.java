@@ -50,13 +50,11 @@ public class BefehlGive extends Befehl
 	 */
 	static String bestimmeRichtung(Item kuchen, String richtigeRichtung, String[] moeglicheRichtungen)
 	{
-		String angegebeneRichtung = null;
-
 		if(kuchen == Item.Kuchen)
 		{
-			angegebeneRichtung = richtigeRichtung;
+			return richtigeRichtung;
 		}
-		else if(kuchen == Item.Giftkuchen)
+		if(kuchen == Item.Giftkuchen)
 		{
 			LinkedList<String> richtungen = new LinkedList<String>();
 			
@@ -67,9 +65,10 @@ public class BefehlGive extends Befehl
 
 			int randomInt = new Random().nextInt(richtungen.size());
 
-			angegebeneRichtung = richtungen.get(randomInt);
+			return richtungen.get(randomInt);
 		}
-		return angegebeneRichtung;
+		
+		return null;
 	}
 
 	@Override

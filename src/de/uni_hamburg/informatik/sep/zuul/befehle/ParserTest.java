@@ -52,7 +52,7 @@ public class ParserTest
 		String[] parS = { TextVerwalter.RICHTUNG_SUEDEN };
 
 		gehe.setParameter(parS);
-		bef = parser.liefereBefehl("gehe sued");
+		bef = parser.liefereBefehl("gehe süd");
 
 		assertEquals(gehe.getBefehlsname(), bef.getBefehlsname());
 		assertArrayEquals(gehe.getParameters(), bef.getParameters());

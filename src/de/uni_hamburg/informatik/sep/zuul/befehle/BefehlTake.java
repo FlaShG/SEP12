@@ -24,11 +24,19 @@ public final class BefehlTake extends Befehl
 				kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 				raum.loescheItem();
+				if(raum.getNaechstesItem() != Item.Keins)
+				{
+					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+				}
 			break;
 			case Giftkuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
 				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 				raum.loescheItem();
+				if(raum.getNaechstesItem() != Item.Keins)
+				{
+					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+				}
 			break;
 
 			default:
