@@ -69,9 +69,9 @@ public class Inventar
 	/**
 	 * Gibt das Inventar als Liste zurück.
 	 */
-	public List<Item> getInhaltsliste()
+	public Item[] getInhaltsliste()
 	{
-		return _inhalt;
+		return _inhalt.toArray(new Item[0]);
 	}
 	
 	public boolean hasAnyKuchen()
