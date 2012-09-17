@@ -149,25 +149,11 @@ public class SpielKontext
 			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
 			break;
 
-		case Kuchen:
-			_lebensEnergie += Krümel_ENERGIE_GEWINN;
-			schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT + _lebensEnergie);
-			break;
-		case Gegengift:
-			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"
-					+ TextVerwalter.BEENDENTEXT);
-			break;
-		}
-		getAktuellerRaum().loescheItem();
-
-		schreibeNL(TextVerwalter.RAUMWECHSELTEXT+_lebensEnergie);
-
-		switch(getAktuellerRaum().getNaechstesItem())
-		{
 			case Kuchen: case Giftkuchen:
 				//_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
 				//_lebensEnergie -= GIFTKUCHEN_ENERGIE_VERLUST;
 				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+				getAktuellerRaum().loescheItem();
 			break;
 
 			case Gegengift:
