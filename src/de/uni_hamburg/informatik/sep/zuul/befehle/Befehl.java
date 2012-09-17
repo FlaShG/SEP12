@@ -44,53 +44,6 @@ public abstract class Befehl
 		return _parameters;
 	}
 	
-	@Override
-	public boolean equals(Object obj)
-	{
-		boolean result = false;
-		if(obj instanceof Befehl)
-		{
-			Befehl other = (Befehl) obj;
-			result = other.getBefehlsname().equals(getBefehlsname()) && other._parameters.equals(_parameters);
-		}
-		return result;
-	}
-	@Override
-	public int hashCode()
-	{
-		return getBefehlsname().hashCode() ^ _parameters.hashCode();
-	}
-	
-	@Override
-	public Befehl clone()
-	{
-		// TODO ugly!!
-		Befehl newBefehl = null;
-		try
-		{
-			newBefehl = this.getClass().newInstance();
-		}
-		catch(InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-		catch(IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-		
-		if(_parameters != null)
-			newBefehl._parameters = _parameters.clone();
-		
-		return newBefehl;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return getBefehlsname();
-	}
-	
 //	/**
 //	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
 //	 * zweites Wort gab.

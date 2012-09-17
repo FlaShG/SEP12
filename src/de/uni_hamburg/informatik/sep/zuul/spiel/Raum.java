@@ -117,12 +117,12 @@ public class Raum
 	}
 
 	/**
-	 * Setze das Item dieses Raumes auf {@link Item}.keins . Dies ist auch der
-	 * Raum-default Wert.
+	 * Entfernt das nächste Item aus dem Raum, wenn es eines gibt
 	 */
 	public void loescheItem()
 	{
-		_items.pop();
+		if(!_items.empty())
+			_items.pop();
 	}
 
 	/**
