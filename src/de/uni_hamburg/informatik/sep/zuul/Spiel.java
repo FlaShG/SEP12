@@ -238,7 +238,7 @@ public class Spiel
 			public void run()
 			{
 				Spiel spiel = new Spiel();
-
+ 
 				spiel.spielen();				
 			}
 		});
