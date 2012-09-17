@@ -78,11 +78,14 @@ public class RaumBauer
 
 		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, burerohausmeister);
 		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.Kuchen);
 		
 
 		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
 		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
 		gang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, labor);
+		gang.addItem(Item.Kuchen);
 
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
@@ -93,6 +96,7 @@ public class RaumBauer
 
 		terasse.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, bibliothek);
 		terasse.addItem(Item.Kuchen);
+		terasse.addItem(Item.Kuchen);
 
 		flur.setAusgang(TextVerwalter.RICHTUNG_OSTEN, haupteingang);
 		flur.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, labor);
@@ -102,6 +106,7 @@ public class RaumBauer
 
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, konferenzraum);
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_NORDEN, labor);
+		wohnung.addItem(Item.Kuchen);
 
 		konferenzraum.setAusgang(e, vorlesungssaal);
 		konferenzraum.setAusgang(n, wohnung);
@@ -118,6 +123,7 @@ public class RaumBauer
 
 		sekretariatchemie.setAusgang(e, eingangchemie);
 		sekretariatchemie.setAusgang(w, flurchemie);
+		sekretariatchemie.addItem(Item.Kuchen);
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
@@ -130,6 +136,7 @@ public class RaumBauer
 
 		mensa.setAusgang(n, herrentiolette);
 		mensa.setAusgang(w, vorlesungssaal);
+		mensa.addItem(Item.Kuchen);
 		mensa.addItem(Item.Kuchen);
 	}
 
