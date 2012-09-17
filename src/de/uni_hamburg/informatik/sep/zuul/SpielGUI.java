@@ -118,8 +118,6 @@ public class SpielGUI extends Spiel
 	@Override
 	protected void beendeSpiel()
 	{
-		super.beendeSpiel();
-
 		_ep.getEingabeZeile().setEnabled(false);
 		_ep.getEnterButton().setEnabled(false);
 

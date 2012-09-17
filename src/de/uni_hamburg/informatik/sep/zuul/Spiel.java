@@ -35,6 +35,14 @@ public abstract class Spiel implements ISchreiber
 	}
 
 	/**
+	 * Schablonenmethode für Aktionen bei beendetem Spiel.
+	 */
+	protected void beendeSpiel()
+	{
+		
+	}
+
+	/**
 	 * Führt das Spiel aus.
 	 */
 	protected void spielen()
@@ -59,5 +67,8 @@ public abstract class Spiel implements ISchreiber
 
 		Befehl befehl = _parser.liefereBefehl(str);
 		befehl.ausfuehren(_kontext);
+
+		if(_kontext.isSpielZuende())
+			beendeSpiel();
 	}
 }
