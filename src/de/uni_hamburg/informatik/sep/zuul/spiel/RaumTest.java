@@ -23,11 +23,11 @@ public class RaumTest
 		raumOsten = new Raum("Ostblock");
 		raumWesten = new Raum("US und A");
 		raumNorden = new Raum("Nordpol");
-		
+
 		raum.setAusgang("osten", raumOsten);
 		raum.setAusgang("westen", raumWesten);
 		raum.setAusgang("norden", raumNorden);
-		
+
 		raumOsten.setAusgang("raus", raum);
 	}
 
@@ -60,19 +60,19 @@ public class RaumTest
 	public void testGibAusgang()
 	{
 		assertNull(raum.getAusgang("abc"));
-		
+
 		assertEquals(raumOsten, raum.getAusgang("osten"));
 	}
-	
+
 	@Test
 	public void testGetMoeglicheAusgaenge()
 	{
-		String[] ausgaenge = {"osten", "norden", "westen"};
+		String[] ausgaenge = { "osten", "norden", "westen" };
 		assertArrayEquals(ausgaenge, raum.getMoeglicheAusgaenge());
-		
+
 		raum.setAusgang("gibtsNicht", raum);
-		
-		String[] ausgaenge2 = {"gibtsNicht", "osten", "norden", "westen"};
+
+		String[] ausgaenge2 = { "gibtsNicht", "osten", "norden", "westen" };
 		assertArrayEquals(ausgaenge2, raum.getMoeglicheAusgaenge());
 	}
 
@@ -92,25 +92,53 @@ public class RaumTest
 
 		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 	}
-	
+
 	@Test
 	public void testSetItem()
 	{
 		raumOsten.addItem(Item.Kuchen);
-		
+
 		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
-		
+
 	}
-	
+
 	@Test
 	public void testLoescheItem()
 	{
 		raumOsten.addItem(Item.Kuchen);
 		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
-		
+
 		raumOsten.loescheItem();
 		assertEquals(Item.Keins, raumOsten.getNaechstesItem());
 	}
-	
+
+	@Test
+	public void testHasMaus()
+	{
+		assertFalse(raum.hasMaus());
+		raum.setMaus(new Maus(TextVerwalter.RICHTUNG_NORDEN));
+		assertTrue(raum.hasMaus());
+	}
+
+	@Test
+	public void testSetMaus()
+	{
+		assertFalse(raumWesten.hasMaus());
+
+		raumWesten.setMaus(new Maus(TextVerwalter.RICHTUNG_WESTEN));
+		assertTrue(raumWesten.hasMaus());
+	}
+
+	@Test
+	public void testGetMaus()
+	{
+		assertFalse(raumNorden.hasMaus());
+		Maus nordmaus = new Maus(TextVerwalter.RICHTUNG_NORDEN);
+
+		raumNorden.setMaus(nordmaus);
+
+		assertEquals(nordmaus, raumNorden.getMaus());
+		assertTrue(raumNorden.hasMaus());
+	}
 
 }
