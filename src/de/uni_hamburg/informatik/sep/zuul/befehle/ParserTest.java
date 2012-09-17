@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -6,10 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlGo;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlHelp;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlQuit;
+import de.uni_hamburg.informatik.sep.zuul.Parser;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class ParserTest
