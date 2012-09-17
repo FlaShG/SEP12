@@ -26,6 +26,9 @@ public class ButtonPanel extends JPanel
 
 	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
 	private final int HOEHE = 260;
+	private JButton _essenButton;
+	private JButton _nehmenButton;
+	private JButton _gibButton;
 
 	public ButtonPanel(int breite)
 	{
@@ -63,6 +66,18 @@ public class ButtonPanel extends JPanel
 		_helpButton = new JButton(TextVerwalter.BEFEHL_HILFE);
 		_helpButton.setMinimumSize(BUTTONGROESSE);
 		_helpButton.setFocusable(false);
+		
+		_gibButton = new JButton(TextVerwalter.BEFEHL_GIB);
+		_gibButton.setMinimumSize(BUTTONGROESSE);
+		_gibButton.setFocusable(false);
+		
+		_essenButton = new JButton(TextVerwalter.BEFEHL_ESSEN);
+		_essenButton.setMinimumSize(BUTTONGROESSE);
+		_essenButton.setFocusable(false);
+		
+		_nehmenButton = new JButton(TextVerwalter.BEFEHL_NEHMEN);
+		_nehmenButton.setMinimumSize(BUTTONGROESSE);
+		_nehmenButton.setFocusable(false);		
 
 		initialisiereUI();
 
@@ -96,7 +111,22 @@ public class ButtonPanel extends JPanel
 
 		c.gridx = 3;
 		add(_platzhalter, c);
+		
+		c.gridy = 0;
+		c.gridx = 3;
+		
+		c.anchor = GridBagConstraints.EAST;
+		add(_gibButton, c);
+		
+		c.anchor = GridBagConstraints.CENTER;
+		
+		c.gridx = 4;
+		add(_essenButton, c);
+		
+		c.gridx = 5;
+		add(_nehmenButton, c);
 
+		c.gridy = 2;
 		c.gridx = 4;
 		add(_helpButton, c);
 
@@ -153,6 +183,30 @@ public class ButtonPanel extends JPanel
 	public JButton getHelpButton()
 	{
 		return _helpButton;
+	}
+
+	/**
+	 * @return den _GibButton
+	 */
+	public JButton getGibButton()
+	{
+		return _gibButton;
+	}
+
+	/**
+	 * @return den _essenButton
+	 */
+	public JButton getEssenButton()
+	{
+		return _essenButton;
+	}
+
+	/**
+	 * @return den _nehmenButton
+	 */
+	public JButton getNehmenButton()
+	{
+		return _nehmenButton;
 	}
 
 }
