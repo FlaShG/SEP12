@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingUtilities;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
@@ -139,6 +143,26 @@ public class Spiel
 			public void actionPerformed(ActionEvent e)
 			{
 				verarbeiteEingabe(TextVerwalter.BEFEHL_HILFE);
+			}
+		});
+		
+		_bp.getEssenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_ESSEN);
+			}
+		});
+		
+		_bp.getNehmenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_NEHMEN);
 			}
 		});
 		
