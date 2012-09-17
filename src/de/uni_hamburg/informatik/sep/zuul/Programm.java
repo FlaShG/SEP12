@@ -10,7 +10,7 @@ public class Programm
 	 */
 	public static void main(String[] args)
 	{
-		boolean onconsole = args.length > 0 && args[0].equals("onconsole");
+		boolean onconsole = args.length > 0 && args[0].equals("console");
 		if(!onconsole)
 		{
 			SwingUtilities.invokeLater(new Runnable()
@@ -25,7 +25,8 @@ public class Programm
 		}
 		else
 		{
-			//TODO: Console.
+			Spiel spiel = new SpielConsole();
+			spiel.spielen();
 		}
 
 	}
