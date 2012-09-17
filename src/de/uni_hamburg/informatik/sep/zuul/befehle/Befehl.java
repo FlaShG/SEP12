@@ -37,12 +37,12 @@ public abstract class Befehl
 	public abstract String getBefehlsname();
 	
 	/**
-	 * Gibt alle Befehlsnamen, inklusive Aliases, zurück.
+	 * Gibt alle Aliases zurück.
 	 * @return
 	 */
-	public String[] getBefehlsnamen()
+	public String[] getAliases()
 	{
-		return new String[]{getBefehlsname()};
+		return new String[0];
 	}
 
 	/**

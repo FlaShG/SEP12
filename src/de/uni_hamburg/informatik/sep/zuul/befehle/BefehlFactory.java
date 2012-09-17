@@ -34,9 +34,10 @@ public class BefehlFactory
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
 		{
-			for(String befehlswort : befehl.getBefehlsnamen())
+			_map.put(befehl.getBefehlsname(), befehl);
+			for(String alias : befehl.getAliases())
 			{
-				_map.put(befehlswort, befehl);
+				_map.put(alias, befehl);
 			}
 		}
 	}
