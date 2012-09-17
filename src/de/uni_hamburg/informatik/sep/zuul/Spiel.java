@@ -76,6 +76,10 @@ public abstract class Spiel
 				}
 			});
 		}
+		else
+		{
+			//TODO: Console.
+		}
 
 	}
 
