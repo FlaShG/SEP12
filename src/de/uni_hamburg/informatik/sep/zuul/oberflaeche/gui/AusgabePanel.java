@@ -41,9 +41,10 @@ public class AusgabePanel extends JPanel
 		//_scrollPane.setAutoscrolls(true);
 		
 		
-		setSize(breite, HOEHE);
-		setPreferredSize(new Dimension(breite, HOEHE));
-		_scrollPane.setPreferredSize(new Dimension(breite, (HOEHE - 20)));
+		//setSize(breite, HOEHE);
+		//setPreferredSize(new Dimension(breite, HOEHE));
+		setGroesse(breite, HOEHE);
+		//_scrollPane.setPreferredSize(new Dimension(breite, (HOEHE - 20)));
 
 		add(_scrollPane);
 	}
@@ -54,5 +55,16 @@ public class AusgabePanel extends JPanel
 	public JTextArea getAnzeigeArea()
 	{
 		return _anzeige;
+	}
+	
+	/**
+	 * Setzt die Größe des Inhalts neu
+	 */
+	public void setGroesse(int breite, int hoehe)
+	{
+		setSize(breite, hoehe);
+		setPreferredSize(new Dimension(breite, hoehe));
+		
+		_scrollPane.setPreferredSize(new Dimension(breite - 16, hoehe - 20));
 	}
 }

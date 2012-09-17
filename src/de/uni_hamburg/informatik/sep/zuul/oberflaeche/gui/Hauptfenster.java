@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,8 +17,8 @@ import javax.swing.JPanel;
  */
 public class Hauptfenster extends JFrame
 {
-	private JPanel _ausgabePanel;
-	private JPanel _eingabePanel;
+	private AusgabePanel _ausgabePanel;
+	private EingabePanel _eingabePanel;
 	private JPanel _buttonPanel;
 
 	/**
@@ -29,7 +29,7 @@ public class Hauptfenster extends JFrame
 	 * @param eingabePanel
 	 * @param buttonPanel
 	 */
-	public Hauptfenster(JPanel ausgabePanel, JPanel eingabePanel,
+	public Hauptfenster(AusgabePanel ausgabePanel, EingabePanel eingabePanel,
 			JPanel buttonPanel)
 	{
 		super();
@@ -43,25 +43,34 @@ public class Hauptfenster extends JFrame
 
 		Container content = getContentPane();
 
+		
 		content.setLayout(new BorderLayout());
+		 
 
-		GridBagConstraints c = new GridBagConstraints();
-		Insets insets = new Insets(0, 0, 0, 0);
-		c.insets = insets;
-
-		c.gridx = 0;
-		c.gridy = 0;
 		content.add(_ausgabePanel, BorderLayout.NORTH);
 
-		c.gridy = 1;
 		content.add(_eingabePanel, BorderLayout.CENTER);
-
-		c.gridy = 2;
+		
 		content.add(_buttonPanel, BorderLayout.SOUTH);
-
+		
+		this.addComponentListener(new ComponentAdapter()
+		{			
+			@Override
+			public void componentResized(ComponentEvent arg0)
+			{
+				_ausgabePanel.setGroesse(getSize().width, getSize().height-350);
+				_eingabePanel.setBreite(getSize().width);
+			}
+		});
+		
+		_eingabePanel.setDoubleBuffered(true);
+		_ausgabePanel.setDoubleBuffered(true);
+		_buttonPanel.setDoubleBuffered(true);
+		
+		
 		setVisible(true);
 		setSize(1024, 720);
 		setPreferredSize(new Dimension(1024, 720));
-		setMinimumSize(new Dimension(1024, 720));
+		setMinimumSize(new Dimension(850, 500));
 	}
 }
