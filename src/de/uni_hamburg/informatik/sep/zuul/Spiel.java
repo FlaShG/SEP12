@@ -198,6 +198,9 @@ public class Spiel
 		_bp.getNorthButton().setEnabled(false);
 		_bp.getWestButton().setEnabled(false);
 		_bp.getEastButton().setEnabled(false);
+		_bp.getGibButton().setEnabled(false);
+		_bp.getEssenButton().setEnabled(false);
+		_bp.getNehmenButton().setEnabled(false);
 		_bp.getHelpButton().setEnabled(false);
 		_bp.getQuitButton().setEnabled(false);
 
