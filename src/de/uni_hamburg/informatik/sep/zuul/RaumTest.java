@@ -76,17 +76,17 @@ public class RaumTest
 		assertEquals(Item.Keins, raum.getItem());
 		assertEquals(Item.Keins, raumWesten.getItem());
 
-		raumOsten.setItem(Item.Kuchen);
+		raumOsten.setItem(Item.Krümel);
 
-		assertEquals(Item.Kuchen, raumOsten.getItem());
+		assertEquals(Item.Krümel, raumOsten.getItem());
 	}
 	
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.setItem(Item.Kuchen);
+		raumOsten.setItem(Item.Krümel);
 
-		assertEquals(Item.Kuchen, raumOsten.getItem());
+		assertEquals(Item.Krümel, raumOsten.getItem());
 		
 		raumOsten.setItem(Item.Gegengift);
 
@@ -96,8 +96,8 @@ public class RaumTest
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.setItem(Item.Kuchen);
-		assertEquals(Item.Kuchen, raumOsten.getItem());
+		raumOsten.setItem(Item.Krümel);
+		assertEquals(Item.Krümel, raumOsten.getItem());
 		
 		raumOsten.loescheItem();
 		assertEquals(Item.Keins, raumOsten.getItem());
