@@ -1,18 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Arrays;
-
-import javax.swing.SwingUtilities;
-
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.ButtonPanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.EingabePanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -30,161 +20,40 @@ import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public class Spiel
+public abstract class Spiel implements ISchreiber
 {
-	private Parser _parser;
-	private SpielKontext _kontext;
-
-	private Hauptfenster _hf;
-	private EingabePanel _ep;
-	private AusgabePanel _ap;
-	private ButtonPanel _bp;
+	protected Parser _parser;
+	protected SpielKontext _kontext;
 
 	/**
 	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
-	 * 
-	 * @param in
-	 *            InputStream
-	 * @param out
-	 *            OutputStream
 	 */
 	public Spiel()
 	{
-
-		_bp = new ButtonPanel(1024);
-		_ep = new EingabePanel(1024);
-		_ap = new AusgabePanel(1024);
-		
-		_hf = new Hauptfenster(_ap, _ep, _bp);
-
-
-		_ep.getEnterButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				String str = _ep.getEingabeZeile().getText();
-				_ep.getEingabeZeile().setText("");
-				
-				verarbeiteEingabe(str);
-				
-			}
-		});
-		
-		_ep.getEingabeZeile().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_ep.getEnterButton().doClick();				
-			}
-		});
-
-		
-		_bp.getNorthButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("go north");
-			}
-		});
-		
-		_bp.getSouthButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("go south");
-			}
-		});
-		
-		_bp.getEastButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("go east");
-			}
-		});
-		
-		_bp.getWestButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("go west");
-			}
-		});
-		
-		_bp.getQuitButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("quit");
-			}
-		});
-		
-		_bp.getHelpButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				verarbeiteEingabe("help");
-			}
-		});
-		
 		_parser = new Parser();
-
 		_kontext = new SpielKontext(this);
-
-
 	}
-	
 
-
-	private void beendeSpiel()
+	/**
+	 * Schablonenmethode für Aktionen bei beendetem Spiel.
+	 */
+	protected void beendeSpiel()
 	{
-
-		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
 		
-		_ep.getEingabeZeile().setEnabled(false);
-		_ep.getEnterButton().setEnabled(false);
-		
-		_bp.getSouthButton().setEnabled(false);
-		_bp.getNorthButton().setEnabled(false);
-		_bp.getWestButton().setEnabled(false);
-		_bp.getEastButton().setEnabled(false);
-		_bp.getHelpButton().setEnabled(false);
-		_bp.getQuitButton().setEnabled(false);
-
-		
-		//TODO: Hauptfenster ausschalten (wie auch immer) Buttons + Eingabe sperren
 	}
-	
+
 	/**
 	 * Führt das Spiel aus.
 	 */
-	public void spielen()
+	protected void spielen()
 	{
-//		_hauptwerkzeug.zeigeFenster();
-		
 		zeigeWillkommenstext();
 	}
 
 	/**
 	 * Gibt einen Begrüßungstext für den Spieler aus.
 	 */
-	private void zeigeWillkommenstext()
+	protected void zeigeWillkommenstext()
 	{
 		_kontext.schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
 		_kontext.schreibeNL("");
@@ -192,50 +61,13 @@ public class Spiel
 		_kontext.zeigeAusgaenge();
 	}
 
-	/**
-	 * main-Methode zum Ausführen.
-	 */
-	public static void main(String[] args)
+	protected void verarbeiteEingabe(String str)
 	{
-		SwingUtilities.invokeLater(new Runnable()
-		{			
-			@Override
-			public void run()
-			{
-				Spiel spiel = new Spiel();
+		schreibeNL("> " + str);
 
-				spiel.spielen();				
-			}
-		});
-
-	}
-
-
-
-	public void schreibeNL(String nachricht)
-	{
-		schreibe(nachricht);
-		_ap.getAnzeigeArea().append("\n");
-		
-	}
-
-
-
-	public void schreibe(String nachricht)
-	{
-		_ap.getAnzeigeArea().append(nachricht);		
-	}
-
-
-
-	private void verarbeiteEingabe(String str)
-	{	
-		
-		schreibeNL("> "+ str);
-		
 		Befehl befehl = _parser.liefereBefehl(str);
 		befehl.ausfuehren(_kontext);
-		
+
 		if(_kontext.isSpielZuende())
 			beendeSpiel();
 	}

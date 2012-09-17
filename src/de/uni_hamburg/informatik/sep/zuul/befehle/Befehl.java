@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 /**
  * Informationen über einen vom Benutzer eingegebenen Befehl. Ein Befehl besteht
@@ -35,6 +35,15 @@ public abstract class Befehl
 	 * Gibt den Namen des Befehls zurück.
 	 */
 	public abstract String getBefehlsname();
+	
+	/**
+	 * Gibt alle Aliases zurück.
+	 * @return
+	 */
+	public String[] getAliases()
+	{
+		return new String[0];
+	}
 
 	/**
 	 * @return Die Parameter dieses Befehls
@@ -42,23 +51,6 @@ public abstract class Befehl
 	protected String[] getParameters()
 	{
 		return _parameters;
-	}
-	
-	@Override
-	public boolean equals(Object obj)
-	{
-		boolean result = false;
-		if(obj instanceof Befehl)
-		{
-			Befehl other = (Befehl) obj;
-			result = other.getBefehlsname().equals(getBefehlsname()) && other._parameters.equals(_parameters);
-		}
-		return result;
-	}
-	@Override
-	public int hashCode()
-	{
-		return getBefehlsname().hashCode() ^ _parameters.hashCode();
 	}
 	
 	@Override
@@ -83,12 +75,6 @@ public abstract class Befehl
 			newBefehl._parameters = _parameters.clone();
 		
 		return newBefehl;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return getBefehlsname();
 	}
 	
 //	/**

@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.ui;
+package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 public class mockupGui
 {

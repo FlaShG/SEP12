@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 public class RaumBauer
 {
@@ -38,7 +38,7 @@ public class RaumBauer
 		//
 		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
 		//
-		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Ein Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
+		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Eine Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
 		//
 		Raum flur = new Raum("Dr. Little betritt einen Flur.");
 		//
@@ -46,14 +46,14 @@ public class RaumBauer
 				"Dr. Little betritt das Büro des Hausmeisters. Es ist niemand da. An der Wand stehen Besen und Putzmittel; der Boden ist mit Schwämmen bedeckt. Die Tür zur Besenkammer steht weit offen.");
 		// 
 		Raum besenkammerhausmeister = new Raum(
-				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank, offensichtlich der Rest des Mittagessens des Hausmeisters, liegt darin. Es ist dunkel.");
+				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank steht leicht geöffnet; es ragen Besenstiele heraus, doch viel zu erkennen ist nicht.");
 		//
-		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckende Anblick.");
+		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckender Anblick.");
 		//
 		Raum wohnung = new Raum(
 				"Dr. Little betritt seine Wohnung auf dem Campus. Er wohnt seit Jahren dort, da er ja eh ständig in seinem angrenzenden Labor beschäftigt ist.");
 		//
-		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige geschäftige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
+		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
 				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
@@ -77,22 +77,27 @@ public class RaumBauer
 		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_OSTEN, westfluegel);
 
 		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, burerohausmeister);
-		besenkammerhausmeister.setItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.Giftkuchen);
+		besenkammerhausmeister.addItem(Item.Kuchen);
 		
 
 		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
 		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
 		gang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, labor);
+		gang.addItem(Item.Kuchen);
 
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
+		ostfluegel.setMaus(new Maus(s));
 
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
 
 		terasse.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, bibliothek);
-		terasse.setItem(Item.Kuchen);
+		terasse.addItem(Item.Kuchen);
+		terasse.addItem(Item.Kuchen);
 
 		flur.setAusgang(TextVerwalter.RICHTUNG_OSTEN, haupteingang);
 		flur.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, labor);
@@ -102,6 +107,7 @@ public class RaumBauer
 
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, konferenzraum);
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_NORDEN, labor);
+		wohnung.addItem(Item.Kuchen);
 
 		konferenzraum.setAusgang(e, vorlesungssaal);
 		konferenzraum.setAusgang(n, wohnung);
@@ -118,19 +124,21 @@ public class RaumBauer
 
 		sekretariatchemie.setAusgang(e, eingangchemie);
 		sekretariatchemie.setAusgang(w, flurchemie);
+		sekretariatchemie.addItem(Item.Giftkuchen);
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
 		
 		buerovondoktorevenbigger.setAusgang(s, flurchemie);
-		buerovondoktorevenbigger.setItem(Item.Gegengift);
+		buerovondoktorevenbigger.addItem(Item.Gegengift);
 
 		herrentiolette.setAusgang(n, ostfluegel);
 		herrentiolette.setAusgang(s, mensa);
 
 		mensa.setAusgang(n, herrentiolette);
 		mensa.setAusgang(w, vorlesungssaal);
-		mensa.setItem(Item.Kuchen);
+		mensa.addItem(Item.Giftkuchen);
+		mensa.addItem(Item.Kuchen);
 	}
 
 	/**
@@ -142,3 +150,4 @@ public class RaumBauer
 		return _startRaum;
 	}
 }
+

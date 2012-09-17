@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 /**
  * Definiert moegliche Items die im Spiel verfuegbar sind.
@@ -7,5 +7,5 @@ package de.uni_hamburg.informatik.sep.zuul;
  */
 public enum Item
 {
-	Kuchen, Gegengift, Keins
+	Kuchen, Giftkuchen, Gegengift, Keins
 }

@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import static org.junit.Assert.*;
 
@@ -23,11 +23,11 @@ public class RaumTest
 		raumOsten = new Raum("Ostblock");
 		raumWesten = new Raum("US und A");
 		raumNorden = new Raum("Nordpol");
-		
+
 		raum.setAusgang("osten", raumOsten);
 		raum.setAusgang("westen", raumWesten);
 		raum.setAusgang("norden", raumNorden);
-		
+
 		raumOsten.setAusgang("raus", raum);
 	}
 
@@ -60,8 +60,20 @@ public class RaumTest
 	public void testGibAusgang()
 	{
 		assertNull(raum.getAusgang("abc"));
-		
+
 		assertEquals(raumOsten, raum.getAusgang("osten"));
+	}
+
+	@Test
+	public void testGetMoeglicheAusgaenge()
+	{
+		String[] ausgaenge = { "osten", "norden", "westen" };
+		assertArrayEquals(ausgaenge, raum.getMoeglicheAusgaenge());
+
+		raum.setAusgang("gibtsNicht", raum);
+
+		String[] ausgaenge2 = { "gibtsNicht", "osten", "norden", "westen" };
+		assertArrayEquals(ausgaenge2, raum.getMoeglicheAusgaenge());
 	}
 
 	@Test
@@ -71,37 +83,62 @@ public class RaumTest
 	}
 
 	@Test
-	public void testGetItem()
+	public void testgetNaechstesItem()
 	{
-		assertEquals(Item.Keins, raum.getItem());
-		assertEquals(Item.Keins, raumWesten.getItem());
+		assertEquals(Item.Keins, raum.getNaechstesItem());
+		assertEquals(Item.Keins, raumWesten.getNaechstesItem());
 
-		raumOsten.setItem(Item.Kuchen);
+		raumOsten.addItem(Item.Kuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getItem());
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 	}
-	
+
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.setItem(Item.Kuchen);
+		raumOsten.addItem(Item.Kuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getItem());
-		
-		raumOsten.setItem(Item.Gegengift);
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
 
-		assertEquals(Item.Gegengift, raumOsten.getItem());
 	}
-	
+
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.setItem(Item.Kuchen);
-		assertEquals(Item.Kuchen, raumOsten.getItem());
-		
+		raumOsten.addItem(Item.Kuchen);
+		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+
 		raumOsten.loescheItem();
-		assertEquals(Item.Keins, raumOsten.getItem());
+		assertEquals(Item.Keins, raumOsten.getNaechstesItem());
 	}
-	
+
+	@Test
+	public void testHasMaus()
+	{
+		assertFalse(raum.hasMaus());
+		raum.setMaus(new Maus(TextVerwalter.RICHTUNG_NORDEN));
+		assertTrue(raum.hasMaus());
+	}
+
+	@Test
+	public void testSetMaus()
+	{
+		assertFalse(raumWesten.hasMaus());
+
+		raumWesten.setMaus(new Maus(TextVerwalter.RICHTUNG_WESTEN));
+		assertTrue(raumWesten.hasMaus());
+	}
+
+	@Test
+	public void testGetMaus()
+	{
+		assertFalse(raumNorden.hasMaus());
+		Maus nordmaus = new Maus(TextVerwalter.RICHTUNG_NORDEN);
+
+		raumNorden.setMaus(nordmaus);
+
+		assertEquals(nordmaus, raumNorden.getMaus());
+		assertTrue(raumNorden.hasMaus());
+	}
 
 }

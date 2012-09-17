@@ -1,7 +1,8 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 
@@ -19,10 +20,10 @@ public class RaumBauerTest
 	@Test
 	public void testGetStartRaum()
 	{
-		String s = "south";
-		String n = "north";
-		String e = "east";
-		String w = "west";
+		String s = TextVerwalter.RICHTUNG_SUEDEN;
+		String n = TextVerwalter.RICHTUNG_NORDEN;
+		String e = TextVerwalter.RICHTUNG_OSTEN;
+		String w = TextVerwalter.RICHTUNG_WESTEN;
 
 		RaumBauer bauer = new RaumBauer();
 		Raum labor = bauer.getStartRaum();

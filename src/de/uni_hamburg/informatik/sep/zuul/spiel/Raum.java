@@ -1,7 +1,9 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
@@ -13,8 +15,9 @@ public class Raum
 {
 	private String _beschreibung;
 	private Map<String, Raum> _ausgaenge;
-	private Item _item;
-
+	private Stack<Item> _items; 	
+	private Maus _maus;
+	
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -31,7 +34,7 @@ public class Raum
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_item = Item.Keins;
+		_items = new Stack<Item>();
 
 	}
 
@@ -97,34 +100,29 @@ public class Raum
 	}
 
 	/**
-	 * Gibt das Item zurück, welches der Raum hält. Gibt "keins" als Item
-	 * zurück, wenn kein Item im Raum liegt.
-	 * 
-	 * @return item im Raum.
-	 */
-	public Item getItem()
-	{
-		return _item;
-	}
-
-	/**
 	 * Setze ein Item in diesen Raum. Default ist {@link Item}.keins .
 	 * 
 	 * @param item
 	 *            Das neue Item
+	 *
+	 * @require item != Item.Keins
 	 */
-	public void setItem(Item item)
+	public void addItem(Item item)
 	{
-		_item = item;
+		assert item != Item.Keins : "Vorbedingung verletzt: item != Item.Keins";
+		
+		_items.push(item);
+		
+		Collections.shuffle(_items);
 	}
 
 	/**
-	 * Setze das Item dieses Raumes auf {@link Item}.keins . Dies ist auch der
-	 * Raum-default Wert.
+	 * Entfernt das nächste Item aus dem Raum, wenn es eines gibt
 	 */
 	public void loescheItem()
 	{
-		_item = Item.Keins;
+		if(!_items.empty())
+			_items.pop();
 	}
 
 	/**
@@ -136,6 +134,45 @@ public class Raum
 	public String getBeschreibung()
 	{
 		return _beschreibung;
+	}
+	
+	/**
+	 * liefert das Nächste Item, entfernt es jedoch nicht
+	 * @return Item
+	 * @ensure Item != null
+	 */
+	public Item getNaechstesItem()
+	{
+		if (_items.empty())
+		{
+			return Item.Keins;
+		}
+		return _items.peek();
+	}
+	
+
+	public boolean hasMaus()
+	{
+		return _maus != null;
+	}
+	
+	/**
+	 * @return the _maus
+	 * @require hasMaus()
+	 */
+	public Maus getMaus()
+	{
+		assert hasMaus();
+		
+		return _maus;
+	}
+
+	/**
+	 * @param _maus the _maus to set
+	 */
+	public void setMaus(Maus maus)
+	{
+		_maus = maus;
 	}
 
 }

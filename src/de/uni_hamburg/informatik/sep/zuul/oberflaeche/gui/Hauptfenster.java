@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.ui;
+package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -34,6 +34,7 @@ public class Hauptfenster extends JFrame
 	{
 		super();
 
+		setTitle("Zuul");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		_ausgabePanel = ausgabePanel;

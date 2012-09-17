@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class BefehlFactory
 {
@@ -28,12 +28,18 @@ public class BefehlFactory
 	static
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
-				new BefehlQuit() };
+				new BefehlTake(), new BefehlEat(), 
+				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGive() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
+		{
 			_map.put(befehl.getBefehlsname(), befehl);
-
+			for(String alias : befehl.getAliases())
+			{
+				_map.put(alias, befehl);
+			}
+		}
 	}
 
 	/**
