@@ -18,7 +18,7 @@ public class InventarTest
 	public void testFuegeItemHinzu()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Krümel;
+		Item it = Item.Kuchen;
 		
 		inv.fuegeItemHinzu(Item.Keins);
 		assertFalse(inv.isGefuellt());
@@ -33,7 +33,7 @@ public class InventarTest
 	public void testNehmeLetztesItem()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Krümel;
+		Item it = Item.Kuchen;
 		
 		inv.fuegeItemHinzu(it);
 		
@@ -49,7 +49,7 @@ public class InventarTest
 		Inventar inv  = new Inventar();
 		assertFalse(inv.isGefuellt());
 		
-		inv.fuegeItemHinzu(Item.Krümel);
+		inv.fuegeItemHinzu(Item.Kuchen);
 		assertTrue(inv.isGefuellt());
 	}
 

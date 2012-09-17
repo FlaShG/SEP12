@@ -9,6 +9,9 @@ public class SpielKontext
 	private static final int Krümel_ENERGIE_GEWINN = 3;
 	private static final int START_ENERGIE = 8;
 
+
+	private static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
+	
 	private PrintStream _out;
 	private InputStream _in;
 
@@ -16,11 +19,13 @@ public class SpielKontext
 	private boolean _spielZuende;
 	private int _lebensEnergie;
 	private final Spiel _spiel;
+	private Inventar _inventar;
 
 	public SpielKontext(Spiel spiel)
 	{
 		_spiel = spiel;
 		_lebensEnergie = START_ENERGIE;
+		_inventar = new Inventar();
 		legeRaeumeAn();
 	}
 
@@ -144,9 +149,9 @@ public class SpielKontext
 			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
 			break;
 
-		case Krümel:
+		case Kuchen:
 			_lebensEnergie += Krümel_ENERGIE_GEWINN;
-			schreibeNL(TextVerwalter.KRÜMELGEFUNDENTEXT + _lebensEnergie);
+			schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT + _lebensEnergie);
 			break;
 		case Gegengift:
 			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"
@@ -155,9 +160,32 @@ public class SpielKontext
 		}
 		getAktuellerRaum().loescheItem();
 
+		schreibeNL(TextVerwalter.RAUMWECHSELTEXT+_lebensEnergie);
+
+		switch(getAktuellerRaum().getNaechstesItem())
+		{
+			case Kuchen: case Giftkuchen:
+				//_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
+				//_lebensEnergie -= GIFTKUCHEN_ENERGIE_VERLUST;
+				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+			break;
+
+			case Gegengift:
+				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
+			break;
+		}
+
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
+	}
+
+	/**
+	 * Gibt das Inventar
+	 */
+	public Inventar getInventar()
+	{
+		return _inventar;
 	}
 }
