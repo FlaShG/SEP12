@@ -78,7 +78,7 @@ public class RaumBauer
 
 		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, burerohausmeister);
 		besenkammerhausmeister.addItem(Item.Kuchen);
-		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.Giftkuchen);
 		besenkammerhausmeister.addItem(Item.Kuchen);
 		
 
@@ -123,7 +123,7 @@ public class RaumBauer
 
 		sekretariatchemie.setAusgang(e, eingangchemie);
 		sekretariatchemie.setAusgang(w, flurchemie);
-		sekretariatchemie.addItem(Item.Kuchen);
+		sekretariatchemie.addItem(Item.Giftkuchen);
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
@@ -136,7 +136,7 @@ public class RaumBauer
 
 		mensa.setAusgang(n, herrentiolette);
 		mensa.setAusgang(w, vorlesungssaal);
-		mensa.addItem(Item.Kuchen);
+		mensa.addItem(Item.Giftkuchen);
 		mensa.addItem(Item.Kuchen);
 	}
 
