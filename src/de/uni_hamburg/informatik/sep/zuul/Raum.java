@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -103,10 +104,16 @@ public class Raum
 	 * 
 	 * @param item
 	 *            Das neue Item
+	 *
+	 * @require item != Item.Keins
 	 */
 	public void addItem(Item item)
 	{
+		assert item != Item.Keins : "Vorbedingung verletzt: item != Item.Keins";
+		
 		_items.push(item);
+		
+		Collections.shuffle(_items);
 	}
 
 	/**
