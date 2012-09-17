@@ -16,36 +16,29 @@ public class BefehlGive extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
-		if(getParameters().length > 0 && getParameters()[0].equals("krümel"))
+
+		if(!kontext.getAktuellerRaum().hasMaus())
 		{
-			if(!kontext.getAktuellerRaum().hasMaus())
-			{
-				kontext.schreibeNL(TextVerwalter.MAUS_KEINE_MAUS);
-				return;
-			}
-
-			if(!kontext.getInventar().hasAnyKuchen())
-			{
-				kontext.schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
-				return;
-			}
-
-			Item kuchen = kontext.getInventar().getAnyKuchen();
-
-			String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
-					.getRichtung();
-
-			String richtung = bestimmeRichtung(kuchen, richtigeRichtung);
-
-			String richtungsangabe = String.format(
-					TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
-			kontext.schreibeNL(richtungsangabe);
-
+			kontext.schreibeNL(TextVerwalter.MAUS_KEINE_MAUS);
+			return;
 		}
-		else
+
+		if(!kontext.getInventar().hasAnyKuchen())
 		{
-			BefehlFactory.unbekannnterBefehl.ausfuehren(kontext);
+			kontext.schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
+			return;
 		}
+
+		Item kuchen = kontext.getInventar().getAnyKuchen();
+
+		String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
+				.getRichtung();
+
+		String richtung = bestimmeRichtung(kuchen, richtigeRichtung);
+
+		String richtungsangabe = String.format(
+				TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
+		kontext.schreibeNL(richtungsangabe);
 	}
 
 	/**

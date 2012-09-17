@@ -166,6 +166,16 @@ public class Spiel
 			}
 		});
 		
+		_bp.getGibButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GIB);
+			}
+		});
+		
 		_parser = new Parser();
 
 		_kontext = new SpielKontext(this);

@@ -145,9 +145,6 @@ public class SpielKontext
 		
 		switch(getAktuellerRaum().getNaechstesItem())
 		{
-		case Keins:
-			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
-			break;
 
 			case Kuchen: case Giftkuchen:
 				//_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
