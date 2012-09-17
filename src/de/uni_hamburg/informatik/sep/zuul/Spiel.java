@@ -36,7 +36,7 @@ public abstract class Spiel
 
 	protected void beendeSpiel()
 	{
-		_kontext.schreibeNL("Danke für dieses Spiel. Auf Wiedersehen.");
+		_kontext.schreibeNL(TextVerwalter.BEENDENTEXT);
 	}
 
 	/**
@@ -58,30 +58,6 @@ public abstract class Spiel
 		_kontext.zeigeAusgaenge();
 	}
 
-	/**
-	 * main-Methode zum Ausführen.
-	 */
-	public static void main(String[] args)
-	{
-		boolean onconsole = args.length > 0 && args[0].equals("onconsole");
-		if(!onconsole)
-		{
-			SwingUtilities.invokeLater(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					Spiel spiel = new SpielGUI();
-					spiel.spielen();
-				}
-			});
-		}
-		else
-		{
-			//TODO: Console.
-		}
-
-	}
 
 	public abstract void schreibeNL(String nachricht);
 
