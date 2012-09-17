@@ -19,10 +19,10 @@ public class RaumBauerTest
 	@Test
 	public void testGetStartRaum()
 	{
-		String s = "south";
-		String n = "north";
-		String e = "east";
-		String w = "west";
+		String s = TextVerwalter.RICHTUNG_SUEDEN;
+		String n = TextVerwalter.RICHTUNG_NORDEN;
+		String e = TextVerwalter.RICHTUNG_OSTEN;
+		String w = TextVerwalter.RICHTUNG_WESTEN;
 
 		RaumBauer bauer = new RaumBauer();
 		Raum labor = bauer.getStartRaum();

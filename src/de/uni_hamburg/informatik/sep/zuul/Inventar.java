@@ -59,7 +59,7 @@ public class Inventar
 	/**
 	 * Gibt an, ob das Inventar mindestens ein Item besitzt.
 	 */
-	private boolean isGefuellt()
+	public boolean isGefuellt()
 	{
 		return _inhalt.size() > 0;
 	}
