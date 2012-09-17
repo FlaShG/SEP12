@@ -35,6 +35,15 @@ public abstract class Befehl
 	 * Gibt den Namen des Befehls zurück.
 	 */
 	public abstract String getBefehlsname();
+	
+	/**
+	 * Gibt alle Befehlsnamen, inklusive Aliases, zurück.
+	 * @return
+	 */
+	public String[] getBefehlsnamen()
+	{
+		return new String[]{getBefehlsname()};
+	}
 
 	/**
 	 * @return Die Parameter dieses Befehls
@@ -42,6 +51,30 @@ public abstract class Befehl
 	protected String[] getParameters()
 	{
 		return _parameters;
+	}
+	
+	@Override
+	public Befehl clone()
+	{
+		// TODO ugly!!
+		Befehl newBefehl = null;
+		try
+		{
+			newBefehl = this.getClass().newInstance();
+		}
+		catch(InstantiationException e)
+		{
+			e.printStackTrace();
+		}
+		catch(IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		
+		if(_parameters != null)
+			newBefehl._parameters = _parameters.clone();
+		
+		return newBefehl;
 	}
 	
 //	/**

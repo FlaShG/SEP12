@@ -33,13 +33,12 @@ public class BefehlFactory
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
-			_map.put(befehl.getBefehlsname(), befehl);
-
-		//Aliases
-		_map.put("n", _map.get(TextVerwalter.RICHTUNG_NORDEN));
-		_map.put("s", _map.get(TextVerwalter.RICHTUNG_SUEDEN));
-		_map.put("w", _map.get(TextVerwalter.RICHTUNG_WESTEN));
-		_map.put("o", _map.get(TextVerwalter.RICHTUNG_OSTEN));
+		{
+			for(String befehlswort : befehl.getBefehlsnamen())
+			{
+				_map.put(befehlswort, befehl);
+			}
+		}
 	}
 
 	/**
