@@ -5,13 +5,11 @@ import java.io.PrintStream;
 
 public class SpielKontext
 {
-	private static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
-	private static final int Krümel_ENERGIE_GEWINN = 3;
-	private static final int START_ENERGIE = 8;
+	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
+	public static final int KUCHEN_ENERGIE_GEWINN = 3;
+	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
+	public static final int START_ENERGIE = 8;
 
-
-	private static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
-	
 	private PrintStream _out;
 	private InputStream _in;
 
@@ -24,7 +22,7 @@ public class SpielKontext
 	public SpielKontext(Spiel spiel)
 	{
 		_spiel = spiel;
-		_lebensEnergie = START_ENERGIE;
+		setLebensEnergie(START_ENERGIE);
 		_inventar = new Inventar();
 		legeRaeumeAn();
 	}
@@ -143,7 +141,9 @@ public class SpielKontext
 	private void raumBetreten()
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		switch (getAktuellerRaum().getNaechstesItem())
+		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);
+		
+		switch(getAktuellerRaum().getNaechstesItem())
 		{
 		case Keins:
 			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
@@ -173,5 +173,15 @@ public class SpielKontext
 	public Inventar getInventar()
 	{
 		return _inventar;
+	}
+
+	public int getLebensEnergie()
+	{
+		return _lebensEnergie;
+	}
+
+	public void setLebensEnergie(int lebensEnergie)
+	{
+		_lebensEnergie = lebensEnergie;
 	}
 }

@@ -14,12 +14,21 @@ public class TextVerwalter
 	
 	public static final String KUCHENIMRAUMTEXT = "In diesem Raum nimmt Dr. Little den dezent-süßen Geruch frisch verkrümelten Kuchens wahr.";
 	public static final String KUCHENGENOMMENTEXT = "Dr. Little findet einen Kuchenkrümel! Er tut sie in seine Tasche.";
+	public static final String kuchengegessentext(int energie)
+	{
+		return "Dr. Little vernascht genüsslich einen Kuchenkrümel aus seiner Tasche. Er fühlt sich belebt und kann nun wieder "+energie+" weitere Räume bechreiten.";
+	}
+	public static final String giftkuchengegessentext(int energie)
+	{
+		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "+energie+" Räume betreten können wird.";
+	}
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
 	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden. Um über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
 	public static final String RAUMWECHSELTEXT = "Der Doktor kann nun einen Raum weniger betreten. Er kann noch folgende Anzahl an Räumen betreten: ";
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft.\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
+	public static final String NICHTSZUMESSENTEXT = "Dr. Little sucht in seiner Tasche vergeblich nach einem Kuchenkrümel.";
 	public static final String FALSCHEEINGABE = "Ich weiß nicht, was Sie meinen...";
 	
 	public static final String KEINERICHTUNG = "Wohin möchten Sie gehen?";
@@ -28,6 +37,7 @@ public class TextVerwalter
 	
 	public static final String BEFEHL_GEHEN = "gehe";
 	public static final String BEFEHL_NEHMEN = "nehmen";
+	public static final String BEFEHL_ESSEN = "essen";
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
 	public static final String BUTTON_EINGEBEN = "enter";
