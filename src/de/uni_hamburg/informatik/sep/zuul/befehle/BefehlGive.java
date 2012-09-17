@@ -33,8 +33,10 @@ public class BefehlGive extends Befehl
 
 		String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
 				.getRichtung();
+		
+		String[] moeglicheRichtungen = kontext.getAktuellerRaum().getMoeglicheAusgaenge();
 
-		String richtung = bestimmeRichtung(kuchen, richtigeRichtung);
+		String richtung = bestimmeRichtung(kuchen, richtigeRichtung, moeglicheRichtungen);
 
 		String richtungsangabe = String.format(
 				TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
@@ -46,29 +48,27 @@ public class BefehlGive extends Befehl
 	 * @param richtigeRichtung
 	 * @return
 	 */
-	static String bestimmeRichtung(Item kuchen, String richtigeRichtung)
+	static String bestimmeRichtung(Item kuchen, String richtigeRichtung, String[] moeglicheRichtungen)
 	{
-		String richtung = null;
-
 		if(kuchen == Item.Kuchen)
 		{
-			richtung = richtigeRichtung;
+			return richtigeRichtung;
 		}
-		else if(kuchen == Item.Giftkuchen)
+		if(kuchen == Item.Giftkuchen)
 		{
-			LinkedList<String> Richtungen = new LinkedList<String>();
-			Richtungen.add(TextVerwalter.RICHTUNG_NORDEN);
-			Richtungen.add(TextVerwalter.RICHTUNG_OSTEN);
-			Richtungen.add(TextVerwalter.RICHTUNG_SUEDEN);
-			Richtungen.add(TextVerwalter.RICHTUNG_WESTEN);
+			LinkedList<String> richtungen = new LinkedList<String>();
+			
+			for(String richtung : moeglicheRichtungen)
+				richtungen.add(richtung);
 
-			Richtungen.remove(richtigeRichtung);
+			richtungen.remove(richtigeRichtung);
 
-			int randomInt = new Random().nextInt(3);
+			int randomInt = new Random().nextInt(richtungen.size());
 
-			richtung = Richtungen.get(randomInt);
+			return richtungen.get(randomInt);
 		}
-		return richtung;
+		
+		return null;
 	}
 
 	@Override
