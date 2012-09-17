@@ -72,4 +72,6 @@ public class TextVerwalter
 	public static final String MAUS_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er abgeben könnte...";
 	public static final String MAUS_KEINE_MAUS = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
 
+	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nDas Gift zerstört die letzen Reste seines angegriffenen Organsystems.";
+
 }
