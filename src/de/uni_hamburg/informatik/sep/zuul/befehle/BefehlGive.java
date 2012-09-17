@@ -5,10 +5,10 @@ import java.util.Random;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
-import de.uni_hamburg.informatik.sep.zuul.Inventar;
-import de.uni_hamburg.informatik.sep.zuul.Item;
-import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class BefehlGive extends Befehl
 {

@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.fail;

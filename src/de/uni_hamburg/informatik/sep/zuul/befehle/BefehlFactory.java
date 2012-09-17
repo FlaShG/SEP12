@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class BefehlFactory
 {

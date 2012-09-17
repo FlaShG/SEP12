@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 /**
  * Informationen über einen vom Benutzer eingegebenen Befehl. Ein Befehl besteht

@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.ui;
+package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-import de.uni_hamburg.informatik.sep.zuul.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class EingabePanel extends JPanel
 {

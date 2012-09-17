@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
-import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.ButtonPanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.EingabePanel;
-import de.uni_hamburg.informatik.sep.zuul.ui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class SpielGUI extends Spiel
 {

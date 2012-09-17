@@ -1,7 +1,9 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielKontext
 {
