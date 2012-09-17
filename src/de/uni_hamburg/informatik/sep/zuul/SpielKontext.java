@@ -9,6 +9,7 @@ public class SpielKontext
 	private static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	private static final int KUCHEN_ENERGIE_GEWINN = 3;
 	private static final int START_ENERGIE = 8;
+	private static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	
 	private PrintStream _out;
 	private InputStream _in;
@@ -136,17 +137,21 @@ public class SpielKontext
 	{
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
 		schreibeNL(TextVerwalter.RAUMWECHSELTEXT+_lebensEnergie);
-		switch(getAktuellerRaum().getItem())
+		
+
+		switch(getAktuellerRaum().getNaechstesItem())
 		{
-			case Kuchen:
-				_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-				schreibeNL(TextVerwalter.KUCHENGEFUNDENTEXT +_lebensEnergie);
+			case Kuchen: case Giftkuchen:
+				//_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
+				//_lebensEnergie -= GIFTKUCHEN_ENERGIE_VERLUST;
+				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+			break;
+
 			break;
 			case Gegengift:
 				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 			break;
 		}
-		getAktuellerRaum().loescheItem();
 		
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
