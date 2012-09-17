@@ -13,6 +13,12 @@ final class BefehlW extends Befehl
 	}
 
 	@Override
+	public String[] getAliases()
+	{
+		return new String[]{"w"};
+	}
+	
+	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
 		// Wir versuchen den Raum zu verlassen.

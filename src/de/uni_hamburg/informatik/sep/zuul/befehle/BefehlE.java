@@ -11,6 +11,12 @@ final class BefehlE extends Befehl
 	{
 		return TextVerwalter.RICHTUNG_OSTEN;
 	}
+	
+	@Override
+	public String[] getAliases()
+	{
+		return new String[]{"o"};
+	}
 
 	@Override
 	public void ausfuehren(SpielKontext kontext)

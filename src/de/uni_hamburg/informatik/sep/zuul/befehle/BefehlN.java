@@ -13,6 +13,12 @@ final class BefehlN extends Befehl
 	}
 
 	@Override
+	public String[] getAliases()
+	{
+		return new String[]{"n"};
+	}
+	
+	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
 		// Wir versuchen den Raum zu verlassen.
