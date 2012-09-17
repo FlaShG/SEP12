@@ -42,10 +42,10 @@ public class ButtonPanel extends JPanel
 				"                                                 ");
 		_platzhalter.setVisible(true);
 
-		ImageIcon north = new ImageIcon("./res/north.png");
-		ImageIcon south = new ImageIcon("./res/south.png");
-		ImageIcon west = new ImageIcon("./res/west.png");
-		ImageIcon east = new ImageIcon("./res/east.png");
+		ImageIcon north = new ImageIcon(getClass().getResource("bilder/north.png"));
+		ImageIcon south = new ImageIcon(getClass().getResource("bilder/south.png"));
+		ImageIcon west = new ImageIcon(getClass().getResource("bilder/west.png"));
+		ImageIcon east = new ImageIcon(getClass().getResource("bilder/east.png"));
 
 		//Buttons initialisieren:
 		_northButton = new JButton(StringUtils.capitalize(TextVerwalter.RICHTUNG_NORDEN), north);
