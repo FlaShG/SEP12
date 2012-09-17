@@ -20,7 +20,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel
+public abstract class Spiel implements ISchreiber
 {
 	protected Parser _parser;
 	protected SpielKontext _kontext;
@@ -32,11 +32,6 @@ public abstract class Spiel
 	{
 		_parser = new Parser();
 		_kontext = new SpielKontext(this);
-	}
-
-	protected void beendeSpiel()
-	{
-		_kontext.schreibeNL(TextVerwalter.BEENDENTEXT);
 	}
 
 	/**
@@ -58,19 +53,11 @@ public abstract class Spiel
 		_kontext.zeigeAusgaenge();
 	}
 
-
-	public abstract void schreibeNL(String nachricht);
-
-	public abstract void schreibe(String nachricht);
-
 	protected void verarbeiteEingabe(String str)
 	{
 		schreibeNL("> " + str);
 
 		Befehl befehl = _parser.liefereBefehl(str);
 		befehl.ausfuehren(_kontext);
-
-		if(_kontext.isSpielZuende())
-			beendeSpiel();
 	}
 }

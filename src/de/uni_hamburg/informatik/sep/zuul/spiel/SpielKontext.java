@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
-
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
 
 public class SpielKontext
 {
@@ -12,12 +11,12 @@ public class SpielKontext
 	private Raum _aktuellerRaum;
 	private boolean _spielZuende;
 	private int _lebensEnergie;
-	private final Spiel _spiel;
+	private final ISchreiber _schreiber;
 	private Inventar _inventar;
 
-	public SpielKontext(Spiel spiel)
+	public SpielKontext(ISchreiber schreiber)
 	{
-		_spiel = spiel;
+		_schreiber = schreiber;
 		setLebensEnergie(START_ENERGIE);
 		_inventar = new Inventar();
 		legeRaeumeAn();
@@ -32,7 +31,7 @@ public class SpielKontext
 	 */
 	public void schreibeNL(String nachricht)
 	{
-		_spiel.schreibeNL(nachricht);
+		_schreiber.schreibeNL(nachricht);
 	}
 
 	/**
@@ -43,7 +42,7 @@ public class SpielKontext
 	 */
 	public void schreibe(String nachricht)
 	{
-		_spiel.schreibe(nachricht);
+		_schreiber.schreibe(nachricht);
 	}
 
 	/**
