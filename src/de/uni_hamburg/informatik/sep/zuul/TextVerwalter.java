@@ -61,7 +61,7 @@ public class TextVerwalter
 	public static final String BUTTON_EINGEBEN = "enter";
 
 	public static final String RICHTUNG_NORDEN = "nord";
-	public static final String RICHTUNG_SUEDEN = "sued";
+	public static final String RICHTUNG_SUEDEN = "süd";
 
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
