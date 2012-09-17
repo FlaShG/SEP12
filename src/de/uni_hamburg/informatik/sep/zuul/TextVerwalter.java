@@ -46,7 +46,7 @@ public class TextVerwalter
 			"\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
 	public static final String NICHTSZUMESSENTEXT = "Dr. Little sucht in seiner Tasche vergeblich nach einem Kuchenkrümel.";
 	public static final String FALSCHEEINGABE = "Ich weiß nicht, was Sie meinen...";
-	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nDas Gift zerstört die letzen Reste seines angegriffenen Organsystems.";
+	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nEine fiese Chemikalie im Krümel zerstört die letzen Reste seines angegriffenen Organsystems.";
 	
 	public static final String KEINERICHTUNG = "Wohin möchten Sie gehen?";
 	public static final String KEINETUER = "Dort ist keine Tür. Wählen Sie eine andere Richtung.";
