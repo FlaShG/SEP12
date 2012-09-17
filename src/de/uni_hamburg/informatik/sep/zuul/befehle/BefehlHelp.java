@@ -16,9 +16,15 @@ final class BefehlHelp extends Befehl
 	{
 		kontext.schreibeNL(TextVerwalter.HILFETEXT);
 		
+		StringBuilder builder = new StringBuilder();
 		for(String gueltigerBefehl: BefehlFactory._map.keySet())
-			kontext.schreibe(" "+gueltigerBefehl);
-		kontext.schreibeNL("");
+		{
+			builder.append(gueltigerBefehl);
+			builder.append(" | ");
+		}
+		builder.delete(builder.length()-3, builder.length()-1);
+		
+		kontext.schreibeNL(builder.toString());
 
 	}
 }
