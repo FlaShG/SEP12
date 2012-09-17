@@ -18,6 +18,7 @@ public class SpielKontext
 	private boolean _spielZuende;
 	private int _lebensEnergie;
 	private final Spiel _spiel;
+	private Inventar _inventar;
 
 	
 
@@ -25,6 +26,7 @@ public class SpielKontext
 	{
 		_spiel = spiel;
 		_lebensEnergie = START_ENERGIE;
+		_inventar = new Inventar();
 		legeRaeumeAn();
 	}
 
@@ -155,5 +157,13 @@ public class SpielKontext
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
 		}
+	}
+
+	/**
+	 * Gibt das Inventar
+	 */
+	public Inventar getInventar()
+	{
+		return _inventar;
 	}
 }
