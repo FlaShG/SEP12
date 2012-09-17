@@ -140,24 +140,20 @@ public class SpielKontext
 	 */
 	private void raumBetreten()
 	{
+		if(getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+		{
+			beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
+			return;
+		}
+		
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);
+		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);	
 		
 		switch(getAktuellerRaum().getNaechstesItem())
 		{
-		case Keins:
-			schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);			
-			break;
-
 			case Kuchen: case Giftkuchen:
-				//_lebensEnergie += KUCHEN_ENERGIE_GEWINN;
-				//_lebensEnergie -= GIFTKUCHEN_ENERGIE_VERLUST;
 				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
 				getAktuellerRaum().loescheItem();
-			break;
-
-			case Gegengift:
-				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 			break;
 		}
 
