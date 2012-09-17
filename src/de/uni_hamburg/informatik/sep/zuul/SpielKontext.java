@@ -160,7 +160,14 @@ public class SpielKontext
 				beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 			break;
 		}
-
+		
+		// Maus
+		if(getAktuellerRaum().hasMaus())
+		{
+			schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
+			schreibeNL(TextVerwalter.MAUS_FRAGE);
+		}
+		
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
