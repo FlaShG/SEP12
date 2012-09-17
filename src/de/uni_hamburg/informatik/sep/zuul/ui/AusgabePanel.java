@@ -28,9 +28,10 @@ public class AusgabePanel extends JPanel
 		_anzeige.setEditable(false);
 		_anzeige.setLineWrap(true);
 		_anzeige.setWrapStyleWord(true);
-		_anzeige.setAutoscrolls(true);
+		//_anzeige.setAutoscrolls(true);
 		_anzeige.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+		
 		_scrollPane = new JScrollPane();
 
 		_scrollPane.setViewportView(_anzeige);
@@ -38,8 +39,9 @@ public class AusgabePanel extends JPanel
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		_scrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		_scrollPane.setAutoscrolls(true);
-
+		//_scrollPane.setAutoscrolls(true);
+		
+		
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));
 		_scrollPane.setPreferredSize(new Dimension(breite, (HOEHE - 20)));

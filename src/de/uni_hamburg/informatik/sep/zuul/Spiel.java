@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
@@ -223,7 +224,10 @@ public class Spiel
 
 	public void schreibe(String nachricht)
 	{
-		_ap.getAnzeigeArea().append(nachricht);		
+		JTextArea anzeige = _ap.getAnzeigeArea();
+		
+		anzeige.append(nachricht);
+		anzeige.setCaretPosition(anzeige.getDocument().getLength()); 
 	}
 
 

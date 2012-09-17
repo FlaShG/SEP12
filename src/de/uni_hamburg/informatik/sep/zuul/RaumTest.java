@@ -63,6 +63,18 @@ public class RaumTest
 		
 		assertEquals(raumOsten, raum.getAusgang("osten"));
 	}
+	
+	@Test
+	public void testGetMoeglicheAusgaenge()
+	{
+		String[] ausgaenge = {"osten", "norden", "westen"};
+		assertArrayEquals(ausgaenge, raum.getMoeglicheAusgaenge());
+		
+		raum.setAusgang("gibtsNicht", raum);
+		
+		String[] ausgaenge2 = {"gibtsNicht", "osten", "norden", "westen"};
+		assertArrayEquals(ausgaenge2, raum.getMoeglicheAusgaenge());
+	}
 
 	@Test
 	public void testGibBeschreibung()
