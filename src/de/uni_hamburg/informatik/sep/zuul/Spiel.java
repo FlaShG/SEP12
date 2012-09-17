@@ -2,9 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Arrays;
 
 import javax.swing.SwingUtilities;
 
@@ -91,7 +88,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("go north");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
 			}
 		});
 		
@@ -101,7 +98,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("go south");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
 			}
 		});
 		
@@ -111,7 +108,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("go east");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
 			}
 		});
 		
@@ -121,7 +118,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("go west");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
 			}
 		});
 		
@@ -131,7 +128,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("quit");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_BEENDEN);
 			}
 		});
 		
@@ -141,7 +138,7 @@ public class Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				verarbeiteEingabe("help");
+				verarbeiteEingabe(TextVerwalter.BEFEHL_HILFE);
 			}
 		});
 		
