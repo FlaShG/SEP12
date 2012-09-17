@@ -28,7 +28,7 @@ public class BefehlFactory
 	static
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
-				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE() };
+				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGib() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)

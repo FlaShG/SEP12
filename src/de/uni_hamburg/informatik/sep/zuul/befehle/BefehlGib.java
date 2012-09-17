@@ -35,7 +35,7 @@ public class BefehlGib extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "gib";
+		return TextVerwalter.BEFEHL_GIB;
 	}
 
 }

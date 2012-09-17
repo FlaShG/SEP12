@@ -20,7 +20,7 @@ public class Raum
 	public Raum(String beschreibung, Maus maus)
 	{
 		this(beschreibung);
-		_maus = maus;
+		setMaus(maus);
 	}
 
 	/**
@@ -160,6 +160,14 @@ public class Raum
 		assert hasMaus();
 		
 		return _maus;
+	}
+
+	/**
+	 * @param _maus the _maus to set
+	 */
+	public void setMaus(Maus maus)
+	{
+		_maus = maus;
 	}
 
 }

@@ -27,6 +27,7 @@ public class TextVerwalter
 	public static final String BEFEHL_GEHEN = "gehe";
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
+	public static final String BEFEHL_GIB = "gib";
 
 	public static final String RICHTUNG_NORDEN = "nord";
 	public static final String RICHTUNG_SUEDEN = "sued";
