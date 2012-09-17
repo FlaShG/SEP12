@@ -28,7 +28,7 @@ public class BefehlGib extends Befehl
 		}
 		else
 		{
-			// TODO unbekannter Befehl.
+			BefehlFactory.unbekannnterBefehl.ausfuehren(kontext);
 		}
 	}
 
