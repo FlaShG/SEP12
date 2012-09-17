@@ -3,7 +3,12 @@ package de.uni_hamburg.informatik.sep.zuul;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.ui.AusgabePanel;
@@ -142,6 +147,36 @@ public class Spiel
 			}
 		});
 		
+		_bp.getEssenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_ESSEN);
+			}
+		});
+		
+		_bp.getNehmenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_NEHMEN);
+			}
+		});
+		
+		_bp.getGibButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				verarbeiteEingabe(TextVerwalter.BEFEHL_GIB);
+			}
+		});
+		
 		_parser = new Parser();
 
 		_kontext = new SpielKontext(this);
@@ -223,7 +258,10 @@ public class Spiel
 
 	public void schreibe(String nachricht)
 	{
-		_ap.getAnzeigeArea().append(nachricht);		
+		JTextArea anzeige = _ap.getAnzeigeArea();
+		
+		anzeige.append(nachricht);
+		anzeige.setCaretPosition(anzeige.getDocument().getLength()); 
 	}
 
 

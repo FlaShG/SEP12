@@ -46,14 +46,14 @@ public class RaumBauer
 				"Dr. Little betritt das Büro des Hausmeisters. Es ist niemand da. An der Wand stehen Besen und Putzmittel; der Boden ist mit Schwämmen bedeckt. Die Tür zur Besenkammer steht weit offen.");
 		// 
 		Raum besenkammerhausmeister = new Raum(
-				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank, offensichtlich der Rest des Mittagessens des Hausmeisters, liegt darin. Es ist dunkel.");
+				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank steht leicht geöffnet; es ragen Besenstiele heraus, doch viel zu erkennen ist nicht.");
 		//
-		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckende Anblick.");
+		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckender Anblick.");
 		//
 		Raum wohnung = new Raum(
 				"Dr. Little betritt seine Wohnung auf dem Campus. Er wohnt seit Jahren dort, da er ja eh ständig in seinem angrenzenden Labor beschäftigt ist.");
 		//
-		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige geschäftige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
+		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
 				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
@@ -90,6 +90,7 @@ public class RaumBauer
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
+		ostfluegel.setMaus(new Maus(s));
 
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
