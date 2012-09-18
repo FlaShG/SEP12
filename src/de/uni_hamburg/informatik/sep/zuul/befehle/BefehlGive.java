@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
+import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
@@ -36,7 +37,7 @@ public class BefehlGive extends Befehl
 			kontext.schreibeNL(richtungsangabe);
 			return;
 		}
-		if(kontext.getAktuellerRaum().isLabor())
+		if(kontext.getAktuellerRaum().getRaumart() == RaumArt.Labor)
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
 			{

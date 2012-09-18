@@ -5,18 +5,31 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
  * verbunden, die in unterschiedlichen Richtungen liegen. In manchen Räumen
  * liegen Items, die von dem Spieler automatisch eingesammelt werden.
  * Standardmäßig sind die Räume leer.
  */
+@XmlRootElement(name = "raum")
+@XmlType(propOrder={"_name", "_id", "_beschreibung", "_raumart"})
 public class Raum
 {
-	private String _beschreibung;
-	private Map<String, Raum> _ausgaenge;
-	private Stack<Item> _items; 	
-	private Maus _maus;
+	private @XmlElement(name = "beschreibung") String _beschreibung;
+	private @XmlTransient Map<String, Raum> _ausgaenge;
+	private @XmlTransient Stack<Item> _items; 	
+	private @XmlTransient Maus _maus;
+	private @XmlElement(name = "raumart") RaumArt _raumart;
+	private @XmlElement(name = "id") int _id; 
+	private @XmlElement(name = "name") String _name;
+	
+	public Raum()
+	{	/* für JAXB */	}
 	
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -35,7 +48,20 @@ public class Raum
 		this._ausgaenge = new HashMap<String, Raum>();
 
 		_items = new Stack<Item>();
+	}
+	
+	public Raum(String name, String beschreibung)
+	{
+		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
 
+		this._beschreibung = beschreibung;
+		this._ausgaenge = new HashMap<String, Raum>();
+
+		_items = new Stack<Item>();
+		
+		_name = name;
+
+		_id = _name.hashCode();
 	}
 
 	/**
@@ -174,10 +200,35 @@ public class Raum
 	{
 		_maus = maus;
 	}
-
-	public boolean isLabor()
+	
+	public RaumArt getRaumart()
 	{
-		return false;
+		return _raumart;
+	}
+
+	private void setRaumart(RaumArt raumart)
+	{
+		_raumart = raumart;
+	}
+
+	public int getId()
+	{
+		return _id;
+	}
+
+	private void setId(int id)
+	{
+		_id = id;
+	}
+
+	public String getName()
+	{
+		return _name;
+	}
+
+	private void setName(String name)
+	{
+		_name = name;
 	}
 
 }
