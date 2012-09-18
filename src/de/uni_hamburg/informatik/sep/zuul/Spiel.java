@@ -31,7 +31,6 @@ public abstract class Spiel implements ISchreiber
 	public Spiel()
 	{
 		_parser = new Parser();
-		_kontext = new SpielKontext(this);
 	}
 
 	/**
@@ -47,6 +46,8 @@ public abstract class Spiel implements ISchreiber
 	 */
 	protected void spielen()
 	{
+		_kontext = new SpielKontext(this);
+		
 		zeigeWillkommenstext();
 	}
 
@@ -70,5 +71,10 @@ public abstract class Spiel implements ISchreiber
 
 		if(_kontext.isSpielZuende())
 			beendeSpiel();
+	}
+	
+	protected void restart()
+	{
+		spielen();
 	}
 }
