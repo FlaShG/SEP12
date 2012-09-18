@@ -160,12 +160,9 @@ public class ButtonPanel extends JPanel
 		c.gridy = 1;
 		steuerungsPanel.add(_eastButton, c);
 
-//		c.gridx = 3;
-//		steuerungsPanel.add(_platzhalter, c);
 
 		
 		//Befehlpanel
-			
 		
 		c.gridx = 0;
 		c.gridy = 0;
@@ -193,6 +190,7 @@ public class ButtonPanel extends JPanel
 		
 	
 		//RaumbildPanel
+		
 		c.insets = new Insets(0, 40, 0, 40);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -288,8 +286,8 @@ public class ButtonPanel extends JPanel
 	}
 	
 	/**
-	 * 
-	 * @param img
+	 * aktualisiert die Raumanzeige auf den nächsten Raum
+	 * @param img Das neue Raumbild
 	 */
 	public void setRaumanzeige(BufferedImage img)
 	{
