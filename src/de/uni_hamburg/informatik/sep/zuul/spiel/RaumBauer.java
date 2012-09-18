@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ public class RaumBauer
 	 */
 	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
 	{
+		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
+		
 		for(Raum raum : verbindungen.keySet())
 		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
@@ -40,7 +43,17 @@ public class RaumBauer
 			{
 				_startRaum = raum;
 			}
+			if(raum.getRaumart() != RaumArt.Ende && raum.getRaumart() != RaumArt.Start && raum.getRaumart() != RaumArt.Labor)
+				kannMausEnthaltenRaum.add(raum);
 		}
+		
+
+		// Maus
+		
+		
+		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
+		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+		mausRaum.setMaus(new Maus(mausRaum));
 	}
 
 	private void initialisiereRaeumeHart()
@@ -159,7 +172,6 @@ public class RaumBauer
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
-		ostfluegel.setMaus(new Maus(s));
 
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);

@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +112,11 @@ public class Raum
 		this.setAusgang(richtung, nachbar);
 		nachbar.setAusgang(gegenRichtung, this);
 
+	}
+	
+	public ArrayList<Raum> getAusgaenge()
+	{
+		return new ArrayList<Raum>(_ausgaenge.values());
 	}
 
 	/**
