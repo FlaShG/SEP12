@@ -19,7 +19,8 @@ public class Maus
 
 		ArrayList<Raum> path = findPath(_raum, null);
 		if(path != null)
-		{
+		{			
+			
 			if(_raum.getAusgang(TextVerwalter.RICHTUNG_NORDEN) == path.get(1))
 				return TextVerwalter.RICHTUNG_NORDEN;
 			if(_raum.getAusgang(TextVerwalter.RICHTUNG_OSTEN) == path.get(1))
@@ -36,14 +37,16 @@ public class Maus
 
 	ArrayList<Raum> findPath(Raum start, ArrayList<Raum> begangeneRaeume)
 	{
-		if(SpielKontext.IsRaumZielRaum(start))
-			return begangeneRaeume;
-
 		if(begangeneRaeume == null)
 		{
 			begangeneRaeume = new ArrayList<>();
 		}
 		begangeneRaeume.add(start);
+		
+		if(SpielKontext.IsRaumZielRaum(start))
+		{
+			return begangeneRaeume;
+		}
 
 		ArrayList<Raum> ausgaenge = start.getAusgaenge();
 		ausgaenge.removeAll(begangeneRaeume);
@@ -51,21 +54,20 @@ public class Maus
 		if(ausgaenge.size() == 0)
 			return null;
 
-		ArrayList<Raum> kuerzesterWeg = null;
+		ArrayList<Raum> kuerzesterWegZumZiel = null;
 		for(Raum ausgang : ausgaenge)
-		{
-			ArrayList<Raum> path = findPath(ausgang, begangeneRaeume);
+		{			
+			ArrayList<Raum> path = findPath(ausgang, (ArrayList<Raum>)begangeneRaeume.clone());
 			if(path != null)
 			{
-				if(kuerzesterWeg == null || path.size() < kuerzesterWeg.size())
-					kuerzesterWeg = path;
+				if(kuerzesterWegZumZiel == null || path.size() < kuerzesterWegZumZiel.size())
+					kuerzesterWegZumZiel = path;
 			}
 		}
 
-		if(kuerzesterWeg == null)
+		if(kuerzesterWegZumZiel == null)
 			return null;
-		begangeneRaeume.addAll(kuerzesterWeg);
-		return begangeneRaeume;
+		return kuerzesterWegZumZiel;
 
 	}
 

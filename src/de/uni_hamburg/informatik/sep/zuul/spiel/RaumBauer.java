@@ -1,5 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class RaumBauer
 {
 	private Raum _startRaum;
@@ -90,7 +93,6 @@ public class RaumBauer
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
-		ostfluegel.setMaus(new Maus(ostfluegel));
 
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
@@ -139,6 +141,20 @@ public class RaumBauer
 		mensa.setAusgang(w, vorlesungssaal);
 		mensa.addItem(Item.Giftkuchen);
 		mensa.addItem(Item.Kuchen);
+		
+		
+		// Maus
+		
+		ArrayList<Raum> mausRaeume = new ArrayList<>();
+		mausRaeume.add(ostfluegel);
+		mausRaeume.add(mensa);
+		mausRaeume.add(herrentiolette);
+		
+		int randomInt = new Random().nextInt(mausRaeume.size());
+		Raum mausRaum = mausRaeume.get(randomInt);
+		mausRaum.setMaus(new Maus(mausRaum));
+		
+		
 	}
 
 	/**

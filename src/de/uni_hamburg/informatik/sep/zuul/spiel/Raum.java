@@ -142,6 +142,13 @@ public class Raum
 		return _beschreibung;
 	}
 	
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return getBeschreibung();
+	}
+	
 	/**
 	 * liefert das Nächste Item, entfernt es jedoch nicht
 	 * @return Item
