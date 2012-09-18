@@ -1,16 +1,13 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Random;
-=======
 import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
->>>>>>> master
 
 public class RaumBauer
 {
