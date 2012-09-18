@@ -3,6 +3,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
 {
@@ -11,124 +12,91 @@ public class SpielLogik
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	private boolean _spielZuende;
-	private final ISchreiber _schreiber;
-	private SpielKontext _kontext = new SpielKontext();
-
-	public SpielLogik(ISchreiber schreiber)
+	public static SpielKontext erstelleKontext()
 	{
-		_schreiber = schreiber;
-		_kontext.setLebensEnergie(START_ENERGIE);
-		_kontext.setInventar(new Inventar());
-		legeRaeumeAn();
+		final SpielKontext kontext = new SpielKontext();
+		kontext.setLebensEnergie(START_ENERGIE);
+		kontext.setInventar(new Inventar());
+		legeRaeumeAn(kontext);
 		
-		_kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
+		kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
 		{
 			@Override
 			public void propertyChange(PropertyChangeEvent evt)
 			{				
-				zeigeRaumbeschreibung();
+				zeigeRaumbeschreibung(kontext);
 				
-				if(getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+				if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
 				{
-					beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
+					beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
 					return;
 				}
 				
-				_kontext.setLebensEnergie(_kontext.getLebensEnergie() - RAUMWECHSEL_ENERGIE_KOSTEN);
-				schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _kontext.getLebensEnergie());	
+				kontext.setLebensEnergie(kontext.getLebensEnergie() - RAUMWECHSEL_ENERGIE_KOSTEN);
+				Spiel.getInstance().schreibeNL(TextVerwalter.RAUMWECHSELTEXT + kontext.getLebensEnergie());	
 				
-				switch(getAktuellerRaum().getNaechstesItem())
+				switch(kontext.getAktuellerRaum().getNaechstesItem())
 				{
 					case Kuchen: case Giftkuchen:
-						schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+						Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
 					break;
 				}
 				
 				// Maus
-				if(getAktuellerRaum().hasMaus())
+				if(kontext.getAktuellerRaum().hasMaus())
 				{
-					schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
-					schreibeNL(TextVerwalter.MAUS_FRAGE);
+					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
+					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_FRAGE);
 				}
 				
-				if(!isSpielZuende() && _kontext.getLebensEnergie() <= 0)
+				if(!kontext.isSpielZuende() && kontext.getLebensEnergie() <= 0)
 				{
-					beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
+					beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
 				}
 				
-				if(!isSpielZuende())
+				if(!kontext.isSpielZuende())
 				{
-					zeigeAusgaenge();
+					zeigeAusgaenge(kontext);
 				}
 				
 			}
 		});
-	}
-
-	/**
-	 * Schreibt nachricht in den Output, hänge einen Zeilenumbruch an.
-	 * Vergleichbar mit PrintStream.println()
-	 * 
-	 * @param nachricht
-	 *            Die auszugebende Nachricht
-	 */
-	public void schreibeNL(String nachricht)
-	{
-		_schreiber.schreibeNL(nachricht);
-	}
-
-	/**
-	 * Schreibt nachricht in den Output. Vergleichbar mit PrintStream.print()
-	 * 
-	 * @param nachricht
-	 *            Die auszugebende Nachricht
-	 */
-	public void schreibe(String nachricht)
-	{
-		_schreiber.schreibe(nachricht);
+		return kontext;
 	}
 
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private void legeRaeumeAn()
+	private static void legeRaeumeAn(SpielKontext kontext)
 	{
 		RaumBauer raumbauer = new RaumBauer();
-		_kontext.setAktuellerRaum(raumbauer.getStartRaum());
+		kontext.setAktuellerRaum(raumbauer.getStartRaum());
+	}
+	
+	
+
+	/**
+	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
+	 * befindet.
+	 */
+	public static void zeigeRaumbeschreibung(SpielKontext kontext)
+	{
+		Spiel.getInstance().schreibeNL(kontext.getAktuellerRaum().getBeschreibung());
 	}
 
 	/**
-	 * Gibt den aktuellen Raum zurück, in dem sich der Spieler befindet.
-	 * 
-	 * @return
+	 * Zeigt die Ausgänge des aktuellen Raumes an.
 	 */
-	public Raum getAktuellerRaum()
+	public static void zeigeAusgaenge(SpielKontext kontext)
 	{
-		return _kontext.getAktuellerRaum();
-	}
+		Spiel.getInstance().schreibe(TextVerwalter.AUSGAENGE + ": ");
 
-	/**
-	 * Ändert den aktuellen Raum, in dem sich der Spieler befindet. Zeigt dessen
-	 * Beschreibung an, welche Items eingesammelt werden und zum Abschluss die
-	 * Ausgänge.
-	 * 
-	 * @param aktuellerRaum
-	 *            der neue Raum, der betreten wird
-	 */
-	public void setAktuellerRaum(Raum aktuellerRaum)
-	{
-		_kontext.setAktuellerRaum(aktuellerRaum);
-	}
+		for(String s : kontext.getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			Spiel.getInstance().schreibe(s + " ");
+		}
 
-	/**
-	 * Gibt zurück, ob das Spiel zuende ist
-	 * 
-	 * @return true, wenn das Spiel zuende ist
-	 */
-	public boolean isSpielZuende()
-	{
-		return _spielZuende;
+		Spiel.getInstance().schreibeNL("");
 	}
 
 	/**
@@ -137,38 +105,9 @@ public class SpielLogik
 	 * @param nachricht
 	 *            die Nachricht, die vor dem Spielende ausgegeben werden soll
 	 */
-	public void beendeSpiel(String nachricht)
+	public static void beendeSpiel(SpielKontext kontext, String nachricht)
 	{
-		schreibeNL(nachricht);
-		_spielZuende = true;
-	}
-
-	/**
-	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
-	 * befindet.
-	 */
-	public void zeigeRaumbeschreibung()
-	{
-		schreibeNL(getAktuellerRaum().getBeschreibung());
-	}
-
-	/**
-	 * Zeigt die Ausgänge des aktuellen Raumes an.
-	 */
-	public void zeigeAusgaenge()
-	{
-		schreibe(TextVerwalter.AUSGAENGE + ": ");
-
-		for(String s : getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			schreibe(s + " ");
-		}
-
-		schreibeNL("");
-	}
-
-	public SpielKontext getKontext()
-	{
-		return _kontext;
+		kontext.spielZuende();
+		Spiel.getInstance().schreibeNL(nachricht);
 	}
 }

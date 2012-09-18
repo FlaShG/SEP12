@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
@@ -12,8 +13,8 @@ final class BefehlQuit extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielLogik kontext)
+	public void ausfuehren(SpielKontext kontext)
 	{
-		kontext.beendeSpiel(TextVerwalter.BEENDENTEXT);
+		SpielLogik.beendeSpiel(kontext, TextVerwalter.BEENDENTEXT);
 	}
 }

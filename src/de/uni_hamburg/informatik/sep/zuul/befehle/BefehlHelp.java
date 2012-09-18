@@ -1,6 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import java.util.ArrayList;
+
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
@@ -13,9 +16,9 @@ final class BefehlHelp extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielLogik kontext)
+	public void ausfuehren(SpielKontext kontext)
 	{
-		kontext.schreibeNL(TextVerwalter.HILFETEXT);
+		Spiel.getInstance().schreibeNL(TextVerwalter.HILFETEXT);
 		
 		// essen | hilfe | nehmen | ost | n | o | w | süd | s | gib | gehe | nord | beenden | west 
 		// gehe nehme gib essen
@@ -56,11 +59,11 @@ final class BefehlHelp extends Befehl
 		befehle.removeAll(kurzBefehle);
 		befehle.removeAll(system);
 		
-		kontext.schreibeNL(buildString(aktionen));
-		kontext.schreibeNL(buildString(bewegen));
-		kontext.schreibeNL(buildString(kurzBefehle));
-		kontext.schreibeNL(buildString(system));
-		kontext.schreibeNL(buildString(befehle));
+		Spiel.getInstance().schreibeNL(buildString(aktionen));
+		Spiel.getInstance().schreibeNL(buildString(bewegen));
+		Spiel.getInstance().schreibeNL(buildString(kurzBefehle));
+		Spiel.getInstance().schreibeNL(buildString(system));
+		Spiel.getInstance().schreibeNL(buildString(befehle));
 
 	}
 

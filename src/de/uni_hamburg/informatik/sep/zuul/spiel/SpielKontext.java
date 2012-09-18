@@ -10,11 +10,7 @@ public class SpielKontext
 	private Inventar _inventar;
 
 	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
-
-
-	public SpielKontext()
-	{
-	}
+	private boolean _spielZuende;
 
 	public Raum getAktuellerRaum()
 	{
@@ -70,5 +66,22 @@ public class SpielKontext
 	public void removePropertyChangeListener(String property, PropertyChangeListener l)
 	{
 		changes.removePropertyChangeListener(property, l);
+	}
+
+	/**
+	 * @return the spielZuende
+	 */
+	public boolean isSpielZuende()
+	{
+		return _spielZuende;
+	}
+
+	/**
+	 * @param spielZuende the spielZuende to set
+	 */
+	public void spielZuende()
+	{
+		_spielZuende = true;
+		changes.firePropertyChange("SpielZuende", false, true);
 	}
 }

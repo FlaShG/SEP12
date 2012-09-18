@@ -26,15 +26,15 @@ public class SpielConsole extends Spiel
 	@Override
 	protected void spielen()
 	{
-		_kontext = new SpielLogik(this);
+		_kontext = SpielLogik.erstelleKontext();
 		
-		zeigeWillkommenstext();
+		zeigeWillkommenstext(_kontext);
 
 		while(!_kontext.isSpielZuende())
 		{
 			String eingabezeile = leseZeileEin();
 
-			Befehl befehl = _parser.liefereBefehl(eingabezeile);
+			Befehl befehl = Spiel.parseEingabezeile(eingabezeile);
 
 			befehl.ausfuehren(_kontext);
 

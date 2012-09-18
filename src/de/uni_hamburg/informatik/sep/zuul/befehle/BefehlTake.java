@@ -1,9 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlTake extends Befehl
@@ -15,34 +15,33 @@ final class BefehlTake extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielLogik logik)
+	public void ausfuehren(SpielKontext kontext)
 	{
-		SpielKontext kontext = logik.getKontext();
 		Raum raum = kontext.getAktuellerRaum();
 
 		switch(raum.getNaechstesItem())
 		{
 			case Kuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
-				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+				Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 				raum.loescheItem();
 				if(raum.getNaechstesItem() != Item.Keins)
 				{
-					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+					Spiel.getInstance().schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
 				}
 			break;
 			case Giftkuchen:
 				kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
-				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+				Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 				raum.loescheItem();
 				if(raum.getNaechstesItem() != Item.Keins)
 				{
-					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+					Spiel.getInstance().schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
 				}
 			break;
 
 			default:
-				kontext.schreibeNL(TextVerwalter.NICHTSZUMNEHMENTEXT);
+				Spiel.getInstance().schreibeNL(TextVerwalter.NICHTSZUMNEHMENTEXT);
 			break;
 		}
 	}

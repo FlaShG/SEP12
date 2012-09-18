@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
@@ -19,13 +21,13 @@ final class BefehlS extends Befehl
 	}
 	
 	@Override
-	public void ausfuehren(SpielLogik kontext)
+	public void ausfuehren(SpielKontext kontext)
 	{
 		// Wir versuchen den Raum zu verlassen.
 		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang(TextVerwalter.RICHTUNG_SUEDEN);
 		if(naechsterRaum == null)
 		{
-			kontext.schreibeNL(TextVerwalter.KEINETUER);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINETUER);
 		}
 		else
 		{

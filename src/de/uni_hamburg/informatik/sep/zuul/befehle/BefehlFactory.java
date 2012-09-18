@@ -3,6 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
@@ -19,9 +21,9 @@ public final class BefehlFactory
 		}
 
 		@Override
-		public void ausfuehren(SpielLogik kontext)
+		public void ausfuehren(SpielKontext kontext)
 		{
-			kontext.schreibeNL(TextVerwalter.FALSCHEEINGABE);
+			Spiel.getInstance().schreibeNL(TextVerwalter.FALSCHEEINGABE);
 		}
 	};
 

@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
@@ -14,12 +15,11 @@ final class BefehlEat extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielLogik logik)
+	public void ausfuehren(SpielKontext kontext)
 	{
-		SpielKontext kontext = logik.getKontext();
 		if(getParameters().length == 0)
 		{
-			logik.schreibeNL(TextVerwalter.KEINORT);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINORT);
 			return;
 		}
 
@@ -36,23 +36,23 @@ final class BefehlEat extends Befehl
 			{
 			case Kuchen:
 				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
-				logik.schreibeNL(TextVerwalter.kuchengegessentext(energie));
+				Spiel.getInstance().schreibeNL(TextVerwalter.kuchengegessentext(energie));
 				break;
 			case Giftkuchen:
 				energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 				if(energie > 0)
 				{
-					logik.schreibeNL(TextVerwalter
+					Spiel.getInstance().schreibeNL(TextVerwalter
 							.giftkuchengegessentext(energie));
 				}
 				else
 				{
-					logik.beendeSpiel(TextVerwalter.KUCHENTODTEXT);
+					SpielLogik.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
 				}
 				break;
 
 			default:
-				logik.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);
+				Spiel.getInstance().schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);
 				break;
 			}
 
@@ -69,11 +69,11 @@ final class BefehlEat extends Befehl
 			case Kuchen:
 				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 				kontext.getAktuellerRaum().loescheItem();
-				logik.schreibeNL(TextVerwalter
+				Spiel.getInstance().schreibeNL(TextVerwalter
 						.kuchenVomBodenGegessenText(energie));
 				if(kontext.getAktuellerRaum().getNaechstesItem() != Item.Keins)
 				{
-					logik.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+					Spiel.getInstance().schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
 				}
 				
 				break;
@@ -82,16 +82,16 @@ final class BefehlEat extends Befehl
 				kontext.getAktuellerRaum().loescheItem();
 				if(energie > 0)
 				{
-					logik.schreibeNL(TextVerwalter
+					Spiel.getInstance().schreibeNL(TextVerwalter
 							.giftkuchenVomBodenGegessenText(energie));
 				}
 				else
 				{
-					logik.beendeSpiel(TextVerwalter.KUCHENTODTEXT);
+					SpielLogik.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
 				}
 				break;
 			default:
-				logik.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXTBODEN);
+				Spiel.getInstance().schreibeNL(TextVerwalter.NICHTSZUMESSENTEXTBODEN);
 				break;
 			}
 			
@@ -100,7 +100,7 @@ final class BefehlEat extends Befehl
 		}
 		else
 		{
-			logik.schreibeNL(TextVerwalter.KEINORT);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINORT);
 			return;
 		}
 		
