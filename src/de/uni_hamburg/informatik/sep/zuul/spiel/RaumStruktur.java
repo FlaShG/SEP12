@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<Raum> list)
 	{
+		_connected = new HashMap<>();
 		initialisiereConnections(list);
 	}
 
@@ -37,6 +39,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<XmlRaum> xmlList, List<Raum> list)
 	{
+		_connected = new HashMap<>();
 		Map<Integer, Raum> zuordnungen = erzeugeIDZuordnungen(xmlList, list);
 
 		for(XmlRaum xmlRaum : xmlList)
@@ -158,4 +161,40 @@ public class RaumStruktur
 		return result;
 	}
 
+	/**
+	 * Getter für die Struktur in Form einer Liste von XmlRäumen.
+	 * 
+	 * @return
+	 */
+	public List<XmlRaum> getXMLRaumListe()
+	{
+		List<XmlRaum> result = new ArrayList<>();
+		for(Raum raum : _connected.keySet())
+		{
+			int nord = 0, ost = 0, sued = 0, west = 0;
+			
+			if(_connected.get(raum)[0] != null)
+			{
+				nord = _connected.get(raum)[0].getId();
+			}
+			if(_connected.get(raum)[1] != null)
+			{
+				ost = _connected.get(raum)[1].getId();
+			}
+			if(_connected.get(raum)[2] != null)
+			{
+				sued = _connected.get(raum)[2].getId();
+			}
+			if(_connected.get(raum)[3] != null)
+			{
+				west = _connected.get(raum)[3].getId();
+			}
+
+			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west);
+			result.add(xmlRaum);
+
+		}
+
+		return result;
+	}
 }

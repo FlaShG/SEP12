@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 
 public class RaumBauer
 {
@@ -12,6 +14,7 @@ public class RaumBauer
 
 	public RaumBauer(RaumStruktur struktur)
 	{
+		//		initialisiereRaeumeHart();
 		initialisiereRaeume(struktur.getConnections());
 	}
 
@@ -32,6 +35,11 @@ public class RaumBauer
 					verbindungen.get(raum)[2], TextVerwalter.RICHTUNG_NORDEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
 					verbindungen.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
+			
+			if(raum.getRaumart() == RaumArt.Start)
+			{
+				_startRaum = raum;
+			}
 		}
 	}
 
@@ -224,6 +232,14 @@ public class RaumBauer
 		sammlung.add(vorlesungssaal);
 
 		RaumStruktur struktur = new RaumStruktur(sammlung);
+		RaumStrukturParser parser = new RaumStrukturParser(
+				"./xml_dateien/testStruktur.xml");
+		for(XmlRaum xmlRaum : struktur.getXMLRaumListe())
+		{
+			parser.getXmlVerbindungen().add(xmlRaum);
+		}
+		parser.schreibeXml();
+
 		_startRaum = labor;
 	}
 

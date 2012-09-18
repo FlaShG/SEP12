@@ -1,5 +1,11 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
+
+import java.util.List;
+
 import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
+import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 
 public class SpielKontext
 {
@@ -50,7 +56,15 @@ public class SpielKontext
 	 */
 	private void legeRaeumeAn()
 	{
-		RaumBauer raumbauer = new RaumBauer();
+		RaumStrukturParser sparser = new RaumStrukturParser(
+				"./xml_dateien/testStruktur.xml");
+		List<XmlRaum> xmlListe = sparser.getXmlVerbindungen();
+		
+		RaumSammlungParser rsparser = new RaumSammlungParser();
+		List<Raum> liste = rsparser.getSammlung();
+		
+		RaumStruktur struktur = new RaumStruktur(xmlListe, liste);
+		RaumBauer raumbauer = new RaumBauer(struktur);
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
 
@@ -137,27 +151,29 @@ public class SpielKontext
 	{
 		if(getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
 		{
-			beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
+			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"
+					+ TextVerwalter.BEENDENTEXT);
 			return;
 		}
-		
+
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);	
-		
-		switch(getAktuellerRaum().getNaechstesItem())
+		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);
+
+		switch (getAktuellerRaum().getNaechstesItem())
 		{
-			case Kuchen: case Giftkuchen:
-				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+		case Kuchen:
+		case Giftkuchen:
+			schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
 			break;
 		}
-		
+
 		// Maus
 		if(getAktuellerRaum().hasMaus())
 		{
 			schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
 			schreibeNL(TextVerwalter.MAUS_FRAGE);
 		}
-		
+
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);

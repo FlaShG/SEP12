@@ -4,6 +4,7 @@
         <name>Privatlabor</name>
         <id>-648638930</id>
         <beschreibung>Dr. Little befindet sich in seinem Privatlabor an der Universität.</beschreibung>
+        <raumart>Start</raumart>
     </raum>
     <raum>
         <name>Gang</name>
@@ -54,6 +55,7 @@
         <name>Büro</name>
         <id>2212023</id>
         <beschreibung>Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.</beschreibung>
+        <raumart>Ende</raumart>
     </raum>
     <raum>
         <name>Hausmeisterbüro</name>
