@@ -206,7 +206,7 @@ public class Raum
 		return _raumart;
 	}
 
-	private void setRaumart(RaumArt raumart)
+	void setRaumart(RaumArt raumart)
 	{
 		_raumart = raumart;
 	}
