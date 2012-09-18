@@ -1,11 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 
@@ -27,7 +26,7 @@ public class RaumBauer
 	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
 	{
 		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
-		
+
 		for(Raum raum : verbindungen.keySet())
 		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
@@ -38,19 +37,18 @@ public class RaumBauer
 					verbindungen.get(raum)[2], TextVerwalter.RICHTUNG_NORDEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
 					verbindungen.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
-			
+
 			if(raum.getRaumart() == RaumArt.Start)
 			{
 				_startRaum = raum;
 			}
-			if(raum.getRaumart() != RaumArt.Ende && raum.getRaumart() != RaumArt.Start)
+			if(raum.getRaumart() != RaumArt.Ende
+					&& raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
 		}
-		
 
 		// Maus
-		
-		
+
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
 		mausRaum.setMaus(new Maus(mausRaum));

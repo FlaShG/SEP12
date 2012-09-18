@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "struktur")
 public class XmlStruktur
 {
-	private @XmlElement(name = "xmlraum") List<XmlRaum> _raeume;
-	
+	private @XmlElement(name = "xmlraum")
+	List<XmlRaum> _raeume;
+
 	public XmlStruktur()
 	{
 		// für JAXB

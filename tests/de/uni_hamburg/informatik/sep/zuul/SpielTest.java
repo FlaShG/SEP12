@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
-
 /**
  * @author Felix Wiedemann<1wiedema@informatik.uni-hamburg.de>
  * 

@@ -3,7 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BefehlFactoryTest 
+public class BefehlFactoryTest
 {
 
 	@Before

@@ -84,9 +84,9 @@ public class SpielLogik
 		//TODO: noch statisch - datei mit filechooser auswählen!!
 
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
-		manager.getRaeume());
+				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
-		kontext.setAktuellerRaum(raumbauer.getStartRaum());	
+		kontext.setAktuellerRaum(raumbauer.getStartRaum());
 	}
 
 	/**
