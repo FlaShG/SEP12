@@ -72,6 +72,7 @@ public class RaumBauer
 		labor.setAusgang(TextVerwalter.RICHTUNG_OSTEN, gang);
 		labor.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, wohnung);
 		labor.setAusgang(TextVerwalter.RICHTUNG_WESTEN, westfluegel);
+		labor.setRaumart(RaumArt.Labor);
 
 		westfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, labor);
 		westfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, burerohausmeister);
