@@ -1,11 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
-import java.util.List;
-
 import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
-import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
-import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
-import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 
 public class SpielKontext
 {
@@ -56,14 +51,12 @@ public class SpielKontext
 	 */
 	private void legeRaeumeAn()
 	{
-		RaumStrukturParser sparser = new RaumStrukturParser(
-				"./xml_dateien/testStruktur.xml");
-		List<XmlRaum> xmlListe = sparser.getXmlVerbindungen();
-		
-		RaumSammlungParser rsparser = new RaumSammlungParser();
-		List<Raum> liste = rsparser.getSammlung();
-		
-		RaumStruktur struktur = new RaumStruktur(xmlListe, liste);
+		IOManager manager = new IOManager();
+		manager.readLevel("./xml_dateien/testStruktur.xml");
+		//TODO: noch statisch - datei mit filechooser auswählen!!
+
+		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
+				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}

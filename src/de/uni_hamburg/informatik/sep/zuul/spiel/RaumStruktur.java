@@ -164,7 +164,7 @@ public class RaumStruktur
 	/**
 	 * Getter für die Struktur in Form einer Liste von XmlRäumen.
 	 * 
-	 * @return
+	 * @return List<XmlRaum>
 	 */
 	public List<XmlRaum> getXMLRaumListe()
 	{
@@ -172,7 +172,7 @@ public class RaumStruktur
 		for(Raum raum : _connected.keySet())
 		{
 			int nord = 0, ost = 0, sued = 0, west = 0;
-			
+
 			if(_connected.get(raum)[0] != null)
 			{
 				nord = _connected.get(raum)[0].getId();
