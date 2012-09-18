@@ -34,6 +34,7 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+	private JButton _ladenBefehl;
 
 	public ButtonPanel(int breite)
 	{
@@ -93,7 +94,6 @@ public class ButtonPanel extends JPanel
 		_essenAusTascheButton.setMinimumSize(PREFERRED);
 		_essenAusTascheButton.setFocusable(false);
 
-		
 		_essenBodenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_BODEN));
@@ -104,6 +104,11 @@ public class ButtonPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 		_nehmenButton.setMinimumSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
+
+		_ladenBefehl = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
+		_ladenBefehl.setMinimumSize(PREFERRED);
+		_ladenBefehl.setFocusable(false);
 
 		initialisiereUI();
 
@@ -155,6 +160,7 @@ public class ButtonPanel extends JPanel
 		befehlsPanel.add(_nehmenButton, befehlsPanel);
 		befehlsPanel.add(_essenAusTascheButton, befehlsPanel);
 		befehlsPanel.add(_essenBodenButton, befehlsPanel);
+		befehlsPanel.add(_ladenBefehl, befehlsPanel);
 		befehlsPanel.add(_helpButton, befehlsPanel);
 		befehlsPanel.add(_quitButton, befehlsPanel);
 
@@ -225,7 +231,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _essenAusTascheButton;
 	}
-	
+
 	/**
 	 * 
 	 * @return den _essenBodenButton
