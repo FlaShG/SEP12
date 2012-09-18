@@ -54,7 +54,7 @@ public class EditorMap extends JPanel
 		_observer = o;
 	}
 	
-	public void informiereBeobachter()
+	private void informiereBeobachter()
 	{
 		if(_observer != null)
 		{

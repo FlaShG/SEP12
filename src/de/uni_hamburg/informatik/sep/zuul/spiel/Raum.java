@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -156,9 +157,28 @@ public class Raum
 		if(!_items.empty())
 			_items.pop();
 	}
+	
+	/**
+	 * Setzt den Item-Stack neu
+	 * Für den Editor relevant
+	 */
+	public void setItems(Stack<Item> items)
+	{
+		_items = items;
+	}
+	
+	/**
+	 * Gibt die Items zurück
+	 * Für den Editor relevant
+	 */
+	public Collection<Item> getItems()
+	{
+		return _items;
+	}
 
 	/**
 	 * Setzt die Beschreibung des Raumes
+	 * Für den Editor relevant
 	 */
 	public void setBescheibung(String beschreibung)
 	{

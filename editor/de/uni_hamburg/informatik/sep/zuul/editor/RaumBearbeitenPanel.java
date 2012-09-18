@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Maus;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
@@ -54,7 +56,7 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 			public void changedUpdate(DocumentEvent arg0){}
 		});
 		
-		add(_eigenschaften = new RaumEigenschaftenPanel(), BorderLayout.CENTER);
+		add(_eigenschaften = new RaumEigenschaftenPanel(raum, this), BorderLayout.CENTER);
 		add(_verbinden = new JButton("verbinden mit"), BorderLayout.EAST);
 	}
 
@@ -62,5 +64,13 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 	public void update(Observable arg0, Object arg1)
 	{
 		_raum.setMaus(_eigenschaften.getMaus() ? new Maus(_raum) : null);
+		
+		Stack<Item> items = new Stack<Item>();
+		for(int i = 0; i < _eigenschaften.getKuchenzahl(); ++i)
+			items.push(Item.Kuchen);
+		for(int i = 0; i < _eigenschaften.getGiftkuchenzahl(); ++i)
+			items.push(Item.Giftkuchen);
+			
+		_raum.setItems(items);
 	}
 }
