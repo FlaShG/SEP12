@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.xml;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -51,7 +50,6 @@ public class RaumSammlungParser
 			Marshaller jmarshaller = jcontext.createMarshaller();
 			jmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jmarshaller.marshal(_root, file);
-//			JAXB.marshal(_root, file);
 		}
 		catch(Exception e)
 		{
