@@ -1,15 +1,27 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+
+import java.awt.Image;
 import java.awt.Toolkit;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.swing.ImageIcon;
+
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import sun.awt.image.ImageRepresentation;
+import sun.awt.image.ToolkitImage;
+
 
 import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
+import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
+import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 
 public class SpielKontext
 {
@@ -61,7 +73,15 @@ public class SpielKontext
 	 */
 	private void legeRaeumeAn()
 	{
-		RaumBauer raumbauer = new RaumBauer();
+		RaumStrukturParser sparser = new RaumStrukturParser(
+				"./xml_dateien/testStruktur.xml");
+		List<XmlRaum> xmlListe = sparser.getXmlVerbindungen();
+		
+		RaumSammlungParser rsparser = new RaumSammlungParser();
+		List<Raum> liste = rsparser.getSammlung();
+		
+		RaumStruktur struktur = new RaumStruktur(xmlListe, liste);
+		RaumBauer raumbauer = new RaumBauer(struktur);
 		_aktuellerRaum = raumbauer.getStartRaum();
 	}
 
@@ -224,39 +244,19 @@ public class SpielKontext
 	private BufferedImage ladeBild(String pfad)
 	{
 		File f = new File(pfad);
-		BufferedImage img = new BufferedImage(5, 5,
-				BufferedImage.TYPE_3BYTE_BGR);
-		FileInputStream fis;
+		BufferedImage img = null;
 		try
 		{
-			fis = new FileInputStream(f);
-			byte[] bilddaten = new byte[fis.available()];
-
-			fis.read(bilddaten);
-			img = (BufferedImage) Toolkit.getDefaultToolkit().createImage(
-					bilddaten);
-			fis.close();
+			 img = ImageIO.read(f);
 		}
 		catch(IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
-		finally
-		{
-			try
-			{
-				fis = new FileInputStream("");
-				fis.close();
-			}
-			catch(IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
+		
 		return img;
+		
+		
 	}
 	
 	public BufferedImage getAktuelleRaumansicht()

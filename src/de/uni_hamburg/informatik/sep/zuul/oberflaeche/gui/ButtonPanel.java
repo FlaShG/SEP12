@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 
@@ -289,7 +290,7 @@ public class ButtonPanel extends JPanel
 	 * aktualisiert die Raumanzeige auf den nächsten Raum
 	 * @param img Das neue Raumbild
 	 */
-	public void setRaumanzeige(BufferedImage img)
+	public void setRaumanzeige(Image img)
 	{
 		if(img != null)
 			_raumIcon = new ImageIcon(img);
