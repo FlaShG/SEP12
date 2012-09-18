@@ -1,4 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
+
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+
 import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
 
 public class SpielKontext
@@ -9,6 +19,7 @@ public class SpielKontext
 	public static final int START_ENERGIE = 8;
 
 	private Raum _aktuellerRaum;
+	private BufferedImage _aktuelleRaumansicht;
 	private boolean _spielZuende;
 	private int _lebensEnergie;
 	private final ISchreiber _schreiber;
@@ -77,6 +88,7 @@ public class SpielKontext
 		_aktuellerRaum = aktuellerRaum;
 		zeigeRaumbeschreibung();
 		raumBetreten();
+
 		if(!isSpielZuende())
 		{
 			zeigeAusgaenge();
@@ -135,29 +147,34 @@ public class SpielKontext
 	 */
 	private void raumBetreten()
 	{
+
+		aktualisiereRaumansicht();
+		
 		if(getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
 		{
-			beendeSpiel(TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
+			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"
+					+ TextVerwalter.BEENDENTEXT);
 			return;
 		}
-		
+
 		_lebensEnergie -= RAUMWECHSEL_ENERGIE_KOSTEN;
-		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);	
-		
-		switch(getAktuellerRaum().getNaechstesItem())
+		schreibeNL(TextVerwalter.RAUMWECHSELTEXT + _lebensEnergie);
+
+		switch (getAktuellerRaum().getNaechstesItem())
 		{
-			case Kuchen: case Giftkuchen:
-				schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
+		case Kuchen:
+		case Giftkuchen:
+			schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
 			break;
 		}
-		
+
 		// Maus
 		if(getAktuellerRaum().hasMaus())
 		{
 			schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
 			schreibeNL(TextVerwalter.MAUS_FRAGE);
 		}
-		
+
 		if(!isSpielZuende() && _lebensEnergie <= 0)
 		{
 			beendeSpiel(TextVerwalter.NIEDERLAGETEXT);
@@ -181,4 +198,70 @@ public class SpielKontext
 	{
 		_lebensEnergie = lebensEnergie;
 	}
+
+	private void aktualisiereRaumansicht()
+	{
+		BufferedImage raum = ladeBild("Z:\\SEP\\test.png");
+		BufferedImage maus = null;
+
+		if(_aktuellerRaum.hasMaus())
+		{
+			maus = ladeBild("Z:\\SEP\\maus.png");
+
+			for(int x = 0; x < maus.getWidth(); x++)
+			{
+				for(int y = 0; y < maus.getHeight(); y++)
+				{
+					raum.setRGB(x + 50, y + 25, maus.getRGB(x, y));
+				}
+			}
+		}
+
+		_aktuelleRaumansicht = raum;
+
+	}
+
+	private BufferedImage ladeBild(String pfad)
+	{
+		File f = new File(pfad);
+		BufferedImage img = new BufferedImage(5, 5,
+				BufferedImage.TYPE_3BYTE_BGR);
+		FileInputStream fis;
+		try
+		{
+			fis = new FileInputStream(f);
+			byte[] bilddaten = new byte[fis.available()];
+
+			fis.read(bilddaten);
+			img = (BufferedImage) Toolkit.getDefaultToolkit().createImage(
+					bilddaten);
+			fis.close();
+		}
+		catch(IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				fis = new FileInputStream("");
+				fis.close();
+			}
+			catch(IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return img;
+	}
+	
+	public BufferedImage getAktuelleRaumansicht()
+	{
+		return _aktuelleRaumansicht;
+	}
+
 }

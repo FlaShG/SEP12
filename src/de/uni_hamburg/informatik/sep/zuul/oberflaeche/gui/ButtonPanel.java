@@ -291,7 +291,8 @@ public class ButtonPanel extends JPanel
 	 */
 	public void setRaumanzeige(BufferedImage img)
 	{
-		_raumIcon = new ImageIcon(img);
+		if(img != null)
+			_raumIcon = new ImageIcon(img);
 	}
 	
 	
