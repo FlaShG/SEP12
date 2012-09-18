@@ -30,9 +30,10 @@ public class ButtonPanel extends JPanel
 	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
 	private final Dimension PREFERRED = new Dimension(120, 25);
 	private final int HOEHE = 260;
-	private JButton _essenButton;
+	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
 	private JButton _gibButton;
+	private JButton _essenBodenButton;
 
 	public ButtonPanel(int breite)
 	{
@@ -86,10 +87,18 @@ public class ButtonPanel extends JPanel
 		_gibButton.setMinimumSize(PREFERRED);
 		_gibButton.setFocusable(false);
 
-		_essenButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN));
-		_essenButton.setMinimumSize(PREFERRED);
-		_essenButton.setFocusable(false);
+		_essenAusTascheButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
+						+ TextVerwalter.ORT_TASCHE));
+		_essenAusTascheButton.setMinimumSize(PREFERRED);
+		_essenAusTascheButton.setFocusable(false);
+
+		
+		_essenBodenButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
+						+ TextVerwalter.ORT_BODEN));
+		_essenBodenButton.setMinimumSize(PREFERRED);
+		_essenBodenButton.setFocusable(false);
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -143,8 +152,9 @@ public class ButtonPanel extends JPanel
 		c.gridx = 3;
 
 		befehlsPanel.add(_gibButton, befehlsPanel);
-		befehlsPanel.add(_essenButton, befehlsPanel);
 		befehlsPanel.add(_nehmenButton, befehlsPanel);
+		befehlsPanel.add(_essenAusTascheButton, befehlsPanel);
+		befehlsPanel.add(_essenBodenButton, befehlsPanel);
 		befehlsPanel.add(_helpButton, befehlsPanel);
 		befehlsPanel.add(_quitButton, befehlsPanel);
 
@@ -213,7 +223,16 @@ public class ButtonPanel extends JPanel
 	 */
 	public JButton getEssenButton()
 	{
-		return _essenButton;
+		return _essenAusTascheButton;
+	}
+	
+	/**
+	 * 
+	 * @return den _essenBodenButton
+	 */
+	public JButton getEssenBodenButton()
+	{
+		return _essenBodenButton;
 	}
 
 	/**

@@ -1,8 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
