@@ -161,6 +161,11 @@ public class SpielKontext
 		schreibeNL("");
 	}
 
+	public static boolean IsRaumZielRaum(Raum raum)
+	{
+		return raum.getNaechstesItem() == Item.Gegengift;
+	}
+	
 	/**
 	 * Arbeitet alle Ereignisse ab, die beim Betrete eines Raumes auftreten
 	 * können, wie z.B. das Finden und Essen von Items.
@@ -168,9 +173,12 @@ public class SpielKontext
 	private void raumBetreten()
 	{
 
+
 		aktualisiereRaumansicht();
 		
-		if(getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+
+		if(SpielKontext.IsRaumZielRaum(getAktuellerRaum()))
+
 		{
 			beendeSpiel(TextVerwalter.SIEGTEXT + "\n"
 					+ TextVerwalter.BEENDENTEXT);
