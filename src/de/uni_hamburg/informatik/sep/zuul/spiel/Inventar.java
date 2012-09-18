@@ -79,11 +79,11 @@ public class Inventar
 		{
 			switch (item)
 			{
-				case Kuchen:
-				case Giftkuchen:
-					return true;
-				default:
-					break;
+			case Kuchen:
+			case Giftkuchen:
+				return true;
+			default:
+				break;
 			}
 		}
 		return false;
@@ -101,12 +101,12 @@ public class Inventar
 		{
 			switch (item)
 			{
-				case Kuchen:
-				case Giftkuchen:
-					_inhalt.remove(item);
-					return item;
-				default:
-					break;
+			case Kuchen:
+			case Giftkuchen:
+				_inhalt.remove(item);
+				return item;
+			default:
+				break;
 			}
 		}
 		return null;

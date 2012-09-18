@@ -15,15 +15,15 @@ public class Programm
 		onconsole = args.length > 0 && args[0].equals("console");
 
 		final Spiel spiel = Spiel.getInstance();
-		
+
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
 				spiel.spielen();
-				
+
 			}
 		});
 

@@ -75,7 +75,6 @@ public abstract class Spiel implements ISchreiber
 		spielen();
 	}
 
-
 	/**
 	 * @param eingabezeile
 	 * @return geparster Befehl

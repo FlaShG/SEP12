@@ -11,13 +11,17 @@ public class RaumBauer
 		Raum labor = new Raum(
 				"Dr. Little befindet sich in seinem Privatlabor an der Universität.");
 		// 
-		Raum gang = new Raum("Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
+		Raum gang = new Raum(
+				"Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.");
 		// Kuuchen?
-		Raum mensa = new Raum("Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.");
+		Raum mensa = new Raum(
+				"Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.");
 		//
-		Raum herrentiolette = new Raum("Dr. Little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
+		Raum herrentiolette = new Raum(
+				"Dr. Little betritt die Herrentoilette. Er würde sich gerne die Hände waschen, das Waschbecken ist allerdings viel zu weit oben angebracht.");
 		// 
-		Raum westfluegel = new Raum("Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
+		Raum westfluegel = new Raum(
+				"Dr. Little schlendert durch den einsturzgefährdeten Westflügel, dessen morsche Dachbalken wie ein Damoklesschwert über ihm ächtzen.");
 		//
 		Raum terasse = new Raum(
 				"Dr. Little geht auf die Terrasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.");
@@ -31,14 +35,17 @@ public class RaumBauer
 		Raum vorlesungssaal = new Raum(
 				"Dr. Little stolpert in eine Vorlesung. Zum Glück sieht ihn keiner; er sollte sich trotzdem schnell aus dem Staub machen.");
 		//
-		Raum innenhof = new Raum("Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf.");
+		Raum innenhof = new Raum(
+				"Dr. Little betritt den Innenhof. Vor ihm erhebt sich ein großer Brunnen. Eine Windböe wirbelt das Laub auf.");
 		//
 		Raum sekretariatchemie = new Raum(
 				"Dr. Little betritt das Chemiesekretariat. Die Frau am Tresen wundert sich, dass sich die Tür öffnet, doch sie kann ihn über den hohen Tresen hinweg nicht sehen.");
 		//
-		Raum flurchemie = new Raum("Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
+		Raum flurchemie = new Raum(
+				"Dr. Little betritt den Chemieflur. Während er duch den Gang wandert, erschüttert eine Explosion in einem Nebenraum das Gebäude.");
 		//
-		Raum eingangchemie = new Raum("Dr. Little betritt das Chemiegebäude. Eine Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
+		Raum eingangchemie = new Raum(
+				"Dr. Little betritt das Chemiegebäude. Eine Ansammlung von kitteltragenden Wissenschaftlern begräbt ihn fast unter ihren Füßen.");
 		//
 		Raum flur = new Raum("Dr. Little betritt einen Flur.");
 		//
@@ -48,12 +55,14 @@ public class RaumBauer
 		Raum besenkammerhausmeister = new Raum(
 				"Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank steht leicht geöffnet; es ragen Besenstiele heraus, doch viel zu erkennen ist nicht.");
 		//
-		Raum bibliothek = new Raum("Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckender Anblick.");
+		Raum bibliothek = new Raum(
+				"Dr. Little betritt die Bibliothek. Ein Haufen Bücher und eine ermahnende Bibliothekarin sind angesichts seiner geringen Größe ein beeindruckender Anblick.");
 		//
 		Raum wohnung = new Raum(
 				"Dr. Little betritt seine Wohnung auf dem Campus. Er wohnt seit Jahren dort, da er ja eh ständig in seinem angrenzenden Labor beschäftigt ist.");
 		//
-		Raum konferenzraum = new Raum("Dr. Little betritt einen Konferenzraum. Einige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
+		Raum konferenzraum = new Raum(
+				"Dr. Little betritt einen Konferenzraum. Einige Geschäftsleute sind gerade dabei ihre Taschen zu packen. Die nächsten stehen bereits vor der Tür.");
 		// Even Bigger Labor Ende
 		Raum buerovondoktorevenbigger = new Raum(
 				"Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.");
@@ -72,16 +81,18 @@ public class RaumBauer
 		labor.setRaumart(RaumArt.Labor);
 
 		westfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, labor);
-		westfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, burerohausmeister);
+		westfluegel
+				.setAusgang(TextVerwalter.RICHTUNG_WESTEN, burerohausmeister);
 
-		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_NORDEN, besenkammerhausmeister);
+		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_NORDEN,
+				besenkammerhausmeister);
 		burerohausmeister.setAusgang(TextVerwalter.RICHTUNG_OSTEN, westfluegel);
 
-		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, burerohausmeister);
+		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN,
+				burerohausmeister);
 		besenkammerhausmeister.addItem(Item.Kuchen);
 		besenkammerhausmeister.addItem(Item.Giftkuchen);
 		besenkammerhausmeister.addItem(Item.Kuchen);
-		
 
 		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
 		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
@@ -129,7 +140,7 @@ public class RaumBauer
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
-		
+
 		buerovondoktorevenbigger.setAusgang(s, flurchemie);
 		buerovondoktorevenbigger.addItem(Item.Gegengift);
 
@@ -144,6 +155,7 @@ public class RaumBauer
 
 	/**
 	 * Gibt den Startraum zurück, von dem aus der Spieler startet.
+	 * 
 	 * @return Der Startraum
 	 */
 	public Raum getStartRaum()
@@ -151,4 +163,3 @@ public class RaumBauer
 		return _startRaum;
 	}
 }
-

@@ -1,7 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 /**
  * Informationen über einen vom Benutzer eingegebenen Befehl. Ein Befehl besteht
@@ -17,16 +16,18 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 public abstract class Befehl
 {
 	private String[] _parameters;
-	
+
 	/**
 	 * Setzt die Parameter, mit denen dieser Befehl ausgeführt werden soll
-	 * @param parameters die Parameter, mit denen dieser Befehl ausgeführt werden soll
+	 * 
+	 * @param parameters
+	 *            die Parameter, mit denen dieser Befehl ausgeführt werden soll
 	 */
 	void setParameter(String[] parameters)
 	{
 		_parameters = parameters;
 	}
-	
+
 	/**
 	 * Führt den Befehl aus.
 	 */
@@ -36,9 +37,10 @@ public abstract class Befehl
 	 * Gibt den Namen des Befehls zurück.
 	 */
 	public abstract String getBefehlsname();
-	
+
 	/**
 	 * Gibt alle Aliases zurück.
+	 * 
 	 * @return
 	 */
 	public String[] getAliases()
@@ -53,7 +55,7 @@ public abstract class Befehl
 	{
 		return _parameters;
 	}
-	
+
 	@Override
 	public Befehl clone()
 	{
@@ -71,27 +73,27 @@ public abstract class Befehl
 		{
 			e.printStackTrace();
 		}
-		
+
 		if(_parameters != null)
 			newBefehl._parameters = _parameters.clone();
-		
+
 		return newBefehl;
 	}
-	
-//	/**
-//	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
-//	 * zweites Wort gab.
-//	 */
-//	public String getZweitesWort()
-//	{
-//		return _zweitesWort;
-//	}
-//
-//	/**
-//	 * Liefert 'true', wenn dieser Befehl ein zweites Wort hat.
-//	 */
-//	public boolean hatZweitesWort()
-//	{
-//		return (_zweitesWort != null);
-//	}
+
+	//	/**
+	//	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
+	//	 * zweites Wort gab.
+	//	 */
+	//	public String getZweitesWort()
+	//	{
+	//		return _zweitesWort;
+	//	}
+	//
+	//	/**
+	//	 * Liefert 'true', wenn dieser Befehl ein zweites Wort hat.
+	//	 */
+	//	public boolean hatZweitesWort()
+	//	{
+	//		return (_zweitesWort != null);
+	//	}
 }

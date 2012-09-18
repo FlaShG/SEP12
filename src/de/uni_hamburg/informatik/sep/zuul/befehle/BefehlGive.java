@@ -7,7 +7,6 @@ import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlGive extends Befehl
@@ -29,10 +28,12 @@ final class BefehlGive extends Befehl
 
 			String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
 					.getRichtung();
-			
-			String[] moeglicheRichtungen = kontext.getAktuellerRaum().getMoeglicheAusgaenge();
 
-			String richtung = bestimmeRichtung(kuchen, richtigeRichtung, moeglicheRichtungen);
+			String[] moeglicheRichtungen = kontext.getAktuellerRaum()
+					.getMoeglicheAusgaenge();
+
+			String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
+					moeglicheRichtungen);
 
 			String richtungsangabe = String.format(
 					TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
@@ -43,24 +44,26 @@ final class BefehlGive extends Befehl
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
 			{
-				Spiel.getInstance().schreibeNL(TextVerwalter.LABOR_KEIN_KRUEMEL);
+				Spiel.getInstance()
+						.schreibeNL(TextVerwalter.LABOR_KEIN_KRUEMEL);
 				return;
 			}
-			
 
 			Item kuchen = kontext.getInventar().getAnyKuchen();
-			switch(kuchen)
+			switch (kuchen)
 			{
 			case Kuchen:
-				Spiel.getInstance().schreibeNL(TextVerwalter.LABOR_GESUNDER_KUCHEN);
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.LABOR_GESUNDER_KUCHEN);
 				break;
 			case Giftkuchen:
-				Spiel.getInstance().schreibe(TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+				Spiel.getInstance().schreibe(
+						TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 				break;
 			}
 			return;
 		}
-		
+
 		Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
 		return;
 	}
@@ -70,7 +73,8 @@ final class BefehlGive extends Befehl
 	 * @param richtigeRichtung
 	 * @return
 	 */
-	static String bestimmeRichtung(Item kuchen, String richtigeRichtung, String[] moeglicheRichtungen)
+	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
+			String[] moeglicheRichtungen)
 	{
 		if(kuchen == Item.Kuchen)
 		{
@@ -79,7 +83,7 @@ final class BefehlGive extends Befehl
 		if(kuchen == Item.Giftkuchen)
 		{
 			LinkedList<String> richtungen = new LinkedList<String>();
-			
+
 			for(String richtung : moeglicheRichtungen)
 				richtungen.add(richtung);
 
@@ -89,7 +93,7 @@ final class BefehlGive extends Befehl
 
 			return richtungen.get(randomInt);
 		}
-		
+
 		return null;
 	}
 

@@ -33,7 +33,8 @@ public class SpielKontext
 	{
 		int alteLebensEnergie = _lebensEnergie;
 		_lebensEnergie = lebensEnergie;
-		changes.firePropertyChange("LebensEnergie", alteLebensEnergie, lebensEnergie);
+		changes.firePropertyChange("LebensEnergie", alteLebensEnergie,
+				lebensEnergie);
 	}
 
 	public Inventar getInventar()
@@ -53,7 +54,8 @@ public class SpielKontext
 		changes.addPropertyChangeListener(l);
 	}
 
-	public void addPropertyChangeListener(String property, PropertyChangeListener l)
+	public void addPropertyChangeListener(String property,
+			PropertyChangeListener l)
 	{
 		changes.addPropertyChangeListener(property, l);
 	}
@@ -63,7 +65,8 @@ public class SpielKontext
 		changes.removePropertyChangeListener(l);
 	}
 
-	public void removePropertyChangeListener(String property, PropertyChangeListener l)
+	public void removePropertyChangeListener(String property,
+			PropertyChangeListener l)
 	{
 		changes.removePropertyChangeListener(property, l);
 	}
@@ -77,7 +80,8 @@ public class SpielKontext
 	}
 
 	/**
-	 * @param spielZuende the spielZuende to set
+	 * @param spielZuende
+	 *            the spielZuende to set
 	 */
 	public void spielZuende()
 	{

@@ -1,8 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
@@ -18,49 +18,59 @@ public class SpielLogik
 		kontext.setLebensEnergie(START_ENERGIE);
 		kontext.setInventar(new Inventar());
 		legeRaeumeAn(kontext);
-		
-		kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
-		{
-			@Override
-			public void propertyChange(PropertyChangeEvent evt)
-			{				
-				zeigeRaumbeschreibung(kontext);
-				
-				if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+
+		kontext.addPropertyChangeListener("AktuellerRaum",
+				new PropertyChangeListener()
 				{
-					beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n" + TextVerwalter.BEENDENTEXT);
-					return;
-				}
-				
-				kontext.setLebensEnergie(kontext.getLebensEnergie() - RAUMWECHSEL_ENERGIE_KOSTEN);
-				Spiel.getInstance().schreibeNL(TextVerwalter.RAUMWECHSELTEXT + kontext.getLebensEnergie());	
-				
-				switch(kontext.getAktuellerRaum().getNaechstesItem())
-				{
-					case Kuchen: case Giftkuchen:
-						Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
-					break;
-				}
-				
-				// Maus
-				if(kontext.getAktuellerRaum().hasMaus())
-				{
-					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
-					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_FRAGE);
-				}
-				
-				if(!kontext.isSpielZuende() && kontext.getLebensEnergie() <= 0)
-				{
-					beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
-				}
-				
-				if(!kontext.isSpielZuende())
-				{
-					zeigeAusgaenge(kontext);
-				}
-				
-			}
-		});
+					@Override
+					public void propertyChange(PropertyChangeEvent evt)
+					{
+						zeigeRaumbeschreibung(kontext);
+
+						if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+						{
+							beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n"
+									+ TextVerwalter.BEENDENTEXT);
+							return;
+						}
+
+						kontext.setLebensEnergie(kontext.getLebensEnergie()
+								- RAUMWECHSEL_ENERGIE_KOSTEN);
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.RAUMWECHSELTEXT
+										+ kontext.getLebensEnergie());
+
+						switch (kontext.getAktuellerRaum().getNaechstesItem())
+						{
+						case Kuchen:
+						case Giftkuchen:
+							Spiel.getInstance().schreibeNL(
+									TextVerwalter.KUCHENIMRAUMTEXT);
+							break;
+						}
+
+						// Maus
+						if(kontext.getAktuellerRaum().hasMaus())
+						{
+							Spiel.getInstance().schreibeNL(
+									TextVerwalter.MAUS_GEFUNDEN);
+							Spiel.getInstance().schreibeNL(
+									TextVerwalter.MAUS_FRAGE);
+						}
+
+						if(!kontext.isSpielZuende()
+								&& kontext.getLebensEnergie() <= 0)
+						{
+							beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
+						}
+
+						if(!kontext.isSpielZuende())
+						{
+							zeigeAusgaenge(kontext);
+						}
+
+					}
+				});
 		return kontext;
 	}
 
@@ -72,8 +82,6 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer();
 		kontext.setAktuellerRaum(raumbauer.getStartRaum());
 	}
-	
-	
 
 	/**
 	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
@@ -81,7 +89,8 @@ public class SpielLogik
 	 */
 	public static void zeigeRaumbeschreibung(SpielKontext kontext)
 	{
-		Spiel.getInstance().schreibeNL(kontext.getAktuellerRaum().getBeschreibung());
+		Spiel.getInstance().schreibeNL(
+				kontext.getAktuellerRaum().getBeschreibung());
 	}
 
 	/**

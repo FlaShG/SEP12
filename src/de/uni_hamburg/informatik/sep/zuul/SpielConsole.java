@@ -27,7 +27,7 @@ public class SpielConsole extends Spiel
 	protected void spielen()
 	{
 		_kontext = SpielLogik.erstelleKontext();
-		
+
 		zeigeWillkommenstext(_kontext);
 
 		while(!_kontext.isSpielZuende())
@@ -39,7 +39,7 @@ public class SpielConsole extends Spiel
 			befehl.ausfuehren(_kontext);
 
 		}
-		
+
 		System.out
 				.println("Wollen Sie noch einmal spielen? Dann antworten Sie mit 'Ja'");
 		String zeile = leseZeileEin();
@@ -55,7 +55,8 @@ public class SpielConsole extends Spiel
 			Runtime.getRuntime().exec("cls");
 		}
 		catch(IOException e)
-		{}
+		{
+		}
 
 		spielen();
 	}

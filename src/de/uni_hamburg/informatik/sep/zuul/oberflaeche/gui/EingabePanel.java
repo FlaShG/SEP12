@@ -38,7 +38,8 @@ public class EingabePanel extends JPanel
 		_eingabeZeile = new JTextField();
 		setBreite(breite);
 
-		_enterButton = new JButton(StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
+		_enterButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
 		_enterButton.setSize(BUTTONGROESSE);
 		_enterButton.setPreferredSize(BUTTONGROESSE);
 		_enterButton.setFocusable(false);
@@ -71,13 +72,14 @@ public class EingabePanel extends JPanel
 		add(_eingabeZeile);
 		add(_enterButton);
 	}
-	
+
 	/**
 	 * Setzt die Breite des Inhalts
 	 */
 	public void setBreite(int breite)
 	{
-		Dimension eingabeZeileGroesse = new Dimension((int) (breite - BUTTONGROESSE.getWidth() - 30), 28);
+		Dimension eingabeZeileGroesse = new Dimension((int) (breite
+				- BUTTONGROESSE.getWidth() - 30), 28);
 		_eingabeZeile.setSize(eingabeZeileGroesse);
 		_eingabeZeile.setPreferredSize(eingabeZeileGroesse);
 	}

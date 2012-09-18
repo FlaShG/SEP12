@@ -8,7 +8,7 @@ public class Maus
 	public Maus(String richtung)
 	{
 		_richtung = richtung;
-		
+
 	}
 
 	/**

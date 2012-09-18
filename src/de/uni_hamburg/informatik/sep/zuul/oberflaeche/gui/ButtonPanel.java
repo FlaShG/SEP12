@@ -93,7 +93,6 @@ public class ButtonPanel extends JPanel
 		_essenAusTascheButton.setMinimumSize(PREFERRED);
 		_essenAusTascheButton.setFocusable(false);
 
-		
 		_essenBodenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_BODEN));
@@ -225,7 +224,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _essenAusTascheButton;
 	}
-	
+
 	/**
 	 * 
 	 * @return den _essenBodenButton

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public final class BefehlFactory
@@ -30,8 +29,9 @@ public final class BefehlFactory
 	static
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
-				new BefehlTake(), new BefehlEat(), 
-				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGive() };
+				new BefehlTake(), new BefehlEat(), new BefehlQuit(),
+				new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(),
+				new BefehlGive() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
@@ -46,8 +46,11 @@ public final class BefehlFactory
 
 	/**
 	 * Gibt ein Befehlsobjeckt anhand des Befehlsnamens zurück
-	 * @param befehlsname Der Name des gewünschten Befehls
-	 * @param parameter Die Parameter, mit denen der Befehl ausgeführt werden soll
+	 * 
+	 * @param befehlsname
+	 *            Der Name des gewünschten Befehls
+	 * @param parameter
+	 *            Die Parameter, mit denen der Befehl ausgeführt werden soll
 	 * @return Das Befehlsobjekt
 	 */
 	public static Befehl get(String befehlsname, String[] parameter)
@@ -57,7 +60,7 @@ public final class BefehlFactory
 		{
 			befehl = unbekannnterBefehl;
 		}
-		
+
 		befehl = befehl.clone();
 		befehl.setParameter(parameter);
 
