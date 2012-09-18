@@ -26,6 +26,8 @@ public class RaumBauer
 	 */
 	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
 	{
+		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
+		
 		for(Raum raum : verbindungen.keySet())
 		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
@@ -41,7 +43,17 @@ public class RaumBauer
 			{
 				_startRaum = raum;
 			}
+			if(raum.getRaumart() != RaumArt.Ende && raum.getRaumart() != RaumArt.Start && raum.getRaumart() != RaumArt.Labor)
+				kannMausEnthaltenRaum.add(raum);
 		}
+		
+
+		// Maus
+		
+		
+		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
+		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+		mausRaum.setMaus(new Maus(mausRaum));
 	}
 
 	private void initialisiereRaeumeHart()
@@ -241,19 +253,6 @@ public class RaumBauer
 		parser.schreibeXml();
 
 		_startRaum = labor;
-
-		
-		
-//		// Maus
-//		
-//		ArrayList<Raum> mausRaeume = new ArrayList<>();
-//		mausRaeume.add(ostfluegel);
-//		mausRaeume.add(mensa);
-//		mausRaeume.add(herrentiolette);
-//		
-//		int randomInt = new Random().nextInt(mausRaeume.size());
-//		Raum mausRaum = mausRaeume.get(randomInt);
-//		mausRaum.setMaus(new Maus(mausRaum));
 	}
 
 	/**
