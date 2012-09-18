@@ -32,7 +32,16 @@ public class TextVerwalter
 	{
 		return "Dr. Little vernascht genüsslich einen Kuchenkrümel aus seiner Tasche. Er fühlt sich belebt und kann nun wieder "+energie+" weitere Räume bechreiten.";
 	}
+	public static final String kuchenVomBodenGegessenText(int energie)
+	{
+		return "Dr. Little vernascht genüsslich einen Kuchenkrümel vom Boden des Raumes. Er fühlt sich belebt und kann nun wieder "+energie+" weitere Räume bechreiten.";
+	}
+	
 	public static final String giftkuchengegessentext(int energie)
+	{
+		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "+energie+" Räume betreten können wird.";
+	}
+	public static String giftkuchenVomBodenGegessenText(int energie)
 	{
 		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "+energie+" Räume betreten können wird.";
 	}
@@ -45,11 +54,13 @@ public class TextVerwalter
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft." +
 			"\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
 	public static final String NICHTSZUMESSENTEXT = "Dr. Little sucht in seiner Tasche vergeblich nach einem Kuchenkrümel.";
+	public static final String NICHTSZUMESSENTEXTBODEN = "Dr.Little sucht vergeblich nach einem Kuchenkrümel in diesem Raum, leider kann er aber keinen finden.";
 	public static final String FALSCHEEINGABE = "Ich weiß nicht, was Sie meinen...";
 	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nEine fiese Chemikalie im Krümel zerstört die letzen Reste seines angegriffenen Organsystems.";
 	
 	public static final String KEINERICHTUNG = "Wohin möchten Sie gehen?";
 	public static final String KEINETUER = "Dort ist keine Tür. Wählen Sie eine andere Richtung.";
+	public static final String KEINORT = "Woraus möchten sie essen?";
 	public static final String AUSGAENGE = "Ausgänge";
 	
 	public static final String BEFEHL_GEHEN = "gehe";
@@ -67,11 +78,18 @@ public class TextVerwalter
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
 	
+	public static final String ORT_BODEN = "boden";
+	public static final String ORT_TASCHE = "tasche";
+	
 	public static final String MAUS_GEFUNDEN = "Eine kleine, pelzige Maus schaut hinter der Ecke hervor. Sie schaut hungrig auf Dr. Littles Tasche.";
 	public static final String MAUS_FRAGE = "Möchten Sie der Maus einen Krümel geben, damit sie Dr. Little den Weg weist?";
 	public static final String MAUS_RICHTUNGSANGABE = "Maus: \"Ich vermute, dass %s die richtige Richtung ist.\"";
 	public static final String MAUS_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er abgeben könnte...";
 	public static final String MAUS_KEINE_MAUS = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
+
+
+
+	
 
 
 }
