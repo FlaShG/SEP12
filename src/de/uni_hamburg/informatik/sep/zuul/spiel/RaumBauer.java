@@ -56,7 +56,7 @@ public class RaumBauer
 		mausRaum.setMaus(new Maus(mausRaum));
 	}
 
-	private void initialisiereRaeumeHart()
+	static Raum initialisiereRaeumeHart()
 	{
 		// die Räume erzeugen
 		// 
@@ -252,7 +252,7 @@ public class RaumBauer
 		}
 		parser.schreibeXml();
 
-		_startRaum = labor;
+		return labor;
 	}
 
 	/**
