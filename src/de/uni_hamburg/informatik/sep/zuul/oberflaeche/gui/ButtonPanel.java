@@ -3,11 +3,9 @@ package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -37,7 +35,7 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
-	private JButton _ladenBefehl;
+	private JButton _ladenButton;
 	private ImageIcon _raumIcon;
 	
 
@@ -110,10 +108,10 @@ public class ButtonPanel extends JPanel
 		_nehmenButton.setMinimumSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
 
-		_ladenBefehl = new JButton(
+		_ladenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
-		_ladenBefehl.setMinimumSize(PREFERRED);
-		_ladenBefehl.setFocusable(false);
+		_ladenButton.setMinimumSize(PREFERRED);
+		_ladenButton.setFocusable(false);
 
 		//Raumanzeige initialisieren
 		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
@@ -171,16 +169,33 @@ public class ButtonPanel extends JPanel
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridx = 3;
-
-		befehlsPanel.add(_gibButton, befehlsPanel);
-		befehlsPanel.add(_nehmenButton, befehlsPanel);
-		befehlsPanel.add(_essenAusTascheButton, befehlsPanel);
-		befehlsPanel.add(_essenBodenButton, befehlsPanel);
-		befehlsPanel.add(_ladenBefehl, befehlsPanel);
-		befehlsPanel.add(_helpButton, befehlsPanel);
-		befehlsPanel.add(_quitButton, befehlsPanel);
-		befehlsPanel.add(_ladenBefehl);
+		befehlsPanel.add(_gibButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 1;
+		befehlsPanel.add(_nehmenButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		befehlsPanel.add(_essenAusTascheButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 3;
+		befehlsPanel.add(_essenBodenButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 4;
+		befehlsPanel.add(_helpButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 5;
+		befehlsPanel.add(_quitButton, c);
+		
+		c.gridx = 0;
+		c.gridy = 6;
+		befehlsPanel.add(_ladenButton, c);
+		
+		
 
 	}
 
@@ -266,6 +281,15 @@ public class ButtonPanel extends JPanel
 	{
 		return _nehmenButton;
 	}
+
+	/**
+	 * @return den _ladenButton
+	 */
+	public JButton getLadenButton()
+	{
+		return _ladenButton;
+	}
+	
 	
 	/**
 	 * aktualisiert die Raumanzeige auf den nächsten Raum
