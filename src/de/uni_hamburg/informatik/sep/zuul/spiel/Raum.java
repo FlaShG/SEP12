@@ -17,14 +17,14 @@ import javax.xml.bind.annotation.XmlType;
  * Standardmäßig sind die Räume leer.
  */
 @XmlRootElement(name = "raum")
-@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart" })
+@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart", "_items" })
 public class Raum
 {
 	private @XmlElement(name = "beschreibung")
 	String _beschreibung;
 	private @XmlTransient
 	Map<String, Raum> _ausgaenge;
-	private @XmlTransient
+	private @XmlElement(name = "item")
 	Stack<Item> _items;
 	private @XmlTransient
 	Maus _maus;
@@ -41,7 +41,7 @@ public class Raum
 	private Raum()
 	{	
 		_ausgaenge = new HashMap<String, Raum>();
-		_items = new Stack<Item>();
+		setItems(new Stack<Item>());
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class Raum
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_items = new Stack<Item>();
+		setItems(new Stack<Item>());
 
 		_name = name;
 
@@ -146,9 +146,9 @@ public class Raum
 	{
 		assert item != Item.Keins : "Vorbedingung verletzt: item != Item.Keins";
 
-		_items.push(item);
+		getItems().push(item);
 
-		Collections.shuffle(_items);
+		Collections.shuffle(getItems());
 	}
 
 	/**
@@ -156,8 +156,8 @@ public class Raum
 	 */
 	public void loescheItem()
 	{
-		if(!_items.empty())
-			_items.pop();
+		if(!getItems().empty())
+			getItems().pop();
 	}
 
 	/**
@@ -179,11 +179,11 @@ public class Raum
 	 */
 	public Item getNaechstesItem()
 	{
-		if(_items.empty())
+		if(getItems().empty())
 		{
 			return Item.Keins;
 		}
-		return _items.peek();
+		return getItems().peek();
 	}
 
 	public boolean hasMaus()
@@ -240,6 +240,16 @@ public class Raum
 	private void setName(String name)
 	{
 		_name = name;
+	}
+
+	private Stack<Item> getItems()
+	{
+		return _items;
+	}
+
+	private void setItems(Stack<Item> items)
+	{
+		_items = items;
 	}
 
 }
