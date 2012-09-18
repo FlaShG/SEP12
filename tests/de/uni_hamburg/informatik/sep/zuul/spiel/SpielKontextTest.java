@@ -10,7 +10,7 @@ import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
 
 public class SpielKontextTest
 {
-	SpielKontext testKontext = new SpielKontext(new ISchreiber()
+	SpielLogik testKontext = new SpielLogik(new ISchreiber()
 	{
 
 		@Override

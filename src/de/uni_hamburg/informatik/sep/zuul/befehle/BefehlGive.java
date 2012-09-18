@@ -5,14 +5,14 @@ import java.util.Random;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlGive extends Befehl
 {
 
 	@Override
-	public void ausfuehren(SpielKontext kontext)
+	public void ausfuehren(SpielLogik kontext)
 	{
 
 		if(kontext.getAktuellerRaum().hasMaus())

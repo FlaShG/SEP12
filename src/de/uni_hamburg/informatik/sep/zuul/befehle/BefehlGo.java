@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlGo extends Befehl
@@ -13,7 +13,7 @@ final class BefehlGo extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielKontext kontext)
+	public void ausfuehren(SpielLogik kontext)
 	{
 		if(getParameters().length == 0)
 		{

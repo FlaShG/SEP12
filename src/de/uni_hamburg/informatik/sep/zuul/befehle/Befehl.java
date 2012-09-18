@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 /**
  * Informationen über einen vom Benutzer eingegebenen Befehl. Ein Befehl besteht
@@ -29,7 +29,7 @@ public abstract class Befehl
 	/**
 	 * Führt den Befehl aus.
 	 */
-	public abstract void ausfuehren(SpielKontext kontext);
+	public abstract void ausfuehren(SpielLogik kontext);
 
 	/**
 	 * Gibt den Namen des Befehls zurück.

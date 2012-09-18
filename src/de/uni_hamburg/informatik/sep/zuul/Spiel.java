@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 /**
@@ -23,7 +23,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 public abstract class Spiel implements ISchreiber
 {
 	protected Parser _parser;
-	protected SpielKontext _kontext;
+	protected SpielLogik _kontext;
 
 	/**
 	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
@@ -46,7 +46,7 @@ public abstract class Spiel implements ISchreiber
 	 */
 	protected void spielen()
 	{
-		_kontext = new SpielKontext(this);
+		_kontext = new SpielLogik(this);
 		
 		zeigeWillkommenstext();
 	}

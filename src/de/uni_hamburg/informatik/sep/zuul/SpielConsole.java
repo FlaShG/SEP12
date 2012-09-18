@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 public class SpielConsole extends Spiel
 {
@@ -26,7 +26,7 @@ public class SpielConsole extends Spiel
 	@Override
 	protected void spielen()
 	{
-		_kontext = new SpielKontext(this);
+		_kontext = new SpielLogik(this);
 		
 		zeigeWillkommenstext();
 

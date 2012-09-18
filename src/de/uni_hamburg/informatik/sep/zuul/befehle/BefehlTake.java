@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlTake extends Befehl
@@ -14,8 +15,9 @@ final class BefehlTake extends Befehl
 	}
 
 	@Override
-	public void ausfuehren(SpielKontext kontext)
+	public void ausfuehren(SpielLogik logik)
 	{
+		SpielKontext kontext = logik.getKontext();
 		Raum raum = kontext.getAktuellerRaum();
 
 		switch(raum.getNaechstesItem())
