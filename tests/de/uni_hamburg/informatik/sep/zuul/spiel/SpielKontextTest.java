@@ -47,7 +47,7 @@ public class SpielKontextTest
 	@Test
 	public void testGetAktuellerRaum()
 	{
-		Raum testraum = new Raum("testRaum");
+		Raum testraum = new Raum("tr", "testRaum");
 		testKontext.setAktuellerRaum(testraum);
 
 		assertEquals(testraum, testKontext.getAktuellerRaum());
@@ -56,7 +56,7 @@ public class SpielKontextTest
 	@Test
 	public void testSetAktuellerRaum()
 	{
-		Raum testraum = new Raum("testRaum");
+		Raum testraum = new Raum("tr", "testRaum");
 		testKontext.setAktuellerRaum(testraum);
 
 		assertEquals(testraum, testKontext.getAktuellerRaum());

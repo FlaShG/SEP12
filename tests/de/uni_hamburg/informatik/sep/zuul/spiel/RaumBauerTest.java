@@ -25,8 +25,7 @@ public class RaumBauerTest
 		String e = TextVerwalter.RICHTUNG_OSTEN;
 		String w = TextVerwalter.RICHTUNG_WESTEN;
 
-		RaumBauer bauer = new RaumBauer();
-		Raum labor = bauer.getStartRaum();
+		Raum labor = RaumBauer.initialisiereRaeumeHart();
 
 		assertNotNull(labor);
 
