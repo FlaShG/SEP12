@@ -37,7 +37,7 @@ final class BefehlGive extends Befehl
 			kontext.schreibeNL(richtungsangabe);
 			return;
 		}
-		if(kontext.getAktuellerRaum().getRaumart() == RaumArt.Labor)
+		if(kontext.getAktuellerRaum().getRaumart() == RaumArt.Start)
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
 			{
@@ -56,6 +56,7 @@ final class BefehlGive extends Befehl
 				kontext.schreibe(TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 				break;
 			}
+			kontext.getInventar().fuegeItemHinzu(kuchen);
 			return;
 		}
 		
