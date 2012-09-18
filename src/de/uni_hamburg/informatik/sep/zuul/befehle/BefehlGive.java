@@ -53,7 +53,7 @@ final class BefehlGive extends Befehl
 				kontext.schreibeNL(TextVerwalter.LABOR_GESUNDER_KUCHEN);
 				break;
 			case Giftkuchen:
-				kontext.schreibe(TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+				kontext.schreibeNL(TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 				break;
 			}
 			kontext.getInventar().fuegeItemHinzu(kuchen);
