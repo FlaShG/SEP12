@@ -16,6 +16,8 @@ public class SpielKontext
 	{
 		return _aktuellerRaum;
 	}
+	
+	// TODO: addTickListener() 
 
 	public void setAktuellerRaum(Raum aktuellerRaum)
 	{
