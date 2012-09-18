@@ -23,7 +23,7 @@ public class BefehlGoTest
 	@Test
 	public void testAusfuehren()
 	{
-		befehlGo.ausfuehren(new SpielKontext(new StubSchreiber()));
+		befehlGo.ausfuehren(new SpielKontext());
 	}
 
 	@Test

@@ -22,7 +22,7 @@ public class BefehlHelpTest
 	@Test
 	public void testAusfuehren()
 	{
-		befehlHelp.ausfuehren(new SpielKontext(new StubSchreiber()));
+		befehlHelp.ausfuehren(new SpielKontext());
 	}
 
 	@Test

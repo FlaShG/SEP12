@@ -79,8 +79,14 @@ public class SpielLogik
 	 */
 	private static void legeRaeumeAn(SpielKontext kontext)
 	{
-		RaumBauer raumbauer = new RaumBauer();
-		kontext.setAktuellerRaum(raumbauer.getStartRaum());
+		IOManager manager = new IOManager();
+		manager.readLevel("./xml_dateien/testStruktur.xml");
+		//TODO: noch statisch - datei mit filechooser auswählen!!
+
+		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
+		manager.getRaeume());
+		RaumBauer raumbauer = new RaumBauer(struktur);
+		kontext.setAktuellerRaum(raumbauer.getStartRaum());	
 	}
 
 	/**
@@ -118,5 +124,10 @@ public class SpielLogik
 	{
 		kontext.spielZuende();
 		Spiel.getInstance().schreibeNL(nachricht);
+	}
+
+	public static boolean isRaumZielRaum(Raum raum)
+	{
+		return raum.getRaumart() == RaumArt.Ende;
 	}
 }

@@ -10,21 +10,7 @@ import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
 
 public class SpielKontextTest
 {
-	SpielLogik testKontext = new SpielLogik(new ISchreiber()
-	{
-
-		@Override
-		public void schreibeNL(String nachricht)
-		{
-			//Dummy for TestCase
-		}
-
-		@Override
-		public void schreibe(String nachricht)
-		{
-			//Dummy for TestCase
-		}
-	});
+	SpielKontext testKontext = new SpielKontext();
 
 	@Test
 	public void testSpielKontext()
@@ -67,7 +53,7 @@ public class SpielKontextTest
 	public void testIsSpielZuende()
 	{
 		assertFalse(testKontext.isSpielZuende());
-		testKontext.beendeSpiel("vorbei!!!");
+		testKontext.spielZuende();
 		assertTrue(testKontext.isSpielZuende());
 	}
 
@@ -75,7 +61,7 @@ public class SpielKontextTest
 	public void testBeendeSpiel()
 	{
 		assertFalse(testKontext.isSpielZuende());
-		testKontext.beendeSpiel("vorbei!!!");
+		testKontext.spielZuende();
 		assertTrue(testKontext.isSpielZuende());
 	}
 

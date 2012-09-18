@@ -26,7 +26,7 @@ public class BefehlTakeTest
 	@Test
 	public void testAusfuehren()
 	{
-		SpielKontext kontext = new SpielKontext(new StubSchreiber());
+		SpielKontext kontext = new SpielKontext();
 		kontext.setAktuellerRaum(new Raum("",""));
 		
 

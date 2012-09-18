@@ -25,11 +25,11 @@ public class BefehlEatTest
 	public void testAusfuehren()
 	{
 		befehlEat.setParameter(new String[] {"tasche"});
-		befehlEat.ausfuehren(new SpielKontext(new StubSchreiber()));
+		befehlEat.ausfuehren(new SpielKontext());
 		
 
 		befehlEat.setParameter(new String[] {TextVerwalter.ORT_BODEN});
-		befehlEat.ausfuehren(new SpielKontext(new StubSchreiber()));
+		befehlEat.ausfuehren(new SpielKontext());
 	}
 
 	@Test

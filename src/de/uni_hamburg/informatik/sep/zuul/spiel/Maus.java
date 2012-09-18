@@ -43,7 +43,7 @@ public class Maus
 		}
 		begangeneRaeume.add(start);
 		
-		if(SpielKontext.IsRaumZielRaum(start))
+		if(SpielLogik.isRaumZielRaum(start))
 		{
 			return begangeneRaeume;
 		}
