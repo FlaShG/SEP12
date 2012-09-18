@@ -8,7 +8,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public class BefehlGive extends Befehl
+final class BefehlGive extends Befehl
 {
 
 	@Override

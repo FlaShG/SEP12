@@ -6,7 +6,7 @@ import java.util.Map;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public class BefehlFactory
+public final class BefehlFactory
 {
 	static final Map<String, Befehl> _map;
 	static final Befehl unbekannnterBefehl = new Befehl()
