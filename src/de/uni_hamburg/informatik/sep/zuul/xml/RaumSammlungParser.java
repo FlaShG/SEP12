@@ -17,7 +17,6 @@ public class RaumSammlungParser
 	
 	public RaumSammlungParser()
 	{
-		_root = new RaumSammlung();
 		leseXmlEin();
 		
 	}

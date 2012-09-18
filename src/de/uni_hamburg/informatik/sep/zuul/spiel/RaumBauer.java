@@ -12,12 +12,14 @@ public class RaumBauer
 	public RaumBauer()
 	{
 		_sammlungParser = new RaumSammlungParser();
+		initialisiereRaeume();
 	}
 	
 	private void initialisiereRaeume()
 	{
 		List<Raum> raeume = _sammlungParser.getSammlung();
 		// TODO setze Ausgänge etc.
+		_startRaum = raeume.get(0);
 	}
 
 	private void initialisiereRaeumeHart()

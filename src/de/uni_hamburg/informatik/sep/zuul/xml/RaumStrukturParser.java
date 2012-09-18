@@ -6,7 +6,7 @@ public class RaumStrukturParser
 {
 	
 	private final String XMLPATH = "/xml_dateien/RaumSammlung.xml";
-//	private RaumSammlung _root;
+	private XmlStruktur _root;
 	
 	
 	public RaumStrukturParser()
