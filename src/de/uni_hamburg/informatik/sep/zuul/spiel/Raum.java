@@ -28,6 +28,9 @@ public class Raum
 	private @XmlElement(name = "id") int _id; 
 	private @XmlElement(name = "name") String _name;
 	
+	/**
+	 * Nur für JAXB
+	 */
 	public Raum()
 	{	/* für JAXB */	}
 	
@@ -40,16 +43,6 @@ public class Raum
 	 * 
 	 * @require beschreibung != null
 	 */
-	public Raum(String beschreibung)
-	{
-		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
-
-		this._beschreibung = beschreibung;
-		this._ausgaenge = new HashMap<String, Raum>();
-
-		_items = new Stack<Item>();
-	}
-	
 	public Raum(String name, String beschreibung)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
@@ -186,6 +179,7 @@ public class Raum
 	 * @return the _maus
 	 * @require hasMaus()
 	 */
+	@XmlTransient
 	public Maus getMaus()
 	{
 		assert hasMaus();
