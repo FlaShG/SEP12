@@ -38,10 +38,12 @@ public class Raum
 	/**
 	 * Nur für JAXB
 	 */
-	public Raum()
-	{ /* für JAXB */
+	private Raum()
+	{	
+		_ausgaenge = new HashMap<String, Raum>();
+		_items = new Stack<Item>();
 	}
-
+	
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -49,11 +51,13 @@ public class Raum
 	 * @param beschreibung
 	 *            die Beschreibung des Raums.
 	 * 
+	 * @require name != null
 	 * @require beschreibung != null
 	 */
 	public Raum(String name, String beschreibung)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
+		assert name != null : "Vorbedingung verletzt: name != null";
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
