@@ -10,8 +10,10 @@ public class MausTest
 	@Test
 	public void testGetRichtung()
 	{
-		Maus maus = new Maus(TextVerwalter.RICHTUNG_NORDEN);
-		assertEquals(TextVerwalter.RICHTUNG_NORDEN, maus.getRichtung());
+		RaumBauer bauer = new RaumBauer();
+		
+		Maus maus = new Maus(bauer.getStartRaum());
+		assertEquals(TextVerwalter.RICHTUNG_SUEDEN, maus.getRichtung());
 
 	}
 
