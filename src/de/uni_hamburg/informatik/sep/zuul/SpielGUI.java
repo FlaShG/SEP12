@@ -134,4 +134,9 @@ public class SpielGUI extends Spiel
 		_bp.getHelpButton().setEnabled(false);
 		_bp.getQuitButton().setEnabled(false);
 	}
+	
+	public void schliesseFenster()
+	{
+		_hf.hide();
+	}
 }
