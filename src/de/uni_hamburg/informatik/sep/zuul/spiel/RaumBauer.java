@@ -90,7 +90,7 @@ public class RaumBauer
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_WESTEN, gang);
-		ostfluegel.setMaus(new Maus(s));
+		ostfluegel.setMaus(new Maus(ostfluegel));
 
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_NORDEN, terasse);
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
