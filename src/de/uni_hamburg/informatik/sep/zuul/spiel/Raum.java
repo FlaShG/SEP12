@@ -126,6 +126,14 @@ public class Raum
 	}
 
 	/**
+	 * Setzt die Beschreibung des Raumes
+	 */
+	public void setBescheibung(String beschreibung)
+	{
+		_beschreibung = beschreibung;
+	}
+	
+	/**
 	 * Liefert die Beschreibung dieses Raums (die dem Konstruktor übergeben
 	 * wurde).
 	 * 

@@ -1,14 +1,25 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class EditorFensterUI
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+
+public class EditorFensterUI implements Observer
 {
 	private JFrame _frame;
 	
-	
+	private EditorMenuBar _menubar;
+	private EditorMap _map;
+	private JButton _raumhinzu;
+	private RaumBearbeitenPanel _bearbeiten;
 	
 	public EditorFensterUI()
 	{
@@ -17,14 +28,72 @@ public class EditorFensterUI
 		_frame.getContentPane().setLayout(new BorderLayout());
 		
 		
-		_frame.add(new EditorMenuBar(), BorderLayout.NORTH);
-		_frame.add(new EditorMap(8, 8), BorderLayout.CENTER);
-		_frame.add(new RaumBearbeitenPanel(), BorderLayout.SOUTH);
+		_frame.add(_menubar = new EditorMenuBar(), BorderLayout.NORTH);
+		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
+		_map.setBeobachter(this);
 		
-		_frame.pack();
-		_frame.setMinimumSize(_frame.getSize());
-		_frame.setSize(_frame.getSize().width, _frame.getSize().width);
+		raumhinzuButtonAnlegen();
+		
+		//fancy größenwahn
+		//_frame.pack();
+		//_frame.setMinimumSize(_frame.getSize());
+		//_frame.setSize(_frame.getSize().width, _frame.getSize().width);
+		_frame.setMinimumSize(new Dimension(900, 600));
+		
+		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_frame.setVisible(true);
+	}
+	
+	private void raumhinzuButtonAnlegen()
+	{
+		_raumhinzu = new JButton("Raum anlegen");
+		_raumhinzu.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_map.fuegeRaumZuAktivemButtonHinzu();
+				if(_map.getAktivenRaum() != null)
+				{
+					update(null, null);
+				}
+			}
+		});
+	}
+	
+	public EditorMenuBar getMenuBar()
+	{
+		return _menubar;
+	}
+	
+	public EditorMap getMap()
+	{
+		return _map;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1)
+	{
+		//DONT USE ARGS!!!
+		
+		_frame.remove(_raumhinzu);
+		if(_bearbeiten != null)
+			_frame.remove(_bearbeiten);
+		_frame.setVisible(true);
+		
+		if(_map.buttonAusgewaehlt())
+		{
+			Raum raum = _map.getAktivenRaum();
+			if(raum == null)
+			{
+				_frame.add(_raumhinzu, BorderLayout.SOUTH);
+			}
+			else
+			{
+				_frame.add(_bearbeiten = new RaumBearbeitenPanel(raum), BorderLayout.SOUTH);
+			}
+		}
 		_frame.setVisible(true);
 	}
 }
