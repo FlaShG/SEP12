@@ -43,7 +43,7 @@ public class RaumBauer
 			{
 				_startRaum = raum;
 			}
-			if(raum.getRaumart() != RaumArt.Ende && raum.getRaumart() != RaumArt.Start && raum.getRaumart() != RaumArt.Labor)
+			if(raum.getRaumart() != RaumArt.Ende && raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
 		}
 		
@@ -148,7 +148,7 @@ public class RaumBauer
 		labor.setAusgang(TextVerwalter.RICHTUNG_OSTEN, gang);
 		labor.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, wohnung);
 		labor.setAusgang(TextVerwalter.RICHTUNG_WESTEN, westfluegel);
-		labor.setRaumart(RaumArt.Labor);
+		labor.setRaumart(RaumArt.Start);
 
 		westfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, labor);
 		westfluegel
