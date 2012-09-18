@@ -92,8 +92,10 @@ public class SpielGUI extends Spiel
 
 		_bp.getHelpButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
 
-		_bp.getEssenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN));
-
+		_bp.getEssenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN + " " +TextVerwalter.ORT_TASCHE));
+		
+		_bp.getEssenBodenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN + " " +TextVerwalter.ORT_BODEN));
+		
 		_bp.getNehmenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_NEHMEN));
 
 		_bp.getGibButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
@@ -127,6 +129,7 @@ public class SpielGUI extends Spiel
 		_bp.getEastButton().setEnabled(false);
 		_bp.getGibButton().setEnabled(false);
 		_bp.getEssenButton().setEnabled(false);
+		_bp.getEssenBodenButton().setEnabled(false);
 		_bp.getNehmenButton().setEnabled(false);
 		_bp.getHelpButton().setEnabled(false);
 		_bp.getQuitButton().setEnabled(false);

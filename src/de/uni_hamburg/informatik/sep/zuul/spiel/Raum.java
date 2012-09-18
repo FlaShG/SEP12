@@ -5,18 +5,37 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * Ein Raum in der Welt von Zuul. Ein Raum ist mit anderen Räumen über Ausgänge
  * verbunden, die in unterschiedlichen Richtungen liegen. In manchen Räumen
  * liegen Items, die von dem Spieler automatisch eingesammelt werden.
  * Standardmäßig sind die Räume leer.
  */
+@XmlRootElement(name = "raum")
+@XmlType(propOrder={"_name", "_id", "_beschreibung", "_raumart"})
 public class Raum
 {
-	private String _beschreibung;
-	private Map<String, Raum> _ausgaenge;
-	private Stack<Item> _items; 	
-	private Maus _maus;
+	private @XmlElement(name = "beschreibung") String _beschreibung;
+	private @XmlTransient Map<String, Raum> _ausgaenge;
+	private @XmlTransient Stack<Item> _items; 	
+	private @XmlTransient Maus _maus;
+	private @XmlElement(name = "raumart") RaumArt _raumart;
+	private @XmlElement(name = "id") int _id; 
+	private @XmlElement(name = "name") String _name;
+	
+	/**
+	 * Nur für JAXB
+	 */
+	private Raum()
+	{	
+		_ausgaenge = new HashMap<String, Raum>();
+		_items = new Stack<Item>();
+	}
 	
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -25,17 +44,22 @@ public class Raum
 	 * @param beschreibung
 	 *            die Beschreibung des Raums.
 	 * 
+	 * @require name != null
 	 * @require beschreibung != null
 	 */
-	public Raum(String beschreibung)
+	public Raum(String name, String beschreibung)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
+		assert name != null : "Vorbedingung verletzt: name != null";
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
 		_items = new Stack<Item>();
+		
+		_name = name;
 
+		_id = _name.hashCode();
 	}
 
 	/**
@@ -160,6 +184,7 @@ public class Raum
 	 * @return the _maus
 	 * @require hasMaus()
 	 */
+	@XmlTransient
 	public Maus getMaus()
 	{
 		assert hasMaus();
@@ -173,6 +198,36 @@ public class Raum
 	public void setMaus(Maus maus)
 	{
 		_maus = maus;
+	}
+	
+	public RaumArt getRaumart()
+	{
+		return _raumart;
+	}
+
+	void setRaumart(RaumArt raumart)
+	{
+		_raumart = raumart;
+	}
+
+	public int getId()
+	{
+		return _id;
+	}
+
+	private void setId(int id)
+	{
+		_id = id;
+	}
+
+	public String getName()
+	{
+		return _name;
+	}
+
+	private void setName(String name)
+	{
+		_name = name;
 	}
 
 }
