@@ -85,7 +85,11 @@ public class TextVerwalter
 	public static final String MAUS_FRAGE = "Möchten Sie der Maus einen Krümel geben, damit sie Dr. Little den Weg weist?";
 	public static final String MAUS_RICHTUNGSANGABE = "Maus: \"Ich vermute, dass %s die richtige Richtung ist.\"";
 	public static final String MAUS_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er abgeben könnte...";
-	public static final String MAUS_KEINE_MAUS = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
+	public static final String BEFEHL_GIB_KEIN_OBJEKT = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
+
+	public static final String LABOR_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er untersuchen könnte...";
+	public static final String LABOR_GESUNDER_KUCHEN = "Der Kuchen stellt sich zwar als Kalorienbombe, aber prinzipiell ungiftig heraus.";
+	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Kuchens wurde schon lange überschritten...";
 
 
 

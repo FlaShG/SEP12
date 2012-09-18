@@ -5,7 +5,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public final class BefehlTake extends Befehl
+final class BefehlTake extends Befehl
 {
 	@Override
 	public String getBefehlsname()

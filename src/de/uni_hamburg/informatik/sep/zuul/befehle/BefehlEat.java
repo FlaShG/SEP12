@@ -4,7 +4,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public final class BefehlEat extends Befehl
+final class BefehlEat extends Befehl
 {
 	@Override
 	public String getBefehlsname()

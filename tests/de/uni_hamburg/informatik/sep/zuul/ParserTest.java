@@ -7,9 +7,6 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-//import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlGo;
-//import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlHelp;
-//import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlQuit;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class ParserTest
