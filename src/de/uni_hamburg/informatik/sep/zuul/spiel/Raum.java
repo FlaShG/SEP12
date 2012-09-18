@@ -175,4 +175,9 @@ public class Raum
 		_maus = maus;
 	}
 
+	public boolean isLabor()
+	{
+		return false;
+	}
+
 }

@@ -14,30 +14,52 @@ public class BefehlGive extends Befehl
 	public void ausfuehren(SpielKontext kontext)
 	{
 
-		if(!kontext.getAktuellerRaum().hasMaus())
+		if(kontext.getAktuellerRaum().hasMaus())
 		{
-			kontext.schreibeNL(TextVerwalter.MAUS_KEINE_MAUS);
+			if(!kontext.getInventar().hasAnyKuchen())
+			{
+				kontext.schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
+				return;
+			}
+
+			Item kuchen = kontext.getInventar().getAnyKuchen();
+
+			String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
+					.getRichtung();
+			
+			String[] moeglicheRichtungen = kontext.getAktuellerRaum().getMoeglicheAusgaenge();
+
+			String richtung = bestimmeRichtung(kuchen, richtigeRichtung, moeglicheRichtungen);
+
+			String richtungsangabe = String.format(
+					TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
+			kontext.schreibeNL(richtungsangabe);
 			return;
 		}
-
-		if(!kontext.getInventar().hasAnyKuchen())
+		if(kontext.getAktuellerRaum().isLabor())
 		{
-			kontext.schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
+			if(!kontext.getInventar().hasAnyKuchen())
+			{
+				kontext.schreibeNL(TextVerwalter.LABOR_KEIN_KRUEMEL);
+				return;
+			}
+			
+
+			Item kuchen = kontext.getInventar().getAnyKuchen();
+			switch(kuchen)
+			{
+			case Kuchen:
+				kontext.schreibeNL(TextVerwalter.LABOR_GESUNDER_KUCHEN);
+				break;
+			case Giftkuchen:
+				kontext.schreibe(TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+				break;
+			}
 			return;
 		}
-
-		Item kuchen = kontext.getInventar().getAnyKuchen();
-
-		String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
-				.getRichtung();
 		
-		String[] moeglicheRichtungen = kontext.getAktuellerRaum().getMoeglicheAusgaenge();
-
-		String richtung = bestimmeRichtung(kuchen, richtigeRichtung, moeglicheRichtungen);
-
-		String richtungsangabe = String.format(
-				TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
-		kontext.schreibeNL(richtungsangabe);
+		kontext.schreibeNL(TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
+		return;
 	}
 
 	/**
