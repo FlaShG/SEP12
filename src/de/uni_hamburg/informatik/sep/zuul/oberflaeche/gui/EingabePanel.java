@@ -17,7 +17,7 @@ public class EingabePanel extends JPanel
 	private JButton _enterButton;
 
 	private final Dimension BUTTONGROESSE = new Dimension(80, 27);
-	private final int HOEHE = 30;
+	private final int HOEHE = 40;
 
 	/**
 	 * Ein Panel zur Texteingabe. Es besteht aus einem JTextfield und einem
@@ -36,9 +36,7 @@ public class EingabePanel extends JPanel
 
 		//Feldinitialisierung
 		_eingabeZeile = new JTextField();
-		Dimension eingabeZeileGroesse = new Dimension((int) (breite - BUTTONGROESSE.getWidth() - 30), 28);
-		_eingabeZeile.setSize(eingabeZeileGroesse);
-		_eingabeZeile.setPreferredSize(eingabeZeileGroesse);
+		setBreite(breite);
 
 		_enterButton = new JButton(StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
 		_enterButton.setSize(BUTTONGROESSE);
@@ -72,5 +70,15 @@ public class EingabePanel extends JPanel
 	{
 		add(_eingabeZeile);
 		add(_enterButton);
+	}
+	
+	/**
+	 * Setzt die Breite des Inhalts
+	 */
+	public void setBreite(int breite)
+	{
+		Dimension eingabeZeileGroesse = new Dimension((int) (breite - BUTTONGROESSE.getWidth() - 30), 28);
+		_eingabeZeile.setSize(eingabeZeileGroesse);
+		_eingabeZeile.setPreferredSize(eingabeZeileGroesse);
 	}
 }

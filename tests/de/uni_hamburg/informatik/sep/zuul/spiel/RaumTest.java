@@ -19,10 +19,10 @@ public class RaumTest
 	@Before
 	public void setUp() throws Exception
 	{
-		raum = new Raum("Hauptraum");
-		raumOsten = new Raum("Ostblock");
-		raumWesten = new Raum("US und A");
-		raumNorden = new Raum("Nordpol");
+		raum = new Raum("hptr", "Hauptraum");
+		raumOsten = new Raum("ostb", "Ostblock");
+		raumWesten = new Raum("usa", "US und A");
+		raumNorden = new Raum("npl", "Nordpol");
 
 		raum.setAusgang("osten", raumOsten);
 		raum.setAusgang("westen", raumWesten);
@@ -116,7 +116,7 @@ public class RaumTest
 	public void testHasMaus()
 	{
 		assertFalse(raum.hasMaus());
-		raum.setMaus(new Maus(TextVerwalter.RICHTUNG_NORDEN));
+		raum.setMaus(new Maus(raum));
 		assertTrue(raum.hasMaus());
 	}
 
@@ -125,7 +125,7 @@ public class RaumTest
 	{
 		assertFalse(raumWesten.hasMaus());
 
-		raumWesten.setMaus(new Maus(TextVerwalter.RICHTUNG_WESTEN));
+		raumWesten.setMaus(new Maus(raumWesten));
 		assertTrue(raumWesten.hasMaus());
 	}
 
@@ -133,7 +133,7 @@ public class RaumTest
 	public void testGetMaus()
 	{
 		assertFalse(raumNorden.hasMaus());
-		Maus nordmaus = new Maus(TextVerwalter.RICHTUNG_NORDEN);
+		Maus nordmaus = new Maus(raumNorden);
 
 		raumNorden.setMaus(nordmaus);
 
