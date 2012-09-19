@@ -16,9 +16,10 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
  */
 public class RaumEigenschaftenPanel extends JPanel
 {
-	private Eigenschaftsfeld _kuchen;
-	private Eigenschaftsfeld _giftkuchen;
-	private Eigenschaftsfeld _typ;
+	private EigenschaftTextPanel _name;
+	private EigenschaftIntPanel _kuchen;
+	private EigenschaftIntPanel _giftkuchen;
+	private EigenschaftEnumPanel _typ;
 	
 	/**
 	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen Raumes
@@ -47,11 +48,20 @@ public class RaumEigenschaftenPanel extends JPanel
 			}
 		}
 		
+		add(_name = new EigenschaftTextPanel("Name", raum.getName()));
 		//Gib ein Object-Array in Eigenschaftsfeld für eine JComboox
-		add(_typ = new Eigenschaftsfeld("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), observer));
+		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), observer));
 		
-		add(_kuchen = new Eigenschaftsfeld("Krümel", Eigenschaftsfeld.ZAHL, kuchen, observer));
-		add(_giftkuchen = new Eigenschaftsfeld("Giftkrümel", Eigenschaftsfeld.ZAHL, giftkuchen, observer));
+		add(_kuchen = new EigenschaftIntPanel("Krümel", kuchen, observer));
+		add(_giftkuchen = new EigenschaftIntPanel("Giftkrümel", giftkuchen, observer));
+	}
+	
+	/**
+	 * Gibt den Namen zurück, die eingestellt wurde
+	 */
+	public String getRaumname()
+	{
+		return _name.getText();
 	}
 	
 	/**
