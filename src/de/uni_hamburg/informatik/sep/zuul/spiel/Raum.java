@@ -180,6 +180,7 @@ public class Raum
 	 * Gibt die Items zurück
 	 * Für den Editor relevant
 	 */
+	@XmlTransient
 	public Stack<Item> getItems()
 	{
 		return _items;
