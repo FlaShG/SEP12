@@ -102,6 +102,18 @@ public class EditorMap extends JPanel
 		if(buttonAusgewaehlt())
 			_buttons[activeX][activeY].fuegeLeerenRaumHinzu();
 	}
+	
+	/**
+	 * Löscht den Raum des aktiven Butons
+	 */
+	public void loescheRaumDesAktivenButtons()
+	{
+		if(buttonAusgewaehlt())
+		{
+			_buttons[activeX][activeY].loescheRaum();
+			informiereBeobachter();
+		}
+	}
 
 	/**
 	 * Getter für das zweidimensionale ButtonArray, in dem alle Raum-Buttons
