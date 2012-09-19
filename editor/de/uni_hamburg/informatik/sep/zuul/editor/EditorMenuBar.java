@@ -6,11 +6,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-
+/**
+ * Die Menülsiete, die die Buttons "neu", "laden", "speichern" und "speichern unter" hält.
+ * @author 0graeff
+ *
+ */
 public class EditorMenuBar extends JPanel
 {
 	private JButton _new;
 	private JButton _save;
+	private JButton _saveas;
 	private JButton _load;
 	
 	public EditorMenuBar()
@@ -21,6 +26,7 @@ public class EditorMenuBar extends JPanel
 		
 		add(_new = new JButton("Neu"));
 		add(_load = new JButton("Laden"));
-		add(_save = new JButton("Speichern")); 
+		add(_save = new JButton("Speichern"));
+		add(_saveas = new JButton("Speichern unter")); 
 	}
 }
