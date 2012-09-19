@@ -65,7 +65,7 @@ final class BefehlGive extends Befehl
 						TextVerwalter.LABOR_GESUNDER_KUCHEN);
 				break;
 			case Giftkuchen:
-				Spiel.getInstance().schreibe(
+				Spiel.getInstance().schreibeNL(
 						TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 				break;
 			}
