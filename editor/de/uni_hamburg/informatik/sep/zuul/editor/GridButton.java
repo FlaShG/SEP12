@@ -43,11 +43,16 @@ public class GridButton extends JButton
 				: Color.lightGray) : (_raum != null ? Color.blue : Color.gray));
 	}
 
-	public void fuegeRaumHinzu()
+	public void fuegeLeerenRaumHinzu()
 	{
 		_raum = new Raum("", "");
 		setAusgewaehlt(true);
 		_raum.setKoordinaten(_x, _y);
+	}
+
+	public void setRaum(Raum raum)
+	{
+		_raum = raum;
 	}
 
 	public Raum getRaum()
