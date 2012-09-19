@@ -98,5 +98,6 @@ public class TextVerwalter
 	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Krümmels wurde schon lange überschritten...";
 
 	public static final String BEFEHL_LADEN = "lade";
-
+	public static final String ABLEGEN_TEXT = "Sie legen einen Krümmel ab.";
+	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 }
