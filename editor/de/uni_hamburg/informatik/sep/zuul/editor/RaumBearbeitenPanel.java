@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
@@ -64,9 +66,15 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 		});
 		
 		add(_eigenschaften = new RaumEigenschaftenPanel(raum, this), BorderLayout.CENTER);
+		
 		add(_loeschen = new JButton("löschen"), BorderLayout.EAST);
 	}
-
+	
+	public JButton getLoeschenButton()
+	{
+		return _loeschen;
+	}
+	
 	/**
 	 * Die Methode, die von den Membern dieses Panels aufgerufen wird,
 	 * um über Änderungen zu informieren.

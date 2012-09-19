@@ -60,6 +60,14 @@ public class EditorFenster implements Observer
 			else
 			{
 				_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum), BorderLayout.SOUTH);
+				_ui.getBearbeitenPanel().getLoeschenButton().addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent arg0)
+					{
+						_ui.getMap().loescheRaumDesAktivenButtons();
+					}
+				});
 			}
 		}
 		_ui.getFrame().setVisible(true);

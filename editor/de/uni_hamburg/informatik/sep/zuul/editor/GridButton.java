@@ -58,5 +58,6 @@ public class GridButton extends JButton
 	public void loescheRaum()
 	{
 		_raum = null;
+		setAusgewaehlt(true);
 	}
 }
