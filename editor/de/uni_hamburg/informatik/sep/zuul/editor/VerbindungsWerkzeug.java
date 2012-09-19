@@ -80,21 +80,21 @@ public class VerbindungsWerkzeug
 		if(istGueltigePosition(x, y + 1) && existiertRaumAnPosition(x, y + 1))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_OSTEN,
-					_raumArray[x - 1][y], TextVerwalter.RICHTUNG_WESTEN);
+					_raumArray[x][y + 1], TextVerwalter.RICHTUNG_WESTEN);
 		}
 
 		//Süd
 		if(istGueltigePosition(x + 1, y) && existiertRaumAnPosition(x + 1, y))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_SUEDEN,
-					_raumArray[x - 1][y], TextVerwalter.RICHTUNG_NORDEN);
+					_raumArray[x + 1][y], TextVerwalter.RICHTUNG_NORDEN);
 		}
 
 		//West
 		if(istGueltigePosition(x, y - 1) && existiertRaumAnPosition(x, y - 1))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
-					_raumArray[x - 1][y], TextVerwalter.RICHTUNG_OSTEN);
+					_raumArray[x][y - 1], TextVerwalter.RICHTUNG_OSTEN);
 		}
 	}
 
@@ -130,7 +130,7 @@ public class VerbindungsWerkzeug
 	 */
 	private boolean istGueltigePosition(int x, int y)
 	{
-		return (x >= 0 && x <= _arrayZL && y >= 0 && y <= _arraySL);
+		return (x >= 0 && x < _arrayZL && y >= 0 && y < _arraySL);
 	}
 
 	/**
