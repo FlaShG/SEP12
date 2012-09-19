@@ -147,6 +147,14 @@ public class SpielKontext
 		return _katzen;
 	}
 	
+	public boolean isKatzeImAktuellenRaum()
+	{
+		for(Katze katze: _katzen)
+			if(katze.getRaum() == _aktuellerRaum)
+				return true;
+		return false;
+	}
+	
 //	private void aktualisiereRaumansicht()
 //	{
 //		
