@@ -37,7 +37,7 @@ final class BefehlAblegen extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "ablegen";
+		return TextVerwalter.BEFEHL_ABLEGEN;
 	}
 
 }
