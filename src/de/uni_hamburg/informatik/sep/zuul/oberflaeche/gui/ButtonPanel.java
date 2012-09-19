@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -44,8 +46,14 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+	private JButton _tuerNordButton;
+	private JButton _tuerOstButton;
+	private JButton _tuerSuedButton;
+	private JButton _tuerWestButton;
 
 	private JButton _ladenButton;
+	
+	private final Color TUERFARBE = new Color(180,90,0);
 
 
 	public ButtonPanel(int breite)
@@ -152,7 +160,48 @@ public class ButtonPanel extends JPanel
 
 
 		_LabelFuerIcon = new JLabel();
-		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
+		_LabelFuerIcon.setLayout(null);
+		_LabelFuerIcon.setMinimumSize(new Dimension(205, 205));
+		_LabelFuerIcon.setSize(205, 205);
+		
+		_tuerNordButton = new JButton();
+		_tuerNordButton.setSize(25, 20);
+		_tuerNordButton.setLocation(90, 0);
+		_tuerNordButton.setBackground(TUERFARBE);
+		_tuerNordButton.setFocusable(false);
+		_tuerNordButton.setBorderPainted(false);
+		_tuerNordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_tuerOstButton = new JButton();
+		_tuerOstButton.setSize(20, 25);
+		_tuerOstButton.setLocation(185, 85);
+		_tuerOstButton.setBackground(TUERFARBE);
+		_tuerOstButton.setFocusable(false);
+		_tuerOstButton.setBorderPainted(false);
+		_tuerOstButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_tuerSuedButton = new JButton();
+		_tuerSuedButton.setSize(25, 20);
+		_tuerSuedButton.setLocation(90, 185);
+		_tuerSuedButton.setBackground(TUERFARBE);
+		_tuerSuedButton.setFocusable(false);
+		_tuerSuedButton.setBorderPainted(false);
+		_tuerSuedButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		
+		_tuerWestButton = new JButton();
+		_tuerWestButton.setSize(20, 25);
+		_tuerWestButton.setLocation(0, 85);
+		_tuerWestButton.setBackground(TUERFARBE);
+		_tuerWestButton.setFocusable(false);
+		_tuerWestButton.setBorderPainted(false);
+		_tuerWestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_LabelFuerIcon.add(_tuerNordButton);
+		_LabelFuerIcon.add(_tuerOstButton);
+		_LabelFuerIcon.add(_tuerSuedButton);
+		_LabelFuerIcon.add(_tuerWestButton);
+		
 
 		initialisiereUI();
 
