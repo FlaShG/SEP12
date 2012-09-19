@@ -17,7 +17,7 @@ public class AusgabePanel extends JPanel
 	private JTextArea _anzeige;
 	private JScrollPane _scrollPane;
 
-	private final int HOEHE = 390;
+	private final int HOEHE = 330;
 
 	public AusgabePanel(int breite)
 	{

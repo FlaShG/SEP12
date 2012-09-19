@@ -40,7 +40,7 @@ public class ButtonPanel extends JPanel
 
 	private final Dimension BUTTONGROESSE = new Dimension(100, 45);
 	private final Dimension PREFERRED = new Dimension(120, 25);
-	private final int HOEHE = 280;
+	private final int HOEHE = 360;
 	private final int SCHRIFTGROESSE = 11;
 	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
@@ -55,6 +55,8 @@ public class ButtonPanel extends JPanel
 	private JButton _fuettereButton;
 	
 	private final Color TUERFARBE = new Color(180,90,0);
+	private JButton _ablegenButton;
+	private JButton _inventarButton;
 
 
 	public ButtonPanel(int breite)
@@ -163,6 +165,18 @@ public class ButtonPanel extends JPanel
 		_ladenButton.setMinimumSize(PREFERRED);
 		_ladenButton.setPreferredSize(PREFERRED);
 		_ladenButton.setFocusable(false);
+
+		_ablegenButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ABLEGEN));
+		_ablegenButton.setMinimumSize(PREFERRED);
+		_ablegenButton.setPreferredSize(PREFERRED);
+		_ablegenButton.setFocusable(false);
+
+		_inventarButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_INVENTAR));
+		_inventarButton.setMinimumSize(PREFERRED);
+		_inventarButton.setPreferredSize(PREFERRED);
+		_inventarButton.setFocusable(false);
 
 		//Raumanzeige initialisieren
 
@@ -286,6 +300,12 @@ public class ButtonPanel extends JPanel
 		
 		c.gridy = 7;
 		befehlsPanel.add(_ladenButton, c);
+		
+		c.gridy = 8;
+		befehlsPanel.add(_inventarButton, c);
+		
+		c.gridy = 9;
+		befehlsPanel.add(_ablegenButton, c);
 
 		//RaumbildPanel
 
@@ -391,12 +411,32 @@ public class ButtonPanel extends JPanel
 	{
 		return _ladenButton;
 	}
+	
+	
 	/**
-	 * @return den _ladenButton
+	 * @return den _fuettereButton
 	 */
 	public JButton getFuettereButton()
 	{
 		return _fuettereButton;
+	}
+	
+	
+	/**
+	 * @return den _inventarButton
+	 */
+	public JButton getInventarButton()
+	{
+		return _inventarButton;
+	}
+	
+	
+	/**
+	 * @return den _ablegenButton
+	 */
+	public JButton getAblegenButton()
+	{
+		return _ablegenButton;
 	}
 
 	/**

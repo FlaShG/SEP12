@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 /**
  * Zeigt den Inhalt des Inventars an. Wenn ein Kuchen oder ein giftiger Kuchen vorhanden ist wird ein Kuchen angezeigt
@@ -21,7 +22,7 @@ final class BefehlInventarAnzeigen extends Befehl
 	@Override
 	public String getBefehlsname()
 	{
-		return "inventar";
+		return TextVerwalter.BEFEHL_INVENTAR;
 	}
 
 }
