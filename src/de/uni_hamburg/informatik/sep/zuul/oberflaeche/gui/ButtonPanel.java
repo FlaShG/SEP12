@@ -139,6 +139,7 @@ public class ButtonPanel extends JPanel
 		_ladenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
 		_ladenButton.setMinimumSize(PREFERRED);
+		_ladenButton.setPreferredSize(PREFERRED);
 		_ladenButton.setFocusable(false);
 
 		//Raumanzeige initialisieren
@@ -216,6 +217,8 @@ public class ButtonPanel extends JPanel
 		c.gridy = 5;
 		befehlsPanel.add(_quitButton, c);
 
+		c.gridy = 6;
+		befehlsPanel.add(_ladenButton, c);
 		//RaumbildPanel
 		c.insets = new Insets(0, 40, 0, 40);
 
@@ -223,10 +226,6 @@ public class ButtonPanel extends JPanel
 		c.gridy = 0;
 
 		raumPanel.add(_LabelFuerIcon, c);
-
-		c.gridy = 6;
-		befehlsPanel.add(_ladenButton, c);
-
 
 	}
 
