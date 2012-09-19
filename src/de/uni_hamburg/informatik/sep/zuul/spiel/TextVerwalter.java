@@ -55,7 +55,7 @@ public class TextVerwalter
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
 	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden, allerdings sind unter ihnen auch vergiftete Krümel. Sollten sie unterwegs eine Maus treffen, so können Sie ihr, als Gegenleistung für einen Krümel, einen Hinweis auf den Richtigen Weg entlocken. Aber auch hier können sie sich nicht sicher sein, dass der Krümel wirklich gesund für die Maus ist... \nUm über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
-	public static final String RAUMWECHSELTEXT = "Anzahl betretbarer Räume: ";
+	public static final String RAUMWECHSELTEXT = "Lebensenergie: ";
 	public static final String IMMERNOCHKUCHENTEXT = "Dr. Little erahnt jedoch noch weitere Krümel in direkter Umgebung.";
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft."
 			+ "\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";

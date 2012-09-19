@@ -27,7 +27,7 @@ public class BefehlLoad extends Befehl
 			{
 				File file = fileChooser.getSelectedFile();
 				level = file.getAbsolutePath();
-				System.out.println(level);
+//				System.out.println(level);
 			}
 			Spiel.getInstance().spielen(level);
 		}
