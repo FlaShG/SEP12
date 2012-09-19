@@ -27,7 +27,7 @@ public class IOManager
 	public void writeLevel(String path, RaumStruktur raumStruktur)
 	{
 		strukParser = new RaumStrukturParser(path);
-
+		strukParser.getXmlVerbindungen().clear();
 		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
 		{
 			strukParser.getXmlVerbindungen().add(raum);
