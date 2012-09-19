@@ -151,20 +151,30 @@ public class SpielGUI extends Spiel
 	public void beendeSpiel()
 	{
 
-		_ep.getEingabeZeile().setEnabled(false);
-		_ep.getEnterButton().setEnabled(false);
-
-		_bp.getSouthButton().setEnabled(false);
-		_bp.getNorthButton().setEnabled(false);
-		_bp.getWestButton().setEnabled(false);
-		_bp.getEastButton().setEnabled(false);
-		_bp.getGibButton().setEnabled(false);
-		_bp.getEssenButton().setEnabled(false);
-		_bp.getEssenBodenButton().setEnabled(false);
-		_bp.getNehmenButton().setEnabled(false);
-		_bp.getHelpButton().setEnabled(false);
-		_bp.getQuitButton().setEnabled(false);
+		UIsetEnabled(false);
 	}
+
+	/**
+	 * 
+	 */
+	private void UIsetEnabled(boolean value)
+	{
+		_ep.getEingabeZeile().setEnabled(value);
+		_ep.getEnterButton().setEnabled(value);
+
+		_bp.getSouthButton().setEnabled(value);
+		_bp.getNorthButton().setEnabled(value);
+		_bp.getWestButton().setEnabled(value);
+		_bp.getEastButton().setEnabled(value);
+		_bp.getGibButton().setEnabled(value);
+		_bp.getEssenButton().setEnabled(value);
+		_bp.getEssenBodenButton().setEnabled(value);
+		_bp.getNehmenButton().setEnabled(value);
+		_bp.getHelpButton().setEnabled(value);
+		_bp.getQuitButton().setEnabled(value);
+		_bp.getFuettereButton().setEnabled(value);
+	}
+	
 
 	public void schliesseFenster()
 	{
@@ -181,6 +191,8 @@ public class SpielGUI extends Spiel
 	@Override
 	public void spielen(String level)
 	{
+		UIsetEnabled(true);
+		
 		super.spielen(level);
 
 		_kontext.addTickListener(new TickListener()
