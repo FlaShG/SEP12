@@ -128,6 +128,10 @@ public class SpielGUI extends Spiel
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
+		
+		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
+		
+		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
 
 	}
 
@@ -173,6 +177,8 @@ public class SpielGUI extends Spiel
 		_bp.getHelpButton().setEnabled(value);
 		_bp.getQuitButton().setEnabled(value);
 		_bp.getFuettereButton().setEnabled(value);
+		_bp.getAblegenButton().setEnabled(value);
+		_bp.getInventarButton().setEnabled(value);
 	}
 	
 

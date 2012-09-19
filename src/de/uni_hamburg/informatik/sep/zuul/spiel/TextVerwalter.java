@@ -116,5 +116,9 @@ public class TextVerwalter
 
 	public static final String KATZE_HAT_KEINEN_HUNGER = "Die Katze scheint keinen Hunger mehr zu haben.";
 
+	public static final String BEFEHL_ABLEGEN = "ablegen";
+
+	public static final String BEFEHL_INVENTAR = "inventar";
+
 
 }
