@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
+import java.awt.Dimension;
 import java.util.Observer;
 
 import javax.swing.JTextField;
@@ -44,6 +45,11 @@ public class EigenschaftTextPanel extends EigenschaftsPanel
 				
 			}
 		});
+		
+		Dimension dim = new Dimension(120,18);
+		_text.setSize(dim);
+		_text.setPreferredSize(dim);
+		_text.setMinimumSize(dim);
 	}
 	
 	public String getText()

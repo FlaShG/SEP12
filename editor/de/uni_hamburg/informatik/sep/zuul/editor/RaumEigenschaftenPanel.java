@@ -31,7 +31,7 @@ public class RaumEigenschaftenPanel extends JPanel
 	public RaumEigenschaftenPanel(Raum raum, Observer observer)
 	{
 		assert raum != null : "Vorbedingung verletzt: raum != null";
-		
+
 		Collection<Item> items = raum.getItems();
 		int kuchen = 0;
 		int giftkuchen = 0;

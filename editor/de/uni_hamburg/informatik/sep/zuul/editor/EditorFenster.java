@@ -20,6 +20,8 @@ public class EditorFenster implements Observer
 	public EditorFenster()
 	{
 		_ui = new EditorFensterUI(this);
+		
+		registriereUIAktionen();
 	}
 	
 	private void registriereUIAktionen()
