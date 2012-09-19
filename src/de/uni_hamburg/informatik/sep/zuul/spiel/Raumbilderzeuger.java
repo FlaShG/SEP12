@@ -14,16 +14,18 @@ import javax.imageio.ImageIO;
 public class Raumbilderzeuger
 {
 
+	
 	private final String PATH = getClass().getResource("bilder/").getPath();
 	private final BufferedImage RAUM = ladeBild(PATH + "raum.png");
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
+	private final BufferedImage KATZE = ladeBild(PATH + "katze.png"); 
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
 	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
 	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
+//	private final BufferedImage DREVENBIGGER = ladeBild(PATH + "drevenbigger.png");
 	private final Color WANDFARBE = Color.white;
 	private final Color BODENFARBE = Color.GREEN;
-	private final int MAUSX = 140;
-	private final int MAUSY = 25;
+	private final Tupel KATZENPOSITION = new Tupel(140, 136);
 	private final Tupel MAUSPOSITION = new Tupel(140, 25);
 	private final LinkedList<Tupel> _itemPositionen = new LinkedList<Tupel>();
 
@@ -88,15 +90,24 @@ public class Raumbilderzeuger
 					_raumansicht);
 		}
 
-		// Male Gegenstände Mäuse, Katzen
+		
+		//Male Maus
 
 		if(_kontext.getAktuellerRaum().hasMaus())
 		{
-			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSY, MAUSX);
+			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSPOSITION);
 		}
-
+		
+//		Male Katze
+//		if(_kontext)
+//		{
+//			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
+//		}
+		
+		
+		// Male Gegenstände
 		int anzahlKruemel = 0;
-		int anzahlGegengift = 0;
+		boolean gegengiftDa = false;
 
 		Stack<Item> raumItems = (Stack<Item>) _kontext.getAktuellerRaum()
 				.getItems().clone();
@@ -112,7 +123,7 @@ public class Raumbilderzeuger
 				anzahlKruemel++;
 				break;
 			case Gegengift:
-				anzahlGegengift++;
+				gegengiftDa = true;;
 				break;
 			default:
 				break;
@@ -120,7 +131,25 @@ public class Raumbilderzeuger
 		}
 
 		maleKruemel(anzahlKruemel);
+		if(gegengiftDa)
+		{
+			maleGegengiftundEvenBigger();
+		}
+		
+		
+		
+		
+		
 
+	}
+
+	private void maleGegengiftundEvenBigger()
+	{
+		Tupel position = getFreiePosition();
+		maleAufBild(_raumansicht, GEGENGIFT, position);
+//		maleAufBild(_raumansicht, DREVENBIGGER, position);
+		
+		
 	}
 
 	private void maleKruemel(int anzahlKruemel)
@@ -130,7 +159,7 @@ public class Raumbilderzeuger
 
 			Tupel position = getFreiePosition();
 
-			maleAufBild(_raumansicht, KRUEMEL, position.getY(), position.getX());
+			maleAufBild(_raumansicht, KRUEMEL, position);
 		}
 	}
 
@@ -166,10 +195,12 @@ public class Raumbilderzeuger
 	}
 
 	private BufferedImage maleAufBild(BufferedImage zielBild,
-			BufferedImage quelle, int offsetH, int offsetB)
+			BufferedImage quelle, Tupel offset)
 	{
 		int quellH = quelle.getHeight();
 		int quellB = quelle.getWidth();
+		int offsetH = offset.getY();
+		int offsetB = offset.getX();
 
 		int[] quellDaten = new int[quellH * quellB];
 
