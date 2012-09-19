@@ -9,6 +9,11 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 
+/**
+ * Ein Panel, in dem alles steckt, das zum Setzen der Einstellungen eines Raumes benötigt wird.
+ * Inklusive Löschen-Button.
+ * @author 0graeff
+ */
 public class RaumEigenschaftenPanel extends JPanel
 {
 	private Eigenschaftsfeld _kuchen;
