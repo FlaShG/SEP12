@@ -396,4 +396,31 @@ public class ButtonPanel extends JPanel
 		}
 	}
 
+	public JButton getTuerNordButton()
+	{
+		return _tuerNordButton;
+	}
+
+	
+
+	public JButton getTuerOstButton()
+	{
+		return _tuerOstButton;
+	}
+
+	
+
+	public JButton getTuerSuedButton()
+	{
+		return _tuerSuedButton;
+	}
+
+
+
+	public JButton getTuerWestButton()
+	{
+		return _tuerWestButton;
+	}
+
+	
 }

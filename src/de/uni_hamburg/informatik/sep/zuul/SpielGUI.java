@@ -95,6 +95,23 @@ public class SpielGUI extends Spiel {
 		_bp.getWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
+		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
+		
+		_bp.getTuerOstButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
+		
+		_bp.getTuerSuedButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+		_bp.getTuerWestButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
