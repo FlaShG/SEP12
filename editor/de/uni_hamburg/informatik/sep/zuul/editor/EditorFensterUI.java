@@ -26,8 +26,6 @@ public class EditorFensterUI
 	private EditorMap _map;
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
-	private SpeicherWerkzeug _speicherWerkzeug;
-	private LadenWerkzeug _ladenWerkzeug;
 	
 	/**
 	 * Erzeugt eine neue EditorFensterUI.
@@ -57,29 +55,9 @@ public class EditorFensterUI
 		_frame.setVisible(true);
 		
 		//--------------- 1griese
-		
-		_speicherWerkzeug = new SpeicherWerkzeug(_map);
-		_ladenWerkzeug = new LadenWerkzeug();
-		
-		_menubar.getSpeicherButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_speicherWerkzeug.speichern("./xml_dateien/speicherTest.xml");
-			}
-		});
-		
-		_menubar.getLadenButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_ladenWerkzeug.lade("./xml_dateien/testStruktur.xml");
-			}
-		});
+			//
+				//DO NOT PUT TOOLS OR LISTENERS HERE
+				//gooby pls
 		
 		//----------------
 		

@@ -16,10 +16,14 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 public class EditorFenster implements Observer
 {
 	private EditorFensterUI _ui;
+	private SpeicherWerkzeug _speicherWerkzeug;
+	private LadenWerkzeug _ladenWerkzeug;
 	
 	public EditorFenster()
 	{
 		_ui = new EditorFensterUI(this);
+		_speicherWerkzeug = new SpeicherWerkzeug(_ui.getMap());
+		_ladenWerkzeug = new LadenWerkzeug();
 		
 		registriereUIAktionen();
 	}
@@ -36,6 +40,26 @@ public class EditorFenster implements Observer
 				{
 					 update(null, null);
 				}
+			}
+		});
+		
+		_ui.getMenuBar().getSpeicherButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_speicherWerkzeug.speichern("./xml_dateien/speicherTest.xml");
+			}
+		});
+		
+		_ui.getMenuBar().getLadenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_ladenWerkzeug.lade("./xml_dateien/testStruktur.xml");
 			}
 		});
 	}
