@@ -97,9 +97,14 @@ final class BefehlGive extends Befehl
 
 			richtungen.remove(richtigeRichtung);
 
+			//TODO: felix!!
+			
 			int randomInt = new Random().nextInt(richtungen.size());
 
-			return richtungen.get(randomInt);
+			 String string = richtungen.get(randomInt);
+			 if(string == null)
+				 return richtigeRichtung;
+			 return string;
 		}
 
 		return null;

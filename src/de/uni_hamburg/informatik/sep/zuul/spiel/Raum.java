@@ -185,6 +185,7 @@ public class Raum
 	 */
 	public Item getNaechstesItem()
 	{
+		
 		if(getItems().empty())
 		{
 			return Item.Keins;
@@ -248,7 +249,7 @@ public class Raum
 		_name = name;
 	}
 
-	private Stack<Item> getItems()
+	public Stack<Item> getItems()
 	{
 		return _items;
 	}

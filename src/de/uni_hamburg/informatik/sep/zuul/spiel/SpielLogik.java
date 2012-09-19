@@ -137,6 +137,8 @@ public class SpielLogik
 					{
 						kontext.setLebensEnergie(kontext.getLebensEnergie()
 								- RAUMWECHSEL_ENERGIE_KOSTEN);
+						
+						
 					}
 				});
 		
