@@ -22,10 +22,10 @@ public class Raumbilderzeuger
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
 	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
 	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
-//	private final BufferedImage DREVENBIGGER = ladeBild(PATH + "drevenbigger.png");
+	private final BufferedImage DREVENBIGGER = ladeBild(PATH + "drevenbigger.png");
 	private final Color WANDFARBE = Color.white;
 	private final Color BODENFARBE = Color.GREEN;
-	private final Tupel KATZENPOSITION = new Tupel(140, 136);
+	private final Tupel KATZENPOSITION = new Tupel(140,136);
 	private final Tupel MAUSPOSITION = new Tupel(140, 25);
 	private final LinkedList<Tupel> _itemPositionen = new LinkedList<Tupel>();
 
@@ -98,11 +98,11 @@ public class Raumbilderzeuger
 			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSPOSITION);
 		}
 		
-//		Male Katze
-//		if(_kontext)
-//		{
-//			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
-//		}
+		//Male Katze
+		if(_kontext.isKatzeImAktuellenRaum())
+		{
+			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
+		}
 		
 		
 		// Male Gegenstände
