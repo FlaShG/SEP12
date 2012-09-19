@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 
@@ -41,8 +44,9 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+
 	private JButton _ladenButton;
-	private ImageIcon _raumIcon;
+
 
 	public ButtonPanel(int breite)
 	{
@@ -137,6 +141,7 @@ public class ButtonPanel extends JPanel
 		_nehmenButton.setPreferredSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
 
+
 		_ladenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
 		_ladenButton.setMinimumSize(PREFERRED);
@@ -144,9 +149,9 @@ public class ButtonPanel extends JPanel
 		_ladenButton.setFocusable(false);
 
 		//Raumanzeige initialisieren
-		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
 
-		_LabelFuerIcon = new JLabel(_raumIcon);
+
+		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
 
 		initialisiereUI();
@@ -335,7 +340,11 @@ public class ButtonPanel extends JPanel
 	 */
 	public void setRaumanzeige(BufferedImage img)
 	{
-		_raumIcon = new ImageIcon(img);
+		if(img != null)
+		{
+			_LabelFuerIcon.setIcon(new ImageIcon(img));
+			repaint();
+		}
 	}
 
 }
