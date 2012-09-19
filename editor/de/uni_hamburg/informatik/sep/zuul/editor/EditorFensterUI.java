@@ -28,6 +28,10 @@ public class EditorFensterUI
 	private RaumBearbeitenPanel _bearbeiten;
 	private SpeicherWerkzeug _speicherWerkzeug;
 	
+	/**
+	 * Erzeugt eine neue EditorFensterUI.
+	 * @param o Ein Observer, der über alle Änderungen in der UI informiert wird.
+	 */
 	public EditorFensterUI(Observer o)
 	{
 		_frame = new JFrame("Zuul-Editor");
@@ -111,6 +115,11 @@ public class EditorFensterUI
 		return _frame;
 	}
 
+	/**
+	 * Legt ein neues RaumBearbeitenPanel an, speichert die Referenz und gibt sie zurück.
+	 * @param raum der Raum, der bearbeitet werden soll
+	 * @return Das neue RaumBearbeitenPanel
+	 */
 	public RaumBearbeitenPanel neuesBearbeitenPanel(Raum raum)
 	{
 		 return _bearbeiten = new RaumBearbeitenPanel(raum);
