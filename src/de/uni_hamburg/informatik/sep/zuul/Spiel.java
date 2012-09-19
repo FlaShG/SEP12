@@ -41,9 +41,9 @@ public abstract class Spiel implements ISchreiber
 	/**
 	 * Führt das Spiel aus.
 	 */
-	protected void spielen()
+	public void spielen(String level)
 	{
-		_kontext = SpielLogik.erstelleKontext();
+		_kontext = SpielLogik.erstelleKontext(level);
 
 		zeigeWillkommenstext(_kontext);
 	}
@@ -71,9 +71,9 @@ public abstract class Spiel implements ISchreiber
 
 	//	protected abstract String leseZeileEin();
 
-	protected void restart()
+	protected void restart(String level)
 	{
-		spielen();
+		spielen(level);
 	}
 
 	/**

@@ -186,25 +186,22 @@ public class ButtonPanel extends JPanel
 		c.gridx = 0;
 		c.gridy = 5;
 		befehlsPanel.add(_quitButton, c);
-<<<<<<< HEAD
-		
-=======
 
 		//RaumbildPanel
 
 		c.insets = new Insets(0, 40, 0, 40);
->>>>>>> refs/heads/master
+
 		c.gridx = 0;
-<<<<<<< HEAD
+
 		c.gridy = 6;
 		befehlsPanel.add(_ladenButton, c);
 		
 		
-=======
+
 		c.gridy = 0;
 
 		raumPanel.add(_LabelFuerIcon, c);
->>>>>>> refs/heads/master
+
 
 	}
 
@@ -291,7 +288,7 @@ public class ButtonPanel extends JPanel
 		return _nehmenButton;
 	}
 
-<<<<<<< HEAD
+
 	/**
 	 * @return den _ladenButton
 	 */
@@ -299,10 +296,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _ladenButton;
 	}
-	
-	
-=======
->>>>>>> refs/heads/master
+
 	/**
 	 * aktualisiert die Raumanzeige auf den nächsten Raum
 	 * 
