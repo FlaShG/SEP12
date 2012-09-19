@@ -9,7 +9,10 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 
 public class SpielGUI extends Spiel {
 
@@ -24,6 +27,8 @@ public class SpielGUI extends Spiel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			verarbeiteEingabe(_befehlszeile);
+			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
@@ -35,6 +40,7 @@ public class SpielGUI extends Spiel {
 	public SpielGUI() {
 		super();
 		initialisiereUI();
+		
 	}
 
 	/**
@@ -47,6 +53,8 @@ public class SpielGUI extends Spiel {
 		_ap = new AusgabePanel(1024);
 
 		_hf = new Hauptfenster(_ap, _ep, _bp);
+		
+		
 
 		_ep.getEnterButton().addActionListener(new ActionListener()
 		{
@@ -159,5 +167,30 @@ public class SpielGUI extends Spiel {
 	protected void verarbeiteEingabe(String eingabezeile) {
 		schreibeNL("> " + eingabezeile);
 		super.verarbeiteEingabe(eingabezeile);
+	}
+	
+	@Override
+	public void spielen(String level)
+	{
+		super.spielen(level);
+
+		_kontext.addTickListener(new TickListener()
+		{
+			
+			@Override
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
+			{
+				if(hasRoomChanged)
+					zeichneBild();
+				return true;
+			}
+		});
+		zeichneBild();
+	}
+
+	private void zeichneBild()
+	{
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 }

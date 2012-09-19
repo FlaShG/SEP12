@@ -3,6 +3,9 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
@@ -136,18 +139,10 @@ public class SpielLogik
 					{
 						kontext.setLebensEnergie(kontext.getLebensEnergie()
 								- RAUMWECHSEL_ENERGIE_KOSTEN);
+						
+						
 					}
 				});
-
-		kontext.addPropertyChangeListener("SpielZuende", new PropertyChangeListener()
-		{
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt)
-			{
-				Spiel.getInstance().beendeSpiel();
-			}
-		});
 
 		return kontext;
 	}
@@ -209,10 +204,12 @@ public class SpielLogik
 	{
 		kontext.spielZuende();
 		Spiel.getInstance().schreibeNL(nachricht);
+		Spiel.getInstance().beendeSpiel();
 	}
 
 	public static boolean isRaumZielRaum(Raum raum)
 	{
+		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
 }

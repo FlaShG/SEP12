@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
@@ -26,7 +27,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel implements ISchreiber
+public abstract class Spiel
 {
 	protected SpielKontext _kontext;
 
@@ -44,6 +45,7 @@ public abstract class Spiel implements ISchreiber
 	public void spielen(String level)
 	{
 		_kontext = SpielLogik.erstelleKontext(level);
+		
 
 		zeigeWillkommenstext(_kontext);
 	}
@@ -98,6 +100,11 @@ public abstract class Spiel implements ISchreiber
 
 		return BefehlFactory.get(befehl, parameter);
 	}
+	
+
+	public abstract void schreibeNL(String nachricht);
+
+	public abstract void schreibe(String nachricht);
 
 	/**
 	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
