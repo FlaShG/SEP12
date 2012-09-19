@@ -217,15 +217,21 @@ public class ButtonPanel extends JPanel
 		c.gridy = 5;
 		befehlsPanel.add(_quitButton, c);
 
-		c.gridy = 6;
-		befehlsPanel.add(_ladenButton, c);
+
 		//RaumbildPanel
+
 		c.insets = new Insets(0, 40, 0, 40);
 
 		c.gridx = 0;
+
+		c.gridy = 6;
+		befehlsPanel.add(_ladenButton, c);
+		
 		c.gridy = 0;
 
+
 		raumPanel.add(_LabelFuerIcon, c);
+
 
 	}
 

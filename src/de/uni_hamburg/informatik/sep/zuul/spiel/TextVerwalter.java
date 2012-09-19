@@ -98,4 +98,5 @@ public class TextVerwalter
 	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Kuchens wurde schon lange überschritten...";
 
 	public static final String BEFEHL_LADEN = "lade";
+
 }
