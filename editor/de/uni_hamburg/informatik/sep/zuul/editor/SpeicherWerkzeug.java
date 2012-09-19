@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumStruktur;
 
 public class SpeicherWerkzeug
@@ -24,7 +25,9 @@ public class SpeicherWerkzeug
 	 */
 	public void speichern(String path)
 	{
-		_verbindungen.verbindeRaeume(_ui.getMap());
+		vergebeIDs();
+				
+		_verbindungen.verbindeRaeume(map);
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
@@ -35,5 +38,21 @@ public class SpeicherWerkzeug
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
 	}
-
+	
+	private void vergebeIDs()
+	{
+		int id = 0;
+		GridButton[][] buttons = _ui.getMap().getButtonArray();
+		for(int y = 0; y < buttons.length; ++y)
+		{
+			for(int x = 0; x < buttons[0].length; ++x)
+			{
+				Raum raum = buttons[x][y].getRaum();
+				if(raum != null)
+				{
+					raum.setId(id++);
+				}
+			}			
+		}
+	}
 }
