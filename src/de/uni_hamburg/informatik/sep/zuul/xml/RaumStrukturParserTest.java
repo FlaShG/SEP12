@@ -13,5 +13,4 @@ public class RaumStrukturParserTest
 		assertTrue(RaumStrukturParser.validiere("./xml_dateien/testStruktur.xml"));
 		assertFalse(RaumStrukturParser.validiere("./xml_dateien/RaumSammlung.xml"));
 	}
-
 }

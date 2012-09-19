@@ -110,7 +110,7 @@ public class TextVerwalter
 
 	public static final String BEFEHL_FEED = "füttere";
 
-	public static final String KATZE_NICHT_DA_ZUM_FUETTERN = "Hier ist keine Katze, die Dr. Little füttern könnte.";
+	public static final String BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN = "Hier ist nichts, die Dr. Little füttern könnte.";
 
 	public static final String KATZE_VERJAGT_DIE_MAUS = "Die Katze verjagt die Maus in diesem Raum";
 
