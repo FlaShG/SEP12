@@ -7,10 +7,12 @@ public class SpeicherWerkzeug
 {
 
 	private VerbindungsWerkzeug _verbindungen;
+	private EditorFensterUI _ui;
 
-	public SpeicherWerkzeug(EditorMap map)
+	public SpeicherWerkzeug(EditorFensterUI ui)
 	{
-		_verbindungen = new VerbindungsWerkzeug(map);
+		_ui = ui;
+		_verbindungen = new VerbindungsWerkzeug();
 	}
 
 	/**
@@ -22,7 +24,7 @@ public class SpeicherWerkzeug
 	 */
 	public void speichern(String path)
 	{
-		_verbindungen.verbindeRaeume();
+		_verbindungen.verbindeRaeume(_ui.getMap());
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
