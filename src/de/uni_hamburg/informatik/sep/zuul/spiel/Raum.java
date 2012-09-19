@@ -257,5 +257,4 @@ public class Raum
 	{
 		_items = items;
 	}
-
 }

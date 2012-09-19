@@ -52,7 +52,7 @@ public class RaumBauer
 		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
-	private void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
+	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
 	{
 		for(;i>0; --i)
 		{
@@ -64,7 +64,7 @@ public class RaumBauer
 	/**
 	 * @param kannMausEnthaltenRaum
 	 */
-	private Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
+	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
 	{
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);

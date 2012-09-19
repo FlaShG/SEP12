@@ -2,18 +2,32 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.LinkedList;
+
+import de.uni_hamburg.informatik.sep.zuul.Katze;
 
 public class SpielKontext
 {
 	private Raum _aktuellerRaum;
 	private int _lebensEnergie;
 	private Inventar _inventar;
+	private ArrayList<Katze> _katzen = new ArrayList<Katze>();
 
 	private final PropertyChangeSupport changes = new PropertyChangeSupport(
 			this);
 	private boolean _spielZuende;
 
+	public SpielKontext()
+	{}
+	
+	public SpielKontext(Raum aktuellerRaum, int lebensEnergie, Inventar inventar)
+	{
+		_aktuellerRaum = aktuellerRaum;
+		_lebensEnergie = lebensEnergie;
+		_inventar = inventar;
+	}
+	
 	public Raum getAktuellerRaum()
 	{
 		return _aktuellerRaum;
@@ -118,5 +132,13 @@ public class SpielKontext
 	{
 		_spielZuende = true;
 		changes.firePropertyChange("SpielZuende", false, true);
+	}
+
+	/**
+	 * @return the katzen
+	 */
+	public ArrayList<Katze> getKatzen()
+	{
+		return _katzen;
 	}
 }
