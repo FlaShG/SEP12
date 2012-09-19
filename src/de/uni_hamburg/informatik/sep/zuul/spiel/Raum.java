@@ -48,6 +48,7 @@ public class Raum
 	 */
 	private Raum()
 	{
+		_raumart = RaumArt.Normal;
 		_ausgaenge = new HashMap<String, Raum>();
 		setItems(new Stack<Item>());
 	}
@@ -69,12 +70,11 @@ public class Raum
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
+		this._raumart = RaumArt.Normal;
 
 		setItems(new Stack<Item>());
 
-		_name = name;
-
-		_id = _name.hashCode();
+		setName(name);
 	}
 
 	/**
@@ -250,12 +250,13 @@ public class Raum
 		_maus = maus;
 	}
 
+	@XmlTransient
 	public RaumArt getRaumart()
 	{
 		return _raumart;
 	}
 
-	void setRaumart(RaumArt raumart)
+	public void setRaumart(RaumArt raumart)
 	{
 		_raumart = raumart;
 	}
@@ -270,14 +271,16 @@ public class Raum
 		_id = id;
 	}
 
+	@XmlTransient
 	public String getName()
 	{
 		return _name;
 	}
 
-	private void setName(String name)
+	public void setName(String name)
 	{
 		_name = name;
+		_id = name.hashCode();
 	}
 
 	public int getX()
