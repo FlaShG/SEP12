@@ -100,7 +100,7 @@ public class TextVerwalter
 	public static final String BEFEHL_LADEN = "lade";
 
 	
-	public static final String KATZE_IM_AKTUELLEN_RAUM = "Dr. Little wird von einer grimmigen Katze angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
+	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
 	public static final String KATZE_GREIFT_AN = "Als Dr. Little den Raum verlassen wollte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
 	public static final String KATZE_IST_SATT_GEWORDEN = "Die Katze frisst den Krümel und sieht jetzt sehr satt aus.";
