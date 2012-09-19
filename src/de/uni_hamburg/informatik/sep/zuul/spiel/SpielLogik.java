@@ -4,18 +4,25 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.features.*;
 
 public class SpielLogik
 {
+	private static String _level;
+
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	public static SpielKontext erstelleKontext()
+	public static SpielKontext erstelleKontext(String level)
 	{
+		_level = level;
+
 		final SpielKontext kontext = new SpielKontext();
 		kontext.setLebensEnergie(START_ENERGIE);
 		kontext.setInventar(new Inventar());
@@ -42,8 +49,15 @@ public class SpielLogik
 	private static void legeRaeumeAn(SpielKontext kontext)
 	{
 		IOManager manager = new IOManager();
-		manager.readLevel("./xml_dateien/testStruktur.xml");
-		//TODO: noch statisch - datei mit filechooser auswählen!!
+		if(_level == null)
+		{
+			manager.readLevel("./xml_dateien/testStruktur.xml");
+		}
+		else
+		{
+			manager.readLevel(_level);
+		}
+		// TODO: noch statisch - datei mit filechooser auswählen!!
 
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());

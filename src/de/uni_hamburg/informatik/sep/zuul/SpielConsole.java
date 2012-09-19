@@ -23,9 +23,9 @@ public class SpielConsole extends Spiel
 	}
 
 	@Override
-	protected void spielen()
+	public void spielen(String level)
 	{
-		_kontext = SpielLogik.erstelleKontext();
+		_kontext = SpielLogik.erstelleKontext(level);
 
 		zeigeWillkommenstext(_kontext);
 
@@ -38,11 +38,11 @@ public class SpielConsole extends Spiel
 				.println("Wollen Sie noch einmal spielen? Dann antworten Sie mit 'Ja'");
 		String zeile = leseZeileEin();
 		if(zeile.equals("Ja"))
-			restart();
+			restart(level);
 
 	}
 
-	protected void restart()
+	protected void restart(String level)
 	{
 		try
 		{
@@ -52,7 +52,7 @@ public class SpielConsole extends Spiel
 		{
 		}
 
-		spielen();
+		spielen(level);
 	}
 
 	/**

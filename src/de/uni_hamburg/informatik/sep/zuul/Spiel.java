@@ -2,8 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.util.Arrays;
 
-import javax.swing.SwingUtilities;
-
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
@@ -43,9 +41,9 @@ public abstract class Spiel
 	/**
 	 * Führt das Spiel aus.
 	 */
-	protected void spielen()
+	public void spielen(String level)
 	{
-		_kontext = SpielLogik.erstelleKontext();
+		_kontext = SpielLogik.erstelleKontext(level);
 
 		zeigeWillkommenstext(_kontext);
 	}
@@ -62,7 +60,9 @@ public abstract class Spiel
 	}
 
 	/**
-	 * Verarbeitet einen eingegebene Befehlszeile und feuert anschließend das Tick Event.
+	 * Verarbeitet einen eingegebene Befehlszeile und feuert anschließend das
+	 * Tick Event.
+	 * 
 	 * @param eingabezeile
 	 */
 	protected void verarbeiteEingabe(String eingabezeile)
@@ -80,13 +80,14 @@ public abstract class Spiel
 	/**
 	 * Vorbereitung für das 'Neustarten-Feature'
 	 */
-	protected void restart()
+	protected void restart(String level)
 	{
-		spielen();
+		spielen(level);
 	}
 
 	/**
 	 * Zerlegt eine Eingabezeile und liefert ein Befehlsobjekt.
+	 * 
 	 * @param eingabezeile
 	 * @return geparster Befehl
 	 */
@@ -107,7 +108,6 @@ public abstract class Spiel
 
 		return BefehlFactory.get(befehl, parameter);
 	}
-	
 
 	public abstract void schreibeNL(String nachricht);
 
