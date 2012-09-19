@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
  * @author 0graeff
  *
  */
-public class EditorFensterUI implements Observer
+public class EditorFensterUI
 {
 	private JFrame _frame;
 	
@@ -26,7 +27,7 @@ public class EditorFensterUI implements Observer
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
 	
-	public EditorFensterUI()
+	public EditorFensterUI(Observer o)
 	{
 		_frame = new JFrame("Zuul-Editor");
 		
@@ -35,9 +36,9 @@ public class EditorFensterUI implements Observer
 		
 		_frame.add(_menubar = new EditorMenuBar(), BorderLayout.NORTH);
 		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
-		_map.setBeobachter(this);
+		_map.setBeobachter(o);
 		
-		raumhinzuButtonAnlegen();
+		_raumhinzu = new JButton("Raum anlegen");
 		
 		//fancy größenwahn
 		//_frame.pack();
@@ -48,23 +49,6 @@ public class EditorFensterUI implements Observer
 		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.setVisible(true);
-	}
-	
-	private void raumhinzuButtonAnlegen()
-	{
-		_raumhinzu = new JButton("Raum anlegen");
-		_raumhinzu.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				_map.fuegeRaumZuAktivemButtonHinzu();
-				if(_map.getAktivenRaum() != null)
-				{
-					update(null, null);
-				}
-			}
-		});
 	}
 	
 	/**
@@ -84,29 +68,33 @@ public class EditorFensterUI implements Observer
 	{
 		return _map;
 	}
-
-	@Override
-	public void update(Observable arg0, Object arg1)
+	
+	/**
+	 * Gibt den Raum-hinzu-Button zurück
+	 */
+	public JButton getRaumhinzu()
 	{
-		//DONT USE ARGS!!!
-		
-		_frame.remove(_raumhinzu);
-		if(_bearbeiten != null)
-			_frame.remove(_bearbeiten);
-		_frame.setVisible(true);
-		
-		if(_map.buttonAusgewaehlt())
-		{
-			Raum raum = _map.getAktivenRaum();
-			if(raum == null)
-			{
-				_frame.add(_raumhinzu, BorderLayout.SOUTH);
-			}
-			else
-			{
-				_frame.add(_bearbeiten = new RaumBearbeitenPanel(raum), BorderLayout.SOUTH);
-			}
-		}
-		_frame.setVisible(true);
+		return _raumhinzu;
+	}
+	
+	/**
+	 * Gibt das RaumBearbeitenPanel zurück
+	 */
+	public RaumBearbeitenPanel getBearbeitenPanel()
+	{
+		return _bearbeiten;
+	}
+	
+	/**
+	 * Gibt den JFrame zurück, den diese Klasse erstellt 
+	 */
+	public JFrame getFrame()
+	{
+		return _frame;
+	}
+
+	public RaumBearbeitenPanel neuesBearbeitenPanel(Raum raum)
+	{
+		 return _bearbeiten = new RaumBearbeitenPanel(raum);
 	}
 }
