@@ -7,12 +7,13 @@ import javax.swing.JPanel;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 
 public class RaumEigenschaftenPanel extends JPanel
 {
 	private Eigenschaftsfeld _kuchen;
 	private Eigenschaftsfeld _giftkuchen;
-	private Eigenschaftsfeld _maus;
+	private Eigenschaftsfeld _typ;
 	
 	public RaumEigenschaftenPanel(Raum raum, Observer observer)
 	{
@@ -32,9 +33,11 @@ public class RaumEigenschaftenPanel extends JPanel
 			}
 		}
 		
+		//Gib ein Object-Array in Eigenschaftsfeld für eine JComboox
+		add(_typ = new Eigenschaftsfeld("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), observer));
+		
 		add(_kuchen = new Eigenschaftsfeld("Krümel", Eigenschaftsfeld.ZAHL, kuchen, observer));
 		add(_giftkuchen = new Eigenschaftsfeld("Giftkrümel", Eigenschaftsfeld.ZAHL, giftkuchen, observer));
-		add(_maus = new Eigenschaftsfeld("Maus", Eigenschaftsfeld.BOOLEAN, raum.getMaus() != null ? 1 : 0, observer));
 	}
 	
 	public int getKuchenzahl()
@@ -47,8 +50,8 @@ public class RaumEigenschaftenPanel extends JPanel
 		return _giftkuchen.getWert();
 	}
 	
-	public boolean getMaus()
+	public RaumArt getTyp()
 	{
-		return _maus.getWert() == 1;
+		return RaumArt.values()[_typ.getWert()];
 	}
 }

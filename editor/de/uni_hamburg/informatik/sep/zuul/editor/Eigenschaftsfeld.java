@@ -7,6 +7,7 @@ import java.awt.event.ItemListener;
 import java.util.Observer;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -17,12 +18,13 @@ public class Eigenschaftsfeld extends JPanel
 {
 	public static final int ZAHL = 0;
 	public static final int BOOLEAN = 1;
-	public static final int ENUM = 2;
+	private static final int ENUM = 2;
 
 	
 	private Observer _observer;
 	private JCheckBox _checkbox;
 	private JSpinner _zahl;
+	private JComboBox<String> _enum; 
 	private int _value = 0;
 	
 	public Eigenschaftsfeld(String beschriftung, int typ, int startwert)
@@ -77,7 +79,22 @@ public class Eigenschaftsfeld extends JPanel
 			break;
 			
 			case ENUM:
-				//TODO
+				_enum = new JComboBox<String>();
+				
+				_enum.addItemListener(new ItemListener()
+				{
+					@Override
+					public void itemStateChanged(ItemEvent arg0)
+					{
+						if(arg0.getStateChange() == ItemEvent.SELECTED)
+						{
+							_value = _enum.getSelectedIndex();
+							informiereBeobachter();
+						}
+					}
+				});
+				
+				add(_enum);
 			break;
 		}
 	}
@@ -97,6 +114,45 @@ public class Eigenschaftsfeld extends JPanel
 	{
 		this(beschriftung, typ, startwert);
 		_observer = observer;
+	}
+	
+	public Eigenschaftsfeld(String beschriftung, Object[] enumValues, int startwert)
+	{
+		this(beschriftung, ENUM, startwert);
+		setEnumStrings(getStringsFromEnum(enumValues));
+	}
+	
+	public Eigenschaftsfeld(String beschriftung, Object[] enumValues, int startwert, Observer observer)
+	{
+		this(beschriftung, enumValues, startwert);
+		_observer = observer;
+	}
+	
+	private static String[] getStringsFromEnum(Object[] values)
+	{
+		String[] result = new String[values.length];
+		for(int i = 0; i < values.length; ++i)
+		{
+			result[i] = values[i].toString();
+		}
+		return result;
+	}
+	
+	
+	private void setEnumStrings(String[] enumStrings)
+	{
+		if(_enum != null)
+		{
+			int valuebuffer = _value;
+			//_enum.setModel(new JComboBox<String>(enumStrings).getModel());
+			_enum.removeAllItems();
+			for(String s : enumStrings)
+			{
+				_enum.addItem(s);
+			}
+			_value = valuebuffer <= enumStrings.length ? valuebuffer : enumStrings.length;
+			_enum.setSelectedIndex(_value);
+		}
 	}
 	
 	private void informiereBeobachter()

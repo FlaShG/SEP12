@@ -2,5 +2,5 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 public enum RaumArt
 {
-	Start, Ende;
+	Normal, Start, Ende
 }
