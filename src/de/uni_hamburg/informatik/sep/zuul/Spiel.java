@@ -59,9 +59,12 @@ public abstract class Spiel implements ISchreiber
 		SpielLogik.zeigeAusgaenge(kontext);
 	}
 
+	/**
+	 * Verarbeitet einen eingegebene Befehlszeile und feuert anschließend das Tick Event.
+	 * @param eingabezeile
+	 */
 	protected void verarbeiteEingabe(String eingabezeile)
 	{
-		//		String eingabezeile = leseZeileEin();
 
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
@@ -71,12 +74,16 @@ public abstract class Spiel implements ISchreiber
 
 	//	protected abstract String leseZeileEin();
 
+	/**
+	 * Vorbereitung für das 'Neustarten-Feature'
+	 */
 	protected void restart()
 	{
 		spielen();
 	}
 
 	/**
+	 * Zerlegt eine Eingabezeile und liefert ein Befehlsobjekt.
 	 * @param eingabezeile
 	 * @return geparster Befehl
 	 */

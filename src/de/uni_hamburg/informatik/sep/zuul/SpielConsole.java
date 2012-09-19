@@ -56,6 +56,7 @@ public class SpielConsole extends Spiel
 	}
 
 	/**
+	 * Liest eine Zeile von der Console.
 	 * @return
 	 */
 	protected String leseZeileEin()

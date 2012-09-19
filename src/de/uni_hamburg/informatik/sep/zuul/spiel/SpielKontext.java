@@ -19,8 +19,6 @@ public class SpielKontext
 		return _aktuellerRaum;
 	}
 
-	// TODO: addTickListener() 
-
 	private LinkedList<TickListener> tickListeners = new LinkedList<>();
 
 	public void addTickListener(TickListener tickListener)
@@ -35,6 +33,11 @@ public class SpielKontext
 
 	
 	private boolean _hasRoomChanged = false;
+	
+	/**
+	 * Feuert das Tick Event.
+	 * Soll nur von Spiel genutzt werden!
+	 */
 	public void fireTickEvent()
 	{
 		boolean hasRoomChanged = _hasRoomChanged;
