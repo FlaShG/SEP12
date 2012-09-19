@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 public class SpielConsole extends Spiel
 {
@@ -26,20 +25,15 @@ public class SpielConsole extends Spiel
 	@Override
 	protected void spielen()
 	{
-		_kontext = new SpielKontext(this);
-		
-		zeigeWillkommenstext();
+		_kontext = SpielLogik.erstelleKontext();
+
+		zeigeWillkommenstext(_kontext);
 
 		while(!_kontext.isSpielZuende())
 		{
-			String eingabezeile = leseZeileEin();
-
-			Befehl befehl = _parser.liefereBefehl(eingabezeile);
-
-			befehl.ausfuehren(_kontext);
-
+			verarbeiteEingabe(leseZeileEin());
 		}
-		
+
 		System.out
 				.println("Wollen Sie noch einmal spielen? Dann antworten Sie mit 'Ja'");
 		String zeile = leseZeileEin();
@@ -55,7 +49,8 @@ public class SpielConsole extends Spiel
 			Runtime.getRuntime().exec("cls");
 		}
 		catch(IOException e)
-		{}
+		{
+		}
 
 		spielen();
 	}
@@ -63,7 +58,7 @@ public class SpielConsole extends Spiel
 	/**
 	 * @return
 	 */
-	String leseZeileEin()
+	protected String leseZeileEin()
 	{
 		System.out.print("> ");
 

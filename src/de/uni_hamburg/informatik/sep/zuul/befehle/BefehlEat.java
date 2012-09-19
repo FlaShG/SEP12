@@ -1,7 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final class BefehlEat extends Befehl
@@ -15,10 +17,9 @@ final class BefehlEat extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
-
 		if(getParameters().length == 0)
 		{
-			kontext.schreibeNL(TextVerwalter.KEINORT);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINORT);
 			return;
 		}
 
@@ -34,30 +35,33 @@ final class BefehlEat extends Befehl
 			switch (item)
 			{
 			case Kuchen:
-				energie += SpielKontext.KUCHEN_ENERGIE_GEWINN;
-				kontext.schreibeNL(TextVerwalter.kuchengegessentext(energie));
+				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.kuchengegessentext(energie));
 				break;
 			case Giftkuchen:
-				energie -= SpielKontext.GIFTKUCHEN_ENERGIE_VERLUST;
+				energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 				if(energie > 0)
 				{
-					kontext.schreibeNL(TextVerwalter
-							.giftkuchengegessentext(energie));
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.giftkuchengegessentext(energie));
 				}
 				else
 				{
-					kontext.beendeSpiel(TextVerwalter.KUCHENTODTEXT);
+					SpielLogik
+							.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
 				}
 				break;
 
 			default:
-				kontext.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);
+				Spiel.getInstance()
+						.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);
 				break;
 			}
 
 			kontext.setLebensEnergie(energie);
 		}
-		
+
 		else if(ort.equals(TextVerwalter.ORT_BODEN))
 		{
 			Item item = kontext.getAktuellerRaum().getNaechstesItem();
@@ -66,43 +70,45 @@ final class BefehlEat extends Befehl
 			switch (item)
 			{
 			case Kuchen:
-				energie += SpielKontext.KUCHEN_ENERGIE_GEWINN;
+				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 				kontext.getAktuellerRaum().loescheItem();
-				kontext.schreibeNL(TextVerwalter
-						.kuchenVomBodenGegessenText(energie));
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.kuchenVomBodenGegessenText(energie));
 				if(kontext.getAktuellerRaum().getNaechstesItem() != Item.Keins)
 				{
-					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.IMMERNOCHKUCHENTEXT);
 				}
-				
+
 				break;
 			case Giftkuchen:
-				energie -= SpielKontext.GIFTKUCHEN_ENERGIE_VERLUST;
+				energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 				kontext.getAktuellerRaum().loescheItem();
 				if(energie > 0)
 				{
-					kontext.schreibeNL(TextVerwalter
-							.giftkuchenVomBodenGegessenText(energie));
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter
+									.giftkuchenVomBodenGegessenText(energie));
 				}
 				else
 				{
-					kontext.beendeSpiel(TextVerwalter.KUCHENTODTEXT);
+					SpielLogik
+							.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
 				}
 				break;
 			default:
-				kontext.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXTBODEN);
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.NICHTSZUMESSENTEXTBODEN);
 				break;
 			}
-			
-			
+
 			kontext.setLebensEnergie(energie);
 		}
 		else
 		{
-			kontext.schreibeNL(TextVerwalter.KEINORT);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINORT);
 			return;
 		}
-		
-		
+
 	}
 }

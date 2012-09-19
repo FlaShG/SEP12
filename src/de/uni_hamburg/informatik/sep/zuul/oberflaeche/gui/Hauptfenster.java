@@ -43,31 +43,29 @@ public class Hauptfenster extends JFrame
 
 		Container content = getContentPane();
 
-		
 		content.setLayout(new BorderLayout());
-		 
 
 		content.add(_ausgabePanel, BorderLayout.NORTH);
 
 		content.add(_eingabePanel, BorderLayout.CENTER);
-		
+
 		content.add(_buttonPanel, BorderLayout.SOUTH);
-		
+
 		this.addComponentListener(new ComponentAdapter()
-		{			
+		{
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				_ausgabePanel.setGroesse(getSize().width, getSize().height-350);
+				_ausgabePanel.setGroesse(getSize().width,
+						getSize().height - 350);
 				_eingabePanel.setBreite(getSize().width);
 			}
 		});
-		
+
 		_eingabePanel.setDoubleBuffered(true);
 		_ausgabePanel.setDoubleBuffered(true);
 		_buttonPanel.setDoubleBuffered(true);
-		
-		
+
 		setVisible(true);
 		setSize(1024, 720);
 		setPreferredSize(new Dimension(1024, 720));
