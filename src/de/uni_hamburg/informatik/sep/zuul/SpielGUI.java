@@ -224,8 +224,7 @@ public class SpielGUI extends Spiel
 			@Override
 			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				if(hasRoomChanged)
-					zeichneBild();
+				zeichneBild();
 				return true;
 			}
 		});
