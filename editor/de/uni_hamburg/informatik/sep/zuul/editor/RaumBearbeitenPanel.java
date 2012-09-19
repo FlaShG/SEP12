@@ -70,6 +70,10 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 		add(_loeschen = new JButton("löschen"), BorderLayout.EAST);
 	}
 	
+	/**
+	 * Gibt den Löschen-Button des Panels zurück
+	 * @return
+	 */
 	public JButton getLoeschenButton()
 	{
 		return _loeschen;
