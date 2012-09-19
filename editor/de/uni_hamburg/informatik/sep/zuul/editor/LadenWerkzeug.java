@@ -32,12 +32,12 @@ public class LadenWerkzeug
 	 * @param raumListe
 	 * @return ein GridButtonArray
 	 */
-	private GridButton[][] erstelleButtonsAusListe(List<XmlRaum> xmlRaumListe,
+	private EditorMap erstelleButtonsAusListe(List<XmlRaum> xmlRaumListe,
 			List<Raum> raumListe)
 	{
 		raumListe = setRaumKoordinaten(xmlRaumListe, raumListe);
 		Raum[][] raumArray = erzeugeRaumArray(raumListe);
-		return erstelleButtonArray(raumArray);
+		return erstelleEditorMap(raumArray);
 	}
 
 	/**
@@ -48,9 +48,10 @@ public class LadenWerkzeug
 	 *            das RaumArray
 	 * @return das analoge GridButtonArray zu dem RaumArray
 	 */
-	private GridButton[][] erstelleButtonArray(Raum[][] raumArray)
+	private EditorMap erstelleEditorMap(Raum[][] raumArray)
 	{
-		GridButton[][] result = new GridButton[raumArray.length][raumArray[0].length];
+		EditorMap result = new EditorMap(raumArray.length, raumArray[0].length);
+		GridButton[][] buttons = result.getButtonArray();
 		for(int i = 0; i < raumArray.length; ++i)
 		{
 			for(int j = 0; j < raumArray[0].length; ++j)
@@ -58,12 +59,7 @@ public class LadenWerkzeug
 				Raum raum = raumArray[i][j];
 				if(raum != null)
 				{
-					result[i][j] = new GridButton(raum.getX(), raum.getY());
-					result[i][j].setRaum(raum);
-				}
-				else
-				{
-					result[i][j] = new GridButton(i, j);
+					buttons[i][j].setRaum(raum);
 				}
 			}
 		}
