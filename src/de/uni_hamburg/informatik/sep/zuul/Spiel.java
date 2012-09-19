@@ -119,14 +119,7 @@ public abstract class Spiel implements ISchreiber
 		{
 			if(!Programm.isOnconsole())
 			{
-				SwingUtilities.invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						instance = new SpielGUI();
-					}
-				});
+				instance = new SpielGUI();
 			}
 			else
 			{
