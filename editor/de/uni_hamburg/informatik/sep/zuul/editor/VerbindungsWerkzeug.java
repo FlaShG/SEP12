@@ -33,7 +33,7 @@ public class VerbindungsWerkzeug
 		GridButton[][] array = _map.getButtonArray();
 		_arrayZL = array.length;
 		_arraySL = array[0].length;
-		_raumListe = new ArrayList<>();
+		_raumListe = new ArrayList<Raum>();
 
 	}
 
