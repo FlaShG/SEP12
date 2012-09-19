@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.nio.Buffer;
 import java.util.Stack;
 
+
 import javax.imageio.ImageIO;
 
 public class Raumbilderzeuger
 {
 
-	private final String PATH = "Z:\\SEP\\";
+	private final String PATH = getClass().getResource("bilder/").getPath();
 	private final BufferedImage RAUM = ladeBild(PATH + "raum.png");
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
@@ -44,20 +45,20 @@ public class Raumbilderzeuger
 			switch (_kontext.getAktuellerRaum().getRaumart())
 			{
 			case Start:
-				faerbeEin(new Color[] { Color.GREEN, Color.white }, new Color[] {
-						Color.darkGray, Color.LIGHT_GRAY }, _raumansicht);
+				faerbeEin(new Color[] { Color.GREEN, Color.white },
+						new Color[] { Color.darkGray, Color.LIGHT_GRAY },
+						_raumansicht);
 				break;
-			case Ende: faerbeEin(new Color[] { Color.GREEN, Color.white }, new Color[] {
-					new Color(255,170,85), new Color(153,249,249)}, _raumansicht);
+			case Ende:
+				faerbeEin(new Color[] { Color.GREEN, Color.white },
+						new Color[] { new Color(255, 170, 85),
+								new Color(153, 249, 249) }, _raumansicht);
 				break;
 			default:
 				break;
 
 			}
 		}
-		
-		
-		
 
 		if(_kontext.getAktuellerRaum().hasMaus())
 		{
