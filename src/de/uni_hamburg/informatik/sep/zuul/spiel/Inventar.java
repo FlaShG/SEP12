@@ -111,4 +111,10 @@ public class Inventar
 		}
 		return null;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Krümel (" + _inhalt.size() + ")";
+	}
 }
