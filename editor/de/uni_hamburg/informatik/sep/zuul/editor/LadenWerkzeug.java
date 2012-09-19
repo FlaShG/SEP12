@@ -75,7 +75,7 @@ public class LadenWerkzeug
 	 */
 	private Raum[][] erzeugeRaumArray(List<Raum> raumListe)
 	{
-		Raum[][] result = new Raum[getMaximumX(raumListe)][getMaximumY(raumListe)];
+		Raum[][] result = new Raum[getMaximumX(raumListe) + 1][getMaximumY(raumListe) + 1];
 		for(Raum raum : raumListe)
 		{
 			result[raum.getX()][raum.getY()] = raum;
@@ -142,6 +142,7 @@ public class LadenWerkzeug
 				if(raum.getId() == xmlRaum.getID())
 				{
 					raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
+					System.out.println(xmlRaum.getX() + " " + xmlRaum.getY());
 				}
 			}
 		}

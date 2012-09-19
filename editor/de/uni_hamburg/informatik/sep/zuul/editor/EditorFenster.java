@@ -49,7 +49,7 @@ public class EditorFenster implements Observer
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				_speicherWerkzeug.speichern("./xml_dateien/speicherTest.xml");
+				_speicherWerkzeug.speichern("./xml_dateien/");
 			}
 		});
 		
