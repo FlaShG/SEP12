@@ -42,7 +42,7 @@ public class RaumEigenschaftenPanel extends JPanel
 	
 	public int getKuchenzahl()
 	{
-		return _kuchen.getWert();
+		return _kuchen.getWert(); 
 	}
 	
 	public int getGiftkuchenzahl()
