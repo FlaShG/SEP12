@@ -2,12 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.features.GewonnenTextAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.features.KuchenImRaumTextAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.features.Lebensenergie;
-import de.uni_hamburg.informatik.sep.zuul.features.MausImRaumTextAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.features.RaumBeschreibungAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.*;
 
 public class SpielLogik
 {
