@@ -6,6 +6,8 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.RaumBeschreibungAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
@@ -55,8 +57,8 @@ public abstract class Spiel implements ISchreiber
 	{
 		schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
 		schreibeNL("");
-		SpielLogik.zeigeRaumbeschreibung(kontext);
-		SpielLogik.zeigeAusgaenge(kontext);
+		RaumBeschreibungAnzeigen.zeigeRaumbeschreibung(kontext);
+		AusgängeAnzeigen.zeigeAusgaenge(kontext);
 	}
 
 	/**

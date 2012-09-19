@@ -1,9 +1,13 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.GewonnenTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.KuchenImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.Lebensenergie;
+import de.uni_hamburg.informatik.sep.zuul.features.MausImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.RaumBeschreibungAnzeigen;
 
 public class SpielLogik
 {
@@ -19,121 +23,17 @@ public class SpielLogik
 		kontext.setInventar(new Inventar());
 		legeRaeumeAn(kontext);
 
-		kontext.addTickListener(new TickListener()
-		{
+		new RaumBeschreibungAnzeigen().registerToKontext(kontext);
 
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(hasRoomChanged)
-					zeigeRaumbeschreibung(kontext);
-				return true;
-			}
-		});
+		new GewonnenTextAnzeigen().registerToKontext(kontext);
 
-		kontext.addTickListener(new TickListener()
-		{
+		new Lebensenergie().registerToKontext(kontext);
 
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
-				{
-					beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n"
-							+ TextVerwalter.BEENDENTEXT);
-					return false;
-				}
-				return true;
-			}
-		});
+		new KuchenImRaumTextAnzeigen().registerToKontext(kontext);
 
-		kontext.addTickListener(new TickListener()
-		{
+		new MausImRaumTextAnzeigen().registerToKontext(kontext);
 
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(hasRoomChanged)
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter.RAUMWECHSELTEXT
-							+ kontext.getLebensEnergie());
-				return true;
-			}
-		});
-
-		kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(hasRoomChanged) // TODO: || KuchenAufgehoben
-				switch (kontext.getAktuellerRaum().getNaechstesItem())
-				{
-				case Kuchen:
-				case Giftkuchen:
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter.KUCHENIMRAUMTEXT);
-					break;
-				}
-				return true;
-			}
-		});
-
-		kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				// Maus
-				if(hasRoomChanged && kontext.getAktuellerRaum().hasMaus())
-				{
-					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
-					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_FRAGE);
-				}
-				return true;
-			}
-		});
-
-		kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(kontext.getLebensEnergie() <= 0)
-				{
-					beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
-					return false;
-				}
-
-				return true;
-			}
-		});
-
-		kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				if(hasRoomChanged)
-					zeigeAusgaenge(kontext);
-				return true;
-			}
-		});
-
-		kontext.addPropertyChangeListener("AktuellerRaum",
-				new PropertyChangeListener()
-				{
-					@Override
-					public void propertyChange(PropertyChangeEvent evt)
-					{
-						kontext.setLebensEnergie(kontext.getLebensEnergie()
-								- RAUMWECHSEL_ENERGIE_KOSTEN);
-					}
-				});
+		new AusgängeAnzeigen().registerToKontext(kontext);
 
 		return kontext;
 	}
@@ -151,31 +51,6 @@ public class SpielLogik
 				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
 		kontext.setAktuellerRaum(raumbauer.getStartRaum());
-	}
-
-	/**
-	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
-	 * befindet.
-	 */
-	public static void zeigeRaumbeschreibung(SpielKontext kontext)
-	{
-		Spiel.getInstance().schreibeNL(
-				kontext.getAktuellerRaum().getBeschreibung());
-	}
-
-	/**
-	 * Zeigt die Ausgänge des aktuellen Raumes an.
-	 */
-	public static void zeigeAusgaenge(SpielKontext kontext)
-	{
-		Spiel.getInstance().schreibe(TextVerwalter.AUSGAENGE + ": ");
-
-		for(String s : kontext.getAktuellerRaum().getMoeglicheAusgaenge())
-		{
-			Spiel.getInstance().schreibe(s + " ");
-		}
-
-		Spiel.getInstance().schreibeNL("");
 	}
 
 	/**

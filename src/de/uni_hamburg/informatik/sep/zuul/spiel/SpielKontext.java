@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
 
+import de.uni_hamburg.informatik.sep.zuul.features.TickListener;
+
 public class SpielKontext
 {
 	private Raum _aktuellerRaum;

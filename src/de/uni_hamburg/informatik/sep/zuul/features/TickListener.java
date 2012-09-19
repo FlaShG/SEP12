@@ -1,4 +1,6 @@
-package de.uni_hamburg.informatik.sep.zuul.spiel;
+package de.uni_hamburg.informatik.sep.zuul.features;
+
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 /**
  * Ein TickListener ist ein Objekt, welches über eine neue SpielRunde (Befehl ausgeführt) informiert werden möchte.
