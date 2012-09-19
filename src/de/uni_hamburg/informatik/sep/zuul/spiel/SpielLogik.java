@@ -23,9 +23,10 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				zeigeRaumbeschreibung(kontext);
+				if(hasRoomChanged)
+					zeigeRaumbeschreibung(kontext);
 				return true;
 			}
 		});
@@ -34,7 +35,7 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
 				if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
 				{
@@ -50,11 +51,12 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.RAUMWECHSELTEXT
-								+ kontext.getLebensEnergie());
+				if(hasRoomChanged)
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.RAUMWECHSELTEXT
+							+ kontext.getLebensEnergie());
 				return true;
 			}
 		});
@@ -63,8 +65,9 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
+				if(hasRoomChanged)
 				switch (kontext.getAktuellerRaum().getNaechstesItem())
 				{
 				case Kuchen:
@@ -81,10 +84,10 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
 				// Maus
-				if(kontext.getAktuellerRaum().hasMaus())
+				if(hasRoomChanged && kontext.getAktuellerRaum().hasMaus())
 				{
 					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
 					Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_FRAGE);
@@ -97,7 +100,7 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
 				if(kontext.getLebensEnergie() <= 0)
 				{
@@ -113,9 +116,10 @@ public class SpielLogik
 		{
 
 			@Override
-			public boolean tick(SpielKontext kontext)
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				zeigeAusgaenge(kontext);
+				if(hasRoomChanged)
+					zeigeAusgaenge(kontext);
 				return true;
 			}
 		});

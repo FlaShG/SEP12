@@ -33,10 +33,16 @@ public class SpielKontext
 		tickListeners.remove(tickListener);
 	}
 
+	
+	private boolean _hasRoomChanged = false;
 	public void fireTickEvent()
 	{
+		boolean hasRoomChanged = _hasRoomChanged;
+		
+		_hasRoomChanged = false;
+		
 		for(TickListener tickListener : tickListeners)
-			if(!tickListener.tick(this))
+			if(!tickListener.tick(this, hasRoomChanged))
 				return;
 	}
 
@@ -44,6 +50,8 @@ public class SpielKontext
 	{
 		Raum alterRaum = _aktuellerRaum;
 		_aktuellerRaum = aktuellerRaum;
+		
+		_hasRoomChanged = true;
 		changes.firePropertyChange("AktuellerRaum", alterRaum, aktuellerRaum);
 	}
 

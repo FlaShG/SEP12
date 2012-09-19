@@ -66,8 +66,7 @@ public abstract class Spiel implements ISchreiber
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		if(befehl.getBefehlsname().equals("gehe")) // TODO: n,s,w,o
-			_kontext.fireTickEvent();
+		_kontext.fireTickEvent();
 	}
 
 	//	protected abstract String leseZeileEin();
