@@ -3,17 +3,22 @@ package de.uni_hamburg.informatik.sep.zuul.features;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 /**
- * Ein TickListener ist ein Objekt, welches über eine neue SpielRunde (Befehl ausgeführt) informiert werden möchte.
+ * Ein TickListener ist ein Objekt, welches über eine neue SpielRunde (Befehl
+ * ausgeführt) informiert werden möchte.
+ * 
  * @author felix
- *
+ * 
  */
 public interface TickListener
 {
 
 	/**
 	 * Ein Tick Event wurde ausgelöst.
-	 * @param kontext Der aktuelle SpielKontext
-	 * @param hasRoomChanged Ob der Raum mit dem letzten Befehl verändert wurde.
+	 * 
+	 * @param kontext
+	 *            Der aktuelle SpielKontext
+	 * @param hasRoomChanged
+	 *            Ob der Raum mit dem letzten Befehl verändert wurde.
 	 * @return Sollen noch weitere TickListener ausgeführt werden?
 	 */
 	boolean tick(SpielKontext kontext, boolean hasRoomChanged);

@@ -8,7 +8,8 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-final public class Lebensenergie implements Feature, TickListener, PropertyChangeListener
+final public class Lebensenergie implements Feature, TickListener,
+		PropertyChangeListener
 {
 	@Override
 	public boolean tick(SpielKontext kontext, boolean raumGeaendert)
@@ -18,11 +19,10 @@ final public class Lebensenergie implements Feature, TickListener, PropertyChang
 			SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
 			return false;
 		}
-		
+
 		if(raumGeaendert)
 			Spiel.getInstance().schreibeNL(
-					TextVerwalter.RAUMWECHSELTEXT
-							+ kontext.getLebensEnergie());
+					TextVerwalter.RAUMWECHSELTEXT + kontext.getLebensEnergie());
 
 		return true;
 	}
@@ -30,8 +30,8 @@ final public class Lebensenergie implements Feature, TickListener, PropertyChang
 	@Override
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		SpielKontext kontext = (SpielKontext)evt.getSource();
-		
+		SpielKontext kontext = (SpielKontext) evt.getSource();
+
 		kontext.setLebensEnergie(kontext.getLebensEnergie()
 				- SpielLogik.RAUMWECHSEL_ENERGIE_KOSTEN);
 	}

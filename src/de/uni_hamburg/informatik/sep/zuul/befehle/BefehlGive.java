@@ -1,8 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
 import java.util.LinkedList;
-import java.util.Random;
 
+import de.uni_hamburg.informatik.sep.zuul.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
@@ -15,6 +15,14 @@ final class BefehlGive extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
+		if(getParameters().length == 3 && getParameters()[0].equals("mir")
+				&& getParameters()[1].equals("mehr")
+				&& getParameters()[2].equals("leben"))
+		{
+			kontext.setLebensEnergie(100);
+			Spiel.getInstance().schreibeNL("Schwupp.");
+			return;
+		}
 
 		if(kontext.getAktuellerRaum().hasMaus())
 		{
@@ -90,9 +98,13 @@ final class BefehlGive extends Befehl
 
 			richtungen.remove(richtigeRichtung);
 
-			int randomInt = new Random().nextInt(richtungen.size());
+			String falscheRichtung = FancyFunction.getRandomEntry(richtungen);
 
-			return richtungen.get(randomInt);
+			// Falls der Raum nur einen Ausgang hat.
+			if(falscheRichtung == null)
+				falscheRichtung = richtigeRichtung;
+
+			return falscheRichtung;
 		}
 
 		return null;

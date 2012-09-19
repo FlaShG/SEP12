@@ -1,14 +1,13 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
+import de.uni_hamburg.informatik.sep.zuul.Katze;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.features.*;
+import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.GewonnenTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.KuchenImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.Lebensenergie;
+import de.uni_hamburg.informatik.sep.zuul.features.MausImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.features.RaumBeschreibungAnzeigen;
 
 public class SpielLogik
 {
@@ -23,10 +22,8 @@ public class SpielLogik
 	{
 		_level = level;
 
-		final SpielKontext kontext = new SpielKontext();
-		kontext.setLebensEnergie(START_ENERGIE);
-		kontext.setInventar(new Inventar());
-		legeRaeumeAn(kontext);
+		final SpielKontext kontext = new SpielKontext(legeRaeumeAn(),
+				START_ENERGIE, new Inventar());
 
 		new RaumBeschreibungAnzeigen().registerToKontext(kontext);
 
@@ -40,13 +37,15 @@ public class SpielLogik
 
 		new AusgängeAnzeigen().registerToKontext(kontext);
 
+		new Katze(kontext.getAktuellerRaum()).registerToKontext(kontext);
+
 		return kontext;
 	}
 
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private static void legeRaeumeAn(SpielKontext kontext)
+	private static Raum legeRaeumeAn()
 	{
 		IOManager manager = new IOManager();
 		if(_level == null)
@@ -62,7 +61,32 @@ public class SpielLogik
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
-		kontext.setAktuellerRaum(raumbauer.getStartRaum());
+		return raumbauer.getStartRaum();
+	}
+
+	/**
+	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
+	 * befindet.
+	 */
+	public static void zeigeRaumbeschreibung(SpielKontext kontext)
+	{
+		Spiel.getInstance().schreibeNL(
+				kontext.getAktuellerRaum().getBeschreibung());
+	}
+
+	/**
+	 * Zeigt die Ausgänge des aktuellen Raumes an.
+	 */
+	public static void zeigeAusgaenge(SpielKontext kontext)
+	{
+		Spiel.getInstance().schreibe(TextVerwalter.AUSGAENGE + ": ");
+
+		for(String s : kontext.getAktuellerRaum().getMoeglicheAusgaenge())
+		{
+			Spiel.getInstance().schreibe(s + " ");
+		}
+
+		Spiel.getInstance().schreibeNL("");
 	}
 
 	/**

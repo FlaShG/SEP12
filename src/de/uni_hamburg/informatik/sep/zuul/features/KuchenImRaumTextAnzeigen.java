@@ -7,8 +7,8 @@ import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public final class KuchenImRaumTextAnzeigen implements Feature,
-		TickListener, PropertyChangeListener
+public final class KuchenImRaumTextAnzeigen implements Feature, TickListener,
+		PropertyChangeListener
 {
 
 	@Override
@@ -19,8 +19,7 @@ public final class KuchenImRaumTextAnzeigen implements Feature,
 			{
 			case Kuchen:
 			case Giftkuchen:
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.KUCHENIMRAUMTEXT);
+				Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
 				break;
 			}
 
@@ -31,7 +30,7 @@ public final class KuchenImRaumTextAnzeigen implements Feature,
 	public void registerToKontext(SpielKontext kontext)
 	{
 		// TODO Register Kuchen änderung!
-		
+
 		kontext.addTickListener(this);
 
 	}

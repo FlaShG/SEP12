@@ -47,11 +47,31 @@ public class RaumBauer
 				kannMausEnthaltenRaum.add(raum);
 		}
 
-		// Maus
+		// Setze 3 Mäuse zufällig.
 
+		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
+	}
+
+	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
+			int i)
+	{
+		for(; i > 0; --i)
+		{
+			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
+			kannMausEnthaltenRaum.remove(r);
+		}
+	}
+
+	/**
+	 * @param kannMausEnthaltenRaum
+	 */
+	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
+	{
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
 		mausRaum.setMaus(new Maus(mausRaum));
+
+		return mausRaum;
 	}
 
 	static Raum initialisiereRaeumeHart()

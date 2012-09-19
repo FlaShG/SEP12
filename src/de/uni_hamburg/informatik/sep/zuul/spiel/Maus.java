@@ -26,7 +26,6 @@ public class Maus
 				return SpielLogik.isRaumZielRaum(raum);
 			}
 		}.findPath(_raum);
-		
 
 		if(path != null)
 		{

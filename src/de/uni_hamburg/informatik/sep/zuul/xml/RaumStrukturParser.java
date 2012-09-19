@@ -65,4 +65,24 @@ public class RaumStrukturParser
 		}
 	}
 
+	/**
+	 * Validiert die angegebene xml.
+	 */
+	public static boolean validiere(String path)
+	{
+		try
+		{ // wäre schön, wenn xsd dateien zur validierung genutzt werde
+			// könnten, ist aber jetzt nicht schlimm :P
+			File file = new File(path);
+			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
+			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
+			junmarshaller.unmarshal(file);
+
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 }

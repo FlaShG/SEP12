@@ -1,0 +1,20 @@
+package de.uni_hamburg.informatik.sep.zuul.xml;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+public class RaumStrukturParserTest
+{
+
+	@Test
+	public void testValidiere()
+	{
+		assertTrue(RaumStrukturParser
+				.validiere("./xml_dateien/testStruktur.xml"));
+		assertFalse(RaumStrukturParser
+				.validiere("./xml_dateien/RaumSammlung.xml"));
+	}
+
+}

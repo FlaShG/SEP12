@@ -6,8 +6,8 @@ import java.beans.PropertyChangeListener;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
-public final class RaumBeschreibungAnzeigen implements Feature,
-		TickListener, PropertyChangeListener
+public final class RaumBeschreibungAnzeigen implements Feature, TickListener,
+		PropertyChangeListener
 {
 	private boolean _raumGeaendertDurchLetztenBefehl;
 

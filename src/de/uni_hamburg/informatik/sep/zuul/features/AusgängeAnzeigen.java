@@ -26,12 +26,12 @@ final public class AusgängeAnzeigen implements Feature, TickListener
 	public static void zeigeAusgaenge(SpielKontext kontext)
 	{
 		Spiel.getInstance().schreibe(TextVerwalter.AUSGAENGE + ": ");
-	
+
 		for(String s : kontext.getAktuellerRaum().getMoeglicheAusgaenge())
 		{
 			Spiel.getInstance().schreibe(s + " ");
 		}
-	
+
 		Spiel.getInstance().schreibeNL("");
 	}
 }

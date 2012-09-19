@@ -49,6 +49,18 @@ public class IOManager
 	}
 
 	/**
+	 * Gibt true zurück, wenn die angegebene .xml einen valide Struktur besitzt.
+	 * Es geht hierbei um die LevelXml!
+	 * 
+	 * @param path
+	 *            Pfad der xml-Datei
+	 */
+	public boolean validiereLevel(String path)
+	{
+		return RaumStrukturParser.validiere(path);
+	}
+
+	/**
 	 * Getter für die XML-Raum Liste die eingelesen wurde.
 	 * 
 	 * @return XmlRaum Liste
