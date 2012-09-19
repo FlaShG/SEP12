@@ -1,6 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.features.*;
 
@@ -30,16 +33,6 @@ public class SpielLogik
 
 		new AusgängeAnzeigen().registerToKontext(kontext);
 
-		kontext.addPropertyChangeListener("SpielZuende", new PropertyChangeListener()
-		{
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt)
-			{
-				Spiel.getInstance().beendeSpiel();
-			}
-		});
-
 		return kontext;
 	}
 
@@ -68,10 +61,12 @@ public class SpielLogik
 	{
 		kontext.spielZuende();
 		Spiel.getInstance().schreibeNL(nachricht);
+		Spiel.getInstance().beendeSpiel();
 	}
 
 	public static boolean isRaumZielRaum(Raum raum)
 	{
+		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
 }
