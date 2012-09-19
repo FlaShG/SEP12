@@ -35,7 +35,7 @@ public abstract class Spiel implements ISchreiber
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
-	protected void beendeSpiel()
+	public void beendeSpiel()
 	{
 
 	}
@@ -71,7 +71,8 @@ public abstract class Spiel implements ISchreiber
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		_kontext.fireTickEvent();
+		if(!_kontext.isSpielZuende())
+			_kontext.fireTickEvent();
 	}
 
 	//	protected abstract String leseZeileEin();

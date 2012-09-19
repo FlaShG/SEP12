@@ -30,6 +30,16 @@ public class SpielLogik
 
 		new AusgängeAnzeigen().registerToKontext(kontext);
 
+		kontext.addPropertyChangeListener("SpielZuende", new PropertyChangeListener()
+		{
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt)
+			{
+				Spiel.getInstance().beendeSpiel();
+			}
+		});
+
 		return kontext;
 	}
 
