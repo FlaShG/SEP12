@@ -12,6 +12,11 @@ import javax.swing.JFrame;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
+/**
+ * Die UI-Klasse des Editor-Fensters.
+ * @author 0graeff
+ *
+ */
 public class EditorFensterUI implements Observer
 {
 	private JFrame _frame;
@@ -80,11 +85,19 @@ public class EditorFensterUI implements Observer
 		});
 	}
 	
+	/**
+	 * Gibt die obere Menüleiste zurück
+	 * @return
+	 */
 	public EditorMenuBar getMenuBar()
 	{
 		return _menubar;
 	}
 	
+	/**
+	 * Gibt die Map (GridButton-Grid) zurück	
+	 * @return
+	 */
 	public EditorMap getMap()
 	{
 		return _map;

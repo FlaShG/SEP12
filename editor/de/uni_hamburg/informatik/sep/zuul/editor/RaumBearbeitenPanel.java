@@ -13,19 +13,26 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Maus;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
 
-
+/**
+ * Das Panel, das das Einstellen aller Eigenschaften eines Raumes ermöglicht.
+ * Inklusive Löschen-Button.
+ * @author 0graeff
+ */
 public class RaumBearbeitenPanel extends JPanel implements Observer
 {
 	private JTextArea _beschreibung;
 	private RaumEigenschaftenPanel _eigenschaften;
 	private JButton _loeschen;
 	
-	private Raum _raum;
+	private final Raum _raum;
 	
+	/**
+	 * Erzeugt ein RaumBearbeitenPanel für einen bestimmten Raum.
+	 * @param raum
+	 */
 	public RaumBearbeitenPanel(Raum raum)
 	{
 		_raum = raum;
@@ -60,6 +67,10 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 		add(_loeschen = new JButton("löschen"), BorderLayout.EAST);
 	}
 
+	/**
+	 * Die Methode, die von den Membern dieses Panels aufgerufen wird,
+	 * um über Änderungen zu informieren.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{

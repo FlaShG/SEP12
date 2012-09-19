@@ -14,6 +14,16 @@ import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Ein Panel, das ein mit JLabel beschriftetes Eingabeelement bereitstellt.
+ * Je nach Konstruktoraufruf kann eine Zahl mit JSpinner, ein Boolean mit JCheckBox oder
+ * eine Wahl in einer Enum mit JComboBox eingestellt werden.
+ * In jedem Fall wird die Einstellung über int getWert() abgerufen.
+ * Bei einer Zahl wird diese direkt zurück gegeben.
+ * Bei einem Boolean wird 1 bei selected, 0 be deselected zurück gegeben.
+ * Bei einer Enum wird der index der Auswahl zurück gegeben.
+ * @author 0graeff
+ */
 public class Eigenschaftsfeld extends JPanel
 {
 	public static final int ZAHL = 0;
@@ -27,6 +37,12 @@ public class Eigenschaftsfeld extends JPanel
 	private JComboBox<String> _enum; 
 	private int _value = 0;
 	
+	/**
+	 * Erzeugt ein Eigenschaftsfeld mit einem Typ und Startwert
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param typ Der Typ der Eingabekomponente (z.B. ZAHL oder BOOLEAN)
+	 * @param startwert Der Wert, den die Komponente annimmt
+	 */
 	public Eigenschaftsfeld(String beschriftung, int typ, int startwert)
 	{
 		FlowLayout layout = new FlowLayout();
@@ -99,29 +115,62 @@ public class Eigenschaftsfeld extends JPanel
 		}
 	}
 	
+	/**
+	 * Erzeugt ein Eigenschaftsfeld mit einem Typ und Default-wert
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param typ Der Typ der Eingabekomponente (z.B. ZAHL oder BOOLEAN)
+	 */
 	public Eigenschaftsfeld(String beschriftung, int typ)
 	{
 		this(beschriftung, typ, 0);
 	}
 	
+	/**
+	 * Erzeugt ein Eigenschaftsfeld mit einem Typ, Default-wert und Observer
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param typ Der Typ der Eingabekomponente (z.B. ZAHL oder BOOLEAN)
+	 * @param observer Der Observer, der über Änderungen im Eingabefeld informiert werden soll
+	 */
 	public Eigenschaftsfeld(String beschriftung, int typ, Observer observer)
 	{
 		this(beschriftung, typ);
 		_observer = observer;
 	}
 	
+	/**
+	 * Erzeugt ein Eigenschaftsfeld mit einem Typ, Startwert und Observer
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param typ Der Typ der Eingabekomponente (z.B. ZAHL oder BOOLEAN)
+	 * @param startwert Der Wert, den die Komponente annimmt
+	 * @param observer Der Observer, der über Änderungen im Eingabefeld informiert werden soll
+	 */
 	public Eigenschaftsfeld(String beschriftung, int typ, int startwert, Observer observer)
 	{
 		this(beschriftung, typ, startwert);
 		_observer = observer;
 	}
 	
+	/**
+	 * Erzeugt ein Enum-Eigenschaftsfeld, das in einer JComboBox eine Enumeration zur Auswahl bietet 
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param enumValues Die Objekte, deren toString-String die Listeneinträge darstellen werden.
+	 *                   Zur Verwendung mit ENUM-TYP.values() geeignet
+	 * @param startwert Der Index, den die Komponente annimmt
+	 */
 	public Eigenschaftsfeld(String beschriftung, Object[] enumValues, int startwert)
 	{
 		this(beschriftung, ENUM, startwert);
 		setEnumStrings(getStringsFromEnum(enumValues));
 	}
 	
+	/**
+	 * Erzeugt ein Enum-Eigenschaftsfeld, das in einer JComboBox eine Enumeration zur Auswahl bietet 
+	 * @param beschriftung Der Text des davorstehenden Labels
+	 * @param enumValues Die Objekte, deren toString-String die Listeneinträge darstellen werden.
+	 *                   Zur Verwendung mit ENUM-TYP.values() geeignet
+	 * @param startwert Der Index, den die Komponente annimmt
+	 * @param observer Der Observer, der über Änderungen im Eingabefeld informiert werden soll
+	 */
 	public Eigenschaftsfeld(String beschriftung, Object[] enumValues, int startwert, Observer observer)
 	{
 		this(beschriftung, enumValues, startwert);
@@ -163,6 +212,13 @@ public class Eigenschaftsfeld extends JPanel
 		}
 	}
 	
+	/**
+	 * Gibt den aktuellen Wert zurück, der in der Komponente eingestellt ist.
+	 * @return Genannter Wert.
+	 *         Die Zahl, wenn der Typ ZAHL ist, 0 für unselected und 1 für selected bei BOOLEAN,
+	 *         den Index der JComboBox bei ENUM.
+	 *         Bei Benutzung einer Enum zu verwenden durch ENUM-TYP.values()[return]
+	 */
 	public int getWert()
 	{
 		return _value;
