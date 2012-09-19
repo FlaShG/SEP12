@@ -38,7 +38,7 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
-	private ImageIcon _raumIcon;
+	
 
 	public ButtonPanel(int breite)
 	{
@@ -109,10 +109,9 @@ public class ButtonPanel extends JPanel
 		_nehmenButton.setMinimumSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
 
-		//Raumanzeige initialisieren
-		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
+		
 
-		_LabelFuerIcon = new JLabel(_raumIcon);
+		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
 
 		initialisiereUI();
@@ -287,10 +286,8 @@ public class ButtonPanel extends JPanel
 	{
 		if(img != null)
 		{
-			
-			
-			_raumIcon = new ImageIcon(img);
-		_LabelFuerIcon.repaint();
+			_LabelFuerIcon.setIcon(new ImageIcon(img));
+			repaint();
 		}
 	}
 
