@@ -9,6 +9,7 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class SpielGUI extends Spiel {
@@ -24,6 +25,8 @@ public class SpielGUI extends Spiel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			verarbeiteEingabe(_befehlszeile);
+			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
