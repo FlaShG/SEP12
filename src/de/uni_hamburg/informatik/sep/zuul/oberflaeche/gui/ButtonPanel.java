@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -13,6 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import sun.security.util.SecurityConstants.AWT;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
@@ -31,20 +36,27 @@ public class ButtonPanel extends JPanel
 	private JLabel _platzhalter;
 	private JLabel _LabelFuerIcon;
 
-	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
+	private final Dimension BUTTONGROESSE = new Dimension(100, 45);
 	private final Dimension PREFERRED = new Dimension(120, 25);
-	private final int HOEHE = 260;
+	private final int HOEHE = 250;
+	private final int SCHRIFTGROESSE = 11;
 	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
-	
+
+	private JButton _ladenButton;
+
 
 	public ButtonPanel(int breite)
 	{
 		super(new GridBagLayout());
 		setSize(breite, HOEHE);
 		setPreferredSize(new Dimension(breite, HOEHE));
+		
+		Insets mehrPlatz = new Insets(0,0,0,0);
+		Font font = new Font("Dialog", Font.PLAIN, SCHRIFTGROESSE);
+		UIManager.put("Button.font", font);
 
 		_platzhalter = new JLabel(
 				"                                                 ");
@@ -64,52 +76,80 @@ public class ButtonPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.RICHTUNG_NORDEN), north);
 		_northButton.setPreferredSize(BUTTONGROESSE);
 		_northButton.setFocusable(false);
+		_northButton.setAlignmentX(JButton.LEFT_ALIGNMENT);
+		_northButton.setMargin(mehrPlatz);
+		_northButton.setIconTextGap(0);
+		
 		_southButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.RICHTUNG_SUEDEN), south);
 		_southButton.setFocusable(false);
 		_southButton.setPreferredSize(BUTTONGROESSE);
+		_southButton.setMargin(mehrPlatz);
+		_southButton.setIconTextGap(0);
+		
 		_westButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.RICHTUNG_WESTEN), west);
 		_westButton.setFocusable(false);
 		_westButton.setPreferredSize(BUTTONGROESSE);
+		_westButton.setMargin(mehrPlatz);
+		_westButton.setIconTextGap(0);
+		_westButton.setHorizontalTextPosition(JButton.LEFT);
+		
 		_eastButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.RICHTUNG_OSTEN), east);
 		_eastButton.setPreferredSize(BUTTONGROESSE);
 		_eastButton.setFocusable(false);
+		_eastButton.setMargin(mehrPlatz);
+		_eastButton.setIconTextGap(0);
 
+		// befehlbuttons
 		_quitButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_BEENDEN));
 		_quitButton.setMinimumSize(PREFERRED);
+		_quitButton.setPreferredSize(PREFERRED);
 		_quitButton.setFocusable(false);
 
 		_helpButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_HILFE));
 		_helpButton.setMinimumSize(PREFERRED);
+		_helpButton.setPreferredSize(PREFERRED);
 		_helpButton.setFocusable(false);
 
 		_gibButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_GIB));
 		_gibButton.setMinimumSize(PREFERRED);
+		_gibButton.setPreferredSize(PREFERRED);
 		_gibButton.setFocusable(false);
 
 		_essenAusTascheButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_TASCHE));
 		_essenAusTascheButton.setMinimumSize(PREFERRED);
+		_essenAusTascheButton.setPreferredSize(PREFERRED);
 		_essenAusTascheButton.setFocusable(false);
 
 		_essenBodenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_BODEN));
 		_essenBodenButton.setMinimumSize(PREFERRED);
+		_essenBodenButton.setPreferredSize(PREFERRED);
 		_essenBodenButton.setFocusable(false);
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 		_nehmenButton.setMinimumSize(PREFERRED);
+		_nehmenButton.setPreferredSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
 
-		
+
+		_ladenButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
+		_ladenButton.setMinimumSize(PREFERRED);
+		_ladenButton.setPreferredSize(PREFERRED);
+		_ladenButton.setFocusable(false);
+
+		//Raumanzeige initialisieren
+
 
 		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
@@ -183,13 +223,20 @@ public class ButtonPanel extends JPanel
 		c.gridy = 5;
 		befehlsPanel.add(_quitButton, c);
 
+		
+		c.gridy = 6;
+		befehlsPanel.add(_ladenButton, c);
+
 		//RaumbildPanel
 
 		c.insets = new Insets(0, 40, 0, 40);
+
 		c.gridx = 0;
+		
 		c.gridy = 0;
 
 		raumPanel.add(_LabelFuerIcon, c);
+
 
 	}
 
@@ -274,6 +321,15 @@ public class ButtonPanel extends JPanel
 	public JButton getNehmenButton()
 	{
 		return _nehmenButton;
+	}
+
+
+	/**
+	 * @return den _ladenButton
+	 */
+	public JButton getLadenButton()
+	{
+		return _ladenButton;
 	}
 
 	/**

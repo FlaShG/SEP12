@@ -12,22 +12,18 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public class SpielGUI extends Spiel
-{
+public class SpielGUI extends Spiel {
 
 	private final class ActionListenerBefehlAusfuehren implements
-			ActionListener
-	{
+			ActionListener {
 		private String _befehlszeile;
 
-		public ActionListenerBefehlAusfuehren(String befehlszeile)
-		{
+		public ActionListenerBefehlAusfuehren(String befehlszeile) {
 			_befehlszeile = befehlszeile;
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{
+		public void actionPerformed(ActionEvent e) {
 			verarbeiteEingabe(_befehlszeile);
 			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
 			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
@@ -39,8 +35,7 @@ public class SpielGUI extends Spiel
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	public SpielGUI()
-	{
+	public SpielGUI() {
 		super();
 		initialisiereUI();
 	}
@@ -119,18 +114,21 @@ public class SpielGUI extends Spiel
 
 		_bp.getGibButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
+
+
+		_bp.getLadenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
+
 	}
 
 	@Override
-	public void schreibeNL(String nachricht)
-	{
+	public void schreibeNL(String nachricht) {
 		schreibe(nachricht);
 		_ap.getAnzeigeArea().append("\n");
 	}
 
 	@Override
-	public void schreibe(String nachricht)
-	{
+	public void schreibe(String nachricht) {
 		JTextArea anzeige = _ap.getAnzeigeArea();
 
 		anzeige.append(nachricht);
@@ -138,8 +136,9 @@ public class SpielGUI extends Spiel
 	}
 
 	@Override
-	protected void beendeSpiel()
+	public void beendeSpiel()
 	{
+
 		_ep.getEingabeZeile().setEnabled(false);
 		_ep.getEnterButton().setEnabled(false);
 
@@ -155,14 +154,12 @@ public class SpielGUI extends Spiel
 		_bp.getQuitButton().setEnabled(false);
 	}
 
-	public void schliesseFenster()
-	{
+	public void schliesseFenster() {
 		_hf.hide();
 	}
 
 	@Override
-	protected void verarbeiteEingabe(String eingabezeile)
-	{
+	protected void verarbeiteEingabe(String eingabezeile) {
 		schreibeNL("> " + eingabezeile);
 		super.verarbeiteEingabe(eingabezeile);
 	}

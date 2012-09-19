@@ -26,14 +26,14 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel implements ISchreiber
+public abstract class Spiel
 {
 	protected SpielKontext _kontext;
 
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
-	protected void beendeSpiel()
+	public void beendeSpiel()
 	{
 
 	}
@@ -41,9 +41,9 @@ public abstract class Spiel implements ISchreiber
 	/**
 	 * Führt das Spiel aus.
 	 */
-	protected void spielen()
+	public void spielen(String level)
 	{
-		_kontext = SpielLogik.erstelleKontext();
+		_kontext = SpielLogik.erstelleKontext(level);
 
 		zeigeWillkommenstext(_kontext);
 	}
@@ -66,14 +66,15 @@ public abstract class Spiel implements ISchreiber
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		_kontext.fireTickEvent();
+		if(!_kontext.isSpielZuende())
+			_kontext.fireTickEvent();
 	}
 
 	//	protected abstract String leseZeileEin();
 
-	protected void restart()
+	protected void restart(String level)
 	{
-		spielen();
+		spielen(level);
 	}
 
 	/**
@@ -97,6 +98,11 @@ public abstract class Spiel implements ISchreiber
 
 		return BefehlFactory.get(befehl, parameter);
 	}
+	
+
+	public abstract void schreibeNL(String nachricht);
+
+	public abstract void schreibe(String nachricht);
 
 	/**
 	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim

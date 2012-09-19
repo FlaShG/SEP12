@@ -3,27 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-
-import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
-
-import sun.awt.image.ImageRepresentation;
-import sun.awt.image.ToolkitImage;
-
-
-import de.uni_hamburg.informatik.sep.zuul.ISchreiber;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
