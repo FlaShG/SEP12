@@ -142,6 +142,7 @@ public class LadenWerkzeug
 				if(raum.getId() == xmlRaum.getID())
 				{
 					raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
+					System.out.println(xmlRaum.getX() + " "+xmlRaum.getY());
 				}
 			}
 		}

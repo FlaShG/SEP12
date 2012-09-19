@@ -28,7 +28,7 @@ public class SpeicherWerkzeug
 				_verbindungen.getRaumListe());
 		IOManager manager = new IOManager();
 
-		manager.schreibeLevelStruktur(path.concat("struktur.xml"), raumstruktur);
+		manager.schreibeLevelStruktur(path.concat("testStruktur.xml"), raumstruktur);
 
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
