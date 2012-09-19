@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import java.util.LinkedList;
 import java.util.Random;
 
+import de.uni_hamburg.informatik.sep.zuul.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
@@ -97,14 +98,13 @@ final class BefehlGive extends Befehl
 
 			richtungen.remove(richtigeRichtung);
 
-			//TODO: felix!!
+			String falscheRichtung = FancyFunction.getRandomEntry(richtungen);
 			
-			int randomInt = new Random().nextInt(richtungen.size());
-
-			 String string = richtungen.get(randomInt);
-			 if(string == null)
-				 return richtigeRichtung;
-			 return string;
+			// Falls der Raum nur einen Ausgang hat.
+			 if(falscheRichtung == null)
+				 falscheRichtung = richtigeRichtung;
+			 
+			 return falscheRichtung;
 		}
 
 		return null;

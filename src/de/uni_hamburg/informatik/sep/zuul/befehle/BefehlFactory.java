@@ -30,7 +30,7 @@ public final class BefehlFactory
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
 
-				new BefehlTake(), new BefehlEat(), new BefehlLoad(),
+				new BefehlTake(), new BefehlEat(), new BefehlLoad(), new BefehlFeed(),
 				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGive() };
 
 
