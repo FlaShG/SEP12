@@ -139,23 +139,21 @@ public class RaumStruktur
 
 		for(String s : richtungen)
 		{
-			switch (s)
+			if(s.equals(TextVerwalter.RICHTUNG_NORDEN))
 			{
-			case TextVerwalter.RICHTUNG_NORDEN:
 				nordNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_OSTEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_OSTEN))
+			{
 				ostNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_SUEDEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_SUEDEN))
+			{
 				suedNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_WESTEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_WESTEN))
+			{
 				westNachbar = raum.getAusgang(s);
-				break;
-
-			default:
-				break;
 			}
 		}
 		Raum[] result = { nordNachbar, ostNachbar, suedNachbar, westNachbar };
