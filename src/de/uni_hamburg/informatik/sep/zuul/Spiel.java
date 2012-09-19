@@ -1,7 +1,13 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.util.Arrays;
+
+import javax.swing.SwingUtilities;
+
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 /**
@@ -22,23 +28,14 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  */
 public abstract class Spiel implements ISchreiber
 {
-	protected Parser _parser;
 	protected SpielKontext _kontext;
-
-	/**
-	 * Erzeugt ein Spiel und initialisiert die interne Raumkarte.
-	 */
-	public Spiel()
-	{
-		_parser = new Parser();
-	}
 
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
 	protected void beendeSpiel()
 	{
-		
+
 	}
 
 	/**
@@ -46,35 +43,89 @@ public abstract class Spiel implements ISchreiber
 	 */
 	protected void spielen()
 	{
-		_kontext = new SpielKontext(this);
-		
-		zeigeWillkommenstext();
+		_kontext = SpielLogik.erstelleKontext();
+
+		zeigeWillkommenstext(_kontext);
 	}
 
 	/**
 	 * Gibt einen Begrüßungstext für den Spieler aus.
 	 */
-	protected void zeigeWillkommenstext()
+	protected void zeigeWillkommenstext(SpielKontext kontext)
 	{
-		_kontext.schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
-		_kontext.schreibeNL("");
-		_kontext.zeigeRaumbeschreibung();
-		_kontext.zeigeAusgaenge();
+		schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
+		schreibeNL("");
+		SpielLogik.zeigeRaumbeschreibung(kontext);
+		SpielLogik.zeigeAusgaenge(kontext);
 	}
 
-	protected void verarbeiteEingabe(String str)
+	protected void verarbeiteEingabe(String eingabezeile)
 	{
-		schreibeNL("> " + str);
+		//		String eingabezeile = leseZeileEin();
 
-		Befehl befehl = _parser.liefereBefehl(str);
+		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		if(_kontext.isSpielZuende())
-			beendeSpiel();
+		_kontext.fireTickEvent();
 	}
-	
+
+	//	protected abstract String leseZeileEin();
+
 	protected void restart()
 	{
 		spielen();
+	}
+
+	/**
+	 * @param eingabezeile
+	 * @return geparster Befehl
+	 */
+	public static Befehl parseEingabezeile(String eingabezeile)
+	{
+		String[] input = eingabezeile.split(" +");
+
+		String[] parameter = new String[0];
+		String befehl = "";
+
+		if(input.length > 0)
+		{
+			befehl = input[0];
+			if(input.length > 1)
+				parameter = Arrays.copyOfRange(input, 1, input.length);
+
+		}
+
+		return BefehlFactory.get(befehl, parameter);
+	}
+
+	/**
+	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
+	 * Laden) der Klasse erzeugt
+	 */
+	private static Spiel instance;
+
+	/** Konstruktor ist privat, Klasse darf nicht von außen instanziiert werden. */
+	protected Spiel()
+	{
+	}
+
+	/**
+	 * Statische Methode „getInstance()“ liefert die einzige Instanz der Klasse
+	 * zurück. Ist synchronisiert und somit thread-sicher.
+	 */
+	public synchronized static Spiel getInstance()
+	{
+		if(instance == null)
+		{
+			if(!Programm.isOnconsole())
+			{
+				instance = new SpielGUI();
+			}
+			else
+			{
+				instance = new SpielConsole();
+			}
+		}
+		return instance;
 	}
 }

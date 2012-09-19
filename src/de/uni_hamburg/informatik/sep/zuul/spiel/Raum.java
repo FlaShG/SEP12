@@ -40,11 +40,11 @@ public class Raum
 	 * Nur für JAXB
 	 */
 	private Raum()
-	{	
+	{
 		_ausgaenge = new HashMap<String, Raum>();
 		setItems(new Stack<Item>());
 	}
-	
+
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -113,7 +113,7 @@ public class Raum
 		nachbar.setAusgang(gegenRichtung, this);
 
 	}
-	
+
 	public ArrayList<Raum> getAusgaenge()
 	{
 		return new ArrayList<Raum>(_ausgaenge.values());

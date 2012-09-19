@@ -63,6 +63,7 @@
         <id>2212023</id>
         <beschreibung>Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.</beschreibung>
         <raumart>Ende</raumart>
+        <item>Gegengift</item>
     </raum>
     <raum>
         <name>Hausmeisterbüro</name>

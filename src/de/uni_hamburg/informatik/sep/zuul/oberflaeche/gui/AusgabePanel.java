@@ -30,7 +30,6 @@ public class AusgabePanel extends JPanel
 		//_anzeige.setAutoscrolls(true);
 		_anzeige.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		
 		_scrollPane = new JScrollPane();
 
 		_scrollPane.setViewportView(_anzeige);
@@ -39,8 +38,7 @@ public class AusgabePanel extends JPanel
 		_scrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		//_scrollPane.setAutoscrolls(true);
-		
-		
+
 		//setSize(breite, HOEHE);
 		//setPreferredSize(new Dimension(breite, HOEHE));
 		setGroesse(breite, HOEHE);
@@ -56,7 +54,7 @@ public class AusgabePanel extends JPanel
 	{
 		return _anzeige;
 	}
-	
+
 	/**
 	 * Setzt die Größe des Inhalts neu
 	 */
@@ -64,7 +62,7 @@ public class AusgabePanel extends JPanel
 	{
 		setSize(breite, hoehe);
 		setPreferredSize(new Dimension(breite, hoehe));
-		
+
 		_scrollPane.setPreferredSize(new Dimension(breite - 16, hoehe - 20));
 	}
 }

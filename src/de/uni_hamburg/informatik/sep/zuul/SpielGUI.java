@@ -28,8 +28,6 @@ public class SpielGUI extends Spiel
 		public void actionPerformed(ActionEvent e)
 		{
 			verarbeiteEingabe(_befehlszeile);
-			
-			_bp.setRaumanzeige(_kontext.getAktuelleRaumasnsicht());
 		}
 	}
 
@@ -79,28 +77,45 @@ public class SpielGUI extends Spiel
 			}
 		});
 
-		_bp.getNorthButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN + " "
-						+ TextVerwalter.RICHTUNG_NORDEN));
+		_bp.getNorthButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
 
-		_bp.getSouthButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN + " "
-						+ TextVerwalter.RICHTUNG_SUEDEN));
+		_bp.getSouthButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
 
-		_bp.getEastButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN + " "
-						+ TextVerwalter.RICHTUNG_OSTEN));
+		_bp.getEastButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
 
-		_bp.getWestButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN));
+		_bp.getWestButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
-		_bp.getQuitButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_BEENDEN));
+		_bp.getQuitButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(
+								TextVerwalter.BEFEHL_BEENDEN));
 
-		_bp.getHelpButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
+		_bp.getHelpButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
 
-		_bp.getEssenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN + " " +TextVerwalter.ORT_TASCHE));
-		
-		_bp.getEssenBodenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN + " " +TextVerwalter.ORT_BODEN));
-		
-		_bp.getNehmenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_NEHMEN));
+		_bp.getEssenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
+						+ " " + TextVerwalter.ORT_TASCHE));
 
-		_bp.getGibButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
+		_bp.getEssenBodenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
+						+ " " + TextVerwalter.ORT_BODEN));
+
+		_bp.getNehmenButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(
+								TextVerwalter.BEFEHL_NEHMEN));
+
+		_bp.getGibButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
 	}
 
 	@Override
@@ -135,5 +150,17 @@ public class SpielGUI extends Spiel
 		_bp.getNehmenButton().setEnabled(false);
 		_bp.getHelpButton().setEnabled(false);
 		_bp.getQuitButton().setEnabled(false);
+	}
+
+	public void schliesseFenster()
+	{
+		_hf.hide();
+	}
+
+	@Override
+	protected void verarbeiteEingabe(String eingabezeile)
+	{
+		schreibeNL("> " + eingabezeile);
+		super.verarbeiteEingabe(eingabezeile);
 	}
 }

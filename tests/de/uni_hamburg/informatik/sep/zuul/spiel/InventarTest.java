@@ -22,12 +22,12 @@ public class InventarTest
 	{
 		Inventar inv = new Inventar();
 		Item it = Item.Kuchen;
-		
+
 		inv.fuegeItemHinzu(Item.Keins);
 		assertFalse(inv.isGefuellt());
-		
+
 		inv.fuegeItemHinzu(it);
-		
+
 		assertTrue(inv.isGefuellt());
 		assertEquals(it, inv.nehmeLetztesItem());
 	}
@@ -37,25 +37,25 @@ public class InventarTest
 	{
 		Inventar inv = new Inventar();
 		Item it = Item.Kuchen;
-		
+
 		inv.fuegeItemHinzu(it);
-		
+
 		assertEquals(it, inv.nehmeLetztesItem());
 		assertFalse(inv.isGefuellt());
-		
+
 		assertEquals(Item.Keins, inv.nehmeLetztesItem());
 	}
 
 	@Test
 	public void testIsGefuellt()
 	{
-		Inventar inv  = new Inventar();
+		Inventar inv = new Inventar();
 		assertFalse(inv.isGefuellt());
-		
+
 		inv.fuegeItemHinzu(Item.Kuchen);
 		assertTrue(inv.isGefuellt());
 	}
-	
+
 	@Test
 	public void testHasAnyKuchen()
 	{

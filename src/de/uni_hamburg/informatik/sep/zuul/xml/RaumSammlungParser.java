@@ -13,18 +13,18 @@ public class RaumSammlungParser
 {
 	private final String XMLPATH = "./xml_dateien/RaumSammlung.xml";
 	private RaumSammlung _root;
-	
+
 	public RaumSammlungParser()
 	{
 		leseXmlEin();
-		
+
 	}
-	
+
 	public List<Raum> getSammlung()
 	{
 		return _root.getSammlung();
 	}
-	
+
 	private void leseXmlEin()
 	{
 		try
@@ -34,13 +34,13 @@ public class RaumSammlungParser
 			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
 			_root = (RaumSammlung) junmarshaller.unmarshal(file);
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void schreibeXml()
 	{
 		try
@@ -57,5 +57,5 @@ public class RaumSammlungParser
 			e.printStackTrace();
 		}
 	}
-	
+
 }
