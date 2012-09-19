@@ -26,6 +26,7 @@ public class EditorFensterUI
 	private EditorMap _map;
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
+	private SpeicherWerkzeug _speicherWerkzeug;
 	
 	public EditorFensterUI(Observer o)
 	{
@@ -49,6 +50,23 @@ public class EditorFensterUI
 		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.setVisible(true);
+		
+		//--------------- 1griese
+		
+		_speicherWerkzeug = new SpeicherWerkzeug(_map);
+		
+		_menubar.getSpeicherButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_speicherWerkzeug.speichern("./xml_dateien/speicherTest.xml");
+			}
+		});
+		
+		//----------------
+		
 	}
 	
 	/**

@@ -29,4 +29,17 @@ public class EditorMenuBar extends JPanel
 		add(_save = new JButton("Speichern"));
 		add(_saveas = new JButton("Speichern unter")); 
 	}
+	
+	
+	//---------------------- 1griese
+	
+	public JButton getSpeicherButton()
+	{
+		return _save;
+	}
+	
+	public JButton getLadenButton()
+	{
+		return _load;
+	}
 }

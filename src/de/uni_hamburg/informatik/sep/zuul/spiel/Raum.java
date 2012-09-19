@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart", "_items" })
 public class Raum
 {
+	private static boolean ISTGESETZT = false;
+
 	private @XmlElement(name = "beschreibung")
 	String _beschreibung;
 	private @XmlTransient
@@ -36,6 +38,10 @@ public class Raum
 	int _id;
 	private @XmlElement(name = "name")
 	String _name;
+	private @XmlTransient
+	int _x;
+	private @XmlTransient
+	int _y;
 
 	/**
 	 * Nur für JAXB
@@ -166,19 +172,17 @@ public class Raum
 		if(!getItems().empty())
 			getItems().pop();
 	}
-	
+
 	/**
-	 * Setzt den Item-Stack neu
-	 * Für den Editor relevant
+	 * Setzt den Item-Stack neu Für den Editor relevant
 	 */
 	public void setItems(Stack<Item> items)
 	{
 		_items = items;
 	}
-	
+
 	/**
-	 * Gibt die Items zurück
-	 * Für den Editor relevant
+	 * Gibt die Items zurück Für den Editor relevant
 	 */
 	@XmlTransient
 	public Stack<Item> getItems()
@@ -187,14 +191,13 @@ public class Raum
 	}
 
 	/**
-	 * Setzt die Beschreibung des Raumes
-	 * Für den Editor relevant
+	 * Setzt die Beschreibung des Raumes Für den Editor relevant
 	 */
 	public void setBescheibung(String beschreibung)
 	{
 		_beschreibung = beschreibung;
 	}
-	
+
 	/**
 	 * Liefert die Beschreibung dieses Raums (die dem Konstruktor übergeben
 	 * wurde).
@@ -278,6 +281,31 @@ public class Raum
 	public void setName(String name)
 	{
 		_name = name;
+	}
+
+	public int getX()
+	{
+		return _x;
+	}
+
+	public int getY()
+	{
+		return _y;
+	}
+
+	/**
+	 * Setze für diesen Raum die Koordinaten.
+	 * 
+	 * @param x
+	 *            x Koordinate
+	 * @param y
+	 *            y Koordinate
+	 */
+	public void setKoordinaten(int x, int y)
+	{
+		_x = x;
+		_y = y;
+		ISTGESETZT = true;
 	}
 
 }

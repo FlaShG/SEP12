@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
@@ -17,23 +18,54 @@ public class IOManager
 	}
 
 	/**
-	 * Schreibe ein Spiellevel als XML Datei nach draußen.
+	 * Schreibe eine SpiellevelStruktur als XML Datei nach draußen.
 	 * 
 	 * @param path
 	 *            Pfad auf den geschrieben werden soll
 	 * @param raumStruktur
 	 *            die aktuelle RaumStruktur
 	 */
-	public void writeLevel(String path, RaumStruktur raumStruktur)
+	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur)
 	{
 		strukParser = new RaumStrukturParser(path);
-
+		strukParser.getXmlVerbindungen().clear();
 		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
 		{
 			strukParser.getXmlVerbindungen().add(raum);
 		}
 
 		strukParser.schreibeXml();
+	}
+
+	/**
+	 * Schreibe eine Liste von Räumen als XML nach draußen.
+	 * 
+	 * @param path
+	 *            Pfad auf den geschrieben werden soll
+	 * @param raumListe
+	 *            die aktuelle RaumListe
+	 */
+	public void schreibeLevelRaeume(List<Raum> raumListe)
+	{
+		sammlParser = new RaumSammlungParser();
+
+		//ID Liste der vorhandenen Räume
+		List<Integer> idSammlung = new ArrayList<>();
+		for(Raum raum : sammlParser.getSammlung())
+		{
+			idSammlung.add(raum.getId());
+		}
+
+		for(Raum raum : raumListe)
+		{
+			if(!idSammlung.contains(raum.getId()))
+			{
+				sammlParser.getSammlung().add(raum);
+			}
+		}
+
+		sammlParser.schreibeXml();
+
 	}
 
 	/**
