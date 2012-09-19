@@ -19,6 +19,8 @@ public class Raumbilderzeuger
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
 	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
 	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
+	private final Color WANDFARBE = Color.white;
+	private final Color BODENFARBE = Color.GREEN;
 
 	private BufferedImage _raumansicht;
 	private SpielKontext _kontext;
@@ -45,12 +47,12 @@ public class Raumbilderzeuger
 			switch (_kontext.getAktuellerRaum().getRaumart())
 			{
 			case Start:
-				faerbeEin(new Color[] { Color.GREEN, Color.white },
+				faerbeEin(new Color[] { BODENFARBE,WANDFARBE },
 						new Color[] { Color.darkGray, Color.LIGHT_GRAY },
 						_raumansicht);
 				break;
 			case Ende:
-				faerbeEin(new Color[] { Color.GREEN, Color.white },
+				faerbeEin(new Color[] { BODENFARBE,WANDFARBE },
 						new Color[] { new Color(255, 170, 85),
 								new Color(153, 249, 249) }, _raumansicht);
 				break;
@@ -59,6 +61,13 @@ public class Raumbilderzeuger
 
 			}
 		}
+		else
+		{
+			faerbeEin(new Color[]{BODENFARBE,WANDFARBE}, new Color[]{new Color(170,85,0),new Color(128,128,64)}, _raumansicht);
+		}
+		
+		
+		
 
 		if(_kontext.getAktuellerRaum().hasMaus())
 		{
