@@ -33,7 +33,12 @@ final class BefehlHelp extends Befehl
 		aktionen.add("gehe");
 		aktionen.add("nehmen");
 		aktionen.add("gib");
+		aktionen.add("füttere");
 		aktionen.add("essen");
+		
+		ArrayList<String> inventar = new ArrayList<String>();
+		inventar.add("inventar");
+		inventar.add("ablegen");
 
 		ArrayList<String> bewegen = new ArrayList<String>();
 		bewegen.add("ost");
@@ -52,11 +57,13 @@ final class BefehlHelp extends Befehl
 		system.add("beenden");
 
 		befehle.removeAll(aktionen);
+		befehle.removeAll(inventar);
 		befehle.removeAll(bewegen);
 		befehle.removeAll(kurzBefehle);
 		befehle.removeAll(system);
 
 		Spiel.getInstance().schreibeNL(buildString(aktionen));
+		Spiel.getInstance().schreibeNL(buildString(inventar));
 		Spiel.getInstance().schreibeNL(buildString(bewegen));
 		Spiel.getInstance().schreibeNL(buildString(kurzBefehle));
 		Spiel.getInstance().schreibeNL(buildString(system));

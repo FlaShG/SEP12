@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import de.uni_hamburg.informatik.sep.zuul.Katze;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
@@ -21,10 +22,7 @@ public class SpielLogik
 	{
 		_level = level;
 
-		final SpielKontext kontext = new SpielKontext();
-		kontext.setLebensEnergie(START_ENERGIE);
-		kontext.setInventar(new Inventar());
-		legeRaeumeAn(kontext);
+		final SpielKontext kontext = new SpielKontext(legeRaeumeAn(), START_ENERGIE, new Inventar());
 
 		kontext.addTickListener(new TickListener()
 		{
@@ -143,6 +141,8 @@ public class SpielLogik
 						
 					}
 				});
+		
+		new Katze(kontext.getAktuellerRaum()).registerToKontext(kontext);
 
 		return kontext;
 	}
@@ -150,7 +150,7 @@ public class SpielLogik
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private static void legeRaeumeAn(SpielKontext kontext)
+	private static Raum legeRaeumeAn()
 	{
 		IOManager manager = new IOManager();
 		if(_level == null)
@@ -166,7 +166,7 @@ public class SpielLogik
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
-		kontext.setAktuellerRaum(raumbauer.getStartRaum());
+		return raumbauer.getStartRaum();
 	}
 
 	/**
