@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 
 import sun.awt.image.ImageRepresentation;
 import sun.awt.image.ToolkitImage;
@@ -225,23 +227,20 @@ public class SpielKontext
 
 	private void aktualisiereRaumansicht()
 	{
-		BufferedImage raum = ladeBild("Z:\\SEP\\test.png");
-		BufferedImage maus = null;
+		
+		_aktuelleRaumansicht = new BufferedImage(245, 245, BufferedImage.TYPE_INT_RGB);
+		_aktuelleRaumansicht = ladeBild("Z:\\SEP\\test2.png");
+		BufferedImage maus = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+		
 
 		if(_aktuellerRaum.hasMaus())
 		{
 			maus = ladeBild("Z:\\SEP\\maus.png");
 
-			for(int x = 0; x < maus.getWidth(); x++)
-			{
-				for(int y = 0; y < maus.getHeight(); y++)
-				{
-					raum.setRGB(x + 50, y + 25, maus.getRGB(x, y));
-				}
-			}
+			maleAufRaumansicht(maus);
 		}
 
-		_aktuelleRaumansicht = raum;
+		
 
 	}
 
@@ -263,9 +262,33 @@ public class SpielKontext
 		
 	}
 	
-	public BufferedImage getAktuelleRaumansicht()
+	
+	private void maleAufRaumansicht(BufferedImage img)
+	{
+		int[] imgData = new int[img.getWidth() * img.getHeight()];
+		img.getRGB(0, 0, img.getWidth(), img.getHeight(), imgData, 0, img.getWidth());
+		
+		for(int i = 0; i < img.getHeight(); i++)
+        {
+            for(int j = 0; j < img.getWidth(); j++)
+            {
+                if(img.getRGB(i, j) != new Color(255,128,255).getRGB())
+                    _aktuelleRaumansicht.setRGB(i+50, j+50, img.getRGB(i, j));
+            }
+        }	
+	}
+	
+	public BufferedImage getAktuelleRaumasnsicht()
 	{
 		return _aktuelleRaumansicht;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

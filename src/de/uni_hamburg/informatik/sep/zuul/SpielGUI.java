@@ -28,7 +28,8 @@ public class SpielGUI extends Spiel
 		public void actionPerformed(ActionEvent e)
 		{
 			verarbeiteEingabe(_befehlszeile);
-			_bp.setRaumanzeige(_kontext.getAktuelleRaumansicht());
+			
+			_bp.setRaumanzeige(_kontext.getAktuelleRaumasnsicht());
 		}
 	}
 

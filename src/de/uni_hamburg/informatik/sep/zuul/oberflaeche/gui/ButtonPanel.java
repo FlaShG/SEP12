@@ -290,10 +290,15 @@ public class ButtonPanel extends JPanel
 	 * aktualisiert die Raumanzeige auf den nächsten Raum
 	 * @param img Das neue Raumbild
 	 */
-	public void setRaumanzeige(Image img)
+	public void setRaumanzeige(BufferedImage img)
 	{
 		if(img != null)
+		{
+			
+			
 			_raumIcon = new ImageIcon(img);
+		_LabelFuerIcon.repaint();
+		}
 	}
 	
 	
