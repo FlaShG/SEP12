@@ -31,7 +31,7 @@ public abstract class EigenschaftsPanel extends JPanel
 		_beobachter = beobachter;
 	}
 	
-	protected void informiereBeobachter()
+	protected final void informiereBeobachter()
 	{
 		if(_beobachter != null)
 		{

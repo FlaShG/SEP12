@@ -48,7 +48,7 @@ public class RaumEigenschaftenPanel extends JPanel
 			}
 		}
 		
-		add(_name = new EigenschaftTextPanel("Name", raum.getName()));
+		add(_name = new EigenschaftTextPanel("Name", raum.getName(), observer));
 		//Gib ein Object-Array in Eigenschaftsfeld für eine JComboox
 		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), observer));
 		

@@ -74,6 +74,7 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
+		_raum.setName(_eigenschaften.getRaumname());
 		_raum.setRaumart(_eigenschaften.getTyp());
 		
 		Stack<Item> items = new Stack<Item>();
