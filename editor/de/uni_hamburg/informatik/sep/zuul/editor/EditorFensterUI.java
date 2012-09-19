@@ -129,6 +129,6 @@ public class EditorFensterUI
 	 */
 	public RaumBearbeitenPanel neuesBearbeitenPanel(Raum raum)
 	{
-		 return _bearbeiten = new RaumBearbeitenPanel(raum);
+		 return _bearbeiten = new RaumBearbeitenPanel(raum, _beobachter);
 	}
 }

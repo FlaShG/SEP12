@@ -155,4 +155,32 @@
         <beschreibung></beschreibung>
         <raumart>Normal</raumart>
     </raum>
+    <raum>
+        <name></name>
+        <id>1</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>2</id>
+        <beschreibung>krümels</beschreibung>
+        <raumart>Normal</raumart>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+        <item>Kuchen</item>
+    </raum>
+    <raum>
+        <name></name>
+        <id>3</id>
+        <beschreibung>ende</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
 </raumsammlung>

@@ -23,7 +23,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
  * Inklusive Löschen-Button.
  * @author 0graeff
  */
-public class RaumBearbeitenPanel extends JPanel implements Observer
+public class RaumBearbeitenPanel extends JPanel
 {
 	private JTextArea _beschreibung;
 	private RaumEigenschaftenPanel _eigenschaften;
@@ -35,7 +35,7 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 	 * Erzeugt ein RaumBearbeitenPanel für einen bestimmten Raum.
 	 * @param raum
 	 */
-	public RaumBearbeitenPanel(Raum raum)
+	public RaumBearbeitenPanel(Raum raum, Observer beobachter)
 	{
 		_raum = raum;
 		
@@ -65,9 +65,17 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 			public void changedUpdate(DocumentEvent arg0){}
 		});
 		
-		add(_eigenschaften = new RaumEigenschaftenPanel(raum, this), BorderLayout.CENTER);
+		add(_eigenschaften = new RaumEigenschaftenPanel(raum, beobachter), BorderLayout.CENTER);
 		
 		add(_loeschen = new JButton("löschen"), BorderLayout.EAST);
+	}
+	
+	/**
+	 * Gibt den bearbeiteten Raum zurück
+	 */
+	public Raum getRaum()
+	{
+		return _raum;
 	}
 	
 	/**
@@ -80,21 +88,10 @@ public class RaumBearbeitenPanel extends JPanel implements Observer
 	}
 	
 	/**
-	 * Die Methode, die von den Membern dieses Panels aufgerufen wird,
-	 * um über Änderungen zu informieren.
+	 * Gibt das Eigenschaften-Panel zurück
 	 */
-	@Override
-	public void update(Observable arg0, Object arg1)
+	public RaumEigenschaftenPanel getEigenschaftenPanel()
 	{
-		_raum.setName(_eigenschaften.getRaumname());
-		_raum.setRaumart(_eigenschaften.getTyp());
-		
-		Stack<Item> items = new Stack<Item>();
-		for(int i = 0; i < _eigenschaften.getKuchenzahl(); ++i)
-			items.push(Item.Kuchen);
-		for(int i = 0; i < _eigenschaften.getGiftkuchenzahl(); ++i)
-			items.push(Item.Giftkuchen);
-			
-		_raum.setItems(items);
+		return _eigenschaften;
 	}
 }

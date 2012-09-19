@@ -36,6 +36,8 @@ public class GridButton extends JButton
 		setPreferredSize(dim);
 		setMinimumSize(dim);
 		setMaximumSize(dim);
+		
+		setFocusable(false);
 
 		setAusgewaehlt(false);
 	}
@@ -64,13 +66,13 @@ public class GridButton extends JButton
 	 * Färbt den Button in Abhängigkeit davon, ob er einen Raum referenziert und
 	 * ob er markiert ist.
 	 * 
-	 * @param b
+	 * @param aktiv
 	 *            ob der Button gerade markiert ist.
 	 */
-	public void setAusgewaehlt(boolean b)
+	public void setAusgewaehlt(boolean aktiv)
 	{
-		setBackground(b ? (_raum != null ? new Color(0.6f, 0.6f, 0.9f)
-				: Color.lightGray) : (_raum != null ? Color.blue : Color.gray));
+		setBackground(aktiv ? (_raum != null ? new Color(0.8f, 0.8f, 1f)
+				: Color.lightGray) : (_raum != null ? new Color(0.3f, 0.3f, 1f) : Color.gray));
 	}
 
 	/**
@@ -86,6 +88,14 @@ public class GridButton extends JButton
 	public void setRaum(Raum raum)
 	{
 		_raum = raum;
+		if(raum != null)
+		{
+			setText(raum.getName());
+		}
+		else
+		{
+			setText("");
+		}
 	}
 
 	/**
@@ -104,7 +114,7 @@ public class GridButton extends JButton
 	 */
 	public void loescheRaum()
 	{
-		_raum = null;
+		setRaum(null);
 		setAusgewaehlt(true);
 	}
 }

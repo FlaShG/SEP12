@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
+import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
 /**
@@ -77,6 +79,27 @@ public class EditorFenster implements Observer
 		if(_ui.getMap().buttonAusgewaehlt())
 		{
 			Raum raum = _ui.getMap().getAktivenRaum();
+			
+			/* TODO
+			//Eigenschaften-Panel
+			if(_ui.getBearbeitenPanel() != null && _ui.getBearbeitenPanel().getRaum() == raum)
+			{
+				RaumEigenschaftenPanel eigenschaften = _ui.getBearbeitenPanel().getEigenschaftenPanel();
+				raum.setName(eigenschaften.getRaumname());
+				_ui.getMap().getAktivenButton().setText(eigenschaften.getRaumname());
+				
+				raum.setRaumart(eigenschaften.getTyp());
+				
+				Stack<Item> items = new Stack<Item>();
+				for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
+					items.push(Item.Kuchen);
+				for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
+					items.push(Item.Giftkuchen);
+					
+				raum.setItems(items);
+			}
+			*/
+			
 			if(raum == null)
 			{
 				_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);

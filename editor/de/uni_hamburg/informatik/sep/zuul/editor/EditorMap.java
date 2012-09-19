@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
@@ -81,7 +82,17 @@ public class EditorMap extends JPanel
 	{
 		return activeX >= 0;
 	}
-
+	
+	/**
+	 * Gibt den aktiven Button zurück
+	 * @return
+	 */
+	public GridButton getAktivenButton()
+	{
+		if(!buttonAusgewaehlt())
+			return null;
+		return _buttons[activeX][activeY];
+	}
 	
 	/**
 	 * Gibt den Raum des aktuell angewählten GridButtons zurück.
@@ -90,7 +101,7 @@ public class EditorMap extends JPanel
 	{
 		if(!buttonAusgewaehlt())
 			return null;
-		return _buttons[activeX][activeY].getRaum();
+		return getAktivenButton().getRaum();
 	}
 	
 	/**
