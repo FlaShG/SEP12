@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
 
+import de.uni_hamburg.informatik.sep.zuul.PathFinder;
+
 public class Maus
 {
 	private Raum _raum;
@@ -16,8 +18,16 @@ public class Maus
 	 */
 	public String getRichtung()
 	{
+		ArrayList<Raum> path = new PathFinder()
+		{
+			@Override
+			protected boolean isZielRaum(Raum raum)
+			{
+				return SpielLogik.isRaumZielRaum(raum);
+			}
+		}.findPath(_raum);
+		
 
-		ArrayList<Raum> path = findPath(_raum, null);
 		if(path != null)
 		{
 
@@ -31,44 +41,6 @@ public class Maus
 				return TextVerwalter.RICHTUNG_WESTEN;
 		}
 		return "unkown";
-
-	}
-
-	ArrayList<Raum> findPath(Raum start, ArrayList<Raum> begangeneRaeume)
-	{
-		if(begangeneRaeume == null)
-		{
-			begangeneRaeume = new ArrayList<>();
-		}
-		begangeneRaeume.add(start);
-
-		if(SpielLogik.isRaumZielRaum(start))
-		{
-			return begangeneRaeume;
-		}
-
-		ArrayList<Raum> ausgaenge = start.getAusgaenge();
-		ausgaenge.removeAll(begangeneRaeume);
-
-		if(ausgaenge.size() == 0)
-			return null;
-
-		ArrayList<Raum> kuerzesterWegZumZiel = null;
-		for(Raum ausgang : ausgaenge)
-		{
-			ArrayList<Raum> path = findPath(ausgang,
-					(ArrayList<Raum>) begangeneRaeume.clone());
-			if(path != null)
-			{
-				if(kuerzesterWegZumZiel == null
-						|| path.size() < kuerzesterWegZumZiel.size())
-					kuerzesterWegZumZiel = path;
-			}
-		}
-
-		if(kuerzesterWegZumZiel == null)
-			return null;
-		return kuerzesterWegZumZiel;
 
 	}
 

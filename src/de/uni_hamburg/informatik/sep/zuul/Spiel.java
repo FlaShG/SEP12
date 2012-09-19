@@ -26,7 +26,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel implements ISchreiber
+public abstract class Spiel
 {
 	protected SpielKontext _kontext;
 
@@ -98,6 +98,11 @@ public abstract class Spiel implements ISchreiber
 
 		return BefehlFactory.get(befehl, parameter);
 	}
+	
+
+	public abstract void schreibeNL(String nachricht);
+
+	public abstract void schreibe(String nachricht);
 
 	/**
 	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
