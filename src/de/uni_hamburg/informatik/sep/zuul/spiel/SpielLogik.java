@@ -67,7 +67,7 @@ public class SpielLogik
 			@Override
 			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				if(hasRoomChanged)
+				if(hasRoomChanged) // TODO: || KuchenAufgehoben
 				switch (kontext.getAktuellerRaum().getNaechstesItem())
 				{
 				case Kuchen:
