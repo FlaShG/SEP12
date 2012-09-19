@@ -16,12 +16,10 @@ import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
 public class LadenWerkzeug
 {
 
-	private EditorMap _map;
 	private IOManager _manager;
 
-	public LadenWerkzeug(EditorMap map)
+	public LadenWerkzeug()
 	{
-		_map = map;
 		_manager = new IOManager();
 	}
 

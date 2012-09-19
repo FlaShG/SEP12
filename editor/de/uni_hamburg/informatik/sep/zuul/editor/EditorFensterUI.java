@@ -27,6 +27,7 @@ public class EditorFensterUI
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
 	private SpeicherWerkzeug _speicherWerkzeug;
+	private LadenWerkzeug _ladenWerkzeug;
 	
 	/**
 	 * Erzeugt eine neue EditorFensterUI.
@@ -58,6 +59,7 @@ public class EditorFensterUI
 		//--------------- 1griese
 		
 		_speicherWerkzeug = new SpeicherWerkzeug(_map);
+		_ladenWerkzeug = new LadenWerkzeug();
 		
 		_menubar.getSpeicherButton().addActionListener(new ActionListener()
 		{
@@ -66,6 +68,16 @@ public class EditorFensterUI
 			public void actionPerformed(ActionEvent e)
 			{
 				_speicherWerkzeug.speichern("./xml_dateien/speicherTest.xml");
+			}
+		});
+		
+		_menubar.getLadenButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_ladenWerkzeug.lade("./xml_dateien/testStruktur.xml");
 			}
 		});
 		
