@@ -1,10 +1,11 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.features;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import de.uni_hamburg.informatik.sep.zuul.features.TickListener;
+import de.uni_hamburg.informatik.sep.zuul.FancyFunction;
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Maus;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
@@ -12,7 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public class Katze implements TickListener, PropertyChangeListener
+public class Katze implements Feature, TickListener, PropertyChangeListener
 {
 	public static final int KATZE_SCHADEN = 2;
 	Raum _raum;

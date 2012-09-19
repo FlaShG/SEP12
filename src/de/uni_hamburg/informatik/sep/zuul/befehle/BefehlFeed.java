@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.Katze;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
