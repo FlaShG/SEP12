@@ -26,21 +26,23 @@ public class SpeicherWerkzeug
 	public void speichern(String path)
 	{
 		vergebeIDs();
-				
+
 		_verbindungen.verbindeRaeume(_ui.getMap());
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
 		IOManager manager = new IOManager();
 
-		manager.schreibeLevelStruktur(path.concat("testStruktur.xml"), raumstruktur);
+		manager.schreibeLevelStruktur(path.concat("testStruktur.xml"),
+				raumstruktur);
 
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
 	}
-	
+
 	private void vergebeIDs()
 	{
+		//TODO: unique ids vergeben. diese methode funzt auch nicht...
 		int id = 0;
 		GridButton[][] buttons = _ui.getMap().getButtonArray();
 		for(int y = 0; y < buttons.length; ++y)
@@ -52,7 +54,7 @@ public class SpeicherWerkzeug
 				{
 					raum.setId(id++);
 				}
-			}			
+			}
 		}
 	}
 }
