@@ -36,7 +36,7 @@ public class ButtonPanel extends JPanel
 	private final Dimension BUTTONGROESSE = new Dimension(100, 45);
 	private final Dimension PREFERRED = new Dimension(120, 25);
 	private final int HOEHE = 250;
-	private final int SCHRIFTGROESSE = 12;
+	private final int SCHRIFTGROESSE = 11;
 	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
 	private JButton _gibButton;
@@ -89,6 +89,7 @@ public class ButtonPanel extends JPanel
 		_westButton.setPreferredSize(BUTTONGROESSE);
 		_westButton.setMargin(mehrPlatz);
 		_westButton.setIconTextGap(0);
+		_westButton.setHorizontalTextPosition(JButton.LEFT);
 		
 		_eastButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.RICHTUNG_OSTEN), east);
