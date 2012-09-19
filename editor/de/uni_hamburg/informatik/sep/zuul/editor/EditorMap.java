@@ -100,7 +100,7 @@ public class EditorMap extends JPanel
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
 		if(buttonAusgewaehlt())
-			_buttons[activeX][activeY].fuegeRaumHinzu();
+			_buttons[activeX][activeY].fuegeLeerenRaumHinzu();
 	}
 	
 	/**

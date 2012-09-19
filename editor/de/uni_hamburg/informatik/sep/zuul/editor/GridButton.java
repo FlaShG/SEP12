@@ -7,10 +7,11 @@ import javax.swing.JButton;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
 /**
- * JButton, der seine Position auf einem Grid (vornehmlich auf einer EditorMap) kennt
- * und eine Referenz auf einen Raum halten kann. 
+ * JButton, der seine Position auf einem Grid (vornehmlich auf einer EditorMap)
+ * kennt und eine Referenz auf einen Raum halten kann.
+ * 
  * @author 0graeff
- *
+ * 
  */
 public class GridButton extends JButton
 {
@@ -20,6 +21,7 @@ public class GridButton extends JButton
 
 	/**
 	 * Erstellt einen neuen GridButton und übergibt dessen Position
+	 * 
 	 * @param x
 	 * @param y
 	 */
@@ -40,15 +42,17 @@ public class GridButton extends JButton
 
 	/**
 	 * Gibt die übergebene x-Position auf dem Grid zurück
+	 * 
 	 * @return
 	 */
 	public int getGridX()
 	{
 		return _x;
 	}
-	
+
 	/**
 	 * Gibt die übergebene y-Position auf dem Grid zurück
+	 * 
 	 * @return
 	 */
 	public int getGridY()
@@ -57,8 +61,11 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Färbt den Button in Abhängigkeit davon, ob er einen Raum referenziert und ob er markiert ist.
-	 * @param b ob der Button gerade markiert ist.
+	 * Färbt den Button in Abhängigkeit davon, ob er einen Raum referenziert und
+	 * ob er markiert ist.
+	 * 
+	 * @param b
+	 *            ob der Button gerade markiert ist.
 	 */
 	public void setAusgewaehlt(boolean b)
 	{
@@ -69,15 +76,22 @@ public class GridButton extends JButton
 	/**
 	 * Legt einen neuen Raum an und lässt den GridButton ihn referenzieren.
 	 */
-	public void fuegeRaumHinzu()
+	public void fuegeLeerenRaumHinzu()
 	{
 		_raum = new Raum("", "");
 		setAusgewaehlt(true);
 		_raum.setKoordinaten(_x, _y);
 	}
 
+	public void setRaum(Raum raum)
+	{
+		_raum = raum;
+	}
+
 	/**
-	 * Gibt den referenzierten Raum zurück. Ist null, wenn keiner referenziert wird.
+	 * Gibt den referenzierten Raum zurück. Ist null, wenn keiner referenziert
+	 * wird.
+	 * 
 	 * @return
 	 */
 	public Raum getRaum()
