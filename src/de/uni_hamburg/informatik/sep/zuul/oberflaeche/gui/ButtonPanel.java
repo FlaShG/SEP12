@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -38,14 +40,21 @@ public class ButtonPanel extends JPanel
 
 	private final Dimension BUTTONGROESSE = new Dimension(100, 45);
 	private final Dimension PREFERRED = new Dimension(120, 25);
-	private final int HOEHE = 250;
+	private final int HOEHE = 280;
 	private final int SCHRIFTGROESSE = 11;
 	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+	private JButton _tuerNordButton;
+	private JButton _tuerOstButton;
+	private JButton _tuerSuedButton;
+	private JButton _tuerWestButton;
 
 	private JButton _ladenButton;
+	private JButton _fuettereButton;
+	
+	private final Color TUERFARBE = new Color(180,90,0);
 
 
 	public ButtonPanel(int breite)
@@ -120,6 +129,13 @@ public class ButtonPanel extends JPanel
 		_gibButton.setMinimumSize(PREFERRED);
 		_gibButton.setPreferredSize(PREFERRED);
 		_gibButton.setFocusable(false);
+		
+
+		_fuettereButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_FEED));
+		_fuettereButton.setMinimumSize(PREFERRED);
+		_fuettereButton.setPreferredSize(PREFERRED);
+		_fuettereButton.setFocusable(false);
 
 		_essenAusTascheButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
@@ -152,7 +168,48 @@ public class ButtonPanel extends JPanel
 
 
 		_LabelFuerIcon = new JLabel();
-		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
+		_LabelFuerIcon.setLayout(null);
+		_LabelFuerIcon.setMinimumSize(new Dimension(205, 205));
+		_LabelFuerIcon.setSize(205, 205);
+		
+		_tuerNordButton = new JButton();
+		_tuerNordButton.setSize(25, 20);
+		_tuerNordButton.setLocation(90, 0);
+		_tuerNordButton.setBackground(TUERFARBE);
+		_tuerNordButton.setFocusable(false);
+		_tuerNordButton.setBorderPainted(false);
+		_tuerNordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_tuerOstButton = new JButton();
+		_tuerOstButton.setSize(20, 25);
+		_tuerOstButton.setLocation(185, 85);
+		_tuerOstButton.setBackground(TUERFARBE);
+		_tuerOstButton.setFocusable(false);
+		_tuerOstButton.setBorderPainted(false);
+		_tuerOstButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_tuerSuedButton = new JButton();
+		_tuerSuedButton.setSize(25, 20);
+		_tuerSuedButton.setLocation(90, 185);
+		_tuerSuedButton.setBackground(TUERFARBE);
+		_tuerSuedButton.setFocusable(false);
+		_tuerSuedButton.setBorderPainted(false);
+		_tuerSuedButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		
+		_tuerWestButton = new JButton();
+		_tuerWestButton.setSize(20, 25);
+		_tuerWestButton.setLocation(0, 85);
+		_tuerWestButton.setBackground(TUERFARBE);
+		_tuerWestButton.setFocusable(false);
+		_tuerWestButton.setBorderPainted(false);
+		_tuerWestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		_LabelFuerIcon.add(_tuerNordButton);
+		_LabelFuerIcon.add(_tuerOstButton);
+		_LabelFuerIcon.add(_tuerSuedButton);
+		_LabelFuerIcon.add(_tuerWestButton);
+		
 
 		initialisiereUI();
 
@@ -201,30 +258,33 @@ public class ButtonPanel extends JPanel
 
 		c.gridx = 0;
 		c.gridy = 0;
-		befehlsPanel.add(_gibButton, c);
+		befehlsPanel.add(_fuettereButton, c);
 
 		c.gridx = 0;
 		c.gridy = 1;
-		befehlsPanel.add(_nehmenButton, c);
+		befehlsPanel.add(_gibButton, c);
 
 		c.gridx = 0;
 		c.gridy = 2;
-		befehlsPanel.add(_essenAusTascheButton, c);
+		befehlsPanel.add(_nehmenButton, c);
 
 		c.gridx = 0;
 		c.gridy = 3;
-		befehlsPanel.add(_essenBodenButton, c);
+		befehlsPanel.add(_essenAusTascheButton, c);
 
 		c.gridx = 0;
 		c.gridy = 4;
-		befehlsPanel.add(_helpButton, c);
+		befehlsPanel.add(_essenBodenButton, c);
 
 		c.gridx = 0;
 		c.gridy = 5;
-		befehlsPanel.add(_quitButton, c);
+		befehlsPanel.add(_helpButton, c);
 
 		
 		c.gridy = 6;
+		befehlsPanel.add(_quitButton, c);
+		
+		c.gridy = 7;
 		befehlsPanel.add(_ladenButton, c);
 
 		//RaumbildPanel
@@ -330,6 +390,13 @@ public class ButtonPanel extends JPanel
 	public JButton getLadenButton()
 	{
 		return _ladenButton;
+	}
+	/**
+	 * @return den _ladenButton
+	 */
+	public JButton getFuettereButton()
+	{
+		return _fuettereButton;
 	}
 
 	/**
