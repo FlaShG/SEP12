@@ -13,6 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * @author 1griese, 0ortmann
  * 
  */
+//TODO: Das kann alles statisch geregelt werden und braucht prinzipiell kein extra Objekt
 public class VerbindungsWerkzeug
 {
 	private EditorMap _map;
@@ -27,13 +28,8 @@ public class VerbindungsWerkzeug
 	 * 
 	 * @param map
 	 */
-	public VerbindungsWerkzeug(EditorMap map)
+	public VerbindungsWerkzeug()
 	{
-		_map = map;
-		GridButton[][] array = _map.getButtonArray();
-		_arrayZL = array.length;
-		_arraySL = array[0].length;
-		_raumListe = new ArrayList<Raum>();
 
 	}
 
@@ -41,8 +37,14 @@ public class VerbindungsWerkzeug
 	 * Verbindet alle im Array gefundenen Räume in den entsprechenden
 	 * Himmelsrichtungen mit ihren potenziellen Nachbarn
 	 */
-	public void verbindeRaeume()
+	public void verbindeRaeume(EditorMap map)
 	{
+		_map = map;
+		GridButton[][] array = _map.getButtonArray();
+		_arrayZL = array.length;
+		_arraySL = array[0].length;
+		_raumListe = new ArrayList<Raum>();
+		
 		_raumArray = liesRaeumeAusButtonArray();
 
 		for(int i = 0; i < _arrayZL; ++i)
