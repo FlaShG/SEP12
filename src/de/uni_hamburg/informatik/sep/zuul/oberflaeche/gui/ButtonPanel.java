@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +26,7 @@ public class ButtonPanel extends JPanel
 	private JButton _helpButton;
 
 	private JLabel _platzhalter;
+	private JLabel _LabelFuerIcon;
 
 	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
 	private final Dimension PREFERRED = new Dimension(120, 25);
@@ -34,6 +35,7 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+	private ImageIcon _raumIcon;
 
 	public ButtonPanel(int breite)
 	{
@@ -93,7 +95,6 @@ public class ButtonPanel extends JPanel
 		_essenAusTascheButton.setMinimumSize(PREFERRED);
 		_essenAusTascheButton.setFocusable(false);
 
-		
 		_essenBodenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_BODEN));
@@ -105,6 +106,12 @@ public class ButtonPanel extends JPanel
 		_nehmenButton.setMinimumSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
 
+		//Raumanzeige initialisieren
+		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
+
+		_LabelFuerIcon = new JLabel(_raumIcon);
+		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
+
 		initialisiereUI();
 
 	}
@@ -112,18 +119,21 @@ public class ButtonPanel extends JPanel
 	/**
 	 * Belege die UI mit Standardwerten und ordne die Elemente in einem
 	 * Gridbaglayout an. Es werden dabei zwei neue Panels erstellt :
-	 * steuerungsPanel mit GridbagLayout befehlsPanel mit GridLayout
+	 * steuerungsPanel und befehlsPanel mit jeweils eigenem GridBagLayout
 	 */
 	private void initialisiereUI()
 	{
 
 		JPanel steuerungsPanel = new JPanel();
 		JPanel befehlsPanel = new JPanel();
+		JPanel raumPanel = new JPanel();
 
 		steuerungsPanel.setLayout(new GridBagLayout());
-		befehlsPanel.setLayout(new GridLayout(0, 1));
+		befehlsPanel.setLayout(new GridBagLayout());
+		raumPanel.setLayout(new GridBagLayout());
 
 		super.add(steuerungsPanel);
+		super.add(raumPanel);
 		super.add(befehlsPanel);
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -145,18 +155,39 @@ public class ButtonPanel extends JPanel
 		c.gridy = 1;
 		steuerungsPanel.add(_eastButton, c);
 
-		c.gridx = 3;
-		steuerungsPanel.add(_platzhalter, c);
+		//Befehlpanel
 
+		c.gridx = 0;
 		c.gridy = 0;
-		c.gridx = 3;
+		befehlsPanel.add(_gibButton, c);
 
-		befehlsPanel.add(_gibButton, befehlsPanel);
-		befehlsPanel.add(_nehmenButton, befehlsPanel);
-		befehlsPanel.add(_essenAusTascheButton, befehlsPanel);
-		befehlsPanel.add(_essenBodenButton, befehlsPanel);
-		befehlsPanel.add(_helpButton, befehlsPanel);
-		befehlsPanel.add(_quitButton, befehlsPanel);
+		c.gridx = 0;
+		c.gridy = 1;
+		befehlsPanel.add(_nehmenButton, c);
+
+		c.gridx = 0;
+		c.gridy = 2;
+		befehlsPanel.add(_essenAusTascheButton, c);
+
+		c.gridx = 0;
+		c.gridy = 3;
+		befehlsPanel.add(_essenBodenButton, c);
+
+		c.gridx = 0;
+		c.gridy = 4;
+		befehlsPanel.add(_helpButton, c);
+
+		c.gridx = 0;
+		c.gridy = 5;
+		befehlsPanel.add(_quitButton, c);
+
+		//RaumbildPanel
+
+		c.insets = new Insets(0, 40, 0, 40);
+		c.gridx = 0;
+		c.gridy = 0;
+
+		raumPanel.add(_LabelFuerIcon, c);
 
 	}
 
@@ -225,7 +256,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _essenAusTascheButton;
 	}
-	
+
 	/**
 	 * 
 	 * @return den _essenBodenButton
@@ -241,6 +272,17 @@ public class ButtonPanel extends JPanel
 	public JButton getNehmenButton()
 	{
 		return _nehmenButton;
+	}
+
+	/**
+	 * aktualisiert die Raumanzeige auf den nächsten Raum
+	 * 
+	 * @param img
+	 *            Das neue Raumbild
+	 */
+	public void setRaumanzeige(BufferedImage img)
+	{
+		_raumIcon = new ImageIcon(img);
 	}
 
 }

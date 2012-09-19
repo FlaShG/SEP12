@@ -19,20 +19,33 @@ import javax.xml.bind.annotation.XmlType;
  * Standardmäßig sind die Räume leer.
  */
 @XmlRootElement(name = "raum")
-@XmlType(propOrder={"_name", "_id", "_beschreibung", "_raumart"})
+@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart", "_items" })
 public class Raum
 {
-	private @XmlElement(name = "beschreibung") String _beschreibung;
-	private @XmlTransient Map<String, Raum> _ausgaenge;
-	private @XmlTransient Stack<Item> _items; 	
-	private @XmlTransient Maus _maus;
-	private @XmlElement(name = "raumart") RaumArt _raumart;
-	private @XmlElement(name = "id") int _id; 
-	private @XmlElement(name = "name") String _name;
-	
-	public Raum()
-	{	/* für JAXB */	}
-	
+	private @XmlElement(name = "beschreibung")
+	String _beschreibung;
+	private @XmlTransient
+	Map<String, Raum> _ausgaenge;
+	private @XmlElement(name = "item")
+	Stack<Item> _items;
+	private @XmlTransient
+	Maus _maus;
+	private @XmlElement(name = "raumart")
+	RaumArt _raumart;
+	private @XmlElement(name = "id")
+	int _id;
+	private @XmlElement(name = "name")
+	String _name;
+
+	/**
+	 * Nur für JAXB
+	 */
+	private Raum()
+	{
+		_ausgaenge = new HashMap<String, Raum>();
+		setItems(new Stack<Item>());
+	}
+
 	/**
 	 * Erzeugt einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -40,27 +53,19 @@ public class Raum
 	 * @param beschreibung
 	 *            die Beschreibung des Raums.
 	 * 
+	 * @require name != null
 	 * @require beschreibung != null
 	 */
-	public Raum(String beschreibung)
-	{
-		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
-
-		this._beschreibung = beschreibung;
-		this._ausgaenge = new HashMap<String, Raum>();
-
-		_items = new Stack<Item>();
-	}
-	
 	public Raum(String name, String beschreibung)
 	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
+		assert name != null : "Vorbedingung verletzt: name != null";
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
 
-		_items = new Stack<Item>();
-		
+		setItems(new Stack<Item>());
+
 		_name = name;
 
 		_id = _name.hashCode();
@@ -83,8 +88,6 @@ public class Raum
 
 		_ausgaenge.put(richtung, nachbar);
 	}
-	
-	
 
 	/**
 	 * Verbindet die beiden übergebenen Räume in der entsprechenden Richtung.
@@ -101,11 +104,17 @@ public class Raum
 	public void verbindeZweiRaeume(String richtung, Raum nachbar,
 			String gegenRichtung)
 	{
+		//TODO: 
+		//Abbrechen wenn null übergeben wird. Dies darf vorkommen, soll aber keinen effekt haben.
+		if(nachbar == null)
+		{
+			return;
+		}
 		this.setAusgang(richtung, nachbar);
 		nachbar.setAusgang(gegenRichtung, this);
 
 	}
-	
+
 	public ArrayList<Raum> getAusgaenge()
 	{
 		return new ArrayList<Raum>(_ausgaenge.values());
@@ -126,7 +135,7 @@ public class Raum
 
 		return _ausgaenge.get(richtung);
 	}
-	
+
 	public String[] getMoeglicheAusgaenge()
 	{
 		return _ausgaenge.keySet().toArray(new String[0]);
@@ -137,16 +146,16 @@ public class Raum
 	 * 
 	 * @param item
 	 *            Das neue Item
-	 *
+	 * 
 	 * @require item != Item.Keins
 	 */
 	public void addItem(Item item)
 	{
 		assert item != Item.Keins : "Vorbedingung verletzt: item != Item.Keins";
-		
-		_items.push(item);
-		
-		Collections.shuffle(_items);
+
+		getItems().push(item);
+
+		Collections.shuffle(getItems());
 	}
 
 	/**
@@ -154,8 +163,8 @@ public class Raum
 	 */
 	public void loescheItem()
 	{
-		if(!_items.empty())
-			_items.pop();
+		if(!getItems().empty())
+			getItems().pop();
 	}
 	
 	/**
@@ -195,53 +204,48 @@ public class Raum
 	{
 		return _beschreibung;
 	}
-	
-	@Override
-	public String toString()
-	{
-		// TODO Auto-generated method stub
-		return getBeschreibung();
-	}
-	
+
 	/**
 	 * liefert das Nächste Item, entfernt es jedoch nicht
+	 * 
 	 * @return Item
 	 * @ensure Item != null
 	 */
 	public Item getNaechstesItem()
 	{
-		if (_items.empty())
+		if(getItems().empty())
 		{
 			return Item.Keins;
 		}
-		return _items.peek();
+		return getItems().peek();
 	}
-	
 
 	public boolean hasMaus()
 	{
 		return _maus != null;
 	}
-	
+
 	/**
 	 * @return the _maus
 	 * @require hasMaus()
 	 */
+	@XmlTransient
 	public Maus getMaus()
 	{
 		assert hasMaus();
-		
+
 		return _maus;
 	}
 
 	/**
-	 * @param _maus the _maus to set
+	 * @param _maus
+	 *            the _maus to set
 	 */
 	public void setMaus(Maus maus)
 	{
 		_maus = maus;
 	}
-	
+
 	public RaumArt getRaumart()
 	{
 		return _raumart;
@@ -270,6 +274,16 @@ public class Raum
 	private void setName(String name)
 	{
 		_name = name;
+	}
+
+	private Stack<Item> getItems()
+	{
+		return _items;
+	}
+
+	private void setItems(Stack<Item> items)
+	{
+		_items = items;
 	}
 
 }

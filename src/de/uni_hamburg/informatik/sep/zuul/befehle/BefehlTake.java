@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
@@ -18,29 +19,31 @@ final class BefehlTake extends Befehl
 	{
 		Raum raum = kontext.getAktuellerRaum();
 
-		switch(raum.getNaechstesItem())
+		switch (raum.getNaechstesItem())
 		{
-			case Kuchen:
-				kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
-				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
-				raum.loescheItem();
-				if(raum.getNaechstesItem() != Item.Keins)
-				{
-					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
-				}
+		case Kuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+			raum.loescheItem();
+			if(raum.getNaechstesItem() != Item.Keins)
+			{
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.IMMERNOCHKUCHENTEXT);
+			}
 			break;
-			case Giftkuchen:
-				kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
-				kontext.schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
-				raum.loescheItem();
-				if(raum.getNaechstesItem() != Item.Keins)
-				{
-					kontext.schreibeNL(TextVerwalter.IMMERNOCHKUCHENTEXT);
-				}
+		case Giftkuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+			raum.loescheItem();
+			if(raum.getNaechstesItem() != Item.Keins)
+			{
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.IMMERNOCHKUCHENTEXT);
+			}
 			break;
 
-			default:
-				kontext.schreibeNL(TextVerwalter.NICHTSZUMNEHMENTEXT);
+		default:
+			Spiel.getInstance().schreibeNL(TextVerwalter.NICHTSZUMNEHMENTEXT);
 			break;
 		}
 	}
