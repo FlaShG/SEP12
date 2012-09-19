@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
@@ -142,7 +141,6 @@ public class LadenWerkzeug
 				if(raum.getId() == xmlRaum.getID())
 				{
 					raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
-					System.out.println(xmlRaum.getX() + " " + xmlRaum.getY());
 				}
 			}
 		}
