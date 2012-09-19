@@ -27,7 +27,7 @@ public class ButtonPanel extends JPanel
 
 	private JLabel _platzhalter;
 	private JLabel _LabelFuerIcon;
-	
+
 	private final Dimension BUTTONGROESSE = new Dimension(120, 80);
 	private final Dimension PREFERRED = new Dimension(120, 25);
 	private final int HOEHE = 260;
@@ -37,7 +37,6 @@ public class ButtonPanel extends JPanel
 	private JButton _essenBodenButton;
 	private JButton _ladenButton;
 	private ImageIcon _raumIcon;
-	
 
 	public ButtonPanel(int breite)
 	{
@@ -115,11 +114,10 @@ public class ButtonPanel extends JPanel
 
 		//Raumanzeige initialisieren
 		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
-		
+
 		_LabelFuerIcon = new JLabel(_raumIcon);
 		_LabelFuerIcon.setMinimumSize(new Dimension(245, 245));
-		
-		
+
 		initialisiereUI();
 
 	}
@@ -139,7 +137,7 @@ public class ButtonPanel extends JPanel
 		steuerungsPanel.setLayout(new GridBagLayout());
 		befehlsPanel.setLayout(new GridBagLayout());
 		raumPanel.setLayout(new GridBagLayout());
-		
+
 		super.add(steuerungsPanel);
 		super.add(raumPanel);
 		super.add(befehlsPanel);
@@ -163,39 +161,50 @@ public class ButtonPanel extends JPanel
 		c.gridy = 1;
 		steuerungsPanel.add(_eastButton, c);
 
-
-		
 		//Befehlpanel
-		
+
 		c.gridx = 0;
 		c.gridy = 0;
 		befehlsPanel.add(_gibButton, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 1;
 		befehlsPanel.add(_nehmenButton, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 2;
 		befehlsPanel.add(_essenAusTascheButton, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 3;
 		befehlsPanel.add(_essenBodenButton, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 4;
 		befehlsPanel.add(_helpButton, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 5;
 		befehlsPanel.add(_quitButton, c);
+<<<<<<< HEAD
 		
+=======
+
+		//RaumbildPanel
+
+		c.insets = new Insets(0, 40, 0, 40);
+>>>>>>> refs/heads/master
 		c.gridx = 0;
+<<<<<<< HEAD
 		c.gridy = 6;
 		befehlsPanel.add(_ladenButton, c);
 		
 		
+=======
+		c.gridy = 0;
+
+		raumPanel.add(_LabelFuerIcon, c);
+>>>>>>> refs/heads/master
 
 	}
 
@@ -282,6 +291,7 @@ public class ButtonPanel extends JPanel
 		return _nehmenButton;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * @return den _ladenButton
 	 */
@@ -291,15 +301,17 @@ public class ButtonPanel extends JPanel
 	}
 	
 	
+=======
+>>>>>>> refs/heads/master
 	/**
 	 * aktualisiert die Raumanzeige auf den nächsten Raum
-	 * @param img Das neue Raumbild
+	 * 
+	 * @param img
+	 *            Das neue Raumbild
 	 */
 	public void setRaumanzeige(BufferedImage img)
 	{
 		_raumIcon = new ImageIcon(img);
 	}
-	
-	
 
 }

@@ -9,24 +9,24 @@ import javax.xml.bind.Unmarshaller;
 
 public class RaumStrukturParser
 {
-	
+
 	private final String XMLPATH;
 	private XmlStruktur _root;
-	
+
 	/**
-	 * Erstellt einen neuen {@link RaumStrukturParser} und liest die
-	 * angegebene <code>.xml</code>
+	 * Erstellt einen neuen {@link RaumStrukturParser} und liest die angegebene
+	 * <code>.xml</code>
 	 * 
 	 * @param xmlpath
 	 */
 	public RaumStrukturParser(String xmlpath)
 	{
 		assert xmlpath != null : "Vorbedingung verletzt: xmlpath != null";
-		
+
 		XMLPATH = xmlpath;
 		leseXmlEin();
 	}
-	
+
 	public List<XmlRaum> getXmlVerbindungen()
 	{
 		return _root.getRaeume();
@@ -41,13 +41,13 @@ public class RaumStrukturParser
 			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
 			_root = (XmlStruktur) junmarshaller.unmarshal(file);
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void schreibeXml()
 	{
 		try
@@ -64,5 +64,5 @@ public class RaumStrukturParser
 			e.printStackTrace();
 		}
 	}
-	
+
 }

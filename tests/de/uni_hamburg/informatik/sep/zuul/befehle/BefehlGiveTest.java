@@ -24,12 +24,15 @@ public class BefehlGiveTest
 	@Test
 	public void testBestimmeRichtung()
 	{
-		assertEquals(TextVerwalter.RICHTUNG_NORDEN, BefehlGive.bestimmeRichtung(
-				Item.Kuchen, TextVerwalter.RICHTUNG_NORDEN, new String[] { TextVerwalter.RICHTUNG_SUEDEN }));
+		assertEquals(TextVerwalter.RICHTUNG_NORDEN,
+				BefehlGive.bestimmeRichtung(Item.Kuchen,
+						TextVerwalter.RICHTUNG_NORDEN,
+						new String[] { TextVerwalter.RICHTUNG_SUEDEN }));
 
 		String falscheRichtung = BefehlGive.bestimmeRichtung(Item.Giftkuchen,
-				TextVerwalter.RICHTUNG_NORDEN, new String[] { TextVerwalter.RICHTUNG_SUEDEN });
-		
+				TextVerwalter.RICHTUNG_NORDEN,
+				new String[] { TextVerwalter.RICHTUNG_SUEDEN });
+
 		assertFalse(falscheRichtung == TextVerwalter.RICHTUNG_NORDEN);
 		assertTrue(falscheRichtung == TextVerwalter.RICHTUNG_SUEDEN);
 
