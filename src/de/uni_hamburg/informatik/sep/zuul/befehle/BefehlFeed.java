@@ -23,6 +23,11 @@ public class BefehlFeed extends Befehl
 			Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
 			return;
 		}
+		if(katze.isSatt())
+		{
+			Spiel.getInstance().schreibeNL(TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+			return;
+		}
 		Item kuchen = kontext.getInventar().getAnyKuchen();
 		katze.fuettere(kontext, kuchen);
 		

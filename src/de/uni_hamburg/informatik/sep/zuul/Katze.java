@@ -42,6 +42,8 @@ public class Katze implements TickListener, PropertyChangeListener
 		if(katzeAufSpielerGetroffen || (_raum == kontext.getAktuellerRaum() && hasRoomChanged))
 		{
 			Spiel.getInstance().schreibeNL(TextVerwalter.KATZE_IM_AKTUELLEN_RAUM);
+			if(_raum.hasMaus())
+				Spiel.getInstance().schreibeNL(TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
 		}
 
 		// Katze im Raum mit einer Maus?
@@ -139,5 +141,11 @@ public class Katze implements TickListener, PropertyChangeListener
 	{
 		// TODO Auto-generated method stub
 		return _raum;
+	}
+
+	public boolean isSatt()
+	{
+		// TODO Auto-generated method stub
+		return _satt;
 	}
 }

@@ -109,4 +109,8 @@ public class TextVerwalter
 
 	public static final String KATZE_NICHT_DA_ZUM_FUETTERN = "Hier ist keine Katze, die Dr. Little füttern könnte.";
 
+	public static final String KATZE_VERJAGT_DIE_MAUS = "Die Katze verjagt die Maus in diesem Raum";
+
+	public static final String KATZE_HAT_KEINEN_HUNGER = "Die Katze scheint keinen Hunger mehr zu haben.";
+
 }
