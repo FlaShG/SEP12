@@ -38,7 +38,7 @@ public class ButtonPanel extends JPanel
 
 	private final Dimension BUTTONGROESSE = new Dimension(100, 45);
 	private final Dimension PREFERRED = new Dimension(120, 25);
-	private final int HOEHE = 250;
+	private final int HOEHE = 280;
 	private final int SCHRIFTGROESSE = 11;
 	private JButton _essenAusTascheButton;
 	private JButton _nehmenButton;
@@ -46,6 +46,7 @@ public class ButtonPanel extends JPanel
 	private JButton _essenBodenButton;
 
 	private JButton _ladenButton;
+	private JButton _fuettereButton;
 
 
 	public ButtonPanel(int breite)
@@ -120,6 +121,13 @@ public class ButtonPanel extends JPanel
 		_gibButton.setMinimumSize(PREFERRED);
 		_gibButton.setPreferredSize(PREFERRED);
 		_gibButton.setFocusable(false);
+		
+
+		_fuettereButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_FEED));
+		_fuettereButton.setMinimumSize(PREFERRED);
+		_fuettereButton.setPreferredSize(PREFERRED);
+		_fuettereButton.setFocusable(false);
 
 		_essenAusTascheButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
@@ -201,30 +209,33 @@ public class ButtonPanel extends JPanel
 
 		c.gridx = 0;
 		c.gridy = 0;
-		befehlsPanel.add(_gibButton, c);
+		befehlsPanel.add(_fuettereButton, c);
 
 		c.gridx = 0;
 		c.gridy = 1;
-		befehlsPanel.add(_nehmenButton, c);
+		befehlsPanel.add(_gibButton, c);
 
 		c.gridx = 0;
 		c.gridy = 2;
-		befehlsPanel.add(_essenAusTascheButton, c);
+		befehlsPanel.add(_nehmenButton, c);
 
 		c.gridx = 0;
 		c.gridy = 3;
-		befehlsPanel.add(_essenBodenButton, c);
+		befehlsPanel.add(_essenAusTascheButton, c);
 
 		c.gridx = 0;
 		c.gridy = 4;
-		befehlsPanel.add(_helpButton, c);
+		befehlsPanel.add(_essenBodenButton, c);
 
 		c.gridx = 0;
 		c.gridy = 5;
-		befehlsPanel.add(_quitButton, c);
+		befehlsPanel.add(_helpButton, c);
 
 		
 		c.gridy = 6;
+		befehlsPanel.add(_quitButton, c);
+		
+		c.gridy = 7;
 		befehlsPanel.add(_ladenButton, c);
 
 		//RaumbildPanel
@@ -330,6 +341,13 @@ public class ButtonPanel extends JPanel
 	public JButton getLadenButton()
 	{
 		return _ladenButton;
+	}
+	/**
+	 * @return den _ladenButton
+	 */
+	public JButton getFuettereButton()
+	{
+		return _fuettereButton;
 	}
 
 	/**
