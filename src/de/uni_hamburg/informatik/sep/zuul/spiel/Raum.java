@@ -258,12 +258,13 @@ public class Raum
 		_raumart = raumart;
 	}
 
+	@XmlTransient
 	public int getId()
 	{
 		return _id;
 	}
 
-	private void setId(int id)
+	public void setId(int id)
 	{
 		_id = id;
 	}
@@ -277,7 +278,6 @@ public class Raum
 	public void setName(String name)
 	{
 		_name = name;
-		_id = name.hashCode();
 	}
 
 }
