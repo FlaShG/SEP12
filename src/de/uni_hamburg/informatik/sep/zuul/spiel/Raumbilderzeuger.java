@@ -21,6 +21,9 @@ public class Raumbilderzeuger
 	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
 	private final Color WANDFARBE = Color.white;
 	private final Color BODENFARBE = Color.GREEN;
+	private final int MAUSX = 140;
+	private final int MAUSY = 25;
+	
 
 	private BufferedImage _raumansicht;
 	private SpielKontext _kontext;
@@ -71,7 +74,7 @@ public class Raumbilderzeuger
 
 		if(_kontext.getAktuellerRaum().hasMaus())
 		{
-			_raumansicht = maleAufBild(_raumansicht, MAUS, 100, 50);
+			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSY, MAUSX);
 		}
 
 		int anzahlKruemel = 0;
