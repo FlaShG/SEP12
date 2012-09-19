@@ -27,7 +27,7 @@ public class SpeicherWerkzeug
 	{
 		vergebeIDs();
 				
-		_verbindungen.verbindeRaeume(map);
+		_verbindungen.verbindeRaeume(_ui.getMap());
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
