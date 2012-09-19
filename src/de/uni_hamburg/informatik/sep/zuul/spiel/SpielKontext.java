@@ -21,7 +21,7 @@ public class SpielKontext
 
 	// TODO: addTickListener() 
 
-	private LinkedList<TickListener> tickListeners = new LinkedList<>();
+	private LinkedList<TickListener> tickListeners = new LinkedList<TickListener>();
 
 	public void addTickListener(TickListener tickListener)
 	{

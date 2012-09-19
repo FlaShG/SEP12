@@ -24,7 +24,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<Raum> list)
 	{
-		_connected = new HashMap<>();
+		_connected = new HashMap<Raum, Raum[]>();
 		initialisiereConnections(list);
 	}
 
@@ -39,7 +39,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<XmlRaum> xmlList, List<Raum> list)
 	{
-		_connected = new HashMap<>();
+		_connected = new HashMap<Raum, Raum[]>();
 		Map<Integer, Raum> zuordnungen = erzeugeIDZuordnungen(xmlList, list);
 
 		for(XmlRaum xmlRaum : xmlList)
@@ -168,7 +168,7 @@ public class RaumStruktur
 	 */
 	public List<XmlRaum> getXMLRaumListe()
 	{
-		List<XmlRaum> result = new ArrayList<>();
+		List<XmlRaum> result = new ArrayList<XmlRaum>();
 		for(Raum raum : _connected.keySet())
 		{
 			int nord = 0, ost = 0, sued = 0, west = 0;

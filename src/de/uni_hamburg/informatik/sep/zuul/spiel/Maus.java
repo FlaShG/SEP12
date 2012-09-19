@@ -38,7 +38,7 @@ public class Maus
 	{
 		if(begangeneRaeume == null)
 		{
-			begangeneRaeume = new ArrayList<>();
+			begangeneRaeume = new ArrayList<Raum>();
 		}
 		begangeneRaeume.add(start);
 

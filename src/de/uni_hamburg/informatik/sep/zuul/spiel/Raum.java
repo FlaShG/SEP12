@@ -180,7 +180,7 @@ public class Raum
 	 * Gibt die Items zurück
 	 * Für den Editor relevant
 	 */
-	public Collection<Item> getItems()
+	public Stack<Item> getItems()
 	{
 		return _items;
 	}
@@ -274,16 +274,6 @@ public class Raum
 	private void setName(String name)
 	{
 		_name = name;
-	}
-
-	private Stack<Item> getItems()
-	{
-		return _items;
-	}
-
-	private void setItems(Stack<Item> items)
-	{
-		_items = items;
 	}
 
 }

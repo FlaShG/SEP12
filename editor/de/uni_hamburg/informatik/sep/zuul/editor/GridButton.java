@@ -46,7 +46,7 @@ public class GridButton extends JButton
 	
 	public void fuegeRaumHinzu()
 	{
-		_raum = new Raum("");
+		_raum = new Raum("", "");
 		setAusgewaehlt(true);
 	}
 	
