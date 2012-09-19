@@ -116,6 +116,9 @@ public class SpielGUI extends Spiel
 
 		_bp.getGibButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
+
+		_bp.getLadenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
 	}
 
 	@Override

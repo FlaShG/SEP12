@@ -97,4 +97,5 @@ public class TextVerwalter
 	public static final String LABOR_GESUNDER_KUCHEN = "Der Kuchen stellt sich zwar als Kalorienbombe, aber prinzipiell ungiftig heraus.";
 	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Kuchens wurde schon lange überschritten...";
 
+	public static final String BEFEHL_LADEN = "lade";
 }

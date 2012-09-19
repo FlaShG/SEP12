@@ -35,6 +35,7 @@ public class ButtonPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
+	private JButton _ladenButton;
 	private ImageIcon _raumIcon;
 
 	public ButtonPanel(int breite)
@@ -105,6 +106,11 @@ public class ButtonPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 		_nehmenButton.setMinimumSize(PREFERRED);
 		_nehmenButton.setFocusable(false);
+
+		_ladenButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
+		_ladenButton.setMinimumSize(PREFERRED);
+		_ladenButton.setFocusable(false);
 
 		//Raumanzeige initialisieren
 		_raumIcon = new ImageIcon("Z:\\SEP\\test.png");
@@ -182,12 +188,16 @@ public class ButtonPanel extends JPanel
 		befehlsPanel.add(_quitButton, c);
 
 		//RaumbildPanel
-
 		c.insets = new Insets(0, 40, 0, 40);
+
 		c.gridx = 0;
 		c.gridy = 0;
 
 		raumPanel.add(_LabelFuerIcon, c);
+
+		c.gridy = 6;
+		befehlsPanel.add(_ladenButton, c);
+
 
 	}
 
@@ -272,6 +282,15 @@ public class ButtonPanel extends JPanel
 	public JButton getNehmenButton()
 	{
 		return _nehmenButton;
+	}
+
+
+	/**
+	 * @return den _ladenButton
+	 */
+	public JButton getLadenButton()
+	{
+		return _ladenButton;
 	}
 
 	/**
