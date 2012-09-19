@@ -17,6 +17,8 @@ public class SpeicherWerkzeug
 	 * Speichere alle Räume als Struktur an den angegebenen Pfad.
 	 * 
 	 * @param path
+	 *            Directory Only! darf nur zwei XMLs beinhalten oder muss leer
+	 *            sein.
 	 */
 	public void speichern(String path)
 	{
@@ -26,9 +28,9 @@ public class SpeicherWerkzeug
 				_verbindungen.getRaumListe());
 		IOManager manager = new IOManager();
 
-		manager.writeLevel(path, raumstruktur);
+		manager.schreibeLevelStruktur(path.concat("struktur.xml"), raumstruktur);
 
-		//TODO: prüfen wie das mit neuen Räumen ist und die evtl auch schreiben - andere write methode?
+		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
 	}
 
