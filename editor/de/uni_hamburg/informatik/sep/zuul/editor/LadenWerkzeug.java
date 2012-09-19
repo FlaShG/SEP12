@@ -17,10 +17,12 @@ public class LadenWerkzeug
 {
 
 	private IOManager _manager;
+	private EditorFensterUI _ui;
 
-	public LadenWerkzeug()
+	public LadenWerkzeug(EditorFensterUI ui)
 	{
 		_manager = new IOManager();
+		_ui = ui;
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class LadenWerkzeug
 	 * @param raumListe
 	 * @return ein GridButtonArray
 	 */
-	private EditorMap erstelleButtonsAusListe(List<XmlRaum> xmlRaumListe,
+	private EditorMap erstelleEditorMapAusListe(List<XmlRaum> xmlRaumListe,
 			List<Raum> raumListe)
 	{
 		raumListe = setRaumKoordinaten(xmlRaumListe, raumListe);
@@ -58,6 +60,7 @@ public class LadenWerkzeug
 				if(raum != null)
 				{
 					buttons[i][j].setRaum(raum);
+					buttons[i][j].setAusgewaehlt(false);
 				}
 			}
 		}
@@ -153,8 +156,8 @@ public class LadenWerkzeug
 	public void lade(String path)
 	{
 		_manager.readLevel(path);
-		erstelleButtonsAusListe(_manager.getXmlRaeume(), _manager.getRaeume());
-
+		EditorMap map = erstelleEditorMapAusListe(_manager.getXmlRaeume(), _manager.getRaeume());
+		_ui.setMap(map);
 	}
 
 }

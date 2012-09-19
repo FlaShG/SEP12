@@ -27,12 +27,17 @@ public class EditorFensterUI
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
 	
+	private Observer _beobachter;
+	
 	/**
 	 * Erzeugt eine neue EditorFensterUI.
 	 * @param o Ein Observer, der über alle Änderungen in der UI informiert wird.
 	 */
 	public EditorFensterUI(Observer o)
 	{
+		_beobachter = o;
+		
+		
 		_frame = new JFrame("Zuul-Editor");
 		
 		_frame.getContentPane().setLayout(new BorderLayout());
@@ -70,6 +75,18 @@ public class EditorFensterUI
 	public EditorMenuBar getMenuBar()
 	{
 		return _menubar;
+	}
+
+	/**
+	 * Setzt die Map
+	 * @return
+	 */
+	public void setMap(EditorMap map)
+	{
+		_frame.remove(_map);
+		_frame.add(_map = map, BorderLayout.CENTER);
+		_map.setBeobachter(_beobachter);
+		_frame.setVisible(true);
 	}
 	
 	/**
