@@ -90,6 +90,9 @@ public class Raumbilderzeuger
 					_raumansicht);
 		}
 
+		// Male Dr.Little
+		_raumansicht = maleAufBild(_raumansicht, DRLITLE, new Tupel(77, 77));
+		
 		
 		//Male Maus
 
@@ -147,7 +150,7 @@ public class Raumbilderzeuger
 	{
 		Tupel position = getFreiePosition();
 		maleAufBild(_raumansicht, GEGENGIFT, position);
-//		maleAufBild(_raumansicht, DREVENBIGGER, position);
+		maleAufBild(_raumansicht, DREVENBIGGER, position);
 		
 		
 	}
