@@ -156,4 +156,11 @@ public class SpielGUI extends Spiel
 	{
 		_hf.hide();
 	}
+
+	@Override
+	protected void verarbeiteEingabe(String eingabezeile)
+	{
+		schreibeNL("> " + eingabezeile);
+		super.verarbeiteEingabe(eingabezeile);
+	}
 }

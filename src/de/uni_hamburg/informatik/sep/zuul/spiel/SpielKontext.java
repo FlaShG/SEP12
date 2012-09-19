@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.LinkedList;
 
 public class SpielKontext
 {
@@ -9,7 +10,8 @@ public class SpielKontext
 	private int _lebensEnergie;
 	private Inventar _inventar;
 
-	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport changes = new PropertyChangeSupport(
+			this);
 	private boolean _spielZuende;
 
 	public Raum getAktuellerRaum()
@@ -18,6 +20,25 @@ public class SpielKontext
 	}
 
 	// TODO: addTickListener() 
+
+	private LinkedList<TickListener> tickListeners = new LinkedList<>();
+
+	public void addTickListener(TickListener tickListener)
+	{
+		tickListeners.add(tickListener);
+	}
+
+	public void removeTickListener(TickListener tickListener)
+	{
+		tickListeners.remove(tickListener);
+	}
+
+	public void fireTickEvent()
+	{
+		for(TickListener tickListener : tickListeners)
+			if(!tickListener.tick(this))
+				return;
+	}
 
 	public void setAktuellerRaum(Raum aktuellerRaum)
 	{

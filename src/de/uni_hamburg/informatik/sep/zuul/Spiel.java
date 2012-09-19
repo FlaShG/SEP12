@@ -59,16 +59,18 @@ public abstract class Spiel implements ISchreiber
 		SpielLogik.zeigeAusgaenge(kontext);
 	}
 
-	protected void verarbeiteEingabe(String str)
+	protected void verarbeiteEingabe(String eingabezeile)
 	{
-		schreibeNL("> " + str);
+		//		String eingabezeile = leseZeileEin();
 
-		Befehl befehl = parseEingabezeile(str);
+		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		if(_kontext.isSpielZuende())
-			beendeSpiel();
+		if(befehl.getBefehlsname().equals("gehe")) // TODO: n,s,w,o
+			_kontext.fireTickEvent();
 	}
+
+	//	protected abstract String leseZeileEin();
 
 	protected void restart()
 	{

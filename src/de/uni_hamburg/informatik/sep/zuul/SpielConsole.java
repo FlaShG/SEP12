@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 public class SpielConsole extends Spiel
@@ -32,12 +31,7 @@ public class SpielConsole extends Spiel
 
 		while(!_kontext.isSpielZuende())
 		{
-			String eingabezeile = leseZeileEin();
-
-			Befehl befehl = Spiel.parseEingabezeile(eingabezeile);
-
-			befehl.ausfuehren(_kontext);
-
+			verarbeiteEingabe(leseZeileEin());
 		}
 
 		System.out
@@ -64,7 +58,7 @@ public class SpielConsole extends Spiel
 	/**
 	 * @return
 	 */
-	String leseZeileEin()
+	protected String leseZeileEin()
 	{
 		System.out.print("> ");
 
