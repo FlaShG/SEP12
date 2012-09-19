@@ -53,22 +53,22 @@ public class Katze implements TickListener, PropertyChangeListener
 			
 			
 			// Maus neu platzieren. Alle Räume außer Start, Ende, Maus
-			ArrayList<Raum> ausgaenge = _raum.getAusgaenge();
-			for( Raum ausgang : (ArrayList<Raum>) ausgaenge.clone())
+			ArrayList<Raum> moeglicherOrtFuerMaus = _raum.getAusgaenge();
+			for( Raum ausgang : (ArrayList<Raum>) moeglicherOrtFuerMaus.clone())
 			{
 				if(ausgang.getRaumart() == RaumArt.Start)
-					ausgaenge.remove(ausgang);
+					moeglicherOrtFuerMaus.remove(ausgang);
 				if(ausgang.getRaumart() == RaumArt.Ende)
-					ausgaenge.remove(ausgang);
+					moeglicherOrtFuerMaus.remove(ausgang);
 				if(ausgang.hasMaus())
-					ausgaenge.remove(ausgang);
+					moeglicherOrtFuerMaus.remove(ausgang);
 			}
-			if(ausgaenge.size() == 0)
+			if(moeglicherOrtFuerMaus.size() == 0)
 			{
 				// panic!
 				return true;
 			}
-			Raum neuerMausRaum = FancyFunction.getRandomEntry(ausgaenge);
+			Raum neuerMausRaum = FancyFunction.getRandomEntry(moeglicherOrtFuerMaus);
 			neuerMausRaum.setMaus(new Maus(neuerMausRaum));
 			
 		}

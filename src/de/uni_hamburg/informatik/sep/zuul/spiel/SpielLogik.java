@@ -142,7 +142,7 @@ public class SpielLogik
 					}
 				});
 		
-		new Katze(kontext.getAktuellerRaum()).registerToKontext(kontext);
+		new Katze(kontext.getAktuellerRaum().getAusgang("süd").getAusgang("süd")).registerToKontext(kontext);
 
 		return kontext;
 	}
