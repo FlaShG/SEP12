@@ -14,6 +14,16 @@ import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Ein Panel, das ein mit JLabel beschriftetes Eingabeelement bereitstellt.
+ * Je nach Konstruktoraufruf kann eine Zahl mit JSpinner, ein Boolean mit JCheckBox oder
+ * eine Wahl in einer Enum mit JComboBox eingestellt werden.
+ * In jedem Fall wird die Einstellung über int getWert() abgerufen.
+ * Bei einer Zahl wird diese direkt zurück gegeben.
+ * Bei einem Boolean wird 1 bei selected, 0 be deselected zurück gegeben.
+ * Bei einer Enum wird der index der Auswahl zurück gegeben.
+ * @author 0graeff
+ */
 public class Eigenschaftsfeld extends JPanel
 {
 	public static final int ZAHL = 0;
