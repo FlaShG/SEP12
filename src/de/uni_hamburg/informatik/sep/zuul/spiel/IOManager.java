@@ -50,7 +50,7 @@ public class IOManager
 		sammlParser = new RaumSammlungParser();
 
 		//ID Liste der vorhandenen Räume
-		List<Integer> idSammlung = new ArrayList<>();
+		List<Integer> idSammlung = new ArrayList<Integer>();
 		for(Raum raum : sammlParser.getSammlung())
 		{
 			idSammlung.add(raum.getId());

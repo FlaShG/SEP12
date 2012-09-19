@@ -23,7 +23,7 @@ public class EditorFenster implements Observer
 	{
 		_ui = new EditorFensterUI(this);
 		_speicherWerkzeug = new SpeicherWerkzeug(_ui);
-		_ladenWerkzeug = new LadenWerkzeug();
+		_ladenWerkzeug = new LadenWerkzeug(_ui);
 		
 		registriereUIAktionen();
 	}
