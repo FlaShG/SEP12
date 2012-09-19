@@ -3,9 +3,14 @@ package de.uni_hamburg.informatik.sep.zuul.xml;
 import java.io.File;
 import java.util.List;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 public class RaumStrukturParser
 {
@@ -65,4 +70,24 @@ public class RaumStrukturParser
 		}
 	}
 
+	/**
+	 * Validiert die angegebene xml.
+	 */
+	public static boolean validiere(String path)
+	{
+		try
+		{	// wäre schön, wenn xsd dateien zur validierung genutzt werde
+			// könnten, ist aber jetzt nicht schlimm :P
+			File file = new File(path);
+			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
+			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
+			junmarshaller.unmarshal(file);
+			
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 }
