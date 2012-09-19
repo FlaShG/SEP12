@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
-
-
+/**
+ * Hält ein zweidimensionales Feld auf GridButtons, die die Räume auf der Karte darstellen.
+ * @author 0graeff
+ */
 public class EditorMap extends JPanel
 {
 	Observer _observer;
@@ -18,6 +20,11 @@ public class EditorMap extends JPanel
 	int activeX = -1;
 	int activeY = -1;
 	
+	/**
+	 * Erstellt eine neue EditorMap mit gegebener Höhe und Breite
+	 * @param width
+	 * @param height
+	 */
 	public EditorMap(int width, int height)
 	{		
 		setLayout(new GridLayout(width, height));
@@ -48,7 +55,9 @@ public class EditorMap extends JPanel
 		}
 	}
 	
-	
+	/**
+	 * Setzt den Beobachter, der über Änderungen im Grid informiert werden soll
+	 */
 	public void setBeobachter(Observer o)
 	{
 		_observer = o;
@@ -62,11 +71,17 @@ public class EditorMap extends JPanel
 		}
 	}
 	
+	/**
+	 * Gibt zurück, ob gerade ein GridButton ausgewählt ist
+	 */
 	public boolean buttonAusgewaehlt()
 	{
 		return activeX >= 0;
 	}
 	
+	/**
+	 * Gibt den Raum des aktuell angewählten GridButtons zurück.
+	 */
 	public Raum getAktivenRaum()
 	{
 		if(!buttonAusgewaehlt())
@@ -74,6 +89,10 @@ public class EditorMap extends JPanel
 		return _buttons[activeX][activeY].getRaum();
 	}
 	
+	/**
+	 * Fügt dem aktuell ausgewählten GridButton einen Raum hinzu,
+	 * wenn einer ausgewählt ist.
+	 */
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
 		if(buttonAusgewaehlt())
