@@ -15,7 +15,14 @@ final class BefehlGive extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
-
+		if(getParameters().length==3 && getParameters()[0].equals("mir") && getParameters()[1].equals("mehr") && getParameters()[2].equals("leben"))
+		{
+			kontext.setLebensEnergie(100);
+			Spiel.getInstance().schreibeNL("Schwupp.");
+			return;
+		}
+		
+		
 		if(kontext.getAktuellerRaum().hasMaus())
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
