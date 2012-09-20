@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Stack;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 
 public class Raumbilderzeuger
 {
@@ -30,11 +31,11 @@ public class Raumbilderzeuger
 	private final LinkedList<Tupel> _itemPositionen = new LinkedList<Tupel>();
 
 	private BufferedImage _raumansicht;
-	private SpielKontext _kontext;
+	private ClientPaket _paket;
 
-	public Raumbilderzeuger(SpielKontext kontext)
+	public Raumbilderzeuger(ClientPaket paket)
 	{
-		_kontext = kontext;
+		_paket = paket;
 
 		_itemPositionen.add(new Tupel(25, 25));
 		_itemPositionen.add(new Tupel(62, 25));
@@ -65,9 +66,9 @@ public class Raumbilderzeuger
 		_raumansicht = RAUM;
 
 		//Färbe den Raum ein je nach RaumTyp
-		if(_kontext.getAktuellerRaum().getRaumart() != null)
+		if(_paket.getRaumArt() != null)
 		{
-			switch (_kontext.getAktuellerRaum().getRaumart())
+			switch (_paket.getRaumArt())
 			{
 			case Start:
 				faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
@@ -96,13 +97,13 @@ public class Raumbilderzeuger
 		
 		//Male Maus
 
-		if(_kontext.getAktuellerRaum().hasMaus())
+		if(_paket.hasMaus())
 		{
 			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSPOSITION);
 		}
 		
 		//Male Katze
-		if(_kontext.isKatzeImAktuellenRaum())
+		if(_paket.hasKatze())
 		{
 			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
 		}
@@ -112,12 +113,11 @@ public class Raumbilderzeuger
 		int anzahlKruemel = 0;
 		boolean gegengiftDa = false;
 
-		Stack<Item> raumItems = (Stack<Item>) _kontext.getAktuellerRaum()
-				.getItems().clone();
-
-		for(int i = 0; i < raumItems.size(); i++)
+		Collection<Item> raumItems = _paket.getItems();
+		
+		for (Item item : raumItems)
 		{
-			switch (raumItems.get(i))
+			switch (item)
 			{
 			case Kuchen:
 				anzahlKruemel++;
@@ -131,8 +131,9 @@ public class Raumbilderzeuger
 			default:
 				break;
 			}
+			
 		}
-
+		
 		maleKruemel(anzahlKruemel);
 		if(gegengiftDa)
 		{

@@ -22,6 +22,11 @@ public class Programm
 			@Override
 			public void run()
 			{
+				
+				//TODO Server erstellen
+				
+				// TODO Client erstellen, Ip und Servername übergeben
+				
 				spiel.spielen(null);
 
 			}

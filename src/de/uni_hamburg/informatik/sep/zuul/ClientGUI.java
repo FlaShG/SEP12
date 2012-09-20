@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
@@ -14,9 +16,30 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 
-public class SpielGUI extends Spiel
+public class ClientGUI extends Client
 {
 
+	@Override
+	public void schreibeText(String text)
+	{
+		
+		JTextArea anzeige = _ap.getAnzeigeArea();
+		anzeige.append(text);
+		anzeige.setCaretPosition(anzeige.getDocument().getLength());
+	}
+
+	@Override
+	public void zeigeAn(ClientPaket paket)
+	{
+
+		schreibeText(paket.getNachricht());
+
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
+		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+
+	}
+	
+	
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -31,8 +54,6 @@ public class SpielGUI extends Spiel
 		public void actionPerformed(ActionEvent e)
 		{
 			verarbeiteEingabe(_befehlszeile);
-			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
@@ -41,9 +62,9 @@ public class SpielGUI extends Spiel
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	public SpielGUI()
+	public ClientGUI(String serverName, String serverIP, Server server)
 	{
-		super();
+		super(serverName, serverIP, server);
 		initialisiereUI();
 
 	}
@@ -98,23 +119,21 @@ public class SpielGUI extends Spiel
 		_bp.getWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
-		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+
+		_bp.getTuerNordButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_NORDEN));
-		
+
 		_bp.getTuerOstButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_OSTEN));
-		
+
 		_bp.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
 		_bp.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -145,10 +164,15 @@ public class SpielGUI extends Spiel
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
-		
-		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
-		
-		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
+
+		_bp.getInventarButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_INVENTAR));
+
+		_bp.getAblegenButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(
+								TextVerwalter.BEFEHL_ABLEGEN));
 
 	}
 
@@ -162,10 +186,10 @@ public class SpielGUI extends Spiel
 	@Override
 	public void schreibe(String nachricht)
 	{
-		JTextArea anzeige = _ap.getAnzeigeArea();
+		
 
 		anzeige.append(nachricht);
-		anzeige.setCaretPosition(anzeige.getDocument().getLength());
+		
 	}
 
 	@Override
@@ -197,7 +221,6 @@ public class SpielGUI extends Spiel
 		_bp.getAblegenButton().setEnabled(value);
 		_bp.getInventarButton().setEnabled(value);
 	}
-	
 
 	public void schliesseFenster()
 	{
@@ -215,7 +238,7 @@ public class SpielGUI extends Spiel
 	public void spielen(String level)
 	{
 		UIsetEnabled(true);
-		
+
 		super.spielen(level);
 
 		_kontext.addTickListener(new TickListener()
