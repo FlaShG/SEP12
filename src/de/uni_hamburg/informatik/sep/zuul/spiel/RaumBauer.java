@@ -49,12 +49,13 @@ public class RaumBauer
 
 		// Setze 3 Mäuse zufällig.
 
-		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
+		if(kannMausEnthaltenRaum.size()>0)
+			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
 	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
 	{
-		for(;i>0; --i)
+		for(;i>0 && kannMausEnthaltenRaum.size() > 0; --i)
 		{
 			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
 			kannMausEnthaltenRaum.remove(r);
@@ -66,6 +67,7 @@ public class RaumBauer
 	 */
 	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
 	{
+		
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
 		mausRaum.setMaus(new Maus(mausRaum));
