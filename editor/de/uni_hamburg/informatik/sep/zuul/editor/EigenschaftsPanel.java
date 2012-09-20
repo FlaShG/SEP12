@@ -1,7 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.FlowLayout;
-import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +13,7 @@ import javax.swing.JPanel;
  */
 public abstract class EigenschaftsPanel extends JPanel
 {
-	private Observer _beobachter;
+	private EditorBeobachter _beobachter;
 	
 	public EigenschaftsPanel(String beschriftung)
 	{
@@ -25,7 +24,7 @@ public abstract class EigenschaftsPanel extends JPanel
 		add(new JLabel(beschriftung));
 	}
 	
-	public EigenschaftsPanel(String beschriftung, Observer beobachter)
+	public EigenschaftsPanel(String beschriftung, EditorBeobachter beobachter)
 	{
 		this(beschriftung);
 		_beobachter = beobachter;
@@ -35,7 +34,7 @@ public abstract class EigenschaftsPanel extends JPanel
 	{
 		if(_beobachter != null)
 		{
-			_beobachter.update(null, null);
+			_beobachter.eigenschaftUpdate();
 		}
 	}
 }

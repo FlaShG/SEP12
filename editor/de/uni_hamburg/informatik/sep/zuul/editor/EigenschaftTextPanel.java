@@ -20,7 +20,7 @@ public class EigenschaftTextPanel extends EigenschaftsPanel
 		this(beschriftung, starttext, null);
 	}
 	
-	public EigenschaftTextPanel(String beschriftung, String starttext, Observer beobachter)
+	public EigenschaftTextPanel(String beschriftung, String starttext, EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
 		add(_text = new JTextField(starttext));

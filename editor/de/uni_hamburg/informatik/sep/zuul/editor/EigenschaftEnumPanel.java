@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Observer;
 
 import javax.swing.JComboBox;
 
@@ -20,11 +19,13 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 		this(beschriftung, enumValues, startwert, null);
 	}
 	
-	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues, int startwert, Observer beobachter)
+	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues, int startwert, EditorBeobachter beobachter)
 	{
-		super(beschriftung);
+		super(beschriftung, beobachter);
 		
 		_enum = new JComboBox<String>(getStringsFromEnum(enumValues));
+		
+		_enum.setSelectedIndex(startwert);
 		
 		_enum.addItemListener(new ItemListener()
 		{
@@ -38,8 +39,6 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 				}
 			}
 		});
-		
-		_enum.setSelectedIndex(startwert);
 		
 		add(_enum);
 	}

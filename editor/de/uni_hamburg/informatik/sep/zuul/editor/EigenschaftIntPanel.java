@@ -1,15 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Observer;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -39,7 +31,7 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	 * @param startwert Der Wert, den die Komponente annimmt
 	 * @param observer Der Observer, der über Änderungen im Eingabefeld informiert werden soll
 	 */
-	public EigenschaftIntPanel(String beschriftung, int startwert, Observer beobachter)
+	public EigenschaftIntPanel(String beschriftung, int startwert, EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
 		_wert = startwert;

@@ -1,12 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,15 +22,15 @@ public class EditorFensterUI
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
 	
-	private Observer _beobachter;
+	private EditorBeobachter _beobachter;
 	
 	/**
 	 * Erzeugt eine neue EditorFensterUI.
-	 * @param o Ein Observer, der über alle Änderungen in der UI informiert wird.
+	 * @param beobachter Ein Observer, der über alle Änderungen in der UI informiert wird.
 	 */
-	public EditorFensterUI(Observer o)
+	public EditorFensterUI(EditorBeobachter beobachter)
 	{
-		_beobachter = o;
+		_beobachter = beobachter;
 		
 		
 		_frame = new JFrame("Zuul-Editor");
@@ -45,7 +40,7 @@ public class EditorFensterUI
 		
 		_frame.add(_menubar = new EditorMenuBar(), BorderLayout.NORTH);
 		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
-		_map.setBeobachter(o);
+		_map.setBeobachter(beobachter);
 		
 		_raumhinzu = new JButton("Raum anlegen");
 		
@@ -130,5 +125,13 @@ public class EditorFensterUI
 	public RaumBearbeitenPanel neuesBearbeitenPanel(Raum raum)
 	{
 		 return _bearbeiten = new RaumBearbeitenPanel(raum, _beobachter);
+	}
+
+	/**
+	 * Entfernt die Referenz auf das aktuelle Bearbeiten-Panel
+	 */
+	public void loescheBearbeitenPanel()
+	{
+		_bearbeiten = null;
 	}
 }

@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Observer;
 
 import javax.swing.JCheckBox;
 
@@ -21,7 +20,7 @@ public class EigenschaftBooleanPanel extends EigenschaftsPanel
 		this(beschriftung, startwert, null);
 	}
 	
-	public EigenschaftBooleanPanel(String beschriftung, boolean startwert, Observer beobachter)
+	public EigenschaftBooleanPanel(String beschriftung, boolean startwert, EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
 		_wert = startwert;

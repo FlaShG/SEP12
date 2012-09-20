@@ -15,7 +15,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
  * @author 0graeff
  *
  */
-public class EditorFenster implements Observer
+public class EditorFenster implements EditorBeobachter
 {
 	private EditorFensterUI _ui;
 	private SpeicherWerkzeug _speicherWerkzeug;
@@ -40,7 +40,7 @@ public class EditorFenster implements Observer
 				_ui.getMap().fuegeRaumZuAktivemButtonHinzu();
 				if(_ui.getMap().getAktivenRaum() != null)
 				{
-					 update(null, null);
+					 raumwahlUpdate();
 				}
 			}
 		});
@@ -67,38 +67,20 @@ public class EditorFenster implements Observer
 	}
 	
 	@Override
-	public void update(Observable arg0, Object arg1)
+	public void raumwahlUpdate()
 	{
 		//DONT USE ARGS!!!
 		
 		_ui.getFrame().remove(_ui.getRaumhinzu());
-		if(_ui.getBearbeitenPanel() != null)
-			_ui.getFrame().remove(_ui.getBearbeitenPanel());
+		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
+		if(bearbeitenPanel != null)
+			_ui.getFrame().remove(bearbeitenPanel);
+			
 		_ui.getFrame().setVisible(true);
 		
 		if(_ui.getMap().buttonAusgewaehlt())
 		{
 			Raum raum = _ui.getMap().getAktivenRaum();
-			
-			/* TODO
-			//Eigenschaften-Panel
-			if(_ui.getBearbeitenPanel() != null && _ui.getBearbeitenPanel().getRaum() == raum)
-			{
-				RaumEigenschaftenPanel eigenschaften = _ui.getBearbeitenPanel().getEigenschaftenPanel();
-				raum.setName(eigenschaften.getRaumname());
-				_ui.getMap().getAktivenButton().setText(eigenschaften.getRaumname());
-				
-				raum.setRaumart(eigenschaften.getTyp());
-				
-				Stack<Item> items = new Stack<Item>();
-				for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
-					items.push(Item.Kuchen);
-				for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
-					items.push(Item.Giftkuchen);
-					
-				raum.setItems(items);
-			}
-			*/
 			
 			if(raum == null)
 			{
@@ -118,5 +100,26 @@ public class EditorFenster implements Observer
 			}
 		}
 		_ui.getFrame().setVisible(true);
+	}
+
+	@Override
+	public void eigenschaftUpdate()
+	{
+		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
+		Raum raum = bearbeitenPanel.getRaum();
+		
+		RaumEigenschaftenPanel eigenschaften = bearbeitenPanel.getEigenschaftenPanel();
+		raum.setName(eigenschaften.getRaumname());
+		_ui.getMap().getAktivenButton().setText(eigenschaften.getRaumname());
+		
+		raum.setRaumart(eigenschaften.getTyp());
+		
+		Stack<Item> items = new Stack<Item>();
+		for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
+			items.push(Item.Kuchen);
+		for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
+			items.push(Item.Giftkuchen);
+			
+		raum.setItems(items);
 	}
 }

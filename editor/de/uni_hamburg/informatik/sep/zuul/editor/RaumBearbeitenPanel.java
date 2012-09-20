@@ -2,11 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
 import java.util.Observer;
-import java.util.Stack;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,7 +10,6 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
 
@@ -35,7 +30,7 @@ public class RaumBearbeitenPanel extends JPanel
 	 * Erzeugt ein RaumBearbeitenPanel für einen bestimmten Raum.
 	 * @param raum
 	 */
-	public RaumBearbeitenPanel(Raum raum, Observer beobachter)
+	public RaumBearbeitenPanel(Raum raum, EditorBeobachter beobachter)
 	{
 		_raum = raum;
 		

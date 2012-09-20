@@ -24,11 +24,11 @@ public class RaumEigenschaftenPanel extends JPanel
 	/**
 	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen Raumes
 	 * @param raum Der Raum, der bearbeitet werden soll
-	 * @param observer Der Observer, der über Änderungen informiert werden will
+	 * @param beobachter Der Observer, der über Änderungen informiert werden will
 	 * 
 	 * @require raum != null
 	 */
-	public RaumEigenschaftenPanel(Raum raum, Observer observer)
+	public RaumEigenschaftenPanel(Raum raum, EditorBeobachter beobachter)
 	{
 		assert raum != null : "Vorbedingung verletzt: raum != null";
 
@@ -48,11 +48,11 @@ public class RaumEigenschaftenPanel extends JPanel
 			}
 		}
 		
-		add(_name = new EigenschaftTextPanel("Name", raum.getName(), observer));
-		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), observer));
+		add(_name = new EigenschaftTextPanel("Name", raum.getName(), beobachter));
+		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), beobachter));
 		
-		add(_kuchen = new EigenschaftIntPanel("Krümel", kuchen, observer));
-		add(_giftkuchen = new EigenschaftIntPanel("Giftkrümel", giftkuchen, observer));
+		add(_kuchen = new EigenschaftIntPanel("Krümel", kuchen, beobachter));
+		add(_giftkuchen = new EigenschaftIntPanel("Giftkrümel", giftkuchen, beobachter));
 	}
 	
 	/**

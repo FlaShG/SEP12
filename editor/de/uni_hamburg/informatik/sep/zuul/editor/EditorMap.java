@@ -17,7 +17,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
  */
 public class EditorMap extends JPanel
 {
-	Observer _observer;
+	EditorBeobachter _beobachter;
 	private GridButton[][] _buttons;
 	int activeX = -1;
 	int activeY = -1;
@@ -62,16 +62,16 @@ public class EditorMap extends JPanel
 	/**
 	 * Setzt den Beobachter, der über Änderungen im Grid informiert werden soll
 	 */
-	public void setBeobachter(Observer o)
+	public void setBeobachter(EditorBeobachter beobachter)
 	{
-		_observer = o;
+		_beobachter = beobachter;
 	}
 
 	private void informiereBeobachter()
 	{
-		if(_observer != null)
+		if(_beobachter != null)
 		{
-			_observer.update(null, null);
+			_beobachter.raumwahlUpdate();
 		}
 	}
 
