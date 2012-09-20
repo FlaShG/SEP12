@@ -38,8 +38,7 @@ public class SpeicherWerkzeug
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
 
-		manager.schreibeLevelStruktur(path.concat("testStruktur.xml"),
-				raumstruktur, _ef.getEditorLevel());
+		manager.schreibeLevelStruktur(path,	raumstruktur, _ef.getEditorLevel());
 
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 

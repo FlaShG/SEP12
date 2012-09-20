@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.xml;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -36,7 +37,18 @@ public class RaumStrukturParser
 	 */
 	public List<XmlRaum> getXmlVerbindungen()
 	{
-		return _root.getRaeume();
+		List<XmlRaum> result = _root.getRaeume();
+		if(result == null)
+			result = new LinkedList<XmlRaum>();
+		return result;
+	}
+	
+	/**
+	 * Setzt die Räume! Unschön!!!
+	 */
+	public void setXmlVerbindungen(List<XmlRaum> raeume)
+	{
+		_root.setRaeume(raeume);
 	}
 
 	/**

@@ -18,12 +18,13 @@ public class XmlStruktur
 		// für JAXB
 	}
 
+	@XmlTransient
 	public List<XmlRaum> getRaeume()
 	{
 		return _raeume;
 	}
 
-	private void setRaeume(List<XmlRaum> raeume)
+	public void setRaeume(List<XmlRaum> raeume)
 	{
 		_raeume = raeume;
 	}

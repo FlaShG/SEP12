@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Stack;
 
+import de.uni_hamburg.informatik.sep.zuul.spiel.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
@@ -58,7 +59,8 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				_speicherWerkzeug.speichern("./xml_dateien/");
+				String str = FileChooser.speichereDatei();
+				_speicherWerkzeug.speichern(str);
 			}
 		});
 		
@@ -67,8 +69,9 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				String str = FileChooser.oeffneDatei();
 				resetEditorFenster();
-				_ladenWerkzeug.lade("./xml_dateien/testStruktur.xml");
+				_ladenWerkzeug.lade(str);
 			}
 		});
 		
