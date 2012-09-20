@@ -14,6 +14,7 @@ public class Hauptfenster extends JFrame
 	public Hauptfenster(BildPanel bildPanel,
 			KonsolenPanel konsolenPanel, BefehlsPanel befehlsPanel)
 	{
+		super("Zuul");
 		_bildPanel = bildPanel;
 		_konsolenPanel = konsolenPanel;
 		_befehlsPanel = befehlsPanel;
@@ -66,11 +67,7 @@ public class Hauptfenster extends JFrame
 
 	}
 
-	public static void main(String[] args)
-	{
-		Hauptfenster hf = new Hauptfenster(new BildPanel(),
-				new KonsolenPanel(), new BefehlsPanel());
-	}
+	
 		
 	
 }

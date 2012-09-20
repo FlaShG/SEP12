@@ -79,17 +79,15 @@ public class Raumbilderzeuger
 						new Color(255, 170, 85), new Color(153, 249, 249) },
 						_raumansicht);
 				break;
+			case  Normal:faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
+					new Color(170, 85, 0), new Color(128, 128, 64) },
+					_raumansicht); break;
 			default:
 				break;
 
 			}
 		}
-		else
-		{
-			faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
-					new Color(170, 85, 0), new Color(128, 128, 64) },
-					_raumansicht);
-		}
+		
 
 		// Male Dr.Little
 		_raumansicht = maleAufBild(_raumansicht, DRLITLE, new Tupel(77, 77));
