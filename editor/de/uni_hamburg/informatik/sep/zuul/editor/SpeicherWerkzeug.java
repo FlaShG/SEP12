@@ -8,11 +8,10 @@ public class SpeicherWerkzeug
 {
 
 	private VerbindungsWerkzeug _verbindungen;
-	private EditorFensterUI _ui;
-
-	public SpeicherWerkzeug(EditorFensterUI ui)
+	private EditorFenster _ef;
+	public SpeicherWerkzeug(EditorFenster ef)
 	{
-		_ui = ui;
+		_ef = ef;
 		_verbindungen = new VerbindungsWerkzeug();
 	}
 
@@ -27,14 +26,15 @@ public class SpeicherWerkzeug
 	{
 		vergebeIDs();
 
-		_verbindungen.verbindeRaeume(_ui.getMap());
+		_verbindungen.verbindeRaeume(_ef.getUI().getMap());
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
+
 		IOManager manager = new IOManager();
 
 		manager.schreibeLevelStruktur(path.concat("testStruktur.xml"),
-				raumstruktur);
+				raumstruktur, _ef.getEditorLevel());
 
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
@@ -44,7 +44,7 @@ public class SpeicherWerkzeug
 	{
 		//TODO: unique ids vergeben. diese methode funzt auch nicht...
 		int id = 0;
-		GridButton[][] buttons = _ui.getMap().getButtonArray();
+		GridButton[][] buttons = _ef.getUI().getMap().getButtonArray();
 		for(int y = 0; y < buttons.length; ++y)
 		{
 			for(int x = 0; x < buttons[0].length; ++x)

@@ -16,12 +16,12 @@ public class LadenWerkzeug
 {
 
 	private IOManager _manager;
-	private EditorFensterUI _ui;
+	private EditorFenster _ef;
 
-	public LadenWerkzeug(EditorFensterUI ui)
+	public LadenWerkzeug(EditorFenster ef)
 	{
 		_manager = new IOManager();
-		_ui = ui;
+		_ef = ef;
 	}
 
 	/**
@@ -155,7 +155,8 @@ public class LadenWerkzeug
 	{
 		_manager.readLevel(path);
 		EditorMap map = erstelleEditorMapAusListe(_manager.getXmlRaeume(), _manager.getRaeume());
-		_ui.setMap(map);
+		_ef.getUI().setMap(map);
+		_ef.setEditorLevel(_manager.getEditorLevel());
 	}
 
 }

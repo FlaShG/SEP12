@@ -27,11 +27,32 @@ public class RaumStrukturParser
 		leseXmlEin();
 	}
 
+	/**
+	 * Gibt die XmlRäume ({@link XmlRaum}) zurück.
+	 * Diese Liste ist zu bearbeiten, wenn die Informationen
+	 * auch gespeichert werde sollen.
+	 */
 	public List<XmlRaum> getXmlVerbindungen()
 	{
 		return _root.getRaeume();
 	}
 
+	/**
+	 * Gibt die Azahl der Mäuse für dieses Level zurück.
+	 */
+	public int getAnzahlMaeuse()
+	{
+		return _root.getMaeuse();
+	}
+	
+	/**
+	 * Setzt die Anzahl Mäuse für dieses Level.
+	 */
+	public void setAnzahlMaeuse(int maeuse)
+	{
+		_root.setMaeuse(maeuse);
+	}
+	
 	private void leseXmlEin()
 	{
 		try

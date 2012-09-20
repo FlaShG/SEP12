@@ -18,14 +18,16 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 public class EditorFenster implements EditorBeobachter
 {
 	private EditorFensterUI _ui;
+	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	
 	public EditorFenster()
 	{
+		_leveldaten = new EditorLevel();
 		_ui = new EditorFensterUI(this);
-		_speicherWerkzeug = new SpeicherWerkzeug(_ui);
-		_ladenWerkzeug = new LadenWerkzeug(_ui);
+		_speicherWerkzeug = new SpeicherWerkzeug(this);
+		_ladenWerkzeug = new LadenWerkzeug(this);
 		
 		registriereUIAktionen();
 	}
@@ -69,8 +71,6 @@ public class EditorFenster implements EditorBeobachter
 	@Override
 	public void raumwahlUpdate()
 	{
-		//DONT USE ARGS!!!
-		
 		_ui.getFrame().remove(_ui.getRaumhinzu());
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
 		if(bearbeitenPanel != null)
@@ -106,20 +106,40 @@ public class EditorFenster implements EditorBeobachter
 	public void eigenschaftUpdate()
 	{
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
-		Raum raum = bearbeitenPanel.getRaum();
-		
-		RaumEigenschaftenPanel eigenschaften = bearbeitenPanel.getEigenschaftenPanel();
-		raum.setName(eigenschaften.getRaumname());
-		_ui.getMap().getAktivenButton().setText(eigenschaften.getRaumname());
-		
-		raum.setRaumart(eigenschaften.getTyp());
-		
-		Stack<Item> items = new Stack<Item>();
-		for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
-			items.push(Item.Kuchen);
-		for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
-			items.push(Item.Giftkuchen);
+		if(bearbeitenPanel != null)
+		{
+			Raum raum = bearbeitenPanel.getRaum();
 			
-		raum.setItems(items);
+			RaumEigenschaftenPanel eigenschaften = bearbeitenPanel.getEigenschaftenPanel();
+			raum.setName(eigenschaften.getRaumname());
+			_ui.getMap().getAktivenButton().setText(eigenschaften.getRaumname());
+			
+			raum.setRaumart(eigenschaften.getTyp());
+			
+			Stack<Item> items = new Stack<Item>();
+			for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
+				items.push(Item.Kuchen);
+			for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
+				items.push(Item.Giftkuchen);
+				
+			raum.setItems(items);
+		}
+		
+		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
+	}
+
+	public EditorFensterUI getUI()
+	{
+		return _ui;
+	}
+
+	public EditorLevel getEditorLevel()
+	{
+		return _leveldaten;
+	}
+
+	public void setEditorLevel(EditorLevel editorLevel)
+	{
+		_leveldaten = editorLevel;
 	}
 }

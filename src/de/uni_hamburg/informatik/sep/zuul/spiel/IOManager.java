@@ -3,14 +3,16 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.uni_hamburg.informatik.sep.zuul.editor.EditorLevel;
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumSammlungParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
+import de.uni_hamburg.informatik.sep.zuul.xml.XmlStruktur;
 
 public class IOManager
 {
-	private RaumStrukturParser strukParser;
-	private RaumSammlungParser sammlParser;
+	private RaumStrukturParser _strukParser;
+	private RaumSammlungParser _sammlParser;
 
 	public IOManager()
 	{
@@ -24,17 +26,20 @@ public class IOManager
 	 *            Pfad auf den geschrieben werden soll
 	 * @param raumStruktur
 	 *            die aktuelle RaumStruktur
+	 * @param level
+	 * 			  das EditorLevel, welches die Levelinformationen enthält
 	 */
-	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur)
+	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur, EditorLevel level)
 	{
-		strukParser = new RaumStrukturParser(path);
-		strukParser.getXmlVerbindungen().clear();
+		_strukParser = new RaumStrukturParser(path);
+		_strukParser.setAnzahlMaeuse(level.getMaeuse());
+		_strukParser.getXmlVerbindungen().clear();
 		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
 		{
-			strukParser.getXmlVerbindungen().add(raum);
+			_strukParser.getXmlVerbindungen().add(raum);
 		}
 
-		strukParser.schreibeXml();
+		_strukParser.schreibeXml();
 	}
 
 	/**
@@ -47,11 +52,11 @@ public class IOManager
 	 */
 	public void schreibeLevelRaeume(List<Raum> raumListe)
 	{
-		sammlParser = new RaumSammlungParser();
+		_sammlParser = new RaumSammlungParser();
 
 		//ID Liste der vorhandenen Räume
 		List<Integer> idSammlung = new ArrayList<Integer>();
-		for(Raum raum : sammlParser.getSammlung())
+		for(Raum raum : _sammlParser.getSammlung())
 		{
 			idSammlung.add(raum.getId());
 		}
@@ -60,11 +65,11 @@ public class IOManager
 		{
 			if(!idSammlung.contains(raum.getId()))
 			{
-				sammlParser.getSammlung().add(raum);
+				_sammlParser.getSammlung().add(raum);
 			}
 		}
 
-		sammlParser.schreibeXml();
+		_sammlParser.schreibeXml();
 
 	}
 
@@ -75,9 +80,9 @@ public class IOManager
 	 */
 	public void readLevel(String path)
 	{
-		strukParser = new RaumStrukturParser(path);
+		_strukParser = new RaumStrukturParser(path);
 
-		sammlParser = new RaumSammlungParser();
+		_sammlParser = new RaumSammlungParser();
 	}
 
 	/**
@@ -87,7 +92,7 @@ public class IOManager
 	 */
 	public List<XmlRaum> getXmlRaeume()
 	{
-		return strukParser.getXmlVerbindungen();
+		return _strukParser.getXmlVerbindungen();
 	}
 
 	/**
@@ -97,6 +102,17 @@ public class IOManager
 	 */
 	public List<Raum> getRaeume()
 	{
-		return sammlParser.getSammlung();
+		return _sammlParser.getSammlung();
+	}
+	
+	/**
+	 * Gibt das {@link EditorLevel} zurück, welches die
+	 * Levelinformationen hält
+	 */
+	public EditorLevel getEditorLevel()
+	{
+		EditorLevel level = new EditorLevel();
+		level.setMaeuse(_strukParser.getAnzahlMaeuse());
+		return level;
 	}
 }

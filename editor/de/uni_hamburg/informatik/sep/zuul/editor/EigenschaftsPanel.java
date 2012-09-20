@@ -15,7 +15,7 @@ public abstract class EigenschaftsPanel extends JPanel
 {
 	private EditorBeobachter _beobachter;
 	
-	public EigenschaftsPanel(String beschriftung)
+	protected EigenschaftsPanel(String beschriftung)
 	{
 		FlowLayout layout = new FlowLayout();
 		layout.setAlignment(FlowLayout.LEFT);
@@ -24,7 +24,7 @@ public abstract class EigenschaftsPanel extends JPanel
 		add(new JLabel(beschriftung));
 	}
 	
-	public EigenschaftsPanel(String beschriftung, EditorBeobachter beobachter)
+	protected EigenschaftsPanel(String beschriftung, EditorBeobachter beobachter)
 	{
 		this(beschriftung);
 		_beobachter = beobachter;

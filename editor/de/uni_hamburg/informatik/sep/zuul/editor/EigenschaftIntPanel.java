@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.Dimension;
 
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -37,7 +38,7 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 		_wert = startwert;
 		
 		_zahl = new JSpinner();
-		_zahl.setValue(startwert);
+		_zahl.setModel(new SpinnerNumberModel(startwert, 0, 99, 1));
 		_zahl.addChangeListener(new ChangeListener()
 		{
 			
@@ -62,5 +63,14 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	public int getWert()
 	{
 		return _wert;
+	}
+
+	/**
+	 * Setzt den aktuellen Wert
+	 * @param wert
+	 */
+	public void setWert(int wert)
+	{
+		_zahl.setValue(wert);
 	}
 }

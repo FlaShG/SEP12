@@ -2,9 +2,11 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 
@@ -21,6 +23,7 @@ public class EditorFensterUI
 	private EditorMap _map;
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
+	private LevelPanel _levelPanel;
 	
 	private EditorBeobachter _beobachter;
 	
@@ -37,30 +40,28 @@ public class EditorFensterUI
 		
 		_frame.getContentPane().setLayout(new BorderLayout());
 		
+		JPanel north = new JPanel();
+		FlowLayout northlayout = new FlowLayout();
+		northlayout.setAlignment(FlowLayout.LEFT);
+		north.setLayout(northlayout);
+		_frame.add(north, BorderLayout.NORTH);
 		
-		_frame.add(_menubar = new EditorMenuBar(), BorderLayout.NORTH);
+		north.add(_menubar = new EditorMenuBar());
+		north.add(_levelPanel = new LevelPanel(beobachter));
+		
 		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
 		_map.setBeobachter(beobachter);
 		
 		_raumhinzu = new JButton("Raum anlegen");
+	
 		
 		//fancy größenwahn
 		//_frame.pack();
 		//_frame.setMinimumSize(_frame.getSize());
 		//_frame.setSize(_frame.getSize().width, _frame.getSize().width);
 		_frame.setMinimumSize(new Dimension(900, 600));
-		
-		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		_frame.setVisible(true);
-		
-		//--------------- 1griese
-			//
-				//DO NOT PUT TOOLS OR LISTENERS HERE
-				//gooby pls
-		
-		//----------------
-		
+		_frame.setVisible(true);		
 	}
 	
 	/**
@@ -133,5 +134,10 @@ public class EditorFensterUI
 	public void loescheBearbeitenPanel()
 	{
 		_bearbeiten = null;
+	}
+
+	public LevelPanel getLevelPanel()
+	{
+		return _levelPanel;
 	}
 }
