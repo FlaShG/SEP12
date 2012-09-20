@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientRaum;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
@@ -32,12 +32,14 @@ public abstract class Client implements ClientInterface
 	String _serverName;
 	String _serverIP;
 	boolean _isSpielzuEnde;
+	Server _server;
 
-	public Client(String serverName, String serverIP)
+	public Client(String serverName, String serverIP, Server server)
 	{
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
+		_server = server;
 	}
 	
 	public void schreibeText(String text)
@@ -68,7 +70,7 @@ public abstract class Client implements ClientInterface
 	}
 
 	@Override
-	public void zeigeAn(ClientRaum raum) throws RemoteException
+	public void zeigeAn(ClientPaket raum) throws RemoteException
 	{
 		// TODO Auto-generated method stub
 		

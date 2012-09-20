@@ -3,7 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientRaum;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 
 public interface ClientInterface extends Remote
 {
@@ -22,7 +22,7 @@ public interface ClientInterface extends Remote
 	 * registriere die änderungen am Client
 	 * @param raum
 	 */
-	public void zeigeAn(ClientRaum raum) throws RemoteException;
+	public void zeigeAn(ClientPaket raum) throws RemoteException;
 	
 	
 }
