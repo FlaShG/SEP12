@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BefehlsPanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanelAlt;
+
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
@@ -32,14 +34,14 @@ public class SpielGUI extends Spiel
 		{
 			verarbeiteEingabe(_befehlszeile);
 			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+			_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
 	private Hauptfenster _hf;
-	private EingabePanel _ep;
-	private AusgabePanel _ap;
-	private ButtonPanel _bp;
+	private KonsolenPanel _kp;
+	private BildPanel _bildPanel;
+	private BefehlsPanel _bp;
 
 	public SpielGUI()
 	{
@@ -53,68 +55,50 @@ public class SpielGUI extends Spiel
 	 */
 	void initialisiereUI()
 	{
-		_bp = new ButtonPanel(1024);
-		_ep = new EingabePanel(1024);
-		_ap = new AusgabePanel(1024);
 
-		_hf = new Hauptfenster(_ap, _ep, _bp);
+		_bp = new BefehlsPanel();
+		_kp = new KonsolenPanel();
+		_bildPanel = new BildPanel();
+		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
 
-		_ep.getEnterButton().addActionListener(new ActionListener()
+		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				String str = _ep.getEingabeZeile().getText();
-				_ep.getEingabeZeile().setText("");
+				String str = _kp.getEingabeZeile().getText();
+				_kp.getEingabeZeile().setText("");
 
 				verarbeiteEingabe(str);
 
 			}
 		});
 
-		_ep.getEingabeZeile().addActionListener(new ActionListener()
+		_kp.getEingabeZeile().addActionListener(new ActionListener()
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				_ep.getEnterButton().doClick();
+				_kp.getEnterButton().doClick();
 			}
 		});
 
-		_bp.getNorthButton().addActionListener(
+		_bildPanel.getTuerNordButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_NORDEN));
 
-		_bp.getSouthButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
-
-		_bp.getEastButton().addActionListener(
+		_bildPanel.getTuerOstButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_OSTEN));
 
-		_bp.getWestButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
-		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_NORDEN));
-		
-		_bp.getTuerOstButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_OSTEN));
-		
-		_bp.getTuerSuedButton().addActionListener(
+		_bildPanel.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
-		_bp.getTuerWestButton().addActionListener(
+		_bildPanel.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -124,7 +108,7 @@ public class SpielGUI extends Spiel
 		_bp.getHelpButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
 
-		_bp.getEssenButton().addActionListener(
+		_bp.getEssenAusTascheButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
 						+ " " + TextVerwalter.ORT_TASCHE));
 
@@ -145,10 +129,15 @@ public class SpielGUI extends Spiel
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
-		
-		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
-		
-		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
+
+		_bp.getInventarButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_INVENTAR));
+
+		_bp.getAblegenButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(
+								TextVerwalter.BEFEHL_ABLEGEN));
 
 	}
 
@@ -156,13 +145,13 @@ public class SpielGUI extends Spiel
 	public void schreibeNL(String nachricht)
 	{
 		schreibe(nachricht);
-		_ap.getAnzeigeArea().append("\n");
+		_kp.getAnzeigeArea().append("\n");
 	}
 
 	@Override
 	public void schreibe(String nachricht)
 	{
-		JTextArea anzeige = _ap.getAnzeigeArea();
+		JTextArea anzeige = _kp.getAnzeigeArea();
 
 		anzeige.append(nachricht);
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
@@ -180,15 +169,10 @@ public class SpielGUI extends Spiel
 	 */
 	private void UIsetEnabled(boolean value)
 	{
-		_ep.getEingabeZeile().setEnabled(value);
-		_ep.getEnterButton().setEnabled(value);
-
-		_bp.getSouthButton().setEnabled(value);
-		_bp.getNorthButton().setEnabled(value);
-		_bp.getWestButton().setEnabled(value);
-		_bp.getEastButton().setEnabled(value);
+		_kp.getEingabeZeile().setEnabled(value);
+		_kp.getEnterButton().setEnabled(value);
 		_bp.getGibButton().setEnabled(value);
-		_bp.getEssenButton().setEnabled(value);
+		_bp.getEssenAusTascheButton().setEnabled(value);
 		_bp.getEssenBodenButton().setEnabled(value);
 		_bp.getNehmenButton().setEnabled(value);
 		_bp.getHelpButton().setEnabled(value);
@@ -196,8 +180,11 @@ public class SpielGUI extends Spiel
 		_bp.getFuettereButton().setEnabled(value);
 		_bp.getAblegenButton().setEnabled(value);
 		_bp.getInventarButton().setEnabled(value);
+		_bildPanel.getTuerNordButton().setEnabled(value);
+		_bildPanel.getTuerOstButton().setEnabled(value);
+		_bildPanel.getTuerSuedButton().setEnabled(value);
+		_bildPanel.getTuerWestButton().setEnabled(value);
 	}
-	
 
 	public void schliesseFenster()
 	{
@@ -215,7 +202,7 @@ public class SpielGUI extends Spiel
 	public void spielen(String level)
 	{
 		UIsetEnabled(true);
-		
+
 		super.spielen(level);
 
 		_kontext.addTickListener(new TickListener()
@@ -233,7 +220,7 @@ public class SpielGUI extends Spiel
 
 	private void zeichneBild()
 	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+				Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+				_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 }
