@@ -1,7 +1,8 @@
-package de.uni_hamburg.informatik.sep.zuul.multiplayer.server;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar;
 
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * Das Inventar nimmt {@link Item}s auf oder gibt sie heraus.

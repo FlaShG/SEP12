@@ -1,6 +1,6 @@
-package de.uni_hamburg.informatik.sep.zuul.multiplayer.server;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
 
 public class Spieler {
 	private int _lebensEnergie;
