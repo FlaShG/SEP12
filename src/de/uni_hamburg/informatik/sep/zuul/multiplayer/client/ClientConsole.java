@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 
@@ -21,7 +22,7 @@ public class ClientConsole extends Client
 	}
 	
 	@Override
-	public void run()
+	public void run() throws RemoteException
 	{
 		while(!_isSpielzuEnde)
 		{

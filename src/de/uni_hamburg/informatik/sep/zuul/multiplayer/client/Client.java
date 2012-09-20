@@ -29,22 +29,23 @@ public abstract class Client implements ClientInterface
 	Server _server;
 	String _clientName;
 
-	public Client(String serverName, String serverIP, Server server, String clientName)
+	public Client(String serverName, String serverIP, Server server,
+			String clientName)
 	{
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
 		_server = server;
 	}
-	
+
 	public void schreibeText(String text)
 	{
-		
+
 	}
-	
-	public void run()
+
+	public void run() throws RemoteException
 	{
-		
+
 	}
 
 	/**
@@ -65,24 +66,11 @@ public abstract class Client implements ClientInterface
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		return false;		
+		return false;
 	}
 
-	public void verarbeiteEingabe(String eingabezeile)
+	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
-		// TODO Auto-generated method stub
-		try
-		{
-			while(!_server.empfangeNutzerEingabe(eingabezeile))
-			{
-			
-			}
-		}
-		catch(RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		while(!_server.empfangeNutzerEingabe(eingabezeile));
 	}
 }

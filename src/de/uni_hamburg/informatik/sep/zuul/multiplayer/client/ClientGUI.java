@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
 
@@ -61,7 +62,15 @@ public class ClientGUI extends Client
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			verarbeiteEingabe(_befehlszeile);
+			try
+			{
+				verarbeiteEingabe(_befehlszeile);
+			}
+			catch(RemoteException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -93,7 +102,15 @@ public class ClientGUI extends Client
 				String str = _ep.getEingabeZeile().getText();
 				_ep.getEingabeZeile().setText("");
 
-				verarbeiteEingabe(str);
+				try
+				{
+					verarbeiteEingabe(str);
+				}
+				catch(RemoteException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
@@ -209,12 +226,12 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	public void verarbeiteEingabe(String eingabezeile)
+	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
 		super.verarbeiteEingabe(eingabezeile);
 	}
 
-	public void spielen(String level)
+	public void spielen(String level) throws RemoteException
 	{
 		UIsetEnabled(true);
 
