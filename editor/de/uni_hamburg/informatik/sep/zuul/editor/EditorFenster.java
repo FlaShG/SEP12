@@ -3,8 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Stack;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
@@ -25,7 +23,7 @@ public class EditorFenster implements EditorBeobachter
 	public EditorFenster()
 	{
 		_leveldaten = new EditorLevel();
-		_ui = new EditorFensterUI(this);
+		_ui = new EditorFensterUI(this, _leveldaten);
 		_speicherWerkzeug = new SpeicherWerkzeug(this);
 		_ladenWerkzeug = new LadenWerkzeug(this);
 		
@@ -141,5 +139,6 @@ public class EditorFenster implements EditorBeobachter
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
 		_leveldaten = editorLevel;
+		_ui.getLevelPanel().setMauszahl(_leveldaten.getMaeuse());
 	}
 }

@@ -30,8 +30,9 @@ public class EditorFensterUI
 	/**
 	 * Erzeugt eine neue EditorFensterUI.
 	 * @param beobachter Ein Observer, der über alle Änderungen in der UI informiert wird.
+	 * @param level 
 	 */
-	public EditorFensterUI(EditorBeobachter beobachter)
+	public EditorFensterUI(EditorBeobachter beobachter, EditorLevel level)
 	{
 		_beobachter = beobachter;
 		
@@ -47,7 +48,7 @@ public class EditorFensterUI
 		_frame.add(north, BorderLayout.NORTH);
 		
 		north.add(_menubar = new EditorMenuBar());
-		north.add(_levelPanel = new LevelPanel(beobachter));
+		north.add(_levelPanel = new LevelPanel(beobachter, level));
 		
 		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
 		_map.setBeobachter(beobachter);
