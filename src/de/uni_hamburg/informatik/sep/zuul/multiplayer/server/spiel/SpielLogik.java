@@ -141,4 +141,14 @@ public class SpielLogik {
 	public void wechseleRaum(Spieler spieler, Raum raum) {
 		_kontext.setAktuellenRaumZu(spieler, raum);
 	}
+
+	/**
+	 * Getter für den Serverkontext.
+	 * 
+	 * @return der Serverkontext
+	 */
+	public ServerKontext getKontex() {
+		return _kontext;
+	}
+
 }

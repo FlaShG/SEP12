@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -87,7 +88,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 	@Override
 	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException {
 		_spiel.parseEingabezeile(eingabe);
-
+		ArrayList<ClientPaket> paketListe = new ArrayList<ClientPaket>();
+		for (String name : _connectedClients.keySet()) {
+			paketListe.add(_spiel.packePaket(name));
+		}
+		sendeAenderungen(paketListe);
 		return false;
 	}
 
