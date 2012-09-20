@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
-import java.util.LinkedList;
 import java.util.Random;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
@@ -15,31 +14,13 @@ final class BefehlGive extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
-
-		if(kontext.getAktuellerRaum().hasMaus())
+		if(getParameters().length==3 && getParameters()[0].equals("mir") && getParameters()[1].equals("mehr") && getParameters()[2].equals("leben"))
 		{
-			if(!kontext.getInventar().hasAnyKuchen())
-			{
-				Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_KEIN_KRUEMEL);
-				return;
-			}
-
-			Item kuchen = kontext.getInventar().getAnyKuchen();
-
-			String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
-					.getRichtung();
-
-			String[] moeglicheRichtungen = kontext.getAktuellerRaum()
-					.getMoeglicheAusgaenge();
-
-			String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
-					moeglicheRichtungen);
-
-			String richtungsangabe = String.format(
-					TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
-			Spiel.getInstance().schreibeNL(richtungsangabe);
+			kontext.setLebensEnergie(100);
+			Spiel.getInstance().schreibeNL("Schwupp.");
 			return;
 		}
+		
 		if(kontext.getAktuellerRaum().getRaumart() == RaumArt.Start)
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
@@ -57,7 +38,7 @@ final class BefehlGive extends Befehl
 						TextVerwalter.LABOR_GESUNDER_KUCHEN);
 				break;
 			case Giftkuchen:
-				Spiel.getInstance().schreibe(
+				Spiel.getInstance().schreibeNL(
 						TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 				break;
 			}
@@ -67,35 +48,6 @@ final class BefehlGive extends Befehl
 
 		Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
 		return;
-	}
-
-	/**
-	 * @param kuchen
-	 * @param richtigeRichtung
-	 * @return
-	 */
-	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
-			String[] moeglicheRichtungen)
-	{
-		if(kuchen == Item.Kuchen)
-		{
-			return richtigeRichtung;
-		}
-		if(kuchen == Item.Giftkuchen)
-		{
-			LinkedList<String> richtungen = new LinkedList<String>();
-
-			for(String richtung : moeglicheRichtungen)
-				richtungen.add(richtung);
-
-			richtungen.remove(richtigeRichtung);
-
-			int randomInt = new Random().nextInt(richtungen.size());
-
-			return richtungen.get(randomInt);
-		}
-
-		return null;
 	}
 
 	@Override

@@ -24,10 +24,18 @@ final class BefehlEat extends Befehl
 		}
 
 		String ort = getParameters()[0];
+		String itemParam = null;
+		if(getParameters().length > 1)
+		{
+			itemParam = getParameters()[1];
+		}
 
 		if(ort.equals("tasche"))
 		{
-
+			if(itemParam != null && !itemParam.equals("kuchen"))
+			{
+				Spiel.getInstance().schreibeNL("Das können sie nicht essen...");
+			}
 			Item item = kontext.getInventar().nehmeLetztesItem();
 
 			int energie = kontext.getLebensEnergie();
@@ -52,7 +60,7 @@ final class BefehlEat extends Befehl
 							.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
 				}
 				break;
-
+				
 			default:
 				Spiel.getInstance()
 						.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);

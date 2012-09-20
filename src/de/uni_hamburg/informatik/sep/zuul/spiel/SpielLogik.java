@@ -3,21 +3,26 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import de.uni_hamburg.informatik.sep.zuul.Katze;
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
 {
+	private static String _level;
+
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	public static SpielKontext erstelleKontext()
+	public static SpielKontext erstelleKontext(String level)
 	{
-		final SpielKontext kontext = new SpielKontext();
-		kontext.setLebensEnergie(START_ENERGIE);
-		kontext.setInventar(new Inventar());
-		legeRaeumeAn(kontext);
+		_level = level;
+
+		final SpielKontext kontext = new SpielKontext(legeRaeumeAn(), START_ENERGIE, new Inventar());
 
 		kontext.addTickListener(new TickListener()
 		{
@@ -56,7 +61,7 @@ public class SpielLogik
 				if(hasRoomChanged)
 					Spiel.getInstance().schreibeNL(
 							TextVerwalter.RAUMWECHSELTEXT
-							+ kontext.getLebensEnergie());
+									+ kontext.getLebensEnergie());
 				return true;
 			}
 		});
@@ -68,14 +73,14 @@ public class SpielLogik
 			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
 				if(hasRoomChanged) // TODO: || KuchenAufgehoben
-				switch (kontext.getAktuellerRaum().getNaechstesItem())
-				{
-				case Kuchen:
-				case Giftkuchen:
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter.KUCHENIMRAUMTEXT);
-					break;
-				}
+					switch (kontext.getAktuellerRaum().getNaechstesItem())
+					{
+					case Kuchen:
+					case Giftkuchen:
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.KUCHENIMRAUMTEXT);
+						break;
+					}
 				return true;
 			}
 		});
@@ -132,8 +137,12 @@ public class SpielLogik
 					{
 						kontext.setLebensEnergie(kontext.getLebensEnergie()
 								- RAUMWECHSEL_ENERGIE_KOSTEN);
+						
+						
 					}
 				});
+		
+		new Katze(kontext.getAktuellerRaum().getAusgang("süd").getAusgang("süd")).registerToKontext(kontext);
 
 		return kontext;
 	}
@@ -141,16 +150,22 @@ public class SpielLogik
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private static void legeRaeumeAn(SpielKontext kontext)
+	private static Raum legeRaeumeAn()
 	{
 		IOManager manager = new IOManager();
-		manager.readLevel("./xml_dateien/testStruktur.xml");
-		//TODO: noch statisch - datei mit filechooser auswählen!!
+		if(_level == null)
+		{
+			manager.readLevel("./xml_dateien/testStruktur.xml");
+		}
+		else
+		{
+			manager.readLevel(_level);
+		}
 
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(struktur);
-		kontext.setAktuellerRaum(raumbauer.getStartRaum());
+		return raumbauer.getStartRaum();
 	}
 
 	/**
@@ -188,10 +203,12 @@ public class SpielLogik
 	{
 		kontext.spielZuende();
 		Spiel.getInstance().schreibeNL(nachricht);
+		Spiel.getInstance().beendeSpiel();
 	}
 
 	public static boolean isRaumZielRaum(Raum raum)
 	{
+		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
 }

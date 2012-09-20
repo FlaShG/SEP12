@@ -22,7 +22,7 @@ public class Programm
 			@Override
 			public void run()
 			{
-				spiel.spielen();
+				spiel.spielen(null);
 
 			}
 		});

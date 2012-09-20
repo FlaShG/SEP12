@@ -28,10 +28,14 @@ public final class BefehlFactory
 
 	static
 	{
-		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
-				new BefehlTake(), new BefehlEat(), new BefehlQuit(),
-				new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(),
-				new BefehlGive() };
+		Befehl[] befehle = new Befehl[] { new BefehlGo(),new BefehlSchauen(), new BefehlHelp(),
+
+
+				new BefehlTake(), new BefehlEat(), new BefehlLoad(),
+				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGive(), new BefehlInventarAnzeigen(), new BefehlFeed(), new BefehlAblegen() };
+
+				 
+				
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)

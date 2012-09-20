@@ -9,7 +9,10 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 
 public class SpielGUI extends Spiel
 {
@@ -28,6 +31,8 @@ public class SpielGUI extends Spiel
 		public void actionPerformed(ActionEvent e)
 		{
 			verarbeiteEingabe(_befehlszeile);
+			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
@@ -40,6 +45,7 @@ public class SpielGUI extends Spiel
 	{
 		super();
 		initialisiereUI();
+
 	}
 
 	/**
@@ -92,6 +98,23 @@ public class SpielGUI extends Spiel
 		_bp.getWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
+		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
+		
+		_bp.getTuerOstButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
+		
+		_bp.getTuerSuedButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+		_bp.getTuerWestButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -116,6 +139,17 @@ public class SpielGUI extends Spiel
 
 		_bp.getGibButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
+
+		_bp.getLadenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
+
+		_bp.getFuettereButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
+		
+		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
+		
+		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
+
 	}
 
 	@Override
@@ -135,22 +169,35 @@ public class SpielGUI extends Spiel
 	}
 
 	@Override
-	protected void beendeSpiel()
+	public void beendeSpiel()
 	{
-		_ep.getEingabeZeile().setEnabled(false);
-		_ep.getEnterButton().setEnabled(false);
 
-		_bp.getSouthButton().setEnabled(false);
-		_bp.getNorthButton().setEnabled(false);
-		_bp.getWestButton().setEnabled(false);
-		_bp.getEastButton().setEnabled(false);
-		_bp.getGibButton().setEnabled(false);
-		_bp.getEssenButton().setEnabled(false);
-		_bp.getEssenBodenButton().setEnabled(false);
-		_bp.getNehmenButton().setEnabled(false);
-		_bp.getHelpButton().setEnabled(false);
-		_bp.getQuitButton().setEnabled(false);
+		UIsetEnabled(false);
 	}
+
+	/**
+	 * 
+	 */
+	private void UIsetEnabled(boolean value)
+	{
+		_ep.getEingabeZeile().setEnabled(value);
+		_ep.getEnterButton().setEnabled(value);
+
+		_bp.getSouthButton().setEnabled(value);
+		_bp.getNorthButton().setEnabled(value);
+		_bp.getWestButton().setEnabled(value);
+		_bp.getEastButton().setEnabled(value);
+		_bp.getGibButton().setEnabled(value);
+		_bp.getEssenButton().setEnabled(value);
+		_bp.getEssenBodenButton().setEnabled(value);
+		_bp.getNehmenButton().setEnabled(value);
+		_bp.getHelpButton().setEnabled(value);
+		_bp.getQuitButton().setEnabled(value);
+		_bp.getFuettereButton().setEnabled(value);
+		_bp.getAblegenButton().setEnabled(value);
+		_bp.getInventarButton().setEnabled(value);
+	}
+	
 
 	public void schliesseFenster()
 	{
@@ -162,5 +209,31 @@ public class SpielGUI extends Spiel
 	{
 		schreibeNL("> " + eingabezeile);
 		super.verarbeiteEingabe(eingabezeile);
+	}
+
+	@Override
+	public void spielen(String level)
+	{
+		UIsetEnabled(true);
+		
+		super.spielen(level);
+
+		_kontext.addTickListener(new TickListener()
+		{
+
+			@Override
+			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
+			{
+				zeichneBild();
+				return true;
+			}
+		});
+		zeichneBild();
+	}
+
+	private void zeichneBild()
+	{
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 }

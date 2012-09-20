@@ -54,8 +54,8 @@ public class TextVerwalter
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
-	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden, allerdings sind unter ihnen auch vergiftete Stücke. Sollten sie unterwegs eine Maus treffen, so können Sie ihr, als Gegenleistung für ein Stück Kuchen, einen Hinweis auf den Richtigen Weg entlocken. Aber auch hier können sie sich nicht sicher sein, dass der Kuchen wirklich gesund für die Maus ist... \nUm über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
-	public static final String RAUMWECHSELTEXT = "Anzahl betretbarer Räume: ";
+	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden, allerdings sind unter ihnen auch vergiftete Krümel. Sollten sie unterwegs eine Maus treffen, so können Sie ihr, als Gegenleistung für einen Krümel, einen Hinweis auf den Richtigen Weg entlocken. Aber auch hier können sie sich nicht sicher sein, dass der Krümel wirklich gesund für die Maus ist... \nUm über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
+	public static final String RAUMWECHSELTEXT = "Lebensenergie: ";
 	public static final String IMMERNOCHKUCHENTEXT = "Dr. Little erahnt jedoch noch weitere Krümel in direkter Umgebung.";
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft."
 			+ "\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
@@ -65,11 +65,13 @@ public class TextVerwalter
 	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nEine fiese Chemikalie im Krümel zerstört die letzen Reste seines angegriffenen Organsystems.";
 
 	public static final String KEINERICHTUNG = "Wohin möchten Sie gehen?";
+	public static final String KEINESCHAURICHTUNG = "Wohin möchten sie schauen?";
 	public static final String KEINETUER = "Dort ist keine Tür. Wählen Sie eine andere Richtung.";
 	public static final String KEINORT = "Woraus möchten sie essen?";
 	public static final String AUSGAENGE = "Ausgänge";
 
 	public static final String BEFEHL_GEHEN = "gehe";
+	public static final String BEFEHL_SCHAUEN = "schaue";
 	public static final String BEFEHL_NEHMEN = "nehmen";
 	public static final String BEFEHL_ESSEN = "essen";
 	public static final String BEFEHL_HILFE = "hilfe";
@@ -80,9 +82,10 @@ public class TextVerwalter
 
 	public static final String RICHTUNG_NORDEN = "nord";
 	public static final String RICHTUNG_SUEDEN = "süd";
-
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
+	
+
 
 	public static final String ORT_BODEN = "boden";
 	public static final String ORT_TASCHE = "tasche";
@@ -94,7 +97,32 @@ public class TextVerwalter
 	public static final String BEFEHL_GIB_KEIN_OBJEKT = "Hier ist niemand, dem Dr. Little einen Krümel geben könnte...";
 
 	public static final String LABOR_KEIN_KRUEMEL = "Dr. Little hat keinen Krümel, den er untersuchen könnte...";
-	public static final String LABOR_GESUNDER_KUCHEN = "Der Kuchen stellt sich zwar als Kalorienbombe, aber prinzipiell ungiftig heraus.";
-	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Kuchens wurde schon lange überschritten...";
+	public static final String LABOR_GESUNDER_KUCHEN = "Der Krümel stellt sich zwar als Kalorienbombe, aber prinzipiell ungiftig heraus.";
+	public static final String LABOR_GIFTIGER_KUCHEN = "Das Verfallsdatum des Krümmels wurde schon lange überschritten...";
+
+	public static final String BEFEHL_LADEN = "lade";
+
+	public static final String ABLEGEN_TEXT = "Sie legen einen Krümmel ab.";
+	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
+
+	
+	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
+	public static final String KATZE_GREIFT_AN = "Als Dr. Little den Raum verlassen wollte, griff ihn die Katze an.";
+	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
+	public static final String KATZE_IST_SATT_GEWORDEN = "Die Katze frisst den Krümel und sieht jetzt sehr satt aus.";
+
+	public static final String BEFEHL_FEED = "füttere";
+
+	public static final String BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN = "Hier ist nichts, die Dr. Little füttern könnte.";
+
+	public static final String KATZE_VERJAGT_DIE_MAUS = "Die Katze verjagt die Maus in diesem Raum";
+
+	public static final String KATZE_HAT_KEINEN_HUNGER = "Die Katze scheint keinen Hunger mehr zu haben.";
+
+	public static final String BEFEHL_ABLEGEN = "ablegen";
+
+	public static final String BEFEHL_INVENTAR = "inventar";
+
+
 
 }
