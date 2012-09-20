@@ -2,6 +2,10 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.rmi.RemoteException;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 
@@ -72,5 +76,10 @@ public abstract class Client implements ClientInterface
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
 		while(!_server.empfangeNutzerEingabe(eingabezeile));
+	}
+	
+	public static void main(String[] args)
+	{		
+		
 	}
 }

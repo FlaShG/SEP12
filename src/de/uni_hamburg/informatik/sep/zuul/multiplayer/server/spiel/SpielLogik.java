@@ -10,7 +10,8 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.ServerKontext;
 
-public class SpielLogik {
+public class SpielLogik
+{
 	private static String _levelPfad;
 	private ServerKontext _kontext;
 	private RaumStruktur _struktur;
@@ -20,7 +21,8 @@ public class SpielLogik {
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	public void erstelleKontext() {
+	public void erstelleKontext()
+	{
 		Raum start = legeRaeumeAn();
 		_kontext = new ServerKontext(start);
 
@@ -31,7 +33,8 @@ public class SpielLogik {
 	 * 
 	 * @param spieler
 	 */
-	public void registriereSpieler(Spieler spieler) {
+	public void registriereSpieler(Spieler spieler)
+	{
 		_kontext.fuegeNeuenSpielerHinzu(spieler);
 	}
 
@@ -41,18 +44,23 @@ public class SpielLogik {
 	 * @param name
 	 *            der name des Spielers
 	 */
-	public void meldeSpielerAb(String name) {
+	public void meldeSpielerAb(String name)
+	{
 		_kontext.entferneSpieler(name);
 	}
 
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private Raum legeRaeumeAn() {
+	private Raum legeRaeumeAn()
+	{
 		IOManager manager = new IOManager();
-		if (_levelPfad == null) {
+		if(_levelPfad == null)
+		{
 			manager.readLevel("./xml_dateien/testStruktur.xml");
-		} else {
+		}
+		else
+		{
 			manager.readLevel(_levelPfad);
 		}
 		// TODO: noch statisch - datei mit filechooser auswählen!!
@@ -68,15 +76,18 @@ public class SpielLogik {
 	 * 
 	 * @param befehl
 	 */
-	public void fuehreBefehlAus(Befehl befehl, Spieler spieler) {
+	public void fuehreBefehlAus(Befehl befehl, Spieler spieler)
+	{
 		// TODO impl!
+		//Befehl.ausführen(_kontext, spieler);
 	}
 
 	/**
 	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
 	 * Räumen zurück.
 	 */
-	public List<Raum> zeigeAktuelleAusgaenge(Spieler spieler) {
+	public List<Raum> zeigeAktuelleAusgaenge(Spieler spieler)
+	{
 		Raum raum = _kontext.getAktuellenRaumZu(spieler);
 		return raum.getAusgaenge();
 	}
@@ -85,7 +96,8 @@ public class SpielLogik {
 	 * Gibt eine Nachricht aus und beendet das Spiel
 	 * 
 	 */
-	public void beendeSpiel(Spieler spieler) {
+	public void beendeSpiel(Spieler spieler)
+	{
 		// TODO nachricht ausgeben.
 		// TODO spiel beenden (Kontext?)
 
@@ -94,8 +106,10 @@ public class SpielLogik {
 	/**
 	 * Beende das Spiel für alle Spieler.
 	 */
-	public void beendeSpiel() {
-		for (Spieler spieler : _kontext.getSpielerListe()) {
+	public void beendeSpiel()
+	{
+		for(Spieler spieler : _kontext.getSpielerListe())
+		{
 			beendeSpiel(spieler);
 		}
 	}
@@ -104,13 +118,16 @@ public class SpielLogik {
 	 * Zeige allen Spielern den Willkommenstext.
 	 * 
 	 */
-	public void zeigeWillkommensText() {
-		for (Spieler spieler : _kontext.getSpielerListe()) {
+	public void zeigeWillkommensText()
+	{
+		for(Spieler spieler : _kontext.getSpielerListe())
+		{
 			_kontext.zeigeWillkommensText(spieler);
 		}
 	}
 
-	public boolean isRaumZielRaum(Raum raum) {
+	public boolean isRaumZielRaum(Raum raum)
+	{
 		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
@@ -120,9 +137,12 @@ public class SpielLogik {
 	 * 
 	 * @return der Zielraum.
 	 */
-	public Raum getZielRaum() {
-		for (Raum raum : _struktur.getConnections().keySet()) {
-			if (isRaumZielRaum(raum)) {
+	public Raum getZielRaum()
+	{
+		for(Raum raum : _struktur.getConnections().keySet())
+		{
+			if(isRaumZielRaum(raum))
+			{
 				return raum;
 			}
 		}
@@ -138,7 +158,8 @@ public class SpielLogik {
 	 * @param raum
 	 *            der Raum in den es gehen soll
 	 */
-	public void wechseleRaum(Spieler spieler, Raum raum) {
+	public void wechseleRaum(Spieler spieler, Raum raum)
+	{
 		_kontext.setAktuellenRaumZu(spieler, raum);
 	}
 
@@ -147,7 +168,8 @@ public class SpielLogik {
 	 * 
 	 * @return der Serverkontext
 	 */
-	public ServerKontext getKontex() {
+	public ServerKontext getKontex()
+	{
 		return _kontext;
 	}
 
