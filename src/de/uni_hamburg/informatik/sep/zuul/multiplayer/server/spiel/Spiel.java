@@ -48,6 +48,16 @@ public abstract class Spiel {
 		_logik.registriereSpieler(neuerSpieler);
 	}
 
+	/**
+	 * melde den Spieler mit dem Namen name ab.
+	 * 
+	 * @param name
+	 *            Spielername
+	 */
+	public void meldeSpielerAb(String name) {
+		_logik.meldeSpielerAb(name);
+	}
+
 	public boolean istGestartet() {
 		return _gestartet;
 	}
@@ -64,9 +74,7 @@ public abstract class Spiel {
 	 */
 	public void spielen() {
 		_logik.erstelleKontext();
-
 		_logik.zeigeWillkommensText();
-
 		_gestartet = true;
 	}
 
