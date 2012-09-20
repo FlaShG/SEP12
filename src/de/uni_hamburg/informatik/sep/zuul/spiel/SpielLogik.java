@@ -161,7 +161,6 @@ public class SpielLogik
 		{
 			manager.readLevel(_level);
 		}
-		// TODO: noch statisch - datei mit filechooser auswählen!!
 
 		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
