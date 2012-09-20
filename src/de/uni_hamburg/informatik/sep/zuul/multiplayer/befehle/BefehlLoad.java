@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.befehle;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle;
 
 import java.io.File;
 

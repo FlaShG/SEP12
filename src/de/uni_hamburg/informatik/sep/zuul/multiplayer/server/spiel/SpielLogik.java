@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
 import java.util.List;
 
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.RaumBauer;
@@ -25,6 +26,24 @@ public class SpielLogik {
 	}
 
 	/**
+	 * Reistriere einen neuen Spieler
+	 * 
+	 * @param spieler
+	 */
+	public void registriereSpieler(Spieler spieler) {
+		_kontext.fuegeNeuenSpielerHinzu(spieler);
+	}
+
+	/**
+	 * Entfernde den Spieler aus dem Spiel.
+	 * 
+	 * @param spieler
+	 */
+	public void meldeSpielerAb(Spieler spieler) {
+		_kontext.entferneSpieler(spieler);
+	}
+
+	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
 	private Raum legeRaeumeAn() {
@@ -43,6 +62,15 @@ public class SpielLogik {
 	}
 
 	/**
+	 * Führt den Befehl aus für den entsprchenden Spieler aus.
+	 * 
+	 * @param befehl
+	 */
+	public void fuehreBefehlAus(Befehl befehl, Spieler spieler) {
+		//TODO impl!
+	}
+
+	/**
 	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
 	 * Räumen zurück.
 	 */
@@ -55,10 +83,29 @@ public class SpielLogik {
 	 * Gibt eine Nachricht aus und beendet das Spiel
 	 * 
 	 */
-	public void beendeSpiel() {
+	public void beendeSpiel(Spieler spieler) {
 		// TODO nachricht ausgeben.
 		// TODO spiel beenden (Kontext?)
 
+	}
+
+	/**
+	 * Beende das Spiel für alle Spieler.
+	 */
+	public void beendeSpiel() {
+		for (Spieler spieler : _kontext.getSpielerListe()) {
+			beendeSpiel(spieler);
+		}
+	}
+
+	/**
+	 * Zeige allen Spielern den Willkommenstext.
+	 * 
+	 */
+	public void zeigeWillkommensText() {
+		for (Spieler spieler : _kontext.getSpielerListe()) {
+			_kontext.zeigeWillkommensText(spieler);
+		}
 	}
 
 	public boolean isRaumZielRaum(Raum raum) {

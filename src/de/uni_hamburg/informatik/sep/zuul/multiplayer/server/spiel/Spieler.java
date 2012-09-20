@@ -3,6 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
 
 public class Spieler {
+
+	private String _name;
 	private int _lebensEnergie;
 	private Inventar _inventar;
 	private boolean _aktiv; // zustand des Spielers (Bein gestellt - disabled,
@@ -12,11 +14,13 @@ public class Spieler {
 	 * Erzeuge einen neuen Spieler, der ein Inventar, Lebensenergie und einen
 	 * Zustand (aktiv oder inaktiv) hält.
 	 */
-	public Spieler() {
+	public Spieler(String name) {
 		_aktiv = true;
+		_name = name;
 	}
 
-	public Spieler(int lebensEnergie, Inventar inventar) {
+	public Spieler(String name, int lebensEnergie, Inventar inventar) {
+		_name = name;
 		_lebensEnergie = lebensEnergie;
 		_inventar = inventar;
 		_aktiv = true;
