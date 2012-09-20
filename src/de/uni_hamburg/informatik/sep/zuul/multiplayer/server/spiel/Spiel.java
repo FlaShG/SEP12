@@ -2,12 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
 import java.util.Arrays;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Programm;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.ServerKontext;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -27,19 +24,39 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
  */
 public abstract class Spiel {
 	private SpielLogik _logik;
+	private boolean _gestartet;
 
 	/**
 	 * Erzeuge ein neues Spiel
 	 */
-	protected Spiel() {
+	public Spiel() {
 		_logik = new SpielLogik();
+		_gestartet = false;
+	}
+
+	/**
+	 * Erzeuge einen neuen Spieler aus dem übergebenen Namen. Sein Inventar ist
+	 * leer und er bekommt die Standardlebensenergie. Siehe auch
+	 * {@link SpielLogik}.
+	 * 
+	 * @param name
+	 *            Name des Spielers
+	 */
+	public void meldeSpielerAn(String name) {
+		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
+				new Inventar());
+		_logik.registriereSpieler(neuerSpieler);
+	}
+
+	public boolean istGestartet() {
+		return _gestartet;
 	}
 
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
 	public void beendeSpiel() {
-
+		_gestartet = false;
 	}
 
 	/**
@@ -48,40 +65,38 @@ public abstract class Spiel {
 	public void spielen() {
 		_logik.erstelleKontext();
 
-		zeigeWillkommenstext();
+		_logik.zeigeWillkommensText();
+
+		_gestartet = true;
 	}
 
 	/**
-	 * Gibt einen Begrüßungstext für den Spieler aus.
+	 * Verarbeite die Eingabe eines Spielers.
+	 * 
+	 * @param eingabezeile
+	 * @param spieler
 	 */
-	protected void zeigeWillkommenstext(Spieler spieler) {
-		schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
-		schreibeNL("");
-		_logik.zeigeRaumbeschreibung(spieler);
-		_logik.zeigeAktuelleAusgaenge(spieler);
-	}
-
-	protected void verarbeiteEingabe(String eingabezeile) {
-		// String eingabezeile = leseZeileEin();
+	protected void verarbeiteEingabe(String eingabezeile, Spieler spieler) {
 
 		Befehl befehl = parseEingabezeile(eingabezeile);
-		befehl.ausfuehren(_kontext);
-
-		if (!_kontext.isSpielZuende())
-			_kontext.fireTickEvent();
+		_logik.fuehreBefehlAus(befehl, spieler);
 	}
 
-	// protected abstract String leseZeileEin();
-
+	/**
+	 * Starte das Spiel neu.
+	 * 
+	 * @param level
+	 */
 	protected void restart(String level) {
-		spielen(level);
+		_logik.beendeSpiel();
+		spielen();
 	}
 
 	/**
 	 * @param eingabezeile
 	 * @return geparster Befehl
 	 */
-	public static Befehl parseEingabezeile(String eingabezeile) {
+	public Befehl parseEingabezeile(String eingabezeile) {
 		String[] input = eingabezeile.split(" +");
 
 		String[] parameter = new String[0];
@@ -101,24 +116,25 @@ public abstract class Spiel {
 
 	public abstract void schreibe(String nachricht);
 
-	/**
-	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
-	 * Laden) der Klasse erzeugt
-	 */
-	private static Spiel instance;
-
-	/**
-	 * Statische Methode „getInstance()“ liefert die einzige Instanz der Klasse
-	 * zurück. Ist synchronisiert und somit thread-sicher.
-	 */
-	public synchronized static Spiel getInstance() {
-		if (instance == null) {
-			if (!Programm.isOnconsole()) {
-				instance = new SpielGUI();
-			} else {
-				instance = new SpielConsole();
-			}
-		}
-		return instance;
-	}
+	// /**
+	// * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
+	// * Laden) der Klasse erzeugt
+	// */
+	// private static Spiel instance;
+	//
+	// /**
+	// * Statische Methode „getInstance()“ liefert die einzige Instanz der
+	// Klasse
+	// * zurück. Ist synchronisiert und somit thread-sicher.
+	// */
+	// public synchronized static Spiel getInstance() {
+	// if (instance == null) {
+	// if (!Programm.isOnconsole()) {
+	// instance = new SpielGUI();
+	// } else {
+	// instance = new SpielConsole();
+	// }
+	// }
+	// return instance;
+	// }
 }

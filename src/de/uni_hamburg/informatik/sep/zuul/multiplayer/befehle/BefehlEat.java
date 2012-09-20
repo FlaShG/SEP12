@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.befehle;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;

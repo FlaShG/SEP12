@@ -1,5 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.Raum;
@@ -35,6 +37,16 @@ public class ServerKontext {
 	}
 
 	/**
+	 * Entferne den angegebenen Spieler aus dem Spiel.
+	 * 
+	 * @param spieler
+	 *            zu entfernender Spieler
+	 */
+	public void entferneSpieler(Spieler spieler) {
+		_spielerPosition.remove(spieler);
+	}
+
+	/**
 	 * Gibt den Raum zurück, in dem der Spieler sich befindet.
 	 * 
 	 * @param spieler
@@ -57,6 +69,28 @@ public class ServerKontext {
 		assert (_spielerPosition.containsKey(spieler));
 		_spielerPosition.remove(spieler);
 		_spielerPosition.put(spieler, neuerRaum);
+	}
+
+	/**
+	 * Gib alle registrierten Spieler in einer Liste aus.
+	 * 
+	 * @return Liste aller Spieler
+	 */
+	public List<Spieler> getSpielerListe() {
+		return new ArrayList<Spieler>(_spielerPosition.keySet());
+	}
+
+	/**
+	 * Zeige dem Spieler den Willkommenstext.
+	 * 
+	 * @param spieler
+	 */
+	public void zeigeWillkommensText(Spieler spieler) {
+		// TODO impl!!
+		// schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
+		// schreibeNL("");
+		// zeigeRaumbeschreibung(spieler);
+		// zeigeAktuelleAusgaenge(spieler);
 	}
 
 }

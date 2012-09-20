@@ -1,22 +1,22 @@
-package de.uni_hamburg.informatik.sep.zuul.befehle;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-final class BefehlE extends Befehl
+final class BefehlN extends Befehl
 {
 	@Override
 	public String getBefehlsname()
 	{
-		return TextVerwalter.RICHTUNG_OSTEN;
+		return TextVerwalter.RICHTUNG_NORDEN;
 	}
 
 	@Override
 	public String[] getAliases()
 	{
-		return new String[] { "o" };
+		return new String[] { "n" };
 	}
 
 	@Override
@@ -24,7 +24,7 @@ final class BefehlE extends Befehl
 	{
 		// Wir versuchen den Raum zu verlassen.
 		Raum naechsterRaum = kontext.getAktuellerRaum().getAusgang(
-				TextVerwalter.RICHTUNG_OSTEN);
+				TextVerwalter.RICHTUNG_NORDEN);
 		if(naechsterRaum == null)
 		{
 			Spiel.getInstance().schreibeNL(TextVerwalter.KEINETUER);

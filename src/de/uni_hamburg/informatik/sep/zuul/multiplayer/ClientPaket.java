@@ -12,7 +12,7 @@ public class ClientPaket
 	private boolean _katze;
 	private boolean _maus;
 	private Collection<Item> _items;
-	private String _nachricht;
+	private String _nachricht;  //Terminal ausgabe
 	private int _lebensEnergie;
 	private String[] _andereSpieler;
 	private RaumArt _raumArt;
