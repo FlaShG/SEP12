@@ -41,7 +41,6 @@ public class Maus
 				return TextVerwalter.RICHTUNG_WESTEN;
 		}
 		return "unkown";
-
 	}
 
 }

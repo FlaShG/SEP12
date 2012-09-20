@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart", "_items" })
 public class Raum
 {
+	private static boolean ISTGESETZT = false;
+
 	private @XmlElement(name = "beschreibung")
 	String _beschreibung;
 	private @XmlTransient
@@ -35,12 +38,17 @@ public class Raum
 	int _id;
 	private @XmlElement(name = "name")
 	String _name;
+	private @XmlTransient
+	int _x;
+	private @XmlTransient
+	int _y;
 
 	/**
 	 * Nur für JAXB
 	 */
 	private Raum()
 	{
+		_raumart = RaumArt.Normal;
 		_ausgaenge = new HashMap<String, Raum>();
 		setItems(new Stack<Item>());
 	}
@@ -62,12 +70,11 @@ public class Raum
 
 		this._beschreibung = beschreibung;
 		this._ausgaenge = new HashMap<String, Raum>();
+		this._raumart = RaumArt.Normal;
 
 		setItems(new Stack<Item>());
 
-		_name = name;
-
-		_id = _name.hashCode();
+		setName(name);
 	}
 
 	/**
@@ -167,6 +174,31 @@ public class Raum
 	}
 
 	/**
+	 * Setzt den Item-Stack neu Für den Editor relevant
+	 */
+	public void setItems(Stack<Item> items)
+	{
+		_items = items;
+	}
+
+	/**
+	 * Gibt die Items zurück Für den Editor relevant
+	 */
+	@XmlTransient
+	public Stack<Item> getItems()
+	{
+		return _items;
+	}
+
+	/**
+	 * Setzt die Beschreibung des Raumes Für den Editor relevant
+	 */
+	public void setBescheibung(String beschreibung)
+	{
+		_beschreibung = beschreibung;
+	}
+
+	/**
 	 * Liefert die Beschreibung dieses Raums (die dem Konstruktor übergeben
 	 * wurde).
 	 * 
@@ -219,43 +251,61 @@ public class Raum
 		_maus = maus;
 	}
 
+	@XmlTransient
 	public RaumArt getRaumart()
 	{
 		return _raumart;
 	}
 
-	void setRaumart(RaumArt raumart)
+	public void setRaumart(RaumArt raumart)
 	{
 		_raumart = raumart;
 	}
 
+	@XmlTransient
 	public int getId()
 	{
 		return _id;
 	}
 
-	private void setId(int id)
+	public void setId(int id)
 	{
 		_id = id;
 	}
 
+	@XmlTransient
 	public String getName()
 	{
 		return _name;
 	}
 
-	private void setName(String name)
+	public void setName(String name)
 	{
 		_name = name;
 	}
 
-	public Stack<Item> getItems()
+	public int getX()
 	{
-		return _items;
+		return _x;
 	}
 
-	private void setItems(Stack<Item> items)
+	public int getY()
 	{
-		_items = items;
+		return _y;
+	}
+
+	/**
+	 * Setze für diesen Raum die Koordinaten.
+	 * 
+	 * @param x
+	 *            x Koordinate
+	 * @param y
+	 *            y Koordinate
+	 */
+	public void setKoordinaten(int x, int y)
+	{
+		_x = x;
+		_y = y;
+		ISTGESETZT = true;
 	}
 }

@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.xml;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -29,11 +30,43 @@ public class RaumStrukturParser
 		leseXmlEin();
 	}
 
+	/**
+	 * Gibt die XmlRäume ({@link XmlRaum}) zurück.
+	 * Diese Liste ist zu bearbeiten, wenn die Informationen
+	 * auch gespeichert werde sollen.
+	 */
 	public List<XmlRaum> getXmlVerbindungen()
 	{
-		return _root.getRaeume();
+		List<XmlRaum> result = _root.getRaeume();
+		if(result == null)
+			result = new LinkedList<XmlRaum>();
+		return result;
+	}
+	
+	/**
+	 * Setzt die Räume! Unschön!!!
+	 */
+	public void setXmlVerbindungen(List<XmlRaum> raeume)
+	{
+		_root.setRaeume(raeume);
 	}
 
+	/**
+	 * Gibt die Azahl der Mäuse für dieses Level zurück.
+	 */
+	public int getAnzahlMaeuse()
+	{
+		return _root.getMaeuse();
+	}
+	
+	/**
+	 * Setzt die Anzahl Mäuse für dieses Level.
+	 */
+	public void setAnzahlMaeuse(int maeuse)
+	{
+		_root.setMaeuse(maeuse);
+	}
+	
 	/**
 	 * Liest die StrukturXml ein.
 	 */
