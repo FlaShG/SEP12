@@ -37,10 +37,11 @@ public class SpielLogik {
 	/**
 	 * Entfernde den Spieler aus dem Spiel.
 	 * 
-	 * @param spieler
+	 * @param name
+	 *            der name des Spielers
 	 */
-	public void meldeSpielerAb(Spieler spieler) {
-		_kontext.entferneSpieler(spieler);
+	public void meldeSpielerAb(String name) {
+		_kontext.entferneSpieler(name);
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class SpielLogik {
 	 * @param befehl
 	 */
 	public void fuehreBefehlAus(Befehl befehl, Spieler spieler) {
-		//TODO impl!
+		// TODO impl!
 	}
 
 	/**

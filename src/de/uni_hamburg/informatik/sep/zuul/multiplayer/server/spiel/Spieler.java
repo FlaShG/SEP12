@@ -50,4 +50,8 @@ public class Spieler {
 		return _aktiv;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
 }

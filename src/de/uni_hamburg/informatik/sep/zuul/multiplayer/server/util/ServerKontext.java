@@ -39,11 +39,15 @@ public class ServerKontext {
 	/**
 	 * Entferne den angegebenen Spieler aus dem Spiel.
 	 * 
-	 * @param spieler
-	 *            zu entfernender Spieler
+	 * @param name
+	 *            name des zu entfernenden Spielers
 	 */
-	public void entferneSpieler(Spieler spieler) {
-		_spielerPosition.remove(spieler);
+	public void entferneSpieler(String name) {
+		for (Spieler spieler : getSpielerListe()) {
+			if (name.equals(spieler.getName())) {
+				_spielerPosition.remove(spieler);
+			}
+		}
 	}
 
 	/**
@@ -81,6 +85,27 @@ public class ServerKontext {
 	}
 
 	/**
+	 * Gibt eine Liste von Spielern aus dem aktuellen Raum.
+	 * 
+	 * @param aktuellerRaum
+	 *            der Raum
+	 * @return alle Spieler in dem Raum
+	 */
+	public List<String> getSpielerNamenInRaum(Raum aktuellerRaum) {
+		ArrayList<String> result = new ArrayList<String>();
+		assert _spielerPosition.containsValue(aktuellerRaum);
+
+		for (Spieler s : _spielerPosition.keySet()) {
+			Raum raum = _spielerPosition.get(s);
+			if (raum.equals(aktuellerRaum)) {
+				result.add(s.getName());
+			}
+		}
+		return result;
+
+	}
+
+	/**
 	 * Zeige dem Spieler den Willkommenstext.
 	 * 
 	 * @param spieler
@@ -91,6 +116,17 @@ public class ServerKontext {
 		// schreibeNL("");
 		// zeigeRaumbeschreibung(spieler);
 		// zeigeAktuelleAusgaenge(spieler);
+	}
+
+	/**
+	 * Gibt die Nachricht für den Spieler Spieler.
+	 * 
+	 * @param spieler
+	 * @return
+	 */
+	public String getNachrichtFuer(Spieler spieler) {
+		return "";
+		// TODO impl !!!!
 	}
 
 }
