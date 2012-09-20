@@ -26,6 +26,45 @@ public class BefehlFeed extends Befehl
 
 			Item kuchen = kontext.getInventar().getAnyKuchen();
 
+			if(getParameters().length == 1)
+			{
+				if(getParameters()[0].equals("krümel"))
+				{
+					kuchen = kontext.getInventar().getAnyKuchen();
+				}
+				else
+				{
+					Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+					return;
+				}
+			}
+
+			if(getParameters().length > 1)
+			{
+				if(getParameters()[0].equals("schlechter")
+						&& getParameters()[1].equals("krümel"))
+				{
+					if(kontext.getInventar().hatDiesenKuchen(Item.IGiftkuchen))
+					{
+						kuchen = kontext.getInventar().getKuchen(
+								Item.IGiftkuchen);
+					}
+				}
+				else if(getParameters()[0].equals("guter")
+						&& getParameters()[1].equals("krümel"))
+				{
+					if(kontext.getInventar().hatDiesenKuchen(Item.IKuchen))
+					{
+						kuchen = kontext.getInventar().getKuchen(Item.IKuchen);
+					}
+				}
+				else
+				{
+					Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+					return;
+				}
+			}
+
 			String richtigeRichtung = kontext.getAktuellerRaum().getMaus()
 					.getRichtung();
 
@@ -101,11 +140,11 @@ public class BefehlFeed extends Befehl
 	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
 			String[] moeglicheRichtungen)
 	{
-		if(kuchen == Item.Kuchen)
+		if(kuchen == Item.IKuchen || kuchen == Item.UKuchen)
 		{
 			return richtigeRichtung;
 		}
-		if(kuchen == Item.Giftkuchen)
+		if(kuchen == Item.IGiftkuchen || kuchen == Item.UGiftkuchen)
 		{
 			LinkedList<String> richtungen = new LinkedList<String>();
 

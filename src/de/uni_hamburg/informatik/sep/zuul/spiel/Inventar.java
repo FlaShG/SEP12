@@ -73,17 +73,116 @@ public class Inventar
 		return _inhalt.toArray(new Item[0]);
 	}
 
+	/**
+	 * Gibt an, ob der Spieler überhaupt einen Kuchen besitzt
+	 * 
+	 * @return
+	 */
 	public boolean hasAnyKuchen()
 	{
 		for(Item item : _inhalt)
 		{
 			switch (item)
 			{
-			case Kuchen:
-			case Giftkuchen:
+			case UKuchen:
+			case IKuchen:
+			case UGiftkuchen:
+			case IGiftkuchen:
 				return true;
 			default:
 				break;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Gibt den entsprechenden Kuchen aus dem Inventar
+	 * 
+	 * @param item
+	 * @return
+	 * 
+	 * @require hasAnyKuchen(item)
+	 */
+	public Item getKuchen(Item item)
+	{
+		assert hasAnyKuchen();
+
+		switch (item)
+		{
+		case IKuchen:
+			if(has(Item.IKuchen))
+			{
+				_inhalt.remove(Item.IKuchen);
+				return (Item.IKuchen);
+			}
+			break;
+		case UKuchen:
+			if(has(Item.UKuchen))
+			{
+				_inhalt.remove(Item.UKuchen);
+				return (Item.UKuchen);
+			}
+			break;
+		case IGiftkuchen:
+			if(has(Item.IGiftkuchen))
+			{
+				_inhalt.remove(Item.IGiftkuchen);
+				return (Item.IGiftkuchen);
+			}
+			break;
+		case UGiftkuchen:
+			if(has(Item.UGiftkuchen))
+			{
+				_inhalt.remove(Item.UGiftkuchen);
+				return (Item.UGiftkuchen);
+			}
+			break;
+		default:
+
+
+		}
+		return null;
+	}
+
+	/**
+	 * Gibt an, ob der Spieler den entsprechenden Kuchen besitzt
+	 * 
+	 * @param i
+	 * @return
+	 */
+	public boolean hatDiesenKuchen(Item item)
+	{
+		for(Item i : _inhalt)
+		{
+			switch (item)
+			{
+			case UKuchen:
+				if(has(Item.UKuchen))
+				{
+					return true;
+				}
+				break;
+			case IKuchen:
+				if(has(Item.IKuchen))
+				{
+					return true;
+				}
+				break;
+			case UGiftkuchen:
+				if(has(Item.UGiftkuchen))
+				{
+					return true;
+				}
+				break;
+			case IGiftkuchen:
+				if(has(Item.IGiftkuchen))
+				{
+					return true;
+				}
+				break;
+			default:
+				return false;
 			}
 		}
 		return false;
@@ -101,8 +200,10 @@ public class Inventar
 		{
 			switch (item)
 			{
-			case Kuchen:
-			case Giftkuchen:
+			case UKuchen:
+			case IKuchen:
+			case UGiftkuchen:
+			case IGiftkuchen:
 				_inhalt.remove(item);
 				return item;
 			default:
@@ -112,9 +213,27 @@ public class Inventar
 		return null;
 	}
 
+	/**
+	 * Gibt an, ob die Liste das Item enthält
+	 * 
+	 * @param item
+	 * @return
+	 */
+	private boolean has(Item item)
+	{
+		return _inhalt.contains(item);
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Krümel (" + _inhalt.size() + ")";
+		String inhalt = "";
+
+		for(Item i : _inhalt)
+		{
+			inhalt += i + " ";
+		}
+
+		return inhalt;
 	}
 }

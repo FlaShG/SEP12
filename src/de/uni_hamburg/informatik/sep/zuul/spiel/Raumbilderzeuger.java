@@ -118,10 +118,10 @@ public class Raumbilderzeuger
 		{
 			switch (raumItems.get(i))
 			{
-			case Kuchen:
+			case IKuchen: case UKuchen:
 				anzahlKruemel++;
 				break;
-			case Giftkuchen:
+			case IGiftkuchen: case UGiftkuchen:
 				anzahlKruemel++;
 				break;
 			case Gegengift:

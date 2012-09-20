@@ -32,9 +32,9 @@ public final class BefehlSchauen extends Befehl
 			Spiel.getInstance().schreibeNL(
 					"Dr.Little schaut nach " + richtung + "en.");
 			Spiel.getInstance().schreibeNL("Er sieht: " + nebenRaum.getName());
-			Spiel.getInstance().schreibeNL("Zusehen sind :");
 
 			Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
+			Spiel.getInstance().schreibeNL("Zu sehen "+(raumItems.size() == 1 ? "ist" : "sind")+":");
 
 			int anzahlKruemel = 0;
 			boolean gegengift = false;
@@ -45,8 +45,8 @@ public final class BefehlSchauen extends Befehl
 
 				while(raumItems.size() != 0)
 				{
-					if(raumItems.get(0) == Item.Kuchen
-							|| raumItems.get(0) == Item.Giftkuchen)
+					if(raumItems.get(0) == Item.UKuchen
+							|| raumItems.get(0) == Item.UGiftkuchen || raumItems.get(0) == Item.IKuchen || raumItems.get(0) == Item.UKuchen)
 					{
 						anzahlKruemel++;
 					}

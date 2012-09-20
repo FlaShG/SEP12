@@ -8,5 +8,20 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
  */
 public enum Item
 {
-	Kuchen, Giftkuchen, Gegengift, Keins
+	UKuchen("Krümel"), IKuchen("Guter Krümel"), UGiftkuchen("Krümel"), IGiftkuchen(
+			"Schlechter Krümel"), Gegengift("Gegengift"), Keins("");
+
+	private final String _text;
+
+	Item(String text)
+	{
+		_text = text;
+	}
+
+	@Override
+	public String toString()
+	{
+		return _text;
+	}
+
 }

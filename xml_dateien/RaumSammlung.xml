@@ -10,23 +10,23 @@
         <name>Gang</name>
         <id>2211891</id>
         <beschreibung>Dr. Little stolpert in einen dunklen Gang. Die Wände sind mit Büsten von bekannten Unigrößen geschmückt.</beschreibung>
+        <item>UKuchen</item>
         <raumart>Normal</raumart>
-        <item>Kuchen</item>
     </raum>
     <raum>
         <name>Mensa</name>
         <id>74229380</id>
         <beschreibung>Dr. Little findet sich in der Mensa wieder. Die Stühle stehen nach dem letzten Mittagessen immer noch im Raum herum.</beschreibung>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
         <raumart>Normal</raumart>
-        <item>Kuchen</item>
-        <item>Giftkuchen</item>
     </raum>
     <raum>
         <name>Sekretariat Chemie</name>
         <id>-920668986</id>
         <beschreibung>Dr. Little betritt das Chemiesekretariat. Die Frau am Tresen wundert sich, dass sich die Tür öffnet, doch sie kann ihn über den hohen Tresen hinweg nicht sehen.</beschreibung>
+        <item>UGiftkuchen</item>
         <raumart>Normal</raumart>
-        <item>Giftkuchen</item>
     </raum>
     <raum>
         <name>Flur</name>
@@ -56,10 +56,10 @@
         <name>Besenkammer</name>
         <id>-778935556</id>
         <beschreibung>Dr. Little betritt die Besenkammer des Hausmeisters. Es riecht nach Putzmitteln. Ein kleiner Schrank steht leicht geöffnet; es ragen Besenstiele heraus, doch viel zu erkennen ist nicht.</beschreibung>
+        <item>UKuchen</item>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
         <raumart>Normal</raumart>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Giftkuchen</item>
     </raum>
     <raum>
         <name>Bibliothek</name>
@@ -72,7 +72,7 @@
         <id>2212023</id>
         <beschreibung>Dr. Little betritt das Labor seines Kollegen Dr. Evenbigger. Das Ziel ist erreicht.</beschreibung>
         <raumart>Ende</raumart>
-        <item>Gegengift</item>
+        <item>UGegengift</item>
     </raum>
     <raum>
         <name>Hausmeisterbüro</name>
@@ -102,8 +102,8 @@
         <name>Wohnung</name>
         <id>-1114283472</id>
         <beschreibung>Dr. Little betritt seine Wohnung auf dem Campus. Er wohnt seit Jahren dort, da er ja eh ständig in seinem angrenzenden Labor beschäftigt ist.</beschreibung>
+        <item>UKuchen</item>
         <raumart>Normal</raumart>
-        <item>Kuchen</item>
     </raum>
     <raum>
         <name>Konferenzraum</name>
@@ -121,9 +121,9 @@
         <name>Terrasse</name>
         <id>-1112220139</id>
         <beschreibung>Dr. Little geht auf die Terrasse hinaus. Es sind Möwen zu hören. Zu seiner Rechten sind einige Tische und Gartenstühle zu sehen.</beschreibung>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
         <raumart>Normal</raumart>
-        <item>Kuchen</item>
-        <item>Giftkuchen</item>
     </raum>
     <raum>
         <name>Vorlesungssaal</name>

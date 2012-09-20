@@ -30,7 +30,7 @@ public class TextVerwalter
 
 	public static final String kuchengegessentext(int energie)
 	{
-		return "Dr. Little vernascht genüsslich einen Kuchenkrümel aus seiner Tasche. Er fühlt sich belebt und kann nun wieder "
+		return "Dr. Little vernascht genüsslich einen Kuchenkrümel. Er fühlt sich belebt und kann nun wieder "
 				+ energie + " weitere Räume bechreiten.";
 	}
 
@@ -51,6 +51,8 @@ public class TextVerwalter
 		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "
 				+ energie + " Räume betreten können wird.";
 	}
+	
+	public static final String KEINIDENTIFIZIERTERKUCHEN = "Dr. Little hat keinen identifizierten Krümel dieser Art.";
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
@@ -61,6 +63,7 @@ public class TextVerwalter
 			+ "\nIn diesem Raum wird er nichts mehr zum Einsammeln finden.";
 	public static final String NICHTSZUMESSENTEXT = "Dr. Little sucht in seiner Tasche vergeblich nach einem Kuchenkrümel.";
 	public static final String NICHTSZUMESSENTEXTBODEN = "Dr.Little sucht vergeblich nach einem Kuchenkrümel in diesem Raum, leider kann er aber keinen finden.";
+	public static final String DORTLIEGTNICHTS = "Dort liegt nichts...";
 	public static final String FALSCHEEINGABE = "Ich weiß nicht, was Sie meinen...";
 	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nEine fiese Chemikalie im Krümel zerstört die letzen Reste seines angegriffenen Organsystems.";
 

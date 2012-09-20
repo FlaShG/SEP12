@@ -21,8 +21,8 @@ final class BefehlTake extends Befehl
 
 		switch (raum.getNaechstesItem())
 		{
-		case Kuchen:
-			kontext.getInventar().fuegeItemHinzu(Item.Kuchen);
+		case UKuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.UKuchen);
 			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 			raum.loescheItem();
 			if(raum.getNaechstesItem() != Item.Keins)
@@ -31,8 +31,28 @@ final class BefehlTake extends Befehl
 						TextVerwalter.IMMERNOCHKUCHENTEXT);
 			}
 			break;
-		case Giftkuchen:
-			kontext.getInventar().fuegeItemHinzu(Item.Giftkuchen);
+		case IKuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.IKuchen);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+			raum.loescheItem();
+			if(raum.getNaechstesItem() != Item.Keins)
+			{
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.IMMERNOCHKUCHENTEXT);
+			}
+			break;
+		case UGiftkuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.UGiftkuchen);
+			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
+			raum.loescheItem();
+			if(raum.getNaechstesItem() != Item.Keins)
+			{
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.IMMERNOCHKUCHENTEXT);
+			}
+			break;
+		case IGiftkuchen:
+			kontext.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
 			Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENGENOMMENTEXT);
 			raum.loescheItem();
 			if(raum.getNaechstesItem() != Item.Keins)

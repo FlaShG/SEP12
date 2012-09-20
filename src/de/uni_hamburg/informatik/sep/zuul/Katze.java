@@ -117,11 +117,11 @@ public class Katze implements TickListener, PropertyChangeListener
 	{
 		switch (kuchen)
 		{
-		case Giftkuchen:
+		case UGiftkuchen: case IGiftkuchen:
 			deregisterFromKontext(kontext);
 			Spiel.getInstance().schreibeNL(TextVerwalter.KATZE_STIRBT);
 			break;
-		case Kuchen:
+		case UKuchen: case IKuchen:
 			_satt = true;
 			Spiel.getInstance().schreibeNL(TextVerwalter.KATZE_IST_SATT_GEWORDEN);
 		}

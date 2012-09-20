@@ -49,12 +49,13 @@ public class RaumBauer
 
 		// Setze 3 Mäuse zufällig.
 
-		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
+		if(kannMausEnthaltenRaum.size()>0)
+			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
 	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
 	{
-		for(;i>0; --i)
+		for(;i>0 && kannMausEnthaltenRaum.size() > 0; --i)
 		{
 			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
 			kannMausEnthaltenRaum.remove(r);
@@ -66,6 +67,7 @@ public class RaumBauer
 	 */
 	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
 	{
+		
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
 		mausRaum.setMaus(new Maus(mausRaum));
@@ -177,14 +179,14 @@ public class RaumBauer
 
 		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN,
 				burerohausmeister);
-		besenkammerhausmeister.addItem(Item.Kuchen);
-		besenkammerhausmeister.addItem(Item.Giftkuchen);
-		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.UKuchen);
+		besenkammerhausmeister.addItem(Item.UGiftkuchen);
+		besenkammerhausmeister.addItem(Item.UKuchen);
 
 		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
 		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
 		gang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, labor);
-		gang.addItem(Item.Kuchen);
+		gang.addItem(Item.UKuchen);
 
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
@@ -194,8 +196,8 @@ public class RaumBauer
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
 
 		terasse.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, bibliothek);
-		terasse.addItem(Item.Kuchen);
-		terasse.addItem(Item.Kuchen);
+		terasse.addItem(Item.UKuchen);
+		terasse.addItem(Item.UKuchen);
 
 		flur.setAusgang(TextVerwalter.RICHTUNG_OSTEN, haupteingang);
 		flur.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, labor);
@@ -205,7 +207,7 @@ public class RaumBauer
 
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, konferenzraum);
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_NORDEN, labor);
-		wohnung.addItem(Item.Kuchen);
+		wohnung.addItem(Item.UKuchen);
 
 		konferenzraum.setAusgang(e, vorlesungssaal);
 		konferenzraum.setAusgang(n, wohnung);
@@ -222,7 +224,7 @@ public class RaumBauer
 
 		sekretariatchemie.setAusgang(e, eingangchemie);
 		sekretariatchemie.setAusgang(w, flurchemie);
-		sekretariatchemie.addItem(Item.Giftkuchen);
+		sekretariatchemie.addItem(Item.UGiftkuchen);
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
@@ -235,8 +237,8 @@ public class RaumBauer
 
 		mensa.setAusgang(n, herrentiolette);
 		mensa.setAusgang(w, vorlesungssaal);
-		mensa.addItem(Item.Giftkuchen);
-		mensa.addItem(Item.Kuchen);
+		mensa.addItem(Item.UGiftkuchen);
+		mensa.addItem(Item.UKuchen);
 
 		List<Raum> sammlung = new ArrayList<Raum>();
 		sammlung.add(labor);
