@@ -132,27 +132,9 @@
         <raumart>Normal</raumart>
     </raum>
     <raum>
-        <name>sdkfc</name>
+        <name>neu</name>
         <id>0</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name>blub</name>
-        <id>0</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name>sdkjfvbhs kdv</name>
-        <id>0</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name>bklib</name>
-        <id>0</id>
-        <beschreibung></beschreibung>
+        <beschreibung>neu</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
