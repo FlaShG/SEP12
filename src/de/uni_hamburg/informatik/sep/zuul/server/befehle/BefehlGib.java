@@ -23,7 +23,8 @@ final class BefehlGib implements Befehl
 	{
 		if(!spieler.getInventar().hasAnyKuchen())
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.LABOR_KEIN_KRUEMEL);
 			return false;
 		}
 
@@ -31,10 +32,12 @@ final class BefehlGib implements Befehl
 		switch (kuchen)
 		{
 		case Kuchen:
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.LABOR_GESUNDER_KUCHEN);
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.LABOR_GESUNDER_KUCHEN);
 			break;
 		case Giftkuchen:
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 			break;
 		}
 		spieler.getInventar().fuegeItemHinzu(kuchen);
@@ -45,7 +48,8 @@ final class BefehlGib implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
+		BefehlFactory.schreibeNL(kontext, spieler,
+				TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
 	}
 
 	@Override

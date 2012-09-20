@@ -2,8 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.util;
 
 import java.util.ArrayList;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 public abstract class PathFinder
 {
@@ -23,7 +22,7 @@ public abstract class PathFinder
 		}
 		begangeneRaeume.add(start);
 
-		if(SpielLogik.isRaumZielRaum(start))
+		if(isZielRaum(start))
 		{
 			return begangeneRaeume;
 		}

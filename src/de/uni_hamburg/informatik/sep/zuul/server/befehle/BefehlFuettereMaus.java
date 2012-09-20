@@ -2,10 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.LinkedList;
 
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -18,7 +16,8 @@ public class BefehlFuettereMaus implements Befehl
 			+ "maus";
 
 	/**
-	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der Kuchen giftig ist.
+	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der
+	 * Kuchen giftig ist.
 	 */
 	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
 			String[] moeglicheRichtungen)

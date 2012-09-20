@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -24,14 +23,15 @@ final class BefehlNehmen implements Befehl
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
 		Item item = raum.getNaechstesItem();
-		
+
 		spieler.getInventar().fuegeItemHinzu(item);
-		
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KUCHENGENOMMENTEXT);
+
+		BefehlFactory.schreibeNL(kontext, spieler,
+				TextVerwalter.KUCHENGENOMMENTEXT);
 		raum.loescheItem();
 		if(raum.getNaechstesItem() != Item.Keins)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, 
+			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.IMMERNOCHKUCHENTEXT);
 		}
 		return true;

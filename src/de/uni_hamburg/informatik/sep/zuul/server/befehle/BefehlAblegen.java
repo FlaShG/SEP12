@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -18,8 +17,8 @@ final class BefehlAblegen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.getAktuellenRaumZu(spieler)
-				.addItem(spieler.getInventar().getAnyKuchen());
+		kontext.getAktuellenRaumZu(spieler).addItem(
+				spieler.getInventar().getAnyKuchen());
 		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.ABLEGEN_TEXT);
 
 		return true;
@@ -40,9 +39,9 @@ final class BefehlAblegen implements Befehl
 	}
 
 	@Override
-	public void gibFehlerAus(ServerKontext serverKontext, Spieler spieler,
+	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Spiel.getInstance().schreibeNL(TextVerwalter.NICHTS_ZUM_ABLEGEN);
+		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN);
 	}
 }

@@ -10,7 +10,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlFuettereKatze implements Befehl
 {
 
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FEED + "katze";
+	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FEED
+			+ "katze";
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
@@ -25,12 +26,12 @@ public class BefehlFuettereKatze implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		
+
 		Katze katze = raum.getKatze();
-		
+
 		if(katze.isSatt())
 		{
-					BefehlFactory.schreibeNL(kontext, spieler,
+			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
 			return false;
 		}

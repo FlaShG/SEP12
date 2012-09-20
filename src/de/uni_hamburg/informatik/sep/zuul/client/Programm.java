@@ -5,16 +5,20 @@ import javax.swing.SwingUtilities;
 public class Programm
 {
 
-	private static boolean onconsole;
+	public static Client client;
 
 	/**
 	 * main-Methode zum Ausführen.
 	 */
 	public static void main(String[] args)
 	{
-		onconsole = args.length > 0 && args[0].equals("console");
 
-		final Spiel spiel = Spiel.getInstance();
+		//TODO Server erstellen
+
+		String serverIP = null;
+		String serverName = null;
+		// TODO Client erstellen, Ip und Servername übergeben
+		createClient(args, serverName, serverIP);
 
 		SwingUtilities.invokeLater(new Runnable()
 		{
@@ -22,24 +26,34 @@ public class Programm
 			@Override
 			public void run()
 			{
-				
+
 				//TODO Server erstellen
-				
+
 				// TODO Client erstellen, Ip und Servername übergeben
-				
-				spiel.spielen(null);
+
+				client.run();
 
 			}
 		});
 
 	}
 
-	/**
-	 * @return the onconsole
-	 */
-	public static boolean isOnconsole()
+	private static void createClient(String[] args, String serverName,
+			String serverIP)
 	{
-		return onconsole;
-	}
+		boolean onconsole = args.length > 0 && args[0].equals("console");
 
+		//TODO Server erstellen
+
+		// TODO Client erstellen, Ip und Servername übergeben
+
+		if(onconsole)
+		{
+			client = new ClientConsole(serverName, serverIP);
+		}
+		else
+		{
+			client = new ClientGUI(serverName, serverIP);
+		}
+	}
 }

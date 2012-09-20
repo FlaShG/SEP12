@@ -17,26 +17,31 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 public interface Befehl
 {
 	/**
-	 * Überprüft, ob die Vorbedingunen erfüllt sind. 
+	 * Überprüft, ob die Vorbedingunen erfüllt sind.
 	 */
-	boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler, Befehlszeile befehlszeile);
-	
+	boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile);
+
 	/**
 	 * Führt den Befehl aus.
+	 * 
 	 * @require vorbedingungErfuellt(serverKontext, kontext, befehlszeile)
 	 */
-	boolean ausfuehren(ServerKontext kontext, Spieler spieler, Befehlszeile befehlszeile);
-	
+	boolean ausfuehren(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile);
+
 	/**
-	 * Falls der Befehl falsch verwendet wird, wird mit dieser Methode ein Fehler ausgegeben.
+	 * Falls der Befehl falsch verwendet wird, wird mit dieser Methode ein
+	 * Fehler ausgegeben.
+	 * 
 	 * @require !vorbedingungErfuellt(serverKontext, kontext, befehlszeile)
 	 */
-	void gibFehlerAus(ServerKontext kontext, Spieler spieler, Befehlszeile befehlszeile);
+	void gibFehlerAus(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile);
 
 	/**
 	 * Gibt die (Alias-) Namen des Befehls zurück.
 	 */
 	String[] getBefehlsnamen();
-
 
 }

@@ -1,8 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -33,6 +30,6 @@ final class BefehlEssen implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] {TextVerwalter.BEFEHL_ESSEN };
+		return new String[] { TextVerwalter.BEFEHL_ESSEN };
 	}
 }

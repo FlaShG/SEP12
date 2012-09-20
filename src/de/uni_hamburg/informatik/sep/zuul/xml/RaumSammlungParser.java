@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 public class RaumSammlungParser
 {

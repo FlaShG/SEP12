@@ -1,7 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-
 public interface Feature
 {
 	/**

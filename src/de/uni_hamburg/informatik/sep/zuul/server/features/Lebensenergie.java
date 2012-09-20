@@ -3,11 +3,9 @@ package de.uni_hamburg.informatik.sep.zuul.server.features;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 final public class Lebensenergie implements Feature, TickListener,
 		PropertyChangeListener

@@ -3,9 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.features;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 public final class RaumBeschreibungAnzeigen implements Feature, TickListener,
 		PropertyChangeListener

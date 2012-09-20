@@ -17,7 +17,7 @@ import javax.swing.UIManager;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ButtonPanel extends JPanel
 {
@@ -47,11 +47,10 @@ public class ButtonPanel extends JPanel
 
 	private JButton _ladenButton;
 	private JButton _fuettereButton;
-	
-	private final Color TUERFARBE = new Color(180,90,0);
+
+	private final Color TUERFARBE = new Color(180, 90, 0);
 	private JButton _ablegenButton;
 	private JButton _inventarButton;
-
 
 	public ButtonPanel(int breite)
 	{
@@ -288,10 +287,10 @@ public class ButtonPanel extends JPanel
 
 		c.gridy = 7;
 		befehlsPanel.add(_ladenButton, c);
-		
+
 		c.gridy = 8;
 		befehlsPanel.add(_inventarButton, c);
-		
+
 		c.gridy = 9;
 		befehlsPanel.add(_ablegenButton, c);
 
@@ -405,8 +404,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _fuettereButton;
 	}
-	
-	
+
 	/**
 	 * @return den _inventarButton
 	 */
@@ -414,8 +412,7 @@ public class ButtonPanel extends JPanel
 	{
 		return _inventarButton;
 	}
-	
-	
+
 	/**
 	 * @return den _ablegenButton
 	 */
@@ -444,26 +441,19 @@ public class ButtonPanel extends JPanel
 		return _tuerNordButton;
 	}
 
-	
-
 	public JButton getTuerOstButton()
 	{
 		return _tuerOstButton;
 	}
-
-	
 
 	public JButton getTuerSuedButton()
 	{
 		return _tuerSuedButton;
 	}
 
-
-
 	public JButton getTuerWestButton()
 	{
 		return _tuerWestButton;
 	}
 
-	
 }

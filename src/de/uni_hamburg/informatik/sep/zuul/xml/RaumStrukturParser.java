@@ -44,7 +44,7 @@ public class RaumStrukturParser
 			File file = new File(XMLPATH);
 			if(!file.exists())
 				erstelleXml();
-			
+
 			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
 			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
 			_root = (XmlStruktur) junmarshaller.unmarshal(file);
@@ -57,17 +57,17 @@ public class RaumStrukturParser
 	}
 
 	/**
-	 * Schreibt die Liste an XmlRäumen (getXmlVerbindungen)
-	 * in die im Konstruktor angegebene Datei.
+	 * Schreibt die Liste an XmlRäumen (getXmlVerbindungen) in die im
+	 * Konstruktor angegebene Datei.
 	 */
 	public void schreibeXml()
 	{
 		try
 		{
 			File file = new File(XMLPATH);
-			if (!file.exists())
+			if(!file.exists())
 				erstelleXml();
-			
+
 			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
 			Marshaller jmarshaller = jcontext.createMarshaller();
 			jmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -86,7 +86,7 @@ public class RaumStrukturParser
 	private void erstelleXml() throws Exception
 	{
 		File file = new File(XMLPATH);
-		if (file.createNewFile())
+		if(file.createNewFile())
 		{
 			BufferedWriter writer = null;
 			try
@@ -97,22 +97,21 @@ public class RaumStrukturParser
 				writer.write("</struktur>");
 				writer.flush();
 			}
-			catch (Exception e)
+			catch(Exception e)
 			{
 				throw e;
 			}
 			finally
 			{
-				if (writer != null)
+				if(writer != null)
 				{
 					writer.close();
 				}
 			}
 		}
-		
-		
+
 	}
-	
+
 	/**
 	 * Validiert die angegebene xml.
 	 */

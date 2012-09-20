@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 @XmlRootElement(name = "raumsammlung")
 public class RaumSammlung

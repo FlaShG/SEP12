@@ -8,7 +8,6 @@ import java.util.Map;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-
 /**
  * Hält Informationen über die Raumverbindungen. Hier wird gespeichert, welche
  * Räume über welche Ausgänge wie verbunden sind.

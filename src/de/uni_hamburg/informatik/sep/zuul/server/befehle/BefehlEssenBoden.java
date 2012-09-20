@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -34,11 +33,11 @@ public class BefehlEssenBoden implements Befehl
 		case Kuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			aktuellerRaum.loescheItem();
-					BefehlFactory.schreibeNL(kontext, spieler,
+			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.kuchenVomBodenGegessenText(energie));
 			if(aktuellerRaum.getNaechstesItem() != Item.Keins)
 			{
-						BefehlFactory.schreibeNL(kontext, spieler,
+				BefehlFactory.schreibeNL(kontext, spieler,
 						TextVerwalter.IMMERNOCHKUCHENTEXT);
 			}
 
@@ -48,12 +47,13 @@ public class BefehlEssenBoden implements Befehl
 			aktuellerRaum.loescheItem();
 			if(energie > 0)
 			{
-						BefehlFactory.schreibeNL(kontext, spieler,
+				BefehlFactory.schreibeNL(kontext, spieler,
 						TextVerwalter.giftkuchenVomBodenGegessenText(energie));
 			}
 			else
 			{
-				BefehlFactory.beendeSpielFuer(kontext, spieler, TextVerwalter.KUCHENTODTEXT);
+				BefehlFactory.beendeSpielFuer(kontext, spieler,
+						TextVerwalter.KUCHENTODTEXT);
 			}
 			break;
 		}

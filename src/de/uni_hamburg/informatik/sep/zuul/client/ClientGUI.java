@@ -9,19 +9,13 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
-import de.uni_hamburg.informatik.sep.zuul.server.Server;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ClientGUI extends Client
 {
-
-	@Override
 	public void schreibeText(String text)
 	{
-		
 		JTextArea anzeige = _ap.getAnzeigeArea();
 		anzeige.append(text);
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
@@ -30,15 +24,13 @@ public class ClientGUI extends Client
 	@Override
 	public void zeigeAn(ClientPaket paket)
 	{
-
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
-		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		// TODO: Raumbilderzeuger fehlt :)
+		zeichneBild();
 
 	}
-	
-	
+
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -52,7 +44,7 @@ public class ClientGUI extends Client
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			verarbeiteEingabe(_befehlszeile);
+			sendeBefehl(_befehlszeile);
 		}
 	}
 
@@ -61,16 +53,12 @@ public class ClientGUI extends Client
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	public ClientGUI(String serverName, String serverIP, Server server)
+	public ClientGUI(String serverName, String serverIP)
 	{
-		super(serverName, serverIP, server);
+		super(serverName, serverIP);
 		initialisiereUI();
-
 	}
 
-	/**
-	 * 
-	 */
 	void initialisiereUI()
 	{
 		_bp = new ButtonPanel(1024);
@@ -81,21 +69,18 @@ public class ClientGUI extends Client
 
 		_ep.getEnterButton().addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				String str = _ep.getEingabeZeile().getText();
 				_ep.getEingabeZeile().setText("");
 
-				verarbeiteEingabe(str);
-
+				sendeBefehl(str);
 			}
 		});
 
 		_ep.getEingabeZeile().addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -175,24 +160,7 @@ public class ClientGUI extends Client
 
 	}
 
-	@Override
-	public void schreibeNL(String nachricht)
-	{
-		schreibe(nachricht);
-		_ap.getAnzeigeArea().append("\n");
-	}
-
-	@Override
-	public void schreibe(String nachricht)
-	{
-		
-
-		anzeige.append(nachricht);
-		
-	}
-
-	@Override
-	public void beendeSpiel()
+	void beendeSpiel()
 	{
 
 		UIsetEnabled(false);
@@ -227,35 +195,27 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	protected void verarbeiteEingabe(String eingabezeile)
+	protected void sendeBefehl(String eingabezeile)
 	{
-		schreibeNL("> " + eingabezeile);
-		super.verarbeiteEingabe(eingabezeile);
+		schreibeText("> " + eingabezeile);
+		super.sendeBefehl(eingabezeile);
 	}
 
-	@Override
-	public void spielen(String level)
+	void spielen(String level)
 	{
 		UIsetEnabled(true);
 
-		super.spielen(level);
-
-		_kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				zeichneBild();
-				return true;
-			}
-		});
 		zeichneBild();
 	}
 
 	private void zeichneBild()
 	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+//		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+//		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+	}
+
+	@Override
+	public void run()
+	{
 	}
 }

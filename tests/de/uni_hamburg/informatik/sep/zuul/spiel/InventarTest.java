@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+
 public class InventarTest
 {
 

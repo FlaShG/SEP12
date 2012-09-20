@@ -5,7 +5,8 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 
-public interface ServerInterface extends Remote {
+public interface ServerInterface extends Remote
+{
 	/**
 	 * registriere einen Client an diesem Server. Gib true oder false zurück,
 	 * wenn das Registrieren erfolgreich war oder nicht.

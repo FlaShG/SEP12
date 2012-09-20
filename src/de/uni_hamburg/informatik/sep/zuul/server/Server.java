@@ -6,9 +6,9 @@ import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 
 public class Server implements ServerInterface
 {
-	
+
 	//Dummy
-	
+
 	@Override
 	public boolean loginClient(ClientInterface client) throws RemoteException
 	{

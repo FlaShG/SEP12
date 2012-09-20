@@ -1,10 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public final class GewonnenTextAnzeigen implements Feature, TickListener
 {

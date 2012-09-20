@@ -3,9 +3,11 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class ClientPaket
 {
@@ -16,22 +18,24 @@ public class ClientPaket
 	private int _lebensEnergie;
 	private String[] _andereSpieler;
 	private RaumArt _raumArt;
-	
-	
+	private boolean _isSpielZuEnde;
+
 	//setter nötig??
-	
-	boolean aktuellerRaumHatKatze;
-	
-	public ClientPaket(SpielKontext kontext)
+
+	public ClientPaket(ServerKontext kontext, Spieler spieler)
 	{
-		aktuellerRaumHatKatze = kontext.isKatzeImAktuellenRaum();
-		_katze = !kontext.getKatzen().isEmpty();
-		_maus = kontext.hasMaus();
-		_items = new ArrayList<Item>(kontext.getItems()); 
-		_nachricht = kontext.getNachricht();
-		_lebensEnergie = kontext.getLebensEnergie();
-		_andereSpieler = kontext.getSpielerFuerAktuellenRaum();
-		_raumArt = kontext.getRaumArt();
+		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		_katze = aktuellerRaum.hasKatze();
+		_maus = aktuellerRaum.hasMaus();
+		_items = (Collection<Item>) aktuellerRaum.getItems().clone();
+		// TODO: Nachricht?
+//		_nachricht = spieler.getNachricht();
+		_lebensEnergie = spieler.getLebensEnergie();
+		// TODO: Andere Spieler
+//		_andereSpieler = kontext.
+		_raumArt = aktuellerRaum.getRaumart();
+		// TODO: Spiel zu Ende?
+//		_isSpielZuEnde = kontext.isSpielZuEnde();
 	}
 
 	public boolean hasKatze()
@@ -43,7 +47,7 @@ public class ClientPaket
 	{
 		return _maus;
 	}
-	
+
 	public Collection<Item> getItems()
 	{
 		return _items;
@@ -63,11 +67,10 @@ public class ClientPaket
 	{
 		return _andereSpieler;
 	}
-	
+
 	public RaumArt getRaumArt()
 	{
 		return _raumArt;
 	}
-	
-	
+
 }

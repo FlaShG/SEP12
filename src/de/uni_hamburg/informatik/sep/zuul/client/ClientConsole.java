@@ -3,8 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
+import java.rmi.RemoteException;
 
 public class ClientConsole extends Client
 {
@@ -12,29 +11,21 @@ public class ClientConsole extends Client
 	public ClientConsole(String serverName, String serverIP)
 	{
 		super(serverName, serverIP);
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void schreibeText(String text)
-	{
-		System.out.println(text);
-	}
-	
 	@Override
 	public void run()
 	{
 		while(!_isSpielzuEnde)
 		{
 			String nachricht = leseZeileEin();
-			
-			verarbeiteEingabe(nachricht);
-			
+
+			sendeBefehl(nachricht);
+
 			//TODO warten einbauen
 		}
 	}
-	
-	
+
 	/**
 	 * @return
 	 */
@@ -56,49 +47,12 @@ public class ClientConsole extends Client
 		}
 		return eingabezeile;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
+	@Override
+	public void zeigeAn(ClientPaket raum) throws RemoteException
+	{
+		String nachricht = raum.getNachricht();
+		System.out.println(nachricht);
+	}
 
 }

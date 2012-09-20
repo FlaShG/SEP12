@@ -31,7 +31,7 @@ public class BefehlGibMirMehrLeben implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] {"gib mir mehr leben" };
+		return new String[] { "gib mir mehr leben" };
 	}
 
 }

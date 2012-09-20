@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+
 public class SpielKontextTest
 {
 	SpielKontext testKontext = new SpielKontext();

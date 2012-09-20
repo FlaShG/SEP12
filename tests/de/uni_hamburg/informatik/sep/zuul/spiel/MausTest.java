@@ -2,6 +2,11 @@ package de.uni_hamburg.informatik.sep.zuul.spiel;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
+
 public class MausTest
 {
 

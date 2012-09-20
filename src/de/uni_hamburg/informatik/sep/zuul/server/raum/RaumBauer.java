@@ -9,12 +9,15 @@ import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class RaumBauer {
+public class RaumBauer
+{
 	private Raum _startRaum;
 
-	public RaumBauer(RaumStruktur struktur) {
+	public RaumBauer(RaumStruktur struktur)
+	{
 		// initialisiereRaeumeHart();
 		initialisiereRaeume(struktur.getConnections());
 	}
@@ -24,10 +27,12 @@ public class RaumBauer {
 	 * 
 	 * @param verbindungen
 	 */
-	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen) {
+	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
+	{
 		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
 
-		for (Raum raum : verbindungen.keySet()) {
+		for(Raum raum : verbindungen.keySet())
+		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
 					verbindungen.get(raum)[0], TextVerwalter.RICHTUNG_SUEDEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_OSTEN,
@@ -37,22 +42,26 @@ public class RaumBauer {
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
 					verbindungen.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
 
-			if (raum.getRaumart() == RaumArt.Start) {
+			if(raum.getRaumart() == RaumArt.Start)
+			{
 				_startRaum = raum;
 			}
-			if (raum.getRaumart() != RaumArt.Ende
+			if(raum.getRaumart() != RaumArt.Ende
 					&& raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
 		}
 
+		// TODO: Maus anzahl auslesen
 		// Setze 3 Mäuse zufällig.
 
 		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
 	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
-			int i) {
-		for (; i > 0; --i) {
+			int i)
+	{
+		for(; i > 0 && kannMausEnthaltenRaum.size()>0; --i)
+		{
 			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
 			kannMausEnthaltenRaum.remove(r);
 		}
@@ -61,15 +70,18 @@ public class RaumBauer {
 	/**
 	 * @param kannMausEnthaltenRaum
 	 */
-	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum) {
-		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
-		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
+	{
+		Raum mausRaum = FancyFunction.getRandomEntry(kannMausEnthaltenRaum);
+		if(mausRaum != null)
+			return null;
 		mausRaum.setMaus(new Maus(mausRaum));
 
 		return mausRaum;
 	}
 
-	static Raum initialisiereRaeumeHart() {
+	static Raum initialisiereRaeumeHart()
+	{
 		// die Räume erzeugen
 		//
 		Raum labor = new Raum("Privatlabor",
@@ -258,7 +270,8 @@ public class RaumBauer {
 		RaumStruktur struktur = new RaumStruktur(sammlung);
 		RaumStrukturParser parser = new RaumStrukturParser(
 				"./xml_dateien/testStruktur.xml");
-		for (XmlRaum xmlRaum : struktur.getXMLRaumListe()) {
+		for(XmlRaum xmlRaum : struktur.getXMLRaumListe())
+		{
 			parser.getXmlVerbindungen().add(xmlRaum);
 		}
 		parser.schreibeXml();
@@ -271,7 +284,8 @@ public class RaumBauer {
 	 * 
 	 * @return Der Startraum
 	 */
-	public Raum getStartRaum() {
+	public Raum getStartRaum()
+	{
 		return _startRaum;
 	}
 }

@@ -8,9 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFuettere;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlGib;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlGiveTest
 {
@@ -31,8 +30,8 @@ public class BefehlGiveTest
 						TextVerwalter.RICHTUNG_NORDEN,
 						new String[] { TextVerwalter.RICHTUNG_SUEDEN }));
 
-		String falscheRichtung = BefehlFuettere.bestimmeRichtung(Item.Giftkuchen,
-				TextVerwalter.RICHTUNG_NORDEN,
+		String falscheRichtung = BefehlFuettere.bestimmeRichtung(
+				Item.Giftkuchen, TextVerwalter.RICHTUNG_NORDEN,
 				new String[] { TextVerwalter.RICHTUNG_SUEDEN });
 
 		assertFalse(falscheRichtung == TextVerwalter.RICHTUNG_NORDEN);

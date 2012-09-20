@@ -9,7 +9,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
-public class SpielLogik {
+public class SpielLogik
+{
 	private static String _levelPfad;
 	private ServerKontext _kontext;
 
@@ -18,7 +19,8 @@ public class SpielLogik {
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
-	public void erstelleKontext() {
+	public void erstelleKontext()
+	{
 		Raum start = legeRaeumeAn();
 		_kontext = new ServerKontext(start);
 
@@ -27,11 +29,15 @@ public class SpielLogik {
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private Raum legeRaeumeAn() {
+	private Raum legeRaeumeAn()
+	{
 		IOManager manager = new IOManager();
-		if (_levelPfad == null) {
+		if(_levelPfad == null)
+		{
 			manager.readLevel("./xml_dateien/testStruktur.xml");
-		} else {
+		}
+		else
+		{
 			manager.readLevel(_levelPfad);
 		}
 		// TODO: noch statisch - datei mit filechooser auswählen!!
@@ -46,7 +52,8 @@ public class SpielLogik {
 	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
 	 * Räumen zurück.
 	 */
-	public List<Raum> zeigeAktuelleAusgaenge(Spieler spieler) {
+	public List<Raum> zeigeAktuelleAusgaenge(Spieler spieler)
+	{
 		Raum raum = _kontext.getAktuellenRaumZu(spieler);
 		return raum.getAusgaenge();
 	}
@@ -55,13 +62,15 @@ public class SpielLogik {
 	 * Gibt eine Nachricht aus und beendet das Spiel
 	 * 
 	 */
-	public void beendeSpiel() {
+	public void beendeSpiel()
+	{
 		// TODO nachricht ausgeben.
 		// TODO spiel beenden (Kontext?)
 
 	}
 
-	public boolean isRaumZielRaum(Raum raum) {
+	public static boolean isRaumZielRaum(Raum raum)
+	{
 		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
@@ -74,7 +83,8 @@ public class SpielLogik {
 	 * @param raum
 	 *            der Raum in den es gehen soll
 	 */
-	public void wechseleRaum(Spieler spieler, Raum raum) {
+	public void wechseleRaum(Spieler spieler, Raum raum)
+	{
 		_kontext.setAktuellenRaumZu(spieler, raum);
 	}
 }

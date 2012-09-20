@@ -39,7 +39,7 @@ final class BefehlInventarAnzeigen implements Befehl
 	public String[] getBefehlsnamen()
 	{
 		// TODO Auto-generated method stub
-		return new String[] {TextVerwalter.BEFEHL_INVENTAR };
+		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
 	}
 
 }

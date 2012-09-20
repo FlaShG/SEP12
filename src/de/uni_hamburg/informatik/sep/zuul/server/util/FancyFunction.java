@@ -3,7 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.util;
 import java.util.List;
 import java.util.Random;
 
-public final class FancyFunction {
+public final class FancyFunction
+{
 	/**
 	 * Gib ein zufälliges Element aus einer Liste.
 	 * 
@@ -11,9 +12,10 @@ public final class FancyFunction {
 	 *            Die Liste
 	 * @return ein zufälliges Element aus der Liste
 	 */
-	public static <T> T getRandomEntry(List<T> entries) {
+	public static <T> T getRandomEntry(List<T> entries)
+	{
 		int size = entries.size();
-		if (size == 0)
+		if(size == 0)
 			return null;
 
 		int nextInt = new Random().nextInt(size);

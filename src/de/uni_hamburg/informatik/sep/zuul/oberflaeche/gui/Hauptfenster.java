@@ -56,8 +56,7 @@ public class Hauptfenster extends JFrame
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				_ausgabePanel.setGroesse(getSize().width,
-						getHeight() - 440);
+				_ausgabePanel.setGroesse(getSize().width, getHeight() - 440);
 				_eingabePanel.setBreite(getSize().width);
 			}
 		});

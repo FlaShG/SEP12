@@ -1,8 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Befehlszeile
@@ -61,5 +59,5 @@ public class Befehlszeile
 	{
 		return _zeile.startsWith(str);
 	}
-	
+
 }

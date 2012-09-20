@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
-
 @XmlRootElement(name = "raumsammlung")
 public class RaumSammlung
 {

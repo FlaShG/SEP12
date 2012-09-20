@@ -27,63 +27,37 @@ public abstract class Client implements ClientInterface
 	boolean _isSpielzuEnde;
 	Server _server;
 
-	public Client(String serverName, String serverIP, Server server)
+	public Client(String serverName, String serverIP)
 	{
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
-		_server = server;
 	}
 	
-	public void schreibeText(String text)
+	protected void sendeBefehl(String nachricht)
 	{
-		
-	}
-	
-	public void run()
-	{
-		
+		try
+		{
+			_server.empfangeNutzerEingabe(nachricht);
+		}
+		catch(RemoteException e)
+		{
+			// TODO: Handle remote exceptions
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * Führt das Spiel aus.
-	 */
+	public abstract void run();
+
 	@Override
 	public void login() throws RemoteException
 	{
-		// TODO Auto-generated method stub
-		
+		//TODO: Log In into server
 	}
 
 	@Override
 	public void logout() throws RemoteException
 	{
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void zeigeAn(ClientPaket raum) throws RemoteException
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void verarbeiteEingabe(String eingabezeile)
-	{
-		// TODO Auto-generated method stub
-		try
-		{
-			while(!_server.empfangeNutzerEingabe(eingabezeile))
-			{
-			
-			}
-		}
-		catch(RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 }

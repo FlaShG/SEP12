@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -20,10 +19,11 @@ public final class BefehlFactory
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGehe(), new BefehlHilfe(),
 				new BefehlNehmen(), new BefehlEssen(), new BefehlEssenBoden(),
-				new BefehlEssenTasche(), new BefehlLaden(), new BefehlBeenden(),
-				new BefehlGib(), new BefehlInventarAnzeigen(),
-				new BefehlFuettere(), new BefehlFuettereKatze(),
-				new BefehlFuettereMaus(), new BefehlAblegen() };
+				new BefehlEssenTasche(), new BefehlLaden(),
+				new BefehlBeenden(), new BefehlGib(),
+				new BefehlInventarAnzeigen(), new BefehlFuettere(),
+				new BefehlFuettereKatze(), new BefehlFuettereMaus(),
+				new BefehlAblegen() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
@@ -56,7 +56,7 @@ public final class BefehlFactory
 						befehlszeile, befehl);
 			}
 		}
-		Spiel.getInstance().schreibeNL(TextVerwalter.FALSCHEEINGABE);
+		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.FALSCHEEINGABE);
 
 		return false;
 	}

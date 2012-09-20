@@ -1,11 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
-public final class MausImRaumTextAnzeigen implements Feature, TickListener
+public final class MausImRaumTextAnzeigen implements SpielerFeature, BefehlAusgefuehrtListener
 {
 	@Override
 	public boolean tick(SpielKontext kontext, boolean raumGeandert)

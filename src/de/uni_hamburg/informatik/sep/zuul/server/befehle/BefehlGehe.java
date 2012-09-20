@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 import java.util.Arrays;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -16,18 +15,20 @@ final class BefehlGehe implements Befehl
 			TextVerwalter.RICHTUNG_WESTEN };
 
 	@Override
-	public boolean ausfuehren(ServerKontext kontext, Spieler spieler, Befehlszeile befehlszeile)
+	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile)
 	{
 		String richtung = extrahiereRichtung(befehlszeile);
-		
-		Raum naechsterRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(richtung);
+
+		Raum naechsterRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(
+				richtung);
 		kontext.setAktuellenRaumZu(spieler, naechsterRaum);
-		
+
 		return true;
 	}
 
-	public boolean vorbedingungErfuellt(ServerKontext kontext,
-			Spieler spieler, Befehlszeile befehlszeile)
+	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile)
 	{
 		String richtung = extrahiereRichtung(befehlszeile);
 		if(richtung == null)
@@ -65,10 +66,10 @@ final class BefehlGehe implements Befehl
 	}
 
 	@Override
-	public void gibFehlerAus(ServerKontext serverKontext,
-			Spieler spieler, Befehlszeile befehlszeile)
+	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
+			Befehlszeile befehlszeile)
 	{
-		Spiel.getInstance().schreibeNL(TextVerwalter.KEINERICHTUNG);
+		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KEINERICHTUNG);
 	}
 
 	@Override

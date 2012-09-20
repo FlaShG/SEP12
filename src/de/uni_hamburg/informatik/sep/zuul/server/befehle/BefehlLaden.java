@@ -5,7 +5,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -36,13 +35,13 @@ public class BefehlLaden implements Befehl
 				File file = fileChooser.getSelectedFile();
 				level = file.getAbsolutePath();
 			}
-//			Spiel.getInstance().spielen(level);
+			//			Spiel.getInstance().spielen(level);
 		}
 		else
 		{
 			String level = befehlszeile.getGeparsteZeile().get(1);
 
-//			Spiel.getInstance().spielen("./xml_dateien/" + level + ".xml");
+			//			Spiel.getInstance().spielen("./xml_dateien/" + level + ".xml");
 		}
 		return true;
 	}
@@ -56,7 +55,7 @@ public class BefehlLaden implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] {TextVerwalter.BEFEHL_LADEN };
+		return new String[] { TextVerwalter.BEFEHL_LADEN };
 	}
 
 }

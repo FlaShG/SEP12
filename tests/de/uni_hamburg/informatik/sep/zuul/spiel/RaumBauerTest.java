@@ -8,6 +8,10 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
+
 public class RaumBauerTest
 {
 

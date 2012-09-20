@@ -1,5 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -12,12 +15,14 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
  * @author 0ortmann, 0Schlund
  * 
  */
-public class ServerKontext {
+public class ServerKontext
+{
 
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 
-	public ServerKontext(Raum startRaum) {
+	public ServerKontext(Raum startRaum)
+	{
 		_startRaum = startRaum;
 
 	}
@@ -28,7 +33,8 @@ public class ServerKontext {
 	 * @param spieler
 	 *            der neue Spieler
 	 */
-	public void fuegeNeuenSpielerHinzu(Spieler spieler) {
+	public void fuegeNeuenSpielerHinzu(Spieler spieler)
+	{
 
 		_spielerPosition.put(spieler, _startRaum);
 
@@ -41,7 +47,8 @@ public class ServerKontext {
 	 *            der Spieler zu dem wir den Raum suchen
 	 * @return der Raum in dem der Spieler ist
 	 */
-	public Raum getAktuellenRaumZu(Spieler spieler) {
+	public Raum getAktuellenRaumZu(Spieler spieler)
+	{
 		return _spielerPosition.get(spieler);
 	}
 
@@ -53,10 +60,21 @@ public class ServerKontext {
 	 * @param neuerRaum
 	 *            der neu aktuelle aufenthalts Raum des Spielers
 	 */
-	public void setAktuellenRaumZu(Spieler spieler, Raum neuerRaum) {
+	public void setAktuellenRaumZu(Spieler spieler, Raum neuerRaum)
+	{
 		assert (_spielerPosition.containsKey(spieler));
 		_spielerPosition.remove(spieler);
 		_spielerPosition.put(spieler, neuerRaum);
+	}
+
+	public Collection<Spieler> getSpieler()
+	{
+		return new ArrayList<Spieler>(_spielerPosition.keySet());
+	}
+	
+	public List<Raum> getRaeumeInDemSichSpielerAufhalten()
+	{
+		return new ArrayList<Raum>(_spielerPosition.values());
 	}
 
 }
