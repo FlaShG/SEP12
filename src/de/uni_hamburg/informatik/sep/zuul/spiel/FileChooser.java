@@ -77,7 +77,7 @@ public class FileChooser
 			@Override
 			public String getDescription()
 			{
-				return "Struktur Daten für Zuul";
+				return "Zuul-Level";
 			}
 
 			@Override
