@@ -66,9 +66,9 @@ public class ClientGUI extends Client
 	}
 
 	
-	public ClientGUI(String serverName, String serverIP, Server server)
+	public ClientGUI(String serverName, String serverIP, Server server, String clientName)
 	{
-		super(serverName, serverIP, server);
+		super(serverName, serverIP, server, clientName);
 		initialisiereUI();
 
 	}

@@ -9,10 +9,9 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, Server server)
+	public ClientConsole(String serverName, String serverIP, Server server, String clientName)
 	{
-		super(serverName, serverIP, server);
-		// TODO Auto-generated constructor stub
+		super(serverName, serverIP, server, clientName);
 	}
 
 	@Override

@@ -27,8 +27,9 @@ public abstract class Client implements ClientInterface
 	String _serverIP;
 	boolean _isSpielzuEnde;
 	Server _server;
+	String _clientName;
 
-	public Client(String serverName, String serverIP, Server server)
+	public Client(String serverName, String serverIP, Server server, String clientName)
 	{
 		_serverName = serverName;
 		_serverIP = serverIP;
@@ -52,23 +53,19 @@ public abstract class Client implements ClientInterface
 	@Override
 	public void login() throws RemoteException
 	{
-		// TODO Auto-generated method stub
-		
+		while(!_server.loginClient(this, _clientName));
 	}
 
 	@Override
 	public void logout() throws RemoteException
 	{
-		// TODO Auto-generated method stub
-		
+		while(!_server.logoutClient(_clientName));
 	}
 
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		return false;
-		// TODO Auto-generated method stub
-		
+		return false;		
 	}
 
 	public void verarbeiteEingabe(String eingabezeile)
