@@ -15,7 +15,6 @@ public class EditorMenuBar extends JPanel
 {
 	private JButton _new;
 	private JButton _save;
-	private JButton _saveas;
 	private JButton _load;
 	
 	public EditorMenuBar()
@@ -27,7 +26,6 @@ public class EditorMenuBar extends JPanel
 		add(_new = new JButton("Neu"));
 		add(_load = new JButton("Laden"));
 		add(_save = new JButton("Speichern"));
-		add(_saveas = new JButton("Speichern unter")); 
 	}
 	
 	public JButton getNeuButton()
