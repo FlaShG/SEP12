@@ -37,7 +37,7 @@ public class SpielLogik
 
 		new AusgängeAnzeigen().registerToKontext(kontext);
 
-		new Katze(kontext.getAktuellerRaum()).registerToKontext(kontext);
+		new Katze(kontext.getAktuellerRaum().getAusgang("süd").getAusgang("süd")).registerToKontext(kontext);
 
 		return kontext;
 	}

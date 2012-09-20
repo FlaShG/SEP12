@@ -98,6 +98,23 @@ public class SpielGUI extends Spiel
 		_bp.getWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
+		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
+		
+		_bp.getTuerOstButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
+		
+		_bp.getTuerSuedButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+		_bp.getTuerWestButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -128,6 +145,10 @@ public class SpielGUI extends Spiel
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
+		
+		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
+		
+		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
 
 	}
 
@@ -173,6 +194,8 @@ public class SpielGUI extends Spiel
 		_bp.getHelpButton().setEnabled(value);
 		_bp.getQuitButton().setEnabled(value);
 		_bp.getFuettereButton().setEnabled(value);
+		_bp.getAblegenButton().setEnabled(value);
+		_bp.getInventarButton().setEnabled(value);
 	}
 	
 
@@ -201,8 +224,7 @@ public class SpielGUI extends Spiel
 			@Override
 			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				if(hasRoomChanged)
-					zeichneBild();
+				zeichneBild();
 				return true;
 			}
 		});

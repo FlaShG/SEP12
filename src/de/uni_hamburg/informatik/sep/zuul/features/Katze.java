@@ -32,7 +32,7 @@ public class Katze implements Feature, TickListener, PropertyChangeListener
 		if(_raum != kontext.getAktuellerRaum())
 		{
 			// Setzt die Katze zwei Felder weiter.
-			_raum = setzeKatzeZweiFelderWeiter(_raum);
+			_raum = bewegeKatze(kontext, _raum);
 
 			if(_raum == kontext.getAktuellerRaum())
 				katzeAufSpielerGetroffen = true;
@@ -81,15 +81,20 @@ public class Katze implements Feature, TickListener, PropertyChangeListener
 	/**
 	 * 
 	 */
-	private Raum setzeKatzeZweiFelderWeiter(Raum raum)
+	private Raum bewegeKatze(SpielKontext kontext, Raum raum)
 	{
+		// Normaler Weise zwei Felder weiter, es sei denn, im ersten Feld ist der Spieler
 		Raum neuerRaum1 = FancyFunction.getRandomEntry(raum.getAusgaenge());
-
+		
+		// Katze auf Spieler getroffen?
+		if(neuerRaum1 == kontext.getAktuellerRaum())
+			return neuerRaum1;
+		
 		ArrayList<Raum> ausgaenge = neuerRaum1.getAusgaenge();
-
+		
 		// Nicht in den aktuellen Raum zurückgehen !
 		ausgaenge.remove(raum);
-
+		
 		Raum neuerRaum2 = FancyFunction.getRandomEntry(ausgaenge);
 		if(neuerRaum2 == null)
 			return neuerRaum1;

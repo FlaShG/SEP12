@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.xml;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -32,11 +34,17 @@ public class RaumStrukturParser
 		return _root.getRaeume();
 	}
 
+	/**
+	 * Liest die StrukturXml ein.
+	 */
 	private void leseXmlEin()
 	{
 		try
 		{
 			File file = new File(XMLPATH);
+			if(!file.exists())
+				erstelleXml();
+			
 			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
 			Unmarshaller junmarshaller = jcontext.createUnmarshaller();
 			_root = (XmlStruktur) junmarshaller.unmarshal(file);
@@ -48,11 +56,18 @@ public class RaumStrukturParser
 		}
 	}
 
+	/**
+	 * Schreibt die Liste an XmlRäumen (getXmlVerbindungen)
+	 * in die im Konstruktor angegebene Datei.
+	 */
 	public void schreibeXml()
 	{
 		try
 		{
 			File file = new File(XMLPATH);
+			if (!file.exists())
+				erstelleXml();
+			
 			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
 			Marshaller jmarshaller = jcontext.createMarshaller();
 			jmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -65,6 +80,39 @@ public class RaumStrukturParser
 		}
 	}
 
+	/**
+	 * Erstellt grundlegende Xml-Datei
+	 */
+	private void erstelleXml() throws Exception
+	{
+		File file = new File(XMLPATH);
+		if (file.createNewFile())
+		{
+			BufferedWriter writer = null;
+			try
+			{
+				writer = new BufferedWriter(new FileWriter(file));
+				writer.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n");
+				writer.write("<struktur>\n");
+				writer.write("</struktur>");
+				writer.flush();
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+			finally
+			{
+				if (writer != null)
+				{
+					writer.close();
+				}
+			}
+		}
+		
+		
+	}
+	
 	/**
 	 * Validiert die angegebene xml.
 	 */
