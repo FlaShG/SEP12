@@ -1,7 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
@@ -24,6 +27,7 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
  */
 public abstract class Spiel {
 	private SpielLogik _logik;
+	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
 
 	/**
@@ -31,6 +35,7 @@ public abstract class Spiel {
 	 */
 	public Spiel() {
 		_logik = new SpielLogik();
+		_spielerMap = new HashMap<String, Spieler>();
 		_gestartet = false;
 	}
 
@@ -45,6 +50,7 @@ public abstract class Spiel {
 	public void meldeSpielerAn(String name) {
 		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
 				new Inventar());
+		_spielerMap.put(name, neuerSpieler);
 		_logik.registriereSpieler(neuerSpieler);
 	}
 
@@ -56,6 +62,7 @@ public abstract class Spiel {
 	 */
 	public void meldeSpielerAb(String name) {
 		_logik.meldeSpielerAb(name);
+		_spielerMap.remove(name);
 	}
 
 	public boolean istGestartet() {
@@ -123,6 +130,18 @@ public abstract class Spiel {
 	public abstract void schreibeNL(String nachricht);
 
 	public abstract void schreibe(String nachricht);
+
+	/**
+	 * Packe das Clienpaket für den Client mit dem Namen name.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public ClientPaket packePaket(String name) {
+		Spieler spieler = _spielerMap.get(name);
+		return new ClientPaket(_logik.getKontex(), spieler);
+
+	}
 
 	// /**
 	// * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim

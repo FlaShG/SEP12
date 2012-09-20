@@ -13,6 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.TextVerwalter;
 
 public class RaumBauer {
 	private Raum _startRaum;
+	private Raum _endRaum;
 
 	public RaumBauer(RaumStruktur struktur) {
 		// initialisiereRaeumeHart();
@@ -40,6 +41,9 @@ public class RaumBauer {
 			if (raum.getRaumart() == RaumArt.Start) {
 				_startRaum = raum;
 			}
+			if (raum.getRaumart() == RaumArt.Ende) {
+				_endRaum = raum;
+			}
 			if (raum.getRaumart() != RaumArt.Ende
 					&& raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
@@ -50,7 +54,7 @@ public class RaumBauer {
 		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
-	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
+	public void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
 			int i) {
 		for (; i > 0; --i) {
 			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
@@ -61,12 +65,12 @@ public class RaumBauer {
 	/**
 	 * @param kannMausEnthaltenRaum
 	 */
-	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum) {
+	public Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum) {
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
-		
-		
-		mausRaum.setMaus(new Maus(mausRaum));
+
+		mausRaum.setMaus(new Maus(mausRaum, _endRaum));
+
 
 		return mausRaum;
 	}

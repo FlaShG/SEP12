@@ -13,6 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.ServerKontext;
 public class SpielLogik {
 	private static String _levelPfad;
 	private ServerKontext _kontext;
+	private RaumStruktur _struktur;
 
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
@@ -56,9 +57,9 @@ public class SpielLogik {
 		}
 		// TODO: noch statisch - datei mit filechooser auswählen!!
 
-		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
+		_struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
-		RaumBauer raumbauer = new RaumBauer(struktur);
+		RaumBauer raumbauer = new RaumBauer(_struktur);
 		return raumbauer.getStartRaum();
 	}
 
@@ -115,6 +116,21 @@ public class SpielLogik {
 	}
 
 	/**
+	 * Gibt den Zielraum zurück oder null, wenn kein Zielraum gesetzt wurde.
+	 * 
+	 * @return der Zielraum.
+	 */
+	public Raum getZielRaum() {
+		for (Raum raum : _struktur.getConnections().keySet()) {
+			if (isRaumZielRaum(raum)) {
+				return raum;
+			}
+		}
+		return null;
+
+	}
+
+	/**
 	 * Gehe mit dem Spieler in einen anderen Raum
 	 * 
 	 * @param spieler
@@ -125,4 +141,14 @@ public class SpielLogik {
 	public void wechseleRaum(Spieler spieler, Raum raum) {
 		_kontext.setAktuellenRaumZu(spieler, raum);
 	}
+
+	/**
+	 * Getter für den Serverkontext.
+	 * 
+	 * @return der Serverkontext
+	 */
+	public ServerKontext getKontex() {
+		return _kontext;
+	}
+
 }
