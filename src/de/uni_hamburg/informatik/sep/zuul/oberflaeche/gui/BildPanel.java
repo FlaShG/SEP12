@@ -57,10 +57,22 @@ public class BildPanel extends JPanel
 		_tuerWestButton.setFocusable(false);
 		_tuerWestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
+		_schaueNordButton = new JButton();
+		_schaueOstButton = new JButton();
+		_schaueSuedButton = new JButton();
+		_schaueWestButton = new JButton();
+		
+		
+		
 		add(_tuerNordButton);
 		add(_tuerOstButton);
 		add(_tuerSuedButton);
 		add(_tuerWestButton);
+		add(_schaueNordButton);
+		add(_schaueOstButton);
+		add(_schaueSuedButton);
+		add(_schaueWestButton);
+		
 		
 		add(_LabelFuerIcon);
 		addComponentListener(new ComponentAdapter()
@@ -83,6 +95,17 @@ public class BildPanel extends JPanel
 				_tuerOstButton.setLocation(185, 85);
 				_tuerSuedButton.setLocation(90, 185);
 				_tuerWestButton.setLocation(0, 85);
+				
+				_schaueNordButton.setSize(25, 20);
+				_schaueOstButton.setSize(20, 25);
+				_schaueSuedButton.setSize(25, 20);
+				_schaueWestButton.setSize(20, 25);
+				
+				_schaueNordButton.setLocation(115, 0);
+				_schaueOstButton.setLocation(185, 60);
+				_schaueSuedButton.setLocation(115, 185);
+				_schaueWestButton.setLocation(0, 60);
+				
 				
 				
 			}

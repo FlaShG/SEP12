@@ -7,7 +7,6 @@ import javax.swing.JTextArea;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanelAlt;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.KonsolenPanel;
@@ -99,6 +98,22 @@ public class SpielGUI extends Spiel
 		_bildPanel.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+
+		_bildPanel.getSchaueNordButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
+						+ TextVerwalter.RICHTUNG_NORDEN));
+
+		_bildPanel.getSchaueOstButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
+						+ TextVerwalter.RICHTUNG_OSTEN));
+
+		_bildPanel.getSchaueSuedButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
+						+ TextVerwalter.RICHTUNG_SUEDEN));
+
+		_bildPanel.getSchaueWestButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
+						+ TextVerwalter.RICHTUNG_WESTEN));
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -220,7 +235,7 @@ public class SpielGUI extends Spiel
 
 	private void zeichneBild()
 	{
-				Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-				_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 }
