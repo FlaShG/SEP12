@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 public class BildPanel extends JPanel
 {
 	
+	private final ImageIcon FENSTERNS = new ImageIcon(getClass().getResource("bilder/").getPath()+"fenster25.png");
+	private final ImageIcon FENSTEROW = new ImageIcon(getClass().getResource("bilder/").getPath()+"fenster20.png");
 	private JButton _tuerNordButton;
 	private JButton _tuerOstButton;
 	private JButton _tuerSuedButton;
@@ -57,10 +59,17 @@ public class BildPanel extends JPanel
 		_tuerWestButton.setFocusable(false);
 		_tuerWestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		_schaueNordButton = new JButton();
-		_schaueOstButton = new JButton();
-		_schaueSuedButton = new JButton();
-		_schaueWestButton = new JButton();
+		_schaueNordButton = new JButton(FENSTERNS);
+		_schaueNordButton.setIcon(FENSTERNS);
+		
+		_schaueOstButton = new JButton(FENSTEROW);
+		_schaueOstButton.setIcon(FENSTEROW);
+		
+		_schaueSuedButton = new JButton(FENSTERNS);
+		_schaueSuedButton.setIcon(FENSTERNS);
+		
+		_schaueWestButton = new JButton(FENSTEROW);
+		_schaueWestButton.setIcon(FENSTEROW);
 		
 		
 		
