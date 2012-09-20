@@ -21,8 +21,9 @@ public interface ClientInterface extends Remote
 	/**
 	 * registriere die änderungen am Client
 	 * @param raum
+	 * @return 
 	 */
-	public void zeigeAn(ClientPaket raum) throws RemoteException;
+	public boolean zeigeAn(ClientPaket raum) throws RemoteException;
 	
 	
 }

@@ -14,7 +14,8 @@ public interface ServerInterface extends Remote {
 	 *            der zu registrierende Client
 	 * @return erfolg beim Login
 	 */
-	public boolean loginClient(ClientInterface client) throws RemoteException;
+	public boolean loginClient(ClientInterface client, String name)
+			throws RemoteException;
 
 	/**
 	 * entferne einen Client von diesem Server. Gib true oder false zurück wenn
@@ -36,4 +37,6 @@ public interface ServerInterface extends Remote {
 	 * @return Übertragung erfolgreich bzw. fehlerfrei
 	 */
 	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException;
+
+	
 }

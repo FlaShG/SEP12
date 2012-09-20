@@ -7,7 +7,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import de.uni_hamburg.informatik.sep.zuul.Katze;
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
 
 public class SpielLogik
 {

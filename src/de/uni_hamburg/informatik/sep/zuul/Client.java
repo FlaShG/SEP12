@@ -65,8 +65,9 @@ public abstract class Client implements ClientInterface
 	}
 
 	@Override
-	public void zeigeAn(ClientPaket raum) throws RemoteException
+	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
+		return false;
 		// TODO Auto-generated method stub
 		
 	}

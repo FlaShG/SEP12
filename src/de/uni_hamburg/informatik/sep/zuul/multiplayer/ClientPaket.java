@@ -16,6 +16,7 @@ public class ClientPaket
 	private int _lebensEnergie;
 	private String[] _andereSpieler;
 	private RaumArt _raumArt;
+	private String _spielerName;
 	
 	
 	//setter nötig??
@@ -32,6 +33,7 @@ public class ClientPaket
 		_lebensEnergie = kontext.getLebensEnergie();
 		_andereSpieler = kontext.getSpielerFuerAktuellenRaum();
 		_raumArt = kontext.getRaumArt();
+		_spielerName = kontext.getSpielerName();
 	}
 
 	public boolean hasKatze()
@@ -67,6 +69,11 @@ public class ClientPaket
 	public RaumArt getRaumArt()
 	{
 		return _raumArt;
+	}
+	
+	public String getSpielerName()
+	{
+		return _spielerName;
 	}
 	
 	
