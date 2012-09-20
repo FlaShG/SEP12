@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import de.uni_hamburg.informatik.sep.zuul.Client;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.ClientInterface;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
 public class Server extends UnicastRemoteObject implements ServerInterface
@@ -90,8 +91,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	}
 
 	@Override
-	public boolean logoutClient(ClientInterface client) throws RemoteException
+	public boolean logoutClient(String name) throws RemoteException
 	{
+		_connectedClients.remove(name);
+		
+		_spiel.meldeSpielerAb(name);
 		
 		return false;
 	}
@@ -99,24 +103,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	@Override
 	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException
 	{
-		ClientPaket paket = _spielLogik.verarbeiteBefehl(eingabe);
+		_spiel.parseEingabezeile(eingabe);
 	
 		return false;
 	}
-	
-	private void verarbeiteAenderung()
-	{
-		broadcast();
-	}
-
-
-
-
-	@Override
-	public boolean loginClient(ClientInterface client) throws RemoteException
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

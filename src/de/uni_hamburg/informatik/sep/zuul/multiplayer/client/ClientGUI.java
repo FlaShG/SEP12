@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,27 +19,35 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 public class ClientGUI extends Client
 {
 
+	private Hauptfenster _hf;
+	private EingabePanel _ep;
+	private AusgabePanel _ap;
+	private ButtonPanel _bp;
+
+	
 	@Override
 	public void schreibeText(String text)
 	{
-		
+
 		JTextArea anzeige = _ap.getAnzeigeArea();
 		anzeige.append(text);
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
 	}
 
 	@Override
-	public void zeigeAn(ClientPaket paket)
+	public boolean zeigeAn(ClientPaket paket)
 	{
 
 		schreibeText(paket.getNachricht());
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
 		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		
+		//nötig??
+		return true;
 
 	}
-	
-	
+
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -57,11 +65,7 @@ public class ClientGUI extends Client
 		}
 	}
 
-	private Hauptfenster _hf;
-	private EingabePanel _ep;
-	private AusgabePanel _ap;
-	private ButtonPanel _bp;
-
+	
 	public ClientGUI(String serverName, String serverIP, Server server)
 	{
 		super(serverName, serverIP, server);
@@ -176,29 +180,6 @@ public class ClientGUI extends Client
 
 	}
 
-	@Override
-	public void schreibeNL(String nachricht)
-	{
-		schreibe(nachricht);
-		_ap.getAnzeigeArea().append("\n");
-	}
-
-	@Override
-	public void schreibe(String nachricht)
-	{
-		
-
-		anzeige.append(nachricht);
-		
-	}
-
-	@Override
-	public void beendeSpiel()
-	{
-
-		UIsetEnabled(false);
-	}
-
 	/**
 	 * 
 	 */
@@ -228,35 +209,17 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	protected void verarbeiteEingabe(String eingabezeile)
+	public void verarbeiteEingabe(String eingabezeile)
 	{
-		schreibeNL("> " + eingabezeile);
 		super.verarbeiteEingabe(eingabezeile);
 	}
 
-	@Override
 	public void spielen(String level)
 	{
 		UIsetEnabled(true);
 
-		super.spielen(level);
+		super.run();
 
-		_kontext.addTickListener(new TickListener()
-		{
-
-			@Override
-			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-			{
-				zeichneBild();
-				return true;
-			}
-		});
-		zeichneBild();
 	}
 
-	private void zeichneBild()
-	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
-	}
 }

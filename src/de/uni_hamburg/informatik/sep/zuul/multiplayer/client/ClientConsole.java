@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;

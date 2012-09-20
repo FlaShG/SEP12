@@ -25,7 +25,7 @@ public interface ServerInterface extends Remote {
 	 *            der zu entfernende Client
 	 * @return erfolg beim Logou
 	 */
-	public boolean logoutClient(ClientInterface client) throws RemoteException;
+	public boolean logoutClient(String name) throws RemoteException;
 
 	/**
 	 * Empfange vom Client die Nutereingaben in Form von Strings. Gib true oder

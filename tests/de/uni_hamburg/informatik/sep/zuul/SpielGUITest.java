@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.ClientGUI;
+
 public class SpielGUITest
 {
 

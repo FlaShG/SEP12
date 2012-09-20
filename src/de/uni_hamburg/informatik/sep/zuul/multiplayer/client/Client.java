@@ -1,9 +1,8 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 
 /**
