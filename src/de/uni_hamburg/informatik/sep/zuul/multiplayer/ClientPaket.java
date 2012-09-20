@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
+import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 public class ClientPaket
@@ -14,6 +15,7 @@ public class ClientPaket
 	private String _nachricht;
 	private int _lebensEnergie;
 	private String[] _andereSpieler;
+	private RaumArt _raumArt;
 	
 	
 	//setter nötig??
@@ -29,6 +31,7 @@ public class ClientPaket
 		_nachricht = kontext.getNachricht();
 		_lebensEnergie = kontext.getLebensEnergie();
 		_andereSpieler = kontext.getSpielerFuerAktuellenRaum();
+		_raumArt = kontext.getRaumArt();
 	}
 
 	public boolean hasKatze()
@@ -59,6 +62,11 @@ public class ClientPaket
 	public String[] getAndereSpieler()
 	{
 		return _andereSpieler;
+	}
+	
+	public RaumArt getRaumArt()
+	{
+		return _raumArt;
 	}
 	
 	

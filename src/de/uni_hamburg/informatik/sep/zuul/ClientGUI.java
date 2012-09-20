@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
@@ -17,45 +18,23 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 public class ClientGUI extends Client
 {
 
-	
 	@Override
 	public void schreibeText(String text)
 	{
 		_ap.getAnzeigeArea().append(text);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void zeigeAn(ClientPaket paket)
+	{
+
+		schreibeText(paket.getNachricht());
+
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_paket); //Spieler, items, maus, Katze anzeigen
+		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+
+	}
+
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -137,23 +116,21 @@ public class ClientGUI extends Client
 		_bp.getWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
-		_bp.getTuerNordButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
+
+		_bp.getTuerNordButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_NORDEN));
-		
+
 		_bp.getTuerOstButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_OSTEN));
-		
+
 		_bp.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
 		_bp.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -184,10 +161,15 @@ public class ClientGUI extends Client
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
-		
-		_bp.getInventarButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_INVENTAR));
-		
-		_bp.getAblegenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN));
+
+		_bp.getInventarButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_INVENTAR));
+
+		_bp.getAblegenButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(
+								TextVerwalter.BEFEHL_ABLEGEN));
 
 	}
 
@@ -236,7 +218,6 @@ public class ClientGUI extends Client
 		_bp.getAblegenButton().setEnabled(value);
 		_bp.getInventarButton().setEnabled(value);
 	}
-	
 
 	public void schliesseFenster()
 	{
@@ -254,7 +235,7 @@ public class ClientGUI extends Client
 	public void spielen(String level)
 	{
 		UIsetEnabled(true);
-		
+
 		super.spielen(level);
 
 		_kontext.addTickListener(new TickListener()
