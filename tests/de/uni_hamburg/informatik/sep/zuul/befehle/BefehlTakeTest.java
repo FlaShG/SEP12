@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlNehmen;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
@@ -10,12 +11,12 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 public class BefehlTakeTest
 {
 
-	private BefehlTake befehlTake;
+	private BefehlNehmen befehlTake;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		befehlTake = new BefehlTake();
+		befehlTake = new BefehlNehmen();
 		befehlTake.setParameter(new String[] { "tasche" });
 	}
 

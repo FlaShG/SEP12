@@ -7,29 +7,31 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFuettere;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlGib;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 public class BefehlGiveTest
 {
 
-	private BefehlGive _befehlGive;
+	private BefehlGib _befehlGive;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		_befehlGive = new BefehlGive();
+		_befehlGive = new BefehlGib();
 	}
 
 	@Test
 	public void testBestimmeRichtung()
 	{
 		assertEquals(TextVerwalter.RICHTUNG_NORDEN,
-				BefehlFeed.bestimmeRichtung(Item.Kuchen,
+				BefehlFuettere.bestimmeRichtung(Item.Kuchen,
 						TextVerwalter.RICHTUNG_NORDEN,
 						new String[] { TextVerwalter.RICHTUNG_SUEDEN }));
 
-		String falscheRichtung = BefehlFeed.bestimmeRichtung(Item.Giftkuchen,
+		String falscheRichtung = BefehlFuettere.bestimmeRichtung(Item.Giftkuchen,
 				TextVerwalter.RICHTUNG_NORDEN,
 				new String[] { TextVerwalter.RICHTUNG_SUEDEN });
 

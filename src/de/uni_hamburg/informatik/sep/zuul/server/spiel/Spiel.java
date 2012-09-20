@@ -1,0 +1,128 @@
+package de.uni_hamburg.informatik.sep.zuul.server.spiel;
+
+import java.util.Arrays;
+
+import de.uni_hamburg.informatik.sep.zuul.server.Programm;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.features.AusgängeAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+
+/**
+ * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
+ * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
+ * sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf jeden Fall
+ * ausgebaut werden, damit es interessanter wird!
+ * 
+ * Zum Spielen muss eine Instanz dieser Klasse erzeugt werden und an ihr die
+ * Methode "spielen" aufgerufen werden.
+ * 
+ * Diese Instanz erzeugt und initialisiert alle anderen Objekte der Anwendung:
+ * Sie legt alle Räume und einen Parser an und startet das Spiel. Sie wertet
+ * auch die Befehle aus, die der Parser liefert, und sorgt für ihre Ausführung.
+ * 
+ * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
+ * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
+ */
+public abstract class Spiel {
+	private SpielLogik _logik;
+
+	/**
+	 * Erzeuge ein neues Spiel
+	 */
+	protected Spiel() {
+		_logik = new SpielLogik();
+	}
+
+	/**
+	 * Schablonenmethode für Aktionen bei beendetem Spiel.
+	 */
+	public void beendeSpiel() {
+
+	}
+
+	/**
+	 * Führt das Spiel aus.
+	 */
+	public void spielen() {
+		_logik.erstelleKontext();
+
+		zeigeWillkommenstext();
+	}
+
+	/**
+	 * Gibt einen Begrüßungstext für den Spieler aus.
+	 */
+	protected void zeigeWillkommenstext(Spieler spieler) {
+		schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
+		schreibeNL("");
+		_logik.zeigeRaumbeschreibung(spieler);
+		_logik.zeigeAktuelleAusgaenge(spieler);
+	}
+
+	protected void verarbeiteEingabe(String eingabezeile) {
+		// String eingabezeile = leseZeileEin();
+
+		Befehl befehl = parseEingabezeile(eingabezeile);
+		befehl.ausfuehren(_kontext);
+
+		if (!_kontext.isSpielZuende())
+			_kontext.fireTickEvent();
+	}
+
+	// protected abstract String leseZeileEin();
+
+	protected void restart(String level) {
+		spielen(level);
+	}
+
+	/**
+	 * Zerlegt eine Eingabezeile und liefert ein Befehlsobjekt.
+	 * 
+	 * @param eingabezeile
+	 * @return geparster Befehl
+	 */
+	public static Befehl parseEingabezeile(String eingabezeile) {
+		String[] input = eingabezeile.split(" +");
+
+		String[] parameter = new String[0];
+		String befehl = "";
+
+		if (input.length > 0) {
+			befehl = input[0];
+			if (input.length > 1)
+				parameter = Arrays.copyOfRange(input, 1, input.length);
+
+		}
+
+		return BefehlFactory.get(befehl, parameter);
+	}
+
+	public abstract void schreibeNL(String nachricht);
+
+	public abstract void schreibe(String nachricht);
+
+	/**
+	 * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
+	 * Laden) der Klasse erzeugt
+	 */
+	private static Spiel instance;
+
+	/**
+	 * Statische Methode „getInstance()“ liefert die einzige Instanz der Klasse
+	 * zurück. Ist synchronisiert und somit thread-sicher.
+	 */
+	public synchronized static Spiel getInstance() {
+		if (instance == null) {
+			if (!Programm.isOnconsole()) {
+				instance = new SpielGUI();
+			} else {
+				instance = new SpielConsole();
+			}
+		}
+		return instance;
+	}
+}
