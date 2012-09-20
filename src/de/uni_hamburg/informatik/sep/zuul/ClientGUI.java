@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextArea;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
@@ -21,7 +22,10 @@ public class ClientGUI extends Client
 	@Override
 	public void schreibeText(String text)
 	{
-		_ap.getAnzeigeArea().append(text);
+		
+		JTextArea anzeige = _ap.getAnzeigeArea();
+		anzeige.append(text);
+		anzeige.setCaretPosition(anzeige.getDocument().getLength());
 	}
 
 	@Override
@@ -30,11 +34,12 @@ public class ClientGUI extends Client
 
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_paket); //Spieler, items, maus, Katze anzeigen
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
 		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 
 	}
-
+	
+	
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -49,8 +54,6 @@ public class ClientGUI extends Client
 		public void actionPerformed(ActionEvent e)
 		{
 			verarbeiteEingabe(_befehlszeile);
-			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-			_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 		}
 	}
 
@@ -59,9 +62,9 @@ public class ClientGUI extends Client
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	public ClientGUI()
+	public ClientGUI(String serverName, String serverIP, Server server)
 	{
-		super();
+		super(serverName, serverIP, server);
 		initialisiereUI();
 
 	}
@@ -183,10 +186,10 @@ public class ClientGUI extends Client
 	@Override
 	public void schreibe(String nachricht)
 	{
-		JTextArea anzeige = _ap.getAnzeigeArea();
+		
 
 		anzeige.append(nachricht);
-		anzeige.setCaretPosition(anzeige.getDocument().getLength());
+		
 	}
 
 	@Override

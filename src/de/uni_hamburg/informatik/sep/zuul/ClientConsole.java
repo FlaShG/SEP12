@@ -28,10 +28,7 @@ public class ClientConsole extends Client
 		{
 			String nachricht = leseZeileEin();
 			
-			while (!_server.empfangeNutzerEingabe(leseZeileEin()))
-			{
-				
-			}
+			verarbeiteEingabe(nachricht);
 			
 			//TODO warten einbauen
 		}

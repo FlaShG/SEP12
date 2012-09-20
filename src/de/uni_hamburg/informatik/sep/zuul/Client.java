@@ -1,15 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.ClientInterface;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -73,6 +68,24 @@ public abstract class Client implements ClientInterface
 	public void zeigeAn(ClientPaket raum) throws RemoteException
 	{
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void verarbeiteEingabe(String eingabezeile)
+	{
+		// TODO Auto-generated method stub
+		try
+		{
+			while(!_server.empfangeNutzerEingabe(eingabezeile))
+			{
+			
+			}
+		}
+		catch(RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }
