@@ -65,11 +65,13 @@ public class TextVerwalter
 	public static final String KUCHENTODTEXT = "Dr. Little ahnte nicht, dass dieser Kuchenkrümel sein letzter sein würde.\nEine fiese Chemikalie im Krümel zerstört die letzen Reste seines angegriffenen Organsystems.";
 
 	public static final String KEINERICHTUNG = "Wohin möchten Sie gehen?";
+	public static final String KEINESCHAURICHTUNG = "Wohin möchten sie schauen?";
 	public static final String KEINETUER = "Dort ist keine Tür. Wählen Sie eine andere Richtung.";
 	public static final String KEINORT = "Woraus möchten sie essen?";
 	public static final String AUSGAENGE = "Ausgänge";
 
 	public static final String BEFEHL_GEHEN = "gehe";
+	public static final String BEFEHL_SCHAUEN = "schaue";
 	public static final String BEFEHL_NEHMEN = "nehmen";
 	public static final String BEFEHL_ESSEN = "essen";
 	public static final String BEFEHL_HILFE = "hilfe";
@@ -80,9 +82,10 @@ public class TextVerwalter
 
 	public static final String RICHTUNG_NORDEN = "nord";
 	public static final String RICHTUNG_SUEDEN = "süd";
-
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
+	
+
 
 	public static final String ORT_BODEN = "boden";
 	public static final String ORT_TASCHE = "tasche";
@@ -119,6 +122,7 @@ public class TextVerwalter
 	public static final String BEFEHL_ABLEGEN = "ablegen";
 
 	public static final String BEFEHL_INVENTAR = "inventar";
+
 
 
 }

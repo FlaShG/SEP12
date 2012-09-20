@@ -28,7 +28,7 @@ public final class BefehlFactory
 
 	static
 	{
-		Befehl[] befehle = new Befehl[] { new BefehlGo(), new BefehlHelp(),
+		Befehl[] befehle = new Befehl[] { new BefehlGo(),new BefehlSchauen(), new BefehlHelp(),
 
 
 				new BefehlTake(), new BefehlEat(), new BefehlLoad(),
