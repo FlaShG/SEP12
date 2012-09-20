@@ -35,7 +35,7 @@ public class LadenWerkzeug
 			List<Raum> raumListe)
 	{
 		raumListe = setRaumKoordinaten(xmlRaumListe, raumListe);
-		Raum[][] raumArray = erzeugeRaumArray(raumListe);
+		Raum[][] raumArray = erzeugeRaumArray(raumListe, xmlRaumListe);
 		return erstelleEditorMap(raumArray);
 	}
 
@@ -76,12 +76,19 @@ public class LadenWerkzeug
 	 * @param raumListe
 	 * @return
 	 */
-	private Raum[][] erzeugeRaumArray(List<Raum> raumListe)
+	private Raum[][] erzeugeRaumArray(List<Raum> raumListe, List<XmlRaum> raumPositionen)
 	{
 		Raum[][] result = new Raum[getMaximumX(raumListe) + 1][getMaximumY(raumListe) + 1];
 		for(Raum raum : raumListe)
 		{
-			result[raum.getX()][raum.getY()] = raum;
+			for(XmlRaum xmlraum : raumPositionen)
+			{
+				if(xmlraum.getID() == raum.getId())
+				{
+					result[raum.getX()][raum.getY()] = raum;
+					break;
+				}
+			}
 		}
 
 		return result;
