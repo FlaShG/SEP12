@@ -56,7 +56,7 @@ public class IOManager
 	 * @param path
 	 * 			Pfad der xml-Datei
 	 */
-	public boolean validiereLevel(String path)
+	public static boolean validiereLevel(String path)
 	{
 		return RaumStrukturParser.validiere(path);
 	}
