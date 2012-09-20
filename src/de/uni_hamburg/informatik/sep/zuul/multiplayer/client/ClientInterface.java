@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientRaum;
 
-public interface Client extends Remote
+public interface ClientInterface extends Remote
 {
 
 	/**

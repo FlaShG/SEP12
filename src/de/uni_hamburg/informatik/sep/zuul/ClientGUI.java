@@ -14,9 +14,48 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 
-public class SpielGUI extends Spiel
+public class ClientGUI extends Client
 {
 
+	
+	@Override
+	public void schreibeText(String text)
+	{
+		_ap.getAnzeigeArea().append(text);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private final class ActionListenerBefehlAusfuehren implements
 			ActionListener
 	{
@@ -41,7 +80,7 @@ public class SpielGUI extends Spiel
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	public SpielGUI()
+	public ClientGUI()
 	{
 		super();
 		initialisiereUI();

@@ -6,9 +6,93 @@ import java.io.InputStreamReader;
 
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
 
-public class SpielConsole extends Spiel
+public class ClientConsole extends Client
 {
 
+	public ClientConsole(String serverName, String serverIP)
+	{
+		super(serverName, serverIP);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void schreibeText(String text)
+	{
+		System.out.println(text);
+	}
+	
+	@Override
+	public void run()
+	{
+		while(!_isSpielzuEnde)
+		{
+			 leseZeileEin();
+		}
+	}
+	
+	
+	/**
+	 * @return
+	 */
+	protected String leseZeileEin()
+	{
+		System.out.print("> ");
+
+		String eingabezeile = "";
+		BufferedReader eingabe = new BufferedReader(new InputStreamReader(
+				System.in));
+		try
+		{
+			eingabezeile = eingabe.readLine();
+		}
+		catch(IOException exc)
+		{
+			System.out.println("There was an error during reading: "
+					+ exc.getMessage());
+		}
+		return eingabezeile;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void schreibeNL(String nachricht)
 	{
@@ -55,26 +139,6 @@ public class SpielConsole extends Spiel
 		spielen(level);
 	}
 
-	/**
-	 * @return
-	 */
-	protected String leseZeileEin()
-	{
-		System.out.print("> ");
-
-		String eingabezeile = "";
-		BufferedReader eingabe = new BufferedReader(new InputStreamReader(
-				System.in));
-		try
-		{
-			eingabezeile = eingabe.readLine();
-		}
-		catch(IOException exc)
-		{
-			System.out.println("There was an error during reading: "
-					+ exc.getMessage());
-		}
-		return eingabezeile;
-	}
+	
 
 }
