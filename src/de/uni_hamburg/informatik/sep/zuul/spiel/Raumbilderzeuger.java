@@ -32,6 +32,7 @@ public class Raumbilderzeuger
 	private BufferedImage _raumansicht;
 	private SpielKontext _kontext;
 
+	
 	public Raumbilderzeuger(SpielKontext kontext)
 	{
 		_kontext = kontext;

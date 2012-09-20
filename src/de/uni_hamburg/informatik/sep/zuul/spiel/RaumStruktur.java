@@ -24,7 +24,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<Raum> list)
 	{
-		_connected = new HashMap<>();
+		_connected = new HashMap<Raum, Raum[]>();
 		initialisiereConnections(list);
 	}
 
@@ -39,7 +39,7 @@ public class RaumStruktur
 	 */
 	public RaumStruktur(List<XmlRaum> xmlList, List<Raum> list)
 	{
-		_connected = new HashMap<>();
+		_connected = new HashMap<Raum, Raum[]>();
 		Map<Integer, Raum> zuordnungen = erzeugeIDZuordnungen(xmlList, list);
 
 		for(XmlRaum xmlRaum : xmlList)
@@ -58,6 +58,7 @@ public class RaumStruktur
 
 			//der Raum selbst
 			Raum raum = zuordnungen.get(xmlRaum.getID());
+			raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
 
 			Raum[] array = { nordNachbar, ostNachbar, suedNachbar, westNachbar };
 
@@ -138,23 +139,21 @@ public class RaumStruktur
 
 		for(String s : richtungen)
 		{
-			switch (s)
+			if(s.equals(TextVerwalter.RICHTUNG_NORDEN))
 			{
-			case TextVerwalter.RICHTUNG_NORDEN:
 				nordNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_OSTEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_OSTEN))
+			{
 				ostNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_SUEDEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_SUEDEN))
+			{
 				suedNachbar = raum.getAusgang(s);
-				break;
-			case TextVerwalter.RICHTUNG_WESTEN:
+			}
+			else if(s.equals(TextVerwalter.RICHTUNG_WESTEN))
+			{
 				westNachbar = raum.getAusgang(s);
-				break;
-
-			default:
-				break;
 			}
 		}
 		Raum[] result = { nordNachbar, ostNachbar, suedNachbar, westNachbar };
@@ -168,7 +167,7 @@ public class RaumStruktur
 	 */
 	public List<XmlRaum> getXMLRaumListe()
 	{
-		List<XmlRaum> result = new ArrayList<>();
+		List<XmlRaum> result = new ArrayList<XmlRaum>();
 		for(Raum raum : _connected.keySet())
 		{
 			int nord = 0, ost = 0, sued = 0, west = 0;
@@ -190,7 +189,8 @@ public class RaumStruktur
 				west = _connected.get(raum)[3].getId();
 			}
 
-			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west);
+			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west,
+					raum.getX(), raum.getY());
 			result.add(xmlRaum);
 
 		}

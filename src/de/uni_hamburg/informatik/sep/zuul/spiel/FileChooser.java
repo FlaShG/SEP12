@@ -24,13 +24,52 @@ public class FileChooser
 	}
 	
 	/**
-	 * Öffnet eine Datei, und gibt den Pfad als String zurück. Wenn die geöffnete Datei keine gültige Datei ist oder der Vorgang abgebrochen wurde, wird <code>null</code> zurückgegeben.
+	 * Öffnet eine Datei, und gibt den Pfad als String zurück.
+	 * Wenn die geöffnete Datei keine gültige Datei ist oder der Vorgang abgebrochen wurde,
+	 * wird <code>null</code> zurückgegeben.
 	 * Es können nur gültige Zuul-Level Dateien angezeigt werden.
 	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei ungültig ist.
 	 */
 	public static String oeffneDatei()
 	{
 		String level = null;
+		final JFileChooser fileChooser = konfiguriereFileChooser();
+
+		int returnVal = fileChooser.showOpenDialog(new JPanel());
+
+		if(returnVal == JFileChooser.APPROVE_OPTION)
+		{
+
+			File file = fileChooser.getSelectedFile();
+			level = file.getAbsolutePath();
+		}
+		return level;
+	}
+	
+	/**
+	 * Gibt den Speicherpfad der Datei zurück.
+	 * Es können nur gültige Zuul-Level Dateien angezeigt werden.
+	 * 
+	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei ungültig ist.
+	 */
+	public static String speichereDatei()
+	{
+		String level = null;
+		final JFileChooser fileChooser = konfiguriereFileChooser();
+
+		int returnVal = fileChooser.showSaveDialog(new JPanel());
+
+		if(returnVal == JFileChooser.APPROVE_OPTION)
+		{
+
+			File file = fileChooser.getSelectedFile();
+			level = file.getAbsolutePath();
+		}
+		return level;
+	}
+
+	private static JFileChooser konfiguriereFileChooser()
+	{
 		final JFileChooser fileChooser = new JFileChooser("./xml_dateien/");
 		fileChooser.setFileFilter(new FileFilter()
 		{
@@ -38,7 +77,7 @@ public class FileChooser
 			@Override
 			public String getDescription()
 			{
-				return "Struktur Daten für Zuul";
+				return "Zuul-Level";
 			}
 
 			@Override
@@ -50,16 +89,7 @@ public class FileChooser
 
 		});
 		fileChooser.setAcceptAllFileFilterUsed(false);
-
-		int returnVal = fileChooser.showOpenDialog(new JPanel());
-
-		if(returnVal == JFileChooser.APPROVE_OPTION)
-		{
-
-			File file = fileChooser.getSelectedFile();
-			level = file.getAbsolutePath();
-		}
-		return level;
+		return fileChooser;
 	}
 
 	/**
