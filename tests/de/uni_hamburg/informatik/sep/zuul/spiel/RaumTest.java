@@ -92,25 +92,25 @@ public class RaumTest
 		assertEquals(Item.Keins, raum.getNaechstesItem());
 		assertEquals(Item.Keins, raumWesten.getNaechstesItem());
 
-		raumOsten.addItem(Item.Kuchen);
+		raumOsten.addItem(Item.UKuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 	}
 
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.addItem(Item.Kuchen);
+		raumOsten.addItem(Item.UKuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 
 	}
 
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.addItem(Item.Kuchen);
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		raumOsten.addItem(Item.UKuchen);
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 
 		raumOsten.loescheItem();
 		assertEquals(Item.Keins, raumOsten.getNaechstesItem());

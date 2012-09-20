@@ -39,10 +39,10 @@ public class RaumEigenschaftenPanel extends JPanel
 		{
 			switch(item)
 			{
-				case Kuchen:
+				case UKuchen:
 					++kuchen;
 				break;
-				case Giftkuchen:
+				case UGiftkuchen:
 					++giftkuchen;
 				break;
 			}

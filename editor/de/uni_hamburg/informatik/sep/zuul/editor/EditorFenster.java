@@ -135,9 +135,9 @@ public class EditorFenster implements EditorBeobachter
 			
 			Stack<Item> items = new Stack<Item>();
 			for(int i = 0; i < eigenschaften.getKuchenzahl(); ++i)
-				items.push(Item.Kuchen);
+				items.push(Item.UKuchen);
 			for(int i = 0; i < eigenschaften.getGiftkuchenzahl(); ++i)
-				items.push(Item.Giftkuchen);
+				items.push(Item.UGiftkuchen);
 				
 			raum.setItems(items);
 		}

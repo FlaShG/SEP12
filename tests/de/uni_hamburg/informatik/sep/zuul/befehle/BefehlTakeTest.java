@@ -25,10 +25,10 @@ public class BefehlTakeTest
 		SpielKontext kontext = new SpielKontext();
 		kontext.setAktuellerRaum(new Raum("", ""));
 
-		kontext.getAktuellerRaum().addItem(Item.Giftkuchen);
+		kontext.getAktuellerRaum().addItem(Item.UGiftkuchen);
 		befehlTake.ausfuehren(kontext);
 
-		kontext.getAktuellerRaum().addItem(Item.Kuchen);
+		kontext.getAktuellerRaum().addItem(Item.UKuchen);
 		befehlTake.ausfuehren(kontext);
 	}
 
