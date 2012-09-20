@@ -25,7 +25,7 @@ public abstract class PathFinder
 		}
 		begangeneRaeume.add(start);
 
-		if(SpielLogik.isRaumZielRaum(start))
+		if(isRaumZielRaum(start))
 		{
 			return begangeneRaeume;
 		}
@@ -53,5 +53,10 @@ public abstract class PathFinder
 			return null;
 		return kuerzesterWegZumZiel;
 
+	}
+	
+	public ArrayList<Raum> getRaumListe(Raum start)
+	{
+		
 	}
 }
