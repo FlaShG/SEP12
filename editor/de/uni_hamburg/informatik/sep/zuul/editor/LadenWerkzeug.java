@@ -138,13 +138,14 @@ public class LadenWerkzeug
 	private List<Raum> setRaumKoordinaten(List<XmlRaum> xmlRaumListe,
 			List<Raum> raumListe)
 	{
-		for(Raum raum : raumListe)
+		for(XmlRaum xmlRaum : xmlRaumListe)
 		{
-			for(XmlRaum xmlRaum : xmlRaumListe)
+			for(Raum raum : raumListe)
 			{
 				if(raum.getId() == xmlRaum.getID())
 				{
 					raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
+					break;
 				}
 			}
 		}

@@ -7,6 +7,8 @@
         <ostid>2211891</ostid>
         <suedid>-1114283472</suedid>
         <westid>-622619353</westid>
+        <x>2</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>2212023</id>
@@ -14,6 +16,8 @@
         <ostid>0</ostid>
         <suedid>-535394682</suedid>
         <westid>0</westid>
+        <x>1</x>
+        <y>4</y>
     </xmlraum>
     <xmlraum>
         <id>1875150719</id>
@@ -21,6 +25,8 @@
         <ostid>74229380</ostid>
         <suedid>463155405</suedid>
         <westid>-391235217</westid>
+        <x>3</x>
+        <y>3</y>
     </xmlraum>
     <xmlraum>
         <id>2211891</id>
@@ -28,6 +34,8 @@
         <ostid>403478920</ostid>
         <suedid>0</suedid>
         <westid>-648638930</westid>
+        <x>3</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>2192899</id>
@@ -35,6 +43,8 @@
         <ostid>-1033341475</ostid>
         <suedid>-648638930</suedid>
         <westid>0</westid>
+        <x>2</x>
+        <y>0</y>
     </xmlraum>
     <xmlraum>
         <id>-1112220139</id>
@@ -42,6 +52,8 @@
         <ostid>0</ostid>
         <suedid>-1714145679</suedid>
         <westid>0</westid>
+        <x>5</x>
+        <y>0</y>
     </xmlraum>
     <xmlraum>
         <id>463155405</id>
@@ -49,6 +61,8 @@
         <ostid>0</ostid>
         <suedid>280481804</suedid>
         <westid>0</westid>
+        <x>3</x>
+        <y>4</y>
     </xmlraum>
     <xmlraum>
         <id>-535394682</id>
@@ -56,6 +70,8 @@
         <ostid>-920668986</ostid>
         <suedid>0</suedid>
         <westid>0</westid>
+        <x>1</x>
+        <y>5</y>
     </xmlraum>
     <xmlraum>
         <id>-391235217</id>
@@ -63,6 +79,8 @@
         <ostid>1875150719</ostid>
         <suedid>0</suedid>
         <westid>0</westid>
+        <x>2</x>
+        <y>3</y>
     </xmlraum>
     <xmlraum>
         <id>-622619353</id>
@@ -70,6 +88,8 @@
         <ostid>-648638930</ostid>
         <suedid>0</suedid>
         <westid>1025772383</westid>
+        <x>1</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>74229380</id>
@@ -77,6 +97,8 @@
         <ostid>0</ostid>
         <suedid>0</suedid>
         <westid>1875150719</westid>
+        <x>4</x>
+        <y>3</y>
     </xmlraum>
     <xmlraum>
         <id>-920668986</id>
@@ -84,6 +106,8 @@
         <ostid>280481804</ostid>
         <suedid>0</suedid>
         <westid>-535394682</westid>
+        <x>2</x>
+        <y>5</y>
     </xmlraum>
     <xmlraum>
         <id>1025772383</id>
@@ -91,6 +115,8 @@
         <ostid>-622619353</ostid>
         <suedid>0</suedid>
         <westid>0</westid>
+        <x>0</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>-1033341475</id>
@@ -98,6 +124,8 @@
         <ostid>0</ostid>
         <suedid>2211891</suedid>
         <westid>2192899</westid>
+        <x>3</x>
+        <y>0</y>
     </xmlraum>
     <xmlraum>
         <id>-1714145679</id>
@@ -105,13 +133,8 @@
         <ostid>0</ostid>
         <suedid>0</suedid>
         <westid>403478920</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>280481804</id>
-        <nordid>463155405</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>-920668986</westid>
+        <x>5</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>403478920</id>
@@ -119,6 +142,8 @@
         <ostid>-1714145679</ostid>
         <suedid>747719876</suedid>
         <westid>2211891</westid>
+        <x>4</x>
+        <y>1</y>
     </xmlraum>
     <xmlraum>
         <id>-1114283472</id>
@@ -126,6 +151,8 @@
         <ostid>0</ostid>
         <suedid>-391235217</suedid>
         <westid>0</westid>
+        <x>2</x>
+        <y>2</y>
     </xmlraum>
     <xmlraum>
         <id>747719876</id>
@@ -133,6 +160,8 @@
         <ostid>0</ostid>
         <suedid>74229380</suedid>
         <westid>0</westid>
+        <x>4</x>
+        <y>2</y>
     </xmlraum>
     <xmlraum>
         <id>-778935556</id>
@@ -140,6 +169,8 @@
         <ostid>0</ostid>
         <suedid>1025772383</suedid>
         <westid>0</westid>
+        <x>0</x>
+        <y>0</y>
     </xmlraum>
     <xmlraum>
         <id>280481804</id>
@@ -147,278 +178,7 @@
         <ostid>0</ostid>
         <suedid>0</suedid>
         <westid>-920668986</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-535394682</id>
-        <nordid>2212023</nordid>
-        <ostid>-920668986</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-920668986</id>
-        <nordid>0</nordid>
-        <ostid>280481804</ostid>
-        <suedid>0</suedid>
-        <westid>-535394682</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1033341475</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>2211891</suedid>
-        <westid>2192899</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-391235217</id>
-        <nordid>-1114283472</nordid>
-        <ostid>1875150719</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-622619353</id>
-        <nordid>0</nordid>
-        <ostid>-648638930</ostid>
-        <suedid>0</suedid>
-        <westid>1025772383</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1714145679</id>
-        <nordid>-1112220139</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>403478920</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>463155405</id>
-        <nordid>1875150719</nordid>
-        <ostid>0</ostid>
-        <suedid>280481804</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-648638930</id>
-        <nordid>2192899</nordid>
-        <ostid>2211891</ostid>
-        <suedid>-1114283472</suedid>
-        <westid>-622619353</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2211891</id>
-        <nordid>-1033341475</nordid>
-        <ostid>403478920</ostid>
-        <suedid>0</suedid>
-        <westid>-648638930</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>1025772383</id>
-        <nordid>-778935556</nordid>
-        <ostid>-622619353</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>403478920</id>
-        <nordid>0</nordid>
-        <ostid>-1714145679</ostid>
-        <suedid>747719876</suedid>
-        <westid>2211891</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1114283472</id>
-        <nordid>-648638930</nordid>
-        <ostid>0</ostid>
-        <suedid>-391235217</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>74229380</id>
-        <nordid>747719876</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>1875150719</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1112220139</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>-1714145679</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>747719876</id>
-        <nordid>403478920</nordid>
-        <ostid>0</ostid>
-        <suedid>74229380</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-778935556</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>1025772383</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2212023</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>-535394682</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>1875150719</id>
-        <nordid>0</nordid>
-        <ostid>74229380</ostid>
-        <suedid>463155405</suedid>
-        <westid>-391235217</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2192899</id>
-        <nordid>0</nordid>
-        <ostid>-1033341475</ostid>
-        <suedid>-648638930</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>747719876</id>
-        <nordid>403478920</nordid>
-        <ostid>0</ostid>
-        <suedid>74229380</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>280481804</id>
-        <nordid>463155405</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>-920668986</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-778935556</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>1025772383</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>403478920</id>
-        <nordid>0</nordid>
-        <ostid>-1714145679</ostid>
-        <suedid>747719876</suedid>
-        <westid>2211891</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>74229380</id>
-        <nordid>747719876</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>1875150719</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1033341475</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>2211891</suedid>
-        <westid>2192899</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-535394682</id>
-        <nordid>2212023</nordid>
-        <ostid>-920668986</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-622619353</id>
-        <nordid>0</nordid>
-        <ostid>-648638930</ostid>
-        <suedid>0</suedid>
-        <westid>1025772383</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>463155405</id>
-        <nordid>1875150719</nordid>
-        <ostid>0</ostid>
-        <suedid>280481804</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2192899</id>
-        <nordid>0</nordid>
-        <ostid>-1033341475</ostid>
-        <suedid>-648638930</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1114283472</id>
-        <nordid>-648638930</nordid>
-        <ostid>0</ostid>
-        <suedid>-391235217</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>1025772383</id>
-        <nordid>-778935556</nordid>
-        <ostid>-622619353</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2211891</id>
-        <nordid>-1033341475</nordid>
-        <ostid>403478920</ostid>
-        <suedid>0</suedid>
-        <westid>-648638930</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-648638930</id>
-        <nordid>2192899</nordid>
-        <ostid>2211891</ostid>
-        <suedid>-1114283472</suedid>
-        <westid>-622619353</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-920668986</id>
-        <nordid>0</nordid>
-        <ostid>280481804</ostid>
-        <suedid>0</suedid>
-        <westid>-535394682</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>1875150719</id>
-        <nordid>0</nordid>
-        <ostid>74229380</ostid>
-        <suedid>463155405</suedid>
-        <westid>-391235217</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-391235217</id>
-        <nordid>-1114283472</nordid>
-        <ostid>1875150719</ostid>
-        <suedid>0</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1112220139</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>-1714145679</suedid>
-        <westid>0</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>-1714145679</id>
-        <nordid>-1112220139</nordid>
-        <ostid>0</ostid>
-        <suedid>0</suedid>
-        <westid>403478920</westid>
-    </xmlraum>
-    <xmlraum>
-        <id>2212023</id>
-        <nordid>0</nordid>
-        <ostid>0</ostid>
-        <suedid>-535394682</suedid>
-        <westid>0</westid>
+        <x>3</x>
+        <y>5</y>
     </xmlraum>
 </struktur>
