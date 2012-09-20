@@ -132,37 +132,26 @@
         <raumart>Normal</raumart>
     </raum>
     <raum>
-        <name>neu</name>
-        <id>0</id>
-        <beschreibung>neu</beschreibung>
-        <raumart>Normal</raumart>
+        <name>mile high club</name>
+        <id>-1343655537</id>
+        <beschreibung>überall schwule stripper</beschreibung>
+        <raumart>Start</raumart>
     </raum>
     <raum>
-        <name></name>
-        <id>1</id>
-        <beschreibung></beschreibung>
+        <name>Absturz</name>
+        <id>809736834</id>
+        <beschreibung>tief hinab</beschreibung>
         <raumart>Normal</raumart>
+        <item>Giftkuchen</item>
+        <item>Giftkuchen</item>
+        <item>Giftkuchen</item>
+        <item>Giftkuchen</item>
+        <item>Giftkuchen</item>
     </raum>
     <raum>
-        <name></name>
-        <id>2</id>
-        <beschreibung>krümels</beschreibung>
-        <raumart>Normal</raumart>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-        <item>Kuchen</item>
-    </raum>
-    <raum>
-        <name></name>
-        <id>3</id>
-        <beschreibung>ende</beschreibung>
+        <name>Pisssumpf</name>
+        <id>-1341940532</id>
+        <beschreibung>Riecht animalisch und wild.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
 </raumsammlung>

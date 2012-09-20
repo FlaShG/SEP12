@@ -52,7 +52,7 @@ public class IOManager
 	 */
 	public void schreibeLevelRaeume(List<Raum> raumListe)
 	{
-		_sammlParser = new RaumSammlungParser();
+		readRaeume();
 
 		//ID Liste der vorhandenen Räume
 		List<Integer> idSammlung = new ArrayList<Integer>();
@@ -82,6 +82,11 @@ public class IOManager
 	{
 		_strukParser = new RaumStrukturParser(path);
 
+		readRaeume();
+	}
+
+	public void readRaeume()
+	{
 		_sammlParser = new RaumSammlungParser();
 	}
 

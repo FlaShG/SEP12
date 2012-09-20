@@ -51,15 +51,16 @@ public class LadenWerkzeug
 	{
 		EditorMap result = new EditorMap(raumArray.length, raumArray[0].length);
 		GridButton[][] buttons = result.getButtonArray();
-		for(int i = 0; i < raumArray.length; ++i)
+		
+		for(int y = 0; y < raumArray[0].length; ++y)
 		{
-			for(int j = 0; j < raumArray[0].length; ++j)
+			for(int x = 0; x < raumArray.length; ++x)
 			{
-				Raum raum = raumArray[i][j];
+				Raum raum = raumArray[x][y];
 				if(raum != null)
 				{
-					buttons[i][j].setRaum(raum);
-					buttons[i][j].setAusgewaehlt(false);
+					buttons[x][y].setRaum(raum);
+					buttons[x][y].setAusgewaehlt(false);
 				}
 			}
 		}

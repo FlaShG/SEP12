@@ -30,7 +30,7 @@ public class EditorMap extends JPanel
 	 */
 	public EditorMap(int width, int height)
 	{
-		setLayout(new GridLayout(width, height));
+		setLayout(new GridLayout(height, width)); //dammit kids
 
 		_buttons = new GridButton[width][height];
 

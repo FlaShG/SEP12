@@ -18,8 +18,8 @@ public class VerbindungsWerkzeug
 {
 	private EditorMap _map;
 	private Raum[][] _raumArray;
-	private int _arrayZL; //Zeilenlänge
-	private int _arraySL; //Spaltenlänge
+	private int _arraySpaltenzahl; //Zeilenlänge
+	private int _arrayZeilenzahl; //Spaltenlänge
 	private List<Raum> _raumListe; //alle Räume in einer Liste
 
 	/**
@@ -41,20 +41,20 @@ public class VerbindungsWerkzeug
 	{
 		_map = map;
 		GridButton[][] array = _map.getButtonArray();
-		_arrayZL = array.length;
-		_arraySL = array[0].length;
+		_arraySpaltenzahl = array.length;
+		_arrayZeilenzahl = array[0].length;
 		_raumListe = new ArrayList<Raum>();
 		
 		_raumArray = liesRaeumeAusButtonArray();
 
-		for(int i = 0; i < _arrayZL; ++i)
+		for(int y = 0; y < _arrayZeilenzahl; ++y)
 		{
-			for(int j = 0; j < _arraySL; ++j)
+			for(int x = 0; x < _arraySpaltenzahl; ++x)
 			{
-				if(existiertRaumAnPosition(i, j))
+				if(existiertRaumAnPosition(x, y))
 				{
-					verbindeNachbarn(i, j);
-					_raumListe.add(_raumArray[i][j]);
+					verbindeNachbarn(x, y);
+					_raumListe.add(_raumArray[x][y]);
 				}
 			}
 		}
@@ -72,31 +72,31 @@ public class VerbindungsWerkzeug
 	private void verbindeNachbarn(int x, int y)
 	{
 		//Nord
-		if(istGueltigePosition(x - 1, y) && existiertRaumAnPosition(x - 1, y))
+		if(istGueltigePosition(x, y - 1) && existiertRaumAnPosition(x, y - 1))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
-					_raumArray[x - 1][y], TextVerwalter.RICHTUNG_SUEDEN);
+					_raumArray[x][y - 1], TextVerwalter.RICHTUNG_SUEDEN);
 		}
 
 		//Ost
-		if(istGueltigePosition(x, y + 1) && existiertRaumAnPosition(x, y + 1))
+		if(istGueltigePosition(x + 1, y) && existiertRaumAnPosition(x + 1, y))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_OSTEN,
-					_raumArray[x][y + 1], TextVerwalter.RICHTUNG_WESTEN);
+					_raumArray[x + 1][y], TextVerwalter.RICHTUNG_WESTEN);
 		}
 
 		//Süd
-		if(istGueltigePosition(x + 1, y) && existiertRaumAnPosition(x + 1, y))
+		if(istGueltigePosition(x, y + 1) && existiertRaumAnPosition(x, y + 1))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_SUEDEN,
-					_raumArray[x + 1][y], TextVerwalter.RICHTUNG_NORDEN);
+					_raumArray[x][y + 1], TextVerwalter.RICHTUNG_NORDEN);
 		}
 
 		//West
-		if(istGueltigePosition(x, y - 1) && existiertRaumAnPosition(x, y - 1))
+		if(istGueltigePosition(x - 1, y) && existiertRaumAnPosition(x - 1, y))
 		{
 			_raumArray[x][y].verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
-					_raumArray[x][y - 1], TextVerwalter.RICHTUNG_OSTEN);
+					_raumArray[x - 1][y], TextVerwalter.RICHTUNG_OSTEN);
 		}
 	}
 
@@ -109,12 +109,12 @@ public class VerbindungsWerkzeug
 	private Raum[][] liesRaeumeAusButtonArray()
 	{
 		GridButton[][] array = _map.getButtonArray();
-		Raum[][] raumArray = new Raum[_arrayZL][_arraySL];
-		for(int i = 0; i < _arrayZL; ++i)
+		Raum[][] raumArray = new Raum[_arraySpaltenzahl][_arrayZeilenzahl];
+		for(int y = 0; y < _arrayZeilenzahl; ++y)
 		{
-			for(int j = 0; j < _arraySL; ++j)
+			for(int x = 0; x < _arraySpaltenzahl; ++x)
 			{
-				raumArray[i][j] = array[i][j].getRaum();
+				raumArray[x][y] = array[x][y].getRaum();
 			}
 		}
 
@@ -132,7 +132,7 @@ public class VerbindungsWerkzeug
 	 */
 	private boolean istGueltigePosition(int x, int y)
 	{
-		return (x >= 0 && x < _arrayZL && y >= 0 && y < _arraySL);
+		return (x >= 0 && x < _arraySpaltenzahl && y >= 0 && y < _arrayZeilenzahl);
 	}
 
 	/**

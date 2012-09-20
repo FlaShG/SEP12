@@ -23,9 +23,17 @@ public class EditorFenster implements EditorBeobachter
 	public EditorFenster()
 	{
 		_leveldaten = new EditorLevel();
-		_ui = new EditorFensterUI(this, _leveldaten);
+		_ui = new EditorFensterUI(this);
+		
 		_speicherWerkzeug = new SpeicherWerkzeug(this);
-		_ladenWerkzeug = new LadenWerkzeug(this);
+		_ladenWerkzeug = new LadenWerkzeug(this);		
+		
+		resetEditorFenster();
+	}
+	
+	private void resetEditorFenster()
+	{
+		_ui.init(_leveldaten);
 		
 		registriereUIAktionen();
 	}
@@ -47,7 +55,6 @@ public class EditorFenster implements EditorBeobachter
 		
 		_ui.getMenuBar().getSpeicherButton().addActionListener(new ActionListener()
 		{
-			
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -57,11 +64,20 @@ public class EditorFenster implements EditorBeobachter
 		
 		_ui.getMenuBar().getLadenButton().addActionListener(new ActionListener()
 		{
-			
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				resetEditorFenster();
 				_ladenWerkzeug.lade("./xml_dateien/testStruktur.xml");
+			}
+		});
+		
+		_ui.getMenuBar().getNeuButton().addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				resetEditorFenster();
 			}
 		});
 	}

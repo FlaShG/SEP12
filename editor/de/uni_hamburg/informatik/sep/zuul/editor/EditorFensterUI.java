@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,11 +33,20 @@ public class EditorFensterUI
 	 * @param beobachter Ein Observer, der über alle Änderungen in der UI informiert wird.
 	 * @param level 
 	 */
-	public EditorFensterUI(EditorBeobachter beobachter, EditorLevel level)
+	public EditorFensterUI(EditorBeobachter beobachter)
 	{
 		_beobachter = beobachter;
-		
-		
+	}
+	
+	
+	public void init(EditorLevel level)
+	{
+		Point pos = new Point(0,0);
+		if(_frame != null)
+		{
+			pos = _frame.getLocation();
+			close();
+		}
 		_frame = new JFrame("Zuul-Editor");
 		
 		_frame.getContentPane().setLayout(new BorderLayout());
@@ -48,10 +58,10 @@ public class EditorFensterUI
 		_frame.add(north, BorderLayout.NORTH);
 		
 		north.add(_menubar = new EditorMenuBar());
-		north.add(_levelPanel = new LevelPanel(beobachter, level));
+		north.add(_levelPanel = new LevelPanel(_beobachter, level));
 		
 		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
-		_map.setBeobachter(beobachter);
+		_map.setBeobachter(_beobachter);
 		
 		_raumhinzu = new JButton("Raum anlegen");
 	
@@ -62,7 +72,13 @@ public class EditorFensterUI
 		//_frame.setSize(_frame.getSize().width, _frame.getSize().width);
 		_frame.setMinimumSize(new Dimension(900, 600));
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_frame.setLocation(pos);
 		_frame.setVisible(true);		
+	}
+	
+	private void close()
+	{
+		_frame.dispose();
 	}
 	
 	/**
