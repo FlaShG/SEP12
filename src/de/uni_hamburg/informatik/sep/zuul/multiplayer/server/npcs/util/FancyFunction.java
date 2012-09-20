@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.npcs.util;
 
 import java.util.List;
 import java.util.Random;

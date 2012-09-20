@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.multiplayer.server;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar;
 
 /**
  * Definiert moegliche Items die im Spiel verfuegbar sind.
