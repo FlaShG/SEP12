@@ -199,6 +199,10 @@ public class SpielGUI extends Spiel
 		_bildPanel.getTuerOstButton().setEnabled(value);
 		_bildPanel.getTuerSuedButton().setEnabled(value);
 		_bildPanel.getTuerWestButton().setEnabled(value);
+		_bildPanel.getSchaueNordButton().setEnabled(value);
+		_bildPanel.getSchaueOstButton().setEnabled(value);
+		_bildPanel.getSchaueSuedButton().setEnabled(value);
+		_bildPanel.getSchaueWestButton().setEnabled(value);
 	}
 
 	public void schliesseFenster()
