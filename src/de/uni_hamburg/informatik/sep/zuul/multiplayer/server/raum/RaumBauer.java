@@ -64,6 +64,8 @@ public class RaumBauer {
 	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum) {
 		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
 		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+		
+		
 		mausRaum.setMaus(new Maus(mausRaum));
 
 		return mausRaum;
