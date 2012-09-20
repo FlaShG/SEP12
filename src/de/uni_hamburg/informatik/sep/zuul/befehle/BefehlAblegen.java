@@ -14,13 +14,19 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  */
 final class BefehlAblegen extends Befehl
 {
-
+ //TODO ABlegen neues ITem enums!!!
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
 		if(kontext.getInventar().isGefuellt())
 		{
 			if(getParameters().length == 0)
+			{
+				kontext.getAktuellerRaum().addItem(
+						kontext.getInventar().getAnyKuchen());
+				Spiel.getInstance().schreibeNL(TextVerwalter.ABLEGEN_TEXT);
+			}
+			if(getParameters().length == 2)
 			{
 				kontext.getAktuellerRaum().addItem(
 						kontext.getInventar().getAnyKuchen());

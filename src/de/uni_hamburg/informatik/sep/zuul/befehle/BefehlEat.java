@@ -1,5 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.befehle;
 
+import java.security.UnrecoverableKeyException;
+
 import de.uni_hamburg.informatik.sep.zuul.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
@@ -17,6 +19,7 @@ final class BefehlEat extends Befehl
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
+		// Keine Parameter; nur "essen"
 		if(getParameters().length == 0)
 		{
 			Spiel.getInstance().schreibeNL(TextVerwalter.KEINORT);
@@ -24,93 +27,109 @@ final class BefehlEat extends Befehl
 		}
 
 		String ort = getParameters()[0];
-		String itemParam = null;
-		if(getParameters().length > 1)
+
+		// Ein Parameter essen tasche, essen boden; random krümel?, frage nach 3. param?
+		if(getParameters().length == 1)
 		{
-			itemParam = getParameters()[1];
+			if(ort.equals(TextVerwalter.ORT_TASCHE))
+			{
+				if(kontext.getInventar().hasAnyKuchen())
+				{
+					Item item = kontext.getInventar().getAnyKuchen();
+					issZufaelligenKruemel(item, kontext);
+				}
+				else
+				{
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.NICHTSZUMESSENTEXT);
+				}
+			}
+
+			else if(ort.equals(TextVerwalter.ORT_BODEN))
+			{
+				if(kontext.getAktuellerRaum().getItems() != null)
+				{
+					Item item = kontext.getAktuellerRaum().getNaechstesItem();
+					issZufaelligenKruemel(item, kontext);
+					if(kontext.getAktuellerRaum().getNaechstesItem() != Item.Keins)
+					{
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.IMMERNOCHKUCHENTEXT);
+					}
+				}
+				else
+				{
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.NICHTSZUMESSENTEXTBODEN);
+				}
+			}
 		}
 
-		if(ort.equals("tasche"))
+		// 2 Parameter, essen tasche krümel
+		else if(getParameters().length == 2)
 		{
-			if(itemParam != null && !itemParam.equals("kuchen"))
+			String itemParam = getParameters()[1];
+			System.out.println(itemParam);
+
+			if(itemParam != null && !itemParam.equals("krümel"))
 			{
 				Spiel.getInstance().schreibeNL("Das können sie nicht essen...");
 			}
 			Item item = kontext.getInventar().nehmeLetztesItem();
 
-			int energie = kontext.getLebensEnergie();
+			issZufaelligenKruemel(item, kontext);
 
-			switch (item)
-			{
-			case Kuchen:
-				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.kuchengegessentext(energie));
-				break;
-			case Giftkuchen:
-				energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
-				if(energie > 0)
-				{
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter.giftkuchengegessentext(energie));
-				}
-				else
-				{
-					SpielLogik
-							.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
-				}
-				break;
-				
-			default:
-				Spiel.getInstance()
-						.schreibeNL(TextVerwalter.NICHTSZUMESSENTEXT);
-				break;
-			}
-
-			kontext.setLebensEnergie(energie);
 		}
-
-		else if(ort.equals(TextVerwalter.ORT_BODEN))
+		// 3 parameter; essen tasche guter krümel, essen tasche schlechter krümel
+		else if(getParameters().length > 2)
 		{
-			Item item = kontext.getAktuellerRaum().getNaechstesItem();
-			int energie = kontext.getLebensEnergie();
+			String itemParam = getParameters()[1];
+			String itemArt = getParameters()[2];
 
-			switch (item)
+			switch (itemParam)
 			{
-			case Kuchen:
-				energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
-				kontext.getAktuellerRaum().loescheItem();
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.kuchenVomBodenGegessenText(energie));
-				if(kontext.getAktuellerRaum().getNaechstesItem() != Item.Keins)
+			case "guter":
+				if(itemArt.equals("krümel"))
 				{
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter.IMMERNOCHKUCHENTEXT);
-				}
 
-				break;
-			case Giftkuchen:
-				energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
-				kontext.getAktuellerRaum().loescheItem();
-				if(energie > 0)
-				{
-					Spiel.getInstance().schreibeNL(
-							TextVerwalter
-									.giftkuchenVomBodenGegessenText(energie));
+					if(kontext.getInventar().hatDiesenKuchen(Item.IKuchen))
+					{
+						kontext.getInventar().getKuchen(Item.IKuchen);
+						int energie = kontext.getLebensEnergie();
+						energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.kuchengegessentext(energie));
+					}
+					else
+					{
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+					}
 				}
-				else
+				break;
+			case "schlechter":
+				if(itemArt.equals("krümel"))
 				{
-					SpielLogik
-							.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
+					if(kontext.getInventar().hatDiesenKuchen(Item.IGiftkuchen))
+					{
+						kontext.getInventar().getKuchen(Item.IGiftkuchen);
+						int energie = kontext.getLebensEnergie();
+						energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.giftkuchengegessentext(energie));
+					}
+					else
+					{
+						Spiel.getInstance().schreibeNL(
+								TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+					}
 				}
 				break;
 			default:
 				Spiel.getInstance().schreibeNL(
-						TextVerwalter.NICHTSZUMESSENTEXTBODEN);
-				break;
+						TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+				return;
 			}
-
-			kontext.setLebensEnergie(energie);
 		}
 		else
 		{
@@ -118,5 +137,49 @@ final class BefehlEat extends Befehl
 			return;
 		}
 
+	}
+
+	/**
+	 * Isst einen zufälligen Krümel, verändert so den Kontext und gibt die
+	 * ensprechenden Texte auf
+	 * 
+	 * @param i
+	 * @param kontext
+	 */
+	private void issZufaelligenKruemel(Item i, SpielKontext kontext)
+	{
+		Item item = i;
+		int energie = kontext.getLebensEnergie();
+
+		switch (item)
+		{
+		case IKuchen:
+		case UKuchen:
+			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
+			kontext.getAktuellerRaum().loescheItem();
+			Spiel.getInstance().schreibeNL(
+					TextVerwalter.kuchengegessentext(energie));
+
+			break;
+		case IGiftkuchen:
+		case UGiftkuchen:
+			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
+			kontext.getAktuellerRaum().loescheItem();
+			if(energie > 0)
+			{
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.giftkuchengegessentext(energie));
+			}
+			else
+			{
+				SpielLogik.beendeSpiel(kontext, TextVerwalter.KUCHENTODTEXT);
+			}
+			break;
+		default:
+			Spiel.getInstance().schreibeNL(TextVerwalter.DORTLIEGTNICHTS);
+			break;
+		}
+
+		kontext.setLebensEnergie(energie);
 	}
 }

@@ -75,8 +75,10 @@ public class SpielLogik
 				if(hasRoomChanged) // TODO: || KuchenAufgehoben
 					switch (kontext.getAktuellerRaum().getNaechstesItem())
 					{
-					case Kuchen:
-					case Giftkuchen:
+					case UKuchen:
+					case UGiftkuchen:
+					case IKuchen:
+					case IGiftkuchen:
 						Spiel.getInstance().schreibeNL(
 								TextVerwalter.KUCHENIMRAUMTEXT);
 						break;

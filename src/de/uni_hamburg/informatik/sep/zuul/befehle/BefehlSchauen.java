@@ -45,8 +45,8 @@ public final class BefehlSchauen extends Befehl
 
 				while(raumItems.size() != 0)
 				{
-					if(raumItems.get(0) == Item.Kuchen
-							|| raumItems.get(0) == Item.Giftkuchen)
+					if(raumItems.get(0) == Item.UKuchen
+							|| raumItems.get(0) == Item.UGiftkuchen || raumItems.get(0) == Item.IKuchen || raumItems.get(0) == Item.UKuchen)
 					{
 						anzahlKruemel++;
 					}

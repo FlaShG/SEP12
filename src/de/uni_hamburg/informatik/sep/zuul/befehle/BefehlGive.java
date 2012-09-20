@@ -33,16 +33,28 @@ final class BefehlGive extends Befehl
 			Item kuchen = kontext.getInventar().getAnyKuchen();
 			switch (kuchen)
 			{
-			case Kuchen:
+			case UKuchen:
 				Spiel.getInstance().schreibeNL(
 						TextVerwalter.LABOR_GESUNDER_KUCHEN);
+				kontext.getInventar().fuegeItemHinzu(Item.IKuchen);
 				break;
-			case Giftkuchen:
+			case UGiftkuchen:
 				Spiel.getInstance().schreibeNL(
 						TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+				kontext.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
+				break;
+			case IGiftkuchen:
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.LABOR_KEIN_KRUEMEL);
+				kontext.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
+				break;
+			case IKuchen:
+				Spiel.getInstance().schreibeNL(
+						TextVerwalter.LABOR_KEIN_KRUEMEL);
+				kontext.getInventar().fuegeItemHinzu(Item.IKuchen);
 				break;
 			}
-			kontext.getInventar().fuegeItemHinzu(kuchen);
+			
 			return;
 		}
 
