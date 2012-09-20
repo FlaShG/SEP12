@@ -1,8 +1,12 @@
-package de.uni_hamburg.informatik.sep.zuul.spiel;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.npcs;
 
 import java.util.ArrayList;
 
-import de.uni_hamburg.informatik.sep.zuul.PathFinder;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.npcs.util.PathFinder;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.TextVerwalter;
+
 
 public class Maus {
 	private Raum _raum;

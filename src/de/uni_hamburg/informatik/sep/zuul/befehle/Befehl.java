@@ -13,87 +13,29 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
  * prüfen. Wenn ein Spieler einen ungültigen Befehl eingegeben hat, sollte das
  * Befehlswort auf <code>null</code> gesetzt werden.
  */
-public abstract class Befehl
+public interface Befehl
 {
-	private String[] _parameters;
-
 	/**
-	 * Setzt die Parameter, mit denen dieser Befehl ausgeführt werden soll
-	 * 
-	 * @param parameters
-	 *            die Parameter, mit denen dieser Befehl ausgeführt werden soll
+	 * Überprüft, ob die Vorbedingunen erfüllt sind. 
 	 */
-	void setParameter(String[] parameters)
-	{
-		_parameters = parameters;
-	}
-
+	boolean vorbedingungErfuellt(ServerKontext serverKontext, SpielerKontext kontext, Befehlszeile befehlszeile);
+	
 	/**
 	 * Führt den Befehl aus.
+	 * @require vorbedingungErfuellt(serverKontext, kontext, befehlszeile)
 	 */
-	public abstract void ausfuehren(SpielKontext kontext);
+	boolean ausfuehren(ServerKontext serverKontext, SpielerKontext kontext, Befehlszeile befehlszeile);
+	
+	/**
+	 * Falls der Befehl falsch verwendet wird, wird mit dieser Methode ein Fehler ausgegeben.
+	 * @require !vorbedingungErfuellt(serverKontext, kontext, befehlszeile)
+	 */
+	void gibFehlerAus(ServerKontext serverKontext, SpielerKontext kontext, Befehlszeile befehlszeile);
 
 	/**
-	 * Gibt den Namen des Befehls zurück.
+	 * Gibt die (Alias-) Namen des Befehls zurück.
 	 */
-	public abstract String getBefehlsname();
+	String[] getBefehlsnamen();
 
-	/**
-	 * Gibt alle Aliases zurück.
-	 * 
-	 * @return
-	 */
-	public String[] getAliases()
-	{
-		return new String[0];
-	}
 
-	/**
-	 * @return Die Parameter dieses Befehls
-	 */
-	protected String[] getParameters()
-	{
-		return _parameters;
-	}
-
-	@Override
-	public Befehl clone()
-	{
-		// TODO ugly!!
-		Befehl newBefehl = null;
-		try
-		{
-			newBefehl = this.getClass().newInstance();
-		}
-		catch(InstantiationException e)
-		{
-			e.printStackTrace();
-		}
-		catch(IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-
-		if(_parameters != null)
-			newBefehl._parameters = _parameters.clone();
-
-		return newBefehl;
-	}
-
-	//	/**
-	//	 * Liefert das zweite Wort dieses Befehls. Liefert 'null', wenn es kein
-	//	 * zweites Wort gab.
-	//	 */
-	//	public String getZweitesWort()
-	//	{
-	//		return _zweitesWort;
-	//	}
-	//
-	//	/**
-	//	 * Liefert 'true', wenn dieser Befehl ein zweites Wort hat.
-	//	 */
-	//	public boolean hatZweitesWort()
-	//	{
-	//		return (_zweitesWort != null);
-	//	}
 }

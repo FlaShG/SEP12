@@ -1,6 +1,8 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server;
 
 import javax.swing.SwingUtilities;
+
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel.Spiel;
 
 public class Programm
 {
@@ -22,11 +24,6 @@ public class Programm
 			@Override
 			public void run()
 			{
-				
-				//TODO Server erstellen
-				
-				// TODO Client erstellen, Ip und Servername übergeben
-				
 				spiel.spielen(null);
 
 			}

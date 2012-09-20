@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
 import java.util.Arrays;
 
@@ -6,9 +6,10 @@ import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.features.AusgängeAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.features.RaumBeschreibungAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Programm;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -26,62 +27,55 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel
-{
-	protected SpielKontext _kontext;
+public abstract class Spiel {
+	private SpielLogik _logik;
+
+	/**
+	 * Erzeuge ein neues Spiel
+	 */
+	protected Spiel() {
+		_logik = new SpielLogik();
+	}
 
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
-	public void beendeSpiel()
-	{
+	public void beendeSpiel() {
 
 	}
 
 	/**
 	 * Führt das Spiel aus.
 	 */
-	public void spielen(String level)
-	{
-		_kontext = SpielLogik.erstelleKontext(level);
+	public void spielen() {
+		_logik.erstelleKontext();
 
-		zeigeWillkommenstext(_kontext);
+		zeigeWillkommenstext();
 	}
 
 	/**
 	 * Gibt einen Begrüßungstext für den Spieler aus.
 	 */
-	protected void zeigeWillkommenstext(SpielKontext kontext)
-	{
+	protected void zeigeWillkommenstext(Spieler spieler) {
 		schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
 		schreibeNL("");
-		RaumBeschreibungAnzeigen.zeigeRaumbeschreibung(kontext);
-		AusgängeAnzeigen.zeigeAusgaenge(kontext);
+		_logik.zeigeRaumbeschreibung(spieler);
+		_logik.zeigeAktuelleAusgaenge(spieler);
 	}
 
-	/**
-	 * Verarbeitet einen eingegebene Befehlszeile und feuert anschließend das
-	 * Tick Event.
-	 * 
-	 * @param eingabezeile
-	 */
-	protected void verarbeiteEingabe(String eingabezeile)
-	{
+	protected void verarbeiteEingabe(String eingabezeile) {
+		// String eingabezeile = leseZeileEin();
 
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		befehl.ausfuehren(_kontext);
 
-		if(!_kontext.isSpielZuende())
+		if (!_kontext.isSpielZuende())
 			_kontext.fireTickEvent();
 	}
 
-	//	protected abstract String leseZeileEin();
+	// protected abstract String leseZeileEin();
 
-	/**
-	 * Vorbereitung für das 'Neustarten-Feature'
-	 */
-	protected void restart(String level)
-	{
+	protected void restart(String level) {
 		spielen(level);
 	}
 
@@ -91,17 +85,15 @@ public abstract class Spiel
 	 * @param eingabezeile
 	 * @return geparster Befehl
 	 */
-	public static Befehl parseEingabezeile(String eingabezeile)
-	{
+	public static Befehl parseEingabezeile(String eingabezeile) {
 		String[] input = eingabezeile.split(" +");
 
 		String[] parameter = new String[0];
 		String befehl = "";
 
-		if(input.length > 0)
-		{
+		if (input.length > 0) {
 			befehl = input[0];
-			if(input.length > 1)
+			if (input.length > 1)
 				parameter = Arrays.copyOfRange(input, 1, input.length);
 
 		}
@@ -119,25 +111,15 @@ public abstract class Spiel
 	 */
 	private static Spiel instance;
 
-	/** Konstruktor ist privat, Klasse darf nicht von außen instanziiert werden. */
-	protected Spiel()
-	{
-	}
-
 	/**
 	 * Statische Methode „getInstance()“ liefert die einzige Instanz der Klasse
 	 * zurück. Ist synchronisiert und somit thread-sicher.
 	 */
-	public synchronized static Spiel getInstance()
-	{
-		if(instance == null)
-		{
-			if(!Programm.isOnconsole())
-			{
+	public synchronized static Spiel getInstance() {
+		if (instance == null) {
+			if (!Programm.isOnconsole()) {
 				instance = new SpielGUI();
-			}
-			else
-			{
+			} else {
 				instance = new SpielConsole();
 			}
 		}

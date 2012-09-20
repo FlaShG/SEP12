@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel;
 
 import java.io.BufferedReader;
 import java.io.IOException;

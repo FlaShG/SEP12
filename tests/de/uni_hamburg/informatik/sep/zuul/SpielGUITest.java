@@ -7,12 +7,12 @@ import org.junit.Test;
 public class SpielGUITest
 {
 
-	private SpielGUI spielGUI;
+	private ClientGUI spielGUI;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		spielGUI = new SpielGUI();
+		spielGUI = new ClientGUI();
 	}
 
 	@After
