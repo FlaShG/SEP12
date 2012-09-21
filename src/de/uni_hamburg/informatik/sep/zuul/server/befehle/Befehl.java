@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 /**
  * Informationen über einen vom Benutzer eingegebenen Befehl. Ein Befehl besteht

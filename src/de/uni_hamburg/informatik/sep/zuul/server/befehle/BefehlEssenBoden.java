@@ -2,9 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlEssenBoden implements Befehl
@@ -30,7 +30,8 @@ public class BefehlEssenBoden implements Befehl
 
 		switch (item)
 		{
-		case Kuchen:
+		case UKuchen:
+		case IKuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			aktuellerRaum.loescheItem();
 			BefehlFactory.schreibeNL(kontext, spieler,
@@ -42,7 +43,8 @@ public class BefehlEssenBoden implements Befehl
 			}
 
 			break;
-		case Giftkuchen:
+		case IGiftkuchen:
+		case UGiftkuchen:
 			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 			aktuellerRaum.loescheItem();
 			if(energie > 0)

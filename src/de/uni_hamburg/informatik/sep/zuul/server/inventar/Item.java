@@ -8,5 +8,5 @@ package de.uni_hamburg.informatik.sep.zuul.server.inventar;
  */
 public enum Item
 {
-	Kuchen, Giftkuchen, Gegengift, Keins
+	UKuchen, IKuchen, UGiftkuchen, IGiftkuchen, Gegengift, Keins
 }

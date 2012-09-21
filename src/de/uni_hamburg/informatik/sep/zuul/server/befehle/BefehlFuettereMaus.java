@@ -4,9 +4,9 @@ import java.util.LinkedList;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFuettereMaus implements Befehl
@@ -22,11 +22,11 @@ public class BefehlFuettereMaus implements Befehl
 	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
 			String[] moeglicheRichtungen)
 	{
-		if(kuchen == Item.Kuchen)
+		if(kuchen == Item.UKuchen || kuchen == Item.IKuchen)
 		{
 			return richtigeRichtung;
 		}
-		if(kuchen == Item.Giftkuchen)
+		if(kuchen == Item.UGiftkuchen || kuchen == Item.IGiftkuchen)
 		{
 			LinkedList<String> richtungen = new LinkedList<String>();
 

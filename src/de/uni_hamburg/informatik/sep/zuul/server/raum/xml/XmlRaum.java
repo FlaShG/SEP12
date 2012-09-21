@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "xmlraum")
-@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID" })
+@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID", "_x", "_y"})
 public class XmlRaum
 {
 	private @XmlElement(name = "id")
@@ -18,19 +18,36 @@ public class XmlRaum
 	int _suedID;
 	private @XmlElement(name = "westid")
 	int _westID;
+	private @XmlElement(name = "x")
+	int _x;
+	private @XmlElement(name = "y")
+	int _y;
 
 	public XmlRaum()
 	{
 		// für JAXB
 	}
 
-	public XmlRaum(int ID, int nordID, int ostID, int suedID, int westID)
+	public XmlRaum(int ID, int nordID, int ostID, int suedID, int westID,
+			int x, int y)
 	{
 		_id = ID;
 		_nordID = nordID;
 		_ostID = ostID;
 		_suedID = suedID;
 		_westID = westID;
+		_x = x;
+		_y = y;
+	}
+
+	public int getX()
+	{
+		return _x;
+	}
+
+	public int getY()
+	{
+		return _y;
 	}
 
 	public int getID()

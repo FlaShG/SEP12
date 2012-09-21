@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlEssenTasche implements Befehl
@@ -21,8 +21,8 @@ public class BefehlEssenTasche implements Befehl
 	{
 		List<Item> items = Arrays.asList(spieler.getInventar()
 				.getInhaltsliste());
-		boolean kuchenImInventar = items.contains(Item.Kuchen)
-				|| items.contains(Item.Giftkuchen);
+		boolean kuchenImInventar = items.contains(Item.UKuchen) || items.contains(Item.IKuchen)
+				|| items.contains(Item.UGiftkuchen)|| items.contains(Item.IGiftkuchen);
 		return befehlszeile.getZeile().equals(BEFEHLSNAME) && kuchenImInventar;
 		// && befehlszeile.getGeparsteZeile().size() <= 3;
 	}
@@ -48,12 +48,14 @@ public class BefehlEssenTasche implements Befehl
 
 		switch (item)
 		{
-		case Kuchen:
+		case IKuchen:
+		case UKuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.kuchengegessentext(energie));
 			break;
-		case Giftkuchen:
+		case IGiftkuchen:
+		case UGiftkuchen:
 			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.giftkuchengegessentext(energie));

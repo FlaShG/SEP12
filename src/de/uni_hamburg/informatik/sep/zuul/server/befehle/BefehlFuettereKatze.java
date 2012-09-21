@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFuettereKatze implements Befehl

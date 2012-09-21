@@ -2,8 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 final class BefehlGib implements Befehl
@@ -31,11 +31,13 @@ final class BefehlGib implements Befehl
 		Item kuchen = spieler.getInventar().getAnyKuchen();
 		switch (kuchen)
 		{
-		case Kuchen:
+		case IKuchen:
+		case UKuchen:
 			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.LABOR_GESUNDER_KUCHEN);
 			break;
-		case Giftkuchen:
+		case IGiftkuchen:
+		case UGiftkuchen:
 			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 			break;

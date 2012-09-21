@@ -4,16 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 import de.uni_hamburg.informatik.sep.zuul.server.features.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
+=======
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumStrukturParser;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
+>>>>>>> feature_server_client:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class RaumBauer
 {
 	private Raum _startRaum;
+	private Raum _endRaum;
 
 	public RaumBauer(RaumStruktur struktur)
 	{
@@ -45,6 +53,10 @@ public class RaumBauer
 			{
 				_startRaum = raum;
 			}
+			if(raum.getRaumart() == RaumArt.Ende)
+			{
+				_endRaum = raum;
+			}
 			if(raum.getRaumart() != RaumArt.Ende
 					&& raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
@@ -53,11 +65,16 @@ public class RaumBauer
 		// TODO: Maus anzahl auslesen
 		// Setze 3 Mäuse zufällig.
 
-		mausInRaumSetzen(kannMausEnthaltenRaum, 3);
+		if(kannMausEnthaltenRaum.size() > 0)
+			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
+<<<<<<< HEAD:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
 			int i)
+=======
+	public void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
+>>>>>>> feature_server_client:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 	{
 		for(; i > 0 && kannMausEnthaltenRaum.size() > 0; --i)
 		{
@@ -69,12 +86,19 @@ public class RaumBauer
 	/**
 	 * @param kannMausEnthaltenRaum
 	 */
-	public static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
+	public Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
 	{
+<<<<<<< HEAD:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 		Raum mausRaum = FancyFunction.getRandomEntry(kannMausEnthaltenRaum);
 		if(mausRaum != null)
 			return null;
 		mausRaum.setMaus(new Maus(mausRaum));
+=======
+		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
+		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+
+		mausRaum.setMaus(new Maus(mausRaum, _endRaum));
+>>>>>>> feature_server_client:src/de/uni_hamburg/informatik/sep/zuul/server/raum/RaumBauer.java
 
 		return mausRaum;
 	}
@@ -183,14 +207,14 @@ public class RaumBauer
 
 		besenkammerhausmeister.setAusgang(TextVerwalter.RICHTUNG_SUEDEN,
 				burerohausmeister);
-		besenkammerhausmeister.addItem(Item.Kuchen);
-		besenkammerhausmeister.addItem(Item.Giftkuchen);
-		besenkammerhausmeister.addItem(Item.Kuchen);
+		besenkammerhausmeister.addItem(Item.UKuchen);
+		besenkammerhausmeister.addItem(Item.UGiftkuchen);
+		besenkammerhausmeister.addItem(Item.UKuchen);
 
 		gang.setAusgang(TextVerwalter.RICHTUNG_NORDEN, haupteingang);
 		gang.setAusgang(TextVerwalter.RICHTUNG_OSTEN, ostfluegel);
 		gang.setAusgang(TextVerwalter.RICHTUNG_WESTEN, labor);
-		gang.addItem(Item.Kuchen);
+		gang.addItem(Item.UKuchen);
 
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_OSTEN, bibliothek);
 		ostfluegel.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, herrentiolette);
@@ -200,8 +224,8 @@ public class RaumBauer
 		bibliothek.setAusgang(TextVerwalter.RICHTUNG_WESTEN, ostfluegel);
 
 		terasse.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, bibliothek);
-		terasse.addItem(Item.Kuchen);
-		terasse.addItem(Item.Kuchen);
+		terasse.addItem(Item.UKuchen);
+		terasse.addItem(Item.UKuchen);
 
 		flur.setAusgang(TextVerwalter.RICHTUNG_OSTEN, haupteingang);
 		flur.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, labor);
@@ -211,7 +235,7 @@ public class RaumBauer
 
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, konferenzraum);
 		wohnung.setAusgang(TextVerwalter.RICHTUNG_NORDEN, labor);
-		wohnung.addItem(Item.Kuchen);
+		wohnung.addItem(Item.UKuchen);
 
 		konferenzraum.setAusgang(e, vorlesungssaal);
 		konferenzraum.setAusgang(n, wohnung);
@@ -228,7 +252,7 @@ public class RaumBauer
 
 		sekretariatchemie.setAusgang(e, eingangchemie);
 		sekretariatchemie.setAusgang(w, flurchemie);
-		sekretariatchemie.addItem(Item.Giftkuchen);
+		sekretariatchemie.addItem(Item.UGiftkuchen);
 
 		flurchemie.setAusgang(n, buerovondoktorevenbigger);
 		flurchemie.setAusgang(e, sekretariatchemie);
@@ -241,8 +265,8 @@ public class RaumBauer
 
 		mensa.setAusgang(n, herrentiolette);
 		mensa.setAusgang(w, vorlesungssaal);
-		mensa.addItem(Item.Giftkuchen);
-		mensa.addItem(Item.Kuchen);
+		mensa.addItem(Item.UGiftkuchen);
+		mensa.addItem(Item.UKuchen);
 
 		List<Raum> sammlung = new ArrayList<Raum>();
 		sammlung.add(labor);
