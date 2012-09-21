@@ -123,19 +123,19 @@
     <raum>
         <name>Ticketstand</name>
         <id>-783740224</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht neben dem Ticketstand. Er kann aber auch ohne Karte vorbeischlüpfen.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Fußballplatz</name>
         <id>151112859</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little stolpert auf den Fußballplatz. Er sollte auf die Füße der Spieler aufpassen.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Umkleidekabine</name>
         <id>-1458201047</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die Umkleidekabine des Sportplatzes. Der Geruch nach Schweiß läßt ihn die Nase rümpfen...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -147,25 +147,25 @@
     <raum>
         <name>Chemische Reinigung</name>
         <id>864909780</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die chemische Reinigung. Der Geruch der Chemikalien treibt ihm die Tränen in die Augen.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Ladenstraße</name>
         <id>1259353816</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die Ladenstraße. Es gibt aber keine Läden für seine Größe.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Park</name>
         <id>-1028925916</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt den Park. Eine Horde Tauben jagt ihn um einen Baum herum.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Labor von Doktor EvenBigger</name>
         <id>723538279</id>
-        <beschreibung>		</beschreibung>
+        <beschreibung>Sie haben das Labor von Dr. Evenbigger gefunden.</beschreibung>
         <raumart>Ende</raumart>
     </raum>
     <raum>
@@ -177,43 +177,43 @@
     <raum>
         <name>Treppe</name>
         <id>463038831</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little müht sich auf den viel zu großen Stufen einer riesigen Holztreppe ab...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Verlassenes Labor</name>
         <id>309175897</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little tritt in ein verlassenes Labor. Die Wände sind geschmückt mit Gläsern mit unbekanntem Eingemachtem. Hier sollte man besser keinen Krümel identifizieren...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Garage</name>
         <id>-842606468</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die Garage. Ein anfahrendes Auto erwischt ihn fast...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Parkplatz</name>
         <id>-1664639580</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht auf dem Parkplatz. An einer Laterne lehnt ein Bauarbeiter.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Kreuzung</name>
         <id>-1069287952</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt eine Kreuzung. Wohin soll er nur gehen?</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Hauptstraße</name>
         <id>-1596866174</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die Hauptstraße. Er sollte sich schnell auf die andere Straßenseite retten, bevor ihn ein Auto erwischt.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Foyer</name>
         <id>1853430083</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt das Foyer des Chemiegebäudes. Das Ziel schein nah zu sein...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -225,37 +225,37 @@
     <raum>
         <name>Hinterhof</name>
         <id>1340346877</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt den Hinterhof. Ausser ein paar Mülltonnen ist hier nichts.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Hintertür</name>
         <id>-1150942711</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht bei der klapprigen Hintertür. Der Wind schlägt sie zu.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Labor</name>
         <id>1816983784</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little befindet sich in seinem Labor an der Universität. Hier lassen sich Krümmel identifizieren.</beschreibung>
         <raumart>Start</raumart>
     </raum>
     <raum>
         <name>Trophäenraum</name>
         <id>-341814360</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht im Tropäenraum der Universität. Er hat aber leider noch nie selbst einen Preis gewonnen...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Vorplatz</name>
         <id>-1689780924</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht auf dem Vorplatz. Eine Gruppe Rucksacktouristen macht unentwegt Fotos von den Gebäuden...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Küche</name>
         <id>1281362672</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little schlüpft in die Küche. Ein angestellte jagt ihn mit einem Besen durch den Raum.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -267,73 +267,73 @@
     <raum>
         <name>Seitenstraße</name>
         <id>1147956359</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt eine Seitenstraße. Hier ist nichts ausser ein paar alter Socken...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Eingang des Versorgungsgebäudes</name>
         <id>1854952104</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt das Versogungsgebäude. Hier finden sich Toilette, eine Cafeteria und ein Aufenthaltsraum.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Aufenthaltsraum</name>
         <id>-98790667</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht im Aufenthaltsraum. Einige Stühle stehen wild durcheinander.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Cafeteria</name>
         <id>-974488782</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt die Cafeteria. Es ist noch sehr unordentlich, das Mittagessen ist gerade vorbei...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Eingang zum Bunker</name>
         <id>-218718181</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht vor einer schweren Eisentür. Der dahinter aufragende Bunker läßt ihn schlucken...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Kiosk</name>
         <id>-820004671</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt den Kiosk der Universität. Ein echter Geheimtipp.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Lager</name>
         <id>564510192</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt das Lager des Universitätskiosk. Der Fußboden klebt. Jemand scheint etwas Zuckerhaltiges verschüttet zu haben...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Herrentoilette</name>
         <id>-1315451361</id>
-        <beschreibung>	</beschreibung>
+        <beschreibung>Dr. Little steht in der Herrentoilette. Ein Spanner hat ein Loch in die Wand zu Damentoilette gehauen. Für Dr. Little ist es als Durchgang gerade groß genung. Soll er es wagen?</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Damentoilette</name>
         <id>100903648</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little schleicht ihn die Damentoilette. Zu Glück ist niemand da.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Reaktorraum</name>
         <id>1257284999</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little betritt einen summenden Raktorraum. Die Wände schimmern in einem grünen Licht...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Trampelpfad</name>
         <id>771434624</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little stolpert auf einen Trampelpfad. Er versinkt in einem schlammigen Fußabdruck...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Notausgang</name>
         <id>1899255010</id>
-        <beschreibung></beschreibung>
+        <beschreibung>Dr. Little steht in einem Notausgang. Er ist aber so klein, dass er den Alarm nicht auslöst.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
 </raumsammlung>
