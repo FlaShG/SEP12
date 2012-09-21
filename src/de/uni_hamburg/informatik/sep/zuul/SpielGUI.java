@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanel;
@@ -46,6 +47,7 @@ public class SpielGUI extends Spiel
 	private Startfenster _sf;
 
 	private String _ipadresse;
+	private String _spielername;
 
 	public SpielGUI()
 	{
@@ -102,7 +104,7 @@ public class SpielGUI extends Spiel
 			}
 		});
 
-		_sf.getTextField().addKeyListener(new KeyListener()
+		_sf.getIPTextField().addKeyListener(new KeyListener()
 		{
 
 			@Override
@@ -122,12 +124,42 @@ public class SpielGUI extends Spiel
 			@Override
 			public void keyPressed(KeyEvent arg0)
 			{
-				if(arg0.equals(KeyEvent.VK_ENTER))
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					_ipadresse = _sf.getTextField().toString();
+					pruefeIP();
+					_spielername = _sf.getSpielerNameTextField().getText();
 				}
 
 			}
+
+			private void pruefeIP()
+			{
+				SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>()
+				{
+
+					@Override
+					protected Void doInBackground() throws Exception
+					{
+						String[] tokens = _sf.getIPTextField().getText()
+								.split("\\.");
+						if(tokens.length == 4)
+						{
+							for(String str : tokens)
+							{
+								int i = Integer.parseInt(str);
+								if(!((i < 0) || (i > 255)))
+								{
+									_ipadresse = _sf.getIPTextField().getText();
+								}
+							}
+						}
+						return null;
+					}
+				};
+
+				worker.execute();
+			}
+
 		});
 
 		_kp.getEingabeZeile().addActionListener(new ActionListener()
