@@ -7,10 +7,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
@@ -21,7 +19,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 
 	// Dummy
 
-	private Queue<ClientPaket> _clientChanges;
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 1688218849488836203L;
 	private Map<String, ClientInterface> _connectedClients;
 	private Spiel _spiel;
 
@@ -33,9 +34,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 
 		// Diesen Server in die Registry schreiben
 		rmireg.bind("RmiServer", this);
-
-		// Queue für clientenänderungen anlegen
-		_clientChanges = new LinkedList<ClientPaket>();
 
 		// Liste der verbundenen Clients anlegen
 		_connectedClients = new HashMap<String, ClientInterface>();
@@ -53,10 +51,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		{
 			ClientInterface client = _connectedClients.get(paket
 					.getSpielerName());
-			if(!client.zeigeAn(paket))
-			{
-				result = false;
-			}
+			client.zeigeAn(paket);
 		}
 		return result;
 	}
@@ -81,9 +76,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 			}
 
 			result = true;
+			System.out.println("eingeloggt");
 		}
-
-		System.out.println("eingeloggt");
 
 		return result;
 
@@ -99,11 +93,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		return true;
 	}
 
-	
 	//TODO: ugly!
 	@Override
-	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName) throws RemoteException
-	{		
+	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName)
+			throws RemoteException
+	{
 		_spiel.verarbeiteEingabe(benuzterName, eingabe);
 		ArrayList<ClientPaket> paketListe = new ArrayList<ClientPaket>();
 		for(String name : _connectedClients.keySet())

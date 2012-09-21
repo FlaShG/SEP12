@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-
 public interface ClientInterface extends Remote
 {
 
@@ -23,6 +22,6 @@ public interface ClientInterface extends Remote
 	 * @param raum
 	 * @return
 	 */
-	public boolean zeigeAn(ClientPaket raum) throws RemoteException;
+	public boolean zeigeAn(ClientPaket paket) throws RemoteException;
 
 }

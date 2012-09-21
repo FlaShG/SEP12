@@ -1,28 +1,20 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import javax.swing.SwingUtilities;
-
-import org.junit.runners.model.RunnerScheduler;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
-import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
-import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
@@ -120,10 +112,12 @@ public class Spiel
 
 		if(befehl != null)
 		{
-			
-			boolean result = Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
+			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
 					befehlszeile, befehl);
-			
+
+			boolean result = Spiel.versucheBefehlAusfuehrung(
+					_logik.getKontext(), spieler, befehlszeile, befehl);
+
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl);
@@ -150,7 +144,7 @@ public class Spiel
 	 * @param name
 	 * @return
 	 */
-	public ClientPaket packePaket(String name)
+	public ClientPaket packePaket(String name) throws RemoteException
 	{
 		Spieler spieler = _spielerMap.get(name);
 		return new ClientPaket(_logik.getKontext(), spieler);
@@ -186,7 +180,7 @@ public class Spiel
 
 	TimerTask _tickTimer = new TimerTask()
 	{
-		
+
 		@Override
 		public void run()
 		{

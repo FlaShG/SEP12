@@ -151,6 +151,7 @@ public class ServerKontext
 		{
 			if(benutzerName.equals(s.getName()))
 			{
+				System.out.println(s.getName());
 				return s;
 			}
 		}

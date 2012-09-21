@@ -24,8 +24,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.ServerInterface;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Client implements ClientInterface
+public abstract class Client extends UnicastRemoteObject implements
+		ClientInterface
 {
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 5290157890129564784L;
 	String _serverName;
 	String _serverIP;
 	boolean _isSpielzuEnde;
@@ -37,13 +42,18 @@ public abstract class Client implements ClientInterface
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
 	{
+
+		super(clientPort);
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
 		_port = clientPort;
 
-		_server = (ServerInterface) Naming.lookup(_serverName);
-		
+		_clientName = clientName;
+
+		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
+				+ _serverName);
+
 		login();
 	}
 
@@ -63,9 +73,7 @@ public abstract class Client implements ClientInterface
 	@Override
 	public void login() throws RemoteException
 	{
-		if(!_server
-				.loginClient((ClientInterface) UnicastRemoteObject
-						.exportObject(this, _port), _clientName))
+		if(!_server.loginClient((ClientInterface) this, _clientName))
 		{
 			System.err.println("Fehler beim Anmelden!");
 			//TODO ausgabe auf gui
@@ -85,15 +93,15 @@ public abstract class Client implements ClientInterface
 	}
 
 	@Override
-	public boolean zeigeAn(ClientPaket paket) throws RemoteException
-	{
-		return false;
-	}
+	public abstract boolean zeigeAn(final ClientPaket paket)
+			throws RemoteException;
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
-		while(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))
-			;
+		if(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))
+		{
+			System.err.println("Fehler bei der Übertragung");
+		}
 	}
 
 	/**
@@ -108,12 +116,13 @@ public abstract class Client implements ClientInterface
 	public static void main(String[] args) throws NumberFormatException,
 			MalformedURLException, RemoteException, NotBoundException
 	{
-		
-		if (args.length == 5 && args[4].equals("console"))
+
+		if(args.length == 5 && args[4].equals("console"))
 		{
-			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]), args[3]);
+			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
+					args[3]);
 		}
-		else 
+		else
 		{
 			new ClientGUI(args[0], args[1], Integer.parseInt(args[2]), args[3]);
 		}

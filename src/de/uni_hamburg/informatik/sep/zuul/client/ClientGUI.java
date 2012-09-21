@@ -38,7 +38,7 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	public boolean zeigeAn(ClientPaket paket)
+	public synchronized boolean zeigeAn(ClientPaket paket)
 	{
 
 		schreibeText(paket.getNachricht());

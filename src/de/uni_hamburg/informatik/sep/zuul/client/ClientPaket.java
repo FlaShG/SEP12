@@ -1,5 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
+import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,8 +14,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
-public class ClientPaket
+public class ClientPaket implements Remote, Serializable
 {
+
 	private boolean _katze;
 	private boolean _maus;
 	private Collection<Item> _items;
@@ -22,6 +27,7 @@ public class ClientPaket
 	private String _spielerName;
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler)
+			throws RemoteException
 	{
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
