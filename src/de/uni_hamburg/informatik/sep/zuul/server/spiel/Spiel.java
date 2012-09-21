@@ -1,13 +1,23 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
+import javax.swing.SwingUtilities;
+
+import org.junit.runners.model.RunnerScheduler;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -30,6 +40,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  */
 public class Spiel
 {
+	private static final long ticksPerSecond = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -41,7 +52,7 @@ public class Spiel
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		_gestartet = false;
+		setGestartet(false);
 	}
 
 	/**
@@ -72,17 +83,12 @@ public class Spiel
 		_spielerMap.remove(name);
 	}
 
-	public boolean istGestartet()
-	{
-		return _gestartet;
-	}
-
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
 	public void beendeSpiel()
 	{
-		_gestartet = false;
+		setGestartet(false);
 	}
 
 	/**
@@ -92,7 +98,7 @@ public class Spiel
 	{
 		_logik.erstelleKontext();
 		_logik.zeigeWillkommensText();
-		_gestartet = true;
+		setGestartet(true);
 	}
 
 	/**
@@ -104,21 +110,20 @@ public class Spiel
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
-		
+
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)
 		{
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler, befehlszeile,
-					befehl);
+			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
+					befehlszeile, befehl);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
 					TextVerwalter.FALSCHEEINGABE);
 		// TODO befehlausgefuehrt aufrufen
 	}
-	
 
 	/**
 	 * Starte das Spiel neu.
@@ -156,5 +161,73 @@ public class Spiel
 			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
 			return false;
 		}
+	}
+
+	void registerFeature(Feature feature)
+	{
+
+	}
+
+	/**
+	 * @return the gestartet
+	 */
+	public boolean isGestartet()
+	{
+		return _gestartet;
+	}
+
+	TimerTask _tickTimer = new TimerTask()
+	{
+		
+		@Override
+		public void run()
+		{
+			try
+			{
+				SwingUtilities.invokeAndWait(new Runnable()
+				{
+					
+					@Override
+					public void run()
+					{
+						doTick();
+					}
+				});
+			}
+			catch(InvocationTargetException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch(InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	};
+
+	/**
+	 * @param gestartet
+	 *            the gestartet to set
+	 */
+	public void setGestartet(boolean gestartet)
+	{
+		if(!gestartet && _gestartet)
+		{
+			_tickTimer.cancel();
+		}
+		else if(gestartet && !_gestartet)
+		{
+			new Timer().schedule(_tickTimer, ticksPerSecond, ticksPerSecond);
+		}
+		_gestartet = gestartet;
+	}
+
+	private void doTick()
+	{
+		System.out.println("Tick");
+		// TODO: fuehre TickListener aus.
+		
 	}
 }

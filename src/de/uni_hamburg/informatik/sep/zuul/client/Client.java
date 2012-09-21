@@ -92,7 +92,7 @@ public abstract class Client implements ClientInterface
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
-		while(!_server.empfangeNutzerEingabe(eingabezeile))
+		while(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))
 			;
 	}
 

@@ -171,4 +171,5 @@ public class SpielLogik
 		return _kontext;
 	}
 
+	
 }
