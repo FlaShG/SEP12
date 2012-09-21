@@ -128,7 +128,7 @@ public class Spiel
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			
-			fuehreBefehlAusgefuehrtListenerAus(spieler, alterRaum != neuerRaum);
+			_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, alterRaum != neuerRaum);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
@@ -201,7 +201,7 @@ public class Spiel
 					@Override
 					public void run()
 					{
-						fuehreTickListenerAus();
+						_logik.fuehreTickListenerAus();
 					}
 				});
 			}
@@ -233,29 +233,5 @@ public class Spiel
 			new Timer().schedule(_tickTimer, ticksPerSecond, ticksPerSecond);
 		}
 		_gestartet = gestartet;
-	}
-	
-	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
-	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
-
-	private void fuehreTickListenerAus()
-	{
-		System.out.println("Tick");
-
-		// Führe alle TickListener aus.
-		for(TickListener tickListener : _tickListeners)
-		{
-			tickListener.tick(_logik.getKontext());
-		}
-		
-	}
-
-	private void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, boolean hasRoomChanged)
-	{
-		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
-		{
-			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_logik.getKontext(), spieler, hasRoomChanged))
-				return;
-		}
 	}
 }

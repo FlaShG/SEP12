@@ -1,10 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
@@ -171,5 +175,48 @@ public class SpielLogik
 		return _kontext;
 	}
 
+	/**
+	 * @return the struktur
+	 */
+	public RaumStruktur getStruktur()
+	{
+		return _struktur;
+	}
+
+	public void registriereFeature(Feature feature)
+	{
+		if(feature instanceof TickListener)
+			_tickListeners.add((TickListener) feature);
+		if(feature instanceof BefehlAusgefuehrtListener)
+			_befehlAusgefuehrtListeners.add((BefehlAusgefuehrtListener) feature);
+		
+		// TODO: Feature registrieren ( Lebenspunkte, ... )
+	}
+
+	
+	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
+	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
+
+	void fuehreTickListenerAus()
+	{
+		System.out.println("Tick");
+
+		// Führe alle TickListener aus.
+		for(TickListener tickListener : _tickListeners)
+		{
+			tickListener.tick(_kontext);
+		}
+		
+	}
+
+	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, boolean hasRoomChanged)
+	{
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
+		{
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler, hasRoomChanged))
+				return;
+		}
+	}
 	
 }

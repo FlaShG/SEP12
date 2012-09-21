@@ -157,4 +157,9 @@ public class ServerKontext
 		return null;
 	}
 
+	public List<Raum> getRaeumeInDemSichSpielerAufhalten()
+	{
+		return new ArrayList<Raum>(_spielerPosition.values());
+	}
+
 }
