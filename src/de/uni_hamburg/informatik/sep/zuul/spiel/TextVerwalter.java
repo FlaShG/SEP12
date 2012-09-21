@@ -51,7 +51,7 @@ public class TextVerwalter
 		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "
 				+ energie + " Räume betreten können wird.";
 	}
-	
+
 	public static final String KEINIDENTIFIZIERTERKUCHEN = "Dr. Little hat keinen identifizierten Krümel dieser Art.";
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
@@ -87,8 +87,6 @@ public class TextVerwalter
 	public static final String RICHTUNG_SUEDEN = "süd";
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
-	
-
 
 	public static final String ORT_BODEN = "boden";
 	public static final String ORT_TASCHE = "tasche";
@@ -108,7 +106,6 @@ public class TextVerwalter
 	public static final String ABLEGEN_TEXT = "Sie legen einen Krümmel ab.";
 	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 
-	
 	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
 	public static final String KATZE_GREIFT_AN = "Als Dr. Little den Raum verlassen wollte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
@@ -126,6 +123,6 @@ public class TextVerwalter
 
 	public static final String BEFEHL_INVENTAR = "inventar";
 
-
+	public static final String KEINRAUMZUMSCHAUN = "Dort ist leider kein Raum, wohin Dr. Little schauen kann.";
 
 }
