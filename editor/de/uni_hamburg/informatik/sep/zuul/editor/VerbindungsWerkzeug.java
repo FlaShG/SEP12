@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
  * Liest von den GridButtons die Räume aus und verbindet alle nebeneinander
@@ -44,7 +44,7 @@ public class VerbindungsWerkzeug
 		_arraySpaltenzahl = array.length;
 		_arrayZeilenzahl = array[0].length;
 		_raumListe = new ArrayList<Raum>();
-		
+
 		_raumArray = liesRaeumeAusButtonArray();
 
 		for(int y = 0; y < _arrayZeilenzahl; ++y)
@@ -161,6 +161,5 @@ public class VerbindungsWerkzeug
 	{
 		return _raumListe;
 	}
-	
 
 }

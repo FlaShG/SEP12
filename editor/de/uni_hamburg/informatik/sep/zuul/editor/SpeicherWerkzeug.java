@@ -8,11 +8,11 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import de.uni_hamburg.informatik.sep.zuul.PathFinder;
-import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumStruktur;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
+import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
+import de.uni_hamburg.informatik.sep.zuul.server.util.PathFinder;
 
 public class SpeicherWerkzeug
 {

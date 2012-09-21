@@ -3,9 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 public class BefehlTakeTest
 {

@@ -9,6 +9,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+
 /**
  * @author Felix Wiedemann<1wiedema@informatik.uni-hamburg.de>
  * 

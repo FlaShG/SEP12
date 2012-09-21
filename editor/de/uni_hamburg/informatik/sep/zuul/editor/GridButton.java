@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
  * JButton, der seine Position auf einem Grid (vornehmlich auf einer EditorMap)
@@ -36,7 +37,7 @@ public class GridButton extends JButton
 		setPreferredSize(dim);
 		setMinimumSize(dim);
 		setMaximumSize(dim);
-		
+
 		setFocusable(false);
 
 		setAusgewaehlt(false);
@@ -72,7 +73,8 @@ public class GridButton extends JButton
 	public void setAusgewaehlt(boolean aktiv)
 	{
 		setBackground(aktiv ? (_raum != null ? new Color(0.8f, 0.8f, 1f)
-				: Color.lightGray) : (_raum != null ? new Color(0.3f, 0.3f, 1f) : Color.gray));
+				: Color.lightGray) : (_raum != null ? new Color(0.3f, 0.3f, 1f)
+				: Color.gray));
 	}
 
 	/**

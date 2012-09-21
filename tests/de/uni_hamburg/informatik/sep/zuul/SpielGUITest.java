@@ -4,15 +4,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
+
 public class SpielGUITest
 {
 
-	private SpielGUI spielGUI;
+	private ClientGUI spielGUI;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		spielGUI = new SpielGUI();
+		spielGUI = new ClientGUI();
 	}
 
 	@After

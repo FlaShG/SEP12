@@ -2,9 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.util.List;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.xml.XmlRaum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 
 /**
  * Lädt ein bestehendes Level in den Editor.
@@ -51,7 +51,7 @@ public class LadenWerkzeug
 	{
 		EditorMap result = new EditorMap(raumArray.length, raumArray[0].length);
 		GridButton[][] buttons = result.getButtonArray();
-		
+
 		for(int y = 0; y < raumArray[0].length; ++y)
 		{
 			for(int x = 0; x < raumArray.length; ++x)
@@ -76,7 +76,8 @@ public class LadenWerkzeug
 	 * @param raumListe
 	 * @return
 	 */
-	private Raum[][] erzeugeRaumArray(List<Raum> raumListe, List<XmlRaum> raumPositionen)
+	private Raum[][] erzeugeRaumArray(List<Raum> raumListe,
+			List<XmlRaum> raumPositionen)
 	{
 		Raum[][] result = new Raum[getMaximumX(raumListe) + 1][getMaximumY(raumListe) + 1];
 		for(Raum raum : raumListe)
@@ -164,7 +165,8 @@ public class LadenWerkzeug
 	public void lade(String path)
 	{
 		_manager.readLevel(path);
-		EditorMap map = erstelleEditorMapAusListe(_manager.getXmlRaeume(), _manager.getRaeume());
+		EditorMap map = erstelleEditorMapAusListe(_manager.getXmlRaeume(),
+				_manager.getRaeume());
 		_ef.getUI().setMap(map);
 		_ef.setEditorLevel(_manager.getEditorLevel());
 	}

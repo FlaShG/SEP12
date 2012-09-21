@@ -3,16 +3,15 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observer;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
- * Hält ein zweidimensionales Feld auf GridButtons, die die Räume auf der Karte darstellen.
+ * Hält ein zweidimensionales Feld auf GridButtons, die die Räume auf der Karte
+ * darstellen.
+ * 
  * @author 0graeff
  */
 public class EditorMap extends JPanel
@@ -22,9 +21,9 @@ public class EditorMap extends JPanel
 	int activeX = -1;
 	int activeY = -1;
 
-	
 	/**
 	 * Erstellt eine neue EditorMap mit gegebener Höhe und Breite
+	 * 
 	 * @param width
 	 * @param height
 	 */
@@ -58,7 +57,6 @@ public class EditorMap extends JPanel
 		}
 	}
 
-	
 	/**
 	 * Setzt den Beobachter, der über Änderungen im Grid informiert werden soll
 	 */
@@ -82,9 +80,10 @@ public class EditorMap extends JPanel
 	{
 		return activeX >= 0;
 	}
-	
+
 	/**
 	 * Gibt den aktiven Button zurück
+	 * 
 	 * @return
 	 */
 	public GridButton getAktivenButton()
@@ -93,7 +92,7 @@ public class EditorMap extends JPanel
 			return null;
 		return _buttons[activeX][activeY];
 	}
-	
+
 	/**
 	 * Gibt den Raum des aktuell angewählten GridButtons zurück.
 	 */
@@ -103,17 +102,17 @@ public class EditorMap extends JPanel
 			return null;
 		return getAktivenButton().getRaum();
 	}
-	
+
 	/**
-	 * Fügt dem aktuell ausgewählten GridButton einen Raum hinzu,
-	 * wenn einer ausgewählt ist.
+	 * Fügt dem aktuell ausgewählten GridButton einen Raum hinzu, wenn einer
+	 * ausgewählt ist.
 	 */
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
 		if(buttonAusgewaehlt())
 			_buttons[activeX][activeY].fuegeLeerenRaumHinzu();
 	}
-	
+
 	/**
 	 * Löscht den Raum des aktiven Butons
 	 */

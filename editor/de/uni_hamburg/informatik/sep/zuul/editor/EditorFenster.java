@@ -8,9 +8,9 @@ import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.FileChooser;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
  * Die Werkzeugklasse für das Editorfenser.
