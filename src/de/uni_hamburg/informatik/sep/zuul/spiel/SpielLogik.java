@@ -139,12 +139,14 @@ public class SpielLogik
 					{
 						kontext.setLebensEnergie(kontext.getLebensEnergie()
 								- RAUMWECHSEL_ENERGIE_KOSTEN);
-						
-						
 					}
 				});
 		
-		new Katze(kontext.getAktuellerRaum().getAusgang("süd").getAusgang("süd")).registerToKontext(kontext);
+		// setze maus
+		Raum startRaum = kontext.getAktuellerRaum();
+		startRaum = startRaum.getAusgaenge().get(0).getAusgaenge().get(0);
+		Katze k = new Katze(startRaum);
+		k.registerToKontext(kontext);
 
 		return kontext;
 	}
