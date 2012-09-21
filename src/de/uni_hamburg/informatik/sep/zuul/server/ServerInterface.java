@@ -37,6 +37,6 @@ public interface ServerInterface extends Remote
 	 *            die Nutzereingabe
 	 * @return Übertragung erfolgreich bzw. fehlerfrei
 	 */
-	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException;
+	public boolean empfangeNutzerEingabe(String eingabe, String benutzerName) throws RemoteException;
 
 }

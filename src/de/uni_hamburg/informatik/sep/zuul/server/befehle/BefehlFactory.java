@@ -35,13 +35,12 @@ public final class BefehlFactory
 		}
 	}
 
-	public static Befehl getBefehl(String befehlsname)
-	{
-		return _map.get(befehlsname);
-	}
-
-	public static boolean fuehreBefehlAus(ServerKontext kontext,
-			Spieler spieler, Befehlszeile befehlszeile)
+	/**
+	 * @param kontext
+	 * @param spieler
+	 * @param befehlszeile
+	 */
+	public static Befehl gibBefehl(Befehlszeile befehlszeile)
 	{
 		List<String> geparsteZeile = befehlszeile.getGeparsteZeile();
 		Collection<String> befehlsnamen = moeglicheBefehlsnamen(geparsteZeile);
@@ -52,35 +51,10 @@ public final class BefehlFactory
 
 			if(befehl != null)
 			{
-				return versucheBefehlAusfuehrung(kontext, spieler,
-						befehlszeile, befehl);
+				return befehl;
 			}
 		}
-		BefehlFactory
-				.schreibeNL(kontext, spieler, TextVerwalter.FALSCHEEINGABE);
-
-		return false;
-	}
-
-	/**
-	 * @param serverKontext
-	 * @param kontext
-	 * @param befehlszeile
-	 * @param befehl
-	 * @return
-	 */
-	public static boolean versucheBefehlAusfuehrung(ServerKontext kontext,
-			Spieler spieler, Befehlszeile befehlszeile, Befehl befehl)
-	{
-		if(befehl.vorbedingungErfuellt(kontext, spieler, befehlszeile))
-		{
-			return befehl.ausfuehren(kontext, spieler, befehlszeile);
-		}
-		else
-		{
-			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
-			return false;
-		}
+		return null;
 	}
 
 	/**

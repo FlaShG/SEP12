@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -28,7 +29,7 @@ public class BefehlFuettere implements Befehl
 			befehl = BefehlFactory.getBefehl(BefehlFuettereKatze.BEFEHLSNAME);
 		if(raum.hasMaus())
 			befehl = BefehlFactory.getBefehl(BefehlFuettereMaus.BEFEHLSNAME);
-		return BefehlFactory.versucheBefehlAusfuehrung(kontext, spieler,
+		return Spiel.versucheBefehlAusfuehrung(kontext, spieler,
 				befehlszeile, befehl);
 	}
 

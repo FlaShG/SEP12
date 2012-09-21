@@ -145,4 +145,16 @@ public class ServerKontext
 		// TODO impl !!!!
 	}
 
+	public Spieler getSpielerByName(String benutzerName)
+	{
+		for(Spieler s : _spielerPosition.keySet())
+		{
+			if(benutzerName.equals(s.getName()))
+			{
+				return s;
+			}
+		}
+		return null;
+	}
+
 }

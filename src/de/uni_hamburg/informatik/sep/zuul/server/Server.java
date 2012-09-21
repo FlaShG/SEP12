@@ -99,10 +99,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		return true;
 	}
 
+	
+	//TODO: ugly!
 	@Override
-	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException
-	{
-		_spiel.parseEingabezeile(eingabe);
+	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName) throws RemoteException
+	{		
+		_spiel.verarbeiteEingabe(benuzterName, eingabe);
 		ArrayList<ClientPaket> paketListe = new ArrayList<ClientPaket>();
 		for(String name : _connectedClients.keySet())
 		{

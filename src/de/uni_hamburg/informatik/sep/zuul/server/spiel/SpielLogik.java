@@ -3,12 +3,15 @@ package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class SpielLogik
 {
@@ -25,7 +28,7 @@ public class SpielLogik
 	{
 		erstelleKontext();
 	}
-	
+
 	public void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();
@@ -76,16 +79,6 @@ public class SpielLogik
 		return raumbauer.getStartRaum();
 	}
 
-	/**
-	 * Führt den Befehl aus für den entsprchenden Spieler aus.
-	 * 
-	 * @param befehl
-	 */
-	public void fuehreBefehlAus(Befehl befehl, Spieler spieler)
-	{
-		// TODO impl!
-		//Befehl.ausführen(_kontext, spieler);
-	}
 
 	/**
 	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
@@ -173,7 +166,7 @@ public class SpielLogik
 	 * 
 	 * @return der Serverkontext
 	 */
-	public ServerKontext getKontex()
+	public ServerKontext getKontext()
 	{
 		return _kontext;
 	}

@@ -7,7 +7,10 @@ import java.util.Map;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -25,7 +28,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public class Spiel {
+public class Spiel
+{
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -95,14 +99,26 @@ public class Spiel {
 	 * Verarbeite die Eingabe eines Spielers.
 	 * 
 	 * @param eingabezeile
-	 * @param spieler
+	 * @param eingabe
 	 */
-	protected void verarbeiteEingabe(String eingabezeile, Spieler spieler)
+	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
+		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+		
+		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
+		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
-		Befehl befehl = parseEingabezeile(eingabezeile);
-		_logik.fuehreBefehlAus(befehl, spieler);
+		if(befehl != null)
+		{
+			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler, befehlszeile,
+					befehl);
+		}
+		else
+			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
+					TextVerwalter.FALSCHEEINGABE);
+		// TODO befehlausgefuehrt aufrufen
 	}
+	
 
 	/**
 	 * Starte das Spiel neu.
@@ -116,29 +132,6 @@ public class Spiel {
 	}
 
 	/**
-	 * @param eingabezeile
-	 * @return geparster Befehl
-	 */
-	public Befehl parseEingabezeile(String eingabezeile)
-	{
-		String[] input = eingabezeile.split(" +");
-
-		String[] parameter = new String[0];
-		String befehl = "";
-
-		if(input.length > 0)
-		{
-			befehl = input[0];
-			if(input.length > 1)
-				parameter = Arrays.copyOfRange(input, 1, input.length);
-
-		}
-
-		// TODO: new befehl structure
-		return BefehlFactory.get(befehl, parameter);
-	}
-
-	/**
 	 * Packe das Clienpaket für den Client mit dem Namen name.
 	 * 
 	 * @param name
@@ -147,29 +140,21 @@ public class Spiel {
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name);
-		return new ClientPaket(_logik.getKontex(), spieler);
+		return new ClientPaket(_logik.getKontext(), spieler);
 
 	}
 
-	// /**
-	// * Privates Klassenattribut, wird beim erstmaligen Gebrauch (nicht beim
-	// * Laden) der Klasse erzeugt
-	// */
-	// private static Spiel instance;
-	//
-	// /**
-	// * Statische Methode „getInstance()“ liefert die einzige Instanz der
-	// Klasse
-	// * zurück. Ist synchronisiert und somit thread-sicher.
-	// */
-	// public synchronized static Spiel getInstance() {
-	// if (instance == null) {
-	// if (!Programm.isOnconsole()) {
-	// instance = new SpielGUI();
-	// } else {
-	// instance = new SpielConsole();
-	// }
-	// }
-	// return instance;
-	// }
+	public static boolean versucheBefehlAusfuehrung(ServerKontext kontext,
+			Spieler spieler, Befehlszeile befehlszeile, Befehl befehl)
+	{
+		if(befehl.vorbedingungErfuellt(kontext, spieler, befehlszeile))
+		{
+			return befehl.ausfuehren(kontext, spieler, befehlszeile);
+		}
+		else
+		{
+			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
+			return false;
+		}
+	}
 }
