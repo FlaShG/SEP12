@@ -7,6 +7,7 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.sun.xml.internal.ws.util.StringUtils;
@@ -28,12 +29,17 @@ public class BefehlsPanel extends JPanel
 	private JButton _fuettereButton;
 	private JButton _ablegenButton;
 	private JButton _inventarButton;
+	
+	private JLabel _labelFuerLebensenergie;
 
 	private static final long serialVersionUID = 1L;
 
 	public BefehlsPanel()
 	{
 		setLayout(null);
+		
+		_labelFuerLebensenergie = new JLabel();
+		_labelFuerLebensenergie.setLocation(0,0);
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -218,6 +224,19 @@ public class BefehlsPanel extends JPanel
 	public JButton getInventarButton()
 	{
 		return _inventarButton;
+	}
+	
+	public void setLebensenergie(int lebensenergie)
+	{
+//		if(this.getWidth() != 0 && this.getHeight() != 0)
+//		{
+//			BufferedImage leben = new BufferedImage(30, this.getWidth(),
+//					BufferedImage.TYPE_INT_ARGB);
+//			Graphics g = leben.getGraphics();
+//			g.setColor(Color.red);
+//			g.fill3DRect(0, 0, 30, this.getWidth(), true);
+//			_LabelFuerIcon.setIcon(new ImageIcon(leben));
+//		}
 	}
 
 }

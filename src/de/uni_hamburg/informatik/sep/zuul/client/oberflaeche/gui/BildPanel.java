@@ -28,7 +28,7 @@ public class BildPanel extends JPanel
 	private JButton _tuerWestButton;
 
 	private JLabel _LabelFuerIcon;
-	private JLabel _labelFuerLebensenergie;
+
 	/**
 	 * 
 	 */
@@ -42,8 +42,7 @@ public class BildPanel extends JPanel
 		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setLocation(0, 0);
 
-		_labelFuerLebensenergie = new JLabel();
-		_labelFuerLebensenergie.setLocation(_LabelFuerIcon.getWidth(), 0);
+		
 
 		_tuerNordButton = new JButton();
 		_tuerNordButton.setContentAreaFilled(false);
@@ -76,7 +75,7 @@ public class BildPanel extends JPanel
 		add(_tuerWestButton);
 
 		add(_LabelFuerIcon);
-		add(_labelFuerLebensenergie);
+	
 
 		
 
@@ -95,9 +94,7 @@ public class BildPanel extends JPanel
 					_LabelFuerIcon.setSize(BildPanel.this.getWidth(),
 							BildPanel.this.getWidth());
 
-				_labelFuerLebensenergie.setSize(30, BildPanel.this.getHeight());
-				_labelFuerLebensenergie.setLocation(_LabelFuerIcon.getWidth(),
-						0);
+				
 
 				int b = _LabelFuerIcon.getWidth();
 				int h = _LabelFuerIcon.getHeight();
@@ -129,8 +126,7 @@ public class BildPanel extends JPanel
 				
 
 				
-				//TODO REMOVE
-				setLebensenergie(0);
+				
 				
 			}
 
@@ -146,18 +142,7 @@ public class BildPanel extends JPanel
 		repaint();
 	}
 
-	public void setLebensenergie(int lebensenergie)
-	{
-		if(this.getWidth() != 0 && this.getHeight() != 0)
-		{
-			BufferedImage leben = new BufferedImage(30, this.getWidth(),
-					BufferedImage.TYPE_INT_ARGB);
-			Graphics g = leben.getGraphics();
-			g.setColor(Color.red);
-			g.fill3DRect(0, 0, 30, this.getWidth(), true);
-			_LabelFuerIcon.setIcon(new ImageIcon(leben));
-		}
-	}
+	
 
 	public JButton getTuerNordButton()
 	{
