@@ -66,6 +66,7 @@ public class TextVerwalter
 	public static final String HILFE_FEED = "Geben sie \"füttere\" ein um einen Krümel an die Katze oder die Maus zu geben. \nTippen sie \"füttere krümel\" ein, um einen zufälligen Krümel zu füttern.\nAlternativ können sie \"füttere guter krümel\" oder \"füttere schlechter krümel\" tippen, wenn sie einen entsprechend identifizierten Krümel haben.";
 	public static final String HILFE_INVENTAR = "Geben sie \"Inventar\" ein, um zu sehen, welche Gegenstände sie bei sich tragen.";
 	public static final String HILFE_ABLEGEN = "Geben sie \"ablegen\" ein, um einen zufälligen Krümel abzulegen.\nTippen sie \"ablegen guter krümel\" oder \"ablegen schlechter krümel\" um einen solchen abzulegen, wenn sie über einen verfügen.";
+	public static final String HILFE_AUSGAENGE = "Geben sie \"ausgänge\" ein, um die möglichen Ausgänge aus diesem Raum anzuzeigen.";
 	public static final String HILFE_QUIT = "Geben sie \"beenden\" ein, um das Spiel zu beenden.";
 	public static final String HILFE_LOAD = "Geben sie \"laden\" ein, um eine Karte zu laden. Tippen sie \"laden\" und einen Dateinamen ein, um eine Karte aus dem Standard-Pfad zu laden.";
 	public static final String HILFE_HELP = "Geben sie \"hilfe\" ein, um die Hilfe zu zeigen.";
