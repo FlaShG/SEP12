@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
@@ -25,7 +26,7 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 	 * Überprüft, ob der {@link Spieler} noch lebt.
 	 */
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, Befehl befehl,
 			boolean hasRoomChanged)
 	{
 		if(spieler.getLebensEnergie() <= 0)

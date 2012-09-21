@@ -34,6 +34,16 @@ public final class BefehlFactory
 			}
 		}
 	}
+	
+	public static Befehl gibBefehl(Class<?> befehlsKlasse)
+	{
+		for(Befehl befehl: _map.values())
+		{
+			if(befehlsKlasse.isInstance(befehl))
+				return befehl;
+		}
+		return null;
+	}
 
 	/**
 	 * @param kontext

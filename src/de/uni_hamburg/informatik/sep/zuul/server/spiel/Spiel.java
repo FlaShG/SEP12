@@ -44,7 +44,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  */
 public class Spiel
 {
-	private static final long ticksPerSecond = 1000;
+	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -120,20 +120,17 @@ public class Spiel
 
 		if(befehl != null)
 		{
-			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 			
 			boolean result = Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
 					befehlszeile, befehl);
 			
-			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-
-			
-			_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, alterRaum != neuerRaum);
+			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
+			if(result)
+				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
 					TextVerwalter.FALSCHEEINGABE);
-		// TODO befehlausgefuehrt aufrufen
 	}
 
 	/**
@@ -230,7 +227,7 @@ public class Spiel
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, ticksPerSecond, ticksPerSecond);
+			new Timer().schedule(_tickTimer, ONE_SECOND, ONE_SECOND);
 		}
 		_gestartet = gestartet;
 	}

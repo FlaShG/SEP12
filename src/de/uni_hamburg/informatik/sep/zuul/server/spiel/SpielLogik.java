@@ -209,12 +209,12 @@ public class SpielLogik
 		
 	}
 
-	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, boolean hasRoomChanged)
+	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, Befehl befehl)
 	{
 		// Führe alle BefehlAusgefuehrtListener aus.
 		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
 		{
-			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler, hasRoomChanged))
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler, befehl))
 				return;
 		}
 	}

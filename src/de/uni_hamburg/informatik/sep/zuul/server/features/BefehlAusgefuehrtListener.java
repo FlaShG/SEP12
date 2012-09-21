@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
@@ -24,6 +25,6 @@ public interface BefehlAusgefuehrtListener
 	 *         werden?
 	 */
 	boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
-			boolean hasRoomChanged);
+			Befehl befehl, boolean hasRoomChanged);
 
 }
