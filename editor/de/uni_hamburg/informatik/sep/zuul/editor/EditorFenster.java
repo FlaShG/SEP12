@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import de.uni_hamburg.informatik.sep.zuul.spiel.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
@@ -86,7 +89,10 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				resetEditorFenster();
+				Object[] options = {"Ja", "Nein"};
+				int jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein neues Level erstellen?", "Neues Level", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				if (jp == 0)
+					resetEditorFenster();
 			}
 		});
 	}

@@ -234,7 +234,8 @@ public class Inventar
 			inhalt += i + ", ";
 		}
 
-		inhalt = inhalt.substring(0, inhalt.length()-2);
+		if (inhalt.length() > 2)
+			inhalt = inhalt.substring(0, inhalt.length()-2);
 		return inhalt;
 	}
 }
