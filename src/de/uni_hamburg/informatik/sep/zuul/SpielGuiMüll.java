@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import de.uni_hamburg.informatik.sep.zuul.client.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.server.raum.Raumbilderzeuger;
 
 public class SpielGuiMüll
 {

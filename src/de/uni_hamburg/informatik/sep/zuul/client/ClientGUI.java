@@ -12,7 +12,6 @@ import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
-import de.uni_hamburg.informatik.sep.zuul.server.raum.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 

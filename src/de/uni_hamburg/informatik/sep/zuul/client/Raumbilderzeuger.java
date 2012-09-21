@@ -1,17 +1,18 @@
-package de.uni_hamburg.informatik.sep.zuul.server.raum;
+package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
-import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 
 public class Raumbilderzeuger
 {
@@ -67,9 +68,10 @@ public class Raumbilderzeuger
 		_raumansicht = RAUM;
 
 		//Färbe den Raum ein je nach RaumTyp
-		if(_kontext.getAktuellerRaum().getRaumart() != null)
+		RaumArt raumArt = _paket.getRaumArt();
+		if(raumArt != null)
 		{
-			switch (_kontext.getAktuellerRaum().getRaumart())
+			switch (raumArt)
 			{
 			case Start:
 				faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
@@ -96,13 +98,13 @@ public class Raumbilderzeuger
 
 		//Male Maus
 
-		if(_kontext.getAktuellerRaum().hasMaus())
+		if(_paket.hasMaus())
 		{
 			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSPOSITION);
 		}
 
 		//Male Katze
-		if(_kontext.isKatzeImAktuellenRaum())
+		if(_paket.hasKatze())
 		{
 			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
 		}
@@ -111,12 +113,12 @@ public class Raumbilderzeuger
 		int anzahlKruemel = 0;
 		boolean gegengiftDa = false;
 
-		Stack<Item> raumItems = (Stack<Item>) _kontext.getAktuellerRaum()
-				.getItems().clone();
+		Collection<Item> raumItems = _paket.getItems();
 
-		for(int i = 0; i < raumItems.size(); i++)
+		
+		for(Item item : raumItems)
 		{
-			switch (raumItems.get(i))
+			switch (item)
 			{
 			case IKuchen:
 			case UKuchen:
@@ -133,6 +135,7 @@ public class Raumbilderzeuger
 			default:
 				break;
 			}
+			
 		}
 
 		maleKruemel(anzahlKruemel);
