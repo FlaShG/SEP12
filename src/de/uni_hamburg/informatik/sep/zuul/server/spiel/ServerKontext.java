@@ -71,13 +71,14 @@ public class ServerKontext
 	{
 		return new ArrayList<Spieler>(_spielerPosition.keySet());
 	}
-	
+
 	public List<Raum> getRaeumeInDemSichSpielerAufhalten()
 	{
 		return new ArrayList<Raum>(_spielerPosition.values());
 	}
 
-	public void addBefehlAusgefuehrtListener(BefehlAusgefuehrtListener befehlAusgefuehrtListener)
+	public void addBefehlAusgefuehrtListener(
+			BefehlAusgefuehrtListener befehlAusgefuehrtListener)
 	{
 		// TODO: save listener and execute after each command.
 	}

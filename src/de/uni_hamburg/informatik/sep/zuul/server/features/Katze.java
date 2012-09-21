@@ -22,18 +22,17 @@ public class Katze implements Feature, TickListener
 		_raum = startRaum;
 	}
 
-
 	@Override
 	public void tick(ServerKontext kontext)
 	{
 		_raum.setKatze(null);
 		_raum = bewegeKatze(kontext, _raum);
 		_raum.setKatze(this);
-		
+
 	}
 
 	// TODO: Wenn ein Spieler den Raum verlässt, -> Schaden
-	
+
 	/**
 	 * 
 	 */

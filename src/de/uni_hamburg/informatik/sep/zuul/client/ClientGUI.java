@@ -9,7 +9,6 @@ import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ClientGUI extends Client
@@ -210,8 +209,8 @@ public class ClientGUI extends Client
 
 	private void zeichneBild()
 	{
-//		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-//		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		//		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
+		//		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 
 	@Override

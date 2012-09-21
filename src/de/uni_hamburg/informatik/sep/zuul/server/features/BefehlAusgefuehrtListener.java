@@ -20,8 +20,10 @@ public interface BefehlAusgefuehrtListener
 	 *            Der aktuelle SpielKontext
 	 * @param hasRoomChanged
 	 *            Ob der Raum mit dem letzten Befehl verändert wurde.
-	 * @return Sollen noch weitere {@link BefehlAusgefuehrtListener} ausgeführt werden?
+	 * @return Sollen noch weitere {@link BefehlAusgefuehrtListener} ausgeführt
+	 *         werden?
 	 */
-	boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, boolean hasRoomChanged);
+	boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged);
 
 }

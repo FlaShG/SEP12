@@ -33,7 +33,7 @@ public abstract class Client implements ClientInterface
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
 	}
-	
+
 	protected void sendeBefehl(String nachricht)
 	{
 		try

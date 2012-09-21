@@ -56,7 +56,8 @@ public final class BefehlFactory
 						befehlszeile, befehl);
 			}
 		}
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.FALSCHEEINGABE);
+		BefehlFactory
+				.schreibeNL(kontext, spieler, TextVerwalter.FALSCHEEINGABE);
 
 		return false;
 	}

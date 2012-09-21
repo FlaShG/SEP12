@@ -46,11 +46,11 @@ public class BefehlFuettereKatze implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		
+
 		if(!spieler.getInventar().hasAnyKuchen())
 		{
 			BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.MAUS_KEIN_KRUEMEL);
+					TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
 		else if(!raum.hasKatze())
 		{

@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.raum;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import de.uni_hamburg.informatik.sep.zuul.server.features.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
@@ -60,7 +59,7 @@ public class RaumBauer
 	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum,
 			int i)
 	{
-		for(; i > 0 && kannMausEnthaltenRaum.size()>0; --i)
+		for(; i > 0 && kannMausEnthaltenRaum.size() > 0; --i)
 		{
 			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
 			kannMausEnthaltenRaum.remove(r);

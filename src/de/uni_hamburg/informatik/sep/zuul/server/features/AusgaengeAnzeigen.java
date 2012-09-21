@@ -6,7 +6,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-final public class AusgaengeAnzeigen implements Feature, BefehlAusgefuehrtListener
+final public class AusgaengeAnzeigen implements Feature,
+		BefehlAusgefuehrtListener
 {
 	/**
 	 * Zeigt die Ausgänge des aktuellen Raumes an.

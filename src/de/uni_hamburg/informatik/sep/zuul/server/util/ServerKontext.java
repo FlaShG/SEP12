@@ -70,7 +70,7 @@ public class ServerKontext
 	{
 		return new ArrayList<ServerKontext>(_spielerPosition.keySet());
 	}
-	
+
 	public List<Raum> getRaeumeInDemSichSpielerAufhalten()
 	{
 		return new ArrayList<Raum>(_spielerPosition.values());

@@ -28,13 +28,13 @@ public class ClientPaket
 		_maus = aktuellerRaum.hasMaus();
 		_items = (Collection<Item>) aktuellerRaum.getItems().clone();
 		// TODO: Nachricht?
-//		_nachricht = spieler.getNachricht();
+		//		_nachricht = spieler.getNachricht();
 		_lebensEnergie = spieler.getLebensEnergie();
 		// TODO: Andere Spieler
-//		_andereSpieler = kontext.
+		//		_andereSpieler = kontext.
 		_raumArt = aktuellerRaum.getRaumart();
 		// TODO: Spiel zu Ende?
-//		_isSpielZuEnde = kontext.isSpielZuEnde();
+		//		_isSpielZuEnde = kontext.isSpielZuEnde();
 	}
 
 	public boolean hasKatze()
