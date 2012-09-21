@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +18,11 @@ import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
@@ -116,8 +120,15 @@ public class Spiel
 
 		if(befehl != null)
 		{
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
+			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
+			
+			boolean result = Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
 					befehlszeile, befehl);
+			
+			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
+
+			
+			fuehreBefehlAusgefuehrtListenerAus(spieler, alterRaum != neuerRaum);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
@@ -190,7 +201,7 @@ public class Spiel
 					@Override
 					public void run()
 					{
-						doTick();
+						fuehreTickListenerAus();
 					}
 				});
 			}
@@ -223,11 +234,28 @@ public class Spiel
 		}
 		_gestartet = gestartet;
 	}
+	
+	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
+	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
 
-	private void doTick()
+	private void fuehreTickListenerAus()
 	{
 		System.out.println("Tick");
-		// TODO: fuehre TickListener aus.
+
+		// Führe alle TickListener aus.
+		for(TickListener tickListener : _tickListeners)
+		{
+			tickListener.tick(_logik.getKontext());
+		}
 		
+	}
+
+	private void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, boolean hasRoomChanged)
+	{
+		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
+		{
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_logik.getKontext(), spieler, hasRoomChanged))
+				return;
+		}
 	}
 }
