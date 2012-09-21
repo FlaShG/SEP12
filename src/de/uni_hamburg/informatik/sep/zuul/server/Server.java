@@ -40,6 +40,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		// Liste der verbundenen Clients anlegen
 		_connectedClients = new HashMap<String, ClientInterface>();
 
+		_spiel = new Spiel();
 	}
 
 	// sinnlos?
@@ -81,6 +82,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 
 			result = true;
 		}
+
+		System.out.println("eingeloggt");
 
 		return result;
 

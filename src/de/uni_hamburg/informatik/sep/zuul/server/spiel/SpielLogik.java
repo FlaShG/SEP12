@@ -21,6 +21,11 @@ public class SpielLogik
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
 
+	public SpielLogik()
+	{
+		erstelleKontext();
+	}
+	
 	public void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();

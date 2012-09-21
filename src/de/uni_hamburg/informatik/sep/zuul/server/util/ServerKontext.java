@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +23,9 @@ public class ServerKontext
 
 	public ServerKontext(Raum startRaum)
 	{
-		_startRaum = startRaum;
 
+		_startRaum = startRaum;
+		_spielerPosition = new HashMap<Spieler, Raum>();
 	}
 
 	/**

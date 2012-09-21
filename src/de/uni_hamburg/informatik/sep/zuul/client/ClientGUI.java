@@ -16,6 +16,7 @@ import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
+
 public class ClientGUI extends Client
 {
 
