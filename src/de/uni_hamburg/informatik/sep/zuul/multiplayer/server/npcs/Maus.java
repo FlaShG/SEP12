@@ -38,6 +38,7 @@ public class Maus
 	public void setNeuerRaum(Raum neuerRaum)
 	{
 		_aktuellerRaum = neuerRaum;
+		berechneNeuenWeg();
 	}
 
 }
