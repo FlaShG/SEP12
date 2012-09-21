@@ -190,28 +190,15 @@ public class Spiel
 		@Override
 		public void run()
 		{
-			try
+			SwingUtilities.invokeLater(new Runnable()
 			{
-				SwingUtilities.invokeAndWait(new Runnable()
+				
+				@Override
+				public void run()
 				{
-					
-					@Override
-					public void run()
-					{
-						_logik.fuehreTickListenerAus();
-					}
-				});
-			}
-			catch(InvocationTargetException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch(InterruptedException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+					_logik.fuehreTickListenerAus();
+				}
+			});
 		}
 	};
 

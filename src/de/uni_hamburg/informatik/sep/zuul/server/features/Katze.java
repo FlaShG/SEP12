@@ -108,28 +108,15 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 			@Override
 			public void run()
 			{
-				try
+				SwingUtilities.invokeLater(new Runnable()
 				{
-					SwingUtilities.invokeAndWait(new Runnable()
-					{
 
-						@Override
-						public void run()
-						{
-							_satt = false;
-						}
-					});
-				}
-				catch(InvocationTargetException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				catch(InterruptedException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					@Override
+					public void run()
+					{
+						_satt = false;
+					}
+				});
 			}
 		}, SCHLAFZEIT_IN_SEKUNDEN * Spiel.ONE_SECOND);
 	}
@@ -165,11 +152,13 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 			Befehl befehl, boolean _)
 	{
 		// Wenn ein Spieler im gleich Raum ist wie die Katze und 'schauen' ausführt, kriegt er eine gewischt, es sei denn, sie ist satt.
-		if( !_satt && _raum == kontext.getAktuellenRaumZu(spieler) && befehl instanceof BefehlSchauen )
+		if(!_satt && _raum == kontext.getAktuellenRaumZu(spieler)
+				&& befehl instanceof BefehlSchauen)
 		{
 			spieler.setLebensEnergie(spieler.getLebensEnergie() - KATZE_SCHADEN);
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KATZE_GREIFT_AN);
-			
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.KATZE_GREIFT_AN);
+
 			bewegeKatze(kontext);
 		}
 		return true;
