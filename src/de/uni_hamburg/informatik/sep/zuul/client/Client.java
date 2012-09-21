@@ -42,8 +42,9 @@ public abstract class Client implements ClientInterface
 		_isSpielzuEnde = false;
 		_port = clientPort;
 
-		_server = (ServerInterface) Naming.lookup(_serverName);
-		
+		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
+				+ _serverName);
+
 		login();
 	}
 
@@ -92,8 +93,9 @@ public abstract class Client implements ClientInterface
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
-		while(!_server.empfangeNutzerEingabe(eingabezeile))
+		while(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))
 			;
+
 	}
 
 	/**
@@ -108,12 +110,13 @@ public abstract class Client implements ClientInterface
 	public static void main(String[] args) throws NumberFormatException,
 			MalformedURLException, RemoteException, NotBoundException
 	{
-		
-		if (args.length == 5 && args[4].equals("console"))
+
+		if(args.length == 5 && args[4].equals("console"))
 		{
-			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]), args[3]);
+			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
+					args[3]);
 		}
-		else 
+		else
 		{
 			new ClientGUI(args[0], args[1], Integer.parseInt(args[2]), args[3]);
 		}
