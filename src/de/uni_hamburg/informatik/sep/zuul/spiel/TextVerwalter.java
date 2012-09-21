@@ -128,4 +128,5 @@ public class TextVerwalter
 	public static final String MODUS_AUSWAHL_SINGLEPLAYER = "Einzelspieler";
 
 	public static final String MODUS_AUSWAHL_MULTIPLAYER = "Mehrspieler";
+	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben sie die Host IP ein: ";
 }
