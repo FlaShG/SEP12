@@ -1,11 +1,15 @@
 package de.uni_hamburg.informatik.sep.zuul.xml;
 
+import java.util.Stack;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
+
 @XmlRootElement(name = "xmlraum")
-@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID", "_x", "_y"})
+@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID", "_x", "_y", "_items"})
 public class XmlRaum
 {
 	private @XmlElement(name = "id")
@@ -22,15 +26,34 @@ public class XmlRaum
 	int _x;
 	private @XmlElement(name = "y")
 	int _y;
+	private @XmlElement(name = "item")
+	Stack<Item> _items;
+	
 
 	public XmlRaum()
 	{
 		// für JAXB
+		_items = new Stack<Item>();
 	}
 
+	/**
+	 * 
+	 * @param ID
+	 * @param nordID
+	 * @param ostID
+	 * @param suedID
+	 * @param westID
+	 * @param x
+	 * @param y
+	 * @param items
+	 * 
+	 * @require items != null
+	 */
 	public XmlRaum(int ID, int nordID, int ostID, int suedID, int westID,
-			int x, int y)
+			int x, int y, Stack<Item> items)
 	{
+		assert items != null : "Vorbedingung verletzt: items != null";
+		
 		_id = ID;
 		_nordID = nordID;
 		_ostID = ostID;
@@ -38,6 +61,7 @@ public class XmlRaum
 		_westID = westID;
 		_x = x;
 		_y = y;
+		_items = items;
 	}
 
 	public int getX()
@@ -98,5 +122,17 @@ public class XmlRaum
 	private void setWestID(int westID)
 	{
 		_westID = westID;
+	}
+
+	
+	public Stack<Item> getItems()
+	{
+		return _items;
+	}
+	
+
+	private void setItems(Stack<Item> items)
+	{
+		_items = items;
 	}
 }

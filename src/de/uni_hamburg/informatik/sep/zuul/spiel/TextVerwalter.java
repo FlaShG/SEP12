@@ -51,12 +51,26 @@ public class TextVerwalter
 		return "Dr. Little isst einen Kuchenkrümel und bereut es sofort. Sein Magen krampft und er spürt, dass er nur noch "
 				+ energie + " Räume betreten können wird.";
 	}
-	
+
 	public static final String KEINIDENTIFIZIERTERKUCHEN = "Dr. Little hat keinen identifizierten Krümel dieser Art.";
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
-	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden, allerdings sind unter ihnen auch vergiftete Krümel. Sollten sie unterwegs eine Maus treffen, so können Sie ihr, als Gegenleistung für einen Krümel, einen Hinweis auf den Richtigen Weg entlocken. Aber auch hier können sie sich nicht sicher sein, dass der Krümel wirklich gesund für die Maus ist... \nUm über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: ";
+	
+	public static final String HILFETEXT = "Sie haben die Hilfe aufgerufen. Ihr Ziel ist es, in möglichst wenigen Schritten das Labor von Prof. Dr. Evenbigger zu finden. Sie können nur eine bestimmte Anzahl an Räumen durchqueren. Wenn Sie den Raum wechseln, verringert sich diese Anzahl um einen Raum. Mit Krümeln kann diese Anzahl aber wieder erhöht werden, allerdings sind unter ihnen auch vergiftete Krümel. Sollten sie unterwegs eine Maus treffen, so können Sie ihr, als Gegenleistung für einen Krümel, einen Hinweis auf den Richtigen Weg entlocken. Aber auch hier können sie sich nicht sicher sein, dass der Krümel wirklich gesund für die Maus ist... \nUm über die Texteingabe zu interagieren, stehen Ihnen folgende Befehle zur Verfügung: \ngehe nehme gib essen\nschauen ost süd nord west o s n w \nhilfe laden beenden";
+	public static final String HILFE_GO = "Geben sie eine richtung ein, um sich dorthin zu bewegen, wenn dort eine Tür ist. \nDie Richtungen sind: \n\"nord\", \"ost\", \"süd\", \"west\" \nSie können aber auch nur den Anfangsbuchstaben der Richtung einegeben, in die Sie gehen möchten.";
+	public static final String HILFE_EAT = "Geben sie \"essen tasche\" oder \"essen boden\" um von der gegebenen Lokalität einen zufälligen Krümel zu Essen. \nTippen sie \"essen tasche guter krümel\" oder \"essen tasche schlechter krümel\" um einen entsprechenden Krümel aus ihrer Tasche zu essen.";
+	public static final String HILFE_LOOK = "Geben sie \"schauen\" und eine Himmelsrichtung ein, um in den Raum zu schauen, wenn dort einer ist. \nDie Richtungen sind: \n\"nord\", \"ost\", \"süd\", \"west\"";
+	public static final String HILFE_TAKE = "Geben sie \"nehmen\" ein, um einen Krümel aus dem Raum aufzuheben.";
+	public static final String HILFE_GIVE = "Geben sie \"gib\" ein um einen Krümel an das Labor zu geben. Dort wird er untersucht.";
+	public static final String HILFE_FEED = "Geben sie \"füttere\" ein um einen Krümel an die Katze oder die Maus zu geben. \nTippen sie \"füttere krümel\" ein, um einen zufälligen Krümel zu füttern.\nAlternativ können sie \"füttere guter krümel\" oder \"füttere schlechter krümel\" tippen, wenn sie einen entsprechend identifizierten Krümel haben.";
+	public static final String HILFE_INVENTAR = "Geben sie \"Inventar\" ein, um zu sehen, welche Gegenstände sie bei sich tragen.";
+	public static final String HILFE_ABLEGEN = "Geben sie \"ablegen\" ein, um einen zufälligen Krümel abzulegen.\nTippen sie \"ablegen guter krümel\" oder \"ablegen schlechter krümel\" um einen solchen abzulegen, wenn sie über einen verfügen.";
+	public static final String HILFE_AUSGAENGE = "Geben sie \"ausgänge\" ein, um die möglichen Ausgänge aus diesem Raum anzuzeigen.";
+	public static final String HILFE_QUIT = "Geben sie \"beenden\" ein, um das Spiel zu beenden.";
+	public static final String HILFE_LOAD = "Geben sie \"laden\" ein, um eine Karte zu laden. Tippen sie \"laden\" und einen Dateinamen ein, um eine Karte aus dem Standard-Pfad zu laden.";
+	public static final String HILFE_HELP = "Geben sie \"hilfe\" ein, um die Hilfe zu zeigen.";
+	
 	public static final String RAUMWECHSELTEXT = "Lebensenergie: ";
 	public static final String IMMERNOCHKUCHENTEXT = "Dr. Little erahnt jedoch noch weitere Krümel in direkter Umgebung.";
 	public static final String NICHTSZUMNEHMENTEXT = "Dr. Little streckt erwartungsvoll die Hand aus, doch er greift nur nach Luft."
@@ -87,8 +101,6 @@ public class TextVerwalter
 	public static final String RICHTUNG_SUEDEN = "süd";
 	public static final String RICHTUNG_WESTEN = "west";
 	public static final String RICHTUNG_OSTEN = "ost";
-	
-
 
 	public static final String ORT_BODEN = "boden";
 	public static final String ORT_TASCHE = "tasche";
@@ -108,7 +120,6 @@ public class TextVerwalter
 	public static final String ABLEGEN_TEXT = "Sie legen einen Krümmel ab.";
 	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 
-	
 	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
 	public static final String KATZE_GREIFT_AN = "Als Dr. Little den Raum verlassen wollte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
@@ -126,6 +137,11 @@ public class TextVerwalter
 
 	public static final String BEFEHL_INVENTAR = "inventar";
 
+	public static final String KEINRAUMZUMSCHAUN = "Dort ist leider kein Raum, wohin Dr. Little schauen kann.";
 
+	public static final String MODUS_AUSWAHL_SINGLEPLAYER = "Einzelspieler";
 
+	public static final String MODUS_AUSWAHL_MULTIPLAYER = "Mehrspieler";
+	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host IP ein: ";
+	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
 }

@@ -18,6 +18,7 @@
         <westid>0</westid>
         <x>1</x>
         <y>4</y>
+        <item>Gegengift</item>
     </xmlraum>
     <xmlraum>
         <id>1875150719</id>
@@ -36,6 +37,7 @@
         <westid>-648638930</westid>
         <x>3</x>
         <y>1</y>
+        <item>UKuchen</item>
     </xmlraum>
     <xmlraum>
         <id>2192899</id>
@@ -54,6 +56,8 @@
         <westid>0</westid>
         <x>5</x>
         <y>0</y>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
     </xmlraum>
     <xmlraum>
         <id>463155405</id>
@@ -99,6 +103,8 @@
         <westid>1875150719</westid>
         <x>4</x>
         <y>3</y>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
     </xmlraum>
     <xmlraum>
         <id>-920668986</id>
@@ -108,6 +114,7 @@
         <westid>-535394682</westid>
         <x>2</x>
         <y>5</y>
+        <item>UGiftkuchen</item>
     </xmlraum>
     <xmlraum>
         <id>1025772383</id>
@@ -153,6 +160,7 @@
         <westid>0</westid>
         <x>2</x>
         <y>2</y>
+        <item>UKuchen</item>
     </xmlraum>
     <xmlraum>
         <id>747719876</id>
@@ -171,6 +179,9 @@
         <westid>0</westid>
         <x>0</x>
         <y>0</y>
+        <item>UKuchen</item>
+        <item>UKuchen</item>
+        <item>UGiftkuchen</item>
     </xmlraum>
     <xmlraum>
         <id>280481804</id>

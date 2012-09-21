@@ -31,7 +31,7 @@ public final class BefehlFactory
 		Befehl[] befehle = new Befehl[] { new BefehlGo(),new BefehlSchauen(), new BefehlHelp(),
 
 
-				new BefehlTake(), new BefehlEat(), new BefehlLoad(),
+				new BefehlTake(), new BefehlEat(), new BefehlLoad(), new BefehlAusgaenge(),
 				new BefehlQuit(), new BefehlN(), new BefehlW(), new BefehlS(), new BefehlE(), new BefehlGive(), new BefehlInventarAnzeigen(), new BefehlFeed(), new BefehlAblegen() };
 
 				 

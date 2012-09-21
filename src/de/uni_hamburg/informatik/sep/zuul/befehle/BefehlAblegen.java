@@ -25,8 +25,17 @@ final class BefehlAblegen extends Befehl
 					|| (getParameters().length == 1 && getParameters()[1]
 							.equals("krümel")))
 			{
-				kontext.getAktuellerRaum().addItem(
-						kontext.getInventar().getAnyKuchen());
+				Item ablegenItem = kontext.getInventar().getAnyKuchen();
+				switch (ablegenItem)
+				{
+				case IKuchen:
+				case UKuchen:
+					kontext.getAktuellerRaum().addItem(Item.UKuchen);
+					break;
+				case IGiftkuchen: case UGiftkuchen:
+					kontext.getAktuellerRaum().addItem(Item.UGiftkuchen);
+				}
+
 				Spiel.getInstance().schreibeNL(TextVerwalter.ABLEGEN_TEXT);
 			}
 			else if(getParameters().length == 2)
@@ -36,8 +45,8 @@ final class BefehlAblegen extends Befehl
 				{
 					if(kontext.getInventar().hatDiesenKuchen(Item.IKuchen))
 					{
-						kontext.getAktuellerRaum().addItem(
-								kontext.getInventar().getKuchen(Item.IKuchen));
+						kontext.getAktuellerRaum().addItem(Item.UKuchen);
+						kontext.getInventar().getKuchen(Item.IKuchen);
 						Spiel.getInstance().schreibeNL(
 								TextVerwalter.ABLEGEN_TEXT);
 						return;
@@ -50,9 +59,8 @@ final class BefehlAblegen extends Befehl
 				{
 					if(kontext.getInventar().hatDiesenKuchen(Item.IGiftkuchen))
 					{
-						kontext.getAktuellerRaum().addItem(
-								kontext.getInventar().getKuchen(
-										Item.IGiftkuchen));
+						kontext.getAktuellerRaum().addItem(Item.UGiftkuchen);
+						kontext.getInventar().getKuchen(Item.IGiftkuchen);
 						Spiel.getInstance().schreibeNL(
 								TextVerwalter.ABLEGEN_TEXT);
 						return;

@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import de.uni_hamburg.informatik.sep.zuul.PathFinder;
 import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
+import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.spiel.RaumStruktur;
 
 public class SpeicherWerkzeug
@@ -38,10 +43,71 @@ public class SpeicherWerkzeug
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
 
-		manager.schreibeLevelStruktur(path,	raumstruktur, _ef.getEditorLevel());
+		if(valide())
+		{
+			manager.schreibeLevelStruktur(path, raumstruktur,
+					_ef.getEditorLevel());
 
-		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
+			manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(new JPanel(), "Level erfüllt nicht die Anforderungen.", "Ungültiges Level", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
+	/**
+	 * Validiert die Räume.
+	 * Folgendes gilt als valide:<br>
+	 * - Ein einzelner Startraum vorhanden<br>
+	 * - Ein einzelner Endraum vorhanden<br>
+	 * - Verbindung zw. Start- und Endraum besteht<br>
+	 * - Mäuse lassen sich setzen ((|Räume| - 2 - |Katzen|) >= |Mäuse|)
+	 */
+	private boolean valide()
+	{
+		boolean valid = false;
+		int start = 0;
+		int ende = 0;
+		Raum startRaum = null;
+		
+		for (Raum r : _verbindungen.getRaumListe())
+		{
+			if (r.getRaumart() == RaumArt.Start)
+			{
+				startRaum = r;
+				start++;
+			}
+			else if (r.getRaumart() == RaumArt.Ende)
+				ende++;
+		}
+		
+		if (start == 1 && ende == 1)
+		{//^-- überprüfe Anzahl von start- und endräumen
+			
+			PathFinder pf = new PathFinder()
+			{
+				@Override
+				protected boolean isZielRaum(Raum raum)
+				{
+					return raum.getRaumart() == RaumArt.Ende;
+				}
+			};
+			
+			if(pf.findPath(startRaum) != null)
+			{//^-- überprüfe Verbindung von start- und endraum
+				
+				int anzahlKatzen = 1;	// TODO ändern, wenn Katzenanzahl einstellbar ist bzw. sich ändert!!!
+				int zulAnzahlMaeuse = _verbindungen.getRaumListe().size() - 2 - anzahlKatzen;
+				valid = zulAnzahlMaeuse >= _ef.getEditorLevel().getMaeuse();
+			}
+			else
+				valid = false;
+		}
+		else
+			valid = false;
+		
+		return valid;
 	}
 
 	private void vergebeIDs(IOManager manager)
@@ -69,8 +135,7 @@ public class SpeicherWerkzeug
 					do
 					{
 						newid = rand.nextInt();
-					}
-					while(newid == 0 || idList.contains(newid));
+					} while(newid == 0 || idList.contains(newid));
 
 					raum.setId(newid);
 					idList.add(newid);

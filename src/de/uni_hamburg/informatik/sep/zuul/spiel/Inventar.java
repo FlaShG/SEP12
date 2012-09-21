@@ -231,9 +231,11 @@ public class Inventar
 
 		for(Item i : _inhalt)
 		{
-			inhalt += i + " ";
+			inhalt += i + ", ";
 		}
 
+		if (inhalt.length() > 2)
+			inhalt = inhalt.substring(0, inhalt.length()-2);
 		return inhalt;
 	}
 }
