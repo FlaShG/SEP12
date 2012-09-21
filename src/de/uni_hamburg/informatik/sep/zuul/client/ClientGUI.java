@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
@@ -14,13 +12,11 @@ import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Startfenster;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 
@@ -102,10 +98,8 @@ public class ClientGUI extends Client
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
-	private Startfenster _sf;
 
-	private String _ipadresse;
-	private String _spielername;
+	
 
 	/**
 	 * 
@@ -117,9 +111,9 @@ public class ClientGUI extends Client
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
-		_sf = new Startfenster();
+		
 
-		_hf.setVisible(false);
+		_hf.setVisible(true);
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
 
@@ -141,86 +135,7 @@ public class ClientGUI extends Client
 
 			}
 		});
-
-		_sf.getSinglePlayerButton().addActionListener(new ActionListener()
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_hf.setVisible(true);
-				_sf.setVisible(false);
-				_sf.dispose();
-			}
-		});
-
-		_sf.getMultiPlayerButton().addActionListener(new ActionListener()
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_sf.serverIPeingabe();
-			}
-		});
-
-		_sf.getIPTextField().addKeyListener(new KeyListener()
-		{
-
-			@Override
-			public void keyTyped(KeyEvent arg0)
-			{
-				//  Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0)
-			{
-				// Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent arg0)
-			{
-				if(arg0.getKeyCode() == KeyEvent.VK_ENTER)
-				{
-					pruefeIP();
-					_spielername = _sf.getSpielerNameTextField().getText();
-				}
-
-			}
-
-			private void pruefeIP()
-			{
-				SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>()
-				{
-
-					@Override
-					protected Void doInBackground() throws Exception
-					{
-						String[] tokens = _sf.getIPTextField().getText()
-								.split("\\.");
-						if(tokens.length == 4)
-						{
-							for(String str : tokens)
-							{
-								int i = Integer.parseInt(str);
-								if(!((i < 0) || (i > 255)))
-								{
-									_ipadresse = _sf.getIPTextField().getText();
-								}
-							}
-						}
-						return null;
-					}
-				};
-
-				worker.execute();
-			}
-
-		});
+ 
 
 		_kp.getEingabeZeile().addActionListener(new ActionListener()
 		{

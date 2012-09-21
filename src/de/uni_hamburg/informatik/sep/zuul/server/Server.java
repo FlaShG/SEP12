@@ -26,7 +26,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	private Map<String, ClientInterface> _connectedClients;
 	private Spiel _spiel;
 
-	protected Server() throws RemoteException, AlreadyBoundException
+	public Server() throws RemoteException, AlreadyBoundException
 	{
 		super();
 

@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,15 +11,14 @@ import javax.swing.JTextField;
 
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class Startfenster extends JFrame
+public class StartfensterUI extends JFrame
 {
 	private JButton _singlePlayer;
 	private JButton _multiPlayer;
-	private JTextField _benutzerName;
 	private JTextField _eingabeIP;
-	private JTextField _eingabePort;
+	private JTextField _benutzerName;
 
-	public Startfenster()
+	public StartfensterUI()
 	{
 		super("Zuul-Spielmodus Auswahl");
 
@@ -36,7 +36,6 @@ public class Startfenster extends JFrame
 		setVisible(true);
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
-		_eingabePort = new JTextField("1090");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -55,9 +54,7 @@ public class Startfenster extends JFrame
 		JLabel labelserver = new JLabel(
 				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
-		JLabel labelport = new JLabel(
-				TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
-		setSize(new Dimension(300, 290));
+		setSize(new Dimension(300, 230));
 		add(labelname);
 		add(_benutzerName);
 		_benutzerName.setCaretPosition(_benutzerName.getText().length());
@@ -65,14 +62,6 @@ public class Startfenster extends JFrame
 		add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
-		add(labelport);
-		add(_eingabePort);
-		_eingabePort.setCaretPosition(_eingabePort.getText().length());
-	}
-
-	public JTextField getSpielerNameTextField()
-	{
-		return _benutzerName;
 	}
 
 	public JTextField getIPTextField()
@@ -80,9 +69,9 @@ public class Startfenster extends JFrame
 		return _eingabeIP;
 	}
 
-	public JTextField getNameTextField()
+	public JTextField getSpielerNameTextField()
 	{
-		return _eingabePort;
+		return _benutzerName;
 	}
 
 }
