@@ -125,4 +125,7 @@ public class TextVerwalter
 
 	public static final String KEINRAUMZUMSCHAUN = "Dort ist leider kein Raum, wohin Dr. Little schauen kann.";
 
+	public static final String MODUS_AUSWAHL_SINGLEPLAYER = "Einzelspieler";
+
+	public static final String MODUS_AUSWAHL_MULTIPLAYER = "Mehrspieler";
 }

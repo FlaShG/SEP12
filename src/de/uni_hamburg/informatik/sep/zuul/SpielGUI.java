@@ -7,9 +7,9 @@ import javax.swing.JTextArea;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanel;
-
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.KonsolenPanel;
+import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Startfenster;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
@@ -41,12 +41,12 @@ public class SpielGUI extends Spiel
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
+	private Startfenster _sf;
 
 	public SpielGUI()
 	{
 		super();
 		initialisiereUI();
-
 	}
 
 	/**
@@ -59,7 +59,9 @@ public class SpielGUI extends Spiel
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
+		_sf = new Startfenster();
 
+		_hf.setVisible(false);
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
 
@@ -71,6 +73,30 @@ public class SpielGUI extends Spiel
 
 				verarbeiteEingabe(str);
 
+			}
+		});
+
+		_sf.getSinglePlayerButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_hf.setVisible(true);
+				_sf.setVisible(false);
+				_sf.dispose();
+			}
+		});
+
+		_sf.getMultiPlayerButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_hf.setVisible(true);
+				_sf.setVisible(false);
+				_sf.dispose();
 			}
 		});
 
@@ -100,20 +126,20 @@ public class SpielGUI extends Spiel
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
 		_bildPanel.getSchaueNordButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_NORDEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
 
 		_bildPanel.getSchaueOstButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_OSTEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
 
 		_bildPanel.getSchaueSuedButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_SUEDEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
 
 		_bildPanel.getSchaueWestButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_WESTEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
 		_bp.getQuitButton()
 				.addActionListener(
