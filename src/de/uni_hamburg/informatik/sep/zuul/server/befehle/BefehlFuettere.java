@@ -48,4 +48,10 @@ public class BefehlFuettere implements Befehl
 		return new String[] { TextVerwalter.BEFEHL_FEED };
 	}
 
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_FEED;
+	}
+
 }

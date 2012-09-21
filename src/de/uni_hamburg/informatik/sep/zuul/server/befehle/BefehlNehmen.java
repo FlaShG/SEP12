@@ -43,12 +43,17 @@ final class BefehlNehmen implements Befehl
 	{
 		BefehlFactory.schreibeNL(kontext, spieler,
 				TextVerwalter.NICHTSZUMNEHMENTEXT);
-
 	}
 
 	@Override
 	public String[] getBefehlsnamen()
 	{
 		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
+	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_TAKE;
 	}
 }

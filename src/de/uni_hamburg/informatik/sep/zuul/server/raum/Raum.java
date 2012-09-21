@@ -115,10 +115,9 @@ public class Raum
 	public void verbindeZweiRaeume(String richtung, Raum nachbar,
 			String gegenRichtung)
 	{
-		// TODO:
-		// Abbrechen wenn null übergeben wird. Dies darf vorkommen, soll aber
-		// keinen effekt haben.
-		if(nachbar == null)
+		// Abbrechen, wenn null übergeben wird. Dies darf vorkommen, sollte aber
+		// keinen Effekt haben.
+		if(nachbar == null || richtung == null || gegenRichtung == null)
 		{
 			return;
 		}

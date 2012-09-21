@@ -43,6 +43,8 @@ public final class BefehlSchauen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
+		
+		//TODO auslagern in Methoden
 		String richtung = extrahiereRichtung(befehlszeile);
 		Raum nebenRaum = getRaumFuerRichtung(kontext, spieler, richtung);
 		
@@ -141,6 +143,13 @@ public final class BefehlSchauen implements Befehl
 	public String[] getBefehlsnamen()
 	{
 		return new String[] { TextVerwalter.BEFEHL_SCHAUEN };
+	}
+
+	@Override
+	public String getHilfe()
+	{
+		// TODO Auto-generated method stub
+		return TextVerwalter.HILFE_LOOK;
 	}
 
 }

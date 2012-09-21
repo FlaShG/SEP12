@@ -107,4 +107,10 @@ final class BefehlGehe implements Befehl
 	{
 		return new String[] { TextVerwalter.BEFEHL_GEHEN, "n", "w", "s", "e" };
 	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_GO;
+	}
 }

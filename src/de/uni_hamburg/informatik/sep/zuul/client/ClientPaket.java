@@ -25,10 +25,11 @@ public class ClientPaket implements Remote, Serializable
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
+	private String[] _moeglicheAusgaenge;
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		 Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 		_katze = aktuellerRaum.hasKatze();
 		_maus = aktuellerRaum.hasMaus();
@@ -38,6 +39,7 @@ public class ClientPaket implements Remote, Serializable
 		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
 		_raumArt = aktuellerRaum.getRaumart();
 		_spielerName = spieler.getName();
+		_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
 	}
 
 	public boolean hasKatze()
@@ -78,6 +80,11 @@ public class ClientPaket implements Remote, Serializable
 	public String getSpielerName()
 	{
 		return _spielerName;
+	}
+	
+	public String[] getMoeglicheAusgaenge()
+	{
+		return _moeglicheAusgaenge;
 	}
 
 }
