@@ -44,24 +44,54 @@ final class BefehlGehe implements Befehl
 	 */
 	private String extrahiereRichtung(Befehlszeile befehlszeile)
 	{
-		// Ist der Befehl ein Shortcut?		
-		int indexOf = Arrays.asList(_shortcuts)
-				.indexOf(befehlszeile.getZeile());
-		if(indexOf >= 0)
-			return Arrays.asList(_richtungen).get(indexOf);
+		// Ist der Befehl ein Shortcut?
+		// o,n,s,w
+		String richtung = translateShortcut(befehlszeile.getZeile());
+		if(richtung != null)
+			return richtung;
 
 		// Ist der Befehl eine lange Richtung ?
+		// gehe …
 		if(befehlszeile.beginntMit(TextVerwalter.BEFEHL_GEHEN)
 				&& befehlszeile.getGeparsteZeile().size() == 2)
 		{
-			// Extrahiere Richtung
-			String richtung = befehlszeile.getGeparsteZeile().get(1);
-			if(Arrays.asList(_richtungen).contains(richtung))
+			richtung = befehlszeile.getGeparsteZeile().get(1);
+			
+			// lange Richtung?
+			// gehe osten, …
+			if(isKorrekteRichtung(richtung))
 			{
 				return richtung;
 			}
+			
+			// vllt. Shortcut?
+			//gehe o, …
+			richtung = translateShortcut(richtung);
+			if(richtung != null)
+				return richtung;
 		}
 
+		return null;
+	}
+
+	/**
+	 * @param richtung
+	 * @return
+	 */
+	private boolean isKorrekteRichtung(String richtung)
+	{
+		return Arrays.asList(_richtungen).contains(richtung);
+	}
+
+	/**
+	 * @param befehlszeile
+	 */
+	private String translateShortcut(String shortcut)
+	{
+		int indexOf = Arrays.asList(_shortcuts)
+				.indexOf(shortcut);
+		if(indexOf >= 0)
+			return Arrays.asList(_richtungen).get(indexOf);
 		return null;
 	}
 
