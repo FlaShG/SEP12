@@ -26,15 +26,14 @@ public class ClientPaket implements Remote, Serializable
 	private RaumArt _raumArt;
 	private String _spielerName;
 
-	public ClientPaket(ServerKontext kontext, Spieler spieler)
-			throws RemoteException
+	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 		_katze = aktuellerRaum.hasKatze();
 		_maus = aktuellerRaum.hasMaus();
 		_items = new ArrayList<Item>(aktuellerRaum.getItems());
-		_nachricht = kontext.getNachrichtFuer(spieler);
+		_nachricht = nachricht;
 		_lebensEnergie = spieler.getLebensEnergie();
 		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
 		_raumArt = aktuellerRaum.getRaumart();

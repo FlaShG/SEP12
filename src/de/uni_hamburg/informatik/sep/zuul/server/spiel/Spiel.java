@@ -1,7 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
-import java.lang.reflect.InvocationTargetException;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -40,6 +38,7 @@ public class Spiel
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
+	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
 
 	/**
@@ -49,6 +48,8 @@ public class Spiel
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
+		_nachrichtenMap = new HashMap<Spieler, String>();
+		//TODO in map schreiben
 		setGestartet(false);
 	}
 
@@ -95,7 +96,35 @@ public class Spiel
 	{
 		_logik.erstelleKontext();
 		_logik.zeigeWillkommensText();
+		zeigeWillkommensText();
 		setGestartet(true);
+	}
+
+	/**
+	 * Zeige jedem angemeldeten Spieler den Willkommenstext an.
+	 */
+	private void zeigeWillkommensText()
+	{
+		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
+
+		for(Spieler spieler : _nachrichtenMap.keySet())
+		{
+			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
+		}
+	}
+
+	/**
+	 * Übergib dem Spieler spieler eine nachricht als String
+	 * 
+	 * @param spieler
+	 *            der Spieler für den die Nachricht ist
+	 * @param nachricht
+	 *            die Nachricht für den Spieler
+	 */
+	public void setNachrichtFuer(Spieler spieler, String nachricht)
+	{
+		_nachrichtenMap.remove(spieler); //altes entfernen
+		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
 	}
 
 	/**
@@ -114,19 +143,19 @@ public class Spiel
 		if(befehl != null)
 		{
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-			
+
 			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
 					befehlszeile, befehl);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
 					_logik.getKontext(), spieler, befehlszeile, befehl);
-			
-			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
+			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
-				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl, alterRaum != neuerRaum);
+				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
+						alterRaum != neuerRaum);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
@@ -150,10 +179,11 @@ public class Spiel
 	 * @param name
 	 * @return
 	 */
-	public ClientPaket packePaket(String name) throws RemoteException
+	public ClientPaket packePaket(String name)
 	{
-		Spieler spieler = _spielerMap.get(name);
-		return new ClientPaket(_logik.getKontext(), spieler);
+		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
+		String nachricht = _nachrichtenMap.get(spieler); // hole die nacricht für den spieler
+		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
 
@@ -192,7 +222,7 @@ public class Spiel
 		{
 			SwingUtilities.invokeLater(new Runnable()
 			{
-				
+
 				@Override
 				public void run()
 				{
