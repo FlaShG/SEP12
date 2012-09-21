@@ -45,25 +45,25 @@ public class BildPanel extends JPanel
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(_LabelFuerIcon.getWidth(), 0);
 
-		_tuerNordButton = new JButton(new ImageIcon(PATH + "door_n.png"));
+		_tuerNordButton = new JButton();
 		_tuerNordButton.setContentAreaFilled(false);
 		_tuerNordButton.setBorderPainted(false);
 		_tuerNordButton.setFocusable(false);
 		_tuerNordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		_tuerOstButton = new JButton(new ImageIcon(PATH + "door_e.png"));
+		_tuerOstButton = new JButton();
 		_tuerOstButton.setContentAreaFilled(false);
 		_tuerOstButton.setBorderPainted(false);
 		_tuerOstButton.setFocusable(false);
 		_tuerOstButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		_tuerSuedButton = new JButton(new ImageIcon(PATH + "door_s.png"));
+		_tuerSuedButton = new JButton();
 		_tuerSuedButton.setContentAreaFilled(false);
 		_tuerSuedButton.setBorderPainted(false);
 		_tuerSuedButton.setFocusable(false);
 		_tuerSuedButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		_tuerWestButton = new JButton(new ImageIcon(PATH + "door_w.png"));
+		_tuerWestButton = new JButton();
 		_tuerWestButton.setContentAreaFilled(false);
 		_tuerWestButton.setBorderPainted(false);
 		_tuerWestButton.setFocusable(false);
