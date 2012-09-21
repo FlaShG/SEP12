@@ -7,6 +7,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
@@ -37,17 +38,33 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	public synchronized boolean zeigeAn(ClientPaket paket)
+	public synchronized boolean zeigeAn(final ClientPaket paket)
 	{
-
-		schreibeText(paket.getNachricht());
-
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
-		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			
+			@Override
+			public void run()
+			{
+				aktualisiereUI(paket);
+			}
+		});
 
 		//nötig??
 		return true;
 
+	}
+
+	/**
+	 * @param paket
+	 */
+	private void aktualisiereUI(ClientPaket paket)
+	{
+		schreibeText(paket.getNachricht());
+
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
+		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -224,12 +241,6 @@ public class ClientGUI extends Client
 	public void schliesseFenster()
 	{
 		_hf.dispose();
-	}
-
-	@Override
-	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
-	{
-		super.verarbeiteEingabe(eingabezeile);
 	}
 
 	public void spielen(String level) throws RemoteException
