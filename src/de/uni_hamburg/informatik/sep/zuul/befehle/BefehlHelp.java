@@ -64,6 +64,9 @@ final class BefehlHelp extends Befehl
 			case "schauen":
 				Spiel.getInstance().schreibeNL(TextVerwalter.HILFE_LOOK);
 				break;
+			case "ausgänge":
+				Spiel.getInstance().schreibeNL(TextVerwalter.HILFE_AUSGAENGE);
+				break;
 			default:
 				Spiel.getInstance().schreibeNL(TextVerwalter.HILFETEXT);
 			}
