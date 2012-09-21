@@ -95,9 +95,25 @@ public abstract class Client implements ClientInterface
 		while(!_server.empfangeNutzerEingabe(eingabezeile))
 			;
 	}
-
-	public static void main(String[] args)
+	/**
+	 * 
+	 * @param args [Oberfläche, Servername, Serverip, Clientport, Clientname]
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
+	 * @throws NumberFormatException 
+	 */
+	public static void main(String[] args) throws NumberFormatException, MalformedURLException, RemoteException, NotBoundException
 	{
-
+		if (args[0].equals("console"))
+		{
+			new ClientConsole(args[1], args[2], Integer.parseInt(args[3]), args[4]);
+		}
+		else
+		{
+			new ClientGUI(args[1], args[2], Integer.parseInt(args[3]), args[4]);
+		}
+		
+		
 	}
 }

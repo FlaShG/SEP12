@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
@@ -25,7 +27,15 @@ public class ClientGUI extends Client
 	private AusgabePanel _ap;
 	private ButtonPanel _bp;
 
-	
+	public ClientGUI(String serverName, String serverIP, int clientport,
+			String clientName) throws MalformedURLException, RemoteException,
+			NotBoundException
+	{
+		super(serverName, serverIP, clientport, clientName);
+		initialisiereUI();
+
+	}
+
 	@Override
 	public void schreibeText(String text)
 	{
@@ -43,7 +53,7 @@ public class ClientGUI extends Client
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
 		_bp.setRaumanzeige(raumbilderzeuger.getRaumansicht());
-		
+
 		//nötig??
 		return true;
 
@@ -72,14 +82,6 @@ public class ClientGUI extends Client
 				e1.printStackTrace();
 			}
 		}
-	}
-
-	
-	public ClientGUI(String serverName, String serverIP, Server server, String clientName)
-	{
-		super(serverName, serverIP, server, clientName);
-		initialisiereUI();
-
 	}
 
 	/**
@@ -222,7 +224,7 @@ public class ClientGUI extends Client
 
 	public void schliesseFenster()
 	{
-		_hf.hide();
+		_hf.dispose();
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
@@ -10,9 +12,9 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, Server server, String clientName)
+	public ClientConsole(String serverName, String serverIP, int clientport, String clientName) throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, server, clientName);
+		super(serverName, serverIP, clientport, clientName);
 	}
 
 	@Override
