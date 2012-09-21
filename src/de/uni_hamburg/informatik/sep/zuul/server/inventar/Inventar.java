@@ -79,8 +79,8 @@ public class Inventar
 		{
 			switch (item)
 			{
-			case Kuchen:
-			case Giftkuchen:
+			case IKuchen:
+			case IGiftkuchen:
 				return true;
 			default:
 				break;
@@ -101,8 +101,8 @@ public class Inventar
 		{
 			switch (item)
 			{
-			case Kuchen:
-			case Giftkuchen:
+			case IKuchen:
+			case IGiftkuchen:
 				_inhalt.remove(item);
 				return item;
 			default:
