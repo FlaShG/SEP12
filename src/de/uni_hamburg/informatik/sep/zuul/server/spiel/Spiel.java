@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
-import java.util.Arrays;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,21 +104,20 @@ public class Spiel
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
-		
+
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)
 		{
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler, befehlszeile,
-					befehl);
+			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
+					befehlszeile, befehl);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
 					TextVerwalter.FALSCHEEINGABE);
 		// TODO befehlausgefuehrt aufrufen
 	}
-	
 
 	/**
 	 * Starte das Spiel neu.
@@ -137,7 +136,7 @@ public class Spiel
 	 * @param name
 	 * @return
 	 */
-	public ClientPaket packePaket(String name)
+	public ClientPaket packePaket(String name) throws RemoteException
 	{
 		Spieler spieler = _spielerMap.get(name);
 		return new ClientPaket(_logik.getKontext(), spieler);
