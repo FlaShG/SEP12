@@ -6,6 +6,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumSammlungParser;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumStrukturParser;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 
 public class IOManager
 {
