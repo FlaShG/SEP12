@@ -25,7 +25,7 @@ public final class BefehlSchauen extends Befehl
 
 		if(nebenRaum == null)
 		{
-
+			Spiel.getInstance().schreibeNL(TextVerwalter.KEINRAUMZUMSCHAUN);
 		}
 		else
 		{
@@ -34,7 +34,9 @@ public final class BefehlSchauen extends Befehl
 			Spiel.getInstance().schreibeNL("Er sieht: " + nebenRaum.getName());
 
 			Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
-			Spiel.getInstance().schreibeNL("Zu sehen "+(raumItems.size() == 1 ? "ist" : "sind")+":");
+			Spiel.getInstance().schreibeNL(
+					"Zu sehen " + (raumItems.size() == 1 ? "ist" : "sind")
+							+ ":");
 
 			int anzahlKruemel = 0;
 			boolean gegengift = false;
@@ -46,7 +48,9 @@ public final class BefehlSchauen extends Befehl
 				while(raumItems.size() != 0)
 				{
 					if(raumItems.get(0) == Item.UKuchen
-							|| raumItems.get(0) == Item.UGiftkuchen || raumItems.get(0) == Item.IKuchen || raumItems.get(0) == Item.UKuchen)
+							|| raumItems.get(0) == Item.UGiftkuchen
+							|| raumItems.get(0) == Item.IKuchen
+							|| raumItems.get(0) == Item.UKuchen)
 					{
 						anzahlKruemel++;
 					}
@@ -77,18 +81,17 @@ public final class BefehlSchauen extends Befehl
 				hatDinge = true;
 			}
 
-//			if(nebenRaum.hasKatze())
-//			{
-//				Spiel.getInstance().schreibeNL("Eine Katze");
-//				hatDinge = true;
-//			}
+			//			if(nebenRaum.hasKatze())
+			//			{
+			//				Spiel.getInstance().schreibeNL("Eine Katze");
+			//				hatDinge = true;
+			//			}
 
-			
 			if(!hatDinge)
 			{
 				Spiel.getInstance().schreibeNL("nur uninteressante Sachen");
 			}
-			
+
 		}
 
 	}

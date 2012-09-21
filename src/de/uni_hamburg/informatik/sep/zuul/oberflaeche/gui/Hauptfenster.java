@@ -11,8 +11,8 @@ public class Hauptfenster extends JFrame
 	private BildPanel _bildPanel;
 	private BefehlsPanel _befehlsPanel;
 
-	public Hauptfenster(BildPanel bildPanel,
-			KonsolenPanel konsolenPanel, BefehlsPanel befehlsPanel)
+	public Hauptfenster(BildPanel bildPanel, KonsolenPanel konsolenPanel,
+			BefehlsPanel befehlsPanel)
 	{
 		super("Zuul");
 		_bildPanel = bildPanel;
@@ -27,7 +27,6 @@ public class Hauptfenster extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		setSize(1024, 720);
-		
 
 		getContentPane().add(_bildPanel);
 		getContentPane().add(_konsolenPanel);
@@ -63,11 +62,8 @@ public class Hauptfenster extends JFrame
 		});
 
 		setLocationRelativeTo(null);
-		setVisible(true);
+		setVisible(false);
 
 	}
 
-	
-		
-	
 }
