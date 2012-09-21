@@ -158,4 +158,20 @@ public class ServerKontext
 		return null;
 	}
 
+	public List<Raum> getRaeumeInDemSichSpielerAufhalten()
+	{
+		return new ArrayList<Raum>(_spielerPosition.values());
+	}
+
+	public List<Spieler> getSpielerInRaum(Raum raum)
+	{
+		ArrayList<Spieler> spielers = new ArrayList<Spieler>();
+		for(Spieler spieler: _spielerPosition.keySet())
+		{
+			if(getAktuellenRaumZu(spieler) == raum)
+				spielers.add(spieler);
+		}
+		return spielers;
+	}
+
 }

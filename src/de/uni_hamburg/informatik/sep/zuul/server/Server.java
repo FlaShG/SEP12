@@ -70,7 +70,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		else
 		{
 			_connectedClients.put(name, client);
-			if(!_spiel.istGestartet())
+			if(!_spiel.isGestartet())
 			{
 				_spiel.meldeSpielerAn(name);
 			}

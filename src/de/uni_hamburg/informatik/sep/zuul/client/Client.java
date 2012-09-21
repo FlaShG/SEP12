@@ -102,7 +102,6 @@ public abstract class Client extends UnicastRemoteObject implements
 		{
 			System.err.println("Fehler bei der Übertragung");
 		}
-
 	}
 
 	/**

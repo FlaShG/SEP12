@@ -26,9 +26,9 @@ public class BefehlFuettere implements Befehl
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 		Befehl befehl = null;
 		if(raum.hasKatze())
-			befehl = BefehlFactory.getBefehl(BefehlFuettereKatze.BEFEHLSNAME);
+			befehl = BefehlFactory.gibBefehl(BefehlFuettereKatze.class);
 		if(raum.hasMaus())
-			befehl = BefehlFactory.getBefehl(BefehlFuettereMaus.BEFEHLSNAME);
+			befehl = BefehlFactory.gibBefehl(BefehlFuettereMaus.class);
 		return Spiel.versucheBefehlAusfuehrung(kontext, spieler,
 				befehlszeile, befehl);
 	}

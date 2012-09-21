@@ -1,13 +1,19 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -30,6 +36,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  */
 public class Spiel
 {
+	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -41,7 +48,7 @@ public class Spiel
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		_gestartet = false;
+		setGestartet(false);
 	}
 
 	/**
@@ -72,17 +79,12 @@ public class Spiel
 		_spielerMap.remove(name);
 	}
 
-	public boolean istGestartet()
-	{
-		return _gestartet;
-	}
-
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
 	public void beendeSpiel()
 	{
-		_gestartet = false;
+		setGestartet(false);
 	}
 
 	/**
@@ -92,7 +94,7 @@ public class Spiel
 	{
 		_logik.erstelleKontext();
 		_logik.zeigeWillkommensText();
-		_gestartet = true;
+		setGestartet(true);
 	}
 
 	/**
@@ -112,11 +114,17 @@ public class Spiel
 		{
 			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
 					befehlszeile, befehl);
+
+			boolean result = Spiel.versucheBefehlAusfuehrung(
+					_logik.getKontext(), spieler, befehlszeile, befehl);
+
+			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
+			if(result)
+				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
 					TextVerwalter.FALSCHEEINGABE);
-		// TODO befehlausgefuehrt aufrufen
 	}
 
 	/**
@@ -155,5 +163,66 @@ public class Spiel
 			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
 			return false;
 		}
+	}
+
+	void registerFeature(Feature feature)
+	{
+
+	}
+
+	/**
+	 * @return the gestartet
+	 */
+	public boolean isGestartet()
+	{
+		return _gestartet;
+	}
+
+	TimerTask _tickTimer = new TimerTask()
+	{
+
+		@Override
+		public void run()
+		{
+			try
+			{
+				SwingUtilities.invokeAndWait(new Runnable()
+				{
+
+					@Override
+					public void run()
+					{
+						_logik.fuehreTickListenerAus();
+					}
+				});
+			}
+			catch(InvocationTargetException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch(InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	};
+
+	/**
+	 * @param gestartet
+	 *            the gestartet to set
+	 */
+	public void setGestartet(boolean gestartet)
+	{
+		if(!gestartet && _gestartet)
+		{
+			_tickTimer.cancel();
+		}
+		else if(gestartet && !_gestartet)
+		{
+			new Timer().schedule(_tickTimer, ONE_SECOND, ONE_SECOND);
+		}
+		_gestartet = gestartet;
 	}
 }
