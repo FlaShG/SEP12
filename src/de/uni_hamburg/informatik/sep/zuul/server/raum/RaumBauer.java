@@ -2,9 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul.server.raum;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
 
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class RaumBauer
@@ -57,8 +57,7 @@ public class RaumBauer
 		if(kannMausEnthaltenRaum.size() > 0)
 			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
-	
-	 
+
 	public void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
 	{
 		for(; i > 0 && kannMausEnthaltenRaum.size() > 0; --i)
@@ -74,8 +73,9 @@ public class RaumBauer
 	public Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
 	{
 
-		int randomInt = new Random().nextInt(kannMausEnthaltenRaum.size());
-		Raum mausRaum = kannMausEnthaltenRaum.get(randomInt);
+		Raum mausRaum = FancyFunction.getRandomEntry(kannMausEnthaltenRaum);
+		if(mausRaum != null)
+			return null;
 
 		mausRaum.setMaus(new Maus(mausRaum, _endRaum));
 

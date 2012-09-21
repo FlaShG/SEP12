@@ -16,8 +16,10 @@ public final class KuchenImRaumTextAnzeigen implements Feature,
 		{
 			switch (kontext.getAktuellenRaumZu(spieler).getNaechstesItem())
 			{
-			case Kuchen:
-			case Giftkuchen:
+			case IKuchen:
+			case UKuchen:
+			case IGiftkuchen:
+			case UGiftkuchen:
 				BefehlFactory.schreibeNL(kontext, spieler,
 						TextVerwalter.KUCHENIMRAUMTEXT);
 			}

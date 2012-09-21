@@ -134,6 +134,7 @@ public class Spiel {
 
 		}
 
+		// TODO: new befehl structure
 		return BefehlFactory.get(befehl, parameter);
 	}
 
