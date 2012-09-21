@@ -126,7 +126,7 @@ public class Spiel
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
-				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl, alterRaum != neuerRaum);
+				_logik.getKontext().fuehreBefehlAusgefuehrtListenerAus(spieler, befehl, alterRaum != neuerRaum);
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
@@ -196,7 +196,7 @@ public class Spiel
 				@Override
 				public void run()
 				{
-					_logik.fuehreTickListenerAus();
+					_logik.getKontext().fuehreTickListenerAus();
 				}
 			});
 		}

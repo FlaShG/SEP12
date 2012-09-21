@@ -52,9 +52,19 @@ public abstract class PathFinder
 
 	}
 
-	public String getRichtung()
+	public static String getRichtung(ArrayList<Raum> raums)
 	{
-		// TODO: gebe richtung zurück.
+		if(raums==null || raums.size()<2)
+			return null;
+		
+		Raum raum1 = raums.get(0);
+		Raum raum2 = raums.get(1);
+		for(String richtung: raum1.getMoeglicheAusgaenge())
+		{
+			if(raum1.getAusgang(richtung) == raum2)
+				return richtung;
+		}
+		
 		return null;
 	}
 }

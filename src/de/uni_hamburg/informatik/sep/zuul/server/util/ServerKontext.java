@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
 /**
@@ -20,11 +25,15 @@ public class ServerKontext
 
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
+	private RaumStruktur _struktur;
+	private RaumStruktur _raumStruktur;
+	public static String _levelPfad;
 
-	public ServerKontext(Raum startRaum)
+	public ServerKontext(RaumStruktur raumStruktur)
 	{
 
-		_startRaum = startRaum;
+		_startRaum = raumStruktur.getStartRaum();
+		_raumStruktur = raumStruktur;
 		_spielerPosition = new HashMap<Spieler, Raum>();
 	}
 
@@ -173,4 +182,55 @@ public class ServerKontext
 		return spielers;
 	}
 
+	public RaumStruktur getRaumStruktur()
+	{
+		return _struktur;
+	}
+
+	public void registriereFeature(Feature feature)
+	{
+		if(feature instanceof TickListener)
+			_tickListeners.add((TickListener) feature);
+		if(feature instanceof BefehlAusgefuehrtListener)
+			_befehlAusgefuehrtListeners.add((BefehlAusgefuehrtListener) feature);
+		
+		// TODO: Feature registrieren ( Lebenspunkte, ... )
+	}
+
+	public void deregisterFeature(Feature feature)
+	{
+
+		if(feature instanceof TickListener)
+			_tickListeners.remove((TickListener) feature);
+		if(feature instanceof BefehlAusgefuehrtListener)
+			_befehlAusgefuehrtListeners.remove((BefehlAusgefuehrtListener) feature);
+		
+		// TODO: Feature deregistrieren ( Lebenspunkte, ... )
+	}
+
+	
+	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
+	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
+
+	public void fuehreTickListenerAus()
+	{
+		System.out.println("Tick");
+
+		// Führe alle TickListener aus.
+		for(TickListener tickListener : _tickListeners)
+		{
+			tickListener.tick(this);
+		}
+		
+	}
+
+	public void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, Befehl befehl, boolean hasRoomChanged)
+	{
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
+		{
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(this, spieler, befehl, hasRoomChanged))
+				return;
+		}
+	}
 }

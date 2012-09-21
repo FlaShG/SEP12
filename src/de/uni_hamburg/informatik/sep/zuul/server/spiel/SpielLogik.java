@@ -19,10 +19,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class SpielLogik
 {
-	private static String _levelPfad;
 	private ServerKontext _kontext;
-	private RaumStruktur _struktur;
-
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
@@ -35,8 +32,7 @@ public class SpielLogik
 
 	public void erstelleKontext()
 	{
-		Raum start = legeRaeumeAn();
-		_kontext = new ServerKontext(start);
+		_kontext = new ServerKontext(legeRaeumeAn());
 
 	}
 
@@ -64,23 +60,27 @@ public class SpielLogik
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private Raum legeRaeumeAn()
+	private RaumStruktur legeRaeumeAn()
 	{
 		IOManager manager = new IOManager();
-		if(_levelPfad == null)
+		if(ServerKontext._levelPfad == null)
 		{
 			manager.readLevel("./xml_dateien/testStruktur.xml");
 		}
 		else
 		{
-			manager.readLevel(_levelPfad);
+			manager.readLevel(ServerKontext._levelPfad);
 		}
 		// TODO: noch statisch - datei mit filechooser auswählen!!
 
-		_struktur = new RaumStruktur(manager.getXmlRaeume(),
+		
+		//TODO relocate
+		RaumStruktur struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
-		RaumBauer raumbauer = new RaumBauer(_struktur);
-		return raumbauer.getStartRaum();
+		
+		RaumBauer.initialisiereRaeume(struktur);
+		
+		return struktur;
 	}
 
 
@@ -141,7 +141,7 @@ public class SpielLogik
 	 */
 	public Raum getZielRaum()
 	{
-		for(Raum raum : _struktur.getConnections().keySet())
+		for(Raum raum : _kontext.getRaumStruktur().getConnections().keySet())
 		{
 			if(isRaumZielRaum(raum))
 			{
@@ -180,43 +180,7 @@ public class SpielLogik
 	 */
 	public RaumStruktur getStruktur()
 	{
-		return _struktur;
-	}
-
-	public void registriereFeature(Feature feature)
-	{
-		if(feature instanceof TickListener)
-			_tickListeners.add((TickListener) feature);
-		if(feature instanceof BefehlAusgefuehrtListener)
-			_befehlAusgefuehrtListeners.add((BefehlAusgefuehrtListener) feature);
-		
-		// TODO: Feature registrieren ( Lebenspunkte, ... )
-	}
-
-	
-	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
-	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
-
-	void fuehreTickListenerAus()
-	{
-		System.out.println("Tick");
-
-		// Führe alle TickListener aus.
-		for(TickListener tickListener : _tickListeners)
-		{
-			tickListener.tick(_kontext);
-		}
-		
-	}
-
-	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, Befehl befehl, boolean hasRoomChanged)
-	{
-		// Führe alle BefehlAusgefuehrtListener aus.
-		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
-		{
-			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler, befehl, hasRoomChanged))
-				return;
-		}
+		return _kontext.getRaumStruktur();
 	}
 	
 }

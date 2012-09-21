@@ -1,5 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.npcs;
 
+import java.util.ArrayList;
+
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.PathFinder;
 
@@ -29,7 +31,7 @@ public class Maus
 
 	public void berechneNeuenWeg()
 	{
-		_pathFinder = new PathFinder()
+		ArrayList<Raum> path = new PathFinder()
 		{
 			
 			@Override
@@ -37,9 +39,9 @@ public class Maus
 			{
 				return raum == _endRaum;
 			}
-		};
+		}.findPath(_aktuellerRaum);
 
-		_richtung = _pathFinder.getRichtung();
+		_richtung = PathFinder.getRichtung(path);
 	}
 
 	public void setNeuerRaum(Raum neuerRaum)

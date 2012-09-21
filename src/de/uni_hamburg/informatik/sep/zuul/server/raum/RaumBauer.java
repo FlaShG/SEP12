@@ -9,24 +9,16 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class RaumBauer
 {
-	private Raum _startRaum;
-	private Raum _endRaum;
-
-	public RaumBauer(RaumStruktur struktur)
-	{
-		// initialisiereRaeumeHart();
-		initialisiereRaeume(struktur.getConnections());
-	}
-
 	/**
 	 * Verbinde alle Räume.
 	 * 
 	 * @param verbindungen
 	 */
-	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
+	public static void initialisiereRaeume(RaumStruktur raumStruktur)
 	{
+		Map<Raum, Raum[]> verbindungen = raumStruktur.getConnections();
 		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
-
+		Raum endRaum = null;
 		for(Raum raum : verbindungen.keySet())
 		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
@@ -38,13 +30,13 @@ public class RaumBauer
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
 					verbindungen.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
 
-			if(raum.getRaumart() == RaumArt.Start)
-			{
-				_startRaum = raum;
-			}
+//			if(raum.getRaumart() == RaumArt.Start)
+//			{
+//				_startRaum = raum;
+//			}
 			if(raum.getRaumart() == RaumArt.Ende)
 			{
-				_endRaum = raum;
+				endRaum = raum;
 			}
 			if(raum.getRaumart() != RaumArt.Ende
 					&& raum.getRaumart() != RaumArt.Start)
@@ -52,17 +44,18 @@ public class RaumBauer
 		}
 
 		// TODO: Maus anzahl auslesen
+		//TODO : Move!
 		// Setze 3 Mäuse zufällig.
 
 		if(kannMausEnthaltenRaum.size() > 0)
-			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
+			mausInRaumSetzen(kannMausEnthaltenRaum, 3, endRaum);
 	}
 
-	public void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
+	public static void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i, Raum endRaum)
 	{
 		for(; i > 0 && kannMausEnthaltenRaum.size() > 0; --i)
 		{
-			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum);
+			Raum r = mausInRaumSetzen(kannMausEnthaltenRaum, endRaum);
 			kannMausEnthaltenRaum.remove(r);
 		}
 	}
@@ -70,25 +63,15 @@ public class RaumBauer
 	/**
 	 * @param kannMausEnthaltenRaum
 	 */
-	public Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum)
+	private static Raum mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, Raum endRaum)
 	{
 
 		Raum mausRaum = FancyFunction.getRandomEntry(kannMausEnthaltenRaum);
 		if(mausRaum != null)
 			return null;
 
-		mausRaum.setMaus(new Maus(mausRaum, _endRaum));
+		mausRaum.setMaus(new Maus(mausRaum, endRaum));
 
 		return mausRaum;
-	}
-
-	/**
-	 * Gibt den Startraum zurück, von dem aus der Spieler startet.
-	 * 
-	 * @return Der Startraum
-	 */
-	public Raum getStartRaum()
-	{
-		return _startRaum;
 	}
 }

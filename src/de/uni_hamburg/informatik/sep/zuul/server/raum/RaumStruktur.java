@@ -205,4 +205,14 @@ public class RaumStruktur
 		// TODO Auto-generated method stub
 		return new ArrayList<Raum>(_connected.keySet());
 	}
+	
+	public Raum getStartRaum()
+	{
+		for(Raum raum : _connected.keySet())
+		{
+			if(raum.getRaumart() == RaumArt.Start)
+				return raum;
+		}
+		return null;
+	}
 }

@@ -86,6 +86,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 		case IGiftkuchen:
 		case UGiftkuchen:
 			// TODO: Katze vom Tick deregistieren.
+			kontext.deregisterFeature(this);
 			_raum.setKatze(null);
 			_raum = null;
 			BefehlFactory.schreibeNL(kontext, spieler,
@@ -135,15 +136,15 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 	 * Erzeugt eine Katze, registriert sie bei der SpielLogik und setzt sie
 	 * zufällig in einen Raum.
 	 */
-	public static Katze erzeugeKatze(SpielLogik spielLogik)
+	public static Katze erzeugeKatze(ServerKontext kontext)
 	{
-		RaumStruktur raumStruktur = spielLogik.getStruktur();
+		RaumStruktur raumStruktur = kontext.getRaumStruktur();
 		List<Raum> raeume = raumStruktur.getRaeume();
 		Raum raum = FancyFunction.getRandomEntry(raeume);
 
 		Katze katze = new Katze(raum);
 		raum.setKatze(katze);
-		spielLogik.registriereFeature(katze);
+		kontext.registriereFeature(katze);
 		return katze;
 	}
 
