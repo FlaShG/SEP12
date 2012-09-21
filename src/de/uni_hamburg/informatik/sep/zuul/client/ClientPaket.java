@@ -1,13 +1,12 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class ClientPaket
 {

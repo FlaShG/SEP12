@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.server.npcs;
+package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,12 @@ import java.util.List;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
 
-public class Katze implements TickListener
+public class Katze implements Feature, TickListener
 {
 	public static final int KATZE_SCHADEN = 2;
 	Raum _raum;
@@ -23,16 +22,14 @@ public class Katze implements TickListener
 		_raum = startRaum;
 	}
 
+
 	@Override
 	public void tick(ServerKontext kontext)
 	{
-		// TODO: fix me.
-		if(_raum != null)
-		{
-			_raum.setKatze(null);
-			_raum = bewegeKatze(kontext, _raum);
-			_raum.setKatze(this);
-		}
+		_raum.setKatze(null);
+		_raum = bewegeKatze(kontext, _raum);
+		_raum.setKatze(this);
+		
 	}
 
 	// TODO: Wenn ein Spieler den Raum verlässt, -> Schaden

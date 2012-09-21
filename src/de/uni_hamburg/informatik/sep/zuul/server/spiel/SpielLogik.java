@@ -7,7 +7,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class SpielLogik
 {

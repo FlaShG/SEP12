@@ -1,45 +1,31 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
-
-public final class RaumBeschreibungAnzeigen implements Feature, TickListener,
-		PropertyChangeListener
+public final class RaumBeschreibungAnzeigen implements Feature,
+		BefehlAusgefuehrtListener
 {
-	private boolean _raumGeaendertDurchLetztenBefehl;
-
-	@Override
-	public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-	{
-		if(_raumGeaendertDurchLetztenBefehl)
-			RaumBeschreibungAnzeigen.zeigeRaumbeschreibung(kontext);
-
-		_raumGeaendertDurchLetztenBefehl = false;
-		return true;
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt)
-	{
-		_raumGeaendertDurchLetztenBefehl = true;
-	}
-
-	@Override
-	public void registerToKontext(SpielKontext kontext)
-	{
-		kontext.addTickListener(this);
-		kontext.addPropertyChangeListener("AktuellerRaum", this);
-	}
 
 	/**
 	 * Zeigt die Beschreibung des Raums an, in dem der Spieler sich momentan
 	 * befindet.
 	 */
-	public static void zeigeRaumbeschreibung(SpielKontext kontext)
+	public static void zeigeRaumbeschreibung(ServerKontext kontext,
+			Spieler spieler)
 	{
-		Spiel.getInstance().schreibeNL(
-				kontext.getAktuellerRaum().getBeschreibung());
+		BefehlFactory.schreibeNL(kontext, spieler,
+				kontext.getAktuellenRaumZu(spieler).getBeschreibung());
 	}
+
+	@Override
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged)
+	{
+		if(hasRoomChanged)
+			RaumBeschreibungAnzeigen.zeigeRaumbeschreibung(kontext, spieler);
+		return true;
+	}
+
 }

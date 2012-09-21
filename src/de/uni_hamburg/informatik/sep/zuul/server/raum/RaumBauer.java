@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import de.uni_hamburg.informatik.sep.zuul.server.features.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.RaumStrukturParser;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;

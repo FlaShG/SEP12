@@ -1,27 +1,24 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
 
-public final class GewonnenTextAnzeigen implements Feature, TickListener
+public final class GewonnenTextAnzeigen implements Feature, BefehlAusgefuehrtListener
 {
 	@Override
-	public boolean tick(SpielKontext kontext, boolean _)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged)
 	{
-		if(kontext.getAktuellerRaum().getNaechstesItem() == Item.Gegengift)
+		if(kontext.getAktuellenRaumZu(spieler).getNaechstesItem() == Item.Gegengift)
 		{
-			SpielLogik.beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n"
-					+ TextVerwalter.BEENDENTEXT);
+			// TODO: Spiel beenden.
+//			SpielLogik.beendeSpiel(kontext, TextVerwalter.SIEGTEXT + "\n"
+//					+ TextVerwalter.BEENDENTEXT);
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public void registerToKontext(SpielKontext kontext)
-	{
-		kontext.addTickListener(this);
 	}
 }

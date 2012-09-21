@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
 /**
  * Hält alle angemeldeten Spieler und kennt den Spielzustand. Dabei hat er
@@ -18,7 +17,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 public class ServerKontext
 {
 
-	private Map<Spieler, Raum> _spielerPosition;
+	private Map<ServerKontext, Raum> _spielerPosition;
 	private Raum _startRaum;
 
 	public ServerKontext(Raum startRaum)
@@ -33,7 +32,7 @@ public class ServerKontext
 	 * @param spieler
 	 *            der neue Spieler
 	 */
-	public void fuegeNeuenSpielerHinzu(Spieler spieler)
+	public void fuegeNeuenSpielerHinzu(ServerKontext spieler)
 	{
 
 		_spielerPosition.put(spieler, _startRaum);
@@ -47,7 +46,7 @@ public class ServerKontext
 	 *            der Spieler zu dem wir den Raum suchen
 	 * @return der Raum in dem der Spieler ist
 	 */
-	public Raum getAktuellenRaumZu(Spieler spieler)
+	public Raum getAktuellenRaumZu(ServerKontext spieler)
 	{
 		return _spielerPosition.get(spieler);
 	}
@@ -60,16 +59,16 @@ public class ServerKontext
 	 * @param neuerRaum
 	 *            der neu aktuelle aufenthalts Raum des Spielers
 	 */
-	public void setAktuellenRaumZu(Spieler spieler, Raum neuerRaum)
+	public void setAktuellenRaumZu(ServerKontext spieler, Raum neuerRaum)
 	{
 		assert (_spielerPosition.containsKey(spieler));
 		_spielerPosition.remove(spieler);
 		_spielerPosition.put(spieler, neuerRaum);
 	}
 
-	public Collection<Spieler> getSpieler()
+	public Collection<ServerKontext> getSpieler()
 	{
-		return new ArrayList<Spieler>(_spielerPosition.keySet());
+		return new ArrayList<ServerKontext>(_spielerPosition.keySet());
 	}
 	
 	public List<Raum> getRaeumeInDemSichSpielerAufhalten()

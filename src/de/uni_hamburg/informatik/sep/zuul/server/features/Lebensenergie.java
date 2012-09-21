@@ -1,44 +1,44 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
 
-final public class Lebensenergie implements Feature, TickListener,
-		PropertyChangeListener
+final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
+		RaumGeaendertListener
 {
+	/**
+	 * Jedes Weitergehen zieht dem {@link Spieler} ein Leben ab.
+	 */
 	@Override
-	public boolean tick(SpielKontext kontext, boolean raumGeaendert)
+	public void raumGeaendertListener(ServerKontext kontext, Spieler spieler,
+			Raum alterRaum, Raum neuerRaum)
 	{
-		if(kontext.getLebensEnergie() <= 0)
-		{
-			SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
-			return false;
-		}
-
-		if(raumGeaendert)
-			Spiel.getInstance().schreibeNL(
-					TextVerwalter.RAUMWECHSELTEXT + kontext.getLebensEnergie());
-
-		return true;
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt)
-	{
-		SpielKontext kontext = (SpielKontext) evt.getSource();
-
-		kontext.setLebensEnergie(kontext.getLebensEnergie()
+		spieler.setLebensEnergie(spieler.getLebensEnergie()
 				- SpielLogik.RAUMWECHSEL_ENERGIE_KOSTEN);
 	}
 
+	/**
+	 * Überprüft, ob der {@link Spieler} noch lebt.
+	 */
 	@Override
-	public void registerToKontext(SpielKontext kontext)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged)
 	{
-		kontext.addTickListener(this);
-		kontext.addPropertyChangeListener("AktuellerRaum", this);
+		if(spieler.getLebensEnergie() <= 0)
+		{
+			// TODO: Spiel beenden für den Spieler
+//			SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
+			return false;
+		}
+
+		if(hasRoomChanged)
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.RAUMWECHSELTEXT + spieler.getLebensEnergie());
+
+		return true;
 	}
 }

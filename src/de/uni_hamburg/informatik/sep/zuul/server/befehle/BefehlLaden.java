@@ -5,8 +5,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlLaden implements Befehl

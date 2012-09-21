@@ -4,9 +4,9 @@ import java.util.LinkedList;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFuettereMaus implements Befehl
@@ -82,8 +82,19 @@ public class BefehlFuettereMaus implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
+		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		
+		if(!spieler.getInventar().hasAnyKuchen())
+		{
+			BefehlFactory.schreibeNL(kontext, spieler,
 				TextVerwalter.MAUS_KEIN_KRUEMEL);
+		}
+		else if(!raum.hasMaus())
+		{
+			// TODO: keine Maus zum Füttern!
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+		}
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.server.npcs;
+package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import java.util.ArrayList;
 
@@ -33,6 +33,7 @@ public class Maus
 		if(path != null)
 		{
 
+			// TODO: ugly!
 			if(_raum.getAusgang(TextVerwalter.RICHTUNG_NORDEN) == path.get(1))
 				return TextVerwalter.RICHTUNG_NORDEN;
 			if(_raum.getAusgang(TextVerwalter.RICHTUNG_OSTEN) == path.get(1))

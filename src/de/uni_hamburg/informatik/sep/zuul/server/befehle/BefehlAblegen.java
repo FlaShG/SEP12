@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
@@ -42,6 +42,7 @@ final class BefehlAblegen implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN);
+		BefehlFactory.schreibeNL(kontext, spieler,
+				TextVerwalter.NICHTS_ZUM_ABLEGEN);
 	}
 }

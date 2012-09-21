@@ -1,42 +1,28 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
 
-public final class KuchenImRaumTextAnzeigen implements Feature, TickListener,
-		PropertyChangeListener
+public final class KuchenImRaumTextAnzeigen implements Feature,
+		BefehlAusgefuehrtListener
 {
-
 	@Override
-	public boolean tick(SpielKontext kontext, boolean raumGeandert)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged)
 	{
-		if(raumGeandert) // TODO: || KuchenAufgehoben
-			switch (kontext.getAktuellerRaum().getNaechstesItem())
+		if(hasRoomChanged)
+		{
+			switch (kontext.getAktuellenRaumZu(spieler).getNaechstesItem())
 			{
 			case Kuchen:
 			case Giftkuchen:
-				Spiel.getInstance().schreibeNL(TextVerwalter.KUCHENIMRAUMTEXT);
-				break;
+				BefehlFactory.schreibeNL(kontext, spieler,
+						TextVerwalter.KUCHENIMRAUMTEXT);
 			}
+		}
 
 		return true;
-	}
-
-	@Override
-	public void registerToKontext(SpielKontext kontext)
-	{
-		// TODO Register Kuchen änderung!
-
-		kontext.addTickListener(this);
-
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt)
-	{
-
 	}
 }

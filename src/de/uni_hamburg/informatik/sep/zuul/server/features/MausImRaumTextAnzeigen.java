@@ -1,25 +1,23 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TickListener;
 
-public final class MausImRaumTextAnzeigen implements SpielerFeature, BefehlAusgefuehrtListener
+public final class MausImRaumTextAnzeigen implements Feature, BefehlAusgefuehrtListener
 {
+
 	@Override
-	public boolean tick(SpielKontext kontext, boolean raumGeandert)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			boolean hasRoomChanged)
 	{
 		// Maus
-		if(raumGeandert && kontext.getAktuellerRaum().hasMaus())
+		if(hasRoomChanged && kontext.getAktuellenRaumZu(spieler).hasMaus())
 		{
-			Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_GEFUNDEN);
-			Spiel.getInstance().schreibeNL(TextVerwalter.MAUS_FRAGE);
+			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.MAUS_GEFUNDEN);
+			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.MAUS_FRAGE);
 		}
 		return true;
-	}
-
-	@Override
-	public void registerToKontext(SpielKontext kontext)
-	{
-		kontext.addTickListener(this);
 	}
 }
