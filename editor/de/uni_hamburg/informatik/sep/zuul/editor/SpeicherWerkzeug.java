@@ -56,6 +56,14 @@ public class SpeicherWerkzeug
 		}
 	}
 
+	/**
+	 * Validiert die Räume.
+	 * Folgendes gilt als valide:<br>
+	 * - Ein einzelner Startraum vorhanden<br>
+	 * - Ein einzelner Endraum vorhanden<br>
+	 * - Verbindung zw. Start- und Endraum besteht<br>
+	 * - Mäuse lassen sich setzen ((|Räume| - 2 - |Katzen|) >= |Mäuse|)
+	 */
 	private boolean valide()
 	{
 		boolean valid = false;
