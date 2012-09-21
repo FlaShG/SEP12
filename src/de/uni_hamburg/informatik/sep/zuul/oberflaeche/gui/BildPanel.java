@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
@@ -13,20 +14,23 @@ import javax.swing.JPanel;
 
 public class BildPanel extends JPanel
 {
-	
-	private final ImageIcon FENSTERNS = new ImageIcon(getClass().getResource("bilder/").getPath()+"fenster25.png");
-	private final ImageIcon FENSTEROW = new ImageIcon(getClass().getResource("bilder/").getPath()+"fenster20.png");
+
+	private final String PATH = getClass().getResource("bilder/").getPath();
+	private final ImageIcon FENSTERNS = new ImageIcon(getClass().getResource(
+			"bilder/").getPath()
+			+ "fenster25.png");
+	private final ImageIcon FENSTEROW = new ImageIcon(getClass().getResource(
+			"bilder/").getPath()
+			+ "fenster20.png");
 	private JButton _tuerNordButton;
 	private JButton _tuerOstButton;
 	private JButton _tuerSuedButton;
 	private JButton _tuerWestButton;
 
-	private JButton _schaueNordButton;
-	private JButton _schaueOstButton;
-	private JButton _schaueSuedButton;
-	private JButton _schaueWestButton;
 	
+
 	private JLabel _LabelFuerIcon;
+	private JLabel _labelFuerLebensenergie;
 	/**
 	 * 
 	 */
@@ -34,102 +38,129 @@ public class BildPanel extends JPanel
 
 	public BildPanel()
 	{
-	
+
 		setLayout(null);
+		setDoubleBuffered(true);
 		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setLocation(0, 0);
-		
-		_tuerNordButton = new JButton();
-		_tuerNordButton.setBackground(new Color(180,90,0));
+
+		_labelFuerLebensenergie = new JLabel();
+		_labelFuerLebensenergie.setLocation(_LabelFuerIcon.getWidth(), 0);
+
+		_tuerNordButton = new JButton(new ImageIcon(PATH + "door_n.png"));
+		_tuerNordButton.setContentAreaFilled(false);
+		_tuerNordButton.setBorderPainted(false);
 		_tuerNordButton.setFocusable(false);
 		_tuerNordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		_tuerOstButton = new JButton();
-		_tuerOstButton.setBackground(new Color(180,90,0));
+
+		_tuerOstButton = new JButton(new ImageIcon(PATH + "door_e.png"));
+		_tuerOstButton.setContentAreaFilled(false);
+		_tuerOstButton.setBorderPainted(false);
 		_tuerOstButton.setFocusable(false);
 		_tuerOstButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		_tuerSuedButton = new JButton();
-		_tuerSuedButton.setBackground(new Color(180,90,0));
+
+		_tuerSuedButton = new JButton(new ImageIcon(PATH + "door_s.png"));
+		_tuerSuedButton.setContentAreaFilled(false);
+		_tuerSuedButton.setBorderPainted(false);
 		_tuerSuedButton.setFocusable(false);
 		_tuerSuedButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		_tuerWestButton = new JButton();
-		_tuerWestButton.setBackground(new Color(180,90,0));
+
+		_tuerWestButton = new JButton(new ImageIcon(PATH + "door_w.png"));
+		_tuerWestButton.setContentAreaFilled(false);
+		_tuerWestButton.setBorderPainted(false);
 		_tuerWestButton.setFocusable(false);
 		_tuerWestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 		
-		_schaueNordButton = new JButton(FENSTERNS);
-		_schaueNordButton.setIcon(FENSTERNS);
-		
-		_schaueOstButton = new JButton(FENSTEROW);
-		_schaueOstButton.setIcon(FENSTEROW);
-		
-		_schaueSuedButton = new JButton(FENSTERNS);
-		_schaueSuedButton.setIcon(FENSTERNS);
-		
-		_schaueWestButton = new JButton(FENSTEROW);
-		_schaueWestButton.setIcon(FENSTEROW);
-		
-		
-		
+
 		add(_tuerNordButton);
 		add(_tuerOstButton);
 		add(_tuerSuedButton);
 		add(_tuerWestButton);
-		add(_schaueNordButton);
-		add(_schaueOstButton);
-		add(_schaueSuedButton);
-		add(_schaueWestButton);
 		
-		
+
 		add(_LabelFuerIcon);
+		add(_labelFuerLebensenergie);
+
+		
+
 		addComponentListener(new ComponentAdapter()
 		{
-			
-			
-			
+
 			@Override
 			public void componentResized(ComponentEvent e)
 			{
 				_LabelFuerIcon.setLocation(0, 0);
-				_LabelFuerIcon.setSize(205, 205);
+
+				if(BildPanel.this.getWidth() > BildPanel.this.getHeight())
+					_LabelFuerIcon.setSize(BildPanel.this.getHeight(),
+							BildPanel.this.getHeight());
+				else
+					_LabelFuerIcon.setSize(BildPanel.this.getWidth(),
+							BildPanel.this.getWidth());
+
+				_labelFuerLebensenergie.setSize(30, BildPanel.this.getHeight());
+				_labelFuerLebensenergie.setLocation(_LabelFuerIcon.getWidth(),
+						0);
+
+				int b = _LabelFuerIcon.getWidth();
+				int h = _LabelFuerIcon.getHeight();
+
+				_tuerNordButton.setSize(
+						(int) (_LabelFuerIcon.getWidth() / 6.4),
+						_LabelFuerIcon.getHeight() / 8);
+				_tuerOstButton.setSize(_LabelFuerIcon.getHeight() / 7,
+						(int) (_LabelFuerIcon.getWidth() / 6.4));
+				_tuerSuedButton.setSize(
+						(int) (_LabelFuerIcon.getWidth() / 6.4),
+						_LabelFuerIcon.getHeight() / 8);
+				_tuerWestButton.setSize(_LabelFuerIcon.getHeight() / 7,
+						(int) (_LabelFuerIcon.getWidth() / 6.4));
+
+				_tuerNordButton.setLocation(_LabelFuerIcon.getWidth() / 2
+						- (_tuerNordButton.getWidth() / 2), 0);
+				_tuerOstButton.setLocation(_LabelFuerIcon.getWidth()
+						- _tuerOstButton.getWidth(), _LabelFuerIcon.getWidth()
+						/ 2 - (_tuerOstButton.getHeight() / 2));
+				_tuerSuedButton.setLocation(
+						_LabelFuerIcon.getWidth() / 2
+								- (_tuerSuedButton.getWidth() / 2),
+						_LabelFuerIcon.getHeight()
+								- (_tuerSuedButton.getHeight()));
+				_tuerWestButton.setLocation(0, _LabelFuerIcon.getWidth() / 2
+						- (_tuerWestButton.getHeight() / 2));
+
 				
-				_tuerNordButton.setSize(25, 20);
-				_tuerOstButton.setSize(20, 25);
-				_tuerSuedButton.setSize(25, 20);
-				_tuerWestButton.setSize(20, 25);
+
 				
-				_tuerNordButton.setLocation(90, 0);
-				_tuerOstButton.setLocation(185, 85);
-				_tuerSuedButton.setLocation(90, 185);
-				_tuerWestButton.setLocation(0, 85);
-				
-				_schaueNordButton.setSize(25, 20);
-				_schaueOstButton.setSize(20, 25);
-				_schaueSuedButton.setSize(25, 20);
-				_schaueWestButton.setSize(20, 25);
-				
-				_schaueNordButton.setLocation(115, 0);
-				_schaueOstButton.setLocation(185, 60);
-				_schaueSuedButton.setLocation(115, 185);
-				_schaueWestButton.setLocation(0, 60);
-				
-				
+				//TODO REMOVE
+				setLebensenergie(0);
 				
 			}
-			
-			
+
 		});
-		
+
 		setVisible(true);
-		
+
 	}
-	
+
 	public void setRaumanzeige(BufferedImage img)
 	{
 		_LabelFuerIcon.setIcon(new ImageIcon(img));
 		repaint();
+	}
+
+	public void setLebensenergie(int lebensenergie)
+	{
+		if(this.getWidth() != 0 && this.getHeight() != 0)
+		{
+			BufferedImage leben = new BufferedImage(30, this.getWidth(),
+					BufferedImage.TYPE_INT_ARGB);
+			Graphics g = leben.getGraphics();
+			g.setColor(Color.red);
+			g.fill3DRect(0, 0, 30, this.getWidth(), true);
+			_LabelFuerIcon.setIcon(new ImageIcon(leben));
+		}
 	}
 
 	public JButton getTuerNordButton()
@@ -137,21 +168,15 @@ public class BildPanel extends JPanel
 		return _tuerNordButton;
 	}
 
-	
-
 	public JButton getTuerOstButton()
 	{
 		return _tuerOstButton;
 	}
 
-	
-
 	public JButton getTuerSuedButton()
 	{
 		return _tuerSuedButton;
 	}
-
-	
 
 	public JButton getTuerWestButton()
 	{
@@ -159,31 +184,11 @@ public class BildPanel extends JPanel
 	}
 
 	
-
-	public JButton getSchaueNordButton()
-	{
-		return _schaueNordButton;
-	}
-
-	
-	public JButton getSchaueOstButton()
-	{
-		return _schaueOstButton;
-	}
-
 	
 
-	public JButton getSchaueSuedButton()
+	public JLabel getLabelFuerIcon()
 	{
-		return _schaueSuedButton;
+		return _LabelFuerIcon;
 	}
 
-	
-
-	public JButton getSchaueWestButton()
-	{
-		return _schaueWestButton;
-	}
-
-	
 }

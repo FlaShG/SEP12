@@ -1,9 +1,11 @@
 package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -14,6 +16,7 @@ import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
 public class BefehlsPanel extends JPanel
 {
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
+	private final String PATH = getClass().getResource("bilder/").getPath();
 	private final int ANZAHLBUTTONS = 10;
 	private JButton _quitButton;
 	private JButton _helpButton;
@@ -65,17 +68,26 @@ public class BefehlsPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ABLEGEN));
 		_ablegenButton.setFocusable(false);
 
-		_helpButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_HILFE));
+		_helpButton = new JButton(new ImageIcon(PATH + "faq-icon.png"));
+		_helpButton.setContentAreaFilled(false);
+		_helpButton.setBorderPainted(false);
 		_helpButton.setFocusable(false);
+		
 
-		_ladenButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_LADEN));
+		_ladenButton = new JButton();
+		_ladenButton.setContentAreaFilled(false);
+		_ladenButton.setBorderPainted(false);
 		_ladenButton.setFocusable(false);
+		
 
-		_quitButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_BEENDEN));
+		_quitButton = new JButton(new ImageIcon(PATH+ "exitIcon.gif") );
+		_quitButton.setContentAreaFilled(false);
+		_quitButton.setBorderPainted(false);
 		_quitButton.setFocusable(false);
+
+		_helpButton.setSize(50, 50);
+		_ladenButton.setSize(50, 50);
+		_quitButton.setSize(50, 50);
 
 		add(_nehmenButton);
 		add(_gibButton);
@@ -96,34 +108,62 @@ public class BefehlsPanel extends JPanel
 			{
 				int platzhalter = 5;
 
-				int buttonheight = (BefehlsPanel.this.getHeight() - (platzhalter*2 * (ANZAHLBUTTONS)))
+				int buttonheight = (BefehlsPanel.this.getHeight() - (platzhalter * 2 * (ANZAHLBUTTONS)))
 						/ ANZAHLBUTTONS;
 
-				Dimension buttongroesse = new Dimension(
-						BefehlsPanel.this.getWidth() - 25, buttonheight);
+				int buttonhoehespalte1 = (BefehlsPanel.this.getHeight() - (platzhalter * 2 * (4))) / 4;
 
-				_nehmenButton.setSize(buttongroesse);
-				_gibButton.setSize(buttongroesse);
-				_fuettereButton.setSize(buttongroesse);
-				_essenAusTascheButton.setSize(buttongroesse);
-				_essenBodenButton.setSize(buttongroesse);
-				_inventarButton.setSize(buttongroesse);
-				_ablegenButton.setSize(buttongroesse);
-				_helpButton.setSize(buttongroesse);
-				_ladenButton.setSize(buttongroesse);
-				_quitButton.setSize(buttongroesse);
+				int buttonhoehespalte2 = (BefehlsPanel.this.getHeight() - 50 - (platzhalter * 2 * (3))) / 3;
+
+				Dimension buttongroesse1 = new Dimension(
+						BefehlsPanel.this.getWidth() / 2 - 25,
+						buttonhoehespalte1);
+
+				Dimension buttongroesse2 = new Dimension(
+						BefehlsPanel.this.getWidth() / 2 - 25,
+						buttonhoehespalte2);
+
+				//linke spalte :
+
+				_nehmenButton.setSize(buttongroesse1);
+				_gibButton.setSize(buttongroesse1);
+				_fuettereButton.setSize(buttongroesse1);
+				_essenBodenButton.setSize(buttongroesse1);
+
+				//rechte Spalte
+				_inventarButton.setSize(buttongroesse2);
+				_ablegenButton.setSize(buttongroesse2);
+				_essenAusTascheButton.setSize(buttongroesse2);
+
+				//linke Spalte
 
 				_nehmenButton.setLocation(5, 5);
-				_gibButton.setLocation(5, buttonheight+10);
-				_fuettereButton.setLocation(5, buttonheight*2+15);
-				_essenAusTascheButton.setLocation(5, buttonheight*3+20);
-				_essenBodenButton.setLocation(5, buttonheight*4+25);
-				_inventarButton.setLocation(5, buttonheight*5+30);
-				_ablegenButton.setLocation(5, buttonheight*6+35);
-				_helpButton.setLocation(5, buttonheight*7+40);
-				_ladenButton.setLocation(5, buttonheight*8+45);
-				_quitButton.setLocation(5, buttonheight*9+50);
-				
+				_gibButton.setLocation(5,
+						(int) (buttongroesse1.getHeight() + 10));
+				_fuettereButton.setLocation(5,
+						(int) (buttongroesse1.getHeight() * 2 + 15));
+				_essenBodenButton.setLocation(5,
+						(int) (buttongroesse1.getHeight() * 3 + 20));
+
+				//rechte Spalte
+
+				int x = _nehmenButton.getWidth() + 10;
+
+				_inventarButton.setLocation(x, 5);
+				_ablegenButton.setLocation(x,
+						(int) (buttongroesse2.getHeight() + 10));
+				_essenAusTascheButton.setLocation(x,
+						(int) (buttongroesse2.getHeight() * 2 + 15));
+
+				_helpButton.setLocation(_inventarButton.getX()
+						+ _inventarButton.getWidth() / 2,
+						BefehlsPanel.this.getHeight() - 50);
+				_ladenButton.setLocation(
+						_helpButton.getX() + _helpButton.getWidth() + 5,
+						BefehlsPanel.this.getHeight() - 50);
+				_quitButton.setLocation(
+						_ladenButton.getX() + _ladenButton.getWidth() + 5,
+						BefehlsPanel.this.getHeight() - 50);
 
 			}
 
@@ -136,68 +176,49 @@ public class BefehlsPanel extends JPanel
 		return _quitButton;
 	}
 
-	
-
 	public JButton getHelpButton()
 	{
 		return _helpButton;
 	}
-
-	
 
 	public JButton getEssenAusTascheButton()
 	{
 		return _essenAusTascheButton;
 	}
 
-	
-
 	public JButton getNehmenButton()
 	{
 		return _nehmenButton;
 	}
-
-	
 
 	public JButton getGibButton()
 	{
 		return _gibButton;
 	}
 
-	
-
 	public JButton getEssenBodenButton()
 	{
 		return _essenBodenButton;
 	}
-
-	
 
 	public JButton getLadenButton()
 	{
 		return _ladenButton;
 	}
 
-	
-
 	public JButton getFuettereButton()
 	{
 		return _fuettereButton;
 	}
-
-
 
 	public JButton getAblegenButton()
 	{
 		return _ablegenButton;
 	}
 
-	
-
 	public JButton getInventarButton()
 	{
 		return _inventarButton;
 	}
 
-	
 }

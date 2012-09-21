@@ -2,14 +2,26 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+
+import sun.security.action.GetLongAction;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.BildPanel;
 
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.KonsolenPanel;
+import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
@@ -33,7 +45,12 @@ public class SpielGUI extends Spiel
 		{
 			verarbeiteEingabe(_befehlszeile);
 			Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-			_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+			if(_bildPanel.getWidth() > _bildPanel.getHeight())
+				_bildPanel.setRaumanzeige(raumbilderzeuger
+						.getRaumansicht(_bildPanel.getHeight()));
+			else
+				_bildPanel.setRaumanzeige(raumbilderzeuger
+						.getRaumansicht(_bildPanel.getWidth()));
 		}
 	}
 
@@ -99,21 +116,7 @@ public class SpielGUI extends Spiel
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
-		_bildPanel.getSchaueNordButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_NORDEN));
-
-		_bildPanel.getSchaueOstButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_OSTEN));
-
-		_bildPanel.getSchaueSuedButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_SUEDEN));
-
-		_bildPanel.getSchaueWestButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_WESTEN));
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -153,6 +156,69 @@ public class SpielGUI extends Spiel
 				.addActionListener(
 						new ActionListenerBefehlAusfuehren(
 								TextVerwalter.BEFEHL_ABLEGEN));
+
+		_bildPanel.addComponentListener(new ComponentAdapter()
+		{
+
+			@Override
+			public void componentResized(ComponentEvent arg0)
+			{
+				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+				else
+					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
+			}
+
+		});
+
+		_bildPanel.getTuerNordButton().addMouseListener(new MouseAdapter()
+		{
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent m)
+			{
+				if(SwingUtilities.isRightMouseButton(m) && m.getClickCount() == 1)
+				{
+					verarbeiteEingabe("schaue nord");
+				}
+				
+			}
+		});
+		
+		_bildPanel.getTuerOstButton().addMouseListener(new MouseAdapter()
+		{
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0)
+			{
+				verarbeiteEingabe("schaue ost");
+				
+			}
+		});
+		
+		_bildPanel.getTuerSuedButton().addMouseListener(new MouseAdapter()
+		{
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0)
+			{
+				verarbeiteEingabe("schaue süd");
+				
+			}
+		});
+		
+		_bildPanel.getTuerWestButton().addMouseListener(new MouseAdapter()
+		{
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0)
+			{
+				verarbeiteEingabe("schaue west");
+				
+			}
+		});
+		
 
 	}
 
@@ -199,10 +265,7 @@ public class SpielGUI extends Spiel
 		_bildPanel.getTuerOstButton().setEnabled(value);
 		_bildPanel.getTuerSuedButton().setEnabled(value);
 		_bildPanel.getTuerWestButton().setEnabled(value);
-		_bildPanel.getSchaueNordButton().setEnabled(value);
-		_bildPanel.getSchaueOstButton().setEnabled(value);
-		_bildPanel.getSchaueSuedButton().setEnabled(value);
-		_bildPanel.getSchaueWestButton().setEnabled(value);
+		
 	}
 
 	public void schliesseFenster()
@@ -224,22 +287,75 @@ public class SpielGUI extends Spiel
 
 		super.spielen(level);
 
+		_kontext.addPropertyChangeListener("LebensEnergie",
+				new PropertyChangeListener()
+				{
+
+					@Override
+					public void propertyChange(PropertyChangeEvent p)
+					{
+						_bildPanel.setLebensenergie((int) p.getNewValue());
+					}
+				});
+		
+		_kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
+		{
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent p)
+			{
+				
+				boolean n = false;
+				boolean o = false;
+				boolean s = false;
+				boolean w = false;
+				
+				for(String richtung : ((Raum) p.getNewValue()).getMoeglicheAusgaenge())
+				{
+					
+					
+					if(richtung.equals("nord"))
+						n = true;
+					else if(richtung.equals("ost"))
+						o = true;
+					else if(richtung.equals("süd"))
+						s = true;
+					else if(richtung.equals("west"))
+						w = true;
+					
+					_bildPanel.getTuerNordButton().setVisible(n);
+					_bildPanel.getTuerOstButton().setVisible(o);
+					_bildPanel.getTuerSuedButton().setVisible(s);
+					_bildPanel.getTuerWestButton().setVisible(w);
+				
+				}
+					
+				
+			}
+		});
+
 		_kontext.addTickListener(new TickListener()
 		{
 
 			@Override
 			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
 			{
-				zeichneBild();
+				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+				else
+					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 				return true;
 			}
 		});
-		zeichneBild();
+		if(_bildPanel.getWidth() > _bildPanel.getHeight())
+			zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+		else
+			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 	}
 
-	private void zeichneBild()
+	private void zeichneBild(int breitehoehe)
 	{
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(_kontext);
-		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
+		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht(breitehoehe));
 	}
 }

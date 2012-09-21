@@ -50,9 +50,9 @@ public class Hauptfenster extends JFrame
 				int breite = (int) Hauptfenster.this.getWidth();
 				int hoehe = Hauptfenster.this.getHeight();
 
-				_bildPanel.setSize(breite - (breite / 5), hoehe / 2);
-				_konsolenPanel.setSize(breite - (breite / 5), hoehe / 2);
-				_befehlsPanel.setSize(breite / 5, hoehe);
+				_bildPanel.setSize(breite/3, hoehe / 2);
+				_konsolenPanel.setSize(breite, hoehe / 2);
+				_befehlsPanel.setSize((breite /3) * 2, hoehe/2);
 
 				_bildPanel.setLocation(0, 0);
 				_konsolenPanel.setLocation(0, _bildPanel.getHeight());
