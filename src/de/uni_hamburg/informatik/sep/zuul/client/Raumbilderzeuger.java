@@ -93,7 +93,7 @@ public class Raumbilderzeuger
 			break;
 		}
 
-		if(_paket.)
+		
 		
 		
 		setPositionen();
