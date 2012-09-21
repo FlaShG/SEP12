@@ -15,6 +15,7 @@ public class Startfenster extends JFrame
 	private JButton _singlePlayer;
 	private JButton _multiPlayer;
 	private JTextField _eingabeIP;
+	private JTextField _benutzerName;
 
 	public Startfenster()
 	{
@@ -32,7 +33,9 @@ public class Startfenster extends JFrame
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public JButton getSinglePlayerButton()
@@ -47,17 +50,27 @@ public class Startfenster extends JFrame
 
 	public void serverIPeingabe()
 	{
-		JLabel label = new JLabel(TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
-		setSize(new Dimension(300, 170));
-		add(label);
+		JLabel labelserver = new JLabel(
+				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
+		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
+		setSize(new Dimension(300, 230));
+		add(labelname);
+		add(_benutzerName);
+		_benutzerName.setCaretPosition(_benutzerName.getText().length());
+		add(labelserver);
 		add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
 	}
 
-	public JTextField getTextField()
+	public JTextField getIPTextField()
 	{
 		return _eingabeIP;
+	}
+
+	public JTextField getSpielerNameTextField()
+	{
+		return _benutzerName;
 	}
 
 }
