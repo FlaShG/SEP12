@@ -1,13 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.multiplayer.client;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.rmi.server.UnicastRemoteObject;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.ServerInterface;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -30,16 +31,20 @@ public abstract class Client implements ClientInterface
 	String _serverName;
 	String _serverIP;
 	boolean _isSpielzuEnde;
-	Server _server;
+	ServerInterface _server;
 	String _clientName;
+	int _port;
 
-	public Client(String serverName, String serverIP, Server server,
-			String clientName)
+	public Client(String serverName, String serverIP, int clientPort,
+			String clientName) throws MalformedURLException, RemoteException,
+			NotBoundException
 	{
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
-		_server = server;
+		_port = clientPort;
+
+		_server = (ServerInterface) Naming.lookup(_serverName);
 	}
 
 	public void schreibeText(String text)
@@ -58,13 +63,25 @@ public abstract class Client implements ClientInterface
 	@Override
 	public void login() throws RemoteException
 	{
-		while(!_server.loginClient(this, _clientName));
+		if(!_server
+				.loginClient((ClientInterface) UnicastRemoteObject
+						.exportObject(this, _port), _clientName))
+		{
+			System.err.println("Fehler beim Anmelden!");
+			//TODO ausgabe auf gui
+		}
+
 	}
 
 	@Override
 	public void logout() throws RemoteException
 	{
-		while(!_server.logoutClient(_clientName));
+		if(!_server.logoutClient(_clientName))
+		{
+			System.err.println("Fehler beim Ausloggen!");
+			//TODO ausgabe auf gui
+		}
+
 	}
 
 	@Override
@@ -75,11 +92,12 @@ public abstract class Client implements ClientInterface
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
-		while(!_server.empfangeNutzerEingabe(eingabezeile));
+		while(!_server.empfangeNutzerEingabe(eingabezeile))
+			;
 	}
-	
+
 	public static void main(String[] args)
-	{		
-		
+	{
+
 	}
 }
