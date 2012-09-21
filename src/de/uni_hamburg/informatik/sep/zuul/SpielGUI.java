@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JTextArea;
 
@@ -42,6 +44,8 @@ public class SpielGUI extends Spiel
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 	private Startfenster _sf;
+
+	private String _ipadresse;
 
 	public SpielGUI()
 	{
@@ -94,9 +98,35 @@ public class SpielGUI extends Spiel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				_hf.setVisible(true);
-				_sf.setVisible(false);
-				_sf.dispose();
+				_sf.serverIPeingabe();
+			}
+		});
+
+		_sf.getTextField().addKeyListener(new KeyListener()
+		{
+
+			@Override
+			public void keyTyped(KeyEvent arg0)
+			{
+				//  Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0)
+			{
+				// Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent arg0)
+			{
+				if(arg0.equals(KeyEvent.VK_ENTER))
+				{
+					_ipadresse = _sf.getTextField().toString();
+				}
+
 			}
 		});
 
