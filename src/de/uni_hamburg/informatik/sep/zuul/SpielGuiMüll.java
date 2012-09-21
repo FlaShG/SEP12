@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
 

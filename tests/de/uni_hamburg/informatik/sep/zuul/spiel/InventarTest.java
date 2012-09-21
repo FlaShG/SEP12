@@ -21,7 +21,7 @@ public class InventarTest
 	public void testFuegeItemHinzu()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Kuchen;
+		Item it = Item.UKuchen;
 
 		inv.fuegeItemHinzu(Item.Keins);
 		assertFalse(inv.isGefuellt());
@@ -36,7 +36,7 @@ public class InventarTest
 	public void testNehmeLetztesItem()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Kuchen;
+		Item it = Item.UKuchen;
 
 		inv.fuegeItemHinzu(it);
 
@@ -52,7 +52,7 @@ public class InventarTest
 		Inventar inv = new Inventar();
 		assertFalse(inv.isGefuellt());
 
-		inv.fuegeItemHinzu(Item.Kuchen);
+		inv.fuegeItemHinzu(Item.UKuchen);
 		assertTrue(inv.isGefuellt());
 	}
 
@@ -62,7 +62,7 @@ public class InventarTest
 		Inventar neuesInv = new Inventar();
 		assertFalse(neuesInv.hasAnyKuchen());
 
-		neuesInv.fuegeItemHinzu(Item.Kuchen);
+		neuesInv.fuegeItemHinzu(Item.UKuchen);
 
 		assertTrue(neuesInv.hasAnyKuchen());
 	}
@@ -73,7 +73,7 @@ public class InventarTest
 		Inventar neuesInv = new Inventar();
 		assertFalse(neuesInv.hasAnyKuchen());
 
-		neuesInv.fuegeItemHinzu(Item.Kuchen);
+		neuesInv.fuegeItemHinzu(Item.UKuchen);
 
 		assertTrue(neuesInv.hasAnyKuchen());
 
