@@ -59,6 +59,7 @@ public class RaumStruktur
 			//der Raum selbst
 			Raum raum = zuordnungen.get(xmlRaum.getID());
 			raum.setKoordinaten(xmlRaum.getX(), xmlRaum.getY());
+			raum.setItems(xmlRaum.getItems());
 
 			Raum[] array = { nordNachbar, ostNachbar, suedNachbar, westNachbar };
 
@@ -190,7 +191,7 @@ public class RaumStruktur
 			}
 
 			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west,
-					raum.getX(), raum.getY());
+					raum.getX(), raum.getY(), raum.getItems());
 			result.add(xmlRaum);
 
 		}

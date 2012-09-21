@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  * Standardmäßig sind die Räume leer.
  */
 @XmlRootElement(name = "raum")
-@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart", "_items" })
+@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart"})
 public class Raum
 {
 	private static boolean ISTGESETZT = false;
@@ -28,7 +28,7 @@ public class Raum
 	String _beschreibung;
 	private @XmlTransient
 	Map<String, Raum> _ausgaenge;
-	private @XmlElement(name = "item")
+	private @XmlTransient
 	Stack<Item> _items;
 	private @XmlTransient
 	Maus _maus;

@@ -34,12 +34,6 @@ public class IOManager
 		_strukParser = new RaumStrukturParser(path);
 		_strukParser.setAnzahlMaeuse(level.getMaeuse());
 		_strukParser.setXmlVerbindungen(raumStruktur.getXMLRaumListe());
-//		_strukParser.getXmlVerbindungen().clear();
-//		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
-//		{
-//			_strukParser.getXmlVerbindungen().add(raum);
-//		}
-		
 
 		_strukParser.schreibeXml();
 	}
