@@ -16,7 +16,8 @@ import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 
-public class Server extends UnicastRemoteObject implements ServerInterface {
+public class Server extends UnicastRemoteObject implements ServerInterface
+{
 
 	// Dummy
 
@@ -24,7 +25,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 	private Map<String, ClientInterface> _connectedClients;
 	private Spiel _spiel;
 
-	protected Server() throws RemoteException, AlreadyBoundException {
+	protected Server() throws RemoteException, AlreadyBoundException
+	{
 		super();
 
 		Registry rmireg = LocateRegistry.createRegistry(1099);
@@ -42,13 +44,16 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
 	// sinnlos?
 	public boolean sendeAenderungen(List<ClientPaket> paketListe)
-			throws RemoteException {
+			throws RemoteException
+	{
 		boolean result = true;
 
-		for (ClientPaket paket : paketListe) {
+		for(ClientPaket paket : paketListe)
+		{
 			ClientInterface client = _connectedClients.get(paket
 					.getSpielerName());
-			if (!client.zeigeAn(paket)) {
+			if(!client.zeigeAn(paket))
+			{
 				result = false;
 			}
 		}
@@ -57,15 +62,20 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
 	@Override
 	public boolean loginClient(ClientInterface client, String name)
-			throws RemoteException {
+			throws RemoteException
+	{
 		boolean result;
 
-		if (_connectedClients.containsKey(name)
-				|| _connectedClients.containsValue(client)) {
+		if(_connectedClients.containsKey(name)
+				|| _connectedClients.containsValue(client))
+		{
 			result = false;
-		} else {
+		}
+		else
+		{
 			_connectedClients.put(name, client);
-			if (!_spiel.istGestartet()) {
+			if(!_spiel.istGestartet())
+			{
 				_spiel.meldeSpielerAn(name);
 			}
 
@@ -77,26 +87,30 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 	}
 
 	@Override
-	public boolean logoutClient(String name) throws RemoteException {
+	public boolean logoutClient(String name) throws RemoteException
+	{
 		_connectedClients.remove(name);
 
 		_spiel.meldeSpielerAb(name);
 
-		return false;
+		return true;
 	}
 
 	@Override
-	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException {
+	public boolean empfangeNutzerEingabe(String eingabe) throws RemoteException
+	{
 		_spiel.parseEingabezeile(eingabe);
 		ArrayList<ClientPaket> paketListe = new ArrayList<ClientPaket>();
-		for (String name : _connectedClients.keySet()) {
+		for(String name : _connectedClients.keySet())
+		{
 			paketListe.add(_spiel.packePaket(name));
 		}
 		sendeAenderungen(paketListe);
-		return false;
+		return true;
 	}
 
-	public static void main(String[] args) throws Exception {
-		ServerInterface s = new Server();
+	public static void main(String[] args) throws Exception
+	{
+		new Server();
 	}
 }

@@ -2,16 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.util.Arrays;
 
-import de.uni_hamburg.informatik.sep.zuul.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.befehle.BefehlFactory;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 public class SpielMüll
 {
 
-	
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
@@ -20,12 +13,9 @@ public class SpielMüll
 
 	}
 
-	
-	
 	public void spielen(String level)
 	{
 		_kontext = SpielLogik.erstelleKontext(level);
-		
 
 		zeigeWillkommenstext(_kontext);
 	}
@@ -80,5 +70,5 @@ public class SpielMüll
 
 		return BefehlFactory.get(befehl, parameter);
 	}
-	
+
 }

@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.IOManager;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumStruktur;
-
 public class SpeicherWerkzeug
 {
 
@@ -38,7 +34,7 @@ public class SpeicherWerkzeug
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
 
-		manager.schreibeLevelStruktur(path,	raumstruktur, _ef.getEditorLevel());
+		manager.schreibeLevelStruktur(path, raumstruktur, _ef.getEditorLevel());
 
 		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
 
@@ -69,8 +65,7 @@ public class SpeicherWerkzeug
 					do
 					{
 						newid = rand.nextInt();
-					}
-					while(newid == 0 || idList.contains(newid));
+					} while(newid == 0 || idList.contains(newid));
 
 					raum.setId(newid);
 					idList.add(newid);

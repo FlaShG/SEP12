@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
@@ -11,12 +13,20 @@ import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
-import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raumbilderzeuger;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ClientGUI extends Client
 {
+
+	public ClientGUI(String serverName, String serverIP, int clientport,
+			String clientName) throws MalformedURLException, RemoteException,
+			NotBoundException
+	{
+		super(serverName, serverIP, clientport, clientName);
+		initialisiereUI();
+
+	}
 
 	@Override
 	public void schreibeText(String text)
@@ -35,7 +45,7 @@ public class ClientGUI extends Client
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
 		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht());
-		
+
 		//nötig??
 		return true;
 
@@ -66,18 +76,10 @@ public class ClientGUI extends Client
 		}
 	}
 
-
 	private Hauptfenster _hf;
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
-	
-	public ClientGUI(String serverName, String serverIP, Server server, String clientName)
-	{
-		super(serverName, serverIP, server, clientName);
-		initialisiereUI();
-
-	}
 
 	/**
 	 * 
@@ -138,20 +140,20 @@ public class ClientGUI extends Client
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
 		_bildPanel.getSchaueNordButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_NORDEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_NORDEN));
 
 		_bildPanel.getSchaueOstButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_OSTEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_OSTEN));
 
 		_bildPanel.getSchaueSuedButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_SUEDEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
 
 		_bildPanel.getSchaueWestButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN + " "
-						+ TextVerwalter.RICHTUNG_WESTEN));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_SCHAUEN
+						+ " " + TextVerwalter.RICHTUNG_WESTEN));
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -222,7 +224,7 @@ public class ClientGUI extends Client
 
 	public void schliesseFenster()
 	{
-		_hf.hide();
+		_hf.dispose();
 	}
 
 	@Override

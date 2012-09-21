@@ -12,30 +12,28 @@ import javax.imageio.ImageIO;
 
 import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
 
 public class Raumbilderzeuger
 {
 
-	
 	private final String PATH = getClass().getResource("bilder/").getPath();
 	private final BufferedImage RAUM = ladeBild(PATH + "raum.png");
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
-	private final BufferedImage KATZE = ladeBild(PATH + "katze.png"); 
+	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
 	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
 	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
-	private final BufferedImage DREVENBIGGER = ladeBild(PATH + "drevenbigger.png");
+	private final BufferedImage DREVENBIGGER = ladeBild(PATH
+			+ "drevenbigger.png");
 	private final Color WANDFARBE = Color.white;
 	private final Color BODENFARBE = Color.GREEN;
-	private final Tupel KATZENPOSITION = new Tupel(140,136);
+	private final Tupel KATZENPOSITION = new Tupel(140, 136);
 	private final Tupel MAUSPOSITION = new Tupel(140, 25);
 	private final LinkedList<Tupel> _itemPositionen = new LinkedList<Tupel>();
 
 	private BufferedImage _raumansicht;
 	private ClientPaket _paket;
 
-	
 	public Raumbilderzeuger(ClientPaket paket)
 	{
 		_paket = paket;
@@ -82,34 +80,33 @@ public class Raumbilderzeuger
 						new Color(255, 170, 85), new Color(153, 249, 249) },
 						_raumansicht);
 				break;
-			case  Normal:faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
-					new Color(170, 85, 0), new Color(128, 128, 64) },
-					_raumansicht); break;
+			case Normal:
+				faerbeEin(new Color[] { BODENFARBE, WANDFARBE }, new Color[] {
+						new Color(170, 85, 0), new Color(128, 128, 64) },
+						_raumansicht);
+				break;
 			default:
 				break;
 
 			}
 		}
-		
 
 		// Male Dr.Little
 		_raumansicht = maleAufBild(_raumansicht, DRLITLE, new Tupel(77, 77));
-		
-		
+
 		//Male Maus
 
 		if(_kontext.getAktuellerRaum().hasMaus())
 		{
 			_raumansicht = maleAufBild(_raumansicht, MAUS, MAUSPOSITION);
 		}
-		
+
 		//Male Katze
 		if(_kontext.isKatzeImAktuellenRaum())
 		{
 			_raumansicht = maleAufBild(_raumansicht, KATZE, KATZENPOSITION);
 		}
-		
-		
+
 		// Male Gegenstände
 		int anzahlKruemel = 0;
 		boolean gegengiftDa = false;
@@ -121,14 +118,17 @@ public class Raumbilderzeuger
 		{
 			switch (raumItems.get(i))
 			{
-			case IKuchen: case UKuchen:
+			case IKuchen:
+			case UKuchen:
 				anzahlKruemel++;
 				break;
-			case IGiftkuchen: case UGiftkuchen:
+			case IGiftkuchen:
+			case UGiftkuchen:
 				anzahlKruemel++;
 				break;
 			case Gegengift:
-				gegengiftDa = true;;
+				gegengiftDa = true;
+				;
 				break;
 			default:
 				break;
@@ -140,11 +140,6 @@ public class Raumbilderzeuger
 		{
 			maleGegengiftundEvenBigger();
 		}
-		
-		
-		
-		
-		
 
 	}
 
@@ -153,8 +148,7 @@ public class Raumbilderzeuger
 		Tupel position = getFreiePosition();
 		maleAufBild(_raumansicht, GEGENGIFT, position);
 		maleAufBild(_raumansicht, DREVENBIGGER, position);
-		
-		
+
 	}
 
 	private void maleKruemel(int anzahlKruemel)

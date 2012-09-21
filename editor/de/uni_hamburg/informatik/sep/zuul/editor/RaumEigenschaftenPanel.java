@@ -5,13 +5,10 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Raum;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
-
 /**
- * Ein Panel, in dem Eigenschaftsfelder stecken,
- * die zum Setzen der Einstellungen eines Raumes benötigt werden.
+ * Ein Panel, in dem Eigenschaftsfelder stecken, die zum Setzen der
+ * Einstellungen eines Raumes benötigt werden.
+ * 
  * @author 0graeff
  */
 public class RaumEigenschaftenPanel extends JPanel
@@ -20,11 +17,15 @@ public class RaumEigenschaftenPanel extends JPanel
 	private EigenschaftIntPanel _kuchen;
 	private EigenschaftIntPanel _giftkuchen;
 	private EigenschaftEnumPanel _typ;
-	
+
 	/**
-	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen Raumes
-	 * @param raum Der Raum, der bearbeitet werden soll
-	 * @param beobachter Der Observer, der über Änderungen informiert werden will
+	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen
+	 * Raumes
+	 * 
+	 * @param raum
+	 *            Der Raum, der bearbeitet werden soll
+	 * @param beobachter
+	 *            Der Observer, der über Änderungen informiert werden will
 	 * 
 	 * @require raum != null
 	 */
@@ -37,24 +38,26 @@ public class RaumEigenschaftenPanel extends JPanel
 		int giftkuchen = 0;
 		for(Item item : items)
 		{
-			switch(item)
+			switch (item)
 			{
-				case UKuchen:
-					++kuchen;
+			case UKuchen:
+				++kuchen;
 				break;
-				case UGiftkuchen:
-					++giftkuchen;
+			case UGiftkuchen:
+				++giftkuchen;
 				break;
 			}
 		}
-		
+
 		add(_name = new EigenschaftTextPanel("Name", raum.getName(), beobachter));
-		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum.getRaumart().ordinal(), beobachter));
-		
+		add(_typ = new EigenschaftEnumPanel("Raumtyp", RaumArt.values(), raum
+				.getRaumart().ordinal(), beobachter));
+
 		add(_kuchen = new EigenschaftIntPanel("Krümel", kuchen, beobachter));
-		add(_giftkuchen = new EigenschaftIntPanel("Giftkrümel", giftkuchen, beobachter));
+		add(_giftkuchen = new EigenschaftIntPanel("Giftkrümel", giftkuchen,
+				beobachter));
 	}
-	
+
 	/**
 	 * Gibt den Namen zurück, die eingestellt wurde
 	 */
@@ -62,23 +65,25 @@ public class RaumEigenschaftenPanel extends JPanel
 	{
 		return _name.getText();
 	}
-	
+
 	/**
-	 * Gibt die Anzahl der im Raum vorhandenen Kuchen zurück, die eingestellt wurde
+	 * Gibt die Anzahl der im Raum vorhandenen Kuchen zurück, die eingestellt
+	 * wurde
 	 */
 	public int getKuchenzahl()
 	{
-		return _kuchen.getWert(); 
+		return _kuchen.getWert();
 	}
-	
+
 	/**
-	 * Gibt die Anzahl der im Raum vorhandenen giftigen Kuchen zurück, die eingestellt wurde
+	 * Gibt die Anzahl der im Raum vorhandenen giftigen Kuchen zurück, die
+	 * eingestellt wurde
 	 */
 	public int getGiftkuchenzahl()
 	{
 		return _giftkuchen.getWert();
 	}
-	
+
 	/**
 	 * Gibt die RaumArt zurück, die eingestellt wurde
 	 */

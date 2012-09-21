@@ -1,7 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.raum;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +68,8 @@ public class Raum
 	 * @require name != null
 	 * @require beschreibung != null
 	 */
-	public Raum(String name, String beschreibung) {
+	public Raum(String name, String beschreibung)
+	{
 		assert beschreibung != null : "Vorbedingung verletzt: beschreibung != null";
 		assert name != null : "Vorbedingung verletzt: name != null";
 
@@ -92,7 +92,8 @@ public class Raum
 	 * @require richtung != null
 	 * @require nachbar != null
 	 */
-	public void setAusgang(String richtung, Raum nachbar) {
+	public void setAusgang(String richtung, Raum nachbar)
+	{
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 		assert nachbar != null : "Vorbedingung verletzt: nachbar != null";
 
@@ -112,11 +113,13 @@ public class Raum
 	 *            die Verbindungsrichtung zu Raum1
 	 */
 	public void verbindeZweiRaeume(String richtung, Raum nachbar,
-			String gegenRichtung) {
+			String gegenRichtung)
+	{
 		// TODO:
 		// Abbrechen wenn null übergeben wird. Dies darf vorkommen, soll aber
 		// keinen effekt haben.
-		if (nachbar == null) {
+		if(nachbar == null)
+		{
 			return;
 		}
 		this.setAusgang(richtung, nachbar);
@@ -124,7 +127,8 @@ public class Raum
 
 	}
 
-	public ArrayList<Raum> getAusgaenge() {
+	public ArrayList<Raum> getAusgaenge()
+	{
 		return new ArrayList<Raum>(_ausgaenge.values());
 	}
 
@@ -137,13 +141,15 @@ public class Raum
 	 *            die Richtung des Nachbarraums.
 	 * @require richtung != null
 	 */
-	public Raum getAusgang(String richtung) {
+	public Raum getAusgang(String richtung)
+	{
 		assert richtung != null : "Vorbedingung verletzt: richtung != null";
 
 		return _ausgaenge.get(richtung);
 	}
 
-	public String[] getMoeglicheAusgaenge() {
+	public String[] getMoeglicheAusgaenge()
+	{
 		return _ausgaenge.keySet().toArray(new String[0]);
 	}
 
@@ -155,7 +161,8 @@ public class Raum
 	 * 
 	 * @require item != Item.Keins
 	 */
-	public void addItem(Item item) {
+	public void addItem(Item item)
+	{
 		assert item != Item.Keins : "Vorbedingung verletzt: item != Item.Keins";
 
 		getItems().push(item);
@@ -166,8 +173,9 @@ public class Raum
 	/**
 	 * Entfernt das nächste Item aus dem Raum, wenn es eines gibt
 	 */
-	public void loescheItem() {
-		if (!getItems().empty())
+	public void loescheItem()
+	{
+		if(!getItems().empty())
 			getItems().pop();
 	}
 
@@ -202,7 +210,8 @@ public class Raum
 	 * 
 	 * @ensure ergebnis != null
 	 */
-	public String getBeschreibung() {
+	public String getBeschreibung()
+	{
 		return _beschreibung;
 	}
 
@@ -212,15 +221,18 @@ public class Raum
 	 * @return Item
 	 * @ensure Item != null
 	 */
-	public Item getNaechstesItem() {
+	public Item getNaechstesItem()
+	{
 
-		if (getItems().empty()) {
+		if(getItems().empty())
+		{
 			return Item.Keins;
 		}
 		return getItems().peek();
 	}
 
-	public boolean hasMaus() {
+	public boolean hasMaus()
+	{
 		return _maus != null;
 	}
 
@@ -229,9 +241,10 @@ public class Raum
 	 * @require hasMaus()
 	 */
 	@XmlTransient
-	public Maus getMaus() {
+	public Maus getMaus()
+	{
 		assert hasMaus();
-	
+
 		return _maus;
 	}
 
@@ -239,7 +252,8 @@ public class Raum
 	 * @param _maus
 	 *            the _maus to set
 	 */
-	public void setMaus(Maus maus) {
+	public void setMaus(Maus maus)
+	{
 		_maus = maus;
 	}
 

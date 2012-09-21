@@ -2,11 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import com.sun.org.apache.xml.internal.security.keys.content.SPKIData;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 /**
  * Legt ein Item in den aktuellen Raum, wenn eines im INventar vorhanden ist.
  * 

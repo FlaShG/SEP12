@@ -2,10 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.ArrayList;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 final class BefehlHelp extends Befehl
 {
 	@Override
@@ -35,7 +31,7 @@ final class BefehlHelp extends Befehl
 		aktionen.add("gib");
 		aktionen.add("füttere");
 		aktionen.add("essen");
-		
+
 		ArrayList<String> inventar = new ArrayList<String>();
 		inventar.add("inventar");
 		inventar.add("ablegen");

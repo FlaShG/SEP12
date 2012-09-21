@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 public class BefehlsPanel extends JPanel
 {
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
@@ -96,7 +94,7 @@ public class BefehlsPanel extends JPanel
 			{
 				int platzhalter = 5;
 
-				int buttonheight = (BefehlsPanel.this.getHeight() - (platzhalter*2 * (ANZAHLBUTTONS)))
+				int buttonheight = (BefehlsPanel.this.getHeight() - (platzhalter * 2 * (ANZAHLBUTTONS)))
 						/ ANZAHLBUTTONS;
 
 				Dimension buttongroesse = new Dimension(
@@ -114,16 +112,15 @@ public class BefehlsPanel extends JPanel
 				_quitButton.setSize(buttongroesse);
 
 				_nehmenButton.setLocation(5, 5);
-				_gibButton.setLocation(5, buttonheight+10);
-				_fuettereButton.setLocation(5, buttonheight*2+15);
-				_essenAusTascheButton.setLocation(5, buttonheight*3+20);
-				_essenBodenButton.setLocation(5, buttonheight*4+25);
-				_inventarButton.setLocation(5, buttonheight*5+30);
-				_ablegenButton.setLocation(5, buttonheight*6+35);
-				_helpButton.setLocation(5, buttonheight*7+40);
-				_ladenButton.setLocation(5, buttonheight*8+45);
-				_quitButton.setLocation(5, buttonheight*9+50);
-				
+				_gibButton.setLocation(5, buttonheight + 10);
+				_fuettereButton.setLocation(5, buttonheight * 2 + 15);
+				_essenAusTascheButton.setLocation(5, buttonheight * 3 + 20);
+				_essenBodenButton.setLocation(5, buttonheight * 4 + 25);
+				_inventarButton.setLocation(5, buttonheight * 5 + 30);
+				_ablegenButton.setLocation(5, buttonheight * 6 + 35);
+				_helpButton.setLocation(5, buttonheight * 7 + 40);
+				_ladenButton.setLocation(5, buttonheight * 8 + 45);
+				_quitButton.setLocation(5, buttonheight * 9 + 50);
 
 			}
 
@@ -136,68 +133,49 @@ public class BefehlsPanel extends JPanel
 		return _quitButton;
 	}
 
-	
-
 	public JButton getHelpButton()
 	{
 		return _helpButton;
 	}
-
-	
 
 	public JButton getEssenAusTascheButton()
 	{
 		return _essenAusTascheButton;
 	}
 
-	
-
 	public JButton getNehmenButton()
 	{
 		return _nehmenButton;
 	}
-
-	
 
 	public JButton getGibButton()
 	{
 		return _gibButton;
 	}
 
-	
-
 	public JButton getEssenBodenButton()
 	{
 		return _essenBodenButton;
 	}
-
-	
 
 	public JButton getLadenButton()
 	{
 		return _ladenButton;
 	}
 
-	
-
 	public JButton getFuettereButton()
 	{
 		return _fuettereButton;
 	}
-
-
 
 	public JButton getAblegenButton()
 	{
 		return _ablegenButton;
 	}
 
-	
-
 	public JButton getInventarButton()
 	{
 		return _inventarButton;
 	}
 
-	
 }

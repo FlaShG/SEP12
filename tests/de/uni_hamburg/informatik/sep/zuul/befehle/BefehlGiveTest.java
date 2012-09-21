@@ -7,9 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 public class BefehlGiveTest
 {
 

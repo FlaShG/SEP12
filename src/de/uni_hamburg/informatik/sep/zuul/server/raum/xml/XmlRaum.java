@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "xmlraum")
-@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID", "_x", "_y"})
+@XmlType(propOrder = { "_id", "_nordID", "_ostID", "_suedID", "_westID", "_x",
+		"_y" })
 public class XmlRaum
 {
 	private @XmlElement(name = "id")

@@ -2,7 +2,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 
-public class Spieler {
+public class Spieler
+{
 
 	private String _name;
 	private int _lebensEnergie;
@@ -14,43 +15,52 @@ public class Spieler {
 	 * Erzeuge einen neuen Spieler, der ein Inventar, Lebensenergie und einen
 	 * Zustand (aktiv oder inaktiv) hält.
 	 */
-	public Spieler(String name) {
+	public Spieler(String name)
+	{
 		_aktiv = true;
 		_name = name;
 	}
 
-	public Spieler(String name, int lebensEnergie, Inventar inventar) {
+	public Spieler(String name, int lebensEnergie, Inventar inventar)
+	{
 		_name = name;
 		_lebensEnergie = lebensEnergie;
 		_inventar = inventar;
 		_aktiv = true;
 	}
 
-	public int getLebensEnergie() {
+	public int getLebensEnergie()
+	{
 		return _lebensEnergie;
 	}
 
-	public void setLebensEnergie(int lebensEnergie) {
+	public void setLebensEnergie(int lebensEnergie)
+	{
 		_lebensEnergie = lebensEnergie;
 	}
 
-	public Inventar getInventar() {
+	public Inventar getInventar()
+	{
 		return _inventar;
 	}
 
-	public void setInventar(Inventar inventar) {
+	public void setInventar(Inventar inventar)
+	{
 		_inventar = inventar;
 	}
 
-	public void setAktiv(boolean aktiv) {
+	public void setAktiv(boolean aktiv)
+	{
 		_aktiv = aktiv;
 	}
 
-	public boolean getAktiv() {
+	public boolean getAktiv()
+	{
 		return _aktiv;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return _name;
 	}
 

@@ -2,13 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.LinkedList;
 
-import de.uni_hamburg.informatik.sep.zuul.FancyFunction;
-import de.uni_hamburg.informatik.sep.zuul.Katze;
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 public class BefehlFeed extends Befehl
 {
 
@@ -34,7 +27,8 @@ public class BefehlFeed extends Befehl
 				}
 				else
 				{
-					Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
 					return;
 				}
 			}
@@ -60,7 +54,8 @@ public class BefehlFeed extends Befehl
 				}
 				else
 				{
-					Spiel.getInstance().schreibeNL(TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+					Spiel.getInstance().schreibeNL(
+							TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
 					return;
 				}
 			}

@@ -31,9 +31,8 @@ public class RaumStrukturParser
 	}
 
 	/**
-	 * Gibt die XmlRäume ({@link XmlRaum}) zurück.
-	 * Diese Liste ist zu bearbeiten, wenn die Informationen
-	 * auch gespeichert werde sollen.
+	 * Gibt die XmlRäume ({@link XmlRaum}) zurück. Diese Liste ist zu
+	 * bearbeiten, wenn die Informationen auch gespeichert werde sollen.
 	 */
 	public List<XmlRaum> getXmlVerbindungen()
 	{
@@ -42,7 +41,7 @@ public class RaumStrukturParser
 			result = new LinkedList<XmlRaum>();
 		return result;
 	}
-	
+
 	/**
 	 * Setzt die Räume! Unschön!!!
 	 */
@@ -58,7 +57,7 @@ public class RaumStrukturParser
 	{
 		return _root.getMaeuse();
 	}
-	
+
 	/**
 	 * Setzt die Anzahl Mäuse für dieses Level.
 	 */
@@ -66,7 +65,7 @@ public class RaumStrukturParser
 	{
 		_root.setMaeuse(maeuse);
 	}
-	
+
 	/**
 	 * Liest die StrukturXml ein.
 	 */

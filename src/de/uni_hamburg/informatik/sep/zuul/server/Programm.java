@@ -2,8 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.server;
 
 import javax.swing.SwingUtilities;
 
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
-
 public class Programm
 {
 
@@ -16,7 +14,7 @@ public class Programm
 	{
 		onconsole = args.length > 0 && args[0].equals("console");
 
-//		final Spiel spiel = Spiel.getInstance();
+		//		final Spiel spiel = Spiel.getInstance();
 
 		SwingUtilities.invokeLater(new Runnable()
 		{
@@ -24,7 +22,7 @@ public class Programm
 			@Override
 			public void run()
 			{
-//				spiel.spielen(null);
+				//				spiel.spielen(null);
 
 			}
 		});

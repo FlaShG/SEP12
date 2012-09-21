@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.inventar;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Das Inventar nimmt {@link Item}s auf oder gibt sie heraus.
  * 
@@ -140,7 +139,6 @@ public class Inventar
 			}
 			break;
 		default:
-
 
 		}
 		return null;

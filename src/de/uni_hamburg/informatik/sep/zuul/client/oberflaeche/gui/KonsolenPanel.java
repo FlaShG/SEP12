@@ -12,8 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
+import javax.swing.ScrollPaneConstants;
 
 public class KonsolenPanel extends JPanel
 {
@@ -55,9 +54,9 @@ public class KonsolenPanel extends JPanel
 		_scrollPane = new JScrollPane();
 		_scrollPane.setViewportView(_anzeige);
 		_scrollPane
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		_scrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		add(_scrollPane);
 
@@ -68,8 +67,7 @@ public class KonsolenPanel extends JPanel
 			public void componentResized(ComponentEvent arg0)
 			{
 
-				_eingabeZeile.setSize(
-						KonsolenPanel.this.getWidth() - 100, 30);
+				_eingabeZeile.setSize(KonsolenPanel.this.getWidth() - 100, 30);
 				_eingabeZeile.setLocation(0,
 						KonsolenPanel.this.getHeight() - 70);
 
@@ -78,8 +76,9 @@ public class KonsolenPanel extends JPanel
 
 				_scrollPane.setSize(KonsolenPanel.this.getWidth(),
 						KonsolenPanel.this.getHeight() - 70);
-				
-				_anzeige.setSize(_scrollPane.getWidth(), _scrollPane.getHeight());
+
+				_anzeige.setSize(_scrollPane.getWidth(),
+						_scrollPane.getHeight());
 				_anzeige.setLocation(0, 0);
 
 			}
@@ -108,8 +107,4 @@ public class KonsolenPanel extends JPanel
 		return _anzeige;
 	}
 
-	
-
-	
-	
 }

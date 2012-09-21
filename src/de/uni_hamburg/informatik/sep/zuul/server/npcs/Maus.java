@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.npcs;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.util.PathFinder;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
-
 public class Maus
 {
 
@@ -11,7 +10,7 @@ public class Maus
 	private PathFinder _pathFinder;
 	private Raum _aktuellerRaum;
 	private Raum _endRaum;
-	
+
 	public Maus(Raum aktuellerRaum, Raum endRaum)
 	{
 		_aktuellerRaum = aktuellerRaum;
@@ -31,10 +30,10 @@ public class Maus
 	public void berechneNeuenWeg()
 	{
 		_pathFinder = new PathFinder(_aktuellerRaum, _endRaum);
-		
+
 		_richtung = _pathFinder.getRichtung();
 	}
-	
+
 	public void setNeuerRaum(Raum neuerRaum)
 	{
 		_aktuellerRaum = neuerRaum;

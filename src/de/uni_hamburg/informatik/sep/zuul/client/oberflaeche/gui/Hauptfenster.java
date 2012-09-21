@@ -11,8 +11,8 @@ public class Hauptfenster extends JFrame
 	private BildPanel _bildPanel;
 	private BefehlsPanel _befehlsPanel;
 
-	public Hauptfenster(BildPanel bildPanel,
-			KonsolenPanel konsolenPanel, BefehlsPanel befehlsPanel)
+	public Hauptfenster(BildPanel bildPanel, KonsolenPanel konsolenPanel,
+			BefehlsPanel befehlsPanel)
 	{
 		super("Zuul");
 		_bildPanel = bildPanel;
@@ -27,7 +27,6 @@ public class Hauptfenster extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		setSize(1024, 720);
-		
 
 		getContentPane().add(_bildPanel);
 		getContentPane().add(_konsolenPanel);
@@ -47,7 +46,7 @@ public class Hauptfenster extends JFrame
 			public void componentResized(ComponentEvent arg0)
 			{
 				super.componentResized(arg0);
-				int breite = (int) Hauptfenster.this.getWidth();
+				int breite = Hauptfenster.this.getWidth();
 				int hoehe = Hauptfenster.this.getHeight();
 
 				_bildPanel.setSize(breite - (breite / 5), hoehe / 2);
@@ -67,7 +66,4 @@ public class Hauptfenster extends JFrame
 
 	}
 
-	
-		
-	
 }

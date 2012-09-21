@@ -10,7 +10,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
-public class ClientPaket {
+public class ClientPaket
+{
 	private boolean _katze;
 	private boolean _maus;
 	private Collection<Item> _items;
@@ -22,7 +23,8 @@ public class ClientPaket {
 
 	// setter nötig??
 
-	public ClientPaket(ServerKontext kontext, Spieler spieler) {
+	public ClientPaket(ServerKontext kontext, Spieler spieler)
+	{
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 		_katze = aktuellerRaum.hasKatze();
@@ -35,35 +37,43 @@ public class ClientPaket {
 		_spielerName = spieler.getName();
 	}
 
-	public boolean hasKatze() {
+	public boolean hasKatze()
+	{
 		return _katze;
 	}
 
-	public boolean hasMaus() {
+	public boolean hasMaus()
+	{
 		return _maus;
 	}
 
-	public Collection<Item> getItems() {
+	public Collection<Item> getItems()
+	{
 		return _items;
 	}
 
-	public String getNachricht() {
+	public String getNachricht()
+	{
 		return _nachricht;
 	}
 
-	public int getLebensEnergie() {
+	public int getLebensEnergie()
+	{
 		return _lebensEnergie;
 	}
 
-	public List<String> getAndereSpieler() {
+	public List<String> getAndereSpieler()
+	{
 		return _andereSpieler;
 	}
 
-	public RaumArt getRaumArt() {
+	public RaumArt getRaumArt()
+	{
 		return _raumArt;
 	}
 
-	public String getSpielerName() {
+	public String getSpielerName()
+	{
 		return _spielerName;
 	}
 

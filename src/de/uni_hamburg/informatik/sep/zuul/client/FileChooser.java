@@ -16,19 +16,22 @@ import javax.swing.filechooser.FileFilter;
 public class FileChooser
 {
 	/**
-	 * Privater Konstruktor, es soll kein FileChooser erzeugt werden. Die Methode ist statisch.
+	 * Privater Konstruktor, es soll kein FileChooser erzeugt werden. Die
+	 * Methode ist statisch.
 	 */
 	private FileChooser()
 	{
-		
+
 	}
-	
+
 	/**
-	 * Öffnet eine Datei, und gibt den Pfad als String zurück.
-	 * Wenn die geöffnete Datei keine gültige Datei ist oder der Vorgang abgebrochen wurde,
-	 * wird <code>null</code> zurückgegeben.
-	 * Es können nur gültige Zuul-Level Dateien angezeigt werden.
-	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei ungültig ist.
+	 * Öffnet eine Datei, und gibt den Pfad als String zurück. Wenn die
+	 * geöffnete Datei keine gültige Datei ist oder der Vorgang abgebrochen
+	 * wurde, wird <code>null</code> zurückgegeben. Es können nur gültige
+	 * Zuul-Level Dateien angezeigt werden.
+	 * 
+	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei
+	 *         ungültig ist.
 	 */
 	public static String oeffneDatei()
 	{
@@ -45,12 +48,13 @@ public class FileChooser
 		}
 		return level;
 	}
-	
+
 	/**
-	 * Gibt den Speicherpfad der Datei zurück.
-	 * Es können nur gültige Zuul-Level Dateien angezeigt werden.
+	 * Gibt den Speicherpfad der Datei zurück. Es können nur gültige Zuul-Level
+	 * Dateien angezeigt werden.
 	 * 
-	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei ungültig ist.
+	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei
+	 *         ungültig ist.
 	 */
 	public static String speichereDatei()
 	{
@@ -94,6 +98,7 @@ public class FileChooser
 
 	/**
 	 * Gibt an, ob die Datei eine XML ist.
+	 * 
 	 * @param file
 	 * @return boolean, ist Datei XML oder nicht
 	 */
@@ -104,6 +109,7 @@ public class FileChooser
 
 	/**
 	 * Gibt an, ob die Datei dem XML-konventionen für Zuul-Level entspricht.
+	 * 
 	 * @param file
 	 * @return boolean, ist die Datei ein gültiges Level oder nicht
 	 */
@@ -114,6 +120,7 @@ public class FileChooser
 
 	/**
 	 * Gibt an, ob die Datei ein Verzeichnis ist oder nicht.
+	 * 
 	 * @param file
 	 * @return booean, ob die Datei ein Verzeichnis ist.
 	 */

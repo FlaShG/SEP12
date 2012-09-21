@@ -9,7 +9,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "struktur")
 public class XmlStruktur
 {
-	private @XmlElement(name = "maeuse") int _maeuse;
+	private @XmlElement(name = "maeuse")
+	int _maeuse;
 	private @XmlElement(name = "xmlraum")
 	List<XmlRaum> _raeume;
 

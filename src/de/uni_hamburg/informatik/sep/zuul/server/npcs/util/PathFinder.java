@@ -6,13 +6,11 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-
-
 public class PathFinder
 {
 	private ArrayList<Raum> _raumListe;
 	private String _richtung;
-	
+
 	public PathFinder(Raum startRaum, Raum zielRaum)
 	{
 		_raumListe = findPath(startRaum);
@@ -61,35 +59,39 @@ public class PathFinder
 		return kuerzesterWegZumZiel;
 
 	}
-	
+
 	public ArrayList<Raum> getWegAlsRaumListe()
 	{
 		return _raumListe;
 	}
-	
+
 	public String getRichtung()
 	{
 		return _richtung;
 	}
-	
+
 	private boolean isRaumZielRaum(Raum raum)
 	{
 		//TODO Ugly!
 		return raum.getRaumart() == RaumArt.Ende;
 	}
-	
+
 	private String berechneRichtung(Raum startRaum, Raum zielRaum)
 	{
 		if(_raumListe != null)
 		{
 
-			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_NORDEN) == _raumListe.get(1))
+			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_NORDEN) == _raumListe
+					.get(1))
 				return TextVerwalter.RICHTUNG_NORDEN;
-			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_OSTEN) == _raumListe.get(1))
+			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_OSTEN) == _raumListe
+					.get(1))
 				return TextVerwalter.RICHTUNG_OSTEN;
-			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_SUEDEN) == _raumListe.get(1))
+			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_SUEDEN) == _raumListe
+					.get(1))
 				return TextVerwalter.RICHTUNG_SUEDEN;
-			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_WESTEN) == _raumListe.get(1))
+			if(startRaum.getAusgang(TextVerwalter.RICHTUNG_WESTEN) == _raumListe
+					.get(1))
 				return TextVerwalter.RICHTUNG_WESTEN;
 		}
 		return "unkown";

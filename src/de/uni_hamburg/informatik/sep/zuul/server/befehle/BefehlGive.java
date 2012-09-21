@@ -2,25 +2,21 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.Random;
 
-import de.uni_hamburg.informatik.sep.zuul.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.spiel.Item;
-import de.uni_hamburg.informatik.sep.zuul.spiel.RaumArt;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 final class BefehlGive extends Befehl
 {
 
 	@Override
 	public void ausfuehren(SpielKontext kontext)
 	{
-		if(getParameters().length==3 && getParameters()[0].equals("mir") && getParameters()[1].equals("mehr") && getParameters()[2].equals("leben"))
+		if(getParameters().length == 3 && getParameters()[0].equals("mir")
+				&& getParameters()[1].equals("mehr")
+				&& getParameters()[2].equals("leben"))
 		{
 			kontext.setLebensEnergie(100);
 			Spiel.getInstance().schreibeNL("Schwupp.");
 			return;
 		}
-		
+
 		if(kontext.getAktuellerRaum().getRaumart() == RaumArt.Start)
 		{
 			if(!kontext.getInventar().hasAnyKuchen())
@@ -44,17 +40,17 @@ final class BefehlGive extends Befehl
 				kontext.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
 				break;
 			case IGiftkuchen:
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.LABOR_KEIN_KRUEMEL);
+				Spiel.getInstance()
+						.schreibeNL(TextVerwalter.LABOR_KEIN_KRUEMEL);
 				kontext.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
 				break;
 			case IKuchen:
-				Spiel.getInstance().schreibeNL(
-						TextVerwalter.LABOR_KEIN_KRUEMEL);
+				Spiel.getInstance()
+						.schreibeNL(TextVerwalter.LABOR_KEIN_KRUEMEL);
 				kontext.getInventar().fuegeItemHinzu(Item.IKuchen);
 				break;
 			}
-			
+
 			return;
 		}
 

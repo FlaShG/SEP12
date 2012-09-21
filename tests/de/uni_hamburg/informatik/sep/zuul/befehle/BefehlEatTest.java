@@ -3,9 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.befehle;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-
 public class BefehlEatTest
 {
 

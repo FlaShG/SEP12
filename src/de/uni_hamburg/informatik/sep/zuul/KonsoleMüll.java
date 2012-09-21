@@ -2,8 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul;
 
 import java.io.IOException;
 
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielLogik;
-
 public class KonsoleMüll
 {
 

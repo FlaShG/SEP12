@@ -14,7 +14,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
  * prüfen. Wenn ein Spieler einen ungültigen Befehl eingegeben hat, sollte das
  * Befehlswort auf <code>null</code> gesetzt werden.
  */
-public abstract class Befehl {
+public abstract class Befehl
+{
 	private String[] _parameters;
 
 	/**
@@ -23,7 +24,8 @@ public abstract class Befehl {
 	 * @param parameters
 	 *            die Parameter, mit denen dieser Befehl ausgeführt werden soll
 	 */
-	void setParameter(String[] parameters) {
+	void setParameter(String[] parameters)
+	{
 		_parameters = parameters;
 	}
 
@@ -42,30 +44,38 @@ public abstract class Befehl {
 	 * 
 	 * @return
 	 */
-	public String[] getAliases() {
+	public String[] getAliases()
+	{
 		return new String[0];
 	}
 
 	/**
 	 * @return Die Parameter dieses Befehls
 	 */
-	protected String[] getParameters() {
+	protected String[] getParameters()
+	{
 		return _parameters;
 	}
 
 	@Override
-	public Befehl clone() {
+	public Befehl clone()
+	{
 		// TODO ugly!!
 		Befehl newBefehl = null;
-		try {
+		try
+		{
 			newBefehl = this.getClass().newInstance();
-		} catch (InstantiationException e) {
+		}
+		catch(InstantiationException e)
+		{
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		}
+		catch(IllegalAccessException e)
+		{
 			e.printStackTrace();
 		}
 
-		if (_parameters != null)
+		if(_parameters != null)
 			newBefehl._parameters = _parameters.clone();
 
 		return newBefehl;

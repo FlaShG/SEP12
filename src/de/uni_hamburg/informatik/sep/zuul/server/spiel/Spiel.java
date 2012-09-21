@@ -25,7 +25,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel {
+public abstract class Spiel
+{
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -33,7 +34,8 @@ public abstract class Spiel {
 	/**
 	 * Erzeuge ein neues Spiel
 	 */
-	public Spiel() {
+	public Spiel()
+	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
 		_gestartet = false;
@@ -47,7 +49,8 @@ public abstract class Spiel {
 	 * @param name
 	 *            Name des Spielers
 	 */
-	public void meldeSpielerAn(String name) {
+	public void meldeSpielerAn(String name)
+	{
 		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
 				new Inventar());
 		_spielerMap.put(name, neuerSpieler);
@@ -60,26 +63,30 @@ public abstract class Spiel {
 	 * @param name
 	 *            Spielername
 	 */
-	public void meldeSpielerAb(String name) {
+	public void meldeSpielerAb(String name)
+	{
 		_logik.meldeSpielerAb(name);
 		_spielerMap.remove(name);
 	}
 
-	public boolean istGestartet() {
+	public boolean istGestartet()
+	{
 		return _gestartet;
 	}
 
 	/**
 	 * Schablonenmethode für Aktionen bei beendetem Spiel.
 	 */
-	public void beendeSpiel() {
+	public void beendeSpiel()
+	{
 		_gestartet = false;
 	}
 
 	/**
 	 * Führt das Spiel aus.
 	 */
-	public void spielen() {
+	public void spielen()
+	{
 		_logik.erstelleKontext();
 		_logik.zeigeWillkommensText();
 		_gestartet = true;
@@ -91,7 +98,8 @@ public abstract class Spiel {
 	 * @param eingabezeile
 	 * @param spieler
 	 */
-	protected void verarbeiteEingabe(String eingabezeile, Spieler spieler) {
+	protected void verarbeiteEingabe(String eingabezeile, Spieler spieler)
+	{
 
 		Befehl befehl = parseEingabezeile(eingabezeile);
 		_logik.fuehreBefehlAus(befehl, spieler);
@@ -102,7 +110,8 @@ public abstract class Spiel {
 	 * 
 	 * @param level
 	 */
-	protected void restart(String level) {
+	protected void restart(String level)
+	{
 		_logik.beendeSpiel();
 		spielen();
 	}
@@ -111,15 +120,17 @@ public abstract class Spiel {
 	 * @param eingabezeile
 	 * @return geparster Befehl
 	 */
-	public Befehl parseEingabezeile(String eingabezeile) {
+	public Befehl parseEingabezeile(String eingabezeile)
+	{
 		String[] input = eingabezeile.split(" +");
 
 		String[] parameter = new String[0];
 		String befehl = "";
 
-		if (input.length > 0) {
+		if(input.length > 0)
+		{
 			befehl = input[0];
-			if (input.length > 1)
+			if(input.length > 1)
 				parameter = Arrays.copyOfRange(input, 1, input.length);
 
 		}
@@ -137,7 +148,8 @@ public abstract class Spiel {
 	 * @param name
 	 * @return
 	 */
-	public ClientPaket packePaket(String name) {
+	public ClientPaket packePaket(String name)
+	{
 		Spieler spieler = _spielerMap.get(name);
 		return new ClientPaket(_logik.getKontex(), spieler);
 

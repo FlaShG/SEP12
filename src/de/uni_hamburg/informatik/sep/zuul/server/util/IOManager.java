@@ -28,19 +28,19 @@ public class IOManager
 	 * @param raumStruktur
 	 *            die aktuelle RaumStruktur
 	 * @param level
-	 * 			  das EditorLevel, welches die Levelinformationen enthält
+	 *            das EditorLevel, welches die Levelinformationen enthält
 	 */
-	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur, EditorLevel level)
+	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur,
+			EditorLevel level)
 	{
 		_strukParser = new RaumStrukturParser(path);
 		_strukParser.setAnzahlMaeuse(level.getMaeuse());
 		_strukParser.setXmlVerbindungen(raumStruktur.getXMLRaumListe());
-//		_strukParser.getXmlVerbindungen().clear();
-//		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
-//		{
-//			_strukParser.getXmlVerbindungen().add(raum);
-//		}
-		
+		//		_strukParser.getXmlVerbindungen().clear();
+		//		for(XmlRaum raum : raumStruktur.getXMLRaumListe())
+		//		{
+		//			_strukParser.getXmlVerbindungen().add(raum);
+		//		}
 
 		_strukParser.schreibeXml();
 	}
@@ -94,18 +94,17 @@ public class IOManager
 	}
 
 	/**
-	 * Gibt true zurück, wenn die angegebene .xml
-	 * einen valide Struktur besitzt.
+	 * Gibt true zurück, wenn die angegebene .xml einen valide Struktur besitzt.
 	 * Es geht hierbei um die LevelXml!
 	 * 
 	 * @param path
-	 * 			Pfad der xml-Datei
+	 *            Pfad der xml-Datei
 	 */
 	public static boolean validiereLevel(String path)
 	{
 		return RaumStrukturParser.validiere(path);
 	}
-	
+
 	/**
 	 * Getter für die XML-Raum Liste die eingelesen wurde.
 	 * 
@@ -125,10 +124,9 @@ public class IOManager
 	{
 		return _sammlParser.getSammlung();
 	}
-	
+
 	/**
-	 * Gibt das {@link EditorLevel} zurück, welches die
-	 * Levelinformationen hält
+	 * Gibt das {@link EditorLevel} zurück, welches die Levelinformationen hält
 	 */
 	public EditorLevel getEditorLevel()
 	{

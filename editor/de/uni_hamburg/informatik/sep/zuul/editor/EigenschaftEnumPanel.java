@@ -7,26 +7,29 @@ import javax.swing.JComboBox;
 
 /**
  * Ein Panel, das eine mit JLabel beschriftete JComboBox anzeigt.
+ * 
  * @author 0graeff
  */
 public class EigenschaftEnumPanel extends EigenschaftsPanel
 {
 	private int _wert;
-	private JComboBox<String> _enum; 
-	
-	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues, int startwert)
+	private JComboBox<String> _enum;
+
+	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues,
+			int startwert)
 	{
 		this(beschriftung, enumValues, startwert, null);
 	}
-	
-	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues, int startwert, EditorBeobachter beobachter)
+
+	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues,
+			int startwert, EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
-		
+
 		_enum = new JComboBox<String>(getStringsFromEnum(enumValues));
-		
+
 		_enum.setSelectedIndex(startwert);
-		
+
 		_enum.addItemListener(new ItemListener()
 		{
 			@Override
@@ -39,10 +42,10 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 				}
 			}
 		});
-		
+
 		add(_enum);
 	}
-	
+
 	private static String[] getStringsFromEnum(Object[] values)
 	{
 		String[] result = new String[values.length];
@@ -52,7 +55,7 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 		}
 		return result;
 	}
-	
+
 	public int getWert()
 	{
 		return _wert;

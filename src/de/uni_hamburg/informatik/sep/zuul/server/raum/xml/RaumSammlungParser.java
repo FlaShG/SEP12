@@ -9,8 +9,6 @@ import javax.xml.bind.Unmarshaller;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
-
-
 public class RaumSammlungParser
 {
 	private final String XMLPATH = "./xml_dateien/RaumSammlung.xml";
