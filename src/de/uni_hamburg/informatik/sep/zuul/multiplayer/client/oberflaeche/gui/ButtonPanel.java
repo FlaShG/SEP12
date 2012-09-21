@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui;
+package de.uni_hamburg.informatik.sep.zuul.multiplayer.client.oberflaeche.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -45,6 +45,8 @@ public abstract class Client implements ClientInterface
 		_port = clientPort;
 
 		_server = (ServerInterface) Naming.lookup(_serverName);
+		
+		login();
 	}
 
 	public void schreibeText(String text)
@@ -105,13 +107,14 @@ public abstract class Client implements ClientInterface
 	 */
 	public static void main(String[] args) throws NumberFormatException, MalformedURLException, RemoteException, NotBoundException
 	{
-		if (args[0].equals("console"))
+		
+		if (args.length == 5 && args[4].equals("console"))
 		{
-			new ClientConsole(args[1], args[2], Integer.parseInt(args[3]), args[4]);
+			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]), args[3]);
 		}
-		else
+		else 
 		{
-			new ClientGUI(args[1], args[2], Integer.parseInt(args[3]), args[4]);
+			new ClientGUI(args[0], args[1], Integer.parseInt(args[2]), args[3]);
 		}
 		
 		

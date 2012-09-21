@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,14 +15,17 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.spiel.Spieler;
  * @author 0ortmann, 0Schlund
  * 
  */
-public class ServerKontext {
+public class ServerKontext
+{
 
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 
-	public ServerKontext(Raum startRaum) {
-		_startRaum = startRaum;
+	public ServerKontext(Raum startRaum)
+	{
 
+		_startRaum = startRaum;
+		_spielerPosition = new HashMap<Spieler, Raum>();
 	}
 
 	/**
@@ -30,7 +34,8 @@ public class ServerKontext {
 	 * @param spieler
 	 *            der neue Spieler
 	 */
-	public void fuegeNeuenSpielerHinzu(Spieler spieler) {
+	public void fuegeNeuenSpielerHinzu(Spieler spieler)
+	{
 
 		_spielerPosition.put(spieler, _startRaum);
 
@@ -42,9 +47,12 @@ public class ServerKontext {
 	 * @param name
 	 *            name des zu entfernenden Spielers
 	 */
-	public void entferneSpieler(String name) {
-		for (Spieler spieler : getSpielerListe()) {
-			if (name.equals(spieler.getName())) {
+	public void entferneSpieler(String name)
+	{
+		for(Spieler spieler : getSpielerListe())
+		{
+			if(name.equals(spieler.getName()))
+			{
 				_spielerPosition.remove(spieler);
 			}
 		}
@@ -57,7 +65,8 @@ public class ServerKontext {
 	 *            der Spieler zu dem wir den Raum suchen
 	 * @return der Raum in dem der Spieler ist
 	 */
-	public Raum getAktuellenRaumZu(Spieler spieler) {
+	public Raum getAktuellenRaumZu(Spieler spieler)
+	{
 		return _spielerPosition.get(spieler);
 	}
 
@@ -69,7 +78,8 @@ public class ServerKontext {
 	 * @param neuerRaum
 	 *            der neu aktuelle aufenthalts Raum des Spielers
 	 */
-	public void setAktuellenRaumZu(Spieler spieler, Raum neuerRaum) {
+	public void setAktuellenRaumZu(Spieler spieler, Raum neuerRaum)
+	{
 		assert (_spielerPosition.containsKey(spieler));
 		_spielerPosition.remove(spieler);
 		_spielerPosition.put(spieler, neuerRaum);
@@ -80,7 +90,8 @@ public class ServerKontext {
 	 * 
 	 * @return Liste aller Spieler
 	 */
-	public List<Spieler> getSpielerListe() {
+	public List<Spieler> getSpielerListe()
+	{
 		return new ArrayList<Spieler>(_spielerPosition.keySet());
 	}
 
@@ -91,13 +102,16 @@ public class ServerKontext {
 	 *            der Raum
 	 * @return alle Spieler in dem Raum
 	 */
-	public List<String> getSpielerNamenInRaum(Raum aktuellerRaum) {
+	public List<String> getSpielerNamenInRaum(Raum aktuellerRaum)
+	{
 		ArrayList<String> result = new ArrayList<String>();
 		assert _spielerPosition.containsValue(aktuellerRaum);
 
-		for (Spieler s : _spielerPosition.keySet()) {
+		for(Spieler s : _spielerPosition.keySet())
+		{
 			Raum raum = _spielerPosition.get(s);
-			if (raum.equals(aktuellerRaum)) {
+			if(raum.equals(aktuellerRaum))
+			{
 				result.add(s.getName());
 			}
 		}
@@ -110,7 +124,8 @@ public class ServerKontext {
 	 * 
 	 * @param spieler
 	 */
-	public void zeigeWillkommensText(Spieler spieler) {
+	public void zeigeWillkommensText(Spieler spieler)
+	{
 		// TODO impl!!
 		// schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
 		// schreibeNL("");
@@ -124,7 +139,8 @@ public class ServerKontext {
 	 * @param spieler
 	 * @return
 	 */
-	public String getNachrichtFuer(Spieler spieler) {
+	public String getNachrichtFuer(Spieler spieler)
+	{
 		return "";
 		// TODO impl !!!!
 	}

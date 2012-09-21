@@ -9,15 +9,13 @@ import java.rmi.RemoteException;
 import javax.swing.JTextArea;
 
 import de.uni_hamburg.informatik.sep.zuul.multiplayer.ClientPaket;
-import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.Server;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.AusgabePanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.ButtonPanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.EingabePanel;
-import de.uni_hamburg.informatik.sep.zuul.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.oberflaeche.gui.AusgabePanel;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.oberflaeche.gui.ButtonPanel;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.oberflaeche.gui.EingabePanel;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.client.oberflaeche.gui.Hauptfenster;
+import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.util.TextVerwalter;
 import de.uni_hamburg.informatik.sep.zuul.spiel.Raumbilderzeuger;
-import de.uni_hamburg.informatik.sep.zuul.spiel.SpielKontext;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.spiel.TickListener;
+
 
 public class ClientGUI extends Client
 {

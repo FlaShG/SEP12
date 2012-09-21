@@ -25,7 +25,7 @@ import de.uni_hamburg.informatik.sep.zuul.multiplayer.server.inventar.Inventar;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public abstract class Spiel {
+public class Spiel {
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	private boolean _gestartet;
@@ -126,10 +126,6 @@ public abstract class Spiel {
 
 		return BefehlFactory.get(befehl, parameter);
 	}
-
-	public abstract void schreibeNL(String nachricht);
-
-	public abstract void schreibe(String nachricht);
 
 	/**
 	 * Packe das Clienpaket für den Client mit dem Namen name.
