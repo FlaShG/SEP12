@@ -231,9 +231,10 @@ public class Inventar
 
 		for(Item i : _inhalt)
 		{
-			inhalt += i + " ";
+			inhalt += i + ", ";
 		}
 
+		inhalt = inhalt.substring(0, inhalt.length()-2);
 		return inhalt;
 	}
 }
