@@ -34,4 +34,10 @@ public class BefehlGibMirMehrLeben implements Befehl
 		return new String[] { "gib mir mehr leben" };
 	}
 
+	@Override
+	public String getHilfe()
+	{
+		return "Hey ho, I'm a cheat code";
+	}
+
 }

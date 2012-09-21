@@ -51,4 +51,10 @@ public class BefehlLaden implements Befehl
 		return new String[] { TextVerwalter.BEFEHL_LADEN };
 	}
 
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_LOAD;
+	}
+
 }

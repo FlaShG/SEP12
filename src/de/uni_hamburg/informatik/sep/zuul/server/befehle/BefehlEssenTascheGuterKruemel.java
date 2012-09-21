@@ -54,4 +54,10 @@ public class BefehlEssenTascheGuterKruemel implements Befehl
 		return new String[] { BEFEHLSNAME };
 	}
 
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_EAT;
+	}
+
 }

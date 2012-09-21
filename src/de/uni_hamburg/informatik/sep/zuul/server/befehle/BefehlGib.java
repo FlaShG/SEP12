@@ -60,4 +60,10 @@ final class BefehlGib implements Befehl
 		return new String[] { TextVerwalter.BEFEHL_GIB };
 	}
 
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_GIVE;
+	}
+
 }
