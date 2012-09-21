@@ -57,11 +57,29 @@ public class IOManager
 			idSammlung.add(raum.getId());
 		}
 
+		// komplett neue Räume hinzufügen
 		for(Raum raum : raumListe)
 		{
 			if(!idSammlung.contains(raum.getId()))
 			{
 				_sammlParser.getSammlung().add(raum);
+			}
+		}
+		
+		// vorhandene Räume ersetzen
+		List<Raum> raeume = _sammlParser.getSammlung();
+		int l = raeume.size();
+		
+		for (Raum raum : raumListe)	// gehen neue räume durch
+		{
+			for (int i = 0; i < l; i++)	// und vergleichen mit den vorhandenen
+			{
+				Raum r = raeume.get(i);
+				if (raum.getId() == r.getId())	// wenn gleich, so solls überschreiben
+				{
+					_sammlParser.getSammlung().set(i, raum);
+					break;
+				}
 			}
 		}
 
