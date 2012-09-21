@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul;
+package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,8 +20,6 @@ public class ClientPaket
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
-
-	// setter nötig??
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler)
 	{

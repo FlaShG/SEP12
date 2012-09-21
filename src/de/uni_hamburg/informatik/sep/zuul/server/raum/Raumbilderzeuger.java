@@ -10,7 +10,7 @@ import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
-import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 
 public class Raumbilderzeuger

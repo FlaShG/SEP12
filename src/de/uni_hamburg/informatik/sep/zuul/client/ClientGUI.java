@@ -8,7 +8,6 @@ import java.rmi.RemoteException;
 
 import javax.swing.JTextArea;
 
-import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;

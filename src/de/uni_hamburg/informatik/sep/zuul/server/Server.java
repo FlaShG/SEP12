@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
+import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 
 public class Server extends UnicastRemoteObject implements ServerInterface

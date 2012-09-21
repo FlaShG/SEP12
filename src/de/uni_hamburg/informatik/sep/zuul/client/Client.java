@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.ServerInterface;
 
 /**

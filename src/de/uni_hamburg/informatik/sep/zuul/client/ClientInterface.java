@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import de.uni_hamburg.informatik.sep.zuul.ClientPaket;
 
 public interface ClientInterface extends Remote
 {
