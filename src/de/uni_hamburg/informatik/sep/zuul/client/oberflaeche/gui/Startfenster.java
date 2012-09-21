@@ -14,8 +14,9 @@ public class Startfenster extends JFrame
 {
 	private JButton _singlePlayer;
 	private JButton _multiPlayer;
-	private JTextField _eingabeIP;
 	private JTextField _benutzerName;
+	private JTextField _eingabeIP;
+	private JTextField _eingabePort;
 
 	public Startfenster()
 	{
@@ -35,6 +36,7 @@ public class Startfenster extends JFrame
 		setVisible(true);
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
+		_eingabePort = new JTextField("1090");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -53,7 +55,9 @@ public class Startfenster extends JFrame
 		JLabel labelserver = new JLabel(
 				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
-		setSize(new Dimension(300, 230));
+		JLabel labelport = new JLabel(
+				TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
+		setSize(new Dimension(300, 290));
 		add(labelname);
 		add(_benutzerName);
 		_benutzerName.setCaretPosition(_benutzerName.getText().length());
@@ -61,6 +65,14 @@ public class Startfenster extends JFrame
 		add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
+		add(labelport);
+		add(_eingabePort);
+		_eingabePort.setCaretPosition(_eingabePort.getText().length());
+	}
+
+	public JTextField getSpielerNameTextField()
+	{
+		return _benutzerName;
 	}
 
 	public JTextField getIPTextField()
@@ -68,9 +80,9 @@ public class Startfenster extends JFrame
 		return _eingabeIP;
 	}
 
-	public JTextField getSpielerNameTextField()
+	public JTextField getNameTextField()
 	{
-		return _benutzerName;
+		return _eingabePort;
 	}
 
 }
