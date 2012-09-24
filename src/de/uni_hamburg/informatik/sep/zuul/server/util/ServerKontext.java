@@ -18,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 public class ServerKontext
 {
 
+	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 
@@ -115,6 +116,35 @@ public class ServerKontext
 		}
 		return result;
 
+	}
+
+	/**
+	 * Gibt die Nachricht für den Spieler und leert den NachrichtenCache.
+	 * 
+	 * @param spieler
+	 * @return
+	 */
+	public String getNachrichtFuer(Spieler spieler)
+	{
+		if(!_nachrichtenCache.containsKey(spieler))
+			return "";
+
+		String nachricht = _nachrichtenCache.get(spieler);
+		_nachrichtenCache.remove(spieler);
+
+		return nachricht;
+	}
+
+	/**
+	 * Speichert eine Nachricht für den Spieler zwischen.
+	 */
+	public void schreibeAnSpieler(Spieler spieler, String nachricht)
+	{
+		String s = "";
+		if(_nachrichtenCache.containsKey(spieler))
+			s = _nachrichtenCache.get(spieler);
+		s = s + nachricht + "\n";
+		_nachrichtenCache.put(spieler, nachricht);
 	}
 
 	public Spieler getSpielerByName(String benutzerName)

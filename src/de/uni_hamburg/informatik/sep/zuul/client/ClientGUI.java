@@ -64,7 +64,7 @@ public class ClientGUI extends Client
 			@Override
 			public void run()
 			{
-				aktualisiereUI(paket);
+				aktualisiereUI(paket,false);
 			}
 		});
 
@@ -73,14 +73,32 @@ public class ClientGUI extends Client
 
 	}
 
+	@Override
+	public synchronized boolean zeigeVorschau(final ClientPaket paket)
+			throws RemoteException
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				aktualisiereUI(paket, true);
+			}
+		});
+
+		return true;
+
+	}
+
 	/**
 	 * @param paket
 	 */
-	private void aktualisiereUI(ClientPaket paket)
+	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
 		if(_bildPanel.getWidth() > _bildPanel.getHeight())
 			_bildPanel.setRaumanzeige(raumbilderzeuger
@@ -106,6 +124,7 @@ public class ClientGUI extends Client
 			sendeEingabe(_befehlszeile);
 		}
 	}
+
 
 	/**
 	 * 
@@ -373,7 +392,7 @@ public class ClientGUI extends Client
 
 	private void zeichneBild(ClientPaket paket, int breitehoehe)
 	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket);
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, false);
 		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht(breitehoehe));
 	}
 
