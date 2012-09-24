@@ -38,10 +38,18 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
-		startFenster();
+		if(!serverIP.equals("127.0.0.1"))
+		{
+			startFenster();
+		}
+		else
+		{
+			login();
+			_server.empfangeStartEingabe(_clientName);
+		}
 
 	}
-	
+
 	private void startFenster() throws RemoteException
 	{
 		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
@@ -69,6 +77,7 @@ public class ClientGUI extends Client
 				try
 				{
 					_server.empfangeStartEingabe(_clientName);
+					starte();
 				}
 				catch(RemoteException e)
 				{
@@ -79,9 +88,11 @@ public class ClientGUI extends Client
 			}
 		});
 	}
-	
-	
-	public void starte()
+
+	/**
+	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
+	 */
+	public void starte() throws RemoteException
 	{
 		initialisiereUI();
 	}
