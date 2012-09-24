@@ -70,7 +70,7 @@ public class BefehlsPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_GIB));
 
 		_fuettereButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_FEED));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_FUETTERE));
 
 		_fuettereGutButton = new JButton(GUT);
 
@@ -109,35 +109,35 @@ public class BefehlsPanel extends JPanel
 		_ladenButton = new JButton(new ImageIcon(PATH + "disk.gif"));
 
 		_quitButton = new JButton(new ImageIcon(PATH + "exitIcon.gif"));
-		_quitButton.setBackground(new Color(0,175,0));
+		_quitButton.setBackground(new Color(0, 175, 0));
 
-		_normalButtons = new JButton[]{_nehmenButton, _gibButton,
+		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
-				_inventarButton, _ablegenButton};
-		_extraButtons = new JButton[]{_fuettereGutButton,
+				_inventarButton, _ablegenButton };
+		_extraButtons = new JButton[] { _fuettereGutButton,
 				_fuettereSchlechtButton, _fuettereUnbekanntButton,
 				_ablegenGutButton, _ablegenSchlechtButton,
 				_ablegenUnbekanntButton, _essenTascheGutButton,
-				_essenTascheSchlechtButton, _essenTascheUnbekanntButton};
-		_systemButtons = new JButton[]{_helpButton, _ladenButton, _quitButton};
-		
-		for (JButton b : _normalButtons)
+				_essenTascheSchlechtButton, _essenTascheUnbekanntButton };
+		_systemButtons = new JButton[] { _helpButton, _ladenButton, _quitButton };
+
+		for(JButton b : _normalButtons)
 		{
 			b.setFocusable(false);
 			add(b);
 		}
-		for (JButton b : _extraButtons)
+		for(JButton b : _extraButtons)
 		{
 			b.setFocusable(false);
 			add(b);
 		}
-		for (JButton b : _systemButtons)
+		for(JButton b : _systemButtons)
 		{
 			b.setFocusable(false);
 			b.setSize(50, 50);
 			add(b);
 		}
-		
+
 		add(_labelFuerLebensenergie);
 
 		addComponentListener(new ComponentAdapter()
@@ -152,7 +152,7 @@ public class BefehlsPanel extends JPanel
 				int buttonhoeheExtra = (int) (buttonhoehe * 0.75);
 
 				Dimension buttongroesse = new Dimension(
-						(BefehlsPanel.this.getWidth() - 100) / 2 -25,
+						(BefehlsPanel.this.getWidth() - 100) / 2 - 25,
 						buttonhoehe);
 
 				Dimension buttongroesseExtra = new Dimension(
@@ -173,8 +173,10 @@ public class BefehlsPanel extends JPanel
 				int xpos_1 = 65;
 
 				_nehmenButton.setLocation(xpos_1, 5);
-				_gibButton.setLocation(xpos_1, (int) (buttongroesse.getHeight() + 10));
-				_essenBodenButton.setLocation(xpos_1,(int) (buttongroesse.getHeight() * 2 + 15));
+				_gibButton.setLocation(xpos_1,
+						(int) (buttongroesse.getHeight() + 10));
+				_essenBodenButton.setLocation(xpos_1,
+						(int) (buttongroesse.getHeight() * 2 + 15));
 				_fuettereButton.setLocation(xpos_1,
 						(int) (buttongroesse.getHeight() * 3 + 20));
 
@@ -188,18 +190,17 @@ public class BefehlsPanel extends JPanel
 								+ _fuettereSchlechtButton.getWidth() + 1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 
-
 				//rechte Spalte
 
 				int x = _nehmenButton.getWidth()
 						+ _nehmenButton.getLocation().x + 10;
 
 				_inventarButton.setLocation(x, 5);
-				
+
 				_ablegenButton.setLocation(x, buttonhoehe + 10);
 
-				_ablegenGutButton.setLocation(x,
-						(int) (_ablegenButton.getY() + buttonhoehe + 2));
+				_ablegenGutButton.setLocation(x, (int) (_ablegenButton.getY()
+						+ buttonhoehe + 2));
 				_ablegenSchlechtButton.setLocation(
 						_ablegenGutButton.getLocation().x
 								+ buttongroesseExtra.width + 1,
@@ -208,10 +209,9 @@ public class BefehlsPanel extends JPanel
 				_ablegenUnbekanntButton.setLocation(
 						_ablegenSchlechtButton.getLocation().x
 								+ buttongroesseExtra.width + 1,
-								_ablegenButton.getY() + buttonhoehe + 2);
+						_ablegenButton.getY() + buttonhoehe + 2);
 
-				_essenTascheButton.setLocation(
-						x,
+				_essenTascheButton.setLocation(x,
 						(int) (buttongroesse.getHeight() * 3 + 20));
 
 				_essenTascheGutButton.setLocation(x,
@@ -229,12 +229,12 @@ public class BefehlsPanel extends JPanel
 						+ _inventarButton.getWidth() + 5, 5);
 
 				_ladenButton.setLocation(_inventarButton.getX()
-						+ _inventarButton.getWidth() + 5,
-						_helpButton.getY() + _helpButton.getHeight() + 5);
-				
+						+ _inventarButton.getWidth() + 5, _helpButton.getY()
+						+ _helpButton.getHeight() + 5);
+
 				_quitButton.setLocation(_inventarButton.getX()
-						+ _inventarButton.getWidth() + 5,
-						_ladenButton.getY() + _ladenButton.getHeight() + 5);
+						+ _inventarButton.getWidth() + 5, _ladenButton.getY()
+						+ _ladenButton.getHeight() + 5);
 
 				_labelFuerLebensenergie.setSize(50,
 						BefehlsPanel.this.getHeight());
@@ -326,6 +326,51 @@ public class BefehlsPanel extends JPanel
 			_labelFuerLebensenergie.setIcon(new ImageIcon(lebensbalken));
 		}
 
+	}
+
+	public JButton getEssenTascheGutButton()
+	{
+		return _essenTascheGutButton;
+	}
+
+	public JButton getEssenTascheSchlechtButton()
+	{
+		return _essenTascheSchlechtButton;
+	}
+
+	public JButton getEssenTascheUnbekanntButton()
+	{
+		return _essenTascheUnbekanntButton;
+	}
+
+	public JButton getFuettereGutButton()
+	{
+		return _fuettereGutButton;
+	}
+
+	public JButton getFuettereSchlechtButton()
+	{
+		return _fuettereSchlechtButton;
+	}
+
+	public JButton getFuettereUnbekanntButton()
+	{
+		return _fuettereUnbekanntButton;
+	}
+
+	public JButton getAblegenGutButton()
+	{
+		return _ablegenGutButton;
+	}
+
+	public JButton getAblegenSchlechtButton()
+	{
+		return _ablegenSchlechtButton;
+	}
+
+	public JButton getAblegenUnbekanntButton()
+	{
+		return _ablegenUnbekanntButton;
 	}
 
 }
