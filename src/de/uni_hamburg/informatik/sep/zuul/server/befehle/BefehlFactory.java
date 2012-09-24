@@ -59,6 +59,7 @@ public final class BefehlFactory
 		for(String befehlsname : befehlsnamen)
 		{
 			Befehl befehl = _map.get(befehlsname);
+			boolean b = _map.containsKey(befehlsname);
 
 			if(befehl != null)
 			{
@@ -90,7 +91,10 @@ public final class BefehlFactory
 		{
 			for(int j = i; j < geparsteZeile.size(); j++)
 			{
-				befehlsnamen.set(j, befehlsnamen.get(j) + " " + geparsteZeile.get(i));
+				String previous = befehlsnamen.get(j);
+				if(previous!= "")
+					previous += " ";
+				befehlsnamen.set(j, previous + geparsteZeile.get(i));
 			}
 		}
 		Collections.reverse(befehlsnamen);

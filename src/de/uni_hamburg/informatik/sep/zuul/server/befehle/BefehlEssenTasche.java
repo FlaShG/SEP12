@@ -13,7 +13,7 @@ public class BefehlEssenTasche implements Befehl
 {
 
 	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN + " "
-			+ TextVerwalter.ORT_BODEN;
+			+ TextVerwalter.ORT_TASCHE;
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
