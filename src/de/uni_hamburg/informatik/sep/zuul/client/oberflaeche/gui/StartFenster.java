@@ -41,10 +41,8 @@ public class StartFenster
 				{
 					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 				}
-				catch(MalformedURLException | RemoteException
-						| NotBoundException e1)
+				catch(Exception e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				_ui.dispose();
@@ -90,10 +88,8 @@ public class StartFenster
 					{
 						new ClientGUI("RmiServer", _ipAdresse, 1090, _spielername);
 					}
-					catch(MalformedURLException | RemoteException
-							| NotBoundException e)
+					catch(Exception e)
 					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 

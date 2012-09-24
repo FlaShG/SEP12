@@ -41,6 +41,8 @@ public class RaumBearbeitenPanel extends JPanel
 		_beschreibung.setSize(dim);
 		_beschreibung.setPreferredSize(dim);
 		_beschreibung.setMinimumSize(dim);
+		_beschreibung.setLineWrap(true);
+		_beschreibung.setWrapStyleWord(true);
 		_beschreibung.setText(_raum.getBeschreibung());
 		_beschreibung.getDocument().addDocumentListener(new DocumentListener()
 		{
