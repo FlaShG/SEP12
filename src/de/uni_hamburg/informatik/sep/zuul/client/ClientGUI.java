@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -56,9 +57,11 @@ public class ClientGUI extends Client
 
 	private void startFenster() throws RemoteException
 	{
-		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
+		final JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
 		JPanel panel = new JPanel();
+		startFrame.setMinimumSize(new Dimension(300, 150));
+		startFrame.setLocationRelativeTo(null);
 
 		final JButton _startButton = new JButton("Los gehts!");
 
@@ -88,10 +91,14 @@ public class ClientGUI extends Client
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				finally
+				{
+					startFrame.dispose();
+				}
 
 			}
 		});
-		
+
 		_befehlButtonMap = new HashMap<String, JButton>();
 
 	}
@@ -164,7 +171,7 @@ public class ClientGUI extends Client
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
 		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
-		
+
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
@@ -176,18 +183,18 @@ public class ClientGUI extends Client
 		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
 					.getLabelFuerIcon().getWidth(), paket, vorschau));
-		
+
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 	}
 
 	private void setzeBefehlsverfuegbarkeit(
 			Map<String, Boolean> verfuegbareBefehle)
 	{
-		for(Entry<String, Boolean> entry: verfuegbareBefehle.entrySet())
+		for(Entry<String, Boolean> entry : verfuegbareBefehle.entrySet())
 		{
 			String befehl = entry.getKey();
 			Boolean enabled = entry.getValue();
-			
+
 			JButton button = _befehlButtonMap.get(befehl);
 			if(button != null)
 				button.setEnabled(enabled);
@@ -196,12 +203,12 @@ public class ClientGUI extends Client
 
 	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
 	{
-		
+
 		boolean n = false;
 		boolean o = false;
 		boolean s = false;
 		boolean w = false;
-		
+
 		for(String richtung : ausgaenge)
 		{
 			if(richtung.equals(TextVerwalter.RICHTUNG_NORDEN))
@@ -221,16 +228,12 @@ public class ClientGUI extends Client
 				w = true;
 			}
 		}
-		
+
 		_bildPanel.getTuerNordButton().setVisible(n);
 		_bildPanel.getTuerOstButton().setVisible(o);
 		_bildPanel.getTuerSuedButton().setVisible(s);
 		_bildPanel.getTuerWestButton().setVisible(w);
-		
-		
-		
-		
-		
+
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -468,7 +471,7 @@ public class ClientGUI extends Client
 				}
 			}
 		});
-		
+
 		createActionListenerMap();
 
 	}
@@ -482,18 +485,20 @@ public class ClientGUI extends Client
 
 	private void createActionListenerMap(JButton[] buttons)
 	{
-		for(JButton button: buttons)
+		for(JButton button : buttons)
 		{
-			for(ActionListener listener: button.getActionListeners())
+			for(ActionListener listener : button.getActionListeners())
 			{
 				if(listener instanceof ActionListenerBefehlAusfuehren)
 				{
 					ActionListenerBefehlAusfuehren actionListenerBefehlAusfuehren = (ActionListenerBefehlAusfuehren) listener;
-					_befehlButtonMap.put(actionListenerBefehlAusfuehren.getBefehlszeile(), button);
+					_befehlButtonMap.put(
+							actionListenerBefehlAusfuehren.getBefehlszeile(),
+							button);
 				}
 			}
 		}
-		
+
 	}
 
 	/**
