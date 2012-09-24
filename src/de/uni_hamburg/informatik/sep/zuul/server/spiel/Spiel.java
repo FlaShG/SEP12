@@ -104,7 +104,7 @@ public class Spiel
 	{
 		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
 
-		for(Spieler spieler : _nachrichtenMap.keySet())
+		for(Spieler spieler : _spielerMap.values())
 		{
 			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
 		}
@@ -179,7 +179,7 @@ public class Spiel
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
-		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
+		String nachricht = _nachrichtenMap.get(spieler); // hole die nacricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
