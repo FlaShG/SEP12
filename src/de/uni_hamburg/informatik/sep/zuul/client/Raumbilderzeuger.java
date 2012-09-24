@@ -21,6 +21,10 @@ public class Raumbilderzeuger
 	private final BufferedImage RAUMNORMAL = ladeBild(PATH + "raum_normal.png");
 	private final BufferedImage RAUMSTART = ladeBild(PATH + "raum_labor.png");
 	private final BufferedImage RAUMENDE = ladeBild(PATH + "raum_ende.png");
+	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "tuerN.png");
+	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "tuerO.png");
+	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "tuerS.png");
+	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "tuerW.png");
 
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
 	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
@@ -89,6 +93,27 @@ public class Raumbilderzeuger
 			break;
 		}
 
+		for(String  richtung : _paket.getMoeglicheAusgaenge())
+		{
+			if(richtung.equals("nord"))
+			{
+				raum = maleAufBild(raum, RAUMTUERNORD, new Tupel(_breitehoehe/2-RAUMTUERNORD.getWidth()/2, 0));
+			}
+			else if(richtung.equals("ost"))
+			{
+				raum = maleAufBild(raum, RAUMTUEROST, new Tupel(_breitehoehe-_breitehoehe/7, _breitehoehe/2-RAUMTUERNORD.getHeight()/2));
+			}
+			else if(richtung.equals("süd"))
+			{
+				raum = maleAufBild(raum, RAUMTUERSUED, new Tupel(_breitehoehe/2-RAUMTUERNORD.getWidth()/2, _breitehoehe-_breitehoehe/7));
+			}
+			else if(richtung.equals("west"))
+			{
+				raum = maleAufBild(raum, RAUMTUERWEST, new Tupel(_breitehoehe-_breitehoehe/7, _breitehoehe/2-RAUMTUERNORD.getHeight()/2));
+			}
+		}
+		
+		
 		setPositionen();
 
 		// Male Dr.Little

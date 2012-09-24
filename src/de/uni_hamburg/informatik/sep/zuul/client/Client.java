@@ -119,6 +119,7 @@ public abstract class Client extends UnicastRemoteObject implements
 			MalformedURLException, RemoteException, NotBoundException
 	{
 
+		// TODO: ugly
 		if(args.length == 5 && args[4].equals("console"))
 		{
 			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),

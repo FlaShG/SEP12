@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -25,16 +26,8 @@ public class BefehlLaden implements Befehl
 		//TODO Level laden
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
-			String level = null;
-			final JFileChooser fileChooser = new JFileChooser("./xml_dateien/");
-
-			int returnVal = fileChooser.showOpenDialog(new JPanel());
-
-			if(returnVal == JFileChooser.APPROVE_OPTION)
-			{
-				File file = fileChooser.getSelectedFile();
-				level = file.getAbsolutePath();
-			}
+			
+			String level = FileChooser.oeffneDatei();
 			//			Spiel.getInstance().spielen(level);
 		}
 		else
@@ -56,6 +49,12 @@ public class BefehlLaden implements Befehl
 	public String[] getBefehlsnamen()
 	{
 		return new String[] { TextVerwalter.BEFEHL_LADEN };
+	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_LOAD;
 	}
 
 }

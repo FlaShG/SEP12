@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlAusgaenge implements Befehl
 {
@@ -39,6 +40,12 @@ public class BefehlAusgaenge implements Befehl
 	public String[] getBefehlsnamen()
 	{
 		return new String[] {"ausgänge"};
+	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_AUSGAENGE;
 	}
 
 }

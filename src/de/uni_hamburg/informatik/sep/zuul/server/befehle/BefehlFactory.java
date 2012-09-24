@@ -114,4 +114,9 @@ public final class BefehlFactory
 	{
 
 	}
+
+	public static Befehl gibBefehl(String string)
+	{
+		return _map.get(string);
+	}
 }

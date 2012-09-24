@@ -32,4 +32,10 @@ final class BefehlEssen implements Befehl
 	{
 		return new String[] { TextVerwalter.BEFEHL_ESSEN };
 	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_EAT;
+	}
 }

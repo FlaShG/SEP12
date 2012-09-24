@@ -39,8 +39,13 @@ final class BefehlInventarAnzeigen implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		// TODO Auto-generated method stub
 		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
+	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_INVENTAR;
 	}
 
 }

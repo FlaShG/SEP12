@@ -33,4 +33,10 @@ final class BefehlBeenden implements Befehl
 	{
 		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
 	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_QUIT;
+	}
 }

@@ -43,5 +43,10 @@ public interface Befehl
 	 * Gibt die (Alias-) Namen des Befehls zurück.
 	 */
 	String[] getBefehlsnamen();
+	
+	/**
+	 * Gibt einen spezifischen Hilfetext zu einem Befehl zurück.
+	 */
+	String getHilfe();
 
 }

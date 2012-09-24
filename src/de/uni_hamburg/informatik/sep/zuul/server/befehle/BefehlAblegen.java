@@ -45,4 +45,10 @@ final class BefehlAblegen implements Befehl
 		BefehlFactory.schreibeNL(kontext, spieler,
 				TextVerwalter.NICHTS_ZUM_ABLEGEN);
 	}
+
+	@Override
+	public String getHilfe()
+	{
+		return TextVerwalter.HILFE_ABLEGEN;
+	}
 }
