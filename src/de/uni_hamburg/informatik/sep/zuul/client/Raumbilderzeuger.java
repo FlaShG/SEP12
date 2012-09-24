@@ -132,6 +132,7 @@ public class Raumbilderzeuger
 		Tupel position;
 
 		// Male Dr.Little
+
 		//		Tupel position = _drlittlepositionen.get(_random.nextInt((_drlittlepositionen.size())));
 		//		int x = position.getX();
 		//		int y = position.getY();
@@ -146,6 +147,7 @@ public class Raumbilderzeuger
 			y = position.getY();
 			g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
 		}
+
 
 		//Male Maus
 
@@ -282,11 +284,13 @@ public class Raumbilderzeuger
 		return ergebnis;
 	}
 
+
 	/**
 	 * Lädt ein Bild aus einer Datei und gibt dieses Bild zurück
 	 * @param pfad
 	 * @return -Das geladene Bild
 	 */
+
 	private BufferedImage ladeBild(String pfad)
 	{
 		try
@@ -309,6 +313,7 @@ public class Raumbilderzeuger
 	 * @param hoehebreite
 	 * @return ein neu skaliertes Bild vom zuletzt gemaltem Raum
 	 */
+
 	public BufferedImage ZeichneBildErneut(int hoehebreite)
 	{
 		_breitehoehe = hoehebreite;
@@ -365,6 +370,11 @@ public class Raumbilderzeuger
 		{
 			return _y;
 		}
+	}
+
+	public void setPaket(ClientPaket paket)
+	{
+		_paket = paket;
 	}
 
 }

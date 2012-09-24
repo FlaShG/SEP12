@@ -105,8 +105,9 @@ public class ClientGUI extends Client
 	 */
 	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
+		_bilderzeuger = new Raumbilderzeuger();
+		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
-		zeigeAn(paket);
 	}
 
 	@Override
@@ -282,8 +283,6 @@ public class ClientGUI extends Client
 	 */
 	void initialisiereUI()
 	{
-
-		_bilderzeuger = new Raumbilderzeuger();
 		_bp = new BefehlsPanel();
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();

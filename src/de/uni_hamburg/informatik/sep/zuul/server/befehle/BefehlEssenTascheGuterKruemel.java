@@ -9,8 +9,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlEssenTascheGuterKruemel implements Befehl
 {
 
-	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN
-			+ " tasche guter krümel";
+	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN_TASCHE_GUT;
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,

@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -12,7 +13,7 @@ public class BefehlAblegenKruemel implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		kontext.getAktuellenRaumZu(spieler).addItem(
-				spieler.getInventar().getAnyKuchen());
+				spieler.getInventar().getAnyUKuchen());
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 
 		return true;
@@ -28,15 +29,18 @@ public class BefehlAblegenKruemel implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().isGefuellt()
-				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN + " krümel");
+		return (spieler.getInventar().has(Item.UGiftkuchen) || spieler
+				.getInventar().has(Item.UKuchen))
+				&& befehlszeile.getZeile().equals(
+						TextVerwalter.BEFEHL_ABLEGEN + " krümel");
 	}
 
 	@Override
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN + " krümel");
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN
+				+ " krümel");
 	}
 
 	@Override
