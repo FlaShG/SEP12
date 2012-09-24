@@ -15,7 +15,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -42,7 +41,7 @@ public class Spiel
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
-	private Map<Spieler, String> _nachrichtenMap;
+	//	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
 	private final Server _server;
 
@@ -55,7 +54,7 @@ public class Spiel
 		_server = server;
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		_nachrichtenMap = new HashMap<Spieler, String>();
+		//		_nachrichtenMap = new HashMap<Spieler, String>();
 		//TODO in map schreiben
 		setGestartet(false);
 	}
@@ -101,10 +100,8 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_logik.erstelleKontext();
-		_logik.zeigeWillkommensText();
-		zeigeWillkommensText();
 		setGestartet(true);
+		zeigeWillkommensText();
 	}
 
 	/**
@@ -112,11 +109,12 @@ public class Spiel
 	 */
 	private void zeigeWillkommensText()
 	{
-		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
+		//		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
 
-		for(Spieler spieler : _nachrichtenMap.keySet())
+		for(Spieler spieler : _spielerMap.values())
 		{
-			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.EINLEITUNGSTEXT);
 		}
 	}
 
@@ -130,8 +128,9 @@ public class Spiel
 	 */
 	public void setNachrichtFuer(Spieler spieler, String nachricht)
 	{
-		_nachrichtenMap.remove(spieler); //altes entfernen
-		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
+		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
+		//		_nachrichtenMap.remove(spieler); //altes entfernen
+		//		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
 	}
 
 	/**
@@ -183,8 +182,7 @@ public class Spiel
 			}
 		}
 		else
-			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
-					TextVerwalter.FALSCHEEINGABE);
+			setNachrichtFuer(spieler, TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class Spiel
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
-		String nachricht = _nachrichtenMap.get(spieler); // hole die nacricht für den spieler
+		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
@@ -224,11 +222,6 @@ public class Spiel
 			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
 			return false;
 		}
-	}
-
-	void registerFeature(Feature feature)
-	{
-
 	}
 
 	/**

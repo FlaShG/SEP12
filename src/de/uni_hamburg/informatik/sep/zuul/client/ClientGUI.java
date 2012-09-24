@@ -22,6 +22,12 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class ClientGUI extends Client
 {
 
+	private Hauptfenster _hf;
+	private KonsolenPanel _kp;
+	private BildPanel _bildPanel;
+	private BefehlsPanel _bp;
+
+	
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
@@ -34,9 +40,17 @@ public class ClientGUI extends Client
 	@Override
 	public void schreibeText(String text)
 	{
+		for(String zeile: text.split("\n"))
+			schreibeTextNL(zeile);
+	}
 
+	/**
+	 * @param text
+	 */
+	private void schreibeTextNL(String text)
+	{
 		JTextArea anzeige = _kp.getAnzeigeArea();
-		anzeige.append(text);
+		anzeige.append(text+"\r\n");
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
 	}
 
@@ -111,10 +125,6 @@ public class ClientGUI extends Client
 		}
 	}
 
-	private Hauptfenster _hf;
-	private KonsolenPanel _kp;
-	private BildPanel _bildPanel;
-	private BefehlsPanel _bp;
 
 	/**
 	 * 

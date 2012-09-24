@@ -99,7 +99,7 @@ final class BefehlGehe implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KEINERICHTUNG);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINERICHTUNG);
 	}
 
 	@Override

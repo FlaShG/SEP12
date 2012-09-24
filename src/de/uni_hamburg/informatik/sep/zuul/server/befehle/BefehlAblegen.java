@@ -19,7 +19,7 @@ final class BefehlAblegen implements Befehl
 	{
 		kontext.getAktuellenRaumZu(spieler).addItem(
 				spieler.getInventar().getAnyKuchen());
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.ABLEGEN_TEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 
 		return true;
 	}
@@ -42,8 +42,7 @@ final class BefehlAblegen implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.NICHTS_ZUM_ABLEGEN);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN);
 	}
 
 	@Override

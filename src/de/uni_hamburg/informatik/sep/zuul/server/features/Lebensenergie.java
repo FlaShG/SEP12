@@ -37,8 +37,7 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 		}
 
 		if(hasRoomChanged)
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.RAUMWECHSELTEXT + spieler.getLebensEnergie());
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.RAUMWECHSELTEXT + spieler.getLebensEnergie());
 
 		return true;
 	}

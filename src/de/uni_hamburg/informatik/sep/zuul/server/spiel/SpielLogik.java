@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
@@ -15,7 +13,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class SpielLogik
 {
@@ -83,7 +80,6 @@ public class SpielLogik
 		return raumbauer.getStartRaum();
 	}
 
-
 	/**
 	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
 	 * Räumen zurück.
@@ -113,18 +109,6 @@ public class SpielLogik
 		for(Spieler spieler : _kontext.getSpielerListe())
 		{
 			beendeSpiel(spieler);
-		}
-	}
-
-	/**
-	 * Zeige allen Spielern den Willkommenstext.
-	 * 
-	 */
-	public void zeigeWillkommensText()
-	{
-		for(Spieler spieler : _kontext.getSpielerListe())
-		{
-			_kontext.zeigeWillkommensText(spieler);
 		}
 	}
 
@@ -188,12 +172,12 @@ public class SpielLogik
 		if(feature instanceof TickListener)
 			_tickListeners.add((TickListener) feature);
 		if(feature instanceof BefehlAusgefuehrtListener)
-			_befehlAusgefuehrtListeners.add((BefehlAusgefuehrtListener) feature);
-		
+			_befehlAusgefuehrtListeners
+					.add((BefehlAusgefuehrtListener) feature);
+
 		// TODO: Feature registrieren ( Lebenspunkte, ... )
 	}
 
-	
 	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
 	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
 
@@ -206,17 +190,19 @@ public class SpielLogik
 		{
 			tickListener.tick(_kontext);
 		}
-		
+
 	}
 
-	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, Befehl befehl, boolean hasRoomChanged)
+	void fuehreBefehlAusgefuehrtListenerAus(Spieler spieler, Befehl befehl,
+			boolean hasRoomChanged)
 	{
 		// Führe alle BefehlAusgefuehrtListener aus.
 		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : _befehlAusgefuehrtListeners)
 		{
-			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler, befehl, hasRoomChanged))
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler,
+					befehl, hasRoomChanged))
 				return;
 		}
 	}
-	
+
 }

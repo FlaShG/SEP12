@@ -56,11 +56,13 @@ public class Raumbilderzeuger
 	public Raumbilderzeuger(ClientPaket paket, boolean vorschau)
 	{
 		_paket = paket;
+
         _istVorschau = vorschau;
         
 		_drlittlepositionen = new LinkedList<>();
 		_mauspositionen = new LinkedList<>();
 		_itemPositionen = new LinkedList<>();
+
 
 		_random = new Random();
 
