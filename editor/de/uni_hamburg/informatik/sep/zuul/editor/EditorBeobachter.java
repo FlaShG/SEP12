@@ -5,4 +5,6 @@ public interface EditorBeobachter
 	public void raumwahlUpdate();
 
 	public void eigenschaftUpdate();
+
+	public void verschiebenUpdate(int x, int y);
 }
