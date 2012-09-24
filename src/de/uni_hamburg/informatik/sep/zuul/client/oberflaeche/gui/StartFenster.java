@@ -18,6 +18,7 @@ public class StartFenster
 	private StartfensterUI _ui;
 
 	private String _ipAdresse;
+	private int _port;
 	private String _spielername;
 
 	public StartFenster()
@@ -25,7 +26,8 @@ public class StartFenster
 		_ui = new StartfensterUI();
 		
 		_ipAdresse = "127.0.0.1";
-
+		_port = 1090;
+		
 		initialisiereUI();
 	}
 
@@ -84,11 +86,12 @@ public class StartFenster
 				if(arg0.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					pruefeIP();
+					pruefePort();
 					_spielername = _ui.getSpielerNameTextField().getText();
 					
 					try
 					{
-						new ClientGUI("RmiServer", _ipAdresse, 1090, _spielername);
+						new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
 					}
 					catch(MalformedURLException | RemoteException
 							| NotBoundException e)
@@ -122,6 +125,29 @@ public class StartFenster
 								}
 							}
 						}
+						return null;
+					}
+				};
+
+				worker.execute();
+			}
+			
+			private void pruefePort()
+			{
+				SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>()
+				{
+
+					@Override
+					protected Void doInBackground() throws Exception
+					{
+						String eingabe = _ui.getPortTextField().getText();
+						
+						if (eingabe.matches("109[0-9]"))
+						{
+							_port = Integer.parseInt(eingabe);
+							System.out.println(eingabe);
+						}
+						
 						return null;
 					}
 				};
