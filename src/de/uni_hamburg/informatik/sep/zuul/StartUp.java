@@ -27,8 +27,10 @@ public class StartUp
 			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
 					args[3]);
 		}
-
-		new StartFenster();
+		else
+		{
+			new StartFenster();
+		}
 
 	}
 
