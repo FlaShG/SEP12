@@ -1,16 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
-import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
-import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
@@ -36,22 +34,21 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public class Spiel
+public class Spiel extends Observable
 {
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	//	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
-	private final Server _server;
 
 	/**
 	 * Erzeuge ein neues Spiel
-	 * @param server 
+	 * 
+	 * @param server
 	 */
-	public Spiel(Server server)
+	public Spiel()
 	{
-		_server = server;
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
 		setGestartet(false);
@@ -151,28 +148,16 @@ public class Spiel
 					_logik.getKontext(), spieler, befehlszeile, befehl);
 
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-			
+
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
-			
+
 			if(befehl instanceof BefehlSchauen)
 			{
-				// TODO schicke clienpaket mit vorschau
-				Map<String, ClientInterface> clients = _server.getConnectedClients();
-				String name = spieler.getName();
-				ClientInterface clientInterface = clients.get(name);
-				try
-				{
-					clientInterface.zeigeVorschau(new ClientPaket(_logik.getKontext(), spieler, null));
-				}
-				catch(RemoteException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				setChanged();
+				notifyObservers(spieler.getName());
 			}
 		}
 		else
