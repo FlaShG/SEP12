@@ -103,9 +103,10 @@ public class ClientGUI extends Client
 	/**
 	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
 	 */
-	public void starteClientUI() throws RemoteException
+	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
 		initialisiereUI();
+		zeigeAn(paket);
 	}
 
 	@Override

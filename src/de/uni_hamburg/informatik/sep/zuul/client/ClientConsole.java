@@ -69,11 +69,11 @@ public class ClientConsole extends Client
 	@Override
 	public boolean zeigeVorschau(ClientPaket paket) throws RemoteException
 	{
-		return true;
+		return zeigeAn(paket);
 	}
 
 	@Override
-	public void starteClientUI() throws RemoteException
+	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
 		// TODO Auto-generated method stub
 		
