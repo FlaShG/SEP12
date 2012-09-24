@@ -35,7 +35,8 @@ public class ClientGUI extends Client
 	private BefehlsPanel _bp;
 
 	private Raumbilderzeuger _bilderzeuger;
-	private Map<String, JButton> _befehlButtonMap;
+	private Map<String, JButton> _befehlButtonMap = new HashMap<String, JButton>();
+
 
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
@@ -98,9 +99,6 @@ public class ClientGUI extends Client
 
 			}
 		});
-
-		_befehlButtonMap = new HashMap<String, JButton>();
-
 	}
 
 	/**
