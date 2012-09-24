@@ -175,10 +175,17 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
+		
+
+		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
+		
+		
+		
 		if(vorschau)
 		{
 			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(_bildPanel.getLabelFuerIcon().getHeight(), paket,
 						vorschau));
+			
 		}
 		else
 		{
@@ -194,8 +201,6 @@ public class ClientGUI extends Client
 						_bildPanel.getLabelFuerIcon().getWidth(), paket,
 						vorschau));
 		}
-
-		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 	}
 
 	private void setzeBefehlsverfuegbarkeit(

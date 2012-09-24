@@ -31,6 +31,7 @@ public class ClientPaket implements Remote, Serializable
 	private String _spielerName;
 	private String[] _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
+	
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
