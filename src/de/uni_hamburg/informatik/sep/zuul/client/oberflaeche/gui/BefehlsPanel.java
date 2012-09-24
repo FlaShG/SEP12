@@ -374,4 +374,27 @@ public class BefehlsPanel extends JPanel
 		return _ablegenUnbekanntButton;
 	}
 
+	/**
+	 * @return the normalButtons
+	 */
+	public JButton[] getNormalButtons()
+	{
+		return _normalButtons;
+	}
+
+	/**
+	 * @return the extraButtons
+	 */
+	public JButton[] getExtraButtons()
+	{
+		return _extraButtons;
+	}
+
+	/**
+	 * @return the systemButtons
+	 */
+	public JButton[] getSystemButtons()
+	{
+		return _systemButtons;
+	}
 }

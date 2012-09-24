@@ -33,7 +33,8 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 	@Override
 	public void tick(ServerKontext kontext)
 	{
-		if(!_satt && !istEinSpielerImRaum(kontext, _raum))
+															// dirty fix
+		if(!_satt && !istEinSpielerImRaum(kontext, _raum) && _raum != null)
 		{
 			bewegeKatze(kontext);
 		}
