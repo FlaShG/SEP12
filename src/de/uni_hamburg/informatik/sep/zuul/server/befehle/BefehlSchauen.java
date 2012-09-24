@@ -24,10 +24,10 @@ public final class BefehlSchauen implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		String richtung = extrahiereRichtung(befehlszeile);
-		return befehlszeile.getGeparsteZeile().size() == 2
-				&& richtung != null && getRaumFuerRichtung(kontext, spieler, richtung) != null;
+		return befehlszeile.getGeparsteZeile().size() == 2 && richtung != null
+				&& getRaumFuerRichtung(kontext, spieler, richtung) != null;
 	}
-	
+
 	/**
 	 * @param befehlszeile
 	 */
@@ -43,17 +43,18 @@ public final class BefehlSchauen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		
+
 		//TODO auslagern in Methoden
 		String richtung = extrahiereRichtung(befehlszeile);
 		Raum nebenRaum = getRaumFuerRichtung(kontext, spieler, richtung);
-		
-		BefehlFactory.schreibeNL(kontext, spieler, 
-				"Dr.Little schaut nach " + richtung + "en.");
-		BefehlFactory.schreibeNL(kontext, spieler, "Er sieht: " + nebenRaum.getName());
+
+		BefehlFactory.schreibeNL(kontext, spieler, "Dr.Little schaut nach "
+				+ richtung + "en.");
+		BefehlFactory.schreibeNL(kontext, spieler,
+				"Er sieht: " + nebenRaum.getName());
 
 		Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
-		BefehlFactory.schreibeNL(kontext, spieler, 
+		BefehlFactory.schreibeNL(kontext, spieler,
 				"Zu sehen " + (raumItems.size() == 1 ? "ist" : "sind") + ":");
 
 		int anzahlKruemel = 0;
@@ -89,7 +90,8 @@ public final class BefehlSchauen implements Befehl
 
 		if(anzahlKruemel != 0)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, anzahlKruemel + " Krümel");
+			BefehlFactory.schreibeNL(kontext, spieler, anzahlKruemel
+					+ " Krümel");
 			hatDinge = true;
 		}
 
@@ -99,15 +101,16 @@ public final class BefehlSchauen implements Befehl
 			hatDinge = true;
 		}
 
-		//			if(nebenRaum.hasKatze())
-		//			{
-		//				BefehlFactory.schreibeNL(kontext, spieler, "Eine Katze");
-		//				hatDinge = true;
-		//			}
+		if(nebenRaum.hasKatze())
+		{
+			BefehlFactory.schreibeNL(kontext, spieler, "Eine Katze");
+			hatDinge = true;
+		}
 
 		if(!hatDinge)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, "nur uninteressante Sachen");
+			BefehlFactory.schreibeNL(kontext, spieler,
+					"nur uninteressante Sachen");
 		}
 		return false;
 	}
@@ -129,14 +132,16 @@ public final class BefehlSchauen implements Befehl
 			Befehlszeile befehlszeile)
 	{
 
-		if( befehlszeile.getGeparsteZeile().size() < 2)
+		if(befehlszeile.getGeparsteZeile().size() < 2)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KEINESCHAURICHTUNG);
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.KEINESCHAURICHTUNG);
 		}
 		// Keine gültige Richtung!
 		else if(extrahiereRichtung(befehlszeile) == null)
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KEINRAUMZUMSCHAUN);
-		
+			BefehlFactory.schreibeNL(kontext, spieler,
+					TextVerwalter.KEINRAUMZUMSCHAUN);
+
 	}
 
 	@Override
