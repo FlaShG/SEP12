@@ -105,8 +105,8 @@ public class ClientGUI extends Client
 	 */
 	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
+		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
-		zeigeAn(paket);
 	}
 
 	@Override
