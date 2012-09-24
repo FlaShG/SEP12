@@ -146,6 +146,7 @@ public class ClientGUI extends Client
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
 		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		_bp.setLebensenergie(paket.getLebensEnergie());
 		
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
