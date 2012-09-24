@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
+import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
 public class StartFenster
 {
@@ -34,6 +37,7 @@ public class StartFenster
 
 	private void initialisiereUI()
 	{
+
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
@@ -42,12 +46,23 @@ public class StartFenster
 			{
 				try
 				{
+					new Server();
+				}
+				catch(RemoteException | AlreadyBoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				try
+				{
 					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
 				}
+
 				finally
 				{
 					_ui.dispose();
@@ -147,6 +162,26 @@ public class StartFenster
 			{
 				// TODO Auto-generated method stub
 
+			}
+		});
+
+		_ui.getServerButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					new Server();
+				}
+				catch(RemoteException | AlreadyBoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				_ui.getServerButton().setEnabled(false);
 			}
 		});
 
