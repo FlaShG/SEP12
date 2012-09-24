@@ -205,8 +205,6 @@ public class SpielLogik
 
 	void fuehreTickListenerAus()
 	{
-		System.out.println("Tick");
-
 		// Führe alle TickListener aus.
 		for(TickListener tickListener : _tickListeners)
 		{

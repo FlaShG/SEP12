@@ -23,7 +23,7 @@ public final class BefehlFactory
 				new BefehlBeenden(), new BefehlGib(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
 				new BefehlFuettereKatze(), new BefehlFuettereMaus(),
-				new BefehlAblegen() };
+				new BefehlAblegen(), new BefehlSchauen() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
