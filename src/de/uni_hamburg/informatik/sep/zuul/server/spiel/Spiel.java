@@ -47,8 +47,6 @@ public class Spiel
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		//		_nachrichtenMap = new HashMap<Spieler, String>();
-		//TODO in map schreiben
 		setGestartet(false);
 	}
 
@@ -102,8 +100,6 @@ public class Spiel
 	 */
 	private void zeigeWillkommensText()
 	{
-		//		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
-
 		for(Spieler spieler : _spielerMap.values())
 		{
 			_logik.getKontext().schreibeAnSpieler(spieler,
@@ -122,8 +118,6 @@ public class Spiel
 	public void setNachrichtFuer(Spieler spieler, String nachricht)
 	{
 		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
-		//		_nachrichtenMap.remove(spieler); //altes entfernen
-		//		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
 	}
 
 	/**
