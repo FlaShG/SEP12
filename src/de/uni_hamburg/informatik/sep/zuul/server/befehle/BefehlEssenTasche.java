@@ -12,8 +12,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlEssenTasche implements Befehl
 {
 
-	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN + " "
-			+ TextVerwalter.ORT_TASCHE;
+	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN_TASCHE;
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,

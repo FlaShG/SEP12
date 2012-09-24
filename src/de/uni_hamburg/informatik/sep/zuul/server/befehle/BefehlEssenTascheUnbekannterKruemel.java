@@ -6,10 +6,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlEssenTascheSchlechterKruemel implements Befehl
+public class BefehlEssenTascheUnbekannterKruemel implements Befehl
 {
-
-	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN_TASCHE_SCHLECHT;
+private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN_TASCHE_UNBEKANNT;
 	
 
 	@Override
@@ -17,23 +16,31 @@ public class BefehlEssenTascheSchlechterKruemel implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		return befehlszeile.getZeile().equals(BEFEHLSNAME)
-				&& spieler.getInventar().has(Item.IGiftkuchen);
+				&& (spieler.getInventar().has(Item.UKuchen)||spieler.getInventar().has(Item.UGiftkuchen));
 	}
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		esseSchlechterKruemel(kontext, spieler);
+		esseUnbekannterKruemel(kontext, spieler);
 		return true;
 	}
 
-	private void esseSchlechterKruemel(ServerKontext kontext, Spieler spieler)
+	private void esseUnbekannterKruemel(ServerKontext kontext, Spieler spieler)
 	{
-		if(spieler.getInventar().getKuchen(Item.IGiftkuchen) != null)
+		Item kuchen = spieler.getInventar().getAnyUKuchen();
+		if(kuchen == Item.UGiftkuchen)
 		{
 			spieler.setLebensEnergie(spieler.getLebensEnergie()
 					- SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter
+			.kuchengegessentext(spieler.getLebensEnergie()));
+		}
+		else if(kuchen == Item.UKuchen) 
+		{
+			spieler.setLebensEnergie(spieler.getLebensEnergie()
+					+ SpielLogik.KUCHEN_ENERGIE_GEWINN);
 			kontext.schreibeAnSpieler(spieler, TextVerwalter
 			.kuchengegessentext(spieler.getLebensEnergie()));
 		}
@@ -57,5 +64,4 @@ public class BefehlEssenTascheSchlechterKruemel implements Befehl
 	{
 		return TextVerwalter.HILFE_EAT;
 	}
-
 }
