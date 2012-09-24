@@ -59,7 +59,6 @@ public final class BefehlFactory
 		for(String befehlsname : befehlsnamen)
 		{
 			Befehl befehl = _map.get(befehlsname);
-			boolean b = _map.containsKey(befehlsname);
 
 			if(befehl != null)
 			{
