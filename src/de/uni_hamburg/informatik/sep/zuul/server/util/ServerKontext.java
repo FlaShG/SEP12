@@ -20,7 +20,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 public class ServerKontext
 {
 
-	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
+	private Map<Spieler, String> _nachrichtenCache = new HashMap<Spieler, String>();
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 	private ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
