@@ -42,7 +42,9 @@ public class ClientGUI extends Client
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-
+		
+		_befehlButtonMap = new HashMap<String, JButton>();
+		
 		if(!serverIP.equals("127.0.0.1"))
 		{
 			startFenster();
@@ -52,7 +54,8 @@ public class ClientGUI extends Client
 			login();
 			_server.empfangeStartEingabe(_clientName);
 		}
-
+		
+		
 	}
 
 	private void startFenster() throws RemoteException
@@ -98,8 +101,6 @@ public class ClientGUI extends Client
 
 			}
 		});
-
-		_befehlButtonMap = new HashMap<String, JButton>();
 
 	}
 
