@@ -84,7 +84,7 @@ public class ClientGUI extends Client
 				try
 				{
 					_server.empfangeStartEingabe(_clientName);
-					starte();
+					starteClientUI();
 				}
 				catch(RemoteException e)
 				{
@@ -106,7 +106,7 @@ public class ClientGUI extends Client
 	/**
 	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
 	 */
-	public void starte() throws RemoteException
+	public void starteClientUI() throws RemoteException
 	{
 		initialisiereUI();
 	}

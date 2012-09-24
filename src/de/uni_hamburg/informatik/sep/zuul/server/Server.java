@@ -135,7 +135,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	{
 		for(ClientInterface c : _connectedClients.values())
 		{
-			c.starte();
+			c.starteClientUI();
 		}
 	}
 
