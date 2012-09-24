@@ -17,7 +17,26 @@ public class BefehlEssenBoden implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		return befehlszeile.getZeile().equals(BEFEHLSNAME);
+		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		boolean hasKuchen = false;
+		for(Item item: aktuellerRaum.getItems())
+		{
+			if(isKuchen(item))
+			{
+				hasKuchen = true;
+				break;
+			}
+		}
+		return befehlszeile.getZeile().equals(BEFEHLSNAME) && hasKuchen;
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	private boolean isKuchen(Item item)
+	{
+		return item == Item.IGiftkuchen || item == Item.UGiftkuchen || item == Item.IKuchen || item == Item.UKuchen;
 	}
 
 	@Override
