@@ -227,15 +227,15 @@ public class Inventar
 	@Override
 	public String toString()
 	{
-		String inhalt = "";
-
+		StringBuilder builder = new StringBuilder();
+		
 		for(Item i : _inhalt)
 		{
-			inhalt += i + ", ";
+			builder.append(i).append(", ");
 		}
 
-		if (inhalt.length() > 2)
-			inhalt = inhalt.substring(0, inhalt.length()-2);
-		return inhalt;
+		if (builder.length() > 2)
+			builder.setLength(builder.length() -2);
+		return builder.toString();
 	}
 }

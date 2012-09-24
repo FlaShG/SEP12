@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.befehle;
+package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import org.junit.Before;
 import org.junit.Test;

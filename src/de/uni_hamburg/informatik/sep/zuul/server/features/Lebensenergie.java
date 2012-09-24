@@ -15,7 +15,7 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 	 * Jedes Weitergehen zieht dem {@link Spieler} ein Leben ab.
 	 */
 	@Override
-	public void raumGeaendertListener(ServerKontext kontext, Spieler spieler,
+	public void raumGeaendert(ServerKontext kontext, Spieler spieler,
 			Raum alterRaum, Raum neuerRaum)
 	{
 		spieler.setLebensEnergie(spieler.getLebensEnergie()

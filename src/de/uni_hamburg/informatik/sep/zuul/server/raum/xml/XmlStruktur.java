@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class XmlStruktur
 {
 	private @XmlElement(name = "maeuse") int _maeuse;
+	private @XmlElement(name = "katzen") int _katzen;
 	private @XmlElement(name = "xmlraum")
 	List<XmlRaum> _raeume;
 
@@ -35,8 +36,19 @@ public class XmlStruktur
 		return _maeuse;
 	}
 
-	public void setMaeuse(int _maeuse)
+	public void setMaeuse(int maeuse)
 	{
-		this._maeuse = _maeuse;
+		this._maeuse = maeuse;
+	}
+	
+	@XmlTransient
+	public int getKatzen()
+	{
+		return _katzen;
+	}
+
+	public void setKatzen(int katzen)
+	{
+		_katzen = katzen;
 	}
 }
