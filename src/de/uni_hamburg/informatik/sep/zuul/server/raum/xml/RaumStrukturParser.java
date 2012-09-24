@@ -49,6 +49,14 @@ public class RaumStrukturParser
 	{
 		_root.setRaeume(raeume);
 	}
+	
+	/**
+	 * Setzt die Anzahl Mäuse für dieses Level.
+	 */
+	public void setAnzahlMaeuse(int maeuse)
+	{
+		_root.setMaeuse(maeuse);
+	}
 
 	/**
 	 * Gibt die Azahl der Mäuse für dieses Level zurück.
@@ -73,13 +81,21 @@ public class RaumStrukturParser
 	{
 		return _root.getKatzen();
 	}
-
+	
 	/**
-	 * Setzt die Anzahl Mäuse für dieses Level.
+	 * Ohmagawd.
 	 */
-	public void setAnzahlMaeuse(int maeuse)
+	public int getLebenspunkte()
 	{
-		_root.setMaeuse(maeuse);
+		return _root.getLeben();
+	}
+	
+	/**
+	 * So fresh.
+	 */
+	public void setLebensenergie(int leben)
+	{
+		_root.setLeben(leben);
 	}
 
 	/**
@@ -188,4 +204,5 @@ public class RaumStrukturParser
 			return false;
 		}
 	}
+
 }

@@ -165,6 +165,7 @@ public class EditorFenster implements EditorBeobachter
 			raum.setItems(items);
 		}
 
+		_leveldaten.setLeben(_ui.getLevelPanel().getLebenspunkte());
 		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
 		_leveldaten.setKatzen(_ui.getLevelPanel().getKatzenzahl());
 	}
@@ -187,6 +188,7 @@ public class EditorFenster implements EditorBeobachter
 
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
+		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
 		_leveldaten = editorLevel;
