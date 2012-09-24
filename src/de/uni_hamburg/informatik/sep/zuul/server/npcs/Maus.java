@@ -39,7 +39,7 @@ public class Maus
 			}
 		};
 
-		_richtung = _pathFinder.getRichtung();
+		_richtung = PathFinder.getRichtung(_pathFinder.findPath(_aktuellerRaum));
 	}
 
 	public void setNeuerRaum(Raum neuerRaum)
