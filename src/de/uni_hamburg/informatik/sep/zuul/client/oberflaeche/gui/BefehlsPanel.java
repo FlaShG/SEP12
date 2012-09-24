@@ -62,7 +62,7 @@ public class BefehlsPanel extends JPanel
 		setSize(682, 512);
 
 		_labelFuerLebensenergie = new JLabel();
-		_labelFuerLebensenergie.setLocation(0, 0);
+		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
