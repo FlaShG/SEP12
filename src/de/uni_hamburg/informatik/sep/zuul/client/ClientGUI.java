@@ -176,17 +176,13 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
-		
-
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
-		
-		
-		
+
 		if(vorschau)
 		{
-			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(_bildPanel.getLabelFuerIcon().getHeight(), paket,
-						vorschau));
-			
+			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(_bildPanel
+					.getLabelFuerIcon().getHeight(), paket, vorschau));
+
 		}
 		else
 		{
@@ -416,14 +412,9 @@ public class ClientGUI extends Client
 			public void componentResized(ComponentEvent arg0)
 			{
 				// TODO: bild neuzeichen ohne client paket
-				if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-					_bildPanel.setRaumanzeige(_bilderzeuger
-							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
-									.getHeight()));
-				else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-					_bildPanel.setRaumanzeige(_bilderzeuger
-							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
-									.getWidth()));
+				int val = getOptimalIconSize();
+
+				_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(val));
 			}
 
 		});
@@ -486,7 +477,7 @@ public class ClientGUI extends Client
 				}
 			}
 		});
-		
+
 		_bildPanel.getSchauenLabel().addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -579,4 +570,38 @@ public class ClientGUI extends Client
 		}
 	}
 
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		int val = getOptimalIconSize();
+		if(duHastGewonnen)
+		{
+			_bildPanel.setRaumanzeige(_bilderzeuger.getWinScreen(val));
+		}
+		else
+		{
+			_bildPanel.setRaumanzeige(_bilderzeuger.getGameOverScreen(val));
+		}
+		//TODO continue
+
+		for(JButton button : _befehlButtonMap.values())
+		{
+			if(button != _bp.getQuitButton())
+				button.setEnabled(false);
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	private int getOptimalIconSize()
+	{
+		int val = 0;
+		if(_bildPanel.getWidth() > _bildPanel.getHeight()
+				&& _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
+			val = _bildPanel.getLabelFuerIcon().getHeight();
+		else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
+			val = _bildPanel.getLabelFuerIcon().getWidth();
+		return val;
+	}
 }

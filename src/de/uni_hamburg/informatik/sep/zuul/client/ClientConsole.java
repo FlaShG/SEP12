@@ -76,7 +76,14 @@ public class ClientConsole extends Client
 	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 }
