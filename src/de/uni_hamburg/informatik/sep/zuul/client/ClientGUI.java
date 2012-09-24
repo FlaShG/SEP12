@@ -10,6 +10,9 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
@@ -21,21 +24,63 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ClientGUI extends Client
 {
-
+	
 	private Hauptfenster _hf;
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
+	private JButton _startButton;
 
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		initialisiereUI();
+		
+		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
+		
+		JPanel panel = new JPanel();
+		
+		final JButton _startButton = new JButton("Los gehts!");
+		
+		panel.add(_startButton);
+		
+		startFrame.setContentPane(panel);
+		
+		login();
+		
+		_startButton.addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_startButton.setEnabled(false);
+				
+				try
+				{
+					_server.empfangeStartEingabe(_clientName);
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+			}
+		});
+		
+		
 
 	}
-
+	
+	
+	public void starte()
+	{
+		initialisiereUI();
+	}
+	
 	@Override
 	public void schreibeText(String text)
 	{

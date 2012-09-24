@@ -15,10 +15,10 @@ public class StartFenster
 	private String _ipAdresse;
 	private int _port;
 	private String _spielername;
-	private boolean _bestaetigt;
 
 	/**
-	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und Multiplayer
+	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und
+	 * Multiplayer
 	 */
 	public StartFenster()
 	{
@@ -26,7 +26,6 @@ public class StartFenster
 
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
-		_bestaetigt = false;
 
 		initialisiereUI();
 	}
@@ -67,30 +66,15 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if(_bestaetigt)
-				{
-					_ui.dispose();
+				_ui.dispose();
 
-					try
-					{
-						new ClientGUI("RmiServer", _ipAdresse, _port,
-								_spielername);
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-				else
+				try
 				{
-					_spielername = _ui.getSpielerNameTextField().getText();
-					_ui.getBestaetigen().setText("Los gehts!");
-					
-					_ui.getIPTextField().setEnabled(false);
-					_ui.getSpielerNameTextField().setEnabled(false);
-					_ui.getPortTextField().setEnabled(false);
-					
-					_bestaetigt = true;
+					new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
 				}
 
 			}
