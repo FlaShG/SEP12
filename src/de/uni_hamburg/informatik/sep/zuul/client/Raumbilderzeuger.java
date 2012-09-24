@@ -2,10 +2,12 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -17,15 +19,14 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 public class Raumbilderzeuger
 {
 
+
 	private final String PATH = getClass().getResource("bilder/").getPath();
 
-	private final BufferedImage RAUMNORMAL = ladeBild(PATH + "raum_normal.png");
-	private final BufferedImage RAUMSTART = ladeBild(PATH + "raum_labor.png");
-	private final BufferedImage RAUMENDE = ladeBild(PATH + "raum_ende.png");
 	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "door_n.png");
 	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "door_e.png");
 	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "door_s.png");
 	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "door_w.png");
+	private final BufferedImage SCHAUENSCHATTEN = ladeBild(PATH + "peek.png");
 
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
 	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
@@ -35,13 +36,6 @@ public class Raumbilderzeuger
 	private final BufferedImage DREVENBIGGER = ladeBild(PATH
 			+ "drevenbigger.png");
 
-	private BufferedImage _currentDrlittle;
-	private BufferedImage _currentMaus;
-	private BufferedImage _currentKatze;
-	private BufferedImage _currentDrevenbigger;
-
-	private BufferedImage _currentKruemel;
-	private BufferedImage _currentGegengift;
 
 	private LinkedList<Tupel> _drlittlepositionen;
 	private LinkedList<Tupel> _mauspositionen;
@@ -51,70 +45,67 @@ public class Raumbilderzeuger
 	private Random _random;
 
 	private ClientPaket _paket;
-	private boolean _istVorschau;
+	private boolean _schauenAnsicht;
 
-	public Raumbilderzeuger(ClientPaket paket, boolean vorschau)
+	public Raumbilderzeuger()
 	{
-		_paket = paket;
-
 		_drlittlepositionen = new LinkedList<Tupel>();
 		_mauspositionen = new LinkedList<Tupel>();
 		_itemPositionen = new LinkedList<Tupel>();
-
 		_random = new Random();
 
 	}
 
-	public BufferedImage getRaumansicht(int breitehoehe)
+	public BufferedImage getRaumansicht(int breitehoehe, ClientPaket paket,
+			boolean vorschau)
 	{
+		_paket = paket;
 		if(breitehoehe == 0)
 			_breitehoehe = 3;
 		_breitehoehe = breitehoehe;
+		_schauenAnsicht = vorschau;
 
 		return erzeugeRaumansicht();
-
 	}
 
 	private BufferedImage erzeugeRaumansicht()
 	{
 		BufferedImage raum = null;
 
-		//Grundraum nach Raumtyp erstellen : TODO skalieren...
-
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
 		{
 		case Normal:
-			raum = RAUMNORMAL;
+			raum = ladeBild(PATH + "raum_normal.png");
 			break;
 		case Start:
-			raum = RAUMSTART;
+			raum = ladeBild(PATH + "raum_labor.png");
 			break;
 		case Ende:
-			raum = RAUMENDE;
+			raum = ladeBild(PATH + "raum_ende.png");
 			break;
 		}
+		
+		
 
 		for(String richtung : _paket.getMoeglicheAusgaenge())
 		{
-			Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-
+			Graphics2D g2d = (Graphics2D) raum.getGraphics();
 			if(richtung.equals("nord"))
 			{
-
-				g2d2.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
+				g2d.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
 			}
 			else if(richtung.equals("ost"))
 			{
-				g2d2.drawImage(RAUMTUEROST, 570, 272, 50, 97, null);
+				g2d.drawImage(RAUMTUEROST, 570, 272, 50, 97, null);
 			}
 			else if(richtung.equals("süd"))
 			{
-				g2d2.drawImage(RAUMTUERSUED, 272, 570, 97, 50, null);
+				g2d.drawImage(RAUMTUERSUED, 272, 570, 97, 50, null);
 			}
 			else if(richtung.equals("west"))
 			{
-				g2d2.drawImage(RAUMTUERWEST, 20, 272, 50, 97, null);
+				g2d.drawImage(RAUMTUERWEST, 20, 272, 50, 97, null);
 			}
 
 		}
@@ -156,30 +147,46 @@ public class Raumbilderzeuger
 		{
 			switch (item)
 			{
-			case IKuchen:
-			case UKuchen:
-				anzahlKruemel++;
-				break;
-			case IGiftkuchen:
-			case UGiftkuchen:
-				anzahlKruemel++;
-				break;
-			case Gegengift:
-				gegengiftDa = true;
-				;
-				break;
-			default:
-				break;
+				case IKuchen:
+				case UKuchen:
+				case IGiftkuchen:
+				case UGiftkuchen:
+					anzahlKruemel++;
+					break;
+				case Gegengift:
+					gegengiftDa = true;
+					break;
+				default:
+					break;
 			}
 
 		}
-		maleKruemel(anzahlKruemel, raum);
+//		maleKruemel(anzahlKruemel, raum);
+		
+		for(int i = 0; i < anzahlKruemel; i++)
+		{
+			int rand = getRandomZahl(_itemPositionen.size());
+			Tupel itempos = _itemPositionen.remove(rand);
+			int x = itempos.getX();
+			int y = itempos.getY();
+			
+			Graphics2D g2d = (Graphics2D) raum.getGraphics();
+			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
+		}
+		
+		
 
 		if(gegengiftDa)
 		{
 			maleGegengiftundEvenBigger(raum);
 		}
 
+		if(_schauenAnsicht)
+		{
+			Graphics2D g2d = (Graphics2D) raum.getGraphics();
+			g2d.drawImage(SCHAUENSCHATTEN, 0, 0, 640, 640, null);
+		}
+		
 		raum = skaliereBild(raum, _breitehoehe);
 
 		return raum;
@@ -191,34 +198,25 @@ public class Raumbilderzeuger
 		return _random.nextInt(size);
 	}
 
-	private void skaliereBilder()
-	{
-		_currentDrlittle = skaliereBild(DRLITLE, _breitehoehe / 7);
-		_currentKatze = skaliereBild(KATZE, _breitehoehe / 7);
-		_currentMaus = skaliereBild(MAUS, _breitehoehe / 7);
-		_currentKruemel = skaliereBild(KRUEMEL, _breitehoehe / 14);
-		_currentGegengift = skaliereBild(GEGENGIFT, _breitehoehe / 14);
-	}
-
 	private void setPositionen()
 	{
+		_itemPositionen = new LinkedList<Tupel>();
 
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel((int) (_breitehoehe / 1.7),
-				(int) (_breitehoehe / 3.6)));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
-		_itemPositionen.add(new Tupel(_breitehoehe / 3, _breitehoehe / 3));
+		_itemPositionen.add(new Tupel(200,180));
+		_itemPositionen.add(new Tupel(155,250));
+		_itemPositionen.add(new Tupel(220,300));
+		_itemPositionen.add(new Tupel(165,395));
+		_itemPositionen.add(new Tupel(380,155));
+		_itemPositionen.add(new Tupel(330,230));
+		_itemPositionen.add(new Tupel(430,205));
+		_itemPositionen.add(new Tupel(300,375));
+		_itemPositionen.add(new Tupel(400,330));
+		_itemPositionen.add(new Tupel(430,440));
 
-		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
+		_mauspositionen.add(new Tupel(70,70));
+//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
+//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
+//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
 
 		_drlittlepositionen.add(new Tupel(73, 320));
 		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
@@ -303,26 +301,13 @@ public class Raumbilderzeuger
 
 	}
 
-	//	private BufferedImage faerbeEin(Color[] quellenfarben,
-	//			Color[] ersatzfarben, BufferedImage quelle)
-	//	{
-	//		for(int x = 0; x < quellenfarben.length; x++)
-	//		{
-	//
-	//			for(int i = 0; i < quelle.getHeight(); i++)
-	//			{
-	//				for(int j = 0; j < quelle.getWidth(); j++)
-	//				{
-	//					if(quelle.getRGB(i, j) == quellenfarben[x].getRGB())
-	//						quelle.setRGB(i, j, ersatzfarben[x].getRGB());
-	//				}
-	//			}
-	//		}
-	//
-	//		return quelle;
-	//	}
+	public BufferedImage ZeichneBildErneut(int hoehebreite)
+	{
+		_breitehoehe = hoehebreite;
+		return erzeugeRaumansicht();
+	}
 
-	private class Tupel
+	private static class Tupel
 	{
 		private int _x;
 		private int _y;
