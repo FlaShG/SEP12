@@ -79,6 +79,8 @@ public class EditorFenster implements EditorBeobachter
 						if(str != null && !str.equals(""))
 						{
 							resetEditorFenster();
+							//markiert auch, dass geladen wird
+							_leveldaten = null;
 							_ladenWerkzeug.lade(str);
 						}
 					}
@@ -191,6 +193,8 @@ public class EditorFenster implements EditorBeobachter
 		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
+		//ganz zum Schluss, damit beim Laden null.
+		//Obige Anweisungen würden sonst Dinge triggern.
 		_leveldaten = editorLevel;
 	}
 }
