@@ -141,6 +141,9 @@ public class Spiel extends Observable
 
 		if(befehl != null)
 		{
+			if(!_logik.fuehreBefehlAusgefuehrenListenerAus(spieler, befehl))
+				return;
+			
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
