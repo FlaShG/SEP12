@@ -5,7 +5,9 @@ import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.features.AusgaengeAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusfuehrenListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.features.GewonnenTextAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
@@ -49,6 +51,7 @@ public class SpielLogik
 		registriereFeature(new AusgaengeAnzeigen());
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());
+		registriereFeature(new BeinStellen());
 
 		Katze.erzeugeKatze(this);
 	}
@@ -101,7 +104,7 @@ public class SpielLogik
 				manager.getRaeume());
 		RaumBauer raumbauer = new RaumBauer(_struktur, manager.getAnzahlMaeuse());
 		
-		for(int i=0;i<  manager.getAnzahlKatzen(); i++)
+		for(int i=0;i<  1 /*manager.getAnzahlKatzen()*/; i++) // TODO mehr als eine katze nicht unterstützt atm
 			Katze.erzeugeKatze(this);
 		
 		return raumbauer.getStartRaum();
@@ -190,12 +193,15 @@ public class SpielLogik
 					.add((BefehlAusgefuehrtListener) feature);
 		if(feature instanceof RaumGeaendertListener)
 			_kontext.getRaumGeaendertListeners().add((RaumGeaendertListener) feature);
+		if(feature instanceof BefehlAusfuehrenListener)
+			_befehlAusfuehrenListeners.add((BefehlAusfuehrenListener) feature);
 
 		// TODO: Feature registrieren ( Lebenspunkte, ... )
 	}
 
 	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
 	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
+	ArrayList<BefehlAusfuehrenListener> _befehlAusfuehrenListeners = new ArrayList<BefehlAusfuehrenListener>();
 	void fuehreTickListenerAus()
 	{
 		// Führe alle TickListener aus.
@@ -216,6 +222,17 @@ public class SpielLogik
 					befehl, hasRoomChanged))
 				return;
 		}
+	}
+
+	boolean fuehreBefehlAusgefuehrenListenerAus(Spieler spieler, Befehl befehl)
+	{
+		boolean befehlAusfuehren = true;
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(BefehlAusfuehrenListener befehlAusfuehrenListener: _befehlAusfuehrenListeners)
+		{
+			befehlAusfuehren &= befehlAusfuehrenListener.befehlSollAusgefuehrtWerden(_kontext, spieler, befehl);
+		}
+		return befehlAusfuehren;
 	}
 
 }

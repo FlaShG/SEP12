@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -26,7 +27,7 @@ public final class BefehlFactory
 				new BefehlAblegen(), new BefehlAblegenKruemel(),
 				new BefehlAblegenGuterKruemel(),
 				new BefehlAblegenSchlechterKruemel(), new BefehlSchauen(),
-				new BefehlGibMirMehrLeben() };
+				new BefehlGibMirMehrLeben(), new BeinStellen() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
