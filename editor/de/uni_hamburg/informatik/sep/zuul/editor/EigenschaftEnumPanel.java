@@ -25,9 +25,9 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 			int startwert, EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
+		_wert = startwert;
 
 		_enum = new JComboBox<String>(getStringsFromEnum(enumValues));
-
 		_enum.setSelectedIndex(startwert);
 
 		_enum.addItemListener(new ItemListener()
