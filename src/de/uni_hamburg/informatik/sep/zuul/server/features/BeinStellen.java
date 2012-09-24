@@ -13,8 +13,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 {
 
-	public static final int INAKTIV_ZEIT = 5;
-	
+	public static final int INAKTIV_ZEIT = 10;
+
 	@Override
 	public boolean befehlSollAusgefuehrtWerden(ServerKontext kontext,
 			Spieler spieler, Befehl befehl)
@@ -22,7 +22,10 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 		if(!spieler.getAktiv())
 		{
 			// TODO: Spieler kann sich nicht bewegen.
-			kontext.schreibeAnSpieler(spieler, spieler.getName() +" liegt am Boden und kann sich vor Schmerzen nicht bewegen.");
+			kontext.schreibeAnSpieler(
+					spieler,
+					spieler.getName()
+							+ " liegt am Boden und kann sich vor Schmerzen nicht bewegen.");
 			return false;
 		}
 		return true;
@@ -32,30 +35,36 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		return kontext.getSpielerInRaum(kontext.getAktuellenRaumZu(spieler)).size()>1;
+		return kontext.getSpielerInRaum(kontext.getAktuellenRaumZu(spieler))
+				.size() > 1;
 	}
 
 	@Override
 	public boolean ausfuehren(final ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		List<Spieler> spielerInRaum = kontext.getSpielerInRaum(kontext.getAktuellenRaumZu(spieler));
+		List<Spieler> spielerInRaum = kontext.getSpielerInRaum(kontext
+				.getAktuellenRaumZu(spieler));
 		spielerInRaum.remove(spieler);
-		for(final Spieler fremderSpieler: spielerInRaum)
+		for(final Spieler fremderSpieler : spielerInRaum)
 		{
-			kontext.schreibeAnSpieler(spieler, "Du schmeißt " + fremderSpieler.getName() + " zu Boden.");
-			kontext.schreibeAnSpieler(fremderSpieler, "Du wirst von " + spieler.getName()+" zu Boden geschmißen.");
+			kontext.schreibeAnSpieler(spieler,
+					"Du schmeißt " + fremderSpieler.getName() + " zu Boden.");
+			kontext.schreibeAnSpieler(fremderSpieler,
+					"Du wirst von " + spieler.getName()
+							+ " zu Boden geschmißen.");
 			fremderSpieler.setAktiv(false);
-			
+
 			new Timer().schedule(new TimerTask()
 			{
-				
+
 				@Override
 				public void run()
 				{
 					fremderSpieler.setAktiv(true);
-					kontext.schreibeAnSpieler(fremderSpieler, "Du stehst langsam wieder auf und kannst weiterspielen.");
-					
+					kontext.schreibeAnSpieler(fremderSpieler,
+							"Du stehst langsam wieder auf und kannst weiterspielen.");
+
 				}
 			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);
 		}
@@ -67,14 +76,15 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 			Befehlszeile befehlszeile)
 	{
 		// TODO
-		kontext.schreibeAnSpieler(spieler, "Hier ist niemand, dem du ein Bein stellen könntest.");
+		kontext.schreibeAnSpieler(spieler,
+				"Hier ist niemand, dem du ein Bein stellen könntest.");
 	}
 
 	@Override
 	public String[] getBefehlsnamen()
 	{
 		// TODO Auto-generated method stub
-		return new String [] {"bein stellen", "bs" };
+		return new String[] { "bein stellen", "bs" };
 	}
 
 	@Override

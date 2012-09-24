@@ -122,8 +122,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	{
 		if(alleGestartet())
 		{
-			_spiel.spielen();
 			starteAlleClients();
+			_spiel.spielen();
 			sendeAenderungenAnAlle();
 		}
 	}

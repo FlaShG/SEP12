@@ -18,8 +18,9 @@ public final class BefehlFactory
 	static
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGehe(), new BefehlHilfe(),
-				new BefehlNehmen(), new BefehlEssen(), new BefehlEssenBoden(),
-				new BefehlEssenTasche(), new BefehlLaden(),
+				new BefehlNehmen(), new BefehlEssenBoden(),
+				new BefehlEssenTasche(), new BefehlEssenTascheGuterKruemel(), new BefehlEssenTascheSchlechterKruemel(),
+				new BefehlEssenTascheUnbekannterKruemel(), new BefehlLaden(),
 				new BefehlBeenden(), new BefehlGib(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
 				new BefehlFuettereSchlechterKruemel(), new BefehlFuettereGuterKruemel(), new BefehlFuettereUnbekanntenKruemel(),

@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,11 +14,18 @@ import javax.imageio.ImageIO;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 
+/**
+ * 
+ * @author 1roebe
+ *
+ */
 public class Raumbilderzeuger
 {
 
 	private final String PATH = getClass().getResource("bilder/").getPath();
 
+	private final BufferedImage WIN = ladeBild(PATH + "win.png");
+	private final BufferedImage GAMEOVER = ladeBild(PATH + "gameover.png");
 	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "door_n.png");
 	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "door_e.png");
 	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "door_s.png");
@@ -38,9 +46,14 @@ public class Raumbilderzeuger
 
 	private int _breitehoehe;
 	private Random _random;
+	private int _raumID;
+	private int[] _besuchteRaeume;
+	private String _gegangeneRichtung;
 
 	private ClientPaket _paket;
 	private boolean _schauenAnsicht;
+	private final Color[] KITTELFARBEN = new Color[] { Color.BLUE, Color.RED,
+			Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA };
 
 	public Raumbilderzeuger()
 	{
@@ -51,6 +64,14 @@ public class Raumbilderzeuger
 
 	}
 
+	/**
+	 * Malt den aktuellen Raum sowie die Items 
+	 * und Charaktere die sich in ihm befinden
+	 * @param breitehoehe die Höhe/Breite des Raumbildes
+	 * @param paket Das Paket mit den Informationen zum Raum
+	 * @param vorschau Gibt an ob in einen benachbarten Raum geschaut wird
+	 * @return
+	 */
 	public BufferedImage getRaumansicht(int breitehoehe, ClientPaket paket,
 			boolean vorschau)
 	{
@@ -106,13 +127,27 @@ public class Raumbilderzeuger
 		}
 
 		setPositionen();
+		int x = 0;
+		int y = 0;
+		Tupel position;
 
 		// Male Dr.Little
-		Tupel position = _drlittlepositionen
-				.get(getRandomZahl(_drlittlepositionen.size()));
-		int x = position.getX();
-		int y = position.getY();
-		g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
+
+		//		Tupel position = _drlittlepositionen.get(_random.nextInt((_drlittlepositionen.size())));
+		//		int x = position.getX();
+		//		int y = position.getY();
+		//		g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
+
+		//andere spieler malen
+		for(String s : _paket.getAndereSpieler())
+		{
+			position = _drlittlepositionen.get(_random
+					.nextInt((_drlittlepositionen.size())));
+			x = position.getX();
+			y = position.getY();
+			g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
+		}
+
 
 		//Male Maus
 
@@ -204,6 +239,7 @@ public class Raumbilderzeuger
 		return _random.nextInt(size);
 	}
 
+	
 	private void setPositionen()
 	{
 		_itemPositionen = new LinkedList<Tupel>();
@@ -225,13 +261,18 @@ public class Raumbilderzeuger
 		_mauspositionen.add(new Tupel(470, 470));
 
 		_drlittlepositionen.add(new Tupel(73, 320));
-		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
+		_drlittlepositionen.add(new Tupel(520, 320));
+		_drlittlepositionen.add(new Tupel(320, 70));
+		_drlittlepositionen.add(new Tupel(320, 520));
 
 	}
-
+	
+	/**
+	 * Skaliert ein Bild neu und gib es dann zurück
+	 * @param img Das zu skalierende Bild
+	 * @param breiteHoehe Die neue Höhe/Breite
+	 * @return Das skalierte Bild
+	 */
 	private BufferedImage skaliereBild(BufferedImage img, int breiteHoehe)
 	{
 
@@ -242,6 +283,13 @@ public class Raumbilderzeuger
 
 		return ergebnis;
 	}
+
+
+	/**
+	 * Lädt ein Bild aus einer Datei und gibt dieses Bild zurück
+	 * @param pfad
+	 * @return -Das geladene Bild
+	 */
 
 	private BufferedImage ladeBild(String pfad)
 	{
@@ -258,11 +306,48 @@ public class Raumbilderzeuger
 
 		return null;
 	}
+	
+	
+	/**
+	 * Gibt ein Bild von dem zuletzt gemalten Raum zurück
+	 * @param hoehebreite
+	 * @return ein neu skaliertes Bild vom zuletzt gemaltem Raum
+	 */
 
 	public BufferedImage ZeichneBildErneut(int hoehebreite)
 	{
 		_breitehoehe = hoehebreite;
 		return erzeugeRaumansicht();
+	}
+
+	/**
+	 * Malt die Verloren-Anzeige auf den aktuellen Raum
+	 *  und gibt das entstandene Bild zurück
+	 * @param breitehoehe
+	 * @return Den Verlierenbildschirm
+	 */
+	public BufferedImage getGameOverScreen(int breitehoehe)
+	{
+		BufferedImage raum = getRaumansicht(breitehoehe, _paket,
+				_schauenAnsicht);
+		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
+		g2d2.drawImage(GAMEOVER, 0, 0, 640, 640, null);
+		return skaliereBild(raum, breitehoehe);
+	}
+	
+	/**
+	 * Malt die Gewonnen-Anzeige auf den aktuellen Raum
+	 *  und gibt das entstandene Bild zurück
+	 * @param hoehebreite -die Hoehe bzw Breite des Raumbildes
+	 * @return Den Gewinnbildschirm
+	 */
+	public BufferedImage getWinScreen(int hoehebreite)
+	{
+		BufferedImage raum = getRaumansicht(hoehebreite, _paket, _schauenAnsicht);
+		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
+		g2d2.drawImage(WIN, 0, 0, 640, 640, null);
+		return skaliereBild(raum, hoehebreite);
+		
 	}
 
 	private static class Tupel

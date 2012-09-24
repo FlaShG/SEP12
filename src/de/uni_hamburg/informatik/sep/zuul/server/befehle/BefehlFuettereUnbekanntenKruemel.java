@@ -78,7 +78,7 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 					kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
 					return false;
 				}
-				Item kuchen = spieler.getInventar().getAnyKuchen();
+				Item kuchen = spieler.getInventar().getAnyUKuchen();
 				katze.fuettere(kontext, spieler, kuchen);
 
 				return true;

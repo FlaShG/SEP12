@@ -90,7 +90,13 @@ public class TextVerwalter
 	public static final String BEFEHL_GEHEN = "gehe";
 	public static final String BEFEHL_SCHAUEN = "schaue";
 	public static final String BEFEHL_NEHMEN = "nehmen";
+	
 	public static final String BEFEHL_ESSEN = "essen";
+	public static final String BEFEHL_ESSEN_TASCHE = "essen tasche";
+	public static final String BEFEHL_ESSEN_TASCHE_GUT = "essen tasche guter krümel";
+	public static final String BEFEHL_ESSEN_TASCHE_SCHLECHT = "essen tasche schlechter krümel";
+	public static final String BEFEHL_ESSEN_TASCHE_UNBEKANNT = "essen tasche krümel";
+	
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
 	public static final String BEFEHL_GIB = "gib";

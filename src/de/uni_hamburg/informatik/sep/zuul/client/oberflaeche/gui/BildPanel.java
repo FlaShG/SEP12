@@ -188,6 +188,11 @@ public class BildPanel extends JPanel
 	public void zeigeSchauen(BufferedImage img)
 	{
 		_LabelFuerIcon.setVisible(false);
+		_tuerNordButton.setEnabled(false);
+		_tuerOstButton.setEnabled(false);
+		_tuerSuedButton.setEnabled(false);
+		_tuerWestButton.setEnabled(false);
+		
 		_schauenLabel.setVisible(true);
 		_schauenLabel.setIcon(new ImageIcon(img));
 		repaint();
@@ -197,12 +202,17 @@ public class BildPanel extends JPanel
 	{
 		_schauenLabel.setVisible(false);
 		_LabelFuerIcon.setVisible(true);
+		_tuerNordButton.setEnabled(true);
+		_tuerOstButton.setEnabled(true);
+		_tuerSuedButton.setEnabled(true);
+		_tuerWestButton.setEnabled(true);
 	}
 
 	public JLabel getSchauenLabel()
 	{
 		return _schauenLabel;
 	}
+	
 
 
 
