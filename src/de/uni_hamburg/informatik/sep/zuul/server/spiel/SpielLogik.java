@@ -13,11 +13,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.KuchenImRaumTextAnzeig
 import de.uni_hamburg.informatik.sep.zuul.server.features.Lebensenergie;
 import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
@@ -167,9 +169,10 @@ public class SpielLogik
 	 */
 	public void wechseleRaum(Spieler spieler, Raum raum)
 	{
+		Raum alterRaum = _kontext.getAktuellenRaumZu(spieler);
 		_kontext.setAktuellenRaumZu(spieler, raum);
-		int aktuelleLebensEnergie = spieler.getLebensEnergie();
-		spieler.setLebensEnergie(aktuelleLebensEnergie - 1);
+
+		fuehreRaumGeaendertListenerAus(spieler, alterRaum, raum);
 	}
 
 	/**
@@ -197,12 +200,15 @@ public class SpielLogik
 		if(feature instanceof BefehlAusgefuehrtListener)
 			_befehlAusgefuehrtListeners
 					.add((BefehlAusgefuehrtListener) feature);
+		if(feature instanceof RaumGeaendertListener)
+			_raumGeaendertListeners.add((RaumGeaendertListener) feature);
 
 		// TODO: Feature registrieren ( Lebenspunkte, ... )
 	}
 
 	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
 	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
+	ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
 
 	void fuehreTickListenerAus()
 	{
@@ -223,6 +229,16 @@ public class SpielLogik
 			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler,
 					befehl, hasRoomChanged))
 				return;
+		}
+	}
+
+	void fuehreRaumGeaendertListenerAus(Spieler spieler, Raum alterRaum,
+			Raum neuerRaum)
+	{
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(RaumGeaendertListener raumGeaendertListener : _raumGeaendertListeners)
+		{
+			raumGeaendertListener.raumGeaendert(_kontext, spieler, alterRaum, neuerRaum);
 		}
 	}
 
