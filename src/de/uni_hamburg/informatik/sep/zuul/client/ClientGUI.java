@@ -44,7 +44,6 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 		
-		_befehlButtonMap = new HashMap<String, JButton>();
 		
 		if(!serverIP.equals("127.0.0.1"))
 		{
