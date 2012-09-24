@@ -42,8 +42,8 @@ public class RaumBearbeitenPanel extends JPanel
 		_beschreibung = new JTextArea();
 		
 		//beschreibung in ein ScrollPane tun
-		_beschreibung.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		Dimension dim = new Dimension(400, 80);
+		_beschreibung.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		Dimension dim = new Dimension(460, 80);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(_beschreibung);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
