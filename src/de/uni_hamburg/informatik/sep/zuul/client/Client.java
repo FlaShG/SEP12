@@ -54,7 +54,7 @@ public abstract class Client extends UnicastRemoteObject implements
 		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
 				+ _serverName);
 
-		login();
+		//login();
 	}
 
 	public void schreibeText(String text)

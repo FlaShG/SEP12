@@ -47,6 +47,8 @@ public class ClientGUI extends Client
 		
 		startFrame.setContentPane(panel);
 		
+		startFrame.setVisible(true);
+		
 		login();
 		
 		_startButton.addActionListener(new ActionListener()
