@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class Startfenster extends JFrame
+public class StartfensterUI extends JFrame
 {
 	private JButton _singlePlayer;
 	private JButton _multiPlayer;
@@ -18,8 +18,7 @@ public class Startfenster extends JFrame
 	private JTextField _eingabeIP;
 	private JTextField _eingabePort;
 
-	
-	public Startfenster()
+	public StartfensterUI()
 	{
 		super("Zuul-Spielmodus Auswahl");
 
@@ -32,13 +31,13 @@ public class Startfenster extends JFrame
 		add(_multiPlayer);
 
 		setMinimumSize(new Dimension(300, 100));
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setVisible(true);
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
 		_eingabePort = new JTextField("1090");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	public JButton getSinglePlayerButton()
@@ -69,11 +68,7 @@ public class Startfenster extends JFrame
 		add(labelport);
 		add(_eingabePort);
 		_eingabePort.setCaretPosition(_eingabePort.getText().length());
-	}
 
-	public JTextField getSpielerNameTextField()
-	{
-		return _benutzerName;
 	}
 
 	public JTextField getIPTextField()
@@ -81,7 +76,12 @@ public class Startfenster extends JFrame
 		return _eingabeIP;
 	}
 
-	public JTextField getNameTextField()
+	public JTextField getSpielerNameTextField()
+	{
+		return _benutzerName;
+	}
+
+	public JTextField getPortTextField()
 	{
 		return _eingabePort;
 	}
