@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -93,24 +94,32 @@ public class Raumbilderzeuger
 			break;
 		}
 
+		
+		
+		
+		
 		for(String  richtung : _paket.getMoeglicheAusgaenge())
 		{
-			if(richtung.equals("nord"))
-			{
-				raum = maleAufBild(raum, RAUMTUERNORD, new Tupel(_breitehoehe/2-RAUMTUERNORD.getWidth()/2, 0));
-			}
-			else if(richtung.equals("ost"))
-			{
-				raum = maleAufBild(raum, RAUMTUEROST, new Tupel(_breitehoehe-_breitehoehe/7, _breitehoehe/2-RAUMTUERNORD.getHeight()/2));
-			}
-			else if(richtung.equals("süd"))
-			{
-				raum = maleAufBild(raum, RAUMTUERSUED, new Tupel(_breitehoehe/2-RAUMTUERNORD.getWidth()/2, _breitehoehe-_breitehoehe/7));
-			}
-			else if(richtung.equals("west"))
-			{
-				raum = maleAufBild(raum, RAUMTUERWEST, new Tupel(_breitehoehe-_breitehoehe/7, _breitehoehe/2-RAUMTUERNORD.getHeight()/2));
-			}
+			Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
+            
+            if (richtung.equals("nord"))
+            {
+               
+                g2d2.drawImage(RAUMTUERNORD, 272,20,97,50,null);
+            }
+             else if (richtung.equals("ost"))
+             {
+                 g2d2.drawImage(RAUMTUEROST, 570,272,50,97,null);
+             }
+             else if (richtung.equals("süd"))
+             {
+                 g2d2.drawImage(RAUMTUERSUED, 272,570,97,50,null);
+             }
+             else if (richtung.equals("west"))
+             {
+                 g2d2.drawImage(RAUMTUERWEST, 20,272,50,97,null);
+             }
+   
 		}
 		
 		

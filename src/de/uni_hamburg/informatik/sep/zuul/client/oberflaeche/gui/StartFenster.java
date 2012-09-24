@@ -23,6 +23,8 @@ public class StartFenster
 	public StartFenster()
 	{
 		_ui = new StartfensterUI();
+		
+		_ipAdresse = "127.0.0.1";
 
 		initialisiereUI();
 	}

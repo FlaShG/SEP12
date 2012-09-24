@@ -2,8 +2,13 @@ package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -105,6 +110,7 @@ public class BefehlsPanel extends JPanel
 		add(_helpButton);
 		add(_ladenButton);
 		add(_quitButton);
+		add(_labelFuerLebensenergie);
 
 		addComponentListener(new ComponentAdapter()
 		{
@@ -170,6 +176,10 @@ public class BefehlsPanel extends JPanel
 				_quitButton.setLocation(
 						_ladenButton.getX() + _ladenButton.getWidth() + 5,
 						BefehlsPanel.this.getHeight() - 50);
+				
+				_labelFuerLebensenergie.setSize(50,BefehlsPanel.this.getHeight());
+				setLebensenergie(10);
+				
 			}
 
 		});
@@ -228,15 +238,34 @@ public class BefehlsPanel extends JPanel
 	
 	public void setLebensenergie(int lebensenergie)
 	{
-//		if(this.getWidth() != 0 && this.getHeight() != 0)
-//		{
-//			BufferedImage leben = new BufferedImage(30, this.getWidth(),
-//					BufferedImage.TYPE_INT_ARGB);
-//			Graphics g = leben.getGraphics();
-//			g.setColor(Color.red);
-//			g.fill3DRect(0, 0, 30, this.getWidth(), true);
-//			_LabelFuerIcon.setIcon(new ImageIcon(leben));
-//		}
+		if (_labelFuerLebensenergie.getHeight() != 0
+        && _labelFuerLebensenergie.getWidth() != 0)
+{
+    BufferedImage lebensbalken = new BufferedImage(50,
+            _labelFuerLebensenergie.getHeight(),
+            BufferedImage.TYPE_INT_ARGB);
+
+    int maxLife = 18;
+    int currentlife = lebensenergie;
+
+    int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (currentlife / (maxLife / 100.0)));
+
+    GradientPaint gp = new GradientPaint(new Point2D.Double(0,
+            _labelFuerLebensenergie.getHeight() - balkenhoehe),
+            Color.red, new Point2D.Double(50,
+                    _labelFuerLebensenergie.getHeight()), Color.blue);
+
+    Graphics2D g2d = (Graphics2D) lebensbalken.getGraphics();
+    g2d.setPaint(gp);
+    Rectangle rec = new Rectangle(0, _labelFuerLebensenergie.getHeight() - balkenhoehe,
+            50, balkenhoehe);
+    g2d.fill(rec);
+    g2d.draw(rec);
+
+    _labelFuerLebensenergie.setIcon(new ImageIcon(lebensbalken));
+}
+
+
 	}
 
 }
