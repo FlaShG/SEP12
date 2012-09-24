@@ -26,13 +26,11 @@ final class BefehlNehmen implements Befehl
 
 		spieler.getInventar().fuegeItemHinzu(item);
 
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.KUCHENGENOMMENTEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENGENOMMENTEXT);
 		raum.loescheItem();
 		if(raum.getNaechstesItem() != Item.Keins)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.IMMERNOCHKUCHENTEXT);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.IMMERNOCHKUCHENTEXT);
 		}
 		return true;
 	}
@@ -41,14 +39,13 @@ final class BefehlNehmen implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.NICHTSZUMNEHMENTEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTSZUMNEHMENTEXT);
 	}
 
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
+		return new String[] { TextVerwalter.BEFEHL_NEHMEN };
 	}
 
 	@Override

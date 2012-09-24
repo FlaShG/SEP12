@@ -18,7 +18,7 @@ public class BefehlGibMirMehrLeben implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		spieler.setLebensEnergie(100);
-		BefehlFactory.schreibeNL(kontext, spieler, "Schwupp.");
+		kontext.schreibeAnSpieler(spieler, "Schwupp.");
 		return true;
 	}
 

@@ -24,7 +24,7 @@ final class BefehlEssen implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.KEINORT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINORT);
 	}
 
 	@Override

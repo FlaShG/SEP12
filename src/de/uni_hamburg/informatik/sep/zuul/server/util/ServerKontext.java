@@ -132,17 +132,37 @@ public class ServerKontext
 		// zeigeRaumbeschreibung(spieler);
 		// zeigeAktuelleAusgaenge(spieler);
 	}
+	
+	
+	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 
 	/**
-	 * Gibt die Nachricht für den Spieler Spieler.
+	 * Gibt die Nachricht für den Spieler und leert den NachrichtenCache.
 	 * 
 	 * @param spieler
 	 * @return
 	 */
 	public String getNachrichtFuer(Spieler spieler)
 	{
-		return "";
-		// TODO impl !!!!
+		if(!_nachrichtenCache.containsKey(spieler))
+			return "";
+		
+		String nachricht = _nachrichtenCache.get(spieler);
+		_nachrichtenCache.remove(spieler);
+		
+		return nachricht;
+	}
+	
+	/**
+	 * Speichert eine Nachricht für den Spieler zwischen.
+	 */
+	public void schreibeAnSpieler(Spieler spieler, String nachricht)
+	{
+		String s = "";
+		if(_nachrichtenCache.containsKey(spieler))
+			s = _nachrichtenCache.get(spieler);
+		s = s + nachricht + "\n";
+		_nachrichtenCache.put(spieler, nachricht);
 	}
 
 	public Spieler getSpielerByName(String benutzerName)
@@ -171,6 +191,14 @@ public class ServerKontext
 				spielers.add(spieler);
 		}
 		return spielers;
+	}
+
+	public void zeigeWillkommensText()
+	{
+		for(Spieler spieler : _spielerPosition.keySet())
+		{
+			zeigeWillkommensText(spieler);
+		}
 	}
 
 }

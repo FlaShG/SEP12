@@ -88,14 +88,12 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 			// TODO: Katze vom Tick deregistieren.
 			_raum.setKatze(null);
 			_raum = null;
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.KATZE_STIRBT);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_STIRBT);
 			break;
 		case IKuchen:
 		case UKuchen:
 			_satt = true;
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.KATZE_IST_SATT_GEWORDEN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_IST_SATT_GEWORDEN);
 			sleep();
 		}
 	}
@@ -156,8 +154,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 				&& befehl instanceof BefehlSchauen)
 		{
 			spieler.setLebensEnergie(spieler.getLebensEnergie() - KATZE_SCHADEN);
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.KATZE_GREIFT_AN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_GREIFT_AN);
 
 			bewegeKatze(kontext);
 		}

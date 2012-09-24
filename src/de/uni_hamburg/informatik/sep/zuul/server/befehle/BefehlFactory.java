@@ -96,19 +96,6 @@ public final class BefehlFactory
 		return befehlsnamen;
 	}
 
-	/**
-	 * Vorläufige Methode zum Schreiben an einen Spieler. Später Refactor ->
-	 * Inline … schwupps schon passt alles.
-	 * 
-	 * @param kontext
-	 * @param spieler
-	 * @param nachricht
-	 */
-	public static void schreibeNL(ServerKontext kontext, Spieler spieler,
-			String nachricht)
-	{
-	}
-
 	public static void beendeSpielFuer(ServerKontext kontext, Spieler spieler,
 			String nachricht)
 	{
