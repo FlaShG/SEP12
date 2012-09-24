@@ -22,10 +22,10 @@ public class Raumbilderzeuger
 	private final BufferedImage RAUMNORMAL = ladeBild(PATH + "raum_normal.png");
 	private final BufferedImage RAUMSTART = ladeBild(PATH + "raum_labor.png");
 	private final BufferedImage RAUMENDE = ladeBild(PATH + "raum_ende.png");
-	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "tuerN.png");
-	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "tuerO.png");
-	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "tuerS.png");
-	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "tuerW.png");
+	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "door_n.png");
+	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "door_e.png");
+	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "door_s.png");
+	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "door_w.png");
 
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
 	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
