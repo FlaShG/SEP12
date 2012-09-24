@@ -26,6 +26,7 @@ public class ClientGUI extends Client
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
+	private Raumbilderzeuger _bilderzeuger;
 
 	
 	public ClientGUI(String serverName, String serverIP, int clientport,
@@ -98,14 +99,15 @@ public class ClientGUI extends Client
 	{
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
+//		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
+		
 		// TODO: falsch?
 		if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(raumbilderzeuger
-					.getRaumansicht(_bildPanel.getHeight()));
+			_bildPanel.setRaumanzeige(_bilderzeuger
+					.getRaumansicht(_bildPanel.getLabelFuerIcon().getHeight(),paket,vorschau));
 		else if( _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(raumbilderzeuger
-					.getRaumansicht(_bildPanel.getWidth()));
+			_bildPanel.setRaumanzeige(_bilderzeuger
+					.getRaumansicht(_bildPanel.getLabelFuerIcon().getWidth(),paket,vorschau));
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -132,6 +134,7 @@ public class ClientGUI extends Client
 	void initialisiereUI()
 	{
 
+		_bilderzeuger = new Raumbilderzeuger();
 		_bp = new BefehlsPanel();
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
@@ -237,23 +240,23 @@ public class ClientGUI extends Client
 		
 		_bp.getAblegenGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel"));
 		_bp.getAblegenSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " schlechter krümel"));
-		_bp.getAblegenUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + "krümel"));
+		_bp.getAblegenUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " krümel"));
 		
 
-		_bildPanel.addComponentListener(new ComponentAdapter()
-		{
-
-			@Override
-			public void componentResized(ComponentEvent arg0)
-			{
-				// TODO: bild neuzeichen ohne client paket
-				if(_bildPanel.getWidth() > _bildPanel.getHeight())
-					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
-				else
-					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
-			}
-
-		});
+//		_bildPanel.addComponentListener(new ComponentAdapter()
+//		{
+//
+//			@Override
+//			public void componentResized(ComponentEvent arg0)
+//			{
+//				// TODO: bild neuzeichen ohne client paket
+//				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+//					_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(_bildPanel.getLabelFuerIcon().getHeight()));
+//				else
+//					_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(_bildPanel.getLabelFuerIcon().getWidth()));
+//			}
+//
+//		});
 
 		_bildPanel.getTuerNordButton().addMouseListener(new MouseAdapter()
 		{
@@ -421,18 +424,8 @@ public class ClientGUI extends Client
 		//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 	}
 
-	private void zeichneBild(ClientPaket paket, int breitehoehe)
-	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, false);
-		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht(breitehoehe));
-	}
+	
 
-	private void zeichneBild(int height)
-	{
-		// TODO Auto-generated method stub
-		// TODO: Bild ohne neues client paket neu zeichen
-
-	}
 
 	/**
 	 * @param befehlszeile
