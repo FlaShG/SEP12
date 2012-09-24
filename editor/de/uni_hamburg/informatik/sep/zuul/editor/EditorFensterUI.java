@@ -43,7 +43,7 @@ public class EditorFensterUI
 		_beobachter = beobachter;
 	}
 
-	public void init(EditorLevel level)
+	public void init(EditorLevel level, int width, int height)
 	{
 		Point pos = new Point(0, 0);
 		if(_frame != null)
@@ -51,7 +51,7 @@ public class EditorFensterUI
 			pos = _frame.getLocation();
 			close();
 		}
-		_frame = new JFrame("Zuul-Editor");
+		_frame = new JFrame(EditorFenster.EDITOR_TITEL);
 
 		_frame.getContentPane().setLayout(new BorderLayout());
 
@@ -64,17 +64,13 @@ public class EditorFensterUI
 		north.add(_menubar = new EditorMenuBar());
 		north.add(_levelPanel = new LevelPanel(_beobachter, level));
 
-		_frame.add(_map = new EditorMap(8, 8), BorderLayout.CENTER);
+		_frame.add(_map = new EditorMap(width, height), BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
 		
 		_verschieben = new RaumVerschiebenPanel(_beobachter);
 
 		_raumhinzu = new JButton("Raum anlegen");
 
-		//fancy größenwahn
-		//_frame.pack();
-		//_frame.setMinimumSize(_frame.getSize());
-		//_frame.setSize(_frame.getSize().width, _frame.getSize().width);
 		_frame.setMinimumSize(new Dimension(900, 600));
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.setLocation(pos);

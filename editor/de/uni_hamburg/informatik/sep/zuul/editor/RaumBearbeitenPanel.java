@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -33,7 +34,7 @@ public class RaumBearbeitenPanel extends JPanel
 	 * 
 	 * @param raum
 	 */
-	public RaumBearbeitenPanel(Raum raum, EditorBeobachter beobachter)
+	public RaumBearbeitenPanel(Raum raum, final EditorBeobachter beobachter)
 	{
 		_raum = raum;
 
@@ -60,12 +61,14 @@ public class RaumBearbeitenPanel extends JPanel
 			@Override
 			public void removeUpdate(DocumentEvent arg0)
 			{
+				beobachter.eigenschaftUpdate();
 				_raum.setBescheibung(_beschreibung.getText());
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent arg0)
 			{
+				beobachter.eigenschaftUpdate();
 				_raum.setBescheibung(_beschreibung.getText());
 			}
 
@@ -97,6 +100,14 @@ public class RaumBearbeitenPanel extends JPanel
 	public JButton getLoeschenButton()
 	{
 		return _loeschen;
+	}
+	
+	/**
+	 * Gibt das Raumbeschreibungs-TextArea zurück
+	 */
+	public JTextArea getBeschreibung()
+	{
+		return _beschreibung;
 	}
 
 	/**

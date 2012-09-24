@@ -7,6 +7,8 @@ import java.util.Stack;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
@@ -20,10 +22,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
  */
 public class EditorFenster implements EditorBeobachter
 {
+	public static final String EDITOR_TITEL = "Zuul-Editor";
+	
 	private EditorFensterUI _ui;
 	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
+	private boolean _unsavedChanges;
 
 	public EditorFenster()
 	{
@@ -33,12 +38,12 @@ public class EditorFenster implements EditorBeobachter
 		_speicherWerkzeug = new SpeicherWerkzeug(this);
 		_ladenWerkzeug = new LadenWerkzeug(this);
 
-		resetEditorFenster();
+		resetEditorFenster(8,8);
 	}
 
-	private void resetEditorFenster()
+	private void resetEditorFenster(int width, int height)
 	{
-		_ui.init(_leveldaten);
+		_ui.init(_leveldaten, width, height);
 
 		registriereUIAktionen();
 	}
@@ -54,6 +59,7 @@ public class EditorFenster implements EditorBeobachter
 				if(_ui.getMap().getAktivenRaum() != null)
 				{
 					raumwahlUpdate();
+					unsavedChanges(true);
 				}
 			}
 		});
@@ -65,7 +71,11 @@ public class EditorFenster implements EditorBeobachter
 					public void actionPerformed(ActionEvent e)
 					{
 						String str = FileChooser.speichereDatei();
-						_speicherWerkzeug.speichern(str);
+						if(str != null)
+						{
+							_speicherWerkzeug.speichern(str);
+							unsavedChanges(false);
+						}
 					}
 				});
 
@@ -75,13 +85,23 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String str = FileChooser.oeffneDatei();
-						if(str != null && !str.equals(""))
+						Object[] options = {"Ja", "Nein"};
+						int jp = 0;
+						if(_unsavedChanges)
 						{
-							resetEditorFenster();
-							//markiert auch, dass geladen wird
-							_leveldaten = null;
-							_ladenWerkzeug.lade(str);
+							jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen.", "Level laden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+						}
+						if (jp == 0)
+						{
+							String str = FileChooser.oeffneDatei();
+							if(str != null && !str.equals(""))
+							{
+								resetEditorFenster(1,1);
+								//markiert auch, dass geladen wird
+								_leveldaten = null;
+								_ladenWerkzeug.lade(str);
+								unsavedChanges(false);
+							}
 						}
 					}
 				});
@@ -92,9 +112,17 @@ public class EditorFenster implements EditorBeobachter
 			public void actionPerformed(ActionEvent e)
 			{
 				Object[] options = {"Ja", "Nein"};
-				int jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein neues Level erstellen?", "Neues Level", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				int jp = 0;
+				if(_unsavedChanges)
+				{
+					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen.", "Neues Level", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				}
 				if (jp == 0)
-					resetEditorFenster();
+				{
+					MapSizeDialog mapsize = new MapSizeDialog();
+					resetEditorFenster(mapsize.getWidth(), mapsize.getHeight());
+					unsavedChanges(false);
+				}
 			}
 		});
 	}
@@ -129,11 +157,13 @@ public class EditorFenster implements EditorBeobachter
 							public void actionPerformed(ActionEvent arg0)
 							{
 								_ui.getMap().loescheRaumDesAktivenButtons();
+								unsavedChanges(true);
 							}
 						});
 				_ui.zeigeVerschiebenPanel(true);
 			}
 		}
+		
 		_ui.getFrame().setVisible(true);
 	}
 
@@ -165,17 +195,23 @@ public class EditorFenster implements EditorBeobachter
 				items.push(Item.UGiftkuchen);
 
 			raum.setItems(items);
+			
+			raum.setBescheibung(bearbeitenPanel.getBeschreibung().getText());
 		}
 
 		_leveldaten.setLeben(_ui.getLevelPanel().getLebenspunkte());
 		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
 		_leveldaten.setKatzen(_ui.getLevelPanel().getKatzenzahl());
+		
+		unsavedChanges(true);
 	}
 	
 	@Override
 	public void verschiebenUpdate(int x, int y)
 	{
 		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
+		
+		unsavedChanges(true);
 	}
 
 	public EditorFensterUI getUI()
@@ -196,5 +232,11 @@ public class EditorFenster implements EditorBeobachter
 		//ganz zum Schluss, damit beim Laden null.
 		//Obige Anweisungen würden sonst Dinge triggern.
 		_leveldaten = editorLevel;
+	}
+	
+	public void unsavedChanges(boolean yes)
+	{
+		_unsavedChanges = yes;
+		_ui.getFrame().setTitle(EDITOR_TITEL+(yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 }
