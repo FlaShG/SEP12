@@ -81,4 +81,9 @@ public class StartfensterUI extends JFrame
 		return _benutzerName;
 	}
 
+	public JTextField getPortTextField()
+	{
+		return _eingabePort;
+	}
+
 }
