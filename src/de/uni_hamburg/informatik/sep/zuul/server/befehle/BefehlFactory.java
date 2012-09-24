@@ -23,8 +23,10 @@ public final class BefehlFactory
 				new BefehlBeenden(), new BefehlGib(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
 				new BefehlFuettereKatze(), new BefehlFuettereMaus(),
-				new BefehlAblegen(), new BefehlSchauen(),
-				new BefehlGibMirMehrLeben()};
+				new BefehlAblegen(), new BefehlAblegenKruemel(),
+				new BefehlAblegenGuterKruemel(),
+				new BefehlAblegenSchlechterKruemel(), new BefehlSchauen(),
+				new BefehlGibMirMehrLeben() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
@@ -35,10 +37,10 @@ public final class BefehlFactory
 			}
 		}
 	}
-	
+
 	public static Befehl gibBefehl(Class<?> befehlsKlasse)
 	{
-		for(Befehl befehl: _map.values())
+		for(Befehl befehl : _map.values())
 		{
 			if(befehlsKlasse.isInstance(befehl))
 				return befehl;
@@ -83,7 +85,7 @@ public final class BefehlFactory
 		if(geparsteZeile.size() == 0)
 			return befehlsnamen;
 
-		for(int i= 0; i< geparsteZeile.size(); i++)
+		for(int i = 0; i < geparsteZeile.size(); i++)
 			befehlsnamen.add("");
 
 		for(int i = 0; i < geparsteZeile.size(); i++)
@@ -91,7 +93,7 @@ public final class BefehlFactory
 			for(int j = i; j < geparsteZeile.size(); j++)
 			{
 				String previous = befehlsnamen.get(j);
-				if(previous!= "")
+				if(previous != "")
 					previous += " ";
 				befehlsnamen.set(j, previous + geparsteZeile.get(i));
 			}
