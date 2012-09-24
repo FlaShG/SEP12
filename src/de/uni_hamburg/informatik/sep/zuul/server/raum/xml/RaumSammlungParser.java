@@ -11,7 +11,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 public class RaumSammlungParser
 {
-	private final String XMLPATH = "./xml_dateien/RaumSammlung.xml";
+	public static final String XMLPATH = "./xml_dateien/RaumSammlung.xml";
 	private RaumSammlung _root;
 
 	public RaumSammlungParser()

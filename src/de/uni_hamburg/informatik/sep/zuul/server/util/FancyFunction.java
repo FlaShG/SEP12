@@ -5,6 +5,8 @@ import java.util.Random;
 
 public final class FancyFunction
 {
+	private static final Random RANDOM = new Random();
+
 	/**
 	 * Gib ein zufälliges Element aus einer Liste.
 	 * 
@@ -18,7 +20,7 @@ public final class FancyFunction
 		if(size == 0)
 			return null;
 
-		int nextInt = new Random().nextInt(size);
+		int nextInt = RANDOM.nextInt(size);
 		return entries.get(nextInt);
 	}
 }

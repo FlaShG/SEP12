@@ -322,7 +322,7 @@ public class Raumbilderzeuger
 	//		return quelle;
 	//	}
 
-	private class Tupel
+	private static class Tupel
 	{
 		private int _x;
 		private int _y;
