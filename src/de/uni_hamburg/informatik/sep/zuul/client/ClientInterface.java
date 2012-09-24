@@ -10,7 +10,7 @@ public interface ClientInterface extends Remote
 	 * registriert den Client beim Server
 	 */
 	public void login() throws RemoteException;
-
+	
 	/**
 	 * trennt die Verbindung zum Server
 	 */
@@ -39,6 +39,6 @@ public interface ClientInterface extends Remote
 	 * 
 	 * @throws RemoteException
 	 */
-	public void starteClientUI() throws RemoteException;
+	public void starteClientUI(ClientPaket paket) throws RemoteException;
 
 }

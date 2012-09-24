@@ -42,7 +42,6 @@ public class ClientGUI extends Client
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		_befehlButtonMap = new HashMap<String, JButton>();
 
 		if(!serverIP.equals("127.0.0.1"))
 		{
@@ -104,9 +103,10 @@ public class ClientGUI extends Client
 	/**
 	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
 	 */
-	public void starteClientUI() throws RemoteException
+	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
 		initialisiereUI();
+		zeigeAn(paket);
 	}
 
 	@Override

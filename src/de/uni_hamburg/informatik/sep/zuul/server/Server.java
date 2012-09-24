@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -133,9 +134,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	 */
 	private void starteAlleClients() throws RemoteException
 	{
-		for(ClientInterface c : _connectedClients.values())
+		for(Entry<String, ClientInterface> entry : _connectedClients.entrySet())
 		{
-			c.starteClientUI();
+			String name = entry.getKey();
+			ClientInterface clientInterface = entry.getValue();
+			clientInterface.starteClientUI(_spiel.packePaket(name));
 		}
 	}
 
