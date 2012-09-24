@@ -29,16 +29,15 @@ public class StartFenster
 
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
-		
+
 		_spielername = "Dr. Little";
-		
+
 		initialisiereUI();
 	}
 
 	private void initialisiereUI()
 	{
-		
-		
+
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
@@ -54,7 +53,7 @@ public class StartFenster
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				try
 				{
 					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
@@ -64,7 +63,10 @@ public class StartFenster
 					e1.printStackTrace();
 				}
 
-				_ui.dispose();
+				finally
+				{
+					_ui.dispose();
+				}
 			}
 		});
 
@@ -84,9 +86,9 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				
+
 				_spielername = _ui.getSpielerNameTextField().getText();
-				
+
 				try
 				{
 					new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
@@ -95,7 +97,10 @@ public class StartFenster
 				{
 					e.printStackTrace();
 				}
-				_ui.dispose();
+				finally
+				{
+					_ui.dispose();
+				}
 
 			}
 
@@ -159,10 +164,10 @@ public class StartFenster
 
 			}
 		});
-		
+
 		_ui.getServerButton().addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -175,7 +180,7 @@ public class StartFenster
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				_ui.getServerButton().setEnabled(false);
 			}
 		});
