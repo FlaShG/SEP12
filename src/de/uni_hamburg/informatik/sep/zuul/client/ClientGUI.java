@@ -33,8 +33,6 @@ public class ClientGUI extends Client
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 
-	private JButton _startButton;
-
 	private Raumbilderzeuger _bilderzeuger;
 	private Map<String, JButton> _befehlButtonMap;
 
@@ -44,6 +42,12 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
+		startFenster();
+
+	}
+	
+	private void startFenster() throws RemoteException
+	{
 		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
 		JPanel panel = new JPanel();
@@ -82,7 +86,8 @@ public class ClientGUI extends Client
 		_befehlButtonMap = new HashMap<String, JButton>();
 
 	}
-
+	
+	
 	public void starte()
 	{
 		initialisiereUI();
@@ -147,6 +152,8 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
@@ -174,6 +181,45 @@ public class ClientGUI extends Client
 			if(button != null)
 				button.setEnabled(enabled);
 		}
+	}
+
+	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	{
+		
+		boolean n = false;
+		boolean o = false;
+		boolean s = false;
+		boolean w = false;
+		
+		for(String richtung : ausgaenge)
+		{
+			if(richtung.equals(TextVerwalter.RICHTUNG_NORDEN))
+			{
+				n = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_OSTEN))
+			{
+				o = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_SUEDEN))
+			{
+				s = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_WESTEN))
+			{
+				w = true;
+			}
+		}
+		
+		_bildPanel.getTuerNordButton().setVisible(n);
+		_bildPanel.getTuerOstButton().setVisible(o);
+		_bildPanel.getTuerSuedButton().setVisible(s);
+		_bildPanel.getTuerWestButton().setVisible(w);
+		
+		
+		
+		
+		
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
