@@ -87,10 +87,12 @@ public class Raumbilderzeuger
 		}
 		
 		
+		Graphics2D g2d = (Graphics2D) raum.getGraphics();
+		
 
 		for(String richtung : _paket.getMoeglicheAusgaenge())
 		{
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
+			
 			if(richtung.equals("nord"))
 			{
 				g2d.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
@@ -121,10 +123,11 @@ public class Raumbilderzeuger
 
 		if(_paket.hasMaus())
 		{
-			raum = maleAufBild(
-					raum,
-					MAUS,
-					_mauspositionen.remove(getRandomZahl(_mauspositionen.size())));
+			Tupel mausposition = _mauspositionen.get(getRandomZahl(_mauspositionen.size()));
+			int x = mausposition.getX();
+			int y = mausposition.getY();
+			
+			g2d.drawImage(MAUS, x, y, 100, 51, null);
 		}
 
 		//Male Katze
@@ -161,7 +164,7 @@ public class Raumbilderzeuger
 			}
 
 		}
-//		maleKruemel(anzahlKruemel, raum);
+
 		
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
@@ -170,7 +173,6 @@ public class Raumbilderzeuger
 			int x = itempos.getX();
 			int y = itempos.getY();
 			
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
 			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
 		}
 		
@@ -183,7 +185,6 @@ public class Raumbilderzeuger
 
 		if(_schauenAnsicht)
 		{
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
 			g2d.drawImage(SCHAUENSCHATTEN, 0, 0, 640, 640, null);
 		}
 		
@@ -214,9 +215,10 @@ public class Raumbilderzeuger
 		_itemPositionen.add(new Tupel(430,440));
 
 		_mauspositionen.add(new Tupel(70,70));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
+		_mauspositionen.add(new Tupel(70,519));
+		_mauspositionen.add(new Tupel(470,70));
+		_mauspositionen.add(new Tupel(470,519));
+
 
 		_drlittlepositionen.add(new Tupel(73, 320));
 		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
@@ -247,17 +249,6 @@ public class Raumbilderzeuger
 
 	}
 
-	private void maleKruemel(int anzahlKruemel, BufferedImage raum)
-	{
-		for(int i = 0; i < anzahlKruemel; i++)
-		{
-
-			maleAufBild(
-					raum,
-					KRUEMEL,
-					_itemPositionen.remove(getRandomZahl(_itemPositionen.size())));
-		}
-	}
 
 	private BufferedImage ladeBild(String pfad)
 	{
