@@ -10,7 +10,6 @@ import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 
 public class StartUp
 {
-
 	public static void main(String args[]) throws RemoteException,
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
@@ -25,7 +24,5 @@ public class StartUp
 		{
 			new StartFenster();
 		}
-
 	}
-
 }

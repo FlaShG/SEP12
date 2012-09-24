@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 public class EditorLevel
 {
+	private int _leben = 10;
 	private int _katzen = 1;
 	private int _maeuse = 2;
 
@@ -23,5 +24,15 @@ public class EditorLevel
 	public void setKatzen(int katzen)
 	{
 		_katzen = katzen;
+	}
+
+	public int getLeben()
+	{
+		return _leben;
+	}
+	
+	public void setLeben(int leben)
+	{
+		_leben = leben;
 	}
 }

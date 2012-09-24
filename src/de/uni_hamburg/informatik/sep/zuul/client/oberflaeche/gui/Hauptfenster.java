@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
