@@ -175,7 +175,7 @@ public class StartFenster
 				{
 					new Server();
 				}
-				catch(RemoteException | AlreadyBoundException e1)
+				catch(Exception e1)
 				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
