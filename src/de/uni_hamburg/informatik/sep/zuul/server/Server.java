@@ -100,7 +100,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		return true;
 	}
 
-	//TODO: ugly!
 	@Override
 	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName)
 			throws RemoteException
