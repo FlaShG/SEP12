@@ -109,7 +109,7 @@ public final class BefehlSchauen implements Befehl
 		{
 			kontext.schreibeAnSpieler(spieler, "nur uninteressante Sachen");
 		}
-		return false;
+		return true;
 	}
 
 	/**
