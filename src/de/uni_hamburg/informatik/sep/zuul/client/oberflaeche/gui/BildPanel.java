@@ -1,8 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
-import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
