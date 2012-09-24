@@ -411,11 +411,11 @@ public class ClientGUI extends Client
 			public void componentResized(ComponentEvent arg0)
 			{
 				// TODO: bild neuzeichen ohne client paket
-				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+				if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
 					_bildPanel.setRaumanzeige(_bilderzeuger
 							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
 									.getHeight()));
-				else
+				else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
 					_bildPanel.setRaumanzeige(_bilderzeuger
 							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
 									.getWidth()));
