@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -72,7 +75,7 @@ public class EditorFensterUI
 		_raumhinzu = new JButton("Raum anlegen");
 
 		_frame.setMinimumSize(new Dimension(900, 600));
-		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		_frame.setLocation(pos);
 		_frame.setVisible(true);
 	}

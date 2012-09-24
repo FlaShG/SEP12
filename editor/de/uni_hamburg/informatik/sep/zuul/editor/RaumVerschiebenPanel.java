@@ -17,6 +17,7 @@ public class RaumVerschiebenPanel extends JPanel
 	private JButton _west;
 	private JButton _ost;
 	private JButton _sued;
+	private JButton _warp;
 	private EditorBeobachter _beobachter;
 	
 	public RaumVerschiebenPanel(EditorBeobachter beobachter)
@@ -40,7 +41,7 @@ public class RaumVerschiebenPanel extends JPanel
 		inner.add(new JLabel(""));
 		
 		inner.add(_west = new JButton("<"));
-		inner.add(new JLabel(""));
+		inner.add(_warp = new JButton("warp"));
 		inner.add(_ost = new JButton(">"));
 		
 		inner.add(new JLabel(""));
@@ -77,6 +78,15 @@ public class RaumVerschiebenPanel extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				informiereBeobachter(0,1);
+			}
+		});
+		
+		_warp.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_beobachter.warpUpdate();
 			}
 		});
 	}

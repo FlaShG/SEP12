@@ -7,4 +7,6 @@ public interface EditorBeobachter
 	public void eigenschaftUpdate();
 
 	public void verschiebenUpdate(int x, int y);
+	
+	public void warpUpdate();
 }

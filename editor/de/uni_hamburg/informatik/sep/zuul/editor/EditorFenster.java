@@ -3,12 +3,13 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
@@ -29,6 +30,10 @@ public class EditorFenster implements EditorBeobachter
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	private boolean _unsavedChanges;
+	private GridButton _warpModeSourceButton;
+
+	private WindowListener _windowListener;
+	
 
 	public EditorFenster()
 	{
@@ -43,8 +48,12 @@ public class EditorFenster implements EditorBeobachter
 
 	private void resetEditorFenster(int width, int height)
 	{
+		if(_windowListener != null)
+		{
+			_ui.getFrame().removeWindowListener(_windowListener);
+		}
 		_ui.init(_leveldaten, width, height);
-
+		
 		registriereUIAktionen();
 	}
 
@@ -125,42 +134,81 @@ public class EditorFenster implements EditorBeobachter
 				}
 			}
 		});
+		
+		_ui.getFrame().addWindowListener(_windowListener = new WindowAdapter()
+		{
+			@Override
+			public void windowClosing(WindowEvent arg0)
+			{
+				Object[] options = {"Ja", "Nein"};
+				int jp = 0;
+				if(_unsavedChanges)
+				{
+					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen.", "Editor beenden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				}
+				if (jp == 0)
+				{
+					System.exit(0);
+				}
+			}
+		});
 	}
 
 	@Override
 	public void raumwahlUpdate()
 	{
-		_ui.getFrame().remove(_ui.getRaumhinzu());
-		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
-		if(bearbeitenPanel != null)
-			_ui.getFrame().remove(bearbeitenPanel);
-
-		_ui.getFrame().setVisible(true);
-
-		if(_ui.getMap().buttonAusgewaehlt())
+		if(_warpModeSourceButton == null)
 		{
-			Raum raum = _ui.getMap().getAktivenRaum();
-
-			if(raum == null)
+			_ui.getFrame().remove(_ui.getRaumhinzu());
+			RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
+			if(bearbeitenPanel != null)
+				_ui.getFrame().remove(bearbeitenPanel);
+	
+			_ui.getFrame().setVisible(true);
+	
+			if(_ui.getMap().buttonAusgewaehlt())
 			{
-				_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
-				_ui.zeigeVerschiebenPanel(false);
-			}
-			else
-			{
-				_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
-						BorderLayout.SOUTH);
-				_ui.getBearbeitenPanel().getLoeschenButton()
-						.addActionListener(new ActionListener()
-						{
-							@Override
-							public void actionPerformed(ActionEvent arg0)
+				Raum raum = _ui.getMap().getAktivenRaum();
+	
+				if(raum == null)
+				{
+					_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
+					_ui.zeigeVerschiebenPanel(false);
+				}
+				else
+				{
+					_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
+							BorderLayout.SOUTH);
+					_ui.getBearbeitenPanel().getLoeschenButton()
+							.addActionListener(new ActionListener()
 							{
-								_ui.getMap().loescheRaumDesAktivenButtons();
-								unsavedChanges(true);
-							}
-						});
-				_ui.zeigeVerschiebenPanel(true);
+								@Override
+								public void actionPerformed(ActionEvent arg0)
+								{
+									_ui.getMap().loescheRaumDesAktivenButtons();
+									unsavedChanges(true);
+								}
+							});
+					_ui.zeigeVerschiebenPanel(true);
+				}
+			}
+		}
+		else //warp mode
+		{
+			if(_ui.getMap().buttonAusgewaehlt())
+			{
+				Raum raum = _ui.getMap().getAktivenRaum();
+				
+				if(raum == null)
+				{
+					GridButton neuerButton = _ui.getMap().getAktivenButton();
+					neuerButton.setRaum(_warpModeSourceButton.getRaum());
+					_warpModeSourceButton.loescheRaum();
+					_warpModeSourceButton.setAusgewaehlt(false);
+					_warpModeSourceButton = null;
+					neuerButton.setAusgewaehlt(true);
+					unsavedChanges(true);
+				}
 			}
 		}
 		
@@ -176,7 +224,7 @@ public class EditorFenster implements EditorBeobachter
 		
 		
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
-		if(bearbeitenPanel != null)
+		if(_ui.getMap().buttonAusgewaehlt() && bearbeitenPanel != null)
 		{
 			Raum raum = bearbeitenPanel.getRaum();
 
@@ -212,6 +260,13 @@ public class EditorFenster implements EditorBeobachter
 		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
 		
 		unsavedChanges(true);
+	}
+	
+	@Override
+	public void warpUpdate()
+	{
+		if(_ui.getMap().buttonAusgewaehlt())
+			_warpModeSourceButton = _ui.getMap().getAktivenButton();
 	}
 
 	public EditorFensterUI getUI()
