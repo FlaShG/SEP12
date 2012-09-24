@@ -17,6 +17,9 @@ public class StartFenster
 	private String _spielername;
 	private boolean _bestaetigt;
 
+	/**
+	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und Multiplayer
+	 */
 	public StartFenster()
 	{
 		_ui = new StartfensterUI();
