@@ -1,10 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;

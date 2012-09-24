@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -55,7 +54,7 @@ public class BefehlFuettereGuterKruemel implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().hatDiesenKuchen(Item.IKuchen);
+		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().has(Item.IKuchen);
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class BefehlFuettereGuterKruemel implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().hatDiesenKuchen(Item.IKuchen))
+		if(!spieler.getInventar().has(Item.IKuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}

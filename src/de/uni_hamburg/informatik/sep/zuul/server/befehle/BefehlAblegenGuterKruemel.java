@@ -30,7 +30,7 @@ public class BefehlAblegenGuterKruemel implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().hatDiesenKuchen(Item.IKuchen)
+		return spieler.getInventar().has(Item.IKuchen)
 				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel");
 	}
 

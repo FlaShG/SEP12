@@ -7,7 +7,6 @@ import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
 /**

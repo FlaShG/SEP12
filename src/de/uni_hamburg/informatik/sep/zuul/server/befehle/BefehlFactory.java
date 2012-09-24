@@ -10,7 +10,6 @@ import java.util.Map;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public final class BefehlFactory
 {

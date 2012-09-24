@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -55,7 +54,7 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && (spieler.getInventar().hatDiesenKuchen(Item.UKuchen)||spieler.getInventar().hatDiesenKuchen(Item.UGiftkuchen));
+		return (raum.hasKatze() || raum.hasMaus()) && (spieler.getInventar().has(Item.UKuchen)||spieler.getInventar().has(Item.UGiftkuchen));
 	}
 
 	@Override
@@ -88,11 +87,11 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 			{
 				Item kuchen = null;
 				
-				if(spieler.getInventar().hatDiesenKuchen(Item.UKuchen) && spieler.getInventar().hatDiesenKuchen(Item.UGiftkuchen))
+				if(spieler.getInventar().has(Item.UKuchen) && spieler.getInventar().has(Item.UGiftkuchen))
 				{
 				kuchen = spieler.getInventar().getAnyUKuchen();
 				}
-				else if(spieler.getInventar().hatDiesenKuchen(Item.UKuchen))
+				else if(spieler.getInventar().has(Item.UKuchen))
 						{
 					       kuchen = spieler.getInventar().getKuchen(Item.UKuchen);
 						}
@@ -126,7 +125,7 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().hatDiesenKuchen(Item.UKuchen)||!spieler.getInventar().hatDiesenKuchen(Item.UGiftkuchen))
+		if(!spieler.getInventar().has(Item.UKuchen)||!spieler.getInventar().has(Item.UGiftkuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}

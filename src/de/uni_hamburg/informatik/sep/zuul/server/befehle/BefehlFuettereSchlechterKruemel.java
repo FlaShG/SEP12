@@ -2,9 +2,9 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.LinkedList;
 
+import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -53,7 +53,7 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen);
+		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().has(Item.IGiftkuchen);
 	}
 
 	@Override
@@ -69,14 +69,17 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 			
 			if(raum.hasKatze())
 			{
-				
-			Befehl befehl = null;
-			if(raum.hasKatze())
-				befehl = BefehlFactory.gibBefehl(BefehlFuettereKatze.class);
-			if(raum.hasMaus())
-				befehl = BefehlFactory.gibBefehl(BefehlFuettereMaus.class);
-			return Spiel.versucheBefehlAusfuehrung(kontext, spieler,
-					befehlszeile, befehl);
+				Katze katze = raum.getKatze();
+
+				if(katze.isSatt())
+				{
+					kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+					return false;
+				}
+				Item kuchen = spieler.getInventar().getAnyKuchen();
+				katze.fuettere(kontext, spieler, kuchen);
+
+				return true;
 			}
 			else if(raum.hasMaus())
 			{
@@ -107,7 +110,7 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen))
+		if(!spieler.getInventar().has(Item.IGiftkuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
