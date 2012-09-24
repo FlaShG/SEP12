@@ -12,7 +12,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlFuettereMaus implements Befehl
 {
 
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FEED + " "
+	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
 			+ "maus";
 
 	/**
@@ -73,7 +73,7 @@ public class BefehlFuettereMaus implements Befehl
 		String richtungsangabe = String.format(
 				TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
 
-		BefehlFactory.schreibeNL(kontext, spieler, richtungsangabe);
+		kontext.schreibeAnSpieler(spieler, richtungsangabe);
 
 		return true;
 	}
@@ -86,14 +86,12 @@ public class BefehlFuettereMaus implements Befehl
 
 		if(!spieler.getInventar().hasAnyKuchen())
 		{
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.MAUS_KEIN_KRUEMEL);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
 		else if(!raum.hasMaus())
 		{
 			// TODO: keine Maus zum Füttern!
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
 		}
 	}
 

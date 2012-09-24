@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,8 +11,8 @@ import javax.swing.SwingUtilities;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -33,23 +34,23 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
  * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
  */
-public class Spiel
+public class Spiel extends Observable
 {
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
-	private Map<Spieler, String> _nachrichtenMap;
+	//	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
 
 	/**
 	 * Erzeuge ein neues Spiel
+	 * 
+	 * @param server
 	 */
 	public Spiel()
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		_nachrichtenMap = new HashMap<Spieler, String>();
-		//TODO in map schreiben
 		setGestartet(false);
 	}
 
@@ -94,10 +95,8 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_logik.erstelleKontext();
-		_logik.zeigeWillkommensText();
-		zeigeWillkommensText();
 		setGestartet(true);
+		zeigeWillkommensText();
 	}
 
 	/**
@@ -105,11 +104,10 @@ public class Spiel
 	 */
 	private void zeigeWillkommensText()
 	{
-		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
-
-		for(Spieler spieler : _nachrichtenMap.keySet())
+		for(Spieler spieler : _spielerMap.values())
 		{
-			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.EINLEITUNGSTEXT);
 		}
 	}
 
@@ -123,8 +121,7 @@ public class Spiel
 	 */
 	public void setNachrichtFuer(Spieler spieler, String nachricht)
 	{
-		_nachrichtenMap.remove(spieler); //altes entfernen
-		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
+		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
 	}
 
 	/**
@@ -135,6 +132,8 @@ public class Spiel
 	 */
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
+		System.err.println(benutzerName + ": " + eingabe);
+		
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
@@ -143,9 +142,6 @@ public class Spiel
 		if(befehl != null)
 		{
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
-					befehlszeile, befehl);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
 					_logik.getKontext(), spieler, befehlszeile, befehl);
@@ -156,10 +152,15 @@ public class Spiel
 			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
+
+			if(befehl instanceof BefehlSchauen)
+			{
+				setChanged();
+				notifyObservers(spieler.getName());
+			}
 		}
 		else
-			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
-					TextVerwalter.FALSCHEEINGABE);
+			setNachrichtFuer(spieler, TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**
@@ -174,7 +175,7 @@ public class Spiel
 	}
 
 	/**
-	 * Packe das Clienpaket für den Client mit dem Namen name.
+	 * Packe das Clientpaket für den Client mit dem Namen name.
 	 * 
 	 * @param name
 	 * @return
@@ -182,7 +183,7 @@ public class Spiel
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
-		String nachricht = _nachrichtenMap.get(spieler); // hole die nacricht für den spieler
+		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
@@ -199,11 +200,6 @@ public class Spiel
 			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
 			return false;
 		}
-	}
-
-	void registerFeature(Feature feature)
-	{
-
 	}
 
 	/**

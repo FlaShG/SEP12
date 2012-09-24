@@ -17,10 +17,8 @@ public final class MausImRaumTextAnzeigen implements Feature,
 		// Maus
 		if(hasRoomChanged && kontext.getAktuellenRaumZu(spieler).hasMaus())
 		{
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.MAUS_GEFUNDEN);
-			BefehlFactory
-					.schreibeNL(kontext, spieler, TextVerwalter.MAUS_FRAGE);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_GEFUNDEN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_FRAGE);
 		}
 		return true;
 	}

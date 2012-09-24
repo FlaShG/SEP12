@@ -33,7 +33,7 @@ final public class AusgaengeAnzeigen implements Feature,
 		{
 			Raum raum = kontext.getAktuellenRaumZu(spieler);
 			String ausgaenge = AusgaengeAnzeigen.zeigeAusgaenge(raum);
-			BefehlFactory.schreibeNL(kontext, spieler, ausgaenge);
+			kontext.schreibeAnSpieler(spieler, ausgaenge);
 		}
 		return true;
 	}

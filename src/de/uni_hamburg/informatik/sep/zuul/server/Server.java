@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 
-public class Server extends UnicastRemoteObject implements ServerInterface
+public class Server extends UnicastRemoteObject implements ServerInterface,
+		Observer
 {
 
 	// Dummy
@@ -24,6 +27,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	 */
 	private static final long serialVersionUID = 1688218849488836203L;
 	private Map<String, ClientInterface> _connectedClients;
+	private List<String> _readyClients; //Liste der Namen der Spieler die bereit sind.
 	private Spiel _spiel;
 
 	public Server() throws RemoteException, AlreadyBoundException
@@ -38,7 +42,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		// Liste der verbundenen Clients anlegen
 		_connectedClients = new HashMap<String, ClientInterface>();
 
+		_readyClients = new ArrayList<String>();
+
 		_spiel = new Spiel();
+		_spiel.addObserver(this);
 	}
 
 	// sinnlos?
@@ -93,23 +100,75 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		return true;
 	}
 
-	//TODO: ugly!
 	@Override
 	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName)
 			throws RemoteException
 	{
 		_spiel.verarbeiteEingabe(benuzterName, eingabe);
+		sendeAenderungenAnAlle();
+		return true;
+	}
+
+	@Override
+	public void empfangeStartEingabe(String benutzerName)
+			throws RemoteException
+	{
+		_readyClients.add(benutzerName);
+		tryStarteSpiel();
+	}
+
+	private void tryStarteSpiel() throws RemoteException
+	{
+		if(alleGestartet())
+		{
+			_spiel.spielen();
+			sendeAenderungenAnAlle();
+		}
+	}
+
+	private boolean alleGestartet()
+	{
+		return _readyClients.containsAll(_connectedClients.keySet());
+	}
+
+	/**
+	 * Broacaste die aktuellen Clinetpakete an alle regsitrierten Clients.
+	 * 
+	 * @throws RemoteException
+	 */
+	private void sendeAenderungenAnAlle() throws RemoteException
+	{
 		ArrayList<ClientPaket> paketListe = new ArrayList<ClientPaket>();
 		for(String name : _connectedClients.keySet())
 		{
 			paketListe.add(_spiel.packePaket(name));
 		}
 		sendeAenderungen(paketListe);
-		return true;
 	}
 
 	public static void main(String[] args) throws Exception
 	{
 		new Server();
+	}
+
+	public Map<String, ClientInterface> getConnectedClients()
+	{
+		return _connectedClients;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1)
+	{
+		//arg1 ist der name (String) des Spielers der den schauen Befehl ausgeführt hat.
+		String name = (String) arg1;
+		try
+		{
+			_connectedClients.get(name).zeigeVorschau(_spiel.packePaket(name));
+		}
+		catch(RemoteException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 }

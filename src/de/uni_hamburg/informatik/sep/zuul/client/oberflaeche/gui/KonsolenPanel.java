@@ -30,6 +30,7 @@ public class KonsolenPanel extends JPanel
 	{
 
 		setLayout(null);
+		setSize(1024, 512);
 
 		//eingabe
 		_eingabeZeile = new JTextField();

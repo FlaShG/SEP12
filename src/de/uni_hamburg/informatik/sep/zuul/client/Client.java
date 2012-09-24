@@ -6,8 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartfensterUI;
 import de.uni_hamburg.informatik.sep.zuul.server.ServerInterface;
 
 /**
@@ -81,6 +79,8 @@ public abstract class Client extends UnicastRemoteObject implements
 			//TODO ausgabe auf gui
 		}
 
+		//TODO starten und einloggen eigetnlch nicht das selbe!! extra methode anbieten.
+		_server.empfangeStartEingabe(_clientName);
 	}
 
 	@Override
@@ -93,11 +93,7 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 
 	}
-
-	@Override
-	public abstract boolean zeigeAn(final ClientPaket paket)
-			throws RemoteException;
-
+	
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
 		if(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))

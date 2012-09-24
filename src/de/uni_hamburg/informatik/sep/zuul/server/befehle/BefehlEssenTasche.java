@@ -13,7 +13,7 @@ public class BefehlEssenTasche implements Befehl
 {
 
 	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN + " "
-			+ TextVerwalter.ORT_BODEN;
+			+ TextVerwalter.ORT_TASCHE;
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
@@ -51,18 +51,15 @@ public class BefehlEssenTasche implements Befehl
 		case IKuchen:
 		case UKuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.kuchengegessentext(energie));
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.kuchengegessentext(energie));
 			break;
 		case IGiftkuchen:
 		case UGiftkuchen:
 			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.giftkuchengegessentext(energie));
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.giftkuchengegessentext(energie));
 			if(energie > 0)
 			{
-				BefehlFactory.schreibeNL(kontext, spieler,
-						TextVerwalter.giftkuchengegessentext(energie));
+				kontext.schreibeAnSpieler(spieler, TextVerwalter.giftkuchengegessentext(energie));
 			}
 			else
 			{
@@ -80,8 +77,7 @@ public class BefehlEssenTasche implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.NICHTSZUMESSENTEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTSZUMESSENTEXT);
 	}
 
 	@Override

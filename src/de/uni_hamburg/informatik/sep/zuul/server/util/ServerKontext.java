@@ -18,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 public class ServerKontext
 {
 
+	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 
@@ -36,9 +37,7 @@ public class ServerKontext
 	 */
 	public void fuegeNeuenSpielerHinzu(Spieler spieler)
 	{
-
 		_spielerPosition.put(spieler, _startRaum);
-
 	}
 
 	/**
@@ -120,29 +119,29 @@ public class ServerKontext
 	}
 
 	/**
-	 * Zeige dem Spieler den Willkommenstext.
-	 * 
-	 * @param spieler
-	 */
-	public void zeigeWillkommensText(Spieler spieler)
-	{
-		// TODO impl!!
-		// schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
-		// schreibeNL("");
-		// zeigeRaumbeschreibung(spieler);
-		// zeigeAktuelleAusgaenge(spieler);
-	}
-
-	/**
-	 * Gibt die Nachricht für den Spieler Spieler.
+	 * Gibt die Nachricht für den Spieler und leert den NachrichtenCache.
 	 * 
 	 * @param spieler
 	 * @return
 	 */
 	public String getNachrichtFuer(Spieler spieler)
 	{
-		return "";
-		// TODO impl !!!!
+		
+		String nachricht = _nachrichtenCache.remove(spieler);
+		
+		return nachricht;
+	}
+
+	/**
+	 * Speichert eine Nachricht für den Spieler zwischen.
+	 */
+	public void schreibeAnSpieler(Spieler spieler, String nachricht)
+	{
+		String s = "";
+		if(_nachrichtenCache.containsKey(spieler))
+			s = _nachrichtenCache.get(spieler);
+		s = s + nachricht + "\n";
+		_nachrichtenCache.put(spieler, s);
 	}
 
 	public Spieler getSpielerByName(String benutzerName)
@@ -165,7 +164,7 @@ public class ServerKontext
 	public List<Spieler> getSpielerInRaum(Raum raum)
 	{
 		ArrayList<Spieler> spielers = new ArrayList<Spieler>();
-		for(Spieler spieler: _spielerPosition.keySet())
+		for(Spieler spieler : _spielerPosition.keySet())
 		{
 			if(getAktuellenRaumZu(spieler) == raum)
 				spielers.add(spieler);

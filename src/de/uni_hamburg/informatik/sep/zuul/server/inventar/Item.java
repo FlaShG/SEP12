@@ -8,5 +8,17 @@ package de.uni_hamburg.informatik.sep.zuul.server.inventar;
  */
 public enum Item
 {
-	UKuchen, IKuchen, UGiftkuchen, IGiftkuchen, Gegengift, Keins
+	UKuchen("Krümel"), IKuchen("Guter Krümel"), UGiftkuchen("Krümel"), IGiftkuchen("Schlechter Krümel"), Gegengift("Gegengift"), Keins("Nichts");
+	
+	private final String _name;
+	
+	Item(String name)
+	{
+		_name = name;
+	}
+	
+	public String toString()
+	{
+		return _name;
+	}
 }

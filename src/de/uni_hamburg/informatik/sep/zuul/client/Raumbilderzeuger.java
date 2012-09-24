@@ -22,10 +22,10 @@ public class Raumbilderzeuger
 	private final BufferedImage RAUMNORMAL = ladeBild(PATH + "raum_normal.png");
 	private final BufferedImage RAUMSTART = ladeBild(PATH + "raum_labor.png");
 	private final BufferedImage RAUMENDE = ladeBild(PATH + "raum_ende.png");
-	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "tuerN.png");
-	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "tuerO.png");
-	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "tuerS.png");
-	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "tuerW.png");
+	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "door_n.png");
+	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "door_e.png");
+	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "door_s.png");
+	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "door_w.png");
 
 	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
 	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
@@ -51,15 +51,16 @@ public class Raumbilderzeuger
 	private Random _random;
 
 	private ClientPaket _paket;
+	private boolean _istVorschau;
 
-	public Raumbilderzeuger(ClientPaket paket)
+	public Raumbilderzeuger(ClientPaket paket, boolean vorschau)
 	{
 		_paket = paket;
-		
+
 		_drlittlepositionen = new LinkedList<Tupel>();
 		_mauspositionen = new LinkedList<Tupel>();
 		_itemPositionen = new LinkedList<Tupel>();
-		
+
 		_random = new Random();
 
 	}
@@ -94,35 +95,30 @@ public class Raumbilderzeuger
 			break;
 		}
 
-		
-		
-		
-		
-		for(String  richtung : _paket.getMoeglicheAusgaenge())
+		for(String richtung : _paket.getMoeglicheAusgaenge())
 		{
 			Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-            
-            if (richtung.equals("nord"))
-            {
-               
-                g2d2.drawImage(RAUMTUERNORD, 272,20,97,50,null);
-            }
-             else if (richtung.equals("ost"))
-             {
-                 g2d2.drawImage(RAUMTUEROST, 570,272,50,97,null);
-             }
-             else if (richtung.equals("süd"))
-             {
-                 g2d2.drawImage(RAUMTUERSUED, 272,570,97,50,null);
-             }
-             else if (richtung.equals("west"))
-             {
-                 g2d2.drawImage(RAUMTUERWEST, 20,272,50,97,null);
-             }
-   
+
+			if(richtung.equals("nord"))
+			{
+
+				g2d2.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
+			}
+			else if(richtung.equals("ost"))
+			{
+				g2d2.drawImage(RAUMTUEROST, 570, 272, 50, 97, null);
+			}
+			else if(richtung.equals("süd"))
+			{
+				g2d2.drawImage(RAUMTUERSUED, 272, 570, 97, 50, null);
+			}
+			else if(richtung.equals("west"))
+			{
+				g2d2.drawImage(RAUMTUERWEST, 20, 272, 50, 97, null);
+			}
+
 		}
-		
-		
+
 		setPositionen();
 
 		// Male Dr.Little
@@ -156,7 +152,6 @@ public class Raumbilderzeuger
 
 		Collection<Item> raumItems = _paket.getItems();
 
-		
 		for(Item item : raumItems)
 		{
 			switch (item)
@@ -176,7 +171,7 @@ public class Raumbilderzeuger
 			default:
 				break;
 			}
-			
+
 		}
 		maleKruemel(anzahlKruemel, raum);
 
@@ -184,9 +179,9 @@ public class Raumbilderzeuger
 		{
 			maleGegengiftundEvenBigger(raum);
 		}
-		
+
 		raum = skaliereBild(raum, _breitehoehe);
-		
+
 		return raum;
 
 	}
@@ -226,10 +221,10 @@ public class Raumbilderzeuger
 		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
 
 		_drlittlepositionen.add(new Tupel(73, 320));
-//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
-//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
+		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
+		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
+		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
+		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
 
 	}
 
@@ -249,8 +244,8 @@ public class Raumbilderzeuger
 
 		maleAufBild(raum, GEGENGIFT,
 				_itemPositionen.remove(getRandomZahl(_itemPositionen.size())));
-//		maleAufBild(raum, DREVENBIGGER,
-//				_mauspositionen.remove(getRandomZahl(_mauspositionen.size())));
+		//		maleAufBild(raum, DREVENBIGGER,
+		//				_mauspositionen.remove(getRandomZahl(_mauspositionen.size())));
 
 	}
 

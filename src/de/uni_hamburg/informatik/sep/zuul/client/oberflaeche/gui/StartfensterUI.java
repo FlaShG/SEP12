@@ -17,6 +17,8 @@ public class StartfensterUI extends JFrame
 	private JTextField _benutzerName;
 	private JTextField _eingabeIP;
 	private JTextField _eingabePort;
+	private JButton _eingabeBestaetigen;
+	private JButton _abbrechen;
 
 	public StartfensterUI()
 	{
@@ -34,6 +36,8 @@ public class StartfensterUI extends JFrame
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
 		_eingabePort = new JTextField("1090");
+		_eingabeBestaetigen = new JButton("Bestaetigen");
+		_abbrechen = new JButton("Abbrechen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -68,6 +72,8 @@ public class StartfensterUI extends JFrame
 		add(labelport);
 		add(_eingabePort);
 		_eingabePort.setCaretPosition(_eingabePort.getText().length());
+		add(_eingabeBestaetigen);
+		add(_abbrechen);
 
 	}
 
@@ -84,6 +90,16 @@ public class StartfensterUI extends JFrame
 	public JTextField getPortTextField()
 	{
 		return _eingabePort;
+	}
+
+	public JButton getAbbrechenButton()
+	{
+		return _abbrechen;
+	}
+
+	public JButton getBestaetigen()
+	{
+		return _eingabeBestaetigen;
 	}
 
 }
