@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,7 +7,6 @@ import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -35,7 +33,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 	@Override
 	public void tick(ServerKontext kontext)
 	{
-		if(!_satt)
+		if(!_satt && !istEinSpielerImRaum(kontext, _raum))
 		{
 			bewegeKatze(kontext);
 		}
