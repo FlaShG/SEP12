@@ -27,7 +27,6 @@ public class ClientGUI extends Client
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 
-	
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
@@ -40,7 +39,7 @@ public class ClientGUI extends Client
 	@Override
 	public void schreibeText(String text)
 	{
-		for(String zeile: text.split("\n"))
+		for(String zeile : text.split("\n"))
 			schreibeTextNL(zeile);
 	}
 
@@ -50,7 +49,7 @@ public class ClientGUI extends Client
 	private void schreibeTextNL(String text)
 	{
 		JTextArea anzeige = _kp.getAnzeigeArea();
-		anzeige.append(text+"\r\n");
+		anzeige.append(text + "\r\n");
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
 	}
 
@@ -64,7 +63,7 @@ public class ClientGUI extends Client
 			@Override
 			public void run()
 			{
-				aktualisiereUI(paket,false);
+				aktualisiereUI(paket, false);
 			}
 		});
 
@@ -98,12 +97,14 @@ public class ClientGUI extends Client
 	{
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket,
+				vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
-		if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
+		if(_bildPanel.getWidth() > _bildPanel.getHeight()
+				&& _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getHeight()));
-		else if( _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
+		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getWidth()));
 	}
@@ -124,7 +125,6 @@ public class ClientGUI extends Client
 			sendeEingabe(_befehlszeile);
 		}
 	}
-
 
 	/**
 	 * 
@@ -196,11 +196,19 @@ public class ClientGUI extends Client
 		_bp.getEssenAusTascheButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
 						+ " " + TextVerwalter.ORT_TASCHE));
-		
-		String befehlEssenString = TextVerwalter.BEFEHL_ESSEN+ " " + TextVerwalter.ORT_TASCHE + " ";
-		_bp.getEssenTascheGutButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "guter krümel"));
-		_bp.getEssenTascheSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "schlechter krümel"));
-		_bp.getEssenTascheUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "krümel"));
+
+		String befehlEssenString = TextVerwalter.BEFEHL_ESSEN + " "
+				+ TextVerwalter.ORT_TASCHE + " ";
+		_bp.getEssenTascheGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(befehlEssenString
+						+ "guter krümel"));
+		_bp.getEssenTascheSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(befehlEssenString
+						+ "schlechter krümel"));
+		_bp.getEssenTascheUnbekanntButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(befehlEssenString
+								+ "krümel"));
 
 		_bp.getEssenBodenButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
@@ -218,12 +226,18 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
 
 		_bp.getFuettereButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE));
-		
-		_bp.getFuettereGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_GUT));
-		_bp.getFuettereSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_SCHLECHT));
-		_bp.getFuettereUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_UNBEKANNT));
-		
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE));
+
+		_bp.getFuettereGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_GUT));
+		_bp.getFuettereSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_SCHLECHT));
+		_bp.getFuettereUnbekanntButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_UNBEKANNT));
 
 		_bp.getInventarButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
@@ -233,12 +247,16 @@ public class ClientGUI extends Client
 				.addActionListener(
 						new ActionListenerBefehlAusfuehren(
 								TextVerwalter.BEFEHL_ABLEGEN));
-		
-		
-		_bp.getAblegenGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel"));
-		_bp.getAblegenSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " schlechter krümel"));
-		_bp.getAblegenUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + "krümel"));
-		
+
+		_bp.getAblegenGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ " guter krümel"));
+		_bp.getAblegenSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ " schlechter krümel"));
+		_bp.getAblegenUnbekanntButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ "krümel"));
 
 		_bildPanel.addComponentListener(new ComponentAdapter()
 		{
@@ -282,8 +300,6 @@ public class ClientGUI extends Client
 					sendeEingabe("schaue ost");
 				}
 
-				
-
 			}
 		});
 
@@ -298,8 +314,6 @@ public class ClientGUI extends Client
 				{
 					sendeEingabe("schaue süd");
 				}
-
-				
 
 			}
 		});
