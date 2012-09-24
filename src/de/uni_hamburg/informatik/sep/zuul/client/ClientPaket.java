@@ -4,8 +4,14 @@ import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
@@ -24,6 +30,7 @@ public class ClientPaket implements Remote, Serializable
 	private RaumArt _raumArt;
 	private String _spielerName;
 	private String[] _moeglicheAusgaenge;
+	private Map<String, Boolean> _verfuegbareBefehle;
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
@@ -39,6 +46,16 @@ public class ClientPaket implements Remote, Serializable
 		_raumArt = aktuellerRaum.getRaumart();
 		_spielerName = spieler.getName();
 		_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
+
+		_verfuegbareBefehle = new HashMap<String, Boolean>();
+		for(Entry<String, Befehl> entry : BefehlFactory.getMap().entrySet())
+		{
+			String befehlsname = entry.getKey();
+			Befehl befehl = entry.getValue();
+
+			_verfuegbareBefehle.put(befehlsname, befehl.vorbedingungErfuellt(
+					kontext, spieler, new Befehlszeile(befehlsname)));
+		}
 	}
 
 	public boolean hasKatze()
@@ -91,4 +108,11 @@ public class ClientPaket implements Remote, Serializable
 		return _raumID;
 	}
 
+	/**
+	 * @return the verfuegbareBefehle
+	 */
+	public Map<String, Boolean> getVerfuegbareBefehle()
+	{
+		return _verfuegbareBefehle;
+	}
 }
