@@ -2,8 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.io.Serializable;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
