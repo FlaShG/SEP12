@@ -27,7 +27,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	 */
 	private static final long serialVersionUID = 1688218849488836203L;
 	private Map<String, ClientInterface> _connectedClients;
-	private List<String> _readyClients; //Liste der Spieler die bereit sind.
+	private List<String> _readyClients; //Liste der Namen der Spieler die bereit sind.
 	private Spiel _spiel;
 
 	public Server() throws RemoteException, AlreadyBoundException
