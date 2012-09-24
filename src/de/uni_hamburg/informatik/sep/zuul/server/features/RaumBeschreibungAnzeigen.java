@@ -16,8 +16,7 @@ public final class RaumBeschreibungAnzeigen implements Feature,
 	public static void zeigeRaumbeschreibung(ServerKontext kontext,
 			Spieler spieler)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				kontext.getAktuellenRaumZu(spieler).getBeschreibung());
+		kontext.schreibeAnSpieler(spieler, kontext.getAktuellenRaumZu(spieler).getBeschreibung());
 	}
 
 	@Override

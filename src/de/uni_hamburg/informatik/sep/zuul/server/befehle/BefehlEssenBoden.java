@@ -34,12 +34,10 @@ public class BefehlEssenBoden implements Befehl
 		case IKuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			aktuellerRaum.loescheItem();
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.kuchenVomBodenGegessenText(energie));
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.kuchenVomBodenGegessenText(energie));
 			if(aktuellerRaum.getNaechstesItem() != Item.Keins)
 			{
-				BefehlFactory.schreibeNL(kontext, spieler,
-						TextVerwalter.IMMERNOCHKUCHENTEXT);
+				kontext.schreibeAnSpieler(spieler, TextVerwalter.IMMERNOCHKUCHENTEXT);
 			}
 
 			break;
@@ -49,8 +47,7 @@ public class BefehlEssenBoden implements Befehl
 			aktuellerRaum.loescheItem();
 			if(energie > 0)
 			{
-				BefehlFactory.schreibeNL(kontext, spieler,
-						TextVerwalter.giftkuchenVomBodenGegessenText(energie));
+				kontext.schreibeAnSpieler(spieler, TextVerwalter.giftkuchenVomBodenGegessenText(energie));
 			}
 			else
 			{
@@ -69,8 +66,7 @@ public class BefehlEssenBoden implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.NICHTSZUMESSENTEXTBODEN);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTSZUMESSENTEXTBODEN);
 
 	}
 

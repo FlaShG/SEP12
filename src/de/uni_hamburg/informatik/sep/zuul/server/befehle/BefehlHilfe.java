@@ -11,11 +11,12 @@ final class BefehlHilfe implements Befehl
 			Befehlszeile befehlszeile)
 	{
 
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.HILFETEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.HILFETEXT);
 
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.HILFETEXT);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.HILFETEXT);
+			return true;
 		}
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile.getGeparsteZeile()
 				.get(1));
@@ -25,7 +26,7 @@ final class BefehlHilfe implements Befehl
 		{
 			hilfetext = befehl.getHilfe();
 		}
-		BefehlFactory.schreibeNL(kontext, spieler, hilfetext);
+		kontext.schreibeAnSpieler(spieler, hilfetext);
 
 		return true;
 	}
