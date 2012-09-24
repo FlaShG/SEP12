@@ -37,14 +37,13 @@ public class ClientGUI extends Client
 	private Raumbilderzeuger _bilderzeuger;
 	private Map<String, JButton> _befehlButtonMap = new HashMap<String, JButton>();
 
-
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		
-		
+		_befehlButtonMap = new HashMap<String, JButton>();
+
 		if(!serverIP.equals("127.0.0.1"))
 		{
 			startFenster();
@@ -54,8 +53,7 @@ public class ClientGUI extends Client
 			login();
 			_server.empfangeStartEingabe(_clientName);
 		}
-		
-		
+
 	}
 
 	private void startFenster() throws RemoteException
@@ -87,7 +85,6 @@ public class ClientGUI extends Client
 				try
 				{
 					_server.empfangeStartEingabe(_clientName);
-					starteClientUI();
 				}
 				catch(RemoteException e)
 				{
