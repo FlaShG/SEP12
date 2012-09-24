@@ -30,8 +30,6 @@ public class ClientGUI extends Client
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 
-	private JButton _startButton;
-
 	private Raumbilderzeuger _bilderzeuger;
 
 	public ClientGUI(String serverName, String serverIP, int clientport,
@@ -40,6 +38,12 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
+		startFenster();
+
+	}
+	
+	private void startFenster() throws RemoteException
+	{
 		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
 		JPanel panel = new JPanel();
@@ -74,9 +78,9 @@ public class ClientGUI extends Client
 
 			}
 		});
-
 	}
-
+	
+	
 	public void starte()
 	{
 		initialisiereUI();
