@@ -145,6 +145,8 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
@@ -156,6 +158,45 @@ public class ClientGUI extends Client
 		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
 					.getLabelFuerIcon().getWidth(), paket, vorschau));
+	}
+
+	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	{
+		
+		boolean n = false;
+		boolean o = false;
+		boolean s = false;
+		boolean w = false;
+		
+		for(String richtung : ausgaenge)
+		{
+			if(richtung.equals(TextVerwalter.RICHTUNG_NORDEN))
+			{
+				n = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_OSTEN))
+			{
+				o = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_SUEDEN))
+			{
+				s = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_WESTEN))
+			{
+				w = true;
+			}
+		}
+		
+		_bildPanel.getTuerNordButton().setVisible(n);
+		_bildPanel.getTuerOstButton().setVisible(o);
+		_bildPanel.getTuerSuedButton().setVisible(s);
+		_bildPanel.getTuerWestButton().setVisible(w);
+		
+		
+		
+		
+		
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
