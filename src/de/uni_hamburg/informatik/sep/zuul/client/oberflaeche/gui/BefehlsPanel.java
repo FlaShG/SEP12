@@ -59,6 +59,7 @@ public class BefehlsPanel extends JPanel
 	public BefehlsPanel()
 	{
 		setLayout(null);
+		setSize(682, 512);
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(0, 0);

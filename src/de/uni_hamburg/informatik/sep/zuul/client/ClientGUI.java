@@ -100,10 +100,10 @@ public class ClientGUI extends Client
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
-		if(_bildPanel.getWidth() > _bildPanel.getHeight())
+		if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getHeight()));
-		else
+		else if( _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getWidth()));
 	}

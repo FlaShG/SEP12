@@ -10,7 +10,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlFuettereKatze implements Befehl
 {
 
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FEED + " "
+	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
 			+ "katze";
 
 	@Override
@@ -53,7 +53,7 @@ public class BefehlFuettereKatze implements Befehl
 		else if(!raum.hasKatze())
 		{
 			//TODO: Keine Katze zum Füttern!
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
 		}
 	}
 
