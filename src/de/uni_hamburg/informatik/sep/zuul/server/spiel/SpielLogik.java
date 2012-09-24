@@ -14,7 +14,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.Lebensenergie;
 import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
-import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
@@ -36,7 +35,7 @@ public class SpielLogik
 	public SpielLogik()
 	{
 		erstelleKontext();
-		
+
 		registriereListeners();
 	}
 
@@ -48,7 +47,7 @@ public class SpielLogik
 		registriereFeature(new AusgaengeAnzeigen());
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());
-		
+
 		Katze.erzeugeKatze(this);
 	}
 
@@ -169,6 +168,8 @@ public class SpielLogik
 	public void wechseleRaum(Spieler spieler, Raum raum)
 	{
 		_kontext.setAktuellenRaumZu(spieler, raum);
+		int aktuelleLebensEnergie = spieler.getLebensEnergie();
+		spieler.setLebensEnergie(aktuelleLebensEnergie - 1);
 	}
 
 	/**
