@@ -24,6 +24,8 @@ public class BefehlsPanel extends JPanel
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
 	private final String PATH = getClass().getResource("bilder/").getPath();
 	private final int ZEILENANZAHL = 5;
+	private final int ABSTAND_NORMAL = 5;
+	private final int ABSTAND_EXTRA = 2;
 	private final String GUT = "Gut";
 	private final String SCHLECHT = "Giftig";
 	private final String UNBEKANNT = "Unbekannt";
@@ -48,6 +50,7 @@ public class BefehlsPanel extends JPanel
 	private JButton _inventarButton;
 	private JButton[] _normalButtons;
 	private JButton[] _extraButtons;
+	private JButton[] _systemButtons;
 
 	private JLabel _labelFuerLebensenergie;
 
@@ -63,72 +66,50 @@ public class BefehlsPanel extends JPanel
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 
-		_nehmenButton.setFocusable(false);
-
 		_gibButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_GIB));
-
-		_gibButton.setFocusable(false);
 
 		_fuettereButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_FEED));
 
-		_fuettereButton.setFocusable(false);
-
 		_fuettereGutButton = new JButton(GUT);
-		_fuettereGutButton.setFocusable(false);
 
 		_fuettereSchlechtButton = new JButton(SCHLECHT);
-		_fuettereSchlechtButton.setFocusable(false);
 
 		_fuettereUnbekanntButton = new JButton(UNBEKANNT);
-		_fuettereUnbekanntButton.setFocusable(false);
 
 		_essenTascheButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_TASCHE));
-		_essenTascheButton.setFocusable(false);
 
 		_essenTascheGutButton = new JButton(GUT);
-		_essenTascheGutButton.setFocusable(false);
 
 		_essenTascheSchlechtButton = new JButton(SCHLECHT);
-		_essenTascheSchlechtButton.setFocusable(false);
 
 		_essenTascheUnbekanntButton = new JButton(UNBEKANNT);
-		_essenTascheUnbekanntButton.setFocusable(false);
 
 		_essenBodenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
 						+ TextVerwalter.ORT_BODEN));
-		_essenBodenButton.setFocusable(false);
 
 		_inventarButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_INVENTAR));
-		_inventarButton.setFocusable(false);
 
 		_ablegenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_ABLEGEN));
-		_ablegenButton.setFocusable(false);
 
 		_ablegenGutButton = new JButton(GUT);
-		_ablegenGutButton.setFocusable(false);
 
 		_ablegenSchlechtButton = new JButton(SCHLECHT);
-		_ablegenSchlechtButton.setFocusable(false);
 
 		_ablegenUnbekanntButton = new JButton(UNBEKANNT);
-		_ablegenUnbekanntButton.setFocusable(false);
 
 		_helpButton = new JButton(new ImageIcon(PATH + "faq-icon.png"));
-		_helpButton.setFocusable(false);
 
 		_ladenButton = new JButton(new ImageIcon(PATH + "disk.gif"));
-		_ladenButton.setFocusable(false);
 
 		_quitButton = new JButton(new ImageIcon(PATH + "exitIcon.gif"));
 		_quitButton.setBackground(new Color(0,175,0));
-		_quitButton.setFocusable(false);
 
 		_normalButtons = new JButton[]{_nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
@@ -138,30 +119,25 @@ public class BefehlsPanel extends JPanel
 				_ablegenGutButton, _ablegenSchlechtButton,
 				_ablegenUnbekanntButton, _essenTascheGutButton,
 				_essenTascheSchlechtButton, _essenTascheUnbekanntButton};
+		_systemButtons = new JButton[]{_helpButton, _ladenButton, _quitButton};
 		
-		_helpButton.setSize(50, 50);
-		_ladenButton.setSize(50, 50);
-		_quitButton.setSize(50, 50);
-
-		add(_nehmenButton);
-		add(_gibButton);
-		add(_fuettereButton);
-		add(_fuettereGutButton);
-		add(_fuettereSchlechtButton);
-		add(_fuettereUnbekanntButton);
-		add(_essenTascheButton);
-		add(_essenTascheGutButton);
-		add(_essenTascheSchlechtButton);
-		add(_essenTascheUnbekanntButton);
-		add(_essenBodenButton);
-		add(_inventarButton);
-		add(_ablegenButton);
-		add(_ablegenGutButton);
-		add(_ablegenSchlechtButton);
-		add(_ablegenUnbekanntButton);
-		add(_helpButton);
-		add(_ladenButton);
-		add(_quitButton);
+		for (JButton b : _normalButtons)
+		{
+			b.setFocusable(false);
+			add(b);
+		}
+		for (JButton b : _extraButtons)
+		{
+			b.setFocusable(false);
+			add(b);
+		}
+		for (JButton b : _systemButtons)
+		{
+			b.setFocusable(false);
+			b.setSize(50, 50);
+			add(b);
+		}
+		
 		add(_labelFuerLebensenergie);
 
 		addComponentListener(new ComponentAdapter()
@@ -170,9 +146,7 @@ public class BefehlsPanel extends JPanel
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				int platzhalter = 5;
-
-				int buttonhoehe = (BefehlsPanel.this.getHeight() - (platzhalter * 2 * (ZEILENANZAHL)))
+				int buttonhoehe = (BefehlsPanel.this.getHeight() - (ABSTAND_NORMAL * 2 * (ZEILENANZAHL)))
 						/ ZEILENANZAHL;
 
 				int buttonhoeheExtra = (int) (buttonhoehe * 0.75);
@@ -207,11 +181,11 @@ public class BefehlsPanel extends JPanel
 				_fuettereGutButton.setLocation(xpos_1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 				_fuettereSchlechtButton.setLocation(
-						xpos_1 + _fuettereGutButton.getWidth(),
+						xpos_1 + _fuettereGutButton.getWidth() + 1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 				_fuettereUnbekanntButton.setLocation(
 						_fuettereSchlechtButton.getLocation().x
-								+ _fuettereSchlechtButton.getWidth(),
+								+ _fuettereSchlechtButton.getWidth() + 1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 
 
@@ -228,12 +202,12 @@ public class BefehlsPanel extends JPanel
 						(int) (_ablegenButton.getY() + buttonhoehe + 2));
 				_ablegenSchlechtButton.setLocation(
 						_ablegenGutButton.getLocation().x
-								+ buttongroesseExtra.width,
+								+ buttongroesseExtra.width + 1,
 						_ablegenButton.getY() + buttonhoehe + 2);
 
 				_ablegenUnbekanntButton.setLocation(
 						_ablegenSchlechtButton.getLocation().x
-								+ buttongroesseExtra.width,
+								+ buttongroesseExtra.width + 1,
 								_ablegenButton.getY() + buttonhoehe + 2);
 
 				_essenTascheButton.setLocation(
@@ -243,11 +217,11 @@ public class BefehlsPanel extends JPanel
 				_essenTascheGutButton.setLocation(x,
 						(int) (_essenTascheButton.getY() + buttonhoehe + 2));
 				_essenTascheSchlechtButton.setLocation(x
-						+ buttongroesseExtra.width,
+						+ buttongroesseExtra.width + 1,
 						(int) (_essenTascheButton.getY() + buttonhoehe + 2));
 				_essenTascheUnbekanntButton.setLocation(
 						_essenTascheSchlechtButton.getX()
-								+ buttongroesseExtra.width,
+								+ buttongroesseExtra.width + 1,
 						(int) (_essenTascheButton.getY() + buttonhoehe + 2));
 
 				// system buttons
