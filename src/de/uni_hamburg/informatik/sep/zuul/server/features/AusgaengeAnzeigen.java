@@ -15,13 +15,12 @@ final public class AusgaengeAnzeigen implements Feature,
 	 */
 	public static String zeigeAusgaenge(Raum raum)
 	{
-		//TODO: rewrite
 		StringBuilder builder = new StringBuilder();
-		builder.append(TextVerwalter.AUSGAENGE + ": ");
+		builder.append(TextVerwalter.AUSGAENGE).append(": ");
 
 		for(String s : raum.getMoeglicheAusgaenge())
 		{
-			builder.append(s + " ");
+			builder.append(s).append(" ");
 		}
 		return builder.toString();
 	}

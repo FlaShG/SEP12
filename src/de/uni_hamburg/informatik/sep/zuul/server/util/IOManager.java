@@ -150,4 +150,14 @@ public class IOManager
 		level.setKatzen(_strukParser.getAnzahlKatzen());
 		return level;
 	}
+	
+	public int getAnzahlMaeuse()
+	{
+		return _strukParser.getAnzahlMaeuse();
+	}
+	
+	public int getAnzahlKatzen()
+	{
+		return _strukParser.getAnzahlKatzen();
+	}
 }
