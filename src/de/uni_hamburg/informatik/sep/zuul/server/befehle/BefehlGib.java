@@ -30,16 +30,23 @@ final class BefehlGib implements Befehl
 		Item kuchen = spieler.getInventar().getAnyKuchen();
 		switch (kuchen)
 		{
-		case IKuchen:
+
 		case UKuchen:
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_GESUNDER_KUCHEN);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.LABOR_GESUNDER_KUCHEN);
+			spieler.getInventar().fuegeItemHinzu(Item.IKuchen);
 			break;
-		case IGiftkuchen:
+
 		case UGiftkuchen:
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.LABOR_GIFTIGER_KUCHEN);
+			spieler.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
 			break;
+		case IKuchen:
+		case IGiftkuchen:
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
+			spieler.getInventar().fuegeItemHinzu(kuchen);
 		}
-		spieler.getInventar().fuegeItemHinzu(kuchen);
 		return true;
 	}
 
