@@ -22,6 +22,12 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class ClientGUI extends Client
 {
 
+	private Hauptfenster _hf;
+	private KonsolenPanel _kp;
+	private BildPanel _bildPanel;
+	private BefehlsPanel _bp;
+
+	
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
@@ -100,11 +106,6 @@ public class ClientGUI extends Client
 			sendeEingabe(_befehlszeile);
 		}
 	}
-
-	private Hauptfenster _hf;
-	private KonsolenPanel _kp;
-	private BildPanel _bildPanel;
-	private BefehlsPanel _bp;
 
 	/**
 	 * 
