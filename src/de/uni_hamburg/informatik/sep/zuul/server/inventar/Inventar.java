@@ -214,6 +214,29 @@ public class Inventar
 	}
 
 	/**
+	 * @require hasAnyKuchen()
+	 * @return
+	 */
+	public Item getAnyUKuchen()
+	{
+	    assert hasAnyKuchen();
+
+		for(Item item : _inhalt)
+		{
+			switch (item)
+			{
+			case UKuchen:
+			case UGiftkuchen:
+				_inhalt.remove(item);
+				return item;
+			default:
+				break;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Gibt an, ob die Liste das Item enthält
 	 * 
 	 * @param item
