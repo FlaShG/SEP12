@@ -42,7 +42,6 @@ public class ClientGUI extends Client
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		_befehlButtonMap = new HashMap<String, JButton>();
 
 		if(!serverIP.equals("127.0.0.1"))
 		{
@@ -104,8 +103,10 @@ public class ClientGUI extends Client
 	/**
 	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
 	 */
-	public void starteClientUI() throws RemoteException
+	public void starteClientUI(ClientPaket paket) throws RemoteException
 	{
+		_bilderzeuger = new Raumbilderzeuger();
+		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
 	}
 
@@ -277,8 +278,6 @@ public class ClientGUI extends Client
 	 */
 	void initialisiereUI()
 	{
-
-		_bilderzeuger = new Raumbilderzeuger();
 		_bp = new BefehlsPanel();
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
@@ -412,11 +411,11 @@ public class ClientGUI extends Client
 			public void componentResized(ComponentEvent arg0)
 			{
 				// TODO: bild neuzeichen ohne client paket
-				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+				if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
 					_bildPanel.setRaumanzeige(_bilderzeuger
 							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
 									.getHeight()));
-				else
+				else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
 					_bildPanel.setRaumanzeige(_bilderzeuger
 							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
 									.getWidth()));
