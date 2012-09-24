@@ -123,7 +123,11 @@ public class Raumbilderzeuger
 
 		if(_paket.hasMaus())
 		{
-			g2d.drawImage(MAUS, 70, 70, 100, 51, null);
+			Tupel mausposition = _mauspositionen.get(getRandomZahl(_mauspositionen.size()));
+			int x = mausposition.getX();
+			int y = mausposition.getY();
+			
+			g2d.drawImage(MAUS, x, y, 100, 51, null);
 		}
 
 		//Male Katze
@@ -211,9 +215,10 @@ public class Raumbilderzeuger
 		_itemPositionen.add(new Tupel(430,440));
 
 		_mauspositionen.add(new Tupel(70,70));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
-//		_mauspositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 7));
+		_mauspositionen.add(new Tupel(70,519));
+		_mauspositionen.add(new Tupel(470,70));
+		_mauspositionen.add(new Tupel(470,519));
+
 
 		_drlittlepositionen.add(new Tupel(73, 320));
 		//		_drlittlepositionen.add(new Tupel(_breitehoehe / 7, _breitehoehe / 2));
