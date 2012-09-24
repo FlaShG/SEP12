@@ -47,15 +47,6 @@ public class StartFenster
 			{
 				try
 				{
-					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
-				}
-				catch(Exception e1)
-				{
-					e1.printStackTrace();
-				}
-				
-				try
-				{
 					new Server();
 				}
 				catch(RemoteException | AlreadyBoundException e1)
@@ -64,6 +55,15 @@ public class StartFenster
 					e1.printStackTrace();
 				}
 				
+				try
+				{
+					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+
 				_ui.dispose();
 			}
 		});
