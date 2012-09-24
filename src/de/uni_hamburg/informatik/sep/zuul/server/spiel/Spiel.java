@@ -11,7 +11,6 @@ import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -38,6 +37,7 @@ public class Spiel
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
+	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
 
 	/**
@@ -47,6 +47,7 @@ public class Spiel
 	{
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
+		_nachrichtenMap = new HashMap<Spieler, String>();
 		//TODO in map schreiben
 		setGestartet(false);
 	}
@@ -92,10 +93,35 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_logik.erstelleKontext();
-		_logik.zeigeWillkommensText();
-		_logik.getKontext().zeigeWillkommensText();
 		setGestartet(true);
+		zeigeWillkommensText();
+	}
+
+	/**
+	 * Zeige jedem angemeldeten Spieler den Willkommenstext an.
+	 */
+	private void zeigeWillkommensText()
+	{
+		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
+
+		for(Spieler spieler : _nachrichtenMap.keySet())
+		{
+			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
+		}
+	}
+
+	/**
+	 * Übergib dem Spieler spieler eine nachricht als String
+	 * 
+	 * @param spieler
+	 *            der Spieler für den die Nachricht ist
+	 * @param nachricht
+	 *            die Nachricht für den Spieler
+	 */
+	public void setNachrichtFuer(Spieler spieler, String nachricht)
+	{
+		_nachrichtenMap.remove(spieler); //altes entfernen
+		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
 	}
 
 	/**
@@ -129,7 +155,8 @@ public class Spiel
 						alterRaum != neuerRaum);
 		}
 		else
-			_logik.getKontext().schreibeAnSpieler(spieler, TextVerwalter.FALSCHEEINGABE);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**

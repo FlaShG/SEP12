@@ -36,9 +36,7 @@ public class ServerKontext
 	 */
 	public void fuegeNeuenSpielerHinzu(Spieler spieler)
 	{
-
 		_spielerPosition.put(spieler, _startRaum);
-
 	}
 
 	/**
@@ -119,21 +117,6 @@ public class ServerKontext
 
 	}
 
-	/**
-	 * Zeige dem Spieler den Willkommenstext.
-	 * 
-	 * @param spieler
-	 */
-	public void zeigeWillkommensText(Spieler spieler)
-	{
-		// TODO impl!!
-		// schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
-		// schreibeNL("");
-		// zeigeRaumbeschreibung(spieler);
-		// zeigeAktuelleAusgaenge(spieler);
-	}
-	
-	
 	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 
 	/**
@@ -146,13 +129,13 @@ public class ServerKontext
 	{
 		if(!_nachrichtenCache.containsKey(spieler))
 			return "";
-		
+
 		String nachricht = _nachrichtenCache.get(spieler);
 		_nachrichtenCache.remove(spieler);
-		
+
 		return nachricht;
 	}
-	
+
 	/**
 	 * Speichert eine Nachricht für den Spieler zwischen.
 	 */
@@ -185,20 +168,12 @@ public class ServerKontext
 	public List<Spieler> getSpielerInRaum(Raum raum)
 	{
 		ArrayList<Spieler> spielers = new ArrayList<Spieler>();
-		for(Spieler spieler: _spielerPosition.keySet())
+		for(Spieler spieler : _spielerPosition.keySet())
 		{
 			if(getAktuellenRaumZu(spieler) == raum)
 				spielers.add(spieler);
 		}
 		return spielers;
-	}
-
-	public void zeigeWillkommensText()
-	{
-		for(Spieler spieler : _spielerPosition.keySet())
-		{
-			zeigeWillkommensText(spieler);
-		}
 	}
 
 }
