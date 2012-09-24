@@ -100,10 +100,10 @@ public class ClientGUI extends Client
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
-		if(_bildPanel.getWidth() > _bildPanel.getHeight())
+		if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getHeight()));
-		else
+		else if( _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(raumbilderzeuger
 					.getRaumansicht(_bildPanel.getWidth()));
 	}
@@ -196,6 +196,11 @@ public class ClientGUI extends Client
 		_bp.getEssenAusTascheButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
 						+ " " + TextVerwalter.ORT_TASCHE));
+		
+		String befehlEssenString = TextVerwalter.BEFEHL_ESSEN+ " " + TextVerwalter.ORT_TASCHE + " ";
+		_bp.getEssenTascheGutButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "guter krümel"));
+		_bp.getEssenTascheSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "schlechter krümel"));
+		_bp.getEssenTascheUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "krümel"));
 
 		_bp.getEssenBodenButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
@@ -213,7 +218,12 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
 
 		_bp.getFuettereButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FEED));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE));
+		
+		_bp.getFuettereGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_GUT));
+		_bp.getFuettereSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_SCHLECHT));
+		_bp.getFuettereUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_UNBEKANNT));
+		
 
 		_bp.getInventarButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
@@ -223,6 +233,12 @@ public class ClientGUI extends Client
 				.addActionListener(
 						new ActionListenerBefehlAusfuehren(
 								TextVerwalter.BEFEHL_ABLEGEN));
+		
+		
+		_bp.getAblegenGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel"));
+		_bp.getAblegenSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " schlechter krümel"));
+		_bp.getAblegenUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + "krümel"));
+		
 
 		_bildPanel.addComponentListener(new ComponentAdapter()
 		{
@@ -258,9 +274,15 @@ public class ClientGUI extends Client
 		{
 
 			@Override
-			public void mouseClicked(MouseEvent arg0)
+			public void mouseClicked(MouseEvent m)
 			{
-				sendeEingabe("schaue ost");
+				if(SwingUtilities.isRightMouseButton(m)
+						&& m.getClickCount() == 1)
+				{
+					sendeEingabe("schaue ost");
+				}
+
+				
 
 			}
 		});
@@ -269,9 +291,15 @@ public class ClientGUI extends Client
 		{
 
 			@Override
-			public void mouseClicked(MouseEvent arg0)
+			public void mouseClicked(MouseEvent m)
 			{
-				sendeEingabe("schaue süd");
+				if(SwingUtilities.isRightMouseButton(m)
+						&& m.getClickCount() == 1)
+				{
+					sendeEingabe("schaue süd");
+				}
+
+				
 
 			}
 		});
@@ -280,10 +308,13 @@ public class ClientGUI extends Client
 		{
 
 			@Override
-			public void mouseClicked(MouseEvent arg0)
+			public void mouseClicked(MouseEvent m)
 			{
-				sendeEingabe("schaue west");
-
+				if(SwingUtilities.isRightMouseButton(m)
+						&& m.getClickCount() == 1)
+				{
+					sendeEingabe("schaue west");
+				}
 			}
 		});
 
