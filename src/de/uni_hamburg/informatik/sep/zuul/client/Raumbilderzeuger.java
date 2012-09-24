@@ -87,10 +87,12 @@ public class Raumbilderzeuger
 		}
 		
 		
+		Graphics2D g2d = (Graphics2D) raum.getGraphics();
+		
 
 		for(String richtung : _paket.getMoeglicheAusgaenge())
 		{
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
+			
 			if(richtung.equals("nord"))
 			{
 				g2d.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
@@ -121,10 +123,7 @@ public class Raumbilderzeuger
 
 		if(_paket.hasMaus())
 		{
-			raum = maleAufBild(
-					raum,
-					MAUS,
-					_mauspositionen.remove(getRandomZahl(_mauspositionen.size())));
+			g2d.drawImage(MAUS, 70, 70, 100, 51, null);
 		}
 
 		//Male Katze
@@ -161,7 +160,7 @@ public class Raumbilderzeuger
 			}
 
 		}
-//		maleKruemel(anzahlKruemel, raum);
+
 		
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
@@ -170,7 +169,6 @@ public class Raumbilderzeuger
 			int x = itempos.getX();
 			int y = itempos.getY();
 			
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
 			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
 		}
 		
@@ -183,7 +181,6 @@ public class Raumbilderzeuger
 
 		if(_schauenAnsicht)
 		{
-			Graphics2D g2d = (Graphics2D) raum.getGraphics();
 			g2d.drawImage(SCHAUENSCHATTEN, 0, 0, 640, 640, null);
 		}
 		
@@ -247,17 +244,6 @@ public class Raumbilderzeuger
 
 	}
 
-	private void maleKruemel(int anzahlKruemel, BufferedImage raum)
-	{
-		for(int i = 0; i < anzahlKruemel; i++)
-		{
-
-			maleAufBild(
-					raum,
-					KRUEMEL,
-					_itemPositionen.remove(getRandomZahl(_itemPositionen.size())));
-		}
-	}
 
 	private BufferedImage ladeBild(String pfad)
 	{
