@@ -15,6 +15,7 @@ public class StartFenster
 	private String _ipAdresse;
 	private int _port;
 	private String _spielername;
+	private boolean _bestaetigt;
 
 	public StartFenster()
 	{
@@ -22,6 +23,7 @@ public class StartFenster
 
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
+		_bestaetigt = false;
 
 		initialisiereUI();
 	}
@@ -62,16 +64,30 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_spielername = _ui.getSpielerNameTextField().getText();
-				_ui.dispose();
+				if(_bestaetigt)
+				{
+					_ui.dispose();
 
-				try
-				{
-					new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
+					try
+					{
+						new ClientGUI("RmiServer", _ipAdresse, _port,
+								_spielername);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
 				}
-				catch(Exception e)
+				else
 				{
-					e.printStackTrace();
+					_spielername = _ui.getSpielerNameTextField().getText();
+					_ui.getBestaetigen().setText("Los gehts!");
+					
+					_ui.getIPTextField().setEnabled(false);
+					_ui.getSpielerNameTextField().setEnabled(false);
+					_ui.getPortTextField().setEnabled(false);
+					
+					_bestaetigt = true;
 				}
 
 			}
