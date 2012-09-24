@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
 /**
@@ -21,6 +23,7 @@ public class ServerKontext
 	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
+	private ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
 
 	public ServerKontext(Raum startRaum)
 	{
@@ -170,6 +173,37 @@ public class ServerKontext
 				spielers.add(spieler);
 		}
 		return spielers;
+	}
+
+	/**
+	 * Gehe mit dem Spieler in einen anderen Raum
+	 * 
+	 * @param spielLogik TODO
+	 * @param spieler
+	 *            der Spieler der Laufe soll
+	 * @param raum
+	 *            der Raum in den es gehen soll
+	 */
+	public void wechseleRaum(Spieler spieler, Raum raum)
+	{
+		Raum alterRaum = getAktuellenRaumZu(spieler);
+		setAktuellenRaumZu(spieler, raum);
+	
+		fuehreRaumGeaendertListenerAus(spieler, alterRaum, raum);
+	}
+
+	public void fuehreRaumGeaendertListenerAus(Spieler spieler, Raum alterRaum, Raum neuerRaum)
+	{
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(RaumGeaendertListener raumGeaendertListener : _raumGeaendertListeners)
+		{
+			raumGeaendertListener.raumGeaendert(this, spieler, alterRaum, neuerRaum);
+		}
+	}
+
+	public ArrayList<RaumGeaendertListener> getRaumGeaendertListeners()
+	{
+		return _raumGeaendertListeners;
 	}
 
 }

@@ -41,6 +41,7 @@ public class BildPanel extends JPanel
 		setSize(341, 512);
 		setDoubleBuffered(true);
 		_LabelFuerIcon = new JLabel();
+		_LabelFuerIcon.setSize(this.getWidth(), this.getHeight());
 		_LabelFuerIcon.setLocation(0, 0);
 
 		

@@ -25,8 +25,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 @XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart" })
 public class Raum
 {
-	private static boolean ISTGESETZT = false;
-
 	private @XmlElement(name = "beschreibung")
 	String _beschreibung;
 	private @XmlTransient
@@ -343,6 +341,5 @@ public class Raum
 	{
 		_x = x;
 		_y = y;
-		ISTGESETZT = true;
 	}
 }

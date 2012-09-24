@@ -26,7 +26,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 public class SpielLogik
 {
 	private static String _levelPfad;
-	private ServerKontext _kontext;
+	public ServerKontext _kontext;
 	private RaumStruktur _struktur;
 
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
@@ -160,22 +160,6 @@ public class SpielLogik
 	}
 
 	/**
-	 * Gehe mit dem Spieler in einen anderen Raum
-	 * 
-	 * @param spieler
-	 *            der Spieler der Laufe soll
-	 * @param raum
-	 *            der Raum in den es gehen soll
-	 */
-	public void wechseleRaum(Spieler spieler, Raum raum)
-	{
-		Raum alterRaum = _kontext.getAktuellenRaumZu(spieler);
-		_kontext.setAktuellenRaumZu(spieler, raum);
-
-		fuehreRaumGeaendertListenerAus(spieler, alterRaum, raum);
-	}
-
-	/**
 	 * Getter für den Serverkontext.
 	 * 
 	 * @return der Serverkontext
@@ -201,15 +185,13 @@ public class SpielLogik
 			_befehlAusgefuehrtListeners
 					.add((BefehlAusgefuehrtListener) feature);
 		if(feature instanceof RaumGeaendertListener)
-			_raumGeaendertListeners.add((RaumGeaendertListener) feature);
+			_kontext.getRaumGeaendertListeners().add((RaumGeaendertListener) feature);
 
 		// TODO: Feature registrieren ( Lebenspunkte, ... )
 	}
 
 	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
 	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
-	ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
-
 	void fuehreTickListenerAus()
 	{
 		// Führe alle TickListener aus.
@@ -229,16 +211,6 @@ public class SpielLogik
 			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(_kontext, spieler,
 					befehl, hasRoomChanged))
 				return;
-		}
-	}
-
-	void fuehreRaumGeaendertListenerAus(Spieler spieler, Raum alterRaum,
-			Raum neuerRaum)
-	{
-		// Führe alle BefehlAusgefuehrtListener aus.
-		for(RaumGeaendertListener raumGeaendertListener : _raumGeaendertListeners)
-		{
-			raumGeaendertListener.raumGeaendert(_kontext, spieler, alterRaum, neuerRaum);
 		}
 	}
 

@@ -24,41 +24,44 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class ClientGUI extends Client
 {
-	
+
 	private Hauptfenster _hf;
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
+
 	private JButton _startButton;
+
+	private Raumbilderzeuger _bilderzeuger;
 
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		
+
 		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
-		
+
 		JPanel panel = new JPanel();
-		
+
 		final JButton _startButton = new JButton("Los gehts!");
-		
+
 		panel.add(_startButton);
-		
+
 		startFrame.setContentPane(panel);
-		
+
 		startFrame.setVisible(true);
-		
+
 		login();
-		
+
 		_startButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				_startButton.setEnabled(false);
-				
+
 				try
 				{
 					_server.empfangeStartEingabe(_clientName);
@@ -68,21 +71,17 @@ public class ClientGUI extends Client
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-			
+
 			}
 		});
-		
-		
 
 	}
-	
-	
+
 	public void starte()
 	{
 		initialisiereUI();
 	}
-	
+
 	@Override
 	public void schreibeText(String text)
 	{
@@ -142,18 +141,17 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
-		schreibeText(paket.getNachricht());
+		String nachricht = paket.getNachricht();
+		if(nachricht != null)
+			schreibeText(nachricht);
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket,
-				vorschau); //Spieler, items, maus, Katze anzeigen
-		// TODO: falsch?
 		if(_bildPanel.getWidth() > _bildPanel.getHeight()
 				&& _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(raumbilderzeuger
-					.getRaumansicht(_bildPanel.getHeight()));
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
+					.getLabelFuerIcon().getHeight(), paket, vorschau));
 		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(raumbilderzeuger
-					.getRaumansicht(_bildPanel.getWidth()));
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
+					.getLabelFuerIcon().getWidth(), paket, vorschau));
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -179,6 +177,7 @@ public class ClientGUI extends Client
 	void initialisiereUI()
 	{
 
+		_bilderzeuger = new Raumbilderzeuger();
 		_bp = new BefehlsPanel();
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
@@ -303,7 +302,7 @@ public class ClientGUI extends Client
 						+ " schlechter krümel"));
 		_bp.getAblegenUnbekanntButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
-						+ "krümel"));
+						+ " krümel"));
 
 		_bildPanel.addComponentListener(new ComponentAdapter()
 		{
@@ -313,9 +312,13 @@ public class ClientGUI extends Client
 			{
 				// TODO: bild neuzeichen ohne client paket
 				if(_bildPanel.getWidth() > _bildPanel.getHeight())
-					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+					_bildPanel.setRaumanzeige(_bilderzeuger
+							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
+									.getHeight()));
 				else
-					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
+					_bildPanel.setRaumanzeige(_bilderzeuger
+							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
+									.getWidth()));
 			}
 
 		});
@@ -480,19 +483,6 @@ public class ClientGUI extends Client
 		//			zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
 		//		else
 		//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
-	}
-
-	private void zeichneBild(ClientPaket paket, int breitehoehe)
-	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, false);
-		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht(breitehoehe));
-	}
-
-	private void zeichneBild(int height)
-	{
-		// TODO Auto-generated method stub
-		// TODO: Bild ohne neues client paket neu zeichen
-
 	}
 
 	/**
