@@ -18,6 +18,7 @@ public class Startfenster extends JFrame
 	private JTextField _eingabeIP;
 	private JTextField _eingabePort;
 
+	
 	public Startfenster()
 	{
 		super("Zuul-Spielmodus Auswahl");
