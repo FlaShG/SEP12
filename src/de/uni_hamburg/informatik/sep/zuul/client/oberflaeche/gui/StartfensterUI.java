@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +14,9 @@ public class StartfensterUI extends JFrame
 {
 	private JButton _singlePlayer;
 	private JButton _multiPlayer;
-	private JTextField _eingabeIP;
 	private JTextField _benutzerName;
+	private JTextField _eingabeIP;
+	private JTextField _eingabePort;
 
 	public StartfensterUI()
 	{
@@ -31,12 +31,13 @@ public class StartfensterUI extends JFrame
 		add(_multiPlayer);
 
 		setMinimumSize(new Dimension(300, 100));
+		_benutzerName = new JTextField("Dr.Little");
+		_eingabeIP = new JTextField("127.0.0.1");
+		_eingabePort = new JTextField("1090");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		_benutzerName = new JTextField("Dr.Little");
-		_eingabeIP = new JTextField("127.0.0.1");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public JButton getSinglePlayerButton()
@@ -54,7 +55,9 @@ public class StartfensterUI extends JFrame
 		JLabel labelserver = new JLabel(
 				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
-		setSize(new Dimension(300, 230));
+		JLabel labelport = new JLabel(
+				TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
+		setSize(new Dimension(300, 290));
 		add(labelname);
 		add(_benutzerName);
 		_benutzerName.setCaretPosition(_benutzerName.getText().length());
@@ -62,6 +65,10 @@ public class StartfensterUI extends JFrame
 		add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
+		add(labelport);
+		add(_eingabePort);
+		_eingabePort.setCaretPosition(_eingabePort.getText().length());
+
 	}
 
 	public JTextField getIPTextField()
