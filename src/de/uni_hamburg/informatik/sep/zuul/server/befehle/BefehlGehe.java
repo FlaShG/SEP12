@@ -21,7 +21,7 @@ final class BefehlGehe implements Befehl
 	{
 		String richtung = extrahiereRichtung(befehlszeile);
 
-		Raum naechsterRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(
+		Raum naechsterRaum = SpielLogik.getAktuellenRaumZu(kontext, spieler).getAusgang(
 				richtung);
 		SpielLogik.wechseleRaum(kontext, spieler, naechsterRaum);
 
@@ -36,7 +36,7 @@ final class BefehlGehe implements Befehl
 			return false;
 
 		// Kann man in den Raum gehen?
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		return Arrays.asList(raum.getMoeglicheAusgaenge()).contains(richtung);
 	}
 

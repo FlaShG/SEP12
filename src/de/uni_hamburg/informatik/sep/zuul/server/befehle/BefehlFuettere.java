@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -13,7 +14,7 @@ public class BefehlFuettere implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		return raum.hasKatze() || raum.hasMaus();
 	}
 
@@ -23,7 +24,7 @@ public class BefehlFuettere implements Befehl
 	{
 		// Versuche eine Katze oder eine Maus zu füttern
 
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		Befehl befehl = null;
 		if(raum.hasKatze())
 			befehl = BefehlFactory.gibBefehl(BefehlFuettereKatze.class);

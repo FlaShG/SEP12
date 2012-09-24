@@ -24,7 +24,7 @@ public class BefehlEssenBoden implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		Raum aktuellerRaum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		Item item = aktuellerRaum.getNaechstesItem();
 		int energie = spieler.getLebensEnergie();
 

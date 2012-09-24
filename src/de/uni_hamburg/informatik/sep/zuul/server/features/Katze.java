@@ -75,7 +75,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 
 	private boolean istEinSpielerImRaum(ServerKontext kontext, Raum raum)
 	{
-		List<Raum> raeume = kontext.getRaeumeInDemSichSpielerAufhalten();
+		List<Raum> raeume = SpielLogik.getRaeumeInDemSichSpielerAufhalten(kontext);
 		return raeume.contains(raum);
 	}
 
@@ -153,7 +153,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 			Befehl befehl, boolean _)
 	{
 		// Wenn ein Spieler im gleich Raum ist wie die Katze und 'schauen' ausführt, kriegt er eine gewischt, es sei denn, sie ist satt.
-		if(!_satt && _raum == kontext.getAktuellenRaumZu(spieler)
+		if(!_satt && _raum == SpielLogik.getAktuellenRaumZu(kontext, spieler)
 				&& befehl instanceof BefehlSchauen)
 		{
 			spieler.setLebensEnergie(spieler.getLebensEnergie() - KATZE_SCHADEN);

@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -15,7 +16,7 @@ public final class MausImRaumTextAnzeigen implements Feature,
 			boolean hasRoomChanged)
 	{
 		// Maus
-		if(hasRoomChanged && kontext.getAktuellenRaumZu(spieler).hasMaus())
+		if(hasRoomChanged && SpielLogik.getAktuellenRaumZu(kontext, spieler).hasMaus())
 		{
 			BefehlFactory.schreibeNL(kontext, spieler,
 					TextVerwalter.MAUS_GEFUNDEN);

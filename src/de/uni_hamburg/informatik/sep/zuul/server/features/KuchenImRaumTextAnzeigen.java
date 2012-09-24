@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -15,7 +16,7 @@ public final class KuchenImRaumTextAnzeigen implements Feature,
 	{
 		if(hasRoomChanged)
 		{
-			switch (kontext.getAktuellenRaumZu(spieler).getNaechstesItem())
+			switch (SpielLogik.getAktuellenRaumZu(kontext, spieler).getNaechstesItem())
 			{
 			case IKuchen:
 			case UKuchen:

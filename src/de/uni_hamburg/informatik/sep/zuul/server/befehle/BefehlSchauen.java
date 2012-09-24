@@ -6,6 +6,7 @@ import java.util.Stack;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -121,7 +122,7 @@ public final class BefehlSchauen implements Befehl
 	private Raum getRaumFuerRichtung(ServerKontext kontext, Spieler spieler,
 			String richtung)
 	{
-		return kontext.getAktuellenRaumZu(spieler).getAusgang(richtung);
+		return SpielLogik.getAktuellenRaumZu(kontext, spieler).getAusgang(richtung);
 	}
 
 	@Override

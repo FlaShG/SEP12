@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -51,7 +52,7 @@ public class BefehlFuettereMaus implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		return raum.hasMaus() && spieler.getInventar().hasAnyKuchen();
 	}
 
@@ -61,7 +62,7 @@ public class BefehlFuettereMaus implements Befehl
 	{
 
 		Item kuchen = spieler.getInventar().getAnyKuchen();
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		Raum aktuellerRaum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 
 		String richtigeRichtung = aktuellerRaum.getMaus().getRichtung();
 
@@ -82,7 +83,7 @@ public class BefehlFuettereMaus implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 
 		if(!spieler.getInventar().hasAnyKuchen())
 		{

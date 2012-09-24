@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -12,7 +13,7 @@ final class BefehlNehmen implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		return raum.getItems().size() > 0;
 	}
 
@@ -20,7 +21,7 @@ final class BefehlNehmen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 
 		Item item = raum.getNaechstesItem();
 

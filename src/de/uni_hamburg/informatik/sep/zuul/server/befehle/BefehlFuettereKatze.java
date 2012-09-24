@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -17,7 +18,7 @@ public class BefehlFuettereKatze implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 		return raum.hasKatze() && spieler.getInventar().hasAnyKuchen();
 	}
 
@@ -25,7 +26,7 @@ public class BefehlFuettereKatze implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 
 		Katze katze = raum.getKatze();
 
@@ -45,7 +46,7 @@ public class BefehlFuettereKatze implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Raum raum = kontext.getAktuellenRaumZu(spieler);
+		Raum raum = SpielLogik.getAktuellenRaumZu(kontext, spieler);
 
 		if(!spieler.getInventar().hasAnyKuchen())
 		{
