@@ -18,7 +18,7 @@ final class BefehlBeenden implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		// TODO: Schließe Verbindung zu Spieler
-		BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter.BEENDENTEXT);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEENDENTEXT);
 		return true;
 	}
 

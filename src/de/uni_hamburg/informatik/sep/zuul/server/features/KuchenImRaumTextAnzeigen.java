@@ -21,8 +21,7 @@ public final class KuchenImRaumTextAnzeigen implements Feature,
 			case UKuchen:
 			case IGiftkuchen:
 			case UGiftkuchen:
-				BefehlFactory.schreibeNL(kontext, spieler,
-						TextVerwalter.KUCHENIMRAUMTEXT);
+				kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENIMRAUMTEXT);
 			}
 		}
 

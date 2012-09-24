@@ -25,8 +25,8 @@ final class BefehlInventarAnzeigen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler, "Ihre Tasche enthält: "
-				+ spieler.getInventar().toString());
+		kontext.schreibeAnSpieler(spieler, "Ihre Tasche enthält: "
+		+ spieler.getInventar().toString());
 		return true;
 	}
 

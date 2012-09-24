@@ -48,14 +48,12 @@ public final class BefehlSchauen implements Befehl
 		String richtung = extrahiereRichtung(befehlszeile);
 		Raum nebenRaum = getRaumFuerRichtung(kontext, spieler, richtung);
 
-		BefehlFactory.schreibeNL(kontext, spieler, "Dr.Little schaut nach "
-				+ richtung + "en.");
-		BefehlFactory.schreibeNL(kontext, spieler,
-				"Er sieht: " + nebenRaum.getName());
+		kontext.schreibeAnSpieler(spieler, "Dr.Little schaut nach "
+		+ richtung + "en.");
+		kontext.schreibeAnSpieler(spieler, "Er sieht: " + nebenRaum.getName());
 
 		Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
-		BefehlFactory.schreibeNL(kontext, spieler,
-				"Zu sehen " + (raumItems.size() == 1 ? "ist" : "sind") + ":");
+		kontext.schreibeAnSpieler(spieler, "Zu sehen " + (raumItems.size() == 1 ? "ist" : "sind") + ":");
 
 		int anzahlKruemel = 0;
 		boolean gegengift = false;
@@ -84,33 +82,32 @@ public final class BefehlSchauen implements Befehl
 		}
 		if(gegengift)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, "Das Gegengift!");
+			kontext.schreibeAnSpieler(spieler, "Das Gegengift!");
 			hatDinge = true;
 		}
 
 		if(anzahlKruemel != 0)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, anzahlKruemel
-					+ " Krümel");
+			kontext.schreibeAnSpieler(spieler, anzahlKruemel
+			+ " Krümel");
 			hatDinge = true;
 		}
 
 		if(nebenRaum.hasMaus())
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, "Eine Maus");
+			kontext.schreibeAnSpieler(spieler, "Eine Maus");
 			hatDinge = true;
 		}
 
 		if(nebenRaum.hasKatze())
 		{
-			BefehlFactory.schreibeNL(kontext, spieler, "Eine Katze");
+			kontext.schreibeAnSpieler(spieler, "Eine Katze");
 			hatDinge = true;
 		}
 
 		if(!hatDinge)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler,
-					"nur uninteressante Sachen");
+			kontext.schreibeAnSpieler(spieler, "nur uninteressante Sachen");
 		}
 		return false;
 	}
@@ -134,13 +131,11 @@ public final class BefehlSchauen implements Befehl
 
 		if(befehlszeile.getGeparsteZeile().size() < 2)
 		{
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.KEINESCHAURICHTUNG);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINESCHAURICHTUNG);
 		}
 		// Keine gültige Richtung!
 		else if(extrahiereRichtung(befehlszeile) == null)
-			BefehlFactory.schreibeNL(kontext, spieler,
-					TextVerwalter.KEINRAUMZUMSCHAUN);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINRAUMZUMSCHAUN);
 
 	}
 
