@@ -41,7 +41,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 
 		_readyClients = new ArrayList<String>();
 
-		_spiel = new Spiel();
+		_spiel = new Spiel(this);
 	}
 
 	// sinnlos?
@@ -146,5 +146,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	public static void main(String[] args) throws Exception
 	{
 		new Server();
+	}
+
+	public Map<String, ClientInterface> getConnectedClients()
+	{
+		return _connectedClients;
 	}
 }

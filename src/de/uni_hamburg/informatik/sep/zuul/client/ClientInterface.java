@@ -23,5 +23,13 @@ public interface ClientInterface extends Remote
 	 * @return
 	 */
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException;
+	
+	/**
+	 * Zeigt die Vorschau des nächsten Raumes an.
+	 * @param paket
+	 * @return
+	 * @throws RemoteException
+	 */
+	public boolean zeigeVorschau(ClientPaket paket) throws RemoteException;
 
 }

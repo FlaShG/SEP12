@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -7,9 +8,12 @@ import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
+import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -37,17 +41,20 @@ public class Spiel
 	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
-	private Map<Spieler, String> _nachrichtenMap;
+	//	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
+	private final Server _server;
 
 	/**
 	 * Erzeuge ein neues Spiel
+	 * @param server 
 	 */
-	public Spiel()
+	public Spiel(Server server)
 	{
+		_server = server;
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
-		_nachrichtenMap = new HashMap<Spieler, String>();
+		//		_nachrichtenMap = new HashMap<Spieler, String>();
 		//TODO in map schreiben
 		setGestartet(false);
 	}
@@ -102,11 +109,12 @@ public class Spiel
 	 */
 	private void zeigeWillkommensText()
 	{
-		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
+		//		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
 
-		for(Spieler spieler : _nachrichtenMap.keySet())
+		for(Spieler spieler : _spielerMap.values())
 		{
-			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.EINLEITUNGSTEXT);
 		}
 	}
 
@@ -120,8 +128,9 @@ public class Spiel
 	 */
 	public void setNachrichtFuer(Spieler spieler, String nachricht)
 	{
-		_nachrichtenMap.remove(spieler); //altes entfernen
-		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
+		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
+		//		_nachrichtenMap.remove(spieler); //altes entfernen
+		//		_nachrichtenMap.put(spieler, nachricht); //neue nachricht setzen
 	}
 
 	/**
@@ -148,15 +157,32 @@ public class Spiel
 					_logik.getKontext(), spieler, befehlszeile, befehl);
 
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-
+			
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
+			
+			if(befehl instanceof BefehlSchauen)
+			{
+				// TODO schicke clienpaket mit vorschau
+				Map<String, ClientInterface> clients = _server.getConnectedClients();
+				String name = spieler.getName();
+				ClientInterface clientInterface = clients.get(name);
+				try
+				{
+					clientInterface.zeigeVorschau(new ClientPaket(_logik.getKontext(), spieler, null));
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
 		else
-			_logik.getKontext().schreibeAnSpieler(spieler,
-					TextVerwalter.FALSCHEEINGABE);
+			setNachrichtFuer(spieler, TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**
@@ -171,7 +197,7 @@ public class Spiel
 	}
 
 	/**
-	 * Packe das Clienpaket für den Client mit dem Namen name.
+	 * Packe das Clientpaket für den Client mit dem Namen name.
 	 * 
 	 * @param name
 	 * @return

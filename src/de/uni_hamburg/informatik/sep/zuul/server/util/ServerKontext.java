@@ -18,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 public class ServerKontext
 {
 
+	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 
@@ -116,8 +117,6 @@ public class ServerKontext
 		return result;
 
 	}
-
-	private Map<Spieler, String> _nachrichtenCache = new HashMap<>();
 
 	/**
 	 * Gibt die Nachricht für den Spieler und leert den NachrichtenCache.
