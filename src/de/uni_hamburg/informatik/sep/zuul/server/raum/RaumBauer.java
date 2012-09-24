@@ -74,7 +74,7 @@ public class RaumBauer
 	{
 
 		Raum mausRaum = FancyFunction.getRandomEntry(kannMausEnthaltenRaum);
-		if(mausRaum != null)
+		if(mausRaum == null)
 			return null;
 
 		mausRaum.setMaus(new Maus(mausRaum, _endRaum));
