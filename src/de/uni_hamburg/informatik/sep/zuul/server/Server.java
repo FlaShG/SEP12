@@ -122,7 +122,20 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		if(alleGestartet())
 		{
 			_spiel.spielen();
+			starteAlleClients();
 			sendeAenderungenAnAlle();
+		}
+	}
+
+	/**
+	 * Sendet an alle Clients, dass das Spiel nun los geht. Diese warten nun
+	 * nicht länger, sondern starten.
+	 */
+	private void starteAlleClients() throws RemoteException
+	{
+		for(ClientInterface c : _connectedClients.values())
+		{
+			c.starte();
 		}
 	}
 
