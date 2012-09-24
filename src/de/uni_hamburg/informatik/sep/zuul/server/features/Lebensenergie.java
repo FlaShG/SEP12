@@ -32,7 +32,7 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 		if(spieler.getLebensEnergie() <= 0)
 		{
 			// TODO: Spiel beenden für den Spieler
-			//			SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
+//						SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
 			return false;
 		}
 

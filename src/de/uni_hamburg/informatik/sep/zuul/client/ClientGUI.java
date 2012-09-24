@@ -96,7 +96,9 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
-		schreibeText(paket.getNachricht());
+		String nachricht = paket.getNachricht();
+		if(nachricht!=null)
+			schreibeText(nachricht);
 
 		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
