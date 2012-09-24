@@ -126,12 +126,9 @@ public class ServerKontext
 	 */
 	public String getNachrichtFuer(Spieler spieler)
 	{
-		if(!_nachrichtenCache.containsKey(spieler))
-			return "";
-
-		String nachricht = _nachrichtenCache.get(spieler);
-		_nachrichtenCache.remove(spieler);
-
+		
+		String nachricht = _nachrichtenCache.remove(spieler);
+		
 		return nachricht;
 	}
 
@@ -144,7 +141,7 @@ public class ServerKontext
 		if(_nachrichtenCache.containsKey(spieler))
 			s = _nachrichtenCache.get(spieler);
 		s = s + nachricht + "\n";
-		_nachrichtenCache.put(spieler, nachricht);
+		_nachrichtenCache.put(spieler, s);
 	}
 
 	public Spieler getSpielerByName(String benutzerName)
