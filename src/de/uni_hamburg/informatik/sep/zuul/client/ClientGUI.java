@@ -10,6 +10,9 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
@@ -26,22 +29,63 @@ public class ClientGUI extends Client
 	private KonsolenPanel _kp;
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
+
+	private JButton _startButton;
+
 	private Raumbilderzeuger _bilderzeuger;
 
-	
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
-		initialisiereUI();
 
+		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
+
+		JPanel panel = new JPanel();
+
+		final JButton _startButton = new JButton("Los gehts!");
+
+		panel.add(_startButton);
+
+		startFrame.setContentPane(panel);
+
+		startFrame.setVisible(true);
+
+		login();
+
+		_startButton.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_startButton.setEnabled(false);
+
+				try
+				{
+					_server.empfangeStartEingabe(_clientName);
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+	}
+
+	public void starte()
+	{
+		initialisiereUI();
 	}
 
 	@Override
 	public void schreibeText(String text)
 	{
-		for(String zeile: text.split("\n"))
+		for(String zeile : text.split("\n"))
 			schreibeTextNL(zeile);
 	}
 
@@ -51,7 +95,7 @@ public class ClientGUI extends Client
 	private void schreibeTextNL(String text)
 	{
 		JTextArea anzeige = _kp.getAnzeigeArea();
-		anzeige.append(text+"\r\n");
+		anzeige.append(text + "\r\n");
 		anzeige.setCaretPosition(anzeige.getDocument().getLength());
 	}
 
@@ -65,7 +109,7 @@ public class ClientGUI extends Client
 			@Override
 			public void run()
 			{
-				aktualisiereUI(paket,false);
+				aktualisiereUI(paket, false);
 			}
 		});
 
@@ -98,18 +142,16 @@ public class ClientGUI extends Client
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
 		String nachricht = paket.getNachricht();
-		if(nachricht!=null)
+		if(nachricht != null)
 			schreibeText(nachricht);
 
-//		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
-		
-		// TODO: falsch?
-		if(_bildPanel.getWidth() > _bildPanel.getHeight() && _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(_bilderzeuger
-					.getRaumansicht(_bildPanel.getLabelFuerIcon().getHeight(),paket,vorschau));
-		else if( _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(_bilderzeuger
-					.getRaumansicht(_bildPanel.getLabelFuerIcon().getWidth(),paket,vorschau));
+		if(_bildPanel.getWidth() > _bildPanel.getHeight()
+				&& _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
+					.getLabelFuerIcon().getHeight(), paket, vorschau));
+		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
+					.getLabelFuerIcon().getWidth(), paket, vorschau));
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -128,7 +170,6 @@ public class ClientGUI extends Client
 			sendeEingabe(_befehlszeile);
 		}
 	}
-
 
 	/**
 	 * 
@@ -201,11 +242,19 @@ public class ClientGUI extends Client
 		_bp.getEssenAusTascheButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
 						+ " " + TextVerwalter.ORT_TASCHE));
-		
-		String befehlEssenString = TextVerwalter.BEFEHL_ESSEN+ " " + TextVerwalter.ORT_TASCHE + " ";
-		_bp.getEssenTascheGutButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "guter krümel"));
-		_bp.getEssenTascheSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "schlechter krümel"));
-		_bp.getEssenTascheUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(befehlEssenString + "krümel"));
+
+		String befehlEssenString = TextVerwalter.BEFEHL_ESSEN + " "
+				+ TextVerwalter.ORT_TASCHE + " ";
+		_bp.getEssenTascheGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(befehlEssenString
+						+ "guter krümel"));
+		_bp.getEssenTascheSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(befehlEssenString
+						+ "schlechter krümel"));
+		_bp.getEssenTascheUnbekanntButton()
+				.addActionListener(
+						new ActionListenerBefehlAusfuehren(befehlEssenString
+								+ "krümel"));
 
 		_bp.getEssenBodenButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ESSEN
@@ -223,12 +272,18 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
 
 		_bp.getFuettereButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE));
-		
-		_bp.getFuettereGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_GUT));
-		_bp.getFuettereSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_SCHLECHT));
-		_bp.getFuettereUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_FUETTERE_UNBEKANNT));
-		
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE));
+
+		_bp.getFuettereGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_GUT));
+		_bp.getFuettereSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_SCHLECHT));
+		_bp.getFuettereUnbekanntButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_FUETTERE_UNBEKANNT));
 
 		_bp.getInventarButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
@@ -238,27 +293,35 @@ public class ClientGUI extends Client
 				.addActionListener(
 						new ActionListenerBefehlAusfuehren(
 								TextVerwalter.BEFEHL_ABLEGEN));
-		
-		
-		_bp.getAblegenGutButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel"));
-		_bp.getAblegenSchlechtButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " schlechter krümel"));
-		_bp.getAblegenUnbekanntButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN + " krümel"));
-		
 
-//		_bildPanel.addComponentListener(new ComponentAdapter()
-//		{
-//
-//			@Override
-//			public void componentResized(ComponentEvent arg0)
-//			{
-//				// TODO: bild neuzeichen ohne client paket
-//				if(_bildPanel.getWidth() > _bildPanel.getHeight())
-//					_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(_bildPanel.getLabelFuerIcon().getHeight()));
-//				else
-//					_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(_bildPanel.getLabelFuerIcon().getWidth()));
-//			}
-//
-//		});
+		_bp.getAblegenGutButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ " guter krümel"));
+		_bp.getAblegenSchlechtButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ " schlechter krümel"));
+		_bp.getAblegenUnbekanntButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_ABLEGEN
+						+ " krümel"));
+
+		_bildPanel.addComponentListener(new ComponentAdapter()
+		{
+
+			@Override
+			public void componentResized(ComponentEvent arg0)
+			{
+				// TODO: bild neuzeichen ohne client paket
+				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+					_bildPanel.setRaumanzeige(_bilderzeuger
+							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
+									.getHeight()));
+				else
+					_bildPanel.setRaumanzeige(_bilderzeuger
+							.ZeichneBildErneut(_bildPanel.getLabelFuerIcon()
+									.getWidth()));
+			}
+
+		});
 
 		_bildPanel.getTuerNordButton().addMouseListener(new MouseAdapter()
 		{
@@ -287,8 +350,6 @@ public class ClientGUI extends Client
 					sendeEingabe("schaue ost");
 				}
 
-				
-
 			}
 		});
 
@@ -303,8 +364,6 @@ public class ClientGUI extends Client
 				{
 					sendeEingabe("schaue süd");
 				}
-
-				
 
 			}
 		});
@@ -425,9 +484,6 @@ public class ClientGUI extends Client
 		//		else
 		//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 	}
-
-	
-
 
 	/**
 	 * @param befehlszeile
