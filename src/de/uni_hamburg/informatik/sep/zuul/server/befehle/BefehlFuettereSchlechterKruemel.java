@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import java.util.LinkedList;
 
+import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
@@ -69,14 +70,17 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 			
 			if(raum.hasKatze())
 			{
-				
-			Befehl befehl = null;
-			if(raum.hasKatze())
-				befehl = BefehlFactory.gibBefehl(BefehlFuettereKatze.class);
-			if(raum.hasMaus())
-				befehl = BefehlFactory.gibBefehl(BefehlFuettereMaus.class);
-			return Spiel.versucheBefehlAusfuehrung(kontext, spieler,
-					befehlszeile, befehl);
+				Katze katze = raum.getKatze();
+
+				if(katze.isSatt())
+				{
+					kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+					return false;
+				}
+				Item kuchen = spieler.getInventar().getAnyKuchen();
+				katze.fuettere(kontext, spieler, kuchen);
+
+				return true;
 			}
 			else if(raum.hasMaus())
 			{

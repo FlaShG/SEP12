@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.rmi.AlreadyBoundException;
-import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
@@ -48,7 +46,7 @@ public class StartFenster
 				{
 					new Server();
 				}
-				catch(RemoteException | AlreadyBoundException e1)
+				catch(Exception e1)
 				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -175,7 +173,7 @@ public class StartFenster
 				{
 					new Server();
 				}
-				catch(RemoteException | AlreadyBoundException e1)
+				catch(Exception e1)
 				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

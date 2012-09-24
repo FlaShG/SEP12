@@ -171,7 +171,7 @@
     <raum>
         <name>Vorraum</name>
         <id>401819458</id>
-        <beschreibung>Eine schwere Eichentür ragt bedrohlich vor Dr. Little auf. Sie weist wohl in Richtung des Büros eines wichten Mitarbeiters der UNiversität...</beschreibung>
+        <beschreibung>Eine schwere Eichentür ragt bedrohlich vor Dr. Little auf. Sie weist wohl in Richtung des Büros eines wichtigen Mitarbeiters der UNiversität...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -213,7 +213,7 @@
     <raum>
         <name>Foyer</name>
         <id>1853430083</id>
-        <beschreibung>Dr. Little betritt das Foyer des Chemiegebäudes. Das Ziel schein nah zu sein...</beschreibung>
+        <beschreibung>Dr. Little betritt das Foyer des Chemiegebäudes. Das Ziel scheint nah zu sein...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -225,7 +225,7 @@
     <raum>
         <name>Hinterhof</name>
         <id>1340346877</id>
-        <beschreibung>Dr. Little betritt den Hinterhof. Ausser ein paar Mülltonnen ist hier nichts.</beschreibung>
+        <beschreibung>Dr. Little betritt den Hinterhof. Außer ein paar Mülltonnen ist hier nichts.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -334,6 +334,14 @@
         <name>Notausgang</name>
         <id>1899255010</id>
         <beschreibung>Dr. Little steht in einem Notausgang. Er ist aber so klein, dass er den Alarm nicht auslöst.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>SM-Kammer</name>
+        <id>2014096446</id>
+        <beschreibung>Dr. Little findet sich urplötzlich in einem Raum voller übler Gerätschaften, Latex-Anzügen und komischen Flecken wieder.
+Der Geruch schweißtreibender Peinigung liegt in der Luft.
+Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kopfkino der in einem dieser Anzüge steckende Präsident von einer Domina bearbeiten lässt.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
 </raumsammlung>

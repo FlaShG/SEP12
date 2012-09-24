@@ -1,13 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Random;
 
