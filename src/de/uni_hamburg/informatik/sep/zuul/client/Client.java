@@ -78,9 +78,6 @@ public abstract class Client extends UnicastRemoteObject implements
 			System.err.println("Fehler beim Anmelden!");
 			//TODO ausgabe auf gui
 		}
-
-		//TODO starten und einloggen eigetnlch nicht das selbe!! extra methode anbieten.
-		_server.empfangeStartEingabe(_clientName);
 	}
 
 	@Override
@@ -93,7 +90,7 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 
 	}
-	
+
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
 		if(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))

@@ -23,13 +23,22 @@ public interface ClientInterface extends Remote
 	 * @return
 	 */
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException;
-	
+
 	/**
 	 * Zeigt die Vorschau des nächsten Raumes an.
+	 * 
 	 * @param paket
 	 * @return
 	 * @throws RemoteException
 	 */
 	public boolean zeigeVorschau(ClientPaket paket) throws RemoteException;
+
+	/**
+	 * Kann vom Server aufgerufen werden, wenn alle wartenden Clients bereit
+	 * sind. Dann wird das Spiel / die Oberfläche gestartet.
+	 * 
+	 * @throws RemoteException
+	 */
+	public void starte() throws RemoteException;
 
 }

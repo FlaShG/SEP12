@@ -72,4 +72,11 @@ public class ClientConsole extends Client
 		return true;
 	}
 
+	@Override
+	public void starte() throws RemoteException
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

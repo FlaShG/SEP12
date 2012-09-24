@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.befehle;
+package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
