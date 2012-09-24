@@ -38,8 +38,7 @@ public class BefehlFuettere implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		// Vorbedingung nicht erfüllt, daher ist kein Tier hier im Raum.
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FEED_NICHTS_DA_ZUM_FUETTERN);
 	}
 
 	@Override

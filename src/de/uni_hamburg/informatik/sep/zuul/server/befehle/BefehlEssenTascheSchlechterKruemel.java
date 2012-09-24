@@ -34,8 +34,8 @@ public class BefehlEssenTascheSchlechterKruemel implements Befehl
 		{
 			spieler.setLebensEnergie(spieler.getLebensEnergie()
 					- SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST);
-			BefehlFactory.schreibeNL(kontext, spieler, TextVerwalter
-					.kuchengegessentext(spieler.getLebensEnergie()));
+			kontext.schreibeAnSpieler(spieler, TextVerwalter
+			.kuchengegessentext(spieler.getLebensEnergie()));
 		}
 	}
 
@@ -43,8 +43,7 @@ public class BefehlEssenTascheSchlechterKruemel implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		BefehlFactory.schreibeNL(kontext, spieler,
-				TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
 	}
 
 	@Override

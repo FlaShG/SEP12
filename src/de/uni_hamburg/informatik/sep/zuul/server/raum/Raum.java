@@ -22,7 +22,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
  * Standardmäßig sind die Räume leer.
  */
 @XmlRootElement(name = "raum")
-@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart"})
+@XmlType(propOrder = { "_name", "_id", "_beschreibung", "_raumart" })
 public class Raum
 {
 	private static boolean ISTGESETZT = false;

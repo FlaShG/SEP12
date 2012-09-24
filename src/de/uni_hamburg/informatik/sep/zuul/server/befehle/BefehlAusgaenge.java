@@ -26,7 +26,7 @@ public class BefehlAusgaenge implements Befehl
 			output += s + " ";
 		}
 		
-		BefehlFactory.schreibeNL(kontext, spieler, output);
+		kontext.schreibeAnSpieler(spieler, output);
 		return true;
 	}
 

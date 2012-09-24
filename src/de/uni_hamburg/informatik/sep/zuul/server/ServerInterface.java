@@ -37,6 +37,18 @@ public interface ServerInterface extends Remote
 	 *            die Nutzereingabe
 	 * @return Übertragung erfolgreich bzw. fehlerfrei
 	 */
-	public boolean empfangeNutzerEingabe(String eingabe, String benutzerName) throws RemoteException;
+	public boolean empfangeNutzerEingabe(String eingabe, String benutzerName)
+			throws RemoteException;
+
+	/**
+	 * Empfange die Starteingabe des Clients. Wenn alle Clients gestartet haben,
+	 * geht das spiel los.
+	 * 
+	 * @param benutzerName
+	 *            Spielername
+	 * @throws RemoteException
+	 */
+	public void empfangeStartEingabe(String benutzerName)
+			throws RemoteException;
 
 }

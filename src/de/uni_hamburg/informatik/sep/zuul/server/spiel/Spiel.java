@@ -11,7 +11,6 @@ import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -94,10 +93,8 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_logik.erstelleKontext();
-		_logik.zeigeWillkommensText();
-		zeigeWillkommensText();
 		setGestartet(true);
+		zeigeWillkommensText();
 	}
 
 	/**
@@ -107,7 +104,7 @@ public class Spiel
 	{
 		_nachrichtenMap.clear(); //alte nachrichten raus (falls drin)
 
-		for(Spieler spieler : _nachrichtenMap.keySet())
+		for(Spieler spieler : _spielerMap.values())
 		{
 			_nachrichtenMap.put(spieler, TextVerwalter.EINLEITUNGSTEXT);
 		}
@@ -158,7 +155,7 @@ public class Spiel
 						alterRaum != neuerRaum);
 		}
 		else
-			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
+			_logik.getKontext().schreibeAnSpieler(spieler,
 					TextVerwalter.FALSCHEEINGABE);
 	}
 
@@ -199,11 +196,6 @@ public class Spiel
 			befehl.gibFehlerAus(kontext, spieler, befehlszeile);
 			return false;
 		}
-	}
-
-	void registerFeature(Feature feature)
-	{
-
 	}
 
 	/**
