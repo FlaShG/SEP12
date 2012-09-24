@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 import java.util.Arrays;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -22,7 +23,7 @@ final class BefehlGehe implements Befehl
 
 		Raum naechsterRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(
 				richtung);
-		kontext.setAktuellenRaumZu(spieler, naechsterRaum);
+		SpielLogik.wechseleRaum(kontext, spieler, naechsterRaum);
 
 		return true;
 	}

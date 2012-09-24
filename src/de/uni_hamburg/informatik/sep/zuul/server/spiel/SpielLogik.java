@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
-import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
@@ -15,24 +13,25 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.IOManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
-import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class SpielLogik
 {
-	private ServerKontext _kontext;
+//	private ServerKontext _kontext;
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	public static final int START_ENERGIE = 8;
+	public static String LEVEL_PFAD;
 
-	public SpielLogik()
+	private SpielLogik()
 	{
 		erstelleKontext();
 	}
 
-	public void erstelleKontext()
+	public static ServerKontext erstelleKontext()
 	{
-		_kontext = new ServerKontext(legeRaeumeAn());
+		ServerKontext kontext = new ServerKontext(legeRaeumeAn());
+		return kontext;
 
 	}
 
@@ -41,9 +40,9 @@ public class SpielLogik
 	 * 
 	 * @param spieler
 	 */
-	public void registriereSpieler(Spieler spieler)
+	public static void registriereSpieler(ServerKontext kontext, Spieler spieler)
 	{
-		_kontext.fuegeNeuenSpielerHinzu(spieler);
+		kontext.getSpielerPosition().put(spieler, kontext.getStartRaum());
 	}
 
 	/**
@@ -52,24 +51,30 @@ public class SpielLogik
 	 * @param name
 	 *            der name des Spielers
 	 */
-	public void meldeSpielerAb(String name)
+	public static void meldeSpielerAb(ServerKontext kontext, String name)
 	{
-		_kontext.entferneSpieler(name);
+		for(Spieler spieler : kontext.getSpielerListe())
+		{
+			if(name.equals(spieler.getName()))
+			{
+				kontext.getSpielerPosition().remove(spieler);
+			}
+		}
 	}
 
 	/**
 	 * Erzeugt alle Räume und verbindet ihre Ausgänge miteinander.
 	 */
-	private RaumStruktur legeRaeumeAn()
+	public static RaumStruktur legeRaeumeAn()
 	{
 		IOManager manager = new IOManager();
-		if(ServerKontext._levelPfad == null)
+		if(SpielLogik.LEVEL_PFAD == null)
 		{
 			manager.readLevel("./xml_dateien/testStruktur.xml");
 		}
 		else
 		{
-			manager.readLevel(ServerKontext._levelPfad);
+			manager.readLevel(SpielLogik.LEVEL_PFAD);
 		}
 		// TODO: noch statisch - datei mit filechooser auswählen!!
 
@@ -85,20 +90,10 @@ public class SpielLogik
 
 
 	/**
-	 * Zeigt die Ausgänge des aktuellen Raumes an. Gibt diese als Liste von
-	 * Räumen zurück.
-	 */
-	public List<Raum> zeigeAktuelleAusgaenge(Spieler spieler)
-	{
-		Raum raum = _kontext.getAktuellenRaumZu(spieler);
-		return raum.getAusgaenge();
-	}
-
-	/**
 	 * Gibt eine Nachricht aus und beendet das Spiel
 	 * 
 	 */
-	public void beendeSpiel(Spieler spieler)
+	public static void beendeSpiel(ServerKontext kontext, Spieler spieler)
 	{
 		// TODO nachricht ausgeben.
 		// TODO spiel beenden (Kontext?)
@@ -108,11 +103,11 @@ public class SpielLogik
 	/**
 	 * Beende das Spiel für alle Spieler.
 	 */
-	public void beendeSpiel()
+	public static void beendeSpiel(ServerKontext kontext)
 	{
-		for(Spieler spieler : _kontext.getSpielerListe())
+		for(Spieler spieler : kontext.getSpielerListe())
 		{
-			beendeSpiel(spieler);
+			beendeSpiel(kontext, spieler);
 		}
 	}
 
@@ -120,15 +115,29 @@ public class SpielLogik
 	 * Zeige allen Spielern den Willkommenstext.
 	 * 
 	 */
-	public void zeigeWillkommensText()
+	public static void zeigeWillkommensText(ServerKontext kontext)
 	{
-		for(Spieler spieler : _kontext.getSpielerListe())
+		for(Spieler spieler : kontext.getSpielerListe())
 		{
-			_kontext.zeigeWillkommensText(spieler);
+			zeigeWillkommensText(spieler);
 		}
 	}
+	
+	/**
+	 * Zeige dem Spieler den Willkommenstext.
+	 * 
+	 * @param spieler
+	 */
+	public static void zeigeWillkommensText(Spieler spieler)
+	{
+		// TODO impl!!
+		// schreibeNL(TextVerwalter.EINLEITUNGSTEXT);
+		// schreibeNL("");
+		// zeigeRaumbeschreibung(spieler);
+		// zeigeAktuelleAusgaenge(spieler);
+	}
 
-	public boolean isRaumZielRaum(Raum raum)
+	public static boolean isRaumZielRaum(Raum raum)
 	{
 		// TODO: Ugly !!!
 		return raum.getRaumart() == RaumArt.Ende;
@@ -139,9 +148,9 @@ public class SpielLogik
 	 * 
 	 * @return der Zielraum.
 	 */
-	public Raum getZielRaum()
+	public static Raum getZielRaum(ServerKontext kontext)
 	{
-		for(Raum raum : _kontext.getRaumStruktur().getConnections().keySet())
+		for(Raum raum : kontext.getRaumStruktur().getConnections().keySet())
 		{
 			if(isRaumZielRaum(raum))
 			{
@@ -160,27 +169,103 @@ public class SpielLogik
 	 * @param raum
 	 *            der Raum in den es gehen soll
 	 */
-	public void wechseleRaum(Spieler spieler, Raum raum)
+	public static void wechseleRaum(ServerKontext kontext, Spieler spieler, Raum raum)
 	{
-		_kontext.setAktuellenRaumZu(spieler, raum);
-	}
-
-	/**
-	 * Getter für den Serverkontext.
-	 * 
-	 * @return der Serverkontext
-	 */
-	public ServerKontext getKontext()
-	{
-		return _kontext;
-	}
-
-	/**
-	 * @return the struktur
-	 */
-	public RaumStruktur getStruktur()
-	{
-		return _kontext.getRaumStruktur();
+		assert (kontext.getSpielerPosition().containsKey(spieler));
+		kontext.getSpielerPosition().remove(spieler);
+		kontext.getSpielerPosition().put(spieler, raum);
 	}
 	
+	public static void registriereFeature(ServerKontext kontext, Feature feature)
+	{
+
+		if(feature instanceof TickListener)
+			kontext.getTickListeners().add((TickListener) feature);
+		if(feature instanceof BefehlAusgefuehrtListener)
+			kontext.getBefehlAusgefuehrtListeners().add((BefehlAusgefuehrtListener) feature);
+		
+		// TODO: Feature registrieren ( Lebenspunkte, ... )
+	}
+	
+	public static void deregisterFeature(ServerKontext kontext, Feature feature)
+	{
+		if(feature instanceof TickListener)
+			kontext.getTickListeners().remove((TickListener) feature);
+		if(feature instanceof BefehlAusgefuehrtListener)
+			kontext.getBefehlAusgefuehrtListeners().remove((BefehlAusgefuehrtListener) feature);
+	}
+
+	public static void fuehreBefehlAusgefuehrtListenerAus(ServerKontext kontext, Spieler spieler, Befehl befehl, boolean hasRoomChanged)
+	{
+		// Führe alle BefehlAusgefuehrtListener aus.
+		for(BefehlAusgefuehrtListener befehlAusgefuehrtListener : kontext.getBefehlAusgefuehrtListeners())
+		{
+			if(!befehlAusgefuehrtListener.befehlAusgefuehrt(kontext, spieler, befehl, hasRoomChanged))
+				return;
+		}
+	}
+	public static Spieler getSpielerByName(ServerKontext kontext, String benutzerName)
+	{
+		for(Spieler s : kontext.getSpielerPosition().keySet())
+		{
+			if(benutzerName.equals(s.getName()))
+			{
+				return s;
+			}
+		}
+		return null;
+		
+	}
+
+	public static void fuehreTickListenerAus(ServerKontext kontext)
+	{
+		System.out.println("Tick");
+		
+		// Führe alle TickListener aus.
+		for(TickListener tickListener : kontext.getTickListeners())
+		{
+			tickListener.tick(kontext);
+		}
+	}
+
+	/**
+	 * Gibt eine Liste von Spielern aus dem aktuellen Raum.
+	 * 
+	 * @param aktuellerRaum
+	 *            der Raum
+	 * @return alle Spieler in dem Raum
+	 */
+	public static List<String> getSpielerNamenInRaum(ServerKontext kontext, Raum aktuellerRaum)
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		assert kontext.getSpielerPosition().containsValue(aktuellerRaum);
+
+		for(Spieler s : kontext.getSpielerPosition().keySet())
+		{
+			Raum raum = kontext.getSpielerPosition().get(s);
+			if(raum.equals(aktuellerRaum))
+			{
+				result.add(s.getName());
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Gibt den Raum zurück, in dem der Spieler sich befindet.
+	 * 
+	 * @param spieler
+	 *            der Spieler zu dem wir den Raum suchen
+	 * @return der Raum in dem der Spieler ist
+	 */
+	public static Raum getAktuellenRaumZu(ServerKontext kontext, Spieler spieler)
+	{
+		return kontext.getSpielerPosition().get(spieler);
+	}
+
+	public static List<Raum> getRaeumeInDemSichSpielerAufhalten(
+			ServerKontext kontext)
+	{
+		return new ArrayList<Raum>(kontext.getSpielerPosition().values());
+	}
 }

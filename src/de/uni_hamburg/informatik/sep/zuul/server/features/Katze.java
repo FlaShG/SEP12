@@ -86,7 +86,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 		case IGiftkuchen:
 		case UGiftkuchen:
 			// TODO: Katze vom Tick deregistieren.
-			kontext.deregisterFeature(this);
+			SpielLogik.deregisterFeature(kontext, this);
 			_raum.setKatze(null);
 			_raum = null;
 			BefehlFactory.schreibeNL(kontext, spieler,
@@ -144,7 +144,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 
 		Katze katze = new Katze(raum);
 		raum.setKatze(katze);
-		kontext.registriereFeature(katze);
+		SpielLogik.registriereFeature(kontext, katze);
 		return katze;
 	}
 

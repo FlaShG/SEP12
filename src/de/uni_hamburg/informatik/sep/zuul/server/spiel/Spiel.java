@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +38,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class Spiel
 {
 	public static final long ONE_SECOND = 1000;
-	private SpielLogik _logik;
+	private ServerKontext _kontext;
 	private Map<String, Spieler> _spielerMap;
 	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
@@ -46,7 +48,8 @@ public class Spiel
 	 */
 	public Spiel()
 	{
-		_logik = new SpielLogik();
+		_kontext = SpielLogik.erstelleKontext();
+		
 		_spielerMap = new HashMap<String, Spieler>();
 		_nachrichtenMap = new HashMap<Spieler, String>();
 		//TODO in map schreiben
@@ -66,7 +69,7 @@ public class Spiel
 		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
 				new Inventar());
 		_spielerMap.put(name, neuerSpieler);
-		_logik.registriereSpieler(neuerSpieler);
+		SpielLogik.registriereSpieler(_kontext, neuerSpieler);
 	}
 
 	/**
@@ -77,7 +80,7 @@ public class Spiel
 	 */
 	public void meldeSpielerAb(String name)
 	{
-		_logik.meldeSpielerAb(name);
+		SpielLogik.meldeSpielerAb(_kontext, name);
 		_spielerMap.remove(name);
 	}
 
@@ -94,8 +97,8 @@ public class Spiel
 	 */
 	public void spielen()
 	{
-		_logik.erstelleKontext();
-		_logik.zeigeWillkommensText();
+		_kontext = SpielLogik.erstelleKontext();
+		SpielLogik.zeigeWillkommensText(_kontext);
 		zeigeWillkommensText();
 		setGestartet(true);
 	}
@@ -135,29 +138,29 @@ public class Spiel
 	 */
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
-		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+		Spieler spieler = SpielLogik.getSpielerByName(_kontext, benutzerName);
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)
 		{
-			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
+			Raum alterRaum = SpielLogik.getAktuellenRaumZu(_kontext, spieler);
 
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
+			Spiel.versucheBefehlAusfuehrung(_kontext, spieler,
 					befehlszeile, befehl);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
-					_logik.getKontext(), spieler, befehlszeile, befehl);
+					_kontext, spieler, befehlszeile, befehl);
 
-			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
+			Raum neuerRaum = SpielLogik.getAktuellenRaumZu(_kontext, spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
-				_logik.getKontext().fuehreBefehlAusgefuehrtListenerAus(spieler, befehl, alterRaum != neuerRaum);
+				SpielLogik.fuehreBefehlAusgefuehrtListenerAus(_kontext, spieler, befehl, alterRaum != neuerRaum);
 		}
 		else
-			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
+			BefehlFactory.schreibeNL(_kontext, spieler,
 					TextVerwalter.FALSCHEEINGABE);
 	}
 
@@ -168,7 +171,7 @@ public class Spiel
 	 */
 	protected void restart(String level)
 	{
-		_logik.beendeSpiel();
+		SpielLogik.beendeSpiel(_kontext);
 		spielen();
 	}
 
@@ -182,7 +185,7 @@ public class Spiel
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
 		String nachricht = _nachrichtenMap.get(spieler); // hole die nacricht für den spieler
-		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
+		return new ClientPaket(_kontext, spieler, nachricht); //packe
 
 	}
 
@@ -225,7 +228,7 @@ public class Spiel
 				@Override
 				public void run()
 				{
-					_logik.getKontext().fuehreTickListenerAus();
+					SpielLogik.fuehreTickListenerAus(_kontext);
 				}
 			});
 		}
@@ -247,4 +250,16 @@ public class Spiel
 		}
 		_gestartet = gestartet;
 	}
+	
+	public static List<Spieler> getSpielerInRaum(ServerKontext kontext, Raum raum)
+	{
+		ArrayList<Spieler> spielers = new ArrayList<Spieler>();
+		for(Spieler spieler: kontext.getSpielerPosition().keySet())
+		{
+			if(SpielLogik.getAktuellenRaumZu(kontext, spieler) == raum)
+				spielers.add(spieler);
+		}
+		return spielers;
+	}
+
 }
