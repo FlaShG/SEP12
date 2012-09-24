@@ -23,7 +23,8 @@ public final class BefehlFactory
 				new BefehlBeenden(), new BefehlGib(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
 				new BefehlFuettereKatze(), new BefehlFuettereMaus(),
-				new BefehlAblegen(), new BefehlSchauen() };
+				new BefehlAblegen(), new BefehlSchauen(),
+				new BefehlGibMirMehrLeben()};
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)
@@ -82,15 +83,15 @@ public final class BefehlFactory
 		if(geparsteZeile.size() == 0)
 			return befehlsnamen;
 
-		befehlsnamen.add(geparsteZeile.get(0));
+		for(int i= 0; i< geparsteZeile.size(); i++)
+			befehlsnamen.add("");
 
-		for(int i = 1; i < geparsteZeile.size(); i++)
+		for(int i = 0; i < geparsteZeile.size(); i++)
 		{
-			String aktuellerToken = geparsteZeile.get(i);
-			ArrayList<String> letzteToken = (ArrayList<String>) befehlsnamen
-					.clone();
-			letzteToken.add(aktuellerToken);
-			befehlsnamen.add(Befehlszeile.join(letzteToken));
+			for(int j = i; j < geparsteZeile.size(); j++)
+			{
+				befehlsnamen.set(j, befehlsnamen.get(j) + " " + geparsteZeile.get(i));
+			}
 		}
 		Collections.reverse(befehlsnamen);
 		return befehlsnamen;
