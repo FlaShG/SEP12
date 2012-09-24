@@ -54,7 +54,7 @@ public abstract class Client extends UnicastRemoteObject implements
 		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
 				+ _serverName);
 
-		login();
+		//login();
 	}
 
 	public void schreibeText(String text)
@@ -89,12 +89,6 @@ public abstract class Client extends UnicastRemoteObject implements
 			//TODO ausgabe auf gui
 		}
 
-	}
-
-	@Override
-	public void starte()
-	{
-		//TODO impl!!
 	}
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
