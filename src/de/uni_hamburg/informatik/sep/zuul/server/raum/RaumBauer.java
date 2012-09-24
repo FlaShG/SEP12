@@ -11,11 +11,14 @@ public class RaumBauer
 {
 	private Raum _startRaum;
 	private Raum _endRaum;
+	private Map<Raum, Raum[]> _connections;
 
-	public RaumBauer(RaumStruktur struktur)
+	public RaumBauer(RaumStruktur struktur, int anzahlMaeuse)
 	{
 		// initialisiereRaeumeHart();
-		initialisiereRaeume(struktur.getConnections());
+		_connections = struktur.getConnections();
+		initialisiereRaeume();
+		setzeMaeuse(anzahlMaeuse);
 	}
 
 	/**
@@ -23,20 +26,19 @@ public class RaumBauer
 	 * 
 	 * @param verbindungen
 	 */
-	private void initialisiereRaeume(Map<Raum, Raum[]> verbindungen)
+	private void initialisiereRaeume()
 	{
-		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
 
-		for(Raum raum : verbindungen.keySet())
+		for(Raum raum : _connections.keySet())
 		{
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_NORDEN,
-					verbindungen.get(raum)[0], TextVerwalter.RICHTUNG_SUEDEN);
+					_connections.get(raum)[0], TextVerwalter.RICHTUNG_SUEDEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_OSTEN,
-					verbindungen.get(raum)[1], TextVerwalter.RICHTUNG_WESTEN);
+					_connections.get(raum)[1], TextVerwalter.RICHTUNG_WESTEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_SUEDEN,
-					verbindungen.get(raum)[2], TextVerwalter.RICHTUNG_NORDEN);
+					_connections.get(raum)[2], TextVerwalter.RICHTUNG_NORDEN);
 			raum.verbindeZweiRaeume(TextVerwalter.RICHTUNG_WESTEN,
-					verbindungen.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
+					_connections.get(raum)[3], TextVerwalter.RICHTUNG_OSTEN);
 
 			if(raum.getRaumart() == RaumArt.Start)
 			{
@@ -46,16 +48,7 @@ public class RaumBauer
 			{
 				_endRaum = raum;
 			}
-			if(raum.getRaumart() != RaumArt.Ende
-					&& raum.getRaumart() != RaumArt.Start)
-				kannMausEnthaltenRaum.add(raum);
 		}
-
-		// TODO: Maus anzahl auslesen
-		// Setze 3 Mäuse zufällig.
-
-		if(kannMausEnthaltenRaum.size() > 0)
-			mausInRaumSetzen(kannMausEnthaltenRaum, 3);
 	}
 
 	public void mausInRaumSetzen(ArrayList<Raum> kannMausEnthaltenRaum, int i)
@@ -90,5 +83,21 @@ public class RaumBauer
 	public Raum getStartRaum()
 	{
 		return _startRaum;
+	}
+
+	public void setzeMaeuse(int anzahlMaeuse)
+	{
+		ArrayList<Raum> kannMausEnthaltenRaum = new ArrayList<Raum>();
+
+		for(Raum raum : _connections.keySet())
+		{
+			if(raum.getRaumart() != RaumArt.Ende
+					&& raum.getRaumart() != RaumArt.Start)
+				kannMausEnthaltenRaum.add(raum);
+		}
+		
+		if(kannMausEnthaltenRaum.size() > 0)
+			mausInRaumSetzen(kannMausEnthaltenRaum, anzahlMaeuse);
+		
 	}
 }

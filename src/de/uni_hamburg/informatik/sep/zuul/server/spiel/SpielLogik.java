@@ -99,7 +99,11 @@ public class SpielLogik
 
 		_struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
-		RaumBauer raumbauer = new RaumBauer(_struktur);
+		RaumBauer raumbauer = new RaumBauer(_struktur, manager.getAnzahlMaeuse());
+		
+		for(int i=0;i<  manager.getAnzahlKatzen(); i++)
+			Katze.erzeugeKatze(this);
+		
 		return raumbauer.getStartRaum();
 	}
 
