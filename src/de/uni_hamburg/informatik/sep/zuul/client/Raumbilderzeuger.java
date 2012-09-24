@@ -32,7 +32,7 @@ public class Raumbilderzeuger
 	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
 	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
 	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
-	private final BufferedImage DRLITLE = ladeBild(PATH + "drlittle.png");
+	private final BufferedImage DRLITTLE = ladeBild(PATH + "drlittle.png");
 	private final BufferedImage DREVENBIGGER = ladeBild(PATH
 			+ "drevenbigger.png");
 
@@ -115,17 +115,20 @@ public class Raumbilderzeuger
 		setPositionen();
 
 		// Male Dr.Little
-		raum = maleAufBild(raum, DRLITLE,
-				_drlittlepositionen.remove(getRandomZahl(_drlittlepositionen
-						.size())));
+		Tupel position = _drlittlepositionen.get(getRandomZahl(_drlittlepositionen.size()));
+		int x = position.getX();
+		int y = position.getY();
+		g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
+		
+		
 
 		//Male Maus
 
 		if(_paket.hasMaus())
 		{
 			Tupel mausposition = _mauspositionen.get(getRandomZahl(_mauspositionen.size()));
-			int x = mausposition.getX();
-			int y = mausposition.getY();
+			 x = mausposition.getX();
+			 y = mausposition.getY();
 			
 			g2d.drawImage(MAUS, x, y, 100, 51, null);
 		}
@@ -134,8 +137,8 @@ public class Raumbilderzeuger
 		else if(_paket.hasKatze())
 		{
 			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen.size())); 
-			int x = pos.getX();
-			int y = pos.getY();
+			 x = pos.getX();
+			 y = pos.getY();
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
 		}
 
@@ -169,8 +172,8 @@ public class Raumbilderzeuger
 		{
 			int rand = getRandomZahl(_itemPositionen.size());
 			Tupel itempos = _itemPositionen.remove(rand);
-			int x = itempos.getX();
-			int y = itempos.getY();
+			 x = itempos.getX();
+			 y = itempos.getY();
 			
 			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
 		}
@@ -179,7 +182,19 @@ public class Raumbilderzeuger
 
 		if(gegengiftDa)
 		{
-			maleGegengiftundEvenBigger(raum);
+			int rand = getRandomZahl(_itemPositionen.size());
+			Tupel itempos = _itemPositionen.remove(rand);
+			 x = itempos.getX();
+			 y = itempos.getY();
+			
+			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
+			
+			
+			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen.size())); 
+			 x = pos.getX();
+			 y = pos.getY();
+			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
+			
 		}
 
 		if(_schauenAnsicht)
@@ -238,15 +253,6 @@ public class Raumbilderzeuger
 		return ergebnis;
 	}
 
-	private void maleGegengiftundEvenBigger(BufferedImage raum)
-	{
-
-		maleAufBild(raum, GEGENGIFT,
-				_itemPositionen.remove(getRandomZahl(_itemPositionen.size())));
-		//		maleAufBild(raum, DREVENBIGGER,
-		//				_mauspositionen.remove(getRandomZahl(_mauspositionen.size())));
-
-	}
 
 
 	private BufferedImage ladeBild(String pfad)
@@ -265,31 +271,7 @@ public class Raumbilderzeuger
 		return null;
 	}
 
-	private BufferedImage maleAufBild(BufferedImage zielBild,
-			BufferedImage quelle, Tupel offset)
-	{
-		int quellH = quelle.getHeight();
-		int quellB = quelle.getWidth();
-		int offsetH = offset.getY();
-		int offsetB = offset.getX();
 
-		int[] quellDaten = new int[quellH * quellB];
-
-		quelle.getRGB(0, 0, quellB, quellH, quellDaten, 0, quellB);
-
-		for(int i = 0; i < quellH; i++)
-		{
-			for(int j = 0; j < quellB; j++)
-			{
-				if(quelle.getRGB(i, j) != new Color(255, 128, 255).getRGB())
-					zielBild.setRGB(i + offsetB, j + offsetH,
-							quelle.getRGB(i, j));
-			}
-		}
-
-		return zielBild;
-
-	}
 
 	public BufferedImage ZeichneBildErneut(int hoehebreite)
 	{

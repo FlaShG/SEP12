@@ -306,7 +306,7 @@ public class BefehlsPanel extends JPanel
 					_labelFuerLebensenergie.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
 
-			int maxLife = 18;
+			int maxLife = 8;
 			int currentlife = lebensenergie;
 
 			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (currentlife / (maxLife / 100.0)));
