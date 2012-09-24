@@ -94,6 +94,9 @@ public class SpeicherWerkzeug
 				}
 			};
 			
+			if(_ef.getEditorLevel().getLeben() > 0)
+				valid = false;
+			
 			if(pf.findPath(startRaum) != null)
 			{//^-- überprüfe Verbindung von start- und endraum
 				
@@ -103,6 +106,7 @@ public class SpeicherWerkzeug
 			}
 			else
 				valid = false;
+			
 		}
 		else
 			valid = false;

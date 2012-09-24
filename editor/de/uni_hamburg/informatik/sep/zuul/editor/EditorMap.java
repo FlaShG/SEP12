@@ -18,8 +18,8 @@ public class EditorMap extends JPanel
 {
 	EditorBeobachter _beobachter;
 	private GridButton[][] _buttons;
-	int activeX = -1;
-	int activeY = -1;
+	int _activeX = -1;
+	int _activeY = -1;
 
 	/**
 	 * Erstellt eine neue EditorMap mit gegebener Höhe und Breite
@@ -46,10 +46,10 @@ public class EditorMap extends JPanel
 					public void actionPerformed(ActionEvent arg0)
 					{
 						if(buttonAusgewaehlt())
-							_buttons[activeX][activeY].setAusgewaehlt(false);
-						activeX = ((GridButton) arg0.getSource()).getGridX();
-						activeY = ((GridButton) arg0.getSource()).getGridY();
-						_buttons[activeX][activeY].setAusgewaehlt(true);
+							_buttons[_activeX][_activeY].setAusgewaehlt(false);
+						_activeX = ((GridButton) arg0.getSource()).getGridX();
+						_activeY = ((GridButton) arg0.getSource()).getGridY();
+						_buttons[_activeX][_activeY].setAusgewaehlt(true);
 						informiereBeobachter();
 					}
 				});
@@ -78,7 +78,7 @@ public class EditorMap extends JPanel
 	 */
 	public boolean buttonAusgewaehlt()
 	{
-		return activeX >= 0;
+		return _activeX >= 0;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class EditorMap extends JPanel
 	{
 		if(!buttonAusgewaehlt())
 			return null;
-		return _buttons[activeX][activeY];
+		return _buttons[_activeX][_activeY];
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class EditorMap extends JPanel
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
 		if(buttonAusgewaehlt())
-			_buttons[activeX][activeY].fuegeLeerenRaumHinzu();
+			_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class EditorMap extends JPanel
 	{
 		if(buttonAusgewaehlt())
 		{
-			_buttons[activeX][activeY].loescheRaum();
+			_buttons[_activeX][_activeY].loescheRaum();
 			informiereBeobachter();
 		}
 	}
@@ -134,5 +134,42 @@ public class EditorMap extends JPanel
 	public GridButton[][] getButtonArray()
 	{
 		return _buttons;
+	}
+
+	public void verschiebeAktuellenRaumRelativ(int x, int y)
+	{
+		if(!buttonAusgewaehlt())
+			return;
+		
+		if(_activeX + x < 0
+		|| _activeX + x >= _buttons.length
+		|| _activeY + y < 0
+		|| _activeY + y >= _buttons[0].length)
+			return;
+		
+		GridButton vorherigerButton = getAktivenButton();
+		
+		if(vorherigerButton != null)
+		{
+			GridButton neuerButton = _buttons[_activeX+x][_activeY+y];
+			
+			Raum raum = vorherigerButton.getRaum();
+			if(raum != null)
+			{
+				if(neuerButton.getRaum() == null)
+				{
+					_activeX += x;
+					_activeY += y;
+					
+					neuerButton.setRaum(raum);
+					//setRaum statt loscheRaum wegen setAusgewaehlt()
+					vorherigerButton.setRaum(null);
+	
+					vorherigerButton.setAusgewaehlt(false);
+					neuerButton.setAusgewaehlt(true);
+				}
+			}
+		}
+			
 	}
 }
