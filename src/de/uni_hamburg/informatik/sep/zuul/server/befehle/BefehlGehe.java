@@ -9,7 +9,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 final class BefehlGehe implements Befehl
 {
-	String[] _shortcuts = new String[] { "n", "w", "s", "e" };
+	String[] _shortcuts = new String[] { "n", "w", "s", "o" };
 	String[] _richtungen = new String[] { TextVerwalter.RICHTUNG_NORDEN,
 			TextVerwalter.RICHTUNG_OSTEN, TextVerwalter.RICHTUNG_SUEDEN,
 			TextVerwalter.RICHTUNG_WESTEN };
