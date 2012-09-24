@@ -26,7 +26,8 @@ public class BildPanel extends JPanel
 	private JButton _tuerOstButton;
 	private JButton _tuerSuedButton;
 	private JButton _tuerWestButton;
-
+	
+	private JLabel _schauenLabel;
 	private JLabel _LabelFuerIcon;
 
 	/**
@@ -43,6 +44,11 @@ public class BildPanel extends JPanel
 		_LabelFuerIcon = new JLabel();
 		_LabelFuerIcon.setSize(this.getWidth(), this.getHeight());
 		_LabelFuerIcon.setLocation(0, 0);
+		
+		_schauenLabel = new JLabel();
+		_schauenLabel.setVisible(false);
+		_schauenLabel.setSize(this.getWidth(), this.getHeight());
+		_schauenLabel.setLocation(0, 0);
 
 		
 
@@ -75,7 +81,7 @@ public class BildPanel extends JPanel
 		add(_tuerOstButton);
 		add(_tuerSuedButton);
 		add(_tuerWestButton);
-
+		add(_schauenLabel);
 		add(_LabelFuerIcon);
 	
 
@@ -96,6 +102,16 @@ public class BildPanel extends JPanel
 					_LabelFuerIcon.setSize(BildPanel.this.getWidth(),
 							BildPanel.this.getWidth());
 
+				
+				
+				if(BildPanel.this.getWidth() > BildPanel.this.getHeight())
+					_schauenLabel.setSize(BildPanel.this.getHeight(),
+							BildPanel.this.getHeight());
+				else
+					_schauenLabel.setSize(BildPanel.this.getWidth(),
+							BildPanel.this.getWidth());
+				
+				
 				
 
 				int b = _LabelFuerIcon.getWidth();
@@ -170,5 +186,26 @@ public class BildPanel extends JPanel
 	{
 		return _LabelFuerIcon;
 	}
+
+	public void zeigeSchauen(BufferedImage img)
+	{
+		_LabelFuerIcon.setVisible(false);
+		_schauenLabel.setVisible(true);
+		_schauenLabel.setIcon(new ImageIcon(img));
+		repaint();
+	}
+	
+	public void versteckeSchauen()
+	{
+		_schauenLabel.setVisible(false);
+		_LabelFuerIcon.setVisible(true);
+	}
+
+	public JLabel getSchauenLabel()
+	{
+		return _schauenLabel;
+	}
+
+
 
 }

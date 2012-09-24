@@ -17,7 +17,7 @@ public class BefehlEssenTascheSchlechterKruemel implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		return befehlszeile.getZeile().equals(BEFEHLSNAME)
-				&& spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen);
+				&& spieler.getInventar().has(Item.IGiftkuchen);
 	}
 
 	@Override

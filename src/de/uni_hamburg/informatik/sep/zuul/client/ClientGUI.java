@@ -175,13 +175,25 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
-		if(_bildPanel.getWidth() > _bildPanel.getHeight()
-				&& _bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
-					.getLabelFuerIcon().getHeight(), paket, vorschau));
-		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
-					.getLabelFuerIcon().getWidth(), paket, vorschau));
+		if(vorschau)
+		{
+			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(_bildPanel.getLabelFuerIcon().getHeight(), paket,
+						vorschau));
+		}
+		else
+		{
+
+			if(_bildPanel.getWidth() > _bildPanel.getHeight()
+					&& _bildPanel.getWidth() != 0
+					&& _bildPanel.getHeight() != 0)
+				_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(
+						_bildPanel.getLabelFuerIcon().getHeight(), paket,
+						vorschau));
+			else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
+				_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(
+						_bildPanel.getLabelFuerIcon().getWidth(), paket,
+						vorschau));
+		}
 
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 	}
@@ -470,6 +482,15 @@ public class ClientGUI extends Client
 				}
 			}
 		});
+		
+		_bildPanel.getSchauenLabel().addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent m)
+			{
+				_bildPanel.versteckeSchauen();
+			}
+		});
 
 		createActionListenerMap();
 
@@ -534,71 +555,6 @@ public class ClientGUI extends Client
 
 		super.run();
 
-		// TODO: move; geht client paket oder so ähnlich.
-		//		_kontext.addPropertyChangeListener("LebensEnergie",
-		//				new PropertyChangeListener()
-		//				{
-		//
-		//					@Override
-		//					public void propertyChange(PropertyChangeEvent p)
-		//					{
-		//						_bildPanel.setLebensenergie((int) p.getNewValue());
-		//					}
-		//				});
-		//		
-		//		_kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
-		//		{
-		//			
-		//			@Override
-		//			public void propertyChange(PropertyChangeEvent p)
-		//			{
-		//				
-		//				boolean n = false;
-		//				boolean o = false;
-		//				boolean s = false;
-		//				boolean w = false;
-		//				
-		//				for(String richtung : ((Raum) p.getNewValue()).getMoeglicheAusgaenge())
-		//				{
-		//					
-		//					
-		//					if(richtung.equals("nord"))
-		//						n = true;
-		//					else if(richtung.equals("ost"))
-		//						o = true;
-		//					else if(richtung.equals("süd"))
-		//						s = true;
-		//					else if(richtung.equals("west"))
-		//						w = true;
-		//					
-		//					_bildPanel.getTuerNordButton().setVisible(n);
-		//					_bildPanel.getTuerOstButton().setVisible(o);
-		//					_bildPanel.getTuerSuedButton().setVisible(s);
-		//					_bildPanel.getTuerWestButton().setVisible(w);
-		//				
-		//				}
-		//					
-		//				
-		//			}
-		//		});
-		//
-		//		_kontext.addTickListener(new TickListener()
-		//		{
-		//
-		//			@Override
-		//			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-		//			{
-		//				if(_bildPanel.getWidth() > _bildPanel.getHeight())
-		//					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
-		//				else
-		//					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
-		//				return true;
-		//			}
-		//		});
-		//		if(_bildPanel.getWidth() > _bildPanel.getHeight())
-		//			zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
-		//		else
-		//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 	}
 
 	/**

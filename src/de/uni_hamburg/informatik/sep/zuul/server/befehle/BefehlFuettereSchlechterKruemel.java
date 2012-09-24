@@ -54,7 +54,7 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen);
+		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().has(Item.IGiftkuchen);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class BefehlFuettereSchlechterKruemel implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen))
+		if(!spieler.getInventar().has(Item.IGiftkuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
