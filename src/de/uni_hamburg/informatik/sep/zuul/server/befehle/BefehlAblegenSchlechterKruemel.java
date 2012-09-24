@@ -30,7 +30,7 @@ public class BefehlAblegenSchlechterKruemel implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().hatDiesenKuchen(Item.IGiftkuchen)
+		return spieler.getInventar().has(Item.IGiftkuchen)
 				&& befehlszeile.getZeile().equals(
 						TextVerwalter.BEFEHL_ABLEGEN + " schlechter krümel");
 	}

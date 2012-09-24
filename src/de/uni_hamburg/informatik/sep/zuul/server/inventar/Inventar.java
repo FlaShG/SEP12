@@ -146,49 +146,6 @@ public class Inventar
 	}
 
 	/**
-	 * Gibt an, ob der Spieler den entsprechenden Kuchen besitzt
-	 * 
-	 * @param i
-	 * @return
-	 */
-	public boolean hatDiesenKuchen(Item item)
-	{
-		for(Item i : _inhalt)
-		{
-			switch (item)
-			{
-			case UKuchen:
-				if(has(Item.UKuchen))
-				{
-					return true;
-				}
-				break;
-			case IKuchen:
-				if(has(Item.IKuchen))
-				{
-					return true;
-				}
-				break;
-			case UGiftkuchen:
-				if(has(Item.UGiftkuchen))
-				{
-					return true;
-				}
-				break;
-			case IGiftkuchen:
-				if(has(Item.IGiftkuchen))
-				{
-					return true;
-				}
-				break;
-			default:
-				return false;
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * @require hasAnyKuchen()
 	 * @return
 	 */
@@ -219,7 +176,7 @@ public class Inventar
 	 * @param item
 	 * @return
 	 */
-	private boolean has(Item item)
+	public boolean has(Item item)
 	{
 		return _inhalt.contains(item);
 	}
