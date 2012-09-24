@@ -3,9 +3,12 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -36,11 +39,19 @@ public class RaumBearbeitenPanel extends JPanel
 
 		setLayout(new BorderLayout());
 
-		add(_beschreibung = new JTextArea(), BorderLayout.WEST);
+		_beschreibung = new JTextArea();
+		
+		//beschreibung in ein ScrollPane tun
+		_beschreibung.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		Dimension dim = new Dimension(400, 80);
-		_beschreibung.setSize(dim);
-		_beschreibung.setPreferredSize(dim);
-		_beschreibung.setMinimumSize(dim);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(_beschreibung);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setSize(dim);
+		scrollPane.setPreferredSize(dim);
+		scrollPane.setMinimumSize(dim);
+		add(scrollPane, BorderLayout.WEST);
+		
 		_beschreibung.setLineWrap(true);
 		_beschreibung.setWrapStyleWord(true);
 		_beschreibung.setText(_raum.getBeschreibung());
