@@ -16,7 +16,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class ClientPaket implements Remote, Serializable
 {
-
+	private int _raumID;
 	private boolean _katze;
 	private boolean _maus;
 	private Collection<Item> _items;
@@ -29,8 +29,9 @@ public class ClientPaket implements Remote, Serializable
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
-		 Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
+		_raumID = aktuellerRaum.getId();
 		_katze = aktuellerRaum.hasKatze();
 		_maus = aktuellerRaum.hasMaus();
 		_items = new ArrayList<Item>(aktuellerRaum.getItems());
@@ -81,10 +82,15 @@ public class ClientPaket implements Remote, Serializable
 	{
 		return _spielerName;
 	}
-	
+
 	public String[] getMoeglicheAusgaenge()
 	{
 		return _moeglicheAusgaenge;
+	}
+
+	public int getRaumID()
+	{
+		return _raumID;
 	}
 
 }

@@ -51,8 +51,9 @@ public class Raumbilderzeuger
 	private Random _random;
 
 	private ClientPaket _paket;
+	private boolean _istVorschau;
 
-	public Raumbilderzeuger(ClientPaket paket)
+	public Raumbilderzeuger(ClientPaket paket, boolean vorschau)
 	{
 		_paket = paket;
 
