@@ -97,7 +97,7 @@ public class SpeicherWerkzeug
 			if(pf.findPath(startRaum) != null)
 			{//^-- überprüfe Verbindung von start- und endraum
 				
-				int anzahlKatzen = 1;	// TODO ändern, wenn Katzenanzahl einstellbar ist bzw. sich ändert!!!
+				int anzahlKatzen = _ef.getEditorLevel().getKatzen();
 				int zulAnzahlMaeuse = _verbindungen.getRaumListe().size() - 2 - anzahlKatzen;
 				valid = zulAnzahlMaeuse >= _ef.getEditorLevel().getMaeuse();
 			}
