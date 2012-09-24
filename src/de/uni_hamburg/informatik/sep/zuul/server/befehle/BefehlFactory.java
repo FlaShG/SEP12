@@ -22,7 +22,7 @@ public final class BefehlFactory
 				new BefehlEssenTasche(), new BefehlLaden(),
 				new BefehlBeenden(), new BefehlGib(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
-				new BefehlFuettereKatze(), new BefehlFuettereMaus(),
+				new BefehlFuettereSchlechterKruemel(), new BefehlFuettereGuterKruemel(), new BefehlFuettereUnbekanntenKruemel(),
 				new BefehlAblegen(), new BefehlAblegenKruemel(),
 				new BefehlAblegenGuterKruemel(),
 				new BefehlAblegenSchlechterKruemel(), new BefehlSchauen(),

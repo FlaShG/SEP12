@@ -11,9 +11,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettere implements Befehl
+public class BefehlFuettereGuterKruemel implements Befehl
 {
-	
+
 	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
 			+ "maus";
 
@@ -55,7 +55,7 @@ public class BefehlFuettere implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().hasAnyKuchen();
+		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().has(Item.IKuchen);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class BefehlFuettere implements Befehl
 			}
 			else if(raum.hasMaus())
 			{
-				Item kuchen = spieler.getInventar().getAnyKuchen();
+				Item kuchen = spieler.getInventar().getKuchen(Item.IKuchen);
 				Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 				String richtigeRichtung = aktuellerRaum.getMaus().getRichtung();
@@ -113,7 +113,7 @@ public class BefehlFuettere implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().hasAnyKuchen())
+		if(!spieler.getInventar().has(Item.IKuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
@@ -127,7 +127,7 @@ public class BefehlFuettere implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_FUETTERE };
+		return new String[] { TextVerwalter.BEFEHL_FUETTERE_GUT };
 	}
 
 	@Override

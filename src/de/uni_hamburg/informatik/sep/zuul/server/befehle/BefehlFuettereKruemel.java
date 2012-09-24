@@ -11,7 +11,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettere implements Befehl
+public class BefehlFuettereKruemel implements Befehl
 {
 	
 	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
