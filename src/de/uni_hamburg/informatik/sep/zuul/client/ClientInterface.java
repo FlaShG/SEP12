@@ -39,6 +39,6 @@ public interface ClientInterface extends Remote
 	 * 
 	 * @throws RemoteException
 	 */
-	public void starte() throws RemoteException;
+	public void starteClientUI() throws RemoteException;
 
 }

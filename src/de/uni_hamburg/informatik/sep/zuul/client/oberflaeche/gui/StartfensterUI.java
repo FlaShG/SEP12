@@ -19,6 +19,7 @@ public class StartfensterUI extends JFrame
 	private JTextField _eingabePort;
 	private JButton _eingabeBestaetigen;
 	private JButton _abbrechen;
+	private JButton _serverStarten;
 
 	public StartfensterUI()
 	{
@@ -28,10 +29,12 @@ public class StartfensterUI extends JFrame
 
 		_singlePlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_SINGLEPLAYER);
 		_multiPlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_MULTIPLAYER);
+		_serverStarten = new JButton("Server Starten");
 
 		add(_singlePlayer);
 		add(_multiPlayer);
-
+		add(_serverStarten);
+		
 		setMinimumSize(new Dimension(300, 100));
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
@@ -100,6 +103,11 @@ public class StartfensterUI extends JFrame
 	public JButton getBestaetigen()
 	{
 		return _eingabeBestaetigen;
+	}
+	
+	public JButton getServerButton()
+	{
+		return _serverStarten;
 	}
 
 }

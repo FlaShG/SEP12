@@ -73,7 +73,7 @@ public class ClientConsole extends Client
 	}
 
 	@Override
-	public void starte() throws RemoteException
+	public void starteClientUI() throws RemoteException
 	{
 		// TODO Auto-generated method stub
 		

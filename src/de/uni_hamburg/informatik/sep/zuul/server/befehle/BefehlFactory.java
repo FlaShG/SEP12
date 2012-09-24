@@ -13,7 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public final class BefehlFactory
 {
-	static final Map<String, Befehl> _map;
+	private static final Map<String, Befehl> _map;
 
 	static
 	{
@@ -111,5 +111,13 @@ public final class BefehlFactory
 	public static Befehl gibBefehl(String string)
 	{
 		return _map.get(string);
+	}
+
+	/**
+	 * @return the Map
+	 */
+	public static Map<String, Befehl> getMap()
+	{
+		return _map;
 	}
 }

@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
+import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
 public class StartFenster
 {
@@ -27,11 +30,14 @@ public class StartFenster
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
 
+		_spielername = "Dr. Little";
+
 		initialisiereUI();
 	}
 
 	private void initialisiereUI()
 	{
+
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
@@ -40,13 +46,27 @@ public class StartFenster
 			{
 				try
 				{
+					new Server();
+				}
+				catch(RemoteException | AlreadyBoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				try
+				{
 					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
 				}
-				_ui.dispose();
+
+				finally
+				{
+					_ui.dispose();
+				}
 			}
 		});
 
@@ -66,7 +86,8 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_ui.dispose();
+
+				_spielername = _ui.getSpielerNameTextField().getText();
 
 				try
 				{
@@ -75,6 +96,10 @@ public class StartFenster
 				catch(Exception e)
 				{
 					e.printStackTrace();
+				}
+				finally
+				{
+					_ui.dispose();
 				}
 
 			}
@@ -137,6 +162,26 @@ public class StartFenster
 			{
 				// TODO Auto-generated method stub
 
+			}
+		});
+
+		_ui.getServerButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					new Server();
+				}
+				catch(RemoteException | AlreadyBoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				_ui.getServerButton().setEnabled(false);
 			}
 		});
 

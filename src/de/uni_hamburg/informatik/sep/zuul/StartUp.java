@@ -7,17 +7,13 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientConsole;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
-import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
 public class StartUp
 {
-
 	public static void main(String args[]) throws RemoteException,
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
-
-		new Server();
 
 		if(args.length == 5 && args[4].equals("console"))
 		{
@@ -28,7 +24,5 @@ public class StartUp
 		{
 			new StartFenster();
 		}
-
 	}
-
 }

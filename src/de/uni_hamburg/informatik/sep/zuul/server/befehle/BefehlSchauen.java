@@ -23,8 +23,11 @@ public final class BefehlSchauen implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
+		if(befehlszeile.getGeparsteZeile().size() != 2)
+			return false;
+		
 		String richtung = extrahiereRichtung(befehlszeile);
-		return befehlszeile.getGeparsteZeile().size() == 2 && richtung != null
+		return  richtung != null
 				&& getRaumFuerRichtung(kontext, spieler, richtung) != null;
 	}
 
@@ -33,6 +36,8 @@ public final class BefehlSchauen implements Befehl
 	 */
 	private String extrahiereRichtung(Befehlszeile befehlszeile)
 	{
+		
+		
 		String richtung = befehlszeile.getGeparsteZeile().get(1);
 		if(Arrays.asList(_richtungen).contains(richtung))
 			return richtung;
@@ -109,7 +114,7 @@ public final class BefehlSchauen implements Befehl
 		{
 			kontext.schreibeAnSpieler(spieler, "nur uninteressante Sachen");
 		}
-		return false;
+		return true;
 	}
 
 	/**

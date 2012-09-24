@@ -114,6 +114,7 @@ public class EditorFenster implements EditorBeobachter
 			if(raum == null)
 			{
 				_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
+				_ui.zeigeVerschiebenPanel(false);
 			}
 			else
 			{
@@ -128,6 +129,7 @@ public class EditorFenster implements EditorBeobachter
 								_ui.getMap().loescheRaumDesAktivenButtons();
 							}
 						});
+				_ui.zeigeVerschiebenPanel(true);
 			}
 		}
 		_ui.getFrame().setVisible(true);
@@ -163,8 +165,15 @@ public class EditorFenster implements EditorBeobachter
 			raum.setItems(items);
 		}
 
+		_leveldaten.setLeben(_ui.getLevelPanel().getLebenspunkte());
 		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
 		_leveldaten.setKatzen(_ui.getLevelPanel().getKatzenzahl());
+	}
+	
+	@Override
+	public void verschiebenUpdate(int x, int y)
+	{
+		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
 	}
 
 	public EditorFensterUI getUI()
@@ -179,6 +188,7 @@ public class EditorFenster implements EditorBeobachter
 
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
+		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
 		_leveldaten = editorLevel;

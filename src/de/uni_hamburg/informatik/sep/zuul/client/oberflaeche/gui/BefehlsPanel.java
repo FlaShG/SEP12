@@ -62,7 +62,7 @@ public class BefehlsPanel extends JPanel
 		setSize(682, 512);
 
 		_labelFuerLebensenergie = new JLabel();
-		_labelFuerLebensenergie.setLocation(0, 0);
+		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -306,7 +306,7 @@ public class BefehlsPanel extends JPanel
 					_labelFuerLebensenergie.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
 
-			int maxLife = 18;
+			int maxLife = 8;
 			int currentlife = lebensenergie;
 
 			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (currentlife / (maxLife / 100.0)));
@@ -374,4 +374,27 @@ public class BefehlsPanel extends JPanel
 		return _ablegenUnbekanntButton;
 	}
 
+	/**
+	 * @return the normalButtons
+	 */
+	public JButton[] getNormalButtons()
+	{
+		return _normalButtons;
+	}
+
+	/**
+	 * @return the extraButtons
+	 */
+	public JButton[] getExtraButtons()
+	{
+		return _extraButtons;
+	}
+
+	/**
+	 * @return the systemButtons
+	 */
+	public JButton[] getSystemButtons()
+	{
+		return _systemButtons;
+	}
 }
