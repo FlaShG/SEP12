@@ -22,7 +22,7 @@ final class BefehlGehe implements Befehl
 
 		Raum naechsterRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(
 				richtung);
-		kontext.setAktuellenRaumZu(spieler, naechsterRaum);
+		kontext.wechseleRaum(spieler, naechsterRaum);
 
 		return true;
 	}
