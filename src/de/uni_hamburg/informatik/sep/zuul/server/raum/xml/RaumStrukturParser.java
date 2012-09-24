@@ -59,6 +59,22 @@ public class RaumStrukturParser
 	}
 
 	/**
+	 * Setzt die Anzahl Katzen für dieses Level.
+	 */
+	public void setAnzahlKatzen(int katzen)
+	{
+		_root.setKatzen(katzen);
+	}
+	
+	/**
+	 * Gibt die Azahl der Katzen für dieses Level zurück.
+	 */
+	public int getAnzahlKatzen()
+	{
+		return _root.getKatzen();
+	}
+
+	/**
 	 * Setzt die Anzahl Mäuse für dieses Level.
 	 */
 	public void setAnzahlMaeuse(int maeuse)

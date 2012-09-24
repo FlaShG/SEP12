@@ -34,6 +34,7 @@ public class IOManager
 	{
 		_strukParser = new RaumStrukturParser(path);
 		_strukParser.setAnzahlMaeuse(level.getMaeuse());
+		_strukParser.setAnzahlKatzen(level.getKatzen());
 		_strukParser.setXmlVerbindungen(raumStruktur.getXMLRaumListe());
 
 		_strukParser.schreibeXml();
@@ -146,6 +147,7 @@ public class IOManager
 	{
 		EditorLevel level = new EditorLevel();
 		level.setMaeuse(_strukParser.getAnzahlMaeuse());
+		level.setKatzen(_strukParser.getAnzahlKatzen());
 		return level;
 	}
 }

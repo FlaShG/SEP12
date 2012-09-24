@@ -136,6 +136,11 @@ public class EditorFenster implements EditorBeobachter
 	@Override
 	public void eigenschaftUpdate()
 	{
+		//early out, wenn wir gerade laden.
+		if(_leveldaten == null)
+			return;
+		
+		
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
 		if(bearbeitenPanel != null)
 		{
@@ -159,6 +164,7 @@ public class EditorFenster implements EditorBeobachter
 		}
 
 		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
+		_leveldaten.setKatzen(_ui.getLevelPanel().getKatzenzahl());
 	}
 
 	public EditorFensterUI getUI()
@@ -173,7 +179,8 @@ public class EditorFenster implements EditorBeobachter
 
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
+		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
+		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
 		_leveldaten = editorLevel;
-		_ui.getLevelPanel().setMauszahl(_leveldaten.getMaeuse());
 	}
 }
