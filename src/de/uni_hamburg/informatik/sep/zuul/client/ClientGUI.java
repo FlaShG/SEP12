@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -9,6 +10,9 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,9 +34,9 @@ public class ClientGUI extends Client
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 
-	private JButton _startButton;
-
 	private Raumbilderzeuger _bilderzeuger;
+	private Map<String, JButton> _befehlButtonMap = new HashMap<String, JButton>();
+
 
 	public ClientGUI(String serverName, String serverIP, int clientport,
 			String clientName) throws MalformedURLException, RemoteException,
@@ -40,9 +44,25 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
-		JFrame startFrame = new JFrame("Warten auf Start des Spiels");
+		if(!serverIP.equals("127.0.0.1"))
+		{
+			startFenster();
+		}
+		else
+		{
+			login();
+			_server.empfangeStartEingabe(_clientName);
+		}
+
+	}
+
+	private void startFenster() throws RemoteException
+	{
+		final JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
 		JPanel panel = new JPanel();
+		startFrame.setMinimumSize(new Dimension(300, 150));
+		startFrame.setLocationRelativeTo(null);
 
 		final JButton _startButton = new JButton("Los gehts!");
 
@@ -65,19 +85,26 @@ public class ClientGUI extends Client
 				try
 				{
 					_server.empfangeStartEingabe(_clientName);
+					starteClientUI();
 				}
 				catch(RemoteException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				finally
+				{
+					startFrame.dispose();
+				}
 
 			}
 		});
-
 	}
 
-	public void starte()
+	/**
+	 * Ruft der Server am Client auf, wenn er das Startsignal emfängt.
+	 */
+	public void starteClientUI() throws RemoteException
 	{
 		initialisiereUI();
 	}
@@ -141,6 +168,8 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
@@ -152,6 +181,57 @@ public class ClientGUI extends Client
 		else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
 			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(_bildPanel
 					.getLabelFuerIcon().getWidth(), paket, vorschau));
+
+		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
+	}
+
+	private void setzeBefehlsverfuegbarkeit(
+			Map<String, Boolean> verfuegbareBefehle)
+	{
+		for(Entry<String, Boolean> entry : verfuegbareBefehle.entrySet())
+		{
+			String befehl = entry.getKey();
+			Boolean enabled = entry.getValue();
+
+			JButton button = _befehlButtonMap.get(befehl);
+			if(button != null)
+				button.setEnabled(enabled);
+		}
+	}
+
+	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	{
+
+		boolean n = false;
+		boolean o = false;
+		boolean s = false;
+		boolean w = false;
+
+		for(String richtung : ausgaenge)
+		{
+			if(richtung.equals(TextVerwalter.RICHTUNG_NORDEN))
+			{
+				n = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_OSTEN))
+			{
+				o = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_SUEDEN))
+			{
+				s = true;
+			}
+			else if(richtung.equals(TextVerwalter.RICHTUNG_WESTEN))
+			{
+				w = true;
+			}
+		}
+
+		_bildPanel.getTuerNordButton().setVisible(n);
+		_bildPanel.getTuerOstButton().setVisible(o);
+		_bildPanel.getTuerSuedButton().setVisible(s);
+		_bildPanel.getTuerWestButton().setVisible(w);
+
 	}
 
 	private final class ActionListenerBefehlAusfuehren implements
@@ -168,6 +248,14 @@ public class ClientGUI extends Client
 		public void actionPerformed(ActionEvent e)
 		{
 			sendeEingabe(_befehlszeile);
+		}
+
+		/**
+		 * @return the befehlszeile
+		 */
+		public String getBefehlszeile()
+		{
+			return _befehlszeile;
 		}
 	}
 
@@ -381,6 +469,33 @@ public class ClientGUI extends Client
 				}
 			}
 		});
+
+		createActionListenerMap();
+
+	}
+
+	private void createActionListenerMap()
+	{
+		createActionListenerMap(_bp.getNormalButtons());
+		createActionListenerMap(_bp.getSystemButtons());
+		createActionListenerMap(_bp.getExtraButtons());
+	}
+
+	private void createActionListenerMap(JButton[] buttons)
+	{
+		for(JButton button : buttons)
+		{
+			for(ActionListener listener : button.getActionListeners())
+			{
+				if(listener instanceof ActionListenerBefehlAusfuehren)
+				{
+					ActionListenerBefehlAusfuehren actionListenerBefehlAusfuehren = (ActionListenerBefehlAusfuehren) listener;
+					_befehlButtonMap.put(
+							actionListenerBefehlAusfuehren.getBefehlszeile(),
+							button);
+				}
+			}
+		}
 
 	}
 

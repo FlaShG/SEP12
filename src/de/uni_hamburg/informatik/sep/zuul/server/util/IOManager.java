@@ -152,4 +152,14 @@ public class IOManager
 		level.setLeben(_strukParser.getLebenspunkte());
 		return level;
 	}
+	
+	public int getAnzahlMaeuse()
+	{
+		return _strukParser.getAnzahlMaeuse();
+	}
+	
+	public int getAnzahlKatzen()
+	{
+		return _strukParser.getAnzahlKatzen();
+	}
 }

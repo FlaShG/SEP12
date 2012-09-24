@@ -27,6 +27,8 @@ public class StartFenster
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
 
+		_spielername = "Dr. Little";
+
 		initialisiereUI();
 	}
 
@@ -46,7 +48,10 @@ public class StartFenster
 				{
 					e1.printStackTrace();
 				}
-				_ui.dispose();
+				finally
+				{
+					_ui.dispose();
+				}
 			}
 		});
 
@@ -66,7 +71,8 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_ui.dispose();
+
+				_spielername = _ui.getSpielerNameTextField().getText();
 
 				try
 				{
@@ -75,6 +81,10 @@ public class StartFenster
 				catch(Exception e)
 				{
 					e.printStackTrace();
+				}
+				finally
+				{
+					_ui.dispose();
 				}
 
 			}

@@ -14,19 +14,13 @@ final class BefehlGib implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start;
+		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start && spieler.getInventar().hasAnyKuchen();
 	}
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		if(!spieler.getInventar().hasAnyKuchen())
-		{
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
-			return false;
-		}
-
 		Item kuchen = spieler.getInventar().getAnyKuchen();
 		switch (kuchen)
 		{
@@ -54,7 +48,12 @@ final class BefehlGib implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
+
+		if(!spieler.getInventar().hasAnyKuchen())
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
+		
+		if(!(kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start))
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
 	}
 
 	@Override

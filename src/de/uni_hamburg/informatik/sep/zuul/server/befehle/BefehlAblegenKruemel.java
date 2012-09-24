@@ -21,7 +21,7 @@ public class BefehlAblegenKruemel implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_ABLEGEN + " guter krümel" };
+		return new String[] { TextVerwalter.BEFEHL_ABLEGEN + " krümel" };
 	}
 
 	@Override
