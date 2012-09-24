@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
+import de.uni_hamburg.informatik.sep.zuul.server.features.AusgaengeAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.GewonnenTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
+import de.uni_hamburg.informatik.sep.zuul.server.features.KuchenImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Lebensenergie;
+import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
@@ -28,6 +36,20 @@ public class SpielLogik
 	public SpielLogik()
 	{
 		erstelleKontext();
+		
+		registriereListeners();
+	}
+
+	private void registriereListeners()
+	{
+		registriereFeature(new GewonnenTextAnzeigen());
+		registriereFeature(new Lebensenergie());
+		registriereFeature(new RaumBeschreibungAnzeigen());
+		registriereFeature(new AusgaengeAnzeigen());
+		registriereFeature(new KuchenImRaumTextAnzeigen());
+		registriereFeature(new MausImRaumTextAnzeigen());
+		
+		Katze.erzeugeKatze(this);
 	}
 
 	public void erstelleKontext()
