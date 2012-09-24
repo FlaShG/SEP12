@@ -26,7 +26,9 @@ public class StartFenster
 
 		_ipAdresse = "127.0.0.1";
 		_port = 1090;
-
+		
+		_spielername = "Dr. Little";
+		
 		initialisiereUI();
 	}
 
@@ -66,8 +68,9 @@ public class StartFenster
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_ui.dispose();
-
+				
+				_spielername = _ui.getSpielerNameTextField().getText();
+				
 				try
 				{
 					new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
@@ -76,6 +79,7 @@ public class StartFenster
 				{
 					e.printStackTrace();
 				}
+				_ui.dispose();
 
 			}
 
