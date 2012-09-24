@@ -141,6 +141,8 @@ public class Spiel
 	 */
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
+		System.err.println(benutzerName + ": " + eingabe);
+		
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
@@ -149,9 +151,6 @@ public class Spiel
 		if(befehl != null)
 		{
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-
-			Spiel.versucheBefehlAusfuehrung(_logik.getKontext(), spieler,
-					befehlszeile, befehl);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
 					_logik.getKontext(), spieler, befehlszeile, befehl);
