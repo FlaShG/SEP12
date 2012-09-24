@@ -55,9 +55,9 @@ public class Raumbilderzeuger
 	{
 		_paket = paket;
 		
-		_drlittlepositionen = new LinkedList<>();
-		_mauspositionen = new LinkedList<>();
-		_itemPositionen = new LinkedList<>();
+		_drlittlepositionen = new LinkedList<Tupel>();
+		_mauspositionen = new LinkedList<Tupel>();
+		_itemPositionen = new LinkedList<Tupel>();
 		
 		_random = new Random();
 
