@@ -65,4 +65,10 @@ public class ClientConsole extends Client
 		return true;
 	}
 
+	@Override
+	public boolean zeigeVorschau(ClientPaket paket) throws RemoteException
+	{
+		return true;
+	}
+
 }

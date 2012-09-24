@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -7,9 +8,12 @@ import java.util.TimerTask;
 
 import javax.swing.SwingUtilities;
 
+import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
+import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
@@ -40,12 +44,15 @@ public class Spiel
 	private Map<String, Spieler> _spielerMap;
 	private Map<Spieler, String> _nachrichtenMap;
 	private boolean _gestartet;
+	private final Server _server;
 
 	/**
 	 * Erzeuge ein neues Spiel
+	 * @param server 
 	 */
-	public Spiel()
+	public Spiel(Server server)
 	{
+		_server = server;
 		_logik = new SpielLogik();
 		_spielerMap = new HashMap<String, Spieler>();
 		_nachrichtenMap = new HashMap<Spieler, String>();
@@ -151,11 +158,29 @@ public class Spiel
 					_logik.getKontext(), spieler, befehlszeile, befehl);
 
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
-
+			
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
 			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
+			
+			if(befehl instanceof BefehlSchauen)
+			{
+				// TODO schicke clienpaket mit vorschau
+				Map<String, ClientInterface> clients = _server.getConnectedClients();
+				String name = spieler.getName();
+				ClientInterface clientInterface = clients.get(name);
+				try
+				{
+					clientInterface.zeigeVorschau(new ClientPaket(_logik.getKontext(), spieler, null));
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
 		else
 			BefehlFactory.schreibeNL(_logik.getKontext(), spieler,
@@ -174,7 +199,7 @@ public class Spiel
 	}
 
 	/**
-	 * Packe das Clienpaket für den Client mit dem Namen name.
+	 * Packe das Clientpaket für den Client mit dem Namen name.
 	 * 
 	 * @param name
 	 * @return

@@ -38,7 +38,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 		// Liste der verbundenen Clients anlegen
 		_connectedClients = new HashMap<String, ClientInterface>();
 
-		_spiel = new Spiel();
+		_spiel = new Spiel(this);
 	}
 
 	// sinnlos?
@@ -111,5 +111,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface
 	public static void main(String[] args) throws Exception
 	{
 		new Server();
+	}
+
+	public Map<String, ClientInterface> getConnectedClients()
+	{
+		return _connectedClients;
 	}
 }

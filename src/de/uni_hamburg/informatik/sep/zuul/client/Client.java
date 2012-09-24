@@ -93,11 +93,7 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 
 	}
-
-	@Override
-	public abstract boolean zeigeAn(final ClientPaket paket)
-			throws RemoteException;
-
+	
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
 	{
 		if(!_server.empfangeNutzerEingabe(eingabezeile, _clientName))

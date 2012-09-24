@@ -19,7 +19,6 @@ import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-
 public class ClientGUI extends Client
 {
 
@@ -44,14 +43,14 @@ public class ClientGUI extends Client
 	@Override
 	public synchronized boolean zeigeAn(final ClientPaket paket)
 	{
-		
+
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
-				aktualisiereUI(paket);
+				aktualisiereUI(paket,false);
 			}
 		});
 
@@ -60,14 +59,32 @@ public class ClientGUI extends Client
 
 	}
 
+	@Override
+	public synchronized boolean zeigeVorschau(final ClientPaket paket)
+			throws RemoteException
+	{
+		SwingUtilities.invokeLater(new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				aktualisiereUI(paket, true);
+			}
+		});
+
+		return true;
+
+	}
+
 	/**
 	 * @param paket
 	 */
-	private void aktualisiereUI(ClientPaket paket)
+	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
 		schreibeText(paket.getNachricht());
 
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket); //Spieler, items, maus, Katze anzeigen
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, vorschau); //Spieler, items, maus, Katze anzeigen
 		// TODO: falsch?
 		if(_bildPanel.getWidth() > _bildPanel.getHeight())
 			_bildPanel.setRaumanzeige(raumbilderzeuger
@@ -99,8 +116,6 @@ public class ClientGUI extends Client
 	private BildPanel _bildPanel;
 	private BefehlsPanel _bp;
 
-	
-
 	/**
 	 * 
 	 */
@@ -111,7 +126,6 @@ public class ClientGUI extends Client
 		_kp = new KonsolenPanel();
 		_bildPanel = new BildPanel();
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
-		
 
 		_hf.setVisible(true);
 		_kp.getEnterButton().addActionListener(new ActionListener()
@@ -135,7 +149,6 @@ public class ClientGUI extends Client
 
 			}
 		});
- 
 
 		_kp.getEingabeZeile().addActionListener(new ActionListener()
 		{
@@ -218,52 +231,51 @@ public class ClientGUI extends Client
 
 		_bildPanel.getTuerNordButton().addMouseListener(new MouseAdapter()
 		{
-			
-			
+
 			@Override
 			public void mouseClicked(MouseEvent m)
 			{
-				if(SwingUtilities.isRightMouseButton(m) && m.getClickCount() == 1)
+				if(SwingUtilities.isRightMouseButton(m)
+						&& m.getClickCount() == 1)
 				{
 					sendeEingabe("schaue nord");
 				}
-				
+
 			}
 		});
-		
+
 		_bildPanel.getTuerOstButton().addMouseListener(new MouseAdapter()
 		{
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0)
 			{
 				sendeEingabe("schaue ost");
-				
+
 			}
 		});
-		
+
 		_bildPanel.getTuerSuedButton().addMouseListener(new MouseAdapter()
 		{
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0)
 			{
 				sendeEingabe("schaue süd");
-				
+
 			}
 		});
-		
+
 		_bildPanel.getTuerWestButton().addMouseListener(new MouseAdapter()
 		{
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0)
 			{
 				sendeEingabe("schaue west");
-				
+
 			}
 		});
-		
 
 	}
 
@@ -287,7 +299,7 @@ public class ClientGUI extends Client
 		_bildPanel.getTuerOstButton().setEnabled(value);
 		_bildPanel.getTuerSuedButton().setEnabled(value);
 		_bildPanel.getTuerWestButton().setEnabled(value);
-		
+
 	}
 
 	public void schliesseFenster()
@@ -301,89 +313,88 @@ public class ClientGUI extends Client
 
 		super.run();
 
-// TODO: move; geht client paket oder so ähnlich.
-//		_kontext.addPropertyChangeListener("LebensEnergie",
-//				new PropertyChangeListener()
-//				{
-//
-//					@Override
-//					public void propertyChange(PropertyChangeEvent p)
-//					{
-//						_bildPanel.setLebensenergie((int) p.getNewValue());
-//					}
-//				});
-//		
-//		_kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
-//		{
-//			
-//			@Override
-//			public void propertyChange(PropertyChangeEvent p)
-//			{
-//				
-//				boolean n = false;
-//				boolean o = false;
-//				boolean s = false;
-//				boolean w = false;
-//				
-//				for(String richtung : ((Raum) p.getNewValue()).getMoeglicheAusgaenge())
-//				{
-//					
-//					
-//					if(richtung.equals("nord"))
-//						n = true;
-//					else if(richtung.equals("ost"))
-//						o = true;
-//					else if(richtung.equals("süd"))
-//						s = true;
-//					else if(richtung.equals("west"))
-//						w = true;
-//					
-//					_bildPanel.getTuerNordButton().setVisible(n);
-//					_bildPanel.getTuerOstButton().setVisible(o);
-//					_bildPanel.getTuerSuedButton().setVisible(s);
-//					_bildPanel.getTuerWestButton().setVisible(w);
-//				
-//				}
-//					
-//				
-//			}
-//		});
-//
-//		_kontext.addTickListener(new TickListener()
-//		{
-//
-//			@Override
-//			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
-//			{
-//				if(_bildPanel.getWidth() > _bildPanel.getHeight())
-//					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
-//				else
-//					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
-//				return true;
-//			}
-//		});
-//		if(_bildPanel.getWidth() > _bildPanel.getHeight())
-//			zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
-//		else
-//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
+		// TODO: move; geht client paket oder so ähnlich.
+		//		_kontext.addPropertyChangeListener("LebensEnergie",
+		//				new PropertyChangeListener()
+		//				{
+		//
+		//					@Override
+		//					public void propertyChange(PropertyChangeEvent p)
+		//					{
+		//						_bildPanel.setLebensenergie((int) p.getNewValue());
+		//					}
+		//				});
+		//		
+		//		_kontext.addPropertyChangeListener("AktuellerRaum", new PropertyChangeListener()
+		//		{
+		//			
+		//			@Override
+		//			public void propertyChange(PropertyChangeEvent p)
+		//			{
+		//				
+		//				boolean n = false;
+		//				boolean o = false;
+		//				boolean s = false;
+		//				boolean w = false;
+		//				
+		//				for(String richtung : ((Raum) p.getNewValue()).getMoeglicheAusgaenge())
+		//				{
+		//					
+		//					
+		//					if(richtung.equals("nord"))
+		//						n = true;
+		//					else if(richtung.equals("ost"))
+		//						o = true;
+		//					else if(richtung.equals("süd"))
+		//						s = true;
+		//					else if(richtung.equals("west"))
+		//						w = true;
+		//					
+		//					_bildPanel.getTuerNordButton().setVisible(n);
+		//					_bildPanel.getTuerOstButton().setVisible(o);
+		//					_bildPanel.getTuerSuedButton().setVisible(s);
+		//					_bildPanel.getTuerWestButton().setVisible(w);
+		//				
+		//				}
+		//					
+		//				
+		//			}
+		//		});
+		//
+		//		_kontext.addTickListener(new TickListener()
+		//		{
+		//
+		//			@Override
+		//			public boolean tick(SpielKontext kontext, boolean hasRoomChanged)
+		//			{
+		//				if(_bildPanel.getWidth() > _bildPanel.getHeight())
+		//					zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+		//				else
+		//					zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
+		//				return true;
+		//			}
+		//		});
+		//		if(_bildPanel.getWidth() > _bildPanel.getHeight())
+		//			zeichneBild(_bildPanel.getLabelFuerIcon().getHeight());
+		//		else
+		//			zeichneBild(_bildPanel.getLabelFuerIcon().getWidth());
 	}
 
 	private void zeichneBild(ClientPaket paket, int breitehoehe)
 	{
-		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket);
+		Raumbilderzeuger raumbilderzeuger = new Raumbilderzeuger(paket, false);
 		_bildPanel.setRaumanzeige(raumbilderzeuger.getRaumansicht(breitehoehe));
 	}
-
 
 	private void zeichneBild(int height)
 	{
 		// TODO Auto-generated method stub
 		// TODO: Bild ohne neues client paket neu zeichen
-		
+
 	}
 
 	/**
-	 * @param befehlszeile 
+	 * @param befehlszeile
 	 * 
 	 */
 	private void sendeEingabe(String befehlszeile)
