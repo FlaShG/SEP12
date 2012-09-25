@@ -26,7 +26,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class SpielLogik
 {
-	private static String _levelPfad;
+	public static String _levelPfad;
 	public ServerKontext _kontext;
 	private RaumStruktur _struktur;
 
