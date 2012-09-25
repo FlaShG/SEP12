@@ -17,7 +17,7 @@ public class StartConsole
 	public StartConsole() throws RemoteException, AlreadyBoundException,
 			MalformedURLException, NotBoundException
 	{
-		consoleAnzeigen("Was wollen sie spielen?(einzelspiel oder multispiel): ");
+		consoleAnzeigen("Wie wollen sie spielen?(einzelspieler oder mehrspieler): ");
 		switch (consoleLesen())
 		{
 		case "einzelspiel":
@@ -30,7 +30,7 @@ public class StartConsole
 		case "mehrspieler":
 		case "m":
 		case "multiplayer":
-			consoleAnzeigen("Wollen Sie denn Server starten(j/n): ");
+			consoleAnzeigen("Wollen Sie denn Server(Host) starten(j/n). Standard ist n: ");
 			String server = consoleLesen();
 			if(server.equals("j"))
 			{
