@@ -6,8 +6,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-final class BefehlGib implements Befehl
-//TODO: BefehlGibLabor
+final class BefehlUntersuche implements Befehl
 {
 
 	@Override
@@ -59,7 +58,7 @@ final class BefehlGib implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_GIB };
+		return new String[] { TextVerwalter.BEFEHL_UNTERSUCHE };
 	}
 
 	@Override

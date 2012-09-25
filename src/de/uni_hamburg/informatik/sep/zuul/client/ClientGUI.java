@@ -367,7 +367,7 @@ public class ClientGUI extends Client
 								TextVerwalter.BEFEHL_NEHMEN));
 
 		_bp.getGibButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GIB));
+				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_UNTERSUCHE));
 
 		_bp.getLadenButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
