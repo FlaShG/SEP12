@@ -86,4 +86,11 @@ public class ClientConsole extends Client
 
 	}
 
+	@Override
+	public void serverBeendet()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

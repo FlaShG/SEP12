@@ -45,5 +45,9 @@ public interface ClientInterface extends Remote
 	 * Das Spiel wird *für dich* beendet.
 	 */
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException;
-
+	
+	/**
+	 * Server wurde beendet
+	 */
+	public void serverBeendet() throws RemoteException;
 }
