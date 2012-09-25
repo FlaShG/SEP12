@@ -93,13 +93,8 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						Object[] options = {"Ja", "Nein"};
-						int jp = 0;
-						if(_unsavedChanges)
-						{
-							jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen.", "Level laden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-						}
-						if (jp == 0)
+						if(!_unsavedChanges
+						|| BestaetigungsDialog.erstelle("Level laden", "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
 							String str = FileChooser.oeffneDatei();
 							if(str != null && !str.equals(""))
@@ -119,13 +114,8 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				Object[] options = {"Ja", "Nein"};
-				int jp = 0;
-				if(_unsavedChanges)
-				{
-					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen.", "Neues Level", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				}
-				if (jp == 0)
+				if(!_unsavedChanges
+				|| BestaetigungsDialog.erstelle("Neues Level", "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
 					resetEditorFenster(mapsize.getBreite(), mapsize.getHoehe());
@@ -141,14 +131,9 @@ public class EditorFenster implements EditorBeobachter
 			{
 				MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap().getBreite(), _ui.getMap().getHoehe());
 				
-				Object[] options = {"Ja", "Nein"};
-				int jp = 0;
 				boolean problematisch = !_ui.getMap().istGroesseAendernUnproblematisch(mapsize.getBreite(), mapsize.getHoehe());
-				if(problematisch)
-				{
-					jp = JOptionPane.showOptionDialog(new JPanel(), "Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?", "Kartengröße ändern.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				}
-				if(jp == 0)
+				if(!problematisch
+				|| BestaetigungsDialog.erstelle("Kartengröße ändern", "Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?"))
 				{
 					_ui.getMap().setGroesse(mapsize.getBreite(), mapsize.getHoehe());
 					_ui.getFrame().setVisible(true);
@@ -163,13 +148,8 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void windowClosing(WindowEvent arg0)
 			{
-				Object[] options = {"Ja", "Nein"};
-				int jp = 0;
-				if(_unsavedChanges)
-				{
-					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen.", "Editor beenden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				}
-				if (jp == 0)
+				if(!_unsavedChanges
+				|| BestaetigungsDialog.erstelle("Editor beenden", "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					System.exit(0);
 				}
