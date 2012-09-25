@@ -231,14 +231,6 @@ public class EditorFenster implements EditorBeobachter
 	}
 	
 	@Override
-	public void verschiebenUpdate(int x, int y)
-	{
-		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
-		
-		verschiebenUpdate();
-	}
-	
-	@Override
 	public void verschiebenUpdate()
 	{
 		unsavedChanges(true);
