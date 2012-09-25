@@ -128,8 +128,32 @@ public class EditorFenster implements EditorBeobachter
 				if (jp == 0)
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
-					resetEditorFenster(mapsize.getWidth(), mapsize.getHeight());
+					resetEditorFenster(mapsize.getBreite(), mapsize.getHoehe());
 					unsavedChanges(false);
+				}
+			}
+		});
+		
+		_ui.getMenuBar().getResizeButton().addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap().getBreite(), _ui.getMap().getHoehe());
+				
+				Object[] options = {"Ja", "Nein"};
+				int jp = 0;
+				boolean problematisch = !_ui.getMap().istGroesseAendernUnproblematisch(mapsize.getBreite(), mapsize.getHoehe());
+				if(problematisch)
+				{
+					jp = JOptionPane.showOptionDialog(new JPanel(), "Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?", "Kartengröße ändern.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				}
+				if(jp == 0)
+				{
+					_ui.getMap().setGroesse(mapsize.getBreite(), mapsize.getHoehe());
+					_ui.getFrame().setVisible(true);
+					if(problematisch)
+						unsavedChanges(false);
 				}
 			}
 		});

@@ -128,9 +128,9 @@ public class EditorMap extends JPanel
 	{
 		if(breite < _buttons.length)
 		{
-			for(int y = 0; y < _buttons[0].length; ++y)
+			for(int y = 0; y < getHoehe(); ++y)
 			{
-				for(int x = breite; x < _buttons.length; ++x)
+				for(int x = breite; x < getBreite(); ++x)
 				{
 					if(_buttons[x][y].getRaum() != null)
 					{
@@ -142,9 +142,9 @@ public class EditorMap extends JPanel
 		
 		if(hoehe < _buttons[0].length)
 		{
-			for(int y = hoehe; y < _buttons[0].length; ++y)
+			for(int y = hoehe; y < getHoehe(); ++y)
 			{
-				for(int x = 0; x < _buttons.length; ++x)
+				for(int x = 0; x < getBreite(); ++x)
 				{
 					if(_buttons[x][y].getRaum() != null)
 					{
@@ -164,6 +164,18 @@ public class EditorMap extends JPanel
 	 */
 	public void setGroesse(int breite, int hoehe)
 	{
+		//alte entfernen
+		if(_buttons != null)
+		{
+			for(int y = 0; y < getHoehe(); ++y)
+			{
+				for(int x = 0; x < getBreite(); ++x)
+				{
+					remove(_buttons[x][y]);
+				}
+			}
+		}
+		
 		setLayout(new GridLayout(hoehe, breite)); //dammit kids
 		
 		GridButton[][] neueButtons = new GridButton[breite][hoehe];
@@ -172,6 +184,8 @@ public class EditorMap extends JPanel
 		{
 			for(int x = 0; x < breite; ++x)
 			{
+				neueButtons[x][y] = new GridButton(x, y);
+				add(neueButtons[x][y]);
 				initialisiereButton(neueButtons[x][y], x, y);
 			}
 		}
@@ -181,11 +195,12 @@ public class EditorMap extends JPanel
 		
 		if(_buttons != null)
 		{
-			for(int y = 0; y < hoehe && y < _buttons[0].length; ++y)
+			for(int y = 0; y < hoehe && y < getHoehe(); ++y)
 			{
-				for(int x = 0; x < breite && y < _buttons.length; ++x)
+				for(int x = 0; x < breite && x < getBreite(); ++x)
 				{
 					neueButtons[x][y].setRaum(_buttons[x][y].getRaum());
+					neueButtons[x][y].setAusgewaehlt(false);
 				}
 			}
 		}
@@ -195,9 +210,6 @@ public class EditorMap extends JPanel
 	
 	private void initialisiereButton(GridButton button, int x, int y)
 	{
-		button = new GridButton(x, y);
-		add(button);
-
 		button.addActionListener(new ActionListener()
 		{
 			@Override
@@ -295,5 +307,15 @@ public class EditorMap extends JPanel
 				}
 			}
 		});
+	}
+
+	public int getBreite()
+	{
+		return _buttons.length;
+	}
+
+	public int getHoehe()
+	{
+		return _buttons[0].length;
 	}
 }
