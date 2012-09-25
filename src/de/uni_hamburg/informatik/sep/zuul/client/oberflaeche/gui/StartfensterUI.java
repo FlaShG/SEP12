@@ -93,15 +93,25 @@ public class StartfensterUI extends JFrame
 		
 		//panel.add(_fileChooserButton);
 		//panel.add(_defaultMapButton);
+		
 		remove(_singlePlayer);
 		remove(_multiPlayer);
+		remove(_benutzerName);
 		remove(_serverStarten);
+		remove(_eingabeIP);
+		remove(_eingabeBestaetigen);
+		remove(_eingabePort);
+		remove(_multiPlayer);
+		remove(_singlePlayer);
+		
 		add(getFileChooserButton());
 		add(getDefaultMapButton());
 		
 		//setContentPane(panel);
 		setMinimumSize(new Dimension(300, 40));
+		setSize(new Dimension(300, 40));
 
+		
 		pack();
 	}
 
