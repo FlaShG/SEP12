@@ -20,9 +20,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 public class Server extends UnicastRemoteObject implements ServerInterface,
 		Observer
 {
-	
+
 	// Dummy
-	
+
 	/**
 	 * UID
 	 */
@@ -31,7 +31,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	private List<String> _readyClients; //Liste der Namen der Spieler die bereit sind.
 	private Spiel _spiel;
 	private String _hostName;
-	
+
 	public Server() throws RemoteException, AlreadyBoundException
 	{
 		super();
@@ -47,6 +47,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_readyClients = new ArrayList<String>();
 
 		_spiel = new Spiel();
+		System.out.println(_spiel.isGestartet());
 		_spiel.addObserver(this);
 	}
 
@@ -70,15 +71,14 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			throws RemoteException
 	{
 		boolean result;
+		System.out.println(_spiel.toString());
 
-		
 		//Der Host connected sich zuerst
-		if (_connectedClients.isEmpty())
+		if(_connectedClients.isEmpty())
 		{
 			_hostName = name;
-			System.out.println("Host" + _hostName);
 		}
-		
+
 		if(_connectedClients.containsKey(name)
 				|| _connectedClients.containsValue(client))
 		{
@@ -106,15 +106,15 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_connectedClients.remove(name);
 
 		_spiel.meldeSpielerAb(name);
-		
-		if (name.equals(_hostName))
+
+		if(name.equals(_hostName))
 		{
 			for(ClientInterface client : _connectedClients.values())
 			{
 				client.serverBeendet();
 			}
 		}
-		
+
 		return true;
 	}
 
