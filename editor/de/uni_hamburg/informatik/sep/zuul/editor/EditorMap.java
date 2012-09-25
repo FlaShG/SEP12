@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -221,17 +222,34 @@ public class EditorMap extends JPanel
 	}
 
 	private void initialisiereButton(GridButton button, int x, int y)
-	{
-		button.addActionListener(new ActionListener()
+	{		
+		button.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void mouseClicked(MouseEvent arg0)
 			{
-				if(buttonAusgewaehlt())
-					_buttons[_activeX][_activeY].setAusgewaehlt(false);
-				_activeX = ((GridButton) arg0.getSource()).getGridX();
-				_activeY = ((GridButton) arg0.getSource()).getGridY();
-				_buttons[_activeX][_activeY].setAusgewaehlt(true);
+				switch(arg0.getClickCount())
+				{
+					case 1:
+						if(buttonAusgewaehlt())
+						{
+							_buttons[_activeX][_activeY].setAusgewaehlt(false);
+						}
+						_activeX = ((GridButton) arg0.getSource()).getGridX();
+						_activeY = ((GridButton) arg0.getSource()).getGridY();
+						_buttons[_activeX][_activeY].setAusgewaehlt(true);
+					break;
+					
+					case 2:
+						if(_buttons[_activeX][_activeY].getRaum() == null)
+						{
+							_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
+							informiereBeobachter();
+						}
+					break;
+					
+					default: return;
+				}
 				informiereBeobachter();
 			}
 		});

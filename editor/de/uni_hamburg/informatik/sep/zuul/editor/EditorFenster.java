@@ -79,7 +79,7 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String str = FileChooser.speichereDatei();
+						String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser());
 						if(str != null)
 						{
 							_speicherWerkzeug.speichern(str);
@@ -100,9 +100,7 @@ public class EditorFenster implements EditorBeobachter
 												"Level laden",
 												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
-							JFileChooser chooser = FileChooser
-									.konfiguriereFileChooser();
-							String str = FileChooser.oeffneDatei(chooser);
+							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser());
 							if(str != null && !str.equals(""))
 							{
 								resetEditorFenster(1, 1);
@@ -213,6 +211,8 @@ public class EditorFenster implements EditorBeobachter
 								unsavedChanges(true);
 							}
 						});
+				//geht net.
+				_ui.getBearbeitenPanel().setzeFokusAufNamensFeld();
 			}
 		}
 
