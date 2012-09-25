@@ -29,7 +29,7 @@ public class StartfensterUI extends JFrame
 
 		_singlePlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_SINGLEPLAYER);
 		_multiPlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_MULTIPLAYER);
-		_serverStarten = new JButton("Server Starten");
+		_serverStarten = new JButton("Erstelle öffentliches Spiel");
 
 		add(_singlePlayer);
 		add(_multiPlayer);
