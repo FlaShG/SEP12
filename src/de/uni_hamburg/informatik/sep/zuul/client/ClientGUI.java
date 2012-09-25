@@ -770,9 +770,10 @@ public class ClientGUI extends Client
 			public void run()
 			{
 				JOptionPane.showMessageDialog(null, "Server wurde beendet");
-				System.exit(0);
+//				System.exit(0);
 			}
 		});
+		_hf.hide();
 		_hf.dispose();
 	}
 

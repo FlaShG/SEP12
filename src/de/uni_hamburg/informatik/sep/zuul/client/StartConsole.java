@@ -8,10 +8,11 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class StartConsole
+public class StartConsole extends StartUp
 {
 
 	public StartConsole() throws RemoteException, AlreadyBoundException,
@@ -24,8 +25,9 @@ public class StartConsole
 		|| eingabe.equals("allein")
 		|| eingabe.equals("e"))
 		{
-			new Server();
-			new ClientConsole("RmiServer", "127.0.0.1", 1090, "Dr.Little");
+			consoleAnzeigen("Wollen Sie denn Server(Host) starten(j/n). Standard ist n: ");
+			_server = new Server();
+			_client = new ClientConsole("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 		}
 		else if(eingabe.equals("multispiel")
 		|| eingabe.equals("mehrspieler")
@@ -38,7 +40,7 @@ public class StartConsole
 			String server = consoleLesen();
 			if(server.equals("j"))
 			{
-				new Server();
+				_server = new Server();
 			}
 			else
 			{
@@ -49,7 +51,7 @@ public class StartConsole
 			}
 			consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
 			String name = consoleLesen();
-			new ClientConsole("RmiServer", ip, Integer.parseInt(port), name);
+			_client = new ClientConsole("RmiServer", ip, Integer.parseInt(port), name);
 		}
 	}
 
