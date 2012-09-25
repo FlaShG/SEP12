@@ -141,7 +141,7 @@ public class BefehlsPanel extends JPanel
 			add(b);
 		}
 		String[] gutschlechtunbekannt = { "Guter Krümel", "Schlechter Krümel",
-				"Unidentifierter Krümel" };
+				"Unindentifierter Krümel" };
 		int c = 0;
 		for(JButton b : _extraButtons)
 		{
