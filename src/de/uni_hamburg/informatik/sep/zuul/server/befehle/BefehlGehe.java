@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -56,14 +57,14 @@ final class BefehlGehe implements Befehl
 				&& befehlszeile.getGeparsteZeile().size() == 2)
 		{
 			richtung = befehlszeile.getGeparsteZeile().get(1);
-			
+
 			// lange Richtung?
 			// gehe osten, …
 			if(isKorrekteRichtung(richtung))
 			{
 				return richtung;
 			}
-			
+
 			// vllt. Shortcut?
 			//gehe o, …
 			richtung = translateShortcut(richtung);
@@ -88,8 +89,7 @@ final class BefehlGehe implements Befehl
 	 */
 	private String translateShortcut(String shortcut)
 	{
-		int indexOf = Arrays.asList(_shortcuts)
-				.indexOf(shortcut);
+		int indexOf = Arrays.asList(_shortcuts).indexOf(shortcut);
 		if(indexOf >= 0)
 			return Arrays.asList(_richtungen).get(indexOf);
 		return null;
@@ -105,7 +105,15 @@ final class BefehlGehe implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_GEHEN, "n", "w", "s", "e" };
+		ArrayList<String> befehlsnamen = new ArrayList<String>();
+		befehlsnamen.addAll(Arrays.asList(_shortcuts));
+
+		for(String shortcut : _shortcuts)
+			befehlsnamen.add(TextVerwalter.BEFEHL_GEHEN + " " + shortcut);
+		for(String richtung : _richtungen)
+			befehlsnamen.add(TextVerwalter.BEFEHL_GEHEN + " " + richtung);
+		befehlsnamen.add("gehe");
+		return befehlsnamen.toArray(new String[0]);
 	}
 
 	@Override

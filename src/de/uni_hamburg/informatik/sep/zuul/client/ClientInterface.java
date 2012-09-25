@@ -50,4 +50,5 @@ public interface ClientInterface extends Remote
 	 * Server wurde beendet
 	 */
 	public void serverBeendet() throws RemoteException;
+
 }

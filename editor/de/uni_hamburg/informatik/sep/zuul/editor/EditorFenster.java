@@ -30,7 +30,6 @@ public class EditorFenster implements EditorBeobachter
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	private boolean _unsavedChanges;
-	private GridButton _warpModeSourceButton;
 
 	private WindowListener _windowListener;
 	
@@ -94,13 +93,8 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						Object[] options = {"Ja", "Nein"};
-						int jp = 0;
-						if(_unsavedChanges)
-						{
-							jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen.", "Level laden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-						}
-						if (jp == 0)
+						if(!_unsavedChanges
+						|| BestaetigungsDialog.erstelle("Level laden", "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
 							String str = FileChooser.oeffneDatei();
 							if(str != null && !str.equals(""))
@@ -120,17 +114,35 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				Object[] options = {"Ja", "Nein"};
-				int jp = 0;
-				if(_unsavedChanges)
-				{
-					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen.", "Neues Level", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				}
-				if (jp == 0)
+				if(!_unsavedChanges
+				|| BestaetigungsDialog.erstelle("Neues Level", "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
-					resetEditorFenster(mapsize.getWidth(), mapsize.getHeight());
+					if(!mapsize.getClickedOK())
+						return;
+					resetEditorFenster(mapsize.getBreite(), mapsize.getHoehe());
 					unsavedChanges(false);
+				}
+			}
+		});
+		
+		_ui.getMenuBar().getResizeButton().addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap().getBreite(), _ui.getMap().getHoehe());
+				if(!mapsize.getClickedOK())
+					return;
+				
+				boolean problematisch = !_ui.getMap().istGroesseAendernUnproblematisch(mapsize.getBreite(), mapsize.getHoehe());
+				if(!problematisch
+				|| BestaetigungsDialog.erstelle("Kartengröße ändern", "Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?"))
+				{
+					_ui.getMap().setGroesse(mapsize.getBreite(), mapsize.getHoehe());
+					_ui.getFrame().setVisible(true);
+					if(problematisch)
+						unsavedChanges(true);
 				}
 			}
 		});
@@ -140,13 +152,8 @@ public class EditorFenster implements EditorBeobachter
 			@Override
 			public void windowClosing(WindowEvent arg0)
 			{
-				Object[] options = {"Ja", "Nein"};
-				int jp = 0;
-				if(_unsavedChanges)
-				{
-					jp = JOptionPane.showOptionDialog(new JPanel(), "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen.", "Editor beenden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				}
-				if (jp == 0)
+				if(!_unsavedChanges
+				|| BestaetigungsDialog.erstelle("Editor beenden", "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					System.exit(0);
 				}
@@ -157,56 +164,35 @@ public class EditorFenster implements EditorBeobachter
 	@Override
 	public void raumwahlUpdate()
 	{
-		if(_warpModeSourceButton == null)
+		_ui.getFrame().remove(_ui.getRaumhinzu());
+		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
+		if(bearbeitenPanel != null)
+			_ui.getFrame().remove(bearbeitenPanel);
+
+		_ui.getFrame().setVisible(true);
+
+		if(_ui.getMap().buttonAusgewaehlt())
 		{
-			_ui.getFrame().remove(_ui.getRaumhinzu());
-			RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
-			if(bearbeitenPanel != null)
-				_ui.getFrame().remove(bearbeitenPanel);
-	
-			_ui.getFrame().setVisible(true);
-	
-			if(_ui.getMap().buttonAusgewaehlt())
+			Raum raum = _ui.getMap().getAktivenRaum();
+
+			if(raum == null)
 			{
-				Raum raum = _ui.getMap().getAktivenRaum();
-	
-				if(raum == null)
-				{
-					_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
-				}
-				else
-				{
-					_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
-							BorderLayout.SOUTH);
-					_ui.getBearbeitenPanel().getLoeschenButton()
-							.addActionListener(new ActionListener()
-							{
-								@Override
-								public void actionPerformed(ActionEvent arg0)
-								{
-									_ui.getMap().loescheRaumDesAktivenButtons();
-									unsavedChanges(true);
-								}
-							});
-				}
+				_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
 			}
-		}
-		else //warp mode
-		{
-			if(_ui.getMap().buttonAusgewaehlt())
+			else
 			{
-				Raum raum = _ui.getMap().getAktivenRaum();
-				
-				if(raum == null)
-				{
-					GridButton neuerButton = _ui.getMap().getAktivenButton();
-					neuerButton.setRaum(_warpModeSourceButton.getRaum());
-					_warpModeSourceButton.loescheRaum();
-					_warpModeSourceButton.setAusgewaehlt(false);
-					_warpModeSourceButton = null;
-					neuerButton.setAusgewaehlt(true);
-					unsavedChanges(true);
-				}
+				_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
+						BorderLayout.SOUTH);
+				_ui.getBearbeitenPanel().getLoeschenButton()
+						.addActionListener(new ActionListener()
+						{
+							@Override
+							public void actionPerformed(ActionEvent arg0)
+							{
+								_ui.getMap().loescheRaumDesAktivenButtons();
+								unsavedChanges(true);
+							}
+						});
 			}
 		}
 		
@@ -253,24 +239,9 @@ public class EditorFenster implements EditorBeobachter
 	}
 	
 	@Override
-	public void verschiebenUpdate(int x, int y)
-	{
-		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
-		
-		verschiebenUpdate();
-	}
-	
-	@Override
 	public void verschiebenUpdate()
 	{
 		unsavedChanges(true);
-	}
-	
-	@Override
-	public void warpUpdate()
-	{
-		if(_ui.getMap().buttonAusgewaehlt())
-			_warpModeSourceButton = _ui.getMap().getAktivenButton();
 	}
 
 	public EditorFensterUI getUI()

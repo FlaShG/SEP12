@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ClientPaket implements Remote, Serializable
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
-	private String[] _moeglicheAusgaenge;
+	private List<String> _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
 	private boolean _dead;
 	private boolean _showLoseScreen;
@@ -38,14 +39,21 @@ public class ClientPaket implements Remote, Serializable
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
 		_dead = !spieler.isAlive();
+		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 		if(!spieler.isAlive())
 		{
 			// TODO: win / lose screen
 			_showLoseScreen = true;
 			_showWinScreen = false;
-		}
+			_moeglicheAusgaenge = new ArrayList<String>();
+			;
 
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		}
+		else
+		{
+			_moeglicheAusgaenge = Arrays.asList(aktuellerRaum
+					.getMoeglicheAusgaenge());
+		}
 
 		_raumID = aktuellerRaum.getId();
 		_katze = aktuellerRaum.hasKatze();
@@ -56,7 +64,6 @@ public class ClientPaket implements Remote, Serializable
 		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
 		_raumArt = aktuellerRaum.getRaumart();
 		_spielerName = spieler.getName();
-		_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
 
 		_verfuegbareBefehle = new HashMap<String, Boolean>();
 		for(Entry<String, Befehl> entry : BefehlFactory.getMap().entrySet())
@@ -64,10 +71,11 @@ public class ClientPaket implements Remote, Serializable
 			String befehlsname = entry.getKey();
 			Befehl befehl = entry.getValue();
 
-			_verfuegbareBefehle.put(
-					befehlsname,
-					_dead ? false : befehl.vorbedingungErfuellt(kontext,
-							spieler, new Befehlszeile(befehlsname)));
+			boolean befehlVerfuegbar = _dead ? false : befehl
+					.vorbedingungErfuellt(kontext, spieler, new Befehlszeile(
+							befehlsname));
+
+			_verfuegbareBefehle.put(befehlsname, befehlVerfuegbar);
 		}
 	}
 
@@ -111,7 +119,7 @@ public class ClientPaket implements Remote, Serializable
 		return _spielerName;
 	}
 
-	public String[] getMoeglicheAusgaenge()
+	public List<String> getMoeglicheAusgaenge()
 	{
 		return _moeglicheAusgaenge;
 	}
@@ -143,6 +151,20 @@ public class ClientPaket implements Remote, Serializable
 	public boolean isShowWinScreen()
 	{
 		return _showWinScreen;
+	}
+
+	public int buildUniqueID()
+	{
+		int[] subHashCodes = new int[] { _andereSpieler.hashCode(),
+				_items.hashCode(), _katze ? 1 : 0, _maus ? 1 : 0,
+				_moeglicheAusgaenge.hashCode(), _raumID, };
+
+		int hashCode = 1;
+		for(int code : subHashCodes)
+		{
+			hashCode = hashCode * 31 + code;
+		}
+		return hashCode;
 	}
 
 }

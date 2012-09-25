@@ -22,14 +22,17 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlsPanel extends JPanel
 {
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
-	public static final String PATH = BefehlsPanel.class.getResource("bilder/")
-			.getPath();
+	//	public static final String PATH = BefehlsPanel.class.getResource("bilder/")
+	//			.getPath();
 	public static final int ZEILENANZAHL = 5;
 	public static final int ABSTAND_NORMAL = 5;
 	public static final int ABSTAND_EXTRA = 2;
-	public static final ImageIcon GUT = new ImageIcon(PATH + "kruemel_gut.png");
-	public static final ImageIcon SCHLECHT = new ImageIcon(PATH + "kruemel_schlecht.png");
-	public static final ImageIcon UNBEKANNT = new ImageIcon(PATH + "kruemel.png");
+	private final ImageIcon GUT = new ImageIcon(getClass().getResource(
+			"bilder/kruemel_gut.png"));
+	private final ImageIcon SCHLECHT = new ImageIcon(getClass().getResource(
+			"bilder/kruemel_schlecht.png"));
+	private final ImageIcon UNBEKANNT = new ImageIcon(getClass().getResource(
+			"bilder/kruemel.png"));
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;
@@ -54,6 +57,8 @@ public class BefehlsPanel extends JPanel
 	private JButton[] _systemButtons;
 
 	private JLabel _labelFuerLebensenergie;
+	private int _lebensenergieMaximum;
+	private int _lebensenergieAktuell;
 
 	private static final long serialVersionUID = 1L;
 
@@ -64,6 +69,8 @@ public class BefehlsPanel extends JPanel
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
+		_lebensenergieMaximum = 8;
+		_lebensenergieAktuell = _lebensenergieMaximum;
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -81,7 +88,9 @@ public class BefehlsPanel extends JPanel
 		_fuettereUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenTascheButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " aus der ") +  StringUtils.capitalize(TextVerwalter.ORT_TASCHE));
+				StringUtils
+						.capitalize(TextVerwalter.BEFEHL_ESSEN + " aus der ")
+						+ StringUtils.capitalize(TextVerwalter.ORT_TASCHE));
 
 		_essenTascheGutButton = new JButton(GUT);
 
@@ -90,7 +99,8 @@ public class BefehlsPanel extends JPanel
 		_essenTascheUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenBodenButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " vom ") + StringUtils.capitalize(TextVerwalter.ORT_BODEN));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " vom ")
+						+ StringUtils.capitalize(TextVerwalter.ORT_BODEN));
 
 		_inventarButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_INVENTAR));
@@ -104,11 +114,14 @@ public class BefehlsPanel extends JPanel
 
 		_ablegenUnbekanntButton = new JButton(UNBEKANNT);
 
-		_helpButton = new JButton(new ImageIcon(PATH + "faq-icon.png"));
+		_helpButton = new JButton(new ImageIcon(getClass().getResource(
+				"bilder/faq-icon.png")));
 
-		_ladenButton = new JButton(new ImageIcon(PATH + "disk.gif"));
+		_ladenButton = new JButton(new ImageIcon(getClass().getResource(
+				"bilder/disk.gif")));
 
-		_quitButton = new JButton(new ImageIcon(PATH + "exitIcon.gif"));
+		_quitButton = new JButton(new ImageIcon(getClass().getResource(
+				"bilder/exitIcon.gif")));
 		_quitButton.setBackground(new Color(0, 175, 0));
 
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
@@ -127,7 +140,8 @@ public class BefehlsPanel extends JPanel
 			b.setFocusable(false);
 			add(b);
 		}
-		String[] gutschlechtunbekannt = {"Guter Krümel", "Schlechter Krümel", "Unidentifierter Krümel"};
+		String[] gutschlechtunbekannt = { "Guter Krümel", "Schlechter Krümel",
+				"Unindentifierter Krümel" };
 		int c = 0;
 		for(JButton b : _extraButtons)
 		{
@@ -243,7 +257,7 @@ public class BefehlsPanel extends JPanel
 
 				_labelFuerLebensenergie.setSize(50,
 						BefehlsPanel.this.getHeight());
-				setLebensenergie(16);
+				setLebensenergie(_lebensenergieAktuell);
 
 			}
 
@@ -310,10 +324,9 @@ public class BefehlsPanel extends JPanel
 					_labelFuerLebensenergie.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
 
-			int maxLife = 8;
-			int currentlife = lebensenergie;
+			_lebensenergieAktuell = lebensenergie;
 
-			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (currentlife / (maxLife / 100.0)));
+			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (_lebensenergieAktuell / (_lebensenergieMaximum / 100.0)));
 
 			GradientPaint gp = new GradientPaint(new Point2D.Double(0,
 					_labelFuerLebensenergie.getHeight() - balkenhoehe),

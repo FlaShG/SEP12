@@ -3,8 +3,8 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Random;
@@ -13,32 +13,45 @@ import javax.imageio.ImageIO;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction.SuperFancyReproducibleRandomEntryPicker;
 
 /**
  * 
  * @author 1roebe
- *
+ * 
  */
 public class Raumbilderzeuger
 {
 
-	private final String PATH = getClass().getResource("bilder/").getPath();
+	//	private final String PATH = getClass().getResource("bilder/").getPath();
 
-	private final BufferedImage WIN = ladeBild(PATH + "win.png");
-	private final BufferedImage GAMEOVER = ladeBild(PATH + "gameover.png");
-	private final BufferedImage RAUMTUERNORD = ladeBild(PATH + "door_n.png");
-	private final BufferedImage RAUMTUEROST = ladeBild(PATH + "door_e.png");
-	private final BufferedImage RAUMTUERSUED = ladeBild(PATH + "door_s.png");
-	private final BufferedImage RAUMTUERWEST = ladeBild(PATH + "door_w.png");
-	private final BufferedImage SCHAUENSCHATTEN = ladeBild(PATH + "peek.png");
+	private final BufferedImage WIN = ladeBild(getClass().getResource(
+			"bilder/win.png"));
+	private final BufferedImage GAMEOVER = ladeBild(getClass().getResource(
+			"bilder/gameover.png"));
+	private final BufferedImage RAUMTUERNORD = ladeBild(getClass().getResource(
+			"bilder/door_n.png"));
+	private final BufferedImage RAUMTUEROST = ladeBild(getClass().getResource(
+			"bilder/door_e.png"));
+	private final BufferedImage RAUMTUERSUED = ladeBild(getClass().getResource(
+			"bilder/door_s.png"));
+	private final BufferedImage RAUMTUERWEST = ladeBild(getClass().getResource(
+			"bilder/door_w.png"));
+	private final BufferedImage SCHAUENSCHATTEN = ladeBild(getClass()
+			.getResource("bilder/peek.png"));
 
-	private final BufferedImage MAUS = ladeBild(PATH + "maus.png");
-	private final BufferedImage KATZE = ladeBild(PATH + "katze.png");
-	private final BufferedImage KRUEMEL = ladeBild(PATH + "kruemel.png");
-	private final BufferedImage GEGENGIFT = ladeBild(PATH + "gegengift.png");
-	private final BufferedImage DRLITTLE = ladeBild(PATH + "drlittle.png");
-	private final BufferedImage DREVENBIGGER = ladeBild(PATH
-			+ "drevenbigger.png");
+	private final BufferedImage MAUS = ladeBild(getClass().getResource(
+			"bilder/maus.png"));
+	private final BufferedImage KATZE = ladeBild(getClass().getResource(
+			"bilder/katze.png"));
+	private final BufferedImage KRUEMEL = ladeBild(getClass().getResource(
+			"bilder/kruemel.png"));
+	private final BufferedImage GEGENGIFT = ladeBild(getClass().getResource(
+			"bilder/gegengift.png"));
+	private final BufferedImage DRLITTLE = ladeBild(getClass().getResource(
+			"bilder/drlittle.png"));
+	private final BufferedImage DREVENBIGGER = ladeBild(getClass().getResource(
+			"bilder/drevenbigger.png"));
 
 	private LinkedList<Tupel> _drlittlepositionen;
 	private LinkedList<Tupel> _mauspositionen;
@@ -65,11 +78,15 @@ public class Raumbilderzeuger
 	}
 
 	/**
-	 * Malt den aktuellen Raum sowie die Items 
-	 * und Charaktere die sich in ihm befinden
-	 * @param breitehoehe die Höhe/Breite des Raumbildes
-	 * @param paket Das Paket mit den Informationen zum Raum
-	 * @param vorschau Gibt an ob in einen benachbarten Raum geschaut wird
+	 * Malt den aktuellen Raum sowie die Items und Charaktere die sich in ihm
+	 * befinden
+	 * 
+	 * @param breitehoehe
+	 *            die Höhe/Breite des Raumbildes
+	 * @param paket
+	 *            Das Paket mit den Informationen zum Raum
+	 * @param vorschau
+	 *            Gibt an ob in einen benachbarten Raum geschaut wird
 	 * @return
 	 */
 	public BufferedImage getRaumansicht(int breitehoehe, ClientPaket paket,
@@ -86,19 +103,22 @@ public class Raumbilderzeuger
 
 	private BufferedImage erzeugeRaumansicht()
 	{
+		SuperFancyReproducibleRandomEntryPicker entryPicker = new SuperFancyReproducibleRandomEntryPicker(
+				_paket.buildUniqueID());
+
 		BufferedImage raum = null;
 
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
 		{
 		case Normal:
-			raum = ladeBild(PATH + "raum_normal.png");
+			raum = ladeBild(getClass().getResource("bilder/raum_normal.png"));
 			break;
 		case Start:
-			raum = ladeBild(PATH + "raum_labor.png");
+			raum = ladeBild(getClass().getResource("bilder/raum_labor.png"));
 			break;
 		case Ende:
-			raum = ladeBild(PATH + "raum_ende.png");
+			raum = ladeBild(getClass().getResource("bilder/raum_ende.png"));
 			break;
 		}
 
@@ -141,20 +161,17 @@ public class Raumbilderzeuger
 		//andere spieler malen
 		for(String s : _paket.getAndereSpieler())
 		{
-			position = _drlittlepositionen.get(_random
-					.nextInt((_drlittlepositionen.size())));
+			position = entryPicker.pick(_drlittlepositionen);
 			x = position.getX();
 			y = position.getY();
 			g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
 		}
 
-
 		//Male Maus
 
 		if(_paket.hasMaus())
 		{
-			Tupel mausposition = _mauspositionen
-					.get(getRandomZahl(_mauspositionen.size()));
+			Tupel mausposition = entryPicker.pick(_mauspositionen);
 			x = mausposition.getX();
 			y = mausposition.getY();
 
@@ -164,8 +181,7 @@ public class Raumbilderzeuger
 		//Male Katze
 		else if(_paket.hasKatze())
 		{
-			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen
-					.size()));
+			Tupel pos = entryPicker.pick(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
@@ -198,8 +214,8 @@ public class Raumbilderzeuger
 
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
-			int rand = getRandomZahl(_itemPositionen.size());
-			Tupel itempos = _itemPositionen.remove(rand);
+			Tupel itempos = entryPicker.pick(_itemPositionen);
+			_itemPositionen.remove(itempos);
 			x = itempos.getX();
 			y = itempos.getY();
 
@@ -208,15 +224,14 @@ public class Raumbilderzeuger
 
 		if(gegengiftDa)
 		{
-			int rand = getRandomZahl(_itemPositionen.size());
-			Tupel itempos = _itemPositionen.remove(rand);
+			Tupel itempos = entryPicker.pick(_itemPositionen);
+			_itemPositionen.remove(itempos);
 			x = itempos.getX();
 			y = itempos.getY();
 
 			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
 
-			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen
-					.size()));
+			Tupel pos = entryPicker.pick(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
@@ -234,12 +249,6 @@ public class Raumbilderzeuger
 
 	}
 
-	private int getRandomZahl(int size)
-	{
-		return _random.nextInt(size);
-	}
-
-	
 	private void setPositionen()
 	{
 		_itemPositionen = new LinkedList<Tupel>();
@@ -255,22 +264,27 @@ public class Raumbilderzeuger
 		_itemPositionen.add(new Tupel(400, 330));
 		_itemPositionen.add(new Tupel(430, 440));
 
+		_mauspositionen = new LinkedList<Tupel>();
 		_mauspositionen.add(new Tupel(70, 70));
 		_mauspositionen.add(new Tupel(70, 470));
 		_mauspositionen.add(new Tupel(470, 70));
 		_mauspositionen.add(new Tupel(470, 470));
 
+		_drlittlepositionen = new LinkedList<Tupel>();
 		_drlittlepositionen.add(new Tupel(73, 320));
 		_drlittlepositionen.add(new Tupel(520, 320));
 		_drlittlepositionen.add(new Tupel(320, 70));
 		_drlittlepositionen.add(new Tupel(320, 520));
 
 	}
-	
+
 	/**
 	 * Skaliert ein Bild neu und gib es dann zurück
-	 * @param img Das zu skalierende Bild
-	 * @param breiteHoehe Die neue Höhe/Breite
+	 * 
+	 * @param img
+	 *            Das zu skalierende Bild
+	 * @param breiteHoehe
+	 *            Die neue Höhe/Breite
 	 * @return Das skalierte Bild
 	 */
 	private BufferedImage skaliereBild(BufferedImage img, int breiteHoehe)
@@ -284,18 +298,18 @@ public class Raumbilderzeuger
 		return ergebnis;
 	}
 
-
 	/**
 	 * Lädt ein Bild aus einer Datei und gibt dieses Bild zurück
-	 * @param pfad
+	 * 
+	 * @param url
 	 * @return -Das geladene Bild
 	 */
 
-	private BufferedImage ladeBild(String pfad)
+	private BufferedImage ladeBild(URL url)
 	{
 		try
 		{
-			BufferedImage tmp = ImageIO.read(new File(pfad));
+			BufferedImage tmp = ImageIO.read(url);
 			return tmp;
 
 		}
@@ -306,10 +320,10 @@ public class Raumbilderzeuger
 
 		return null;
 	}
-	
-	
+
 	/**
 	 * Gibt ein Bild von dem zuletzt gemalten Raum zurück
+	 * 
 	 * @param hoehebreite
 	 * @return ein neu skaliertes Bild vom zuletzt gemaltem Raum
 	 */
@@ -321,8 +335,9 @@ public class Raumbilderzeuger
 	}
 
 	/**
-	 * Malt die Verloren-Anzeige auf den aktuellen Raum
-	 *  und gibt das entstandene Bild zurück
+	 * Malt die Verloren-Anzeige auf den aktuellen Raum und gibt das entstandene
+	 * Bild zurück
+	 * 
 	 * @param breitehoehe
 	 * @return Den Verlierenbildschirm
 	 */
@@ -331,23 +346,26 @@ public class Raumbilderzeuger
 		BufferedImage raum = getRaumansicht(breitehoehe, _paket,
 				_schauenAnsicht);
 		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-		g2d2.drawImage(GAMEOVER, 0, 0, 640, 640, null);
+		g2d2.drawImage(GAMEOVER, 0, 0, breitehoehe, breitehoehe, null);
 		return skaliereBild(raum, breitehoehe);
 	}
-	
+
 	/**
-	 * Malt die Gewonnen-Anzeige auf den aktuellen Raum
-	 *  und gibt das entstandene Bild zurück
-	 * @param hoehebreite -die Hoehe bzw Breite des Raumbildes
+	 * Malt die Gewonnen-Anzeige auf den aktuellen Raum und gibt das entstandene
+	 * Bild zurück
+	 * 
+	 * @param hoehebreite
+	 *            -die Hoehe bzw Breite des Raumbildes
 	 * @return Den Gewinnbildschirm
 	 */
 	public BufferedImage getWinScreen(int hoehebreite)
 	{
-		BufferedImage raum = getRaumansicht(hoehebreite, _paket, _schauenAnsicht);
+		BufferedImage raum = getRaumansicht(hoehebreite, _paket,
+				_schauenAnsicht);
 		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-		g2d2.drawImage(WIN, 0, 0, 640, 640, null);
+		g2d2.drawImage(WIN, 0, 0, hoehebreite, hoehebreite, null);
 		return skaliereBild(raum, hoehebreite);
-		
+
 	}
 
 	private static class Tupel

@@ -10,7 +10,6 @@ public class Spieler
 	private Inventar _inventar;
 	private boolean _aktiv; // zustand des Spielers (Bein gestellt - disabled,
 							// sonst enabled).
-	private boolean _alive; // Ob der Spieler noch lebt.
 
 	/**
 	 * Erzeuge einen neuen Spieler, der ein Inventar, Lebensenergie und einen
@@ -18,7 +17,7 @@ public class Spieler
 	 */
 	public Spieler(String name)
 	{
-		_aktiv = _alive = true;
+		_aktiv = true;
 		_name = name;
 	}
 
@@ -66,12 +65,12 @@ public class Spieler
 
 	public void die()
 	{
-		_alive = false;
+		_lebensEnergie = 0;
 	}
 
 	public boolean isAlive()
 	{
-		return _alive;
+		return _lebensEnergie > 0;
 	}
 
 }

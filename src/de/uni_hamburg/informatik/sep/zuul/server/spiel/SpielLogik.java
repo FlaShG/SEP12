@@ -51,8 +51,6 @@ public class SpielLogik
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());
 		registriereFeature(new BeinStellen());
-
-		Katze.erzeugeKatze(this);
 	}
 
 	public void erstelleKontext()
@@ -101,11 +99,13 @@ public class SpielLogik
 
 		_struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());
-		RaumBauer raumbauer = new RaumBauer(_struktur, manager.getAnzahlMaeuse());
-		
-		for(int i=0;i<  1 /*manager.getAnzahlKatzen()*/; i++) // TODO mehr als eine katze nicht unterstützt atm
+		RaumBauer raumbauer = new RaumBauer(_struktur,
+				manager.getAnzahlMaeuse());
+
+		for(int i = 0; i < 1 /*manager.getAnzahlKatzen()*/; i++)
+			// TODO mehr als eine katze nicht unterstützt atm
 			Katze.erzeugeKatze(this);
-		
+
 		return raumbauer.getStartRaum();
 	}
 
@@ -191,7 +191,8 @@ public class SpielLogik
 			_befehlAusgefuehrtListeners
 					.add((BefehlAusgefuehrtListener) feature);
 		if(feature instanceof RaumGeaendertListener)
-			_kontext.getRaumGeaendertListeners().add((RaumGeaendertListener) feature);
+			_kontext.getRaumGeaendertListeners().add(
+					(RaumGeaendertListener) feature);
 		if(feature instanceof BefehlAusfuehrenListener)
 			_befehlAusfuehrenListeners.add((BefehlAusfuehrenListener) feature);
 
@@ -201,6 +202,7 @@ public class SpielLogik
 	ArrayList<TickListener> _tickListeners = new ArrayList<TickListener>();
 	ArrayList<BefehlAusgefuehrtListener> _befehlAusgefuehrtListeners = new ArrayList<BefehlAusgefuehrtListener>();
 	ArrayList<BefehlAusfuehrenListener> _befehlAusfuehrenListeners = new ArrayList<BefehlAusfuehrenListener>();
+
 	void fuehreTickListenerAus()
 	{
 		// Führe alle TickListener aus.
@@ -227,9 +229,10 @@ public class SpielLogik
 	{
 		boolean befehlAusfuehren = true;
 		// Führe alle BefehlAusgefuehrtListener aus.
-		for(BefehlAusfuehrenListener befehlAusfuehrenListener: _befehlAusfuehrenListeners)
+		for(BefehlAusfuehrenListener befehlAusfuehrenListener : _befehlAusfuehrenListeners)
 		{
-			befehlAusfuehren &= befehlAusfuehrenListener.befehlSollAusgefuehrtWerden(_kontext, spieler, befehl);
+			befehlAusfuehren &= befehlAusfuehrenListener
+					.befehlSollAusgefuehrtWerden(_kontext, spieler, befehl);
 		}
 		return befehlAusfuehren;
 	}

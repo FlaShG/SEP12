@@ -8,6 +8,7 @@ import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
@@ -44,39 +45,42 @@ public class EditorFensterUI
 
 	public void init(EditorLevel level, int width, int height)
 	{
-		Point pos = new Point(0, 0);
-		if(_frame != null)
-		{
-			pos = _frame.getLocation();
-			close();
-		}
-		_frame = new JFrame(EditorFenster.EDITOR_TITEL);
+		JFrame newFrame = new JFrame(EditorFenster.EDITOR_TITEL);
 
-		_frame.getContentPane().setLayout(new BorderLayout());
+		newFrame.getContentPane().setLayout(new BorderLayout());
 
 		JPanel north = new JPanel();
 		FlowLayout northlayout = new FlowLayout();
 		northlayout.setAlignment(FlowLayout.LEFT);
 		north.setLayout(northlayout);
-		_frame.add(north, BorderLayout.NORTH);
+		newFrame.add(north, BorderLayout.NORTH);
 
 		north.add(_menubar = new EditorMenuBar());
 		north.add(_levelPanel = new LevelPanel(_beobachter, level));
 
-		_frame.add(_map = new EditorMap(width, height), BorderLayout.CENTER);
+		newFrame.add(_map = new EditorMap(width, height), BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
 
 		_raumhinzu = new JButton("Raum anlegen");
 
-		_frame.setMinimumSize(new Dimension(900, 600));
-		_frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		_frame.setLocation(pos);
+		newFrame.setMinimumSize(new Dimension(900, 600));
+		newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		if(_frame != null)
+		{
+			newFrame.setLocation(_frame.getLocation());
+			newFrame.setSize(_frame.getSize());
+			newFrame.setExtendedState(_frame.getExtendedState()); 
+			_frame.dispose();
+		}
+		else
+		{
+			newFrame.setLocationRelativeTo(SwingUtilities.getRoot(newFrame));
+		}
+		
+		_frame = newFrame;
+		
 		_frame.setVisible(true);
-	}
-
-	private void close()
-	{
-		_frame.dispose();
 	}
 
 	/**

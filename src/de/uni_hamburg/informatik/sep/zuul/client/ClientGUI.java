@@ -13,6 +13,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -111,6 +112,7 @@ public class ClientGUI extends Client
 		_bilderzeuger = new Raumbilderzeuger();
 		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
+		aktualisiereUI(paket, false);
 	}
 
 	@Override
@@ -155,7 +157,6 @@ public class ClientGUI extends Client
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			//TODO Jetzt bekommen wir zwei Pakete. In Ordnung? Wie damit umgehen?
 			@Override
 			public void run()
 			{
@@ -172,35 +173,35 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
-		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
-		_bp.setLebensenergie(paket.getLebensEnergie());
-
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
 
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		_bp.setLebensenergie(paket.getLebensEnergie());
+
+		int val = _bildPanel.getQuadraticSize();
+
+		if(paket.isShowWinScreen())
+		{
+			_bildPanel.setRaumanzeige(_bilderzeuger.getWinScreen(val));
+			return;
+		}
+		else if(paket.isShowLoseScreen())
+		{
+			_bildPanel.setRaumanzeige(_bilderzeuger.getGameOverScreen(val));
+			return;
+		}
+
 		if(vorschau)
-		{
-			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(_bildPanel
-					.getLabelFuerIcon().getHeight(), paket, vorschau));
-
-		}
+			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(val, paket,
+					vorschau));
 		else
-		{
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(val, paket,
+					vorschau));
 
-			if(_bildPanel.getWidth() > _bildPanel.getHeight()
-					&& _bildPanel.getWidth() != 0
-					&& _bildPanel.getHeight() != 0)
-				_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(
-						_bildPanel.getLabelFuerIcon().getHeight(), paket,
-						vorschau));
-			else if(_bildPanel.getWidth() != 0 && _bildPanel.getHeight() != 0)
-				_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(
-						_bildPanel.getLabelFuerIcon().getWidth(), paket,
-						vorschau));
-		}
 	}
 
 	private void setzeBefehlsverfuegbarkeit(
@@ -209,41 +210,20 @@ public class ClientGUI extends Client
 		for(Entry<String, Boolean> entry : verfuegbareBefehle.entrySet())
 		{
 			String befehl = entry.getKey();
-			Boolean enabled = entry.getValue();
+			boolean enabled = entry.getValue();
 
 			JButton button = _befehlButtonMap.get(befehl);
-			if(button != null)
+			if(button != null && button != _bp.getQuitButton())
 				button.setEnabled(enabled);
 		}
 	}
 
-	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	private void aktualisiereMoeglicheAusgaenge(List<String> list)
 	{
-
-		boolean n = false;
-		boolean o = false;
-		boolean s = false;
-		boolean w = false;
-
-		for(String richtung : ausgaenge)
-		{
-			if(richtung.equals(TextVerwalter.RICHTUNG_NORDEN))
-			{
-				n = true;
-			}
-			else if(richtung.equals(TextVerwalter.RICHTUNG_OSTEN))
-			{
-				o = true;
-			}
-			else if(richtung.equals(TextVerwalter.RICHTUNG_SUEDEN))
-			{
-				s = true;
-			}
-			else if(richtung.equals(TextVerwalter.RICHTUNG_WESTEN))
-			{
-				w = true;
-			}
-		}
+		boolean n = list.contains(TextVerwalter.RICHTUNG_NORDEN);
+		boolean o = list.contains(TextVerwalter.RICHTUNG_OSTEN);
+		boolean s = list.contains(TextVerwalter.RICHTUNG_SUEDEN);
+		boolean w = list.contains(TextVerwalter.RICHTUNG_WESTEN);
 
 		_bildPanel.getTuerNordButton().setVisible(n);
 		_bildPanel.getTuerOstButton().setVisible(o);
@@ -352,6 +332,7 @@ public class ClientGUI extends Client
 		_bildPanel.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+
 		_bildPanel.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
@@ -391,7 +372,8 @@ public class ClientGUI extends Client
 								TextVerwalter.BEFEHL_NEHMEN));
 
 		_bp.getGibButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_UNTERSUCHE));
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_UNTERSUCHE));
 
 		_bp.getLadenButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
@@ -435,7 +417,7 @@ public class ClientGUI extends Client
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				int val = getOptimalIconSize();
+				int val = _bildPanel.getQuadraticSize();
 
 				_bildPanel.setRaumanzeige(_bilderzeuger.zeichneBildErneut(val));
 			}
@@ -594,40 +576,6 @@ public class ClientGUI extends Client
 	}
 
 	@Override
-	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
-	{
-		int val = getOptimalIconSize();
-		if(duHastGewonnen)
-		{
-			_bildPanel.setRaumanzeige(_bilderzeuger.getWinScreen(val));
-		}
-		else
-		{
-			_bildPanel.setRaumanzeige(_bilderzeuger.getGameOverScreen(val));
-		}
-
-		for(JButton button : _befehlButtonMap.values())
-		{
-			if(button != _bp.getQuitButton())
-				button.setEnabled(false);
-		}
-	}
-
-	/**
-	 * @return
-	 */
-	private int getOptimalIconSize()
-	{
-		int val = 0;
-		if(_bildPanel.getWidth() > _bildPanel.getHeight()
-				&& _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getHeight();
-		else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getWidth();
-		return val;
-	}
-
-	@Override
 	public void serverBeendet()
 	{
 		
@@ -642,5 +590,11 @@ public class ClientGUI extends Client
 			}
 		});
 		_hf.dispose();
+	}
+
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		
 	}
 }

@@ -13,14 +13,14 @@ final class BefehlUntersuche implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start && spieler.getInventar().hasAnyKuchen();
+		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start && spieler.getInventar().hasAnyUKuchen();
 	}
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		Item kuchen = spieler.getInventar().getAnyKuchen();
+		Item kuchen = spieler.getInventar().getAnyUKuchen();
 		switch (kuchen)
 		{
 

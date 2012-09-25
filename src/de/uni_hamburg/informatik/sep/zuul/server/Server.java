@@ -193,15 +193,29 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	public void update(Observable arg0, Object arg1)
 	{
 		//arg1 ist der name (String) des Spielers der den schauen Befehl ausgeführt hat.
-		String name = ((String[]) arg1)[0];
-		String richtung = ((String[]) arg1)[1];
-		try
+		if(arg1 == null)
+			try
+			{
+				sendeAenderungenAnAlle();
+			}
+			catch(RemoteException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		else
 		{
-			_connectedClients.get(name).zeigeVorschau(_spiel.packeVorschauPaket(name, richtung));
-		}
-		catch(RemoteException e)
-		{
-			e.printStackTrace();
+			String name = ((String[]) arg1)[0];
+			String richtung = ((String[]) arg1)[1];
+			try
+			{
+				_connectedClients.get(name).zeigeVorschau(
+						_spiel.packeVorschauPaket(name, richtung));
+			}
+			catch(RemoteException e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 	}
