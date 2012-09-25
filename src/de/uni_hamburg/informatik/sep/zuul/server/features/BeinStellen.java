@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 {
@@ -24,7 +27,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 			kontext.schreibeAnSpieler(
 					spieler,
 					spieler.getName()
-							+ " liegt am Boden und kann sich vor Schmerzen nicht bewegen.");
+							+ TextVerwalter.BEINSTELLEN_GEFALLEN_INAKTIV);
 			return false;
 		}
 		return true;
@@ -47,11 +50,8 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 		spielerInRaum.remove(spieler);
 		for(final Spieler fremderSpieler : spielerInRaum)
 		{
-			kontext.schreibeAnSpieler(spieler,
-					"Du schmeißt " + fremderSpieler.getName() + " zu Boden.");
-			kontext.schreibeAnSpieler(fremderSpieler,
-					"Du wirst von " + spieler.getName()
-							+ " zu Boden geschmissen.");
+			kontext.schreibeAnSpieler(spieler,TextVerwalter.beinstellenAnderemSpieler(fremderSpieler.getName()));
+			kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.beinstellenBekommen(spieler.getName()));
 			fremderSpieler.setAktiv(false);
 
 			new Timer().schedule(new TimerTask()
@@ -61,8 +61,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 				public void run()
 				{
 					fremderSpieler.setAktiv(true);
-					kontext.schreibeAnSpieler(fremderSpieler,
-							"Du stehst langsam wieder auf und kannst weiterspielen.");
+					kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.BEINSTELLEN_AUFSTEHEN);
 
 				}
 			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);
@@ -74,14 +73,13 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler,
-				"Hier ist niemand, dem du ein Bein stellen könntest.");
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEINSTELLEN_KEINER_DA);
 	}
 
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { "bein stellen", "bs" };
+		return new String[] { TextVerwalter.BEFEHL_BEINSTELLEN, "bs" };
 	}
 
 	@Override
