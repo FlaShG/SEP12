@@ -35,7 +35,7 @@ public abstract class Client extends UnicastRemoteObject implements
 	String _serverIP;
 	boolean _isSpielzuEnde;
 	ServerInterface _server;
-	String _clientName;
+	private String _clientName;
 	int _port;
 
 	public Client(String serverName, String serverIP, int clientPort,
@@ -129,4 +129,10 @@ public abstract class Client extends UnicastRemoteObject implements
 	{
 
 	}
+
+	public String getClientName()
+	{
+		return _clientName;
+	}
+
 }

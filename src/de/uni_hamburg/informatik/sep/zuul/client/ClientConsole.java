@@ -23,7 +23,7 @@ public class ClientConsole extends Client
 		else
 		{
 			login();
-			_server.empfangeStartEingabe(_clientName);
+			_server.empfangeStartEingabe(getClientName());
 		}
 
 	}
@@ -36,7 +36,7 @@ public class ClientConsole extends Client
 		String bereit = leseZeileEin();
 		if(bereit.equals("OK"))
 		{
-			_server.empfangeStartEingabe(_clientName);
+			_server.empfangeStartEingabe(getClientName());
 		}
 	}
 
