@@ -166,7 +166,10 @@ public class Spiel extends Observable
 
 			if(befehl instanceof BefehlSchauen)
 			{
-				String[] ar = {spieler.getName(), ((BefehlSchauen)befehl).extrahiereRichtung(befehlszeile)};
+				String[] ar = {
+						spieler.getName(),
+						((BefehlSchauen) befehl)
+								.extrahiereRichtung(befehlszeile) };
 				setChanged();
 				notifyObservers(ar);
 			}
@@ -199,12 +202,13 @@ public class Spiel extends Observable
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
-	
+
 	public ClientPaket packeVorschauPaket(String name, String richtung)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
 		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
-		return new ClientVorschauPaket(_logik.getKontext(), spieler, nachricht, richtung); //packe VorschauPacket!
+		return new ClientVorschauPaket(_logik.getKontext(), spieler, nachricht,
+				richtung); //packe VorschauPacket!
 	}
 
 	public static boolean versucheBefehlAusfuehrung(ServerKontext kontext,
@@ -242,6 +246,8 @@ public class Spiel extends Observable
 				public void run()
 				{
 					_logik.fuehreTickListenerAus();
+					setChanged();
+					notifyObservers(null);
 				}
 			});
 		}
