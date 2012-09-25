@@ -27,9 +27,9 @@ public class BefehlsPanel extends JPanel
 	public static final int ZEILENANZAHL = 5;
 	public static final int ABSTAND_NORMAL = 5;
 	public static final int ABSTAND_EXTRA = 2;
-	public static final String GUT = "Gut";
-	public static final String SCHLECHT = "Giftig";
-	public static final String UNBEKANNT = "Unbekannt";
+	public static final ImageIcon GUT = new ImageIcon(PATH + "kruemel_gut.png");
+	public static final ImageIcon SCHLECHT = new ImageIcon(PATH + "kruemel_schlecht.png");
+	public static final ImageIcon UNBEKANNT = new ImageIcon(PATH + "kruemel.png");
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;
@@ -128,10 +128,14 @@ public class BefehlsPanel extends JPanel
 			b.setFocusable(false);
 			add(b);
 		}
+		String[] gutschlechtunbekannt = {"Guter Krümel", "Schlechter Krümel", "Unidentifierter Krümel"};
+		int c = 0;
 		for(JButton b : _extraButtons)
 		{
 			b.setFocusable(false);
+			b.setToolTipText(gutschlechtunbekannt[c % 3]);
 			add(b);
+			c++;
 		}
 		for(JButton b : _systemButtons)
 		{
