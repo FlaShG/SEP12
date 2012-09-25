@@ -114,6 +114,7 @@ public class BefehlsPanel extends JPanel
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
 				_inventarButton, _ablegenButton };
+		// REIHENFOLGE NICHT ÄNDERN!!!!
 		_extraButtons = new JButton[] { _fuettereGutButton,
 				_fuettereSchlechtButton, _fuettereUnbekanntButton,
 				_ablegenGutButton, _ablegenSchlechtButton,
