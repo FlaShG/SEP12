@@ -153,21 +153,10 @@ public class Inventar
 	{
 		assert hasAnyKuchen();
 
-		for(Item item : _inhalt)
-		{
-			switch (item)
-			{
-			case UKuchen:
-			case IKuchen:
-			case UGiftkuchen:
-			case IGiftkuchen:
-				_inhalt.remove(item);
-				return item;
-			default:
-				break;
-			}
-		}
-		return null;
+		Item i = _inhalt.get(_inhalt.size()-1);
+		
+		_inhalt.remove(i);
+		return i;
 	}
 
 	/**
