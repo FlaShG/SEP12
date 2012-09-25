@@ -68,7 +68,7 @@ public class BefehlsPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 
 		_gibButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_GIB));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_UNTERSUCHE));
 
 		_fuettereButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_FUETTERE));

@@ -99,7 +99,7 @@ public class TextVerwalter
 	
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
-	public static final String BEFEHL_GIB = "gib";
+	public static final String BEFEHL_UNTERSUCHE = "untersuche";
 
 	public static final String BUTTON_EINGEBEN = "enter";
 
