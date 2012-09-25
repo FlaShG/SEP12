@@ -331,7 +331,7 @@ public class Raumbilderzeuger
 		BufferedImage raum = getRaumansicht(breitehoehe, _paket,
 				_schauenAnsicht);
 		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-		g2d2.drawImage(GAMEOVER, 0, 0, 640, 640, null);
+		g2d2.drawImage(GAMEOVER, 0, 0, breitehoehe, breitehoehe, null);
 		return skaliereBild(raum, breitehoehe);
 	}
 	
@@ -345,7 +345,7 @@ public class Raumbilderzeuger
 	{
 		BufferedImage raum = getRaumansicht(hoehebreite, _paket, _schauenAnsicht);
 		Graphics2D g2d2 = (Graphics2D) raum.getGraphics();
-		g2d2.drawImage(WIN, 0, 0, 640, 640, null);
+		g2d2.drawImage(WIN, 0, 0, hoehebreite, hoehebreite, null);
 		return skaliereBild(raum, hoehebreite);
 		
 	}
