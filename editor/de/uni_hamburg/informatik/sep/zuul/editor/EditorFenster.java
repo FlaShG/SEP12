@@ -138,7 +138,7 @@ public class EditorFenster implements EditorBeobachter
 					_ui.getMap().setGroesse(mapsize.getBreite(), mapsize.getHoehe());
 					_ui.getFrame().setVisible(true);
 					if(problematisch)
-						unsavedChanges(false);
+						unsavedChanges(true);
 				}
 			}
 		});
