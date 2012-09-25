@@ -53,7 +53,8 @@ public class ClientConsole extends Client
 		{
 			String nachricht = leseZeileEin();
 
-			verarbeiteEingabe(nachricht);
+			if(!nachricht.equals(""))
+				verarbeiteEingabe(nachricht);
 
 			//TODO warten einbauen
 		}
@@ -116,7 +117,7 @@ public class ClientConsole extends Client
 	public void serverBeendet()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
