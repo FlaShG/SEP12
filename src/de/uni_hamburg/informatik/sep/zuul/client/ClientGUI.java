@@ -545,6 +545,8 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
+		
+		
 
 		// Nimmt diese Zeichen aus der Eingabe heraus...
 		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
@@ -580,7 +582,7 @@ public class ClientGUI extends Client
 						if(e.getID() == KeyEvent.KEY_PRESSED)
 						{
 							if (e.isShiftDown())
-							{
+							{// schauen
 								switch (e.getKeyCode())
 								{
 									case KeyEvent.VK_NUMPAD8:
@@ -611,31 +613,45 @@ public class ClientGUI extends Client
 										break;
 									}
 							}
+							// gehen
 							switch (e.getKeyCode())
 							{
 								case KeyEvent.VK_NUMPAD8:
 								case KeyEvent.VK_UP:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_NORDEN);
+									String befehl_up = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_NORDEN; 
+									sendeEingabe(befehl_up);
+									_bilderzeuger.setGehRichtung(befehl_up);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD2:
 								case KeyEvent.VK_DOWN:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_SUEDEN);
+									String befehl_down = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_SUEDEN;
+									sendeEingabe(befehl_down);
+									_bilderzeuger.setGehRichtung(befehl_down);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD6:
 								case KeyEvent.VK_RIGHT:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_OSTEN);
+									String befehl_right = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_OSTEN;
+									sendeEingabe(befehl_right);
+									_bilderzeuger.setGehRichtung(befehl_right);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD4:
 								case KeyEvent.VK_LEFT:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_WESTEN);
+									String befehl_left = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_WESTEN;
+									sendeEingabe(befehl_left);
+									_bilderzeuger.setGehRichtung(befehl_left);
+									_bildPanel.versteckeSchauen();
 									return true;
 								default:
 									break;
 							}
+							// der rest
 							switch (e.getKeyChar())
 							{
 							case '+':
@@ -754,9 +770,10 @@ public class ClientGUI extends Client
 			public void run()
 			{
 				JOptionPane.showMessageDialog(null, "Server wurde beendet");
-				System.exit(0);
+//				System.exit(0);
 			}
 		});
+		_hf.hide();
 		_hf.dispose();
 	}
 
