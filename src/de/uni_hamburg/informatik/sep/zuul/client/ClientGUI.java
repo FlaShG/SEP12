@@ -109,6 +109,7 @@ public class ClientGUI extends Client
 		_bilderzeuger = new Raumbilderzeuger();
 		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
+		aktualisiereUI(paket, false);
 	}
 
 	@Override

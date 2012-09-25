@@ -257,7 +257,7 @@ public class BefehlsPanel extends JPanel
 
 				_labelFuerLebensenergie.setSize(50,
 						BefehlsPanel.this.getHeight());
-				setLebensenergie(16);
+				setLebensenergie(_lebensenergieAktuell);
 
 			}
 

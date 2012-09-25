@@ -34,7 +34,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	public void tick(ServerKontext kontext)
 	{
 		// dirty fix
-		if(!_satt && !istEinSpielerImRaum(kontext, _raum) && _raum != null)
+		if(!_satt && _raum != null && !istEinSpielerImRaum(kontext, _raum))
 		{
 			bewegeKatze(kontext);
 		}
