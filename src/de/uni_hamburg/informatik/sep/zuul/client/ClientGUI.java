@@ -504,6 +504,10 @@ public class ClientGUI extends Client
 			{
 				switch (e.getKeyChar())
 				{
+					case '2':
+					case '4':
+					case '6':
+					case '8':
 					case '+':
 					case '-':
 					case '*':
@@ -526,15 +530,19 @@ public class ClientGUI extends Client
 				{
 					switch(e.getKeyCode())
 					{
+						case KeyEvent.VK_NUMPAD8: 
 						case KeyEvent.VK_UP:
 							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
 							return true;
+						case KeyEvent.VK_NUMPAD2:
 						case KeyEvent.VK_DOWN:
 							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
 							return true;
+						case KeyEvent.VK_NUMPAD6:
 						case KeyEvent.VK_RIGHT:
 							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
 							return true;
+						case KeyEvent.VK_NUMPAD4:
 						case KeyEvent.VK_LEFT:
 							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
 							return true;
