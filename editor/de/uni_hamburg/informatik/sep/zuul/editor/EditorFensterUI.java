@@ -34,15 +34,20 @@ public class EditorFensterUI
 	 * Erzeugt eine neue EditorFensterUI.
 	 * 
 	 * @param beobachter
-	 *            Ein Observer, der über alle Änderungen in der UI informiert
+	 *            ein Observer, der über alle Änderungen in der UI informiert
 	 *            wird.
-	 * @param level
 	 */
 	public EditorFensterUI(EditorBeobachter beobachter)
 	{
 		_beobachter = beobachter;
 	}
 
+	/**
+	 * (Re-)Initialisiert die UI.
+	 * @param level ein Editorlevel für die levelglobalen Infos
+	 * @param width die Breite der Karte
+	 * @param height die Höhe der Karte
+	 */
 	public void init(EditorLevel level, int width, int height)
 	{
 		JFrame newFrame = new JFrame(EditorFenster.EDITOR_TITEL);
@@ -84,7 +89,7 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Gibt die obere Menüleiste zurück
+	 * Gibt die obere Menüleiste zurück.
 	 * 
 	 * @return
 	 */
@@ -94,9 +99,7 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Setzt die Map
-	 * 
-	 * @return
+	 * Setzt die Map neu.
 	 */
 	public void setMap(EditorMap map)
 	{
@@ -107,9 +110,7 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Gibt die Map (GridButton-Grid) zurück
-	 * 
-	 * @return
+	 * Gibt die Map (GridButton-Grid) zurück.
 	 */
 	public EditorMap getMap()
 	{
@@ -161,6 +162,10 @@ public class EditorFensterUI
 		_bearbeiten = null;
 	}
 
+	/**
+	 * Gibt das Panel zurück, auf dem die levelglobalen Einstellungen getätigt werden.
+	 * @return
+	 */
 	public LevelPanel getLevelPanel()
 	{
 		return _levelPanel;
