@@ -128,9 +128,9 @@ public class ServerKontext
 	 */
 	public String getNachrichtFuer(Spieler spieler)
 	{
-		
+
 		String nachricht = _nachrichtenCache.remove(spieler);
-		
+
 		return nachricht;
 	}
 
@@ -177,7 +177,8 @@ public class ServerKontext
 	/**
 	 * Gehe mit dem Spieler in einen anderen Raum
 	 * 
-	 * @param spielLogik TODO
+	 * @param spielLogik
+	 *            TODO
 	 * @param spieler
 	 *            der Spieler der Laufe soll
 	 * @param raum
@@ -187,16 +188,18 @@ public class ServerKontext
 	{
 		Raum alterRaum = getAktuellenRaumZu(spieler);
 		setAktuellenRaumZu(spieler, raum);
-	
+
 		fuehreRaumGeaendertListenerAus(spieler, alterRaum, raum);
 	}
 
-	public void fuehreRaumGeaendertListenerAus(Spieler spieler, Raum alterRaum, Raum neuerRaum)
+	public void fuehreRaumGeaendertListenerAus(Spieler spieler, Raum alterRaum,
+			Raum neuerRaum)
 	{
 		// Führe alle BefehlAusgefuehrtListener aus.
 		for(RaumGeaendertListener raumGeaendertListener : _raumGeaendertListeners)
 		{
-			raumGeaendertListener.raumGeaendert(this, spieler, alterRaum, neuerRaum);
+			raumGeaendertListener.raumGeaendert(this, spieler, alterRaum,
+					neuerRaum);
 		}
 	}
 
@@ -207,8 +210,9 @@ public class ServerKontext
 
 	public void spielerGewinnt(Spieler spieler)
 	{
-		// TODO Auto-generated method stub
-		
+		for(Spieler s : getSpielerListe())
+			s.die();
+		spieler.gewinnt();
 	}
 
 }

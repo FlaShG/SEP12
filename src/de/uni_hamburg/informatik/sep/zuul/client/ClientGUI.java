@@ -1,10 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -489,6 +493,37 @@ public class ClientGUI extends Client
 			public void mouseClicked(MouseEvent m)
 			{
 				_bildPanel.versteckeSchauen();
+			}
+		});
+		
+		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
+		{
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e)
+			{
+				if (e.getID() == KeyEvent.KEY_PRESSED)
+				{
+					switch(e.getKeyCode())
+					{
+						case KeyEvent.VK_UP:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
+							return true;
+						case KeyEvent.VK_DOWN:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
+							return true;
+						case KeyEvent.VK_RIGHT:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
+							return true;
+						case KeyEvent.VK_LEFT:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
+							return true;
+						default:
+							return false;
+					}
+				}
+				else
+					return false;
 			}
 		});
 

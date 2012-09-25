@@ -138,7 +138,7 @@ public class Spiel extends Observable
 
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 
-		if(!spieler.isAlive())
+		if(!spieler.lebendig())
 		{
 			// TODO: Spieler tod, was tun?
 			return;
@@ -160,7 +160,7 @@ public class Spiel extends Observable
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
-			if(result && spieler.isAlive())
+			if(result && spieler.lebendig())
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
 
