@@ -81,8 +81,7 @@ public class BefehlsPanel extends JPanel
 		_fuettereUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenTascheButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
-						+ TextVerwalter.ORT_TASCHE));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " aus der ") +  StringUtils.capitalize(TextVerwalter.ORT_TASCHE));
 
 		_essenTascheGutButton = new JButton(GUT);
 
@@ -91,8 +90,7 @@ public class BefehlsPanel extends JPanel
 		_essenTascheUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenBodenButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
-						+ TextVerwalter.ORT_BODEN));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " vom ") + StringUtils.capitalize(TextVerwalter.ORT_BODEN));
 
 		_inventarButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_INVENTAR));
