@@ -49,5 +49,13 @@ public final class FancyFunction
 			int nextInt = _random.nextInt(size);
 			return entries.get(nextInt);
 		}
+
+		public <T> T pickAndRemoveFromList(List<T> entries)
+		{
+			T pick = pick(entries);
+			if(pick != null)
+				entries.remove(pick);
+			return pick;
+		}
 	}
 }

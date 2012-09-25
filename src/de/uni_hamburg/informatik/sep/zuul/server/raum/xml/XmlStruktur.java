@@ -9,9 +9,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "struktur")
 public class XmlStruktur
 {
-	private @XmlElement(name = "leben") int _leben;
-	private @XmlElement(name = "maeuse") int _maeuse;
-	private @XmlElement(name = "katzen") int _katzen;
+	private @XmlElement(name = "leben")
+	int _leben;
+	private @XmlElement(name = "maeuse")
+	int _maeuse;
+	private @XmlElement(name = "katzen")
+	int _katzen;
 	private @XmlElement(name = "xmlraum")
 	List<XmlRaum> _raeume;
 
@@ -41,7 +44,7 @@ public class XmlStruktur
 	{
 		this._maeuse = maeuse;
 	}
-	
+
 	@XmlTransient
 	public int getKatzen()
 	{
@@ -58,7 +61,7 @@ public class XmlStruktur
 	{
 		return _leben;
 	}
-	
+
 	public void setLeben(int leben)
 	{
 		_leben = leben;

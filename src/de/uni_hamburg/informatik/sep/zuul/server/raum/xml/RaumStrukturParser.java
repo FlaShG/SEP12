@@ -49,7 +49,7 @@ public class RaumStrukturParser
 	{
 		_root.setRaeume(raeume);
 	}
-	
+
 	/**
 	 * Setzt die Anzahl Mäuse für dieses Level.
 	 */
@@ -73,7 +73,7 @@ public class RaumStrukturParser
 	{
 		_root.setKatzen(katzen);
 	}
-	
+
 	/**
 	 * Gibt die Azahl der Katzen für dieses Level zurück.
 	 */
@@ -81,7 +81,7 @@ public class RaumStrukturParser
 	{
 		return _root.getKatzen();
 	}
-	
+
 	/**
 	 * Ohmagawd.
 	 */
@@ -89,7 +89,7 @@ public class RaumStrukturParser
 	{
 		return _root.getLeben();
 	}
-	
+
 	/**
 	 * So fresh.
 	 */

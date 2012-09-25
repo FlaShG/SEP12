@@ -13,6 +13,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
  */
 public interface RaumGeaendertListener
 {
-	void raumGeaendert(ServerKontext kontext, Spieler spieler,
-			Raum alterRaum, Raum neuerRaum);
+	void raumGeaendert(ServerKontext kontext, Spieler spieler, Raum alterRaum,
+			Raum neuerRaum);
 }

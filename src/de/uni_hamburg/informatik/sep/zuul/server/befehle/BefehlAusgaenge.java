@@ -18,14 +18,15 @@ public class BefehlAusgaenge implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		String[] ausgaenge = kontext.getAktuellenRaumZu(spieler).getMoeglicheAusgaenge();
+		String[] ausgaenge = kontext.getAktuellenRaumZu(spieler)
+				.getMoeglicheAusgaenge();
 		String output = "Ausgänge: ";
 
-		for (String s : ausgaenge)
+		for(String s : ausgaenge)
 		{
 			output += s + " ";
 		}
-		
+
 		kontext.schreibeAnSpieler(spieler, output);
 		return true;
 	}
@@ -39,7 +40,7 @@ public class BefehlAusgaenge implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] {"ausgänge"};
+		return new String[] { "ausgänge" };
 	}
 
 	@Override

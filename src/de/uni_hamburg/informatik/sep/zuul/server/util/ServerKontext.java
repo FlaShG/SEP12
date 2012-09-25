@@ -215,4 +215,13 @@ public class ServerKontext
 		spieler.gewinnt();
 	}
 
+	public void schreibeAnAlleSpielerInRaum(Raum raum, String nachricht)
+	{
+		List<Spieler> spielerInRaum = getSpielerInRaum(raum);
+		for(Spieler spieler : spielerInRaum)
+		{
+			schreibeAnSpieler(spieler, nachricht);
+		}
+	}
+
 }

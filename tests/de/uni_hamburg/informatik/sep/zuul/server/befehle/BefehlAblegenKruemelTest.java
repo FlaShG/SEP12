@@ -22,37 +22,41 @@ public class BefehlAblegenKruemelTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spielerleeresInventar = new Spieler("keininventar");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("ablegen krümel");
-    
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("ablegen krümel");
+
 	@Before
 	public void setUp() throws Exception
 	{
-		  kontext.setAktuellenRaumZu(spieler, raum);
-		   inventar.fuegeItemHinzu(Item.UKuchen);
-		   inventar.fuegeItemHinzu(Item.UGiftkuchen);
-		   inventar.fuegeItemHinzu(Item.IKuchen);
-     	   inventar.fuegeItemHinzu(Item.IGiftkuchen);
-		   spieler.setInventar(inventar);
-		   spielerleeresInventar.setInventar(inventar2);
-		     
+		kontext.setAktuellenRaumZu(spieler, raum);
+		inventar.fuegeItemHinzu(Item.UKuchen);
+		inventar.fuegeItemHinzu(Item.UGiftkuchen);
+		inventar.fuegeItemHinzu(Item.IKuchen);
+		inventar.fuegeItemHinzu(Item.IGiftkuchen);
+		spieler.setInventar(inventar);
+		spielerleeresInventar.setInventar(inventar2);
+
 	}
 
 	@Test
 	public void testAusfuehren()
 	{
-		assertTrue(spieler.getInventar().has(Item.UKuchen)||spieler.getInventar().has(Item.UGiftkuchen));
+		assertTrue(spieler.getInventar().has(Item.UKuchen)
+				|| spieler.getInventar().has(Item.UGiftkuchen));
 		assertTrue(ablegen.ausfuehren(kontext, spieler, befehlszeile));
-		assertTrue((raum.getNaechstesItem() == Item.UGiftkuchen) || (raum.getNaechstesItem() == Item.UKuchen));
-		assertFalse(spieler.getInventar().has(Item.UKuchen) && spieler.getInventar().has(Item.UGiftkuchen));
-		assertEquals(TextVerwalter.ABLEGEN_TEXT, kontext.getNachrichtFuer(spieler).substring(0, 26));
+		assertTrue((raum.getNaechstesItem() == Item.UGiftkuchen)
+				|| (raum.getNaechstesItem() == Item.UKuchen));
+		assertFalse(spieler.getInventar().has(Item.UKuchen)
+				&& spieler.getInventar().has(Item.UGiftkuchen));
+		assertEquals(TextVerwalter.ABLEGEN_TEXT,
+				kontext.getNachrichtFuer(spieler).substring(0, 26));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals( "ablegen krümel", ablegen.getBefehlsnamen()[0]);
+		assertEquals("ablegen krümel", ablegen.getBefehlsnamen()[0]);
 	}
 
 	@Test
@@ -61,32 +65,35 @@ public class BefehlAblegenKruemelTest
 		Spieler spieler3 = new Spieler("nurUkuchen");
 		Spieler spieler4 = new Spieler("nurUGiftuchen");
 		Spieler spieler5 = new Spieler("nurIKuchen");
-		
-	    Inventar inventar3 = new Inventar();
-	    Inventar inventar4 = new Inventar();
-	    Inventar inventar5 = new Inventar();
-	    
-	    inventar3.fuegeItemHinzu(Item.UKuchen);
+
+		Inventar inventar3 = new Inventar();
+		Inventar inventar4 = new Inventar();
+		Inventar inventar5 = new Inventar();
+
+		inventar3.fuegeItemHinzu(Item.UKuchen);
 		spieler3.setInventar(inventar3);
 		inventar4.fuegeItemHinzu(Item.UGiftkuchen);
 		spieler4.setInventar(inventar4);
 		inventar5.fuegeItemHinzu(Item.IKuchen);
 		spieler5.setInventar(inventar5);
-			
-		
-		
+
 		assertTrue(ablegen.vorbedingungErfuellt(kontext, spieler, befehlszeile));
-		assertFalse(ablegen.vorbedingungErfuellt(kontext, spielerleeresInventar, befehlszeile));
-		assertTrue(ablegen.vorbedingungErfuellt(kontext, spieler3, befehlszeile));
-		assertTrue(ablegen.vorbedingungErfuellt(kontext, spieler4, befehlszeile));
-		assertFalse(ablegen.vorbedingungErfuellt(kontext, spieler5, befehlszeile));
+		assertFalse(ablegen.vorbedingungErfuellt(kontext,
+				spielerleeresInventar, befehlszeile));
+		assertTrue(ablegen
+				.vorbedingungErfuellt(kontext, spieler3, befehlszeile));
+		assertTrue(ablegen
+				.vorbedingungErfuellt(kontext, spieler4, befehlszeile));
+		assertFalse(ablegen.vorbedingungErfuellt(kontext, spieler5,
+				befehlszeile));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
 		ablegen.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.NICHTS_ZUM_ABLEGEN, kontext.getNachrichtFuer(spieler).substring(0, 31));
+		assertEquals(TextVerwalter.NICHTS_ZUM_ABLEGEN, kontext
+				.getNachrichtFuer(spieler).substring(0, 31));
 	}
 
 	@Test
@@ -96,4 +103,3 @@ public class BefehlAblegenKruemelTest
 	}
 
 }
-
