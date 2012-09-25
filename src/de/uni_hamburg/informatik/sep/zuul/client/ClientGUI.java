@@ -152,7 +152,6 @@ public class ClientGUI extends Client
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			//TODO Jetzt bekommen wir zwei Pakete. In Ordnung? Wie damit umgehen?
 			@Override
 			public void run()
 			{
