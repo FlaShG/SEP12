@@ -53,7 +53,7 @@ public class BefehlEssenTascheTest
 	@Test
 	public void testAusfuehren()
 	{
-		assertEquals(Item.IKuchen, spieler.getInventar().nehmeLetztesItem());
+		assertTrue(spieler.getInventar().has(Item.IKuchen));
 		assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(13, spieler.getLebensEnergie());
 		
