@@ -21,6 +21,7 @@ public class StartConsole
 		switch (consoleLesen())
 		{
 		case "einzelspiel":
+		case "einzelspieler":
 		case "allein":
 		case "e":
 			new Server();
