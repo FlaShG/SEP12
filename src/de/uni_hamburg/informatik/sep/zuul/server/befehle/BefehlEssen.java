@@ -45,17 +45,16 @@ class BefehlEssen implements Befehl
 			Item kuchen)
 	{
 		int energie = spieler.getLebensEnergie();
-	
-		switch (kuchen)
+
+		if(kuchen.isKuchen())
 		{
-		case IKuchen:
-		case UKuchen:
+
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.kuchengegessentext(energie));
-			break;
-		case IGiftkuchen:
-		case UGiftkuchen:
+		}
+		else if(kuchen.isGiftkuchen())
+		{
 			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 			if(energie > 0)
 			{
@@ -67,9 +66,8 @@ class BefehlEssen implements Befehl
 				spieler.die();
 				kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENTODTEXT);
 			}
-			break;
 		}
-	
+
 		spieler.setLebensEnergie(energie);
 		return true;
 	}
