@@ -205,4 +205,10 @@ public class ServerKontext
 		return _raumGeaendertListeners;
 	}
 
+	public void spielerGewinnt(Spieler spieler)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -27,6 +27,10 @@ final class BefehlNehmen implements Befehl
 		spieler.getInventar().fuegeItemHinzu(item);
 		
 		// TODO: und wenn das item, das gegengift ist?
+		if(item == Item.Gegengift){
+			kontext.spielerGewinnt(spieler);
+			return true;
+		}
 
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENGENOMMENTEXT);
 		raum.loescheItem();
