@@ -16,12 +16,17 @@ public class MapSizeDialog
 	
 	public MapSizeDialog()
 	{
+		this(8,8);
+	}
+
+	public MapSizeDialog(int breite, int hoehe)
+	{
 		_dialog = new JDialog();
 		_dialog.setTitle("Kartengröße wählen");
 		_dialog.setModal(true);
 		_dialog.setLayout(new FlowLayout());
-		_dialog.add(_width = new EigenschaftIntPanel("Breite", 8));
-		_dialog.add(_height = new EigenschaftIntPanel("Höhe", 8));
+		_dialog.add(_width = new EigenschaftIntPanel("Breite", breite));
+		_dialog.add(_height = new EigenschaftIntPanel("Höhe", hoehe));
 		
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener()
@@ -41,12 +46,12 @@ public class MapSizeDialog
 		_dialog.setVisible(true);
 	}
 
-	public int getWidth()
+	public int getBreite()
 	{
 		return _width.getWert();
 	}
 
-	public int getHeight()
+	public int getHoehe()
 	{
 		return _height.getWert();
 	}

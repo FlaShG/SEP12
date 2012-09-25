@@ -17,6 +17,7 @@ public class EditorMenuBar extends JPanel
 	private JButton _new;
 	private JButton _save;
 	private JButton _load;
+	private JButton _resize;
 
 	public EditorMenuBar()
 	{
@@ -27,6 +28,7 @@ public class EditorMenuBar extends JPanel
 		add(_new = new JButton("Neu"));
 		add(_load = new JButton("Laden"));
 		add(_save = new JButton("Speichern"));
+		add(_resize = new JButton("Kartengröße"));
 	}
 
 	public JButton getNeuButton()
@@ -42,5 +44,10 @@ public class EditorMenuBar extends JPanel
 	public JButton getLadenButton()
 	{
 		return _load;
+	}
+	
+	public JButton getResizeButton()
+	{
+		return _resize;
 	}
 }
