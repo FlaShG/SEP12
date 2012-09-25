@@ -118,6 +118,8 @@ public class EditorFenster implements EditorBeobachter
 				|| BestaetigungsDialog.erstelle("Neues Level", "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
+					if(!mapsize.getClickedOK())
+						return;
 					resetEditorFenster(mapsize.getBreite(), mapsize.getHoehe());
 					unsavedChanges(false);
 				}
@@ -130,6 +132,8 @@ public class EditorFenster implements EditorBeobachter
 			public void actionPerformed(ActionEvent e)
 			{
 				MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap().getBreite(), _ui.getMap().getHoehe());
+				if(!mapsize.getClickedOK())
+					return;
 				
 				boolean problematisch = !_ui.getMap().istGroesseAendernUnproblematisch(mapsize.getBreite(), mapsize.getHoehe());
 				if(!problematisch
