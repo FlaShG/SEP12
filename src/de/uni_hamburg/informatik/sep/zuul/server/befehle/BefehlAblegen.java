@@ -19,21 +19,15 @@ final class BefehlAblegen implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Item item = spieler.getInventar().getAnyKuchen();
-		Item li = Item.Keins;
 		switch (item)
 		{
-		case UKuchen:
 		case IKuchen:
-			li = Item.UKuchen;
+			item = Item.UKuchen;
 			break;
-		case UGiftkuchen:
 		case IGiftkuchen:
-			li = Item.UGiftkuchen;
-		default:
-			break;
+			item = Item.UGiftkuchen;
 		}
-		if (li != Item.Keins)
-			kontext.getAktuellenRaumZu(spieler).addItem(li);
+		kontext.getAktuellenRaumZu(spieler).addItem(item);
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 
 		return true;
@@ -49,7 +43,7 @@ final class BefehlAblegen implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().isGefuellt()
+		return spieler.getInventar().hasAnyKuchen()
 				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN);
 	}
 
