@@ -36,11 +36,6 @@ final class BefehlUntersuche implements Befehl
 					TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 			spieler.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
 		}
-		else if(kuchen.isIKuchen())
-		{
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
-			spieler.getInventar().fuegeItemHinzu(kuchen);
-		}
 		return true;
 	}
 

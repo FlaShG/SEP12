@@ -166,12 +166,16 @@ public class Spiel extends Observable
 
 			if(befehl instanceof BefehlSchauen)
 			{
-				String[] ar = {
-						spieler.getName(),
-						((BefehlSchauen) befehl)
-								.extrahiereRichtung(befehlszeile) };
-				setChanged();
-				notifyObservers(ar);
+				String richtung = ((BefehlSchauen) befehl)
+						.extrahiereRichtung(befehlszeile);
+				if (alterRaum.getAusgang(richtung) != null)
+				{
+					String[] ar = {
+							spieler.getName(),
+							richtung };
+					setChanged();
+					notifyObservers(ar);
+				}
 			}
 		}
 		else

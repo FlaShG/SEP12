@@ -34,7 +34,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	private Spiel _spiel;
 	private String _hostName;
 	private Registry _rmireg;
-	
+
 	public Server() throws RemoteException, AlreadyBoundException
 	{
 		super();
@@ -57,9 +57,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_readyClients = new ArrayList<String>();
 
 		_spiel = new Spiel();
+		System.out.println(_spiel.isGestartet());
 		_spiel.addObserver(this);
 	}
-	
+
 	public void beendeServer()
 	{
 		try
@@ -93,12 +94,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			throws RemoteException
 	{
 		boolean result;
+		System.out.println(_spiel.toString());
 
 		//Der Host connected sich zuerst
 		if(_connectedClients.isEmpty())
 		{
 			_hostName = name;
-			System.out.println("Host" + _hostName);
 		}
 
 		if(_connectedClients.containsKey(name)
@@ -136,10 +137,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 				client.serverBeendet();
 			}
 		}
-		
+
 		if(_connectedClients.isEmpty())
 			beendeServer();
-		
+
 		return true;
 	}
 
