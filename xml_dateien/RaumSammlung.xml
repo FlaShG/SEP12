@@ -141,7 +141,7 @@
     <raum>
         <name>Büro des Präsidenten</name>
         <id>-876041413</id>
-        <beschreibung>Dr. Little betritt das Büro des Universitäts-Präsidenten. Es ist niemand da...</beschreibung>
+        <beschreibung>Dr. Little betritt das Büro des Universitäts-Präsidenten. Es ist niemand da.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -159,7 +159,7 @@
     <raum>
         <name>Park</name>
         <id>-1028925916</id>
-        <beschreibung>Dr. Little betritt den Park. Eine Horde Tauben jagt ihn um einen Baum herum.</beschreibung>
+        <beschreibung>Dr. Little betritt den Park. Neben der hohen Dichte des Gestrüpps machen ihm bei der Durchquerung dieverse Arten abgeworfener Vogelexkremente zu schaffen.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -171,13 +171,13 @@
     <raum>
         <name>Vorraum</name>
         <id>401819458</id>
-        <beschreibung>Eine schwere Eichentür ragt bedrohlich vor Dr. Little auf. Sie weist wohl in Richtung des Büros eines wichtigen Mitarbeiters der UNiversität...</beschreibung>
+        <beschreibung>Eine schwere Eichentür ragt bedrohlich vor Dr. Little auf. Sie weist wohl in Richtung des Büros eines wichtigen Mitarbeiters der Universität.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Treppe</name>
         <id>463038831</id>
-        <beschreibung>Dr. Little müht sich auf den viel zu großen Stufen einer riesigen Holztreppe ab...</beschreibung>
+        <beschreibung>Dr. Little müht sich auf den viel zu großen Stufen einer riesigen Holztreppe ab.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -237,7 +237,7 @@
     <raum>
         <name>Labor</name>
         <id>1816983784</id>
-        <beschreibung>Dr. Little befindet sich in seinem Labor an der Universität. Hier lassen sich Krümmel identifizieren.</beschreibung>
+        <beschreibung>Dr. Little befindet sich in seinem Labor an der Universität. Hier lassen sich Krümel identifizieren.</beschreibung>
         <raumart>Start</raumart>
     </raum>
     <raum>
@@ -255,13 +255,13 @@
     <raum>
         <name>Küche</name>
         <id>1281362672</id>
-        <beschreibung>Dr. Little schlüpft in die Küche. Ein angestellte jagt ihn mit einem Besen durch den Raum.</beschreibung>
+        <beschreibung>Dr. Little schlüpft in die Küche. Er versteckt sich dort vor dem aggressiv wirkenden Koch.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
         <name>Heizungskeller</name>
         <id>235061777</id>
-        <beschreibung>Dr. Little betritt den Heizungskeller. Die hohe Luftfeuchtigkeit lässt ihm den Schweiß von der Strin rinnen...</beschreibung>
+        <beschreibung>Dr. Little betritt den Heizungskeller. Die hohe Luftfeuchtigkeit lässt ihm den Schweiß von der Strin rinnen.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -291,7 +291,7 @@
     <raum>
         <name>Eingang zum Bunker</name>
         <id>-218718181</id>
-        <beschreibung>Dr. Little steht vor einer schweren Eisentür. Der dahinter aufragende Bunker läßt ihn schlucken...</beschreibung>
+        <beschreibung>Dr. Little steht vor einer schweren Eisentür. Der dahinter aufragende Bunker läßt ihn schlucken.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -303,7 +303,7 @@
     <raum>
         <name>Lager</name>
         <id>564510192</id>
-        <beschreibung>Dr. Little betritt das Lager des Universitätskiosk. Der Fußboden klebt. Jemand scheint etwas Zuckerhaltiges verschüttet zu haben...</beschreibung>
+        <beschreibung>Dr. Little betritt das Lager des Universitätskiosks. Der Fußboden klebt. Jemand scheint etwas Zuckerhaltiges verschüttet zu haben...</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
@@ -322,7 +322,7 @@ Dr. Little ist darüber hinaus vom Mangel an barbusigen Frauen enttäuscht.</bes
     <raum>
         <name>Reaktorraum</name>
         <id>1257284999</id>
-        <beschreibung>Dr. Little betritt einen summenden Raktorraum. Die Wände schimmern in einem grünen Licht...</beschreibung>
+        <beschreibung>Dr. Little betritt einen summenden Raktorraum. Die Wände schimmern in einem grünen Licht.</beschreibung>
         <raumart>Normal</raumart>
     </raum>
     <raum>
