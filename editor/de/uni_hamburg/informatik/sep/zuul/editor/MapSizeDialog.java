@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
 /**
- * Kleiner Dialog, in dem eine Höhe und eine Breite eingestellt werden können. Modaler JDialog.
+ * Kleiner Dialog, in dem eine Höhe und eine Breite eingestellt werden können. Modaler {@link JDialog}.
  * @author 0graeff
  *
  */
@@ -21,7 +21,7 @@ public class MapSizeDialog
 	private boolean _ok;
 
 	/**
-	 * Erstellt einen neuen MapSizedialog mit der Größe 8x8 als Startwert.
+	 * Erstellt einen neuen {@link MapSizeDialog} mit der Größe 8x8 als Startwert.
 	 */
 	public MapSizeDialog()
 	{
