@@ -22,13 +22,14 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlsPanel extends JPanel
 {
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
-	private final String PATH = getClass().getResource("bilder/").getPath();
-	private final int ZEILENANZAHL = 5;
-	private final int ABSTAND_NORMAL = 5;
-	private final int ABSTAND_EXTRA = 2;
-	private final String GUT = "Gut";
-	private final String SCHLECHT = "Giftig";
-	private final String UNBEKANNT = "Unbekannt";
+	public static final String PATH = BefehlsPanel.class.getResource("bilder/")
+			.getPath();
+	public static final int ZEILENANZAHL = 5;
+	public static final int ABSTAND_NORMAL = 5;
+	public static final int ABSTAND_EXTRA = 2;
+	public static final ImageIcon GUT = new ImageIcon(PATH + "kruemel_gut.png");
+	public static final ImageIcon SCHLECHT = new ImageIcon(PATH + "kruemel_schlecht.png");
+	public static final ImageIcon UNBEKANNT = new ImageIcon(PATH + "kruemel.png");
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;
@@ -68,7 +69,7 @@ public class BefehlsPanel extends JPanel
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
 
 		_gibButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_GIB));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_UNTERSUCHE));
 
 		_fuettereButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_FUETTERE));
@@ -80,8 +81,7 @@ public class BefehlsPanel extends JPanel
 		_fuettereUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenTascheButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
-						+ TextVerwalter.ORT_TASCHE));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " aus der ") +  StringUtils.capitalize(TextVerwalter.ORT_TASCHE));
 
 		_essenTascheGutButton = new JButton(GUT);
 
@@ -90,8 +90,7 @@ public class BefehlsPanel extends JPanel
 		_essenTascheUnbekanntButton = new JButton(UNBEKANNT);
 
 		_essenBodenButton = new JButton(
-				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " "
-						+ TextVerwalter.ORT_BODEN));
+				StringUtils.capitalize(TextVerwalter.BEFEHL_ESSEN + " vom ") + StringUtils.capitalize(TextVerwalter.ORT_BODEN));
 
 		_inventarButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_INVENTAR));
@@ -115,6 +114,7 @@ public class BefehlsPanel extends JPanel
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
 				_inventarButton, _ablegenButton };
+		// REIHENFOLGE NICHT ÄNDERN!!!!
 		_extraButtons = new JButton[] { _fuettereGutButton,
 				_fuettereSchlechtButton, _fuettereUnbekanntButton,
 				_ablegenGutButton, _ablegenSchlechtButton,
@@ -127,10 +127,14 @@ public class BefehlsPanel extends JPanel
 			b.setFocusable(false);
 			add(b);
 		}
+		String[] gutschlechtunbekannt = {"Guter Krümel", "Schlechter Krümel", "Unidentifierter Krümel"};
+		int c = 0;
 		for(JButton b : _extraButtons)
 		{
 			b.setFocusable(false);
+			b.setToolTipText(gutschlechtunbekannt[c % 3]);
 			add(b);
+			c++;
 		}
 		for(JButton b : _systemButtons)
 		{

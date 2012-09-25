@@ -9,6 +9,7 @@ import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
+import de.uni_hamburg.informatik.sep.zuul.client.ClientVorschauPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
@@ -132,9 +133,16 @@ public class Spiel extends Observable
 	 */
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
+
 		System.err.println(benutzerName + ": " + eingabe);
-		
+
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+
+		if(!spieler.isAlive())
+		{
+			// TODO: Spieler tod, was tun?
+			return;
+		}
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
@@ -143,7 +151,7 @@ public class Spiel extends Observable
 		{
 			if(!_logik.fuehreBefehlAusgefuehrenListenerAus(spieler, befehl))
 				return;
-			
+
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
@@ -152,14 +160,15 @@ public class Spiel extends Observable
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
-			if(result)
+			if(result && spieler.isAlive())
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
 
 			if(befehl instanceof BefehlSchauen)
 			{
+				String[] ar = {spieler.getName(), ((BefehlSchauen)befehl).extrahiereRichtung(befehlszeile)};
 				setChanged();
-				notifyObservers(spieler.getName());
+				notifyObservers(ar);
 			}
 		}
 		else
@@ -189,6 +198,13 @@ public class Spiel extends Observable
 		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
+	}
+	
+	public ClientPaket packeVorschauPaket(String name, String richtung)
+	{
+		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
+		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
+		return new ClientVorschauPaket(_logik.getKontext(), spieler, nachricht, richtung); //packe VorschauPacket!
 	}
 
 	public static boolean versucheBefehlAusfuehrung(ServerKontext kontext,

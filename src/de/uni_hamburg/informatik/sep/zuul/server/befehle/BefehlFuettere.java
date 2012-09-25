@@ -12,9 +12,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFuettere implements Befehl
 {
-	
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
-			+ "maus";
+
+	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE
+			+ " " + "maus";
 
 	/**
 	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der
@@ -47,14 +47,15 @@ public class BefehlFuettere implements Befehl
 
 		return null;
 	}
-	
+
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && spieler.getInventar().hasAnyKuchen();
+		return (raum.hasKatze() || raum.hasMaus())
+				&& spieler.getInventar().hasAnyKuchen();
 	}
 
 	@Override
@@ -65,17 +66,18 @@ public class BefehlFuettere implements Befehl
 			// Versuche eine Katze oder eine Maus zu füttern
 
 			Raum raum = kontext.getAktuellenRaumZu(spieler);
-			
+
 			//wenn katze im raum
-			
+
 			if(raum.hasKatze())
 			{
-				
+
 				Katze katze = raum.getKatze();
 
 				if(katze.isSatt())
 				{
-					kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+					kontext.schreibeAnSpieler(spieler,
+							TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
 					return false;
 				}
 				Item kuchen = spieler.getInventar().getAnyKuchen();
@@ -90,7 +92,8 @@ public class BefehlFuettere implements Befehl
 
 				String richtigeRichtung = aktuellerRaum.getMaus().getRichtung();
 
-				String[] moeglicheRichtungen = aktuellerRaum.getMoeglicheAusgaenge();
+				String[] moeglicheRichtungen = aktuellerRaum
+						.getMoeglicheAusgaenge();
 
 				String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
 						moeglicheRichtungen);
@@ -118,8 +121,8 @@ public class BefehlFuettere implements Befehl
 		}
 		else if(!raum.hasKatze() && !raum.hasMaus())
 		{
-			//TODO: Keine Katze zum Füttern!
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
 		}
 	}
 

@@ -1,7 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
-import java.io.Serializable;
-import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,7 +16,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
-public class ClientPaket implements Remote, Serializable
+public class ClientVorschauPaket extends ClientPaket
 {
 	private int _raumID;
 	private boolean _katze;
@@ -26,37 +24,31 @@ public class ClientPaket implements Remote, Serializable
 	private Collection<Item> _items;
 	private String _nachricht; // Terminal ausgabe
 	private int _lebensEnergie;
+	private String _richtung;
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
 	private String[] _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
-	private boolean _dead;
-	private boolean _showLoseScreen;
-	private boolean _showWinScreen;
 
-	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
+	public ClientVorschauPaket(ServerKontext kontext, Spieler spieler,
+			String nachricht, String richtung)
 	{
-		_dead = !spieler.isAlive();
-		if(!spieler.isAlive())
-		{
-			// TODO: win / lose screen
-			_showLoseScreen = true;
-			_showWinScreen = false;
-		}
+		super(kontext, spieler, richtung); // eigentlich unnötig, aber gut. was solls
+		
+		Raum vorschauRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(richtung);
 
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-
-		_raumID = aktuellerRaum.getId();
-		_katze = aktuellerRaum.hasKatze();
-		_maus = aktuellerRaum.hasMaus();
-		_items = new ArrayList<Item>(aktuellerRaum.getItems());
+		_raumID = vorschauRaum.getId();
+		_katze = vorschauRaum.hasKatze();
+		_maus = vorschauRaum.hasMaus();
+		_items = new ArrayList<Item>(vorschauRaum.getItems());
 		_nachricht = nachricht;
 		_lebensEnergie = spieler.getLebensEnergie();
-		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
-		_raumArt = aktuellerRaum.getRaumart();
+		_andereSpieler = kontext.getSpielerNamenInRaum(vorschauRaum);
+		_raumArt = vorschauRaum.getRaumart();
+		_richtung = richtung;
 		_spielerName = spieler.getName();
-		_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
+		_moeglicheAusgaenge = vorschauRaum.getMoeglicheAusgaenge();
 
 		_verfuegbareBefehle = new HashMap<String, Boolean>();
 		for(Entry<String, Befehl> entry : BefehlFactory.getMap().entrySet())
@@ -64,85 +56,82 @@ public class ClientPaket implements Remote, Serializable
 			String befehlsname = entry.getKey();
 			Befehl befehl = entry.getValue();
 
-			_verfuegbareBefehle.put(
-					befehlsname,
-					_dead ? false : befehl.vorbedingungErfuellt(kontext,
-							spieler, new Befehlszeile(befehlsname)));
+			_verfuegbareBefehle.put(befehlsname, befehl.vorbedingungErfuellt(
+					kontext, spieler, new Befehlszeile(befehlsname)));
 		}
 	}
 
+	@Override
 	public boolean hasKatze()
 	{
 		return _katze;
 	}
 
+	@Override
 	public boolean hasMaus()
 	{
 		return _maus;
 	}
 
+	@Override
 	public Collection<Item> getItems()
 	{
 		return _items;
 	}
 
+	@Override
 	public String getNachricht()
 	{
 		return _nachricht;
 	}
 
+	@Override
 	public int getLebensEnergie()
 	{
 		return _lebensEnergie;
 	}
 
+	@Override
 	public List<String> getAndereSpieler()
 	{
 		return _andereSpieler;
 	}
 
+	@Override
 	public RaumArt getRaumArt()
 	{
 		return _raumArt;
 	}
 
+	@Override
 	public String getSpielerName()
 	{
 		return _spielerName;
 	}
 
+	@Override
 	public String[] getMoeglicheAusgaenge()
 	{
 		return _moeglicheAusgaenge;
 	}
 
+	@Override
 	public int getRaumID()
 	{
 		return _raumID;
+	}
+	
+	public String getRichtung()
+	{
+		return _richtung;
 	}
 
 	/**
 	 * @return the verfuegbareBefehle
 	 */
+	@Override
 	public Map<String, Boolean> getVerfuegbareBefehle()
 	{
 		return _verfuegbareBefehle;
 	}
-
-	/**
-	 * @return the showLoseScreen
-	 */
-	public boolean isShowLoseScreen()
-	{
-		return _showLoseScreen;
-	}
-
-	/**
-	 * @return the showWinScreen
-	 */
-	public boolean isShowWinScreen()
-	{
-		return _showWinScreen;
-	}
-
 }

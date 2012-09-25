@@ -17,8 +17,9 @@ final class BefehlBeenden implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		// TODO: Schließe Verbindung zu Spieler
+		spieler.die();
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEENDENTEXT);
+		// TODO: Schließe Verbindung zu Spieler
 		return true;
 	}
 
@@ -31,7 +32,7 @@ final class BefehlBeenden implements Befehl
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		return new String[] { TextVerwalter.BEFEHL_INVENTAR };
+		return new String[] { TextVerwalter.BEFEHL_BEENDEN };
 	}
 
 	@Override

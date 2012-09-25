@@ -16,27 +16,24 @@ public final class BefehlSchauen implements Befehl
 			TextVerwalter.RICHTUNG_OSTEN, TextVerwalter.RICHTUNG_SUEDEN,
 			TextVerwalter.RICHTUNG_WESTEN };
 
-	// TODO: broken
-
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
 		if(befehlszeile.getGeparsteZeile().size() != 2)
 			return false;
-		
+
 		String richtung = extrahiereRichtung(befehlszeile);
-		return  richtung != null
+		return richtung != null
 				&& getRaumFuerRichtung(kontext, spieler, richtung) != null;
 	}
 
 	/**
 	 * @param befehlszeile
 	 */
-	private String extrahiereRichtung(Befehlszeile befehlszeile)
+	public String extrahiereRichtung(Befehlszeile befehlszeile)
 	{
-		
-		
+
 		String richtung = befehlszeile.getGeparsteZeile().get(1);
 		if(Arrays.asList(_richtungen).contains(richtung))
 			return richtung;
@@ -52,12 +49,13 @@ public final class BefehlSchauen implements Befehl
 		String richtung = extrahiereRichtung(befehlszeile);
 		Raum nebenRaum = getRaumFuerRichtung(kontext, spieler, richtung);
 
-		kontext.schreibeAnSpieler(spieler, "Dr.Little schaut nach "
-		+ richtung + "en.");
+		kontext.schreibeAnSpieler(spieler, "Dr.Little schaut nach " + richtung
+				+ "en.");
 		kontext.schreibeAnSpieler(spieler, "Er sieht: " + nebenRaum.getName());
 
 		Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
-		kontext.schreibeAnSpieler(spieler, "Zu sehen " + (raumItems.size() == 1 ? "ist" : "sind") + ":");
+		kontext.schreibeAnSpieler(spieler, "Zu sehen "
+				+ (raumItems.size() == 1 ? "ist" : "sind") + ":");
 
 		int anzahlKruemel = 0;
 		boolean gegengift = false;
@@ -92,8 +90,7 @@ public final class BefehlSchauen implements Befehl
 
 		if(anzahlKruemel != 0)
 		{
-			kontext.schreibeAnSpieler(spieler, anzahlKruemel
-			+ " Krümel");
+			kontext.schreibeAnSpieler(spieler, anzahlKruemel + " Krümel");
 			hatDinge = true;
 		}
 

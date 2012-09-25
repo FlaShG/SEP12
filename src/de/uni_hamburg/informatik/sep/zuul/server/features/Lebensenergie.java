@@ -25,18 +25,19 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 	 * Überprüft, ob der {@link Spieler} noch lebt.
 	 */
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, Befehl befehl,
-			boolean hasRoomChanged)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			Befehl befehl, boolean hasRoomChanged)
 	{
 		if(spieler.getLebensEnergie() <= 0)
 		{
-			// TODO: Spiel beenden für den Spieler
-//						SpielLogik.beendeSpiel(kontext, TextVerwalter.NIEDERLAGETEXT);
+			spieler.die();
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.NIEDERLAGETEXT);
 			return false;
 		}
 
 		if(hasRoomChanged)
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.RAUMWECHSELTEXT + spieler.getLebensEnergie());
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.RAUMWECHSELTEXT
+					+ spieler.getLebensEnergie());
 
 		return true;
 	}
