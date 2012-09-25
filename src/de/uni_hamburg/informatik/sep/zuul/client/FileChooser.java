@@ -58,10 +58,9 @@ public class FileChooser
 	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei
 	 *         ungültig ist.
 	 */
-	public static String speichereDatei()
+	public static String speichereDatei(JFileChooser fileChooser)
 	{
 		String level = null;
-		final JFileChooser fileChooser = konfiguriereFileChooser();
 
 		int returnVal = fileChooser.showSaveDialog(new JPanel());
 
