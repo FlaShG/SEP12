@@ -180,7 +180,7 @@ public class Raumbilderzeuger
 		}
 
 		//Male Katze
-		else if(_paket.hasKatze())
+		if(_paket.hasKatze())
 		{
 			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
 			x = pos.getX();
