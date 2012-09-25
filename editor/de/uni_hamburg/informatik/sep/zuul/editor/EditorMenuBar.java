@@ -20,7 +20,7 @@ public class EditorMenuBar extends JPanel
 	private JButton _resize;
 
 	/**
-	 * Erstellt eine neue EditorMenuBar.
+	 * Erstellt eine neue {@link EditorMenuBar}.
 	 */
 	public EditorMenuBar()
 	{
