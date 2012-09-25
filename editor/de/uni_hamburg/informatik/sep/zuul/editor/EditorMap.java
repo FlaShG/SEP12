@@ -222,16 +222,7 @@ public class EditorMap extends JPanel
 	}
 
 	private void initialisiereButton(GridButton button, int x, int y)
-	{
-		button.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-
-			}
-		});
-		
+	{		
 		button.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -253,6 +244,7 @@ public class EditorMap extends JPanel
 						if(_buttons[_activeX][_activeY].getRaum() == null)
 						{
 							_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
+							informiereBeobachter();
 						}
 					break;
 					
