@@ -170,16 +170,16 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
-		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
-		_bp.setLebensenergie(paket.getLebensEnergie());
-
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
 
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
-		int val = getOptimalIconSize();
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		_bp.setLebensenergie(paket.getLebensEnergie());
+
+		int val = _bildPanel.getQuadraticSize();
 
 		if(paket.isShowWinScreen())
 		{
@@ -393,7 +393,7 @@ public class ClientGUI extends Client
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				int val = getOptimalIconSize();
+				int val = _bildPanel.getQuadraticSize();
 
 				_bildPanel.setRaumanzeige(_bilderzeuger.zeichneBildErneut(val));
 			}
@@ -549,19 +549,5 @@ public class ClientGUI extends Client
 			// TODO: exception verarbeiten
 			e1.printStackTrace();
 		}
-	}
-
-	/**
-	 * @return
-	 */
-	private int getOptimalIconSize()
-	{
-		int val = 0;
-		if(_bildPanel.getWidth() > _bildPanel.getHeight()
-				&& _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getHeight();
-		else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getWidth();
-		return val;
 	}
 }
