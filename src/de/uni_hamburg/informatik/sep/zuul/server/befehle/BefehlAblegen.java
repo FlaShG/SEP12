@@ -26,6 +26,7 @@ final class BefehlAblegen implements Befehl
 			break;
 		case IGiftkuchen:
 			item = Item.UGiftkuchen;
+			break;
 		}
 		kontext.getAktuellenRaumZu(spieler).addItem(item);
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);

@@ -1,18 +1,19 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.FlowLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 
 public class MapSizeDialog
 {
 	private JDialog _dialog;
 	private EigenschaftIntPanel _width;
 	private EigenschaftIntPanel _height;
+	private boolean _ok;
 	
 	public MapSizeDialog()
 	{
@@ -34,6 +35,7 @@ public class MapSizeDialog
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				_ok = true;
 				_dialog.dispose();
 			}
 		});
@@ -42,17 +44,33 @@ public class MapSizeDialog
 		//fancy größenwahn
 		_dialog.pack();
 		_dialog.setResizable(false);
-		_dialog.setLocation(10,10);
+		//_dialog.setLocation(10,10);
+		_dialog.setLocationRelativeTo(SwingUtilities.getRoot(_dialog));
 		_dialog.setVisible(true);
 	}
 
+	/**
+	 * Gibt die eingestellte Breite zurück.
+	 */
 	public int getBreite()
 	{
 		return _width.getWert();
 	}
 
+	/**
+	 * Gibt die eingestellte Höhe zurück.
+	 */
 	public int getHoehe()
 	{
 		return _height.getWert();
+	}
+	
+	/**
+	 * Gibt zurück, ob ok geklickt wurde.
+	 * Die Alternative wäre ein Abbruch durch Schließen des Fensters.
+	 */
+	public boolean getClickedOK()
+	{
+		return _ok;
 	}
 }
