@@ -389,7 +389,7 @@ public class ClientGUI extends Client
 		});
 		
 		
-		_bp.getBeinstellenButton().addActionListener(new ActionListenerBefehlAusfuehren(""));
+		_bp.getBeinstellenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_BEINSTELLEN));
 		
 
 		_bp.getQuitButton()
