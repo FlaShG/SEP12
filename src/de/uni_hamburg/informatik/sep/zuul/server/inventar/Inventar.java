@@ -120,7 +120,7 @@ public class Inventar
 		{
 			if(item.isUKuchen())
 			{
-				getKuchen(item);
+				return getKuchen(item);
 			}
 		}
 		return null;
