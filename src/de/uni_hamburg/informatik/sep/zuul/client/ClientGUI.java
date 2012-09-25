@@ -58,7 +58,7 @@ public class ClientGUI extends Client
 		else
 		{
 			login();
-			_server.empfangeStartEingabe(_clientName);
+			_server.empfangeStartEingabe(getClientName());
 		}
 
 	}
@@ -91,7 +91,7 @@ public class ClientGUI extends Client
 
 				try
 				{
-					_server.empfangeStartEingabe(_clientName);
+					_server.empfangeStartEingabe(getClientName());
 				}
 				catch(RemoteException e)
 				{
@@ -281,7 +281,7 @@ public class ClientGUI extends Client
 
 				try
 				{
-					_server.logoutClient(_clientName);
+					_server.logoutClient(getClientName());
 				}
 				catch(RemoteException e1)
 				{
@@ -561,6 +561,7 @@ public class ClientGUI extends Client
 			{
 				switch (e.getKeyChar())
 				{
+				case '0':
 				case '2':
 				case '4':
 				case '6':
@@ -659,6 +660,9 @@ public class ClientGUI extends Client
 							// der rest
 							switch (e.getKeyChar())
 							{
+							case '0':
+								sendeEingabe(TextVerwalter.BEFEHL_BEINSTELLEN);
+								return true;
 							case '+':
 								sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
 								return true;

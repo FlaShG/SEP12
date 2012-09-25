@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +28,8 @@ class BefehlFuettere implements Befehl
 		}
 		if(kuchen == Item.UGiftkuchen || kuchen == Item.IGiftkuchen)
 		{
-			List<String> richtungen = Arrays.asList(moeglicheRichtungen);
+			List<String> richtungen = new ArrayList<String>(
+					Arrays.asList(moeglicheRichtungen));
 
 			richtungen.remove(richtigeRichtung);
 
