@@ -209,8 +209,6 @@ public class ClientGUI extends Client
 			String befehl = entry.getKey();
 			boolean enabled = entry.getValue();
 
-			System.err.println(befehl + ": " + enabled);
-
 			JButton button = _befehlButtonMap.get(befehl);
 			if(button != null && button != _bp.getQuitButton())
 				button.setEnabled(enabled);
