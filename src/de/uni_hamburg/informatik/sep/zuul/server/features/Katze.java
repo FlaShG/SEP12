@@ -18,7 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
+public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 {
 	public static final int KATZE_SCHADEN = 2;
 	public static final long SCHLAFZEIT_IN_SEKUNDEN = 10;
@@ -33,7 +33,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 	@Override
 	public void tick(ServerKontext kontext)
 	{
-															// dirty fix
+		// dirty fix
 		if(!_satt && !istEinSpielerImRaum(kontext, _raum) && _raum != null)
 		{
 			bewegeKatze(kontext);
@@ -92,7 +92,8 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 		case IKuchen:
 		case UKuchen:
 			_satt = true;
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_IST_SATT_GEWORDEN);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.KATZE_IST_SATT_GEWORDEN);
 			sleep();
 		}
 	}
@@ -145,8 +146,8 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 	}
 
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
-			Befehl befehl, boolean _)
+	public boolean befehlSollAusgefuehrtWerden(ServerKontext kontext,
+			Spieler spieler, Befehl befehl)
 	{
 		// Wenn ein Spieler im gleich Raum ist wie die Katze und 'schauen' ausführt, kriegt er eine gewischt, es sei denn, sie ist satt.
 		if(!_satt && _raum == kontext.getAktuellenRaumZu(spieler)
@@ -156,6 +157,7 @@ public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_GREIFT_AN);
 
 			bewegeKatze(kontext);
+			return false;
 		}
 		return true;
 	}
