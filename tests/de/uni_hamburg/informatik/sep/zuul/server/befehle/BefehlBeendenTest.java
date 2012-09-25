@@ -1,8 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +19,9 @@ public class BefehlBeendenTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spielerleeresInventar = new Spieler("keininventar");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("beenden");
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("beenden");
 
 	@Before
 	public void setUp() throws Exception
@@ -39,11 +38,14 @@ public class BefehlBeendenTest
 	@Test
 	public void testAusfuehren()
 	{
-		assertTrue(spieler.getLebensEnergie()!=0);
+		assertTrue(spieler.getLebensEnergie() != 0);
 		assertTrue(beenden.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(spieler.getLebensEnergie(), 0);
-		
-		assertEquals(TextVerwalter.BEENDENTEXT,  kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.BEENDENTEXT.length()));
+
+		assertEquals(
+				TextVerwalter.BEENDENTEXT,
+				kontext.getNachrichtFuer(spieler).substring(0,
+						TextVerwalter.BEENDENTEXT.length()));
 	}
 
 	@Test
@@ -54,7 +56,7 @@ public class BefehlBeendenTest
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals( "beenden", beenden.getBefehlsnamen()[0]);
+		assertEquals("beenden", beenden.getBefehlsnamen()[0]);
 	}
 
 	@Test

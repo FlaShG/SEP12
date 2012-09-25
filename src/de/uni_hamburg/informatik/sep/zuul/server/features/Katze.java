@@ -99,17 +99,15 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 
 	public void fuettere(ServerKontext kontext, Spieler spieler, Item kuchen)
 	{
-		switch (kuchen)
+		if(kuchen.isGiftkuchen())
 		{
-		case IGiftkuchen:
-		case UGiftkuchen:
 			// TODO: Katze vom Tick deregistieren.
 			_raum.setKatze(null);
 			_raum = null;
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_STIRBT);
-			break;
-		case IKuchen:
-		case UKuchen:
+		}
+		else if(kuchen.isKuchen())
+		{
 			_satt = true;
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.KATZE_IST_SATT_GEWORDEN);

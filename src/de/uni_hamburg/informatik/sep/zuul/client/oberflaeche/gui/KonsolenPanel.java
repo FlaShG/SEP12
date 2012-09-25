@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
-import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -39,7 +38,8 @@ public class KonsolenPanel extends JPanel
 		_eingabeZeile = new JTextField();
 		_eingabeZeile.setLocation(0, 0);
 
-		_enterButton = new JButton(StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
+		_enterButton = new JButton(
+				StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
 		_enterButton.setFocusable(false);
 		_enterButton.setVisible(true);
 		_enterButton.setSize(100, 30);

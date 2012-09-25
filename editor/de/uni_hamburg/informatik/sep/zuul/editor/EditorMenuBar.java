@@ -45,7 +45,7 @@ public class EditorMenuBar extends JPanel
 	{
 		return _load;
 	}
-	
+
 	public JButton getResizeButton()
 	{
 		return _resize;

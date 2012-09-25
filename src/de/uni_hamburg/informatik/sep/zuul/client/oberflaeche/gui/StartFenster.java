@@ -55,7 +55,8 @@ public class StartFenster
 
 				try
 				{
-					_gui = new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
+					_gui = new ClientGUI("RmiServer", "127.0.0.1", 1090,
+							"Dr. Little");
 				}
 				catch(Exception e1)
 				{
@@ -90,7 +91,8 @@ public class StartFenster
 
 				try
 				{
-					_gui = new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
+					_gui = new ClientGUI("RmiServer", _ipAdresse, _port,
+							_spielername);
 				}
 				catch(Exception e)
 				{
@@ -173,7 +175,8 @@ public class StartFenster
 				try
 				{
 					new Server();
-					_gui = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
+					_gui = new ClientGUI("RmiServer", "localhost", 1090,
+							"Dr. Little");
 				}
 				catch(Exception e1)
 				{

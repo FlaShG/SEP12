@@ -19,7 +19,7 @@ class BefehlEssenTascheUnbekannterKruemel extends BefehlEssenTasche
 			Befehlszeile befehlszeile)
 	{
 		Item kuchen = spieler.getInventar().getAnyUKuchen();
-		return esseKuchen(kontext, spieler, kuchen);
+		return BefehlEssen.esseKuchen(kontext, spieler, kuchen);
 	}
 
 	@Override

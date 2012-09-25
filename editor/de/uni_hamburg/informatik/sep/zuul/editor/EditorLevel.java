@@ -15,12 +15,12 @@ public class EditorLevel
 	{
 		_maeuse = maeuse;
 	}
-	
+
 	public int getKatzen()
 	{
 		return _katzen;
 	}
-	
+
 	public void setKatzen(int katzen)
 	{
 		_katzen = katzen;
@@ -30,7 +30,7 @@ public class EditorLevel
 	{
 		return _leben;
 	}
-	
+
 	public void setLeben(int leben)
 	{
 		_leben = leben;

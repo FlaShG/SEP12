@@ -14,10 +14,10 @@ public class MapSizeDialog
 	private EigenschaftIntPanel _width;
 	private EigenschaftIntPanel _height;
 	private boolean _ok;
-	
+
 	public MapSizeDialog()
 	{
-		this(8,8);
+		this(8, 8);
 	}
 
 	public MapSizeDialog(int breite, int hoehe)
@@ -28,7 +28,7 @@ public class MapSizeDialog
 		_dialog.setLayout(new FlowLayout());
 		_dialog.add(_width = new EigenschaftIntPanel("Breite", breite));
 		_dialog.add(_height = new EigenschaftIntPanel("Höhe", hoehe));
-		
+
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener()
 		{
@@ -40,7 +40,7 @@ public class MapSizeDialog
 			}
 		});
 		_dialog.add(ok);
-		
+
 		//fancy größenwahn
 		_dialog.pack();
 		_dialog.setResizable(false);
@@ -64,10 +64,10 @@ public class MapSizeDialog
 	{
 		return _height.getWert();
 	}
-	
+
 	/**
-	 * Gibt zurück, ob ok geklickt wurde.
-	 * Die Alternative wäre ein Abbruch durch Schließen des Fensters.
+	 * Gibt zurück, ob ok geklickt wurde. Die Alternative wäre ein Abbruch durch
+	 * Schließen des Fensters.
 	 */
 	public boolean getClickedOK()
 	{

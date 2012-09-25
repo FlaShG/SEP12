@@ -25,7 +25,7 @@ final class BefehlInventarAnzeigen implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		kontext.schreibeAnSpieler(spieler, "Ihre Tasche enthält: "
-		+ spieler.getInventar().toString());
+				+ spieler.getInventar().toString());
 		return true;
 	}
 

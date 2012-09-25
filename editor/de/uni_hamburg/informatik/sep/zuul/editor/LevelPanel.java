@@ -10,9 +10,12 @@ public class LevelPanel extends JPanel
 
 	public LevelPanel(EditorBeobachter beobachter, EditorLevel level)
 	{
-		add(_leben = new EigenschaftIntPanel("Lebenspunkte", level.getLeben(), beobachter));
-		add(_maeuse = new EigenschaftIntPanel("Mäuse", level.getMaeuse(), beobachter));
-		add(_katzen = new EigenschaftIntPanel("Katzen", level.getKatzen(), beobachter));
+		add(_leben = new EigenschaftIntPanel("Lebenspunkte", level.getLeben(),
+				beobachter));
+		add(_maeuse = new EigenschaftIntPanel("Mäuse", level.getMaeuse(),
+				beobachter));
+		add(_katzen = new EigenschaftIntPanel("Katzen", level.getKatzen(),
+				beobachter));
 	}
 
 	public void setMauszahl(int maeuse)
@@ -24,7 +27,7 @@ public class LevelPanel extends JPanel
 	{
 		return _maeuse.getWert();
 	}
-	
+
 	public void setKatzenzahl(int katzen)
 	{
 		_katzen.setWert(katzen);
@@ -34,7 +37,7 @@ public class LevelPanel extends JPanel
 	{
 		return _katzen.getWert();
 	}
-	
+
 	public void setLebenspunkte(int leben)
 	{
 		_leben.setWert(leben);

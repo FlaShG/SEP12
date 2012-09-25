@@ -23,7 +23,7 @@ public class EditorMap extends JPanel
 	private GridButton[][] _buttons;
 	private int _activeX = -1;
 	private int _activeY = -1;
-	
+
 	private GridButton dragDropSource = null;
 	private GridButton dragDropTarget = null;
 
@@ -116,12 +116,15 @@ public class EditorMap extends JPanel
 	{
 		return _buttons;
 	}
-	
+
 	/**
-	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die gegebene
-	 * Größe abgeändert werden.
-	 * @param breite die neue Breite
-	 * @param hoehe die neue Höhe
+	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die
+	 * gegebene Größe abgeändert werden.
+	 * 
+	 * @param breite
+	 *            die neue Breite
+	 * @param hoehe
+	 *            die neue Höhe
 	 * @return
 	 */
 	public boolean istGroesseAendernUnproblematisch(int breite, int hoehe)
@@ -139,7 +142,7 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		if(hoehe < _buttons[0].length)
 		{
 			for(int y = hoehe; y < getHoehe(); ++y)
@@ -153,14 +156,17 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Setzt die Größe der Map.
-	 * @param breite die neue Breite
-	 * @param hoehe die neue Höhe
+	 * 
+	 * @param breite
+	 *            die neue Breite
+	 * @param hoehe
+	 *            die neue Höhe
 	 */
 	public void setGroesse(int breite, int hoehe)
 	{
@@ -175,9 +181,9 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		setLayout(new GridLayout(hoehe, breite)); //dammit kids
-		
+
 		GridButton[][] neueButtons = new GridButton[breite][hoehe];
 
 		for(int y = 0; y < hoehe; ++y)
@@ -189,10 +195,10 @@ public class EditorMap extends JPanel
 				initialisiereButton(neueButtons[x][y], x, y);
 			}
 		}
-		
+
 		_activeX = -1;
 		_activeY = -1;
-		
+
 		if(_buttons != null)
 		{
 			for(int y = 0; y < hoehe && y < getHoehe(); ++y)
@@ -204,10 +210,10 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		_buttons = neueButtons;
 	}
-	
+
 	private void initialisiereButton(GridButton button, int x, int y)
 	{
 		button.addActionListener(new ActionListener()
@@ -223,11 +229,11 @@ public class EditorMap extends JPanel
 				informiereBeobachter();
 			}
 		});
-		
+
 		//drag&drop
 		button.addMouseListener(new MouseAdapter()
 		{
-			
+
 			@Override
 			public void mouseReleased(MouseEvent arg0)
 			{
@@ -240,7 +246,7 @@ public class EditorMap extends JPanel
 						{
 							dragDropTarget.setRaum(dragDropSource.getRaum());
 							dragDropSource.loescheRaum();
-							
+
 							dragDropSource.setAusgewaehlt(false);
 							if(buttonAusgewaehlt())
 							{
@@ -257,14 +263,14 @@ public class EditorMap extends JPanel
 									_activeX = -1;
 									_activeY = -1;
 								}
-								
+
 								_beobachter.raumwahlUpdate();
 							}
 							else
 							{
 								dragDropTarget.setAusgewaehlt(false);
 							}
-							
+
 							_beobachter.verschiebenUpdate();
 							moved = true;
 						}
@@ -277,13 +283,13 @@ public class EditorMap extends JPanel
 				dragDropSource = null;
 				dragDropTarget = null;
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0)
 			{
 				if(dragDropSource == null)
 				{
-					GridButton source = ((GridButton)arg0.getSource());
+					GridButton source = ((GridButton) arg0.getSource());
 					if(source.getRaum() != null)
 					{
 						dragDropSource = source;
@@ -291,22 +297,22 @@ public class EditorMap extends JPanel
 					}
 				}
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent arg0)
 			{
 				if(dragDropSource != null && dragDropSource != arg0.getSource())
 				{
-					((GridButton)arg0.getSource()).setAusgewaehlt(false);
+					((GridButton) arg0.getSource()).setAusgewaehlt(false);
 				}
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0)
 			{
 				if(dragDropSource != null && dragDropSource != arg0.getSource())
 				{
-					GridButton destination = ((GridButton)arg0.getSource());
+					GridButton destination = ((GridButton) arg0.getSource());
 					if(destination.getRaum() == null)
 					{
 						dragDropTarget = destination;

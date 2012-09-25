@@ -66,6 +66,4 @@ public class Hauptfenster extends JFrame
 
 	}
 
-	
-
 }

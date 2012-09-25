@@ -31,7 +31,7 @@ public class Maus
 	{
 		_pathFinder = new PathFinder()
 		{
-			
+
 			@Override
 			protected boolean isZielRaum(Raum raum)
 			{
@@ -39,7 +39,8 @@ public class Maus
 			}
 		};
 
-		_richtung = PathFinder.getRichtung(_pathFinder.findPath(_aktuellerRaum));
+		_richtung = PathFinder
+				.getRichtung(_pathFinder.findPath(_aktuellerRaum));
 	}
 
 	public void setNeuerRaum(Raum neuerRaum)
