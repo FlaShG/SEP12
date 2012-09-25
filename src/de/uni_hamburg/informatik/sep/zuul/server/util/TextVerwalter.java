@@ -159,4 +159,6 @@ public final class TextVerwalter
 	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
 	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie ein Port ein: ";
 
+	public static final String BEFEHL_BEINSTELLEN = "bein stellen";
+
 }
