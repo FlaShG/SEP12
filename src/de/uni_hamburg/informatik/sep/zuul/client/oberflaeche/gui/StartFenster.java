@@ -173,14 +173,17 @@ public class StartFenster
 				try
 				{
 					new Server();
+					_gui = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-				_ui.getServerButton().setEnabled(false);
+				finally
+				{
+					_ui.dispose();
+				}
 			}
 		});
 

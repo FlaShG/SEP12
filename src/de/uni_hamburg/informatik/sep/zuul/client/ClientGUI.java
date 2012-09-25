@@ -1,12 +1,18 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -17,6 +23,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -265,6 +272,27 @@ public class ClientGUI extends Client
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
 
 		_hf.setVisible(true);
+		
+		_hf.addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				
+				
+				try
+				{
+					_server.logoutClient(_clientName);
+				}
+				catch(RemoteException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+			
+		});
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
 
@@ -467,6 +495,74 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
+		
+		// Nimmt diese Zeichen aus der Eingabe heraus...
+		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
+		{
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				switch (e.getKeyChar())
+				{
+					case '+':
+					case '-':
+					case '*':
+					case '/':
+						e.consume();
+						break;
+					default:
+						break;
+				}
+			}
+		});
+		
+		// global Keylistener
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
+		{
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e)
+			{
+				if (e.getID() == KeyEvent.KEY_PRESSED)
+				{
+					switch(e.getKeyCode())
+					{
+						case KeyEvent.VK_UP:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
+							return true;
+						case KeyEvent.VK_DOWN:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
+							return true;
+						case KeyEvent.VK_RIGHT:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
+							return true;
+						case KeyEvent.VK_LEFT:
+							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
+							return true;
+						default:
+							break;
+					}
+					switch(e.getKeyChar())
+					{
+						case '+':
+							sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
+							return true;
+						case '-':
+							sendeEingabe(TextVerwalter.BEFEHL_ABLEGEN);
+							return true;
+						case '*':
+							sendeEingabe(TextVerwalter.BEFEHL_ESSEN + " " + TextVerwalter.ORT_TASCHE);
+							return true;
+						case '/':
+							sendeEingabe(TextVerwalter.BEFEHL_FUETTERE);
+							return true;
+						default:
+							return false;
+					}
+				}
+				else
+					return false;
+			}
+		});
 
 		createActionListenerMap();
 
@@ -549,5 +645,28 @@ public class ClientGUI extends Client
 			// TODO: exception verarbeiten
 			e1.printStackTrace();
 		}
+	}
+
+	@Override
+	public void serverBeendet()
+	{
+		
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			
+			@Override
+			public void run()
+			{
+				JOptionPane.showMessageDialog(null, "Server wurde beendet");
+				System.exit(0);
+			}
+		});
+		_hf.dispose();
+	}
+
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		
 	}
 }

@@ -15,6 +15,29 @@ public class ClientConsole extends Client
 			NotBoundException
 	{
 		super(serverName, serverIP, clientport, clientName);
+
+		if(!clientName.equals("Dr.Little"))
+		{
+			warteFenster();
+		}
+		else
+		{
+			login();
+			_server.empfangeStartEingabe(_clientName);
+		}
+
+	}
+
+	private void warteFenster() throws RemoteException
+	{
+		login();
+		schreibeText("Warten auf Spieler Bereit.");
+		schreibeText("Geben sie OK ein, wenn sie auch Bereit sind: ");
+		String bereit = leseZeileEin();
+		if(bereit.equals("OK"))
+		{
+			_server.empfangeStartEingabe(_clientName);
+		}
 	}
 
 	@Override
@@ -30,7 +53,8 @@ public class ClientConsole extends Client
 		{
 			String nachricht = leseZeileEin();
 
-			verarbeiteEingabe(nachricht);
+			if(!nachricht.equals(""))
+				verarbeiteEingabe(nachricht);
 
 			//TODO warten einbauen
 		}
@@ -61,8 +85,12 @@ public class ClientConsole extends Client
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		for(String zeile : paket.getNachricht().split("\n"))
-			System.out.println(zeile);
+		if(paket.getNachricht() != null)
+		{
+			for(String zeile : paket.getNachricht().split("\n"))
+				System.out.println(zeile);
+			run();
+		}
 		return true;
 	}
 
@@ -74,6 +102,19 @@ public class ClientConsole extends Client
 
 	@Override
 	public void starteClientUI(ClientPaket paket) throws RemoteException
+	{
+
+	}
+
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void serverBeendet()
 	{
 		// TODO Auto-generated method stub
 

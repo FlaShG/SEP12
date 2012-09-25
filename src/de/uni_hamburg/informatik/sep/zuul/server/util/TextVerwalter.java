@@ -90,13 +90,13 @@ public class TextVerwalter
 	public static final String BEFEHL_GEHEN = "gehe";
 	public static final String BEFEHL_SCHAUEN = "schaue";
 	public static final String BEFEHL_NEHMEN = "nehmen";
-	
+
 	public static final String BEFEHL_ESSEN = "essen";
 	public static final String BEFEHL_ESSEN_TASCHE = "essen tasche";
 	public static final String BEFEHL_ESSEN_TASCHE_GUT = "essen tasche guter krümel";
 	public static final String BEFEHL_ESSEN_TASCHE_SCHLECHT = "essen tasche schlechter krümel";
 	public static final String BEFEHL_ESSEN_TASCHE_UNBEKANNT = "essen tasche krümel";
-	
+
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
 	public static final String BEFEHL_UNTERSUCHE = "untersuche";
@@ -127,7 +127,7 @@ public class TextVerwalter
 	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 
 	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
-	public static final String KATZE_GREIFT_AN = "Als Dr. Little in den nächsten Raum  schielte, griff ihn die Katze an.";
+	public static final String KATZE_GREIFT_AN = "Als Dr. Little in den nächsten Raum schielte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
 	public static final String KATZE_IST_SATT_GEWORDEN = "Die Katze frisst den Krümel und sieht jetzt sehr satt aus.";
 
@@ -154,7 +154,5 @@ public class TextVerwalter
 	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host IP ein: ";
 	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
 	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie ein Port ein: ";
-
-
 
 }

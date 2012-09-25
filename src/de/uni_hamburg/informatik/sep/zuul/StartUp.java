@@ -5,7 +5,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import de.uni_hamburg.informatik.sep.zuul.client.ClientConsole;
+import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 
 public class StartUp
@@ -14,11 +14,9 @@ public class StartUp
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
-
-		if(args.length == 5 && args[4].equals("console"))
+		if(args.length == 1 && args[0].equals("console"))
 		{
-			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
-					args[3]);
+			new StartConsole();
 		}
 		else
 		{
