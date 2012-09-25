@@ -193,8 +193,13 @@ public class ClientGUI extends Client
 			return;
 		}
 
-		_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(val, paket,
-				vorschau));
+		if(vorschau)
+			_bildPanel.zeigeSchauen(_bilderzeuger.getRaumansicht(val, paket,
+					vorschau));
+		else
+			_bildPanel.setRaumanzeige(_bilderzeuger.getRaumansicht(val, paket,
+					vorschau));
+
 	}
 
 	private void setzeBefehlsverfuegbarkeit(
