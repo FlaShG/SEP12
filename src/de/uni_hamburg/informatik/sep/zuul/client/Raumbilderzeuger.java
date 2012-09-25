@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction.SuperFancyReproducibleRandomEntryPicker;
 
 /**
  * 
@@ -102,6 +103,9 @@ public class Raumbilderzeuger
 
 	private BufferedImage erzeugeRaumansicht()
 	{
+		SuperFancyReproducibleRandomEntryPicker entryPicker = new SuperFancyReproducibleRandomEntryPicker(
+				_paket.buildUniqueID());
+
 		BufferedImage raum = null;
 
 		RaumArt raumArt = _paket.getRaumArt();
@@ -157,8 +161,7 @@ public class Raumbilderzeuger
 		//andere spieler malen
 		for(String s : _paket.getAndereSpieler())
 		{
-			position = _drlittlepositionen.get(_random
-					.nextInt((_drlittlepositionen.size())));
+			position = entryPicker.pick(_drlittlepositionen);
 			x = position.getX();
 			y = position.getY();
 			g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
@@ -168,8 +171,7 @@ public class Raumbilderzeuger
 
 		if(_paket.hasMaus())
 		{
-			Tupel mausposition = _mauspositionen
-					.get(getRandomZahl(_mauspositionen.size()));
+			Tupel mausposition = entryPicker.pick(_mauspositionen);
 			x = mausposition.getX();
 			y = mausposition.getY();
 
@@ -179,8 +181,7 @@ public class Raumbilderzeuger
 		//Male Katze
 		else if(_paket.hasKatze())
 		{
-			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen
-					.size()));
+			Tupel pos = entryPicker.pick(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
@@ -213,8 +214,8 @@ public class Raumbilderzeuger
 
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
-			int rand = getRandomZahl(_itemPositionen.size());
-			Tupel itempos = _itemPositionen.remove(rand);
+			Tupel itempos = entryPicker.pick(_itemPositionen);
+			_itemPositionen.remove(itempos);
 			x = itempos.getX();
 			y = itempos.getY();
 
@@ -223,15 +224,14 @@ public class Raumbilderzeuger
 
 		if(gegengiftDa)
 		{
-			int rand = getRandomZahl(_itemPositionen.size());
-			Tupel itempos = _itemPositionen.remove(rand);
+			Tupel itempos = entryPicker.pick(_itemPositionen);
+			_itemPositionen.remove(itempos);
 			x = itempos.getX();
 			y = itempos.getY();
 
 			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
 
-			Tupel pos = _mauspositionen.get(getRandomZahl(_mauspositionen
-					.size()));
+			Tupel pos = entryPicker.pick(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
@@ -249,11 +249,6 @@ public class Raumbilderzeuger
 
 	}
 
-	private int getRandomZahl(int size)
-	{
-		return _random.nextInt(size);
-	}
-
 	private void setPositionen()
 	{
 		_itemPositionen = new LinkedList<Tupel>();
@@ -269,11 +264,13 @@ public class Raumbilderzeuger
 		_itemPositionen.add(new Tupel(400, 330));
 		_itemPositionen.add(new Tupel(430, 440));
 
+		_mauspositionen = new LinkedList<Tupel>();
 		_mauspositionen.add(new Tupel(70, 70));
 		_mauspositionen.add(new Tupel(70, 470));
 		_mauspositionen.add(new Tupel(470, 70));
 		_mauspositionen.add(new Tupel(470, 470));
 
+		_drlittlepositionen = new LinkedList<Tupel>();
 		_drlittlepositionen.add(new Tupel(73, 320));
 		_drlittlepositionen.add(new Tupel(520, 320));
 		_drlittlepositionen.add(new Tupel(320, 70));

@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -28,15 +29,16 @@ public class ClientVorschauPaket extends ClientPaket
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
-	private String[] _moeglicheAusgaenge;
+	private List<String> _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
 
 	public ClientVorschauPaket(ServerKontext kontext, Spieler spieler,
 			String nachricht, String richtung)
 	{
 		super(kontext, spieler, richtung); // eigentlich unnötig, aber gut. was solls
-		
-		Raum vorschauRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(richtung);
+
+		Raum vorschauRaum = kontext.getAktuellenRaumZu(spieler).getAusgang(
+				richtung);
 
 		_raumID = vorschauRaum.getId();
 		_katze = vorschauRaum.hasKatze();
@@ -48,7 +50,8 @@ public class ClientVorschauPaket extends ClientPaket
 		_raumArt = vorschauRaum.getRaumart();
 		_richtung = richtung;
 		_spielerName = spieler.getName();
-		_moeglicheAusgaenge = vorschauRaum.getMoeglicheAusgaenge();
+		_moeglicheAusgaenge = Arrays.asList(vorschauRaum
+				.getMoeglicheAusgaenge());
 
 		_verfuegbareBefehle = new HashMap<String, Boolean>();
 		for(Entry<String, Befehl> entry : BefehlFactory.getMap().entrySet())
@@ -110,7 +113,7 @@ public class ClientVorschauPaket extends ClientPaket
 	}
 
 	@Override
-	public String[] getMoeglicheAusgaenge()
+	public List<String> getMoeglicheAusgaenge()
 	{
 		return _moeglicheAusgaenge;
 	}
@@ -120,7 +123,7 @@ public class ClientVorschauPaket extends ClientPaket
 	{
 		return _raumID;
 	}
-	
+
 	public String getRichtung()
 	{
 		return _richtung;

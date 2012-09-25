@@ -23,4 +23,31 @@ public final class FancyFunction
 		int nextInt = RANDOM.nextInt(size);
 		return entries.get(nextInt);
 	}
+
+	public static class SuperFancyReproducibleRandomEntryPicker
+	{
+		private Random _random;
+
+		public SuperFancyReproducibleRandomEntryPicker(int seed)
+		{
+			_random = new Random(seed);
+		}
+
+		/**
+		 * Gib ein zufälliges Element aus einer Liste.
+		 * 
+		 * @param entries
+		 *            Die Liste
+		 * @return ein zufälliges Element aus der Liste
+		 */
+		public <T> T pick(List<T> entries)
+		{
+			int size = entries.size();
+			if(size == 0)
+				return null;
+
+			int nextInt = _random.nextInt(size);
+			return entries.get(nextInt);
+		}
+	}
 }
