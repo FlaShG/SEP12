@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server;
 
+import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -31,15 +33,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	private List<String> _readyClients; //Liste der Namen der Spieler die bereit sind.
 	private Spiel _spiel;
 	private String _hostName;
+	private Registry _rmireg;
 
 	public Server() throws RemoteException, AlreadyBoundException
 	{
 		super();
 
-		Registry rmireg = LocateRegistry.createRegistry(1099);
+		try
+		{
+			_rmireg = LocateRegistry.createRegistry(1099);
+		}
+		catch(RemoteException e)
+		{
+			_rmireg = LocateRegistry.getRegistry(1099);
+		}
 
 		// Diesen Server in die Registry schreiben
-		rmireg.bind("RmiServer", this);
+		_rmireg.bind("RmiServer", this);
 
 		// Liste der verbundenen Clients anlegen
 		_connectedClients = new HashMap<String, ClientInterface>();
@@ -49,6 +59,19 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_spiel = new Spiel();
 		System.out.println(_spiel.isGestartet());
 		_spiel.addObserver(this);
+	}
+
+	public void beendeServer()
+	{
+		try
+		{
+			_rmireg.unbind("RmiServer");
+		}
+		catch(Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// sinnlos?
@@ -114,6 +137,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 				client.serverBeendet();
 			}
 		}
+
+		if(_connectedClients.isEmpty())
+			beendeServer();
 
 		return true;
 	}

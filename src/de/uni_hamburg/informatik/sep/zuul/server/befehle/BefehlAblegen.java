@@ -11,7 +11,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  * @author 1fechner
  * 
  */
-final class BefehlAblegen implements Befehl
+class BefehlAblegen implements Befehl
 {
 
 	@Override
@@ -19,15 +19,13 @@ final class BefehlAblegen implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Item item = spieler.getInventar().getAnyKuchen();
-		switch (item)
-		{
-		case IKuchen:
-			item = Item.UKuchen;
-			break;
-		case IGiftkuchen:
-			item = Item.UGiftkuchen;
-			break;
-		}
+		return legeItemInAktuellenRaum(kontext, spieler, item);
+	}
+
+	static boolean legeItemInAktuellenRaum(ServerKontext kontext,
+			Spieler spieler, Item item)
+	{
+		item = Item.convertIToUKuchen(item);
 		kontext.getAktuellenRaumZu(spieler).addItem(item);
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 
@@ -44,8 +42,7 @@ final class BefehlAblegen implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().hasAnyKuchen()
-				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN);
+		return spieler.getInventar().hasAnyKuchen();
 	}
 
 	@Override

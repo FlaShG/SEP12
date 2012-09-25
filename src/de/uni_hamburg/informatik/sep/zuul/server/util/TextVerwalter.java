@@ -6,8 +6,12 @@ package de.uni_hamburg.informatik.sep.zuul.server.util;
  * @author 0klein, 1jost
  * 
  */
-public class TextVerwalter
+public final class TextVerwalter
 {
+	private TextVerwalter()
+	{
+	}
+
 	public static final String LYRISCHEREINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteurspiel mit Dr. Little.\n\nNach einem fatalen Unfall in seinem Chemielabor ist der Wissenschaftler Dr. Little dazu verdammt, in geringer Körpergröße eine Lösung seines Dilemmas zu finden. Er weiß, dass sein Kollege Prof. Dr. Evenbigger bei seinen Forschungen über das Verhalten von Sonnenblumen unter Aussetzung von Beta-Strahlung zufälligerweise auf ein Mittel gestoßen ist, mithilfe dessen Dr. Little seine normale Größe zurückerlangen könnte."
 			+ "\nProf. Dr. Evenbiggers Labor befindet sich jedoch auf der anderen Seite des Universitätscampus und in Dr. Littles aktueller körperlichen Verfassung stellt die Reise eine große Herausforderung für ihn dar. Er muss sich nun mit seiner mäßigen Orientierung das Labor des Professors finden."
 			+ "\nIhnen obliegt die Verantwortung, Dr. Little sicher durch das Labyrinth von Räumen zu seinem Ziel zu bringen."
@@ -90,13 +94,13 @@ public class TextVerwalter
 	public static final String BEFEHL_GEHEN = "gehe";
 	public static final String BEFEHL_SCHAUEN = "schaue";
 	public static final String BEFEHL_NEHMEN = "nehmen";
-	
+
 	public static final String BEFEHL_ESSEN = "essen";
 	public static final String BEFEHL_ESSEN_TASCHE = "essen tasche";
 	public static final String BEFEHL_ESSEN_TASCHE_GUT = "essen tasche guter krümel";
 	public static final String BEFEHL_ESSEN_TASCHE_SCHLECHT = "essen tasche schlechter krümel";
 	public static final String BEFEHL_ESSEN_TASCHE_UNBEKANNT = "essen tasche krümel";
-	
+
 	public static final String BEFEHL_HILFE = "hilfe";
 	public static final String BEFEHL_BEENDEN = "beenden";
 	public static final String BEFEHL_UNTERSUCHE = "untersuche";
@@ -127,7 +131,7 @@ public class TextVerwalter
 	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 
 	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
-	public static final String KATZE_GREIFT_AN = "Als Dr. Little in den nächsten Raum  schielte, griff ihn die Katze an.";
+	public static final String KATZE_GREIFT_AN = "Als Dr. Little in den nächsten Raum schielte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
 	public static final String KATZE_IST_SATT_GEWORDEN = "Die Katze frisst den Krümel und sieht jetzt sehr satt aus.";
 
@@ -138,7 +142,7 @@ public class TextVerwalter
 
 	public static final String BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN = "Hier ist nichts, was Dr. Little füttern könnte.";
 
-	public static final String KATZE_VERJAGT_DIE_MAUS = "Die Katze verjagt die Maus in diesem Raum";
+	public static final String KATZE_VERJAGT_DIE_MAUS = "Die Katze verjagt die Maus in diesem Raum.";
 
 	public static final String KATZE_HAT_KEINEN_HUNGER = "Die Katze scheint keinen Hunger mehr zu haben.";
 
@@ -154,7 +158,5 @@ public class TextVerwalter
 	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host IP ein: ";
 	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
 	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie ein Port ein: ";
-
-
 
 }

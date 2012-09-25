@@ -15,12 +15,14 @@ import javax.swing.JFileChooser;
 
 import org.junit.internal.runners.statements.RunAfters;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
+import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 
-public class StartFenster
+public class StartFenster extends StartUp
 {
 
 	private StartfensterUI _ui;
@@ -28,7 +30,6 @@ public class StartFenster
 	private String _ipAdresse;
 	private int _port;
 	private String _spielername;
-	public ClientGUI _gui;
 
 	/**
 	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und
@@ -51,6 +52,7 @@ public class StartFenster
 
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
+
 
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -232,7 +234,7 @@ public class StartFenster
 					{
 						new Server();
 					}
-					_gui = new ClientGUI(serverName, serverIP, port, clientName);
+					new ClientGUI(serverName, serverIP, port, clientName);
 				}
 				catch(Exception e1)
 				{

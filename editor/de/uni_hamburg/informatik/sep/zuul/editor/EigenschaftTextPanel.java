@@ -15,11 +15,20 @@ public class EigenschaftTextPanel extends EigenschaftsPanel
 {
 	private JTextField _text;
 
+	/**
+	 * Erstellt ein neues {@link EigenschaftTextPanel} mit Beschriftung und Starttext.
+	 * @param starttext der initial eingestellte und angezeigte Text.
+	 */
 	public EigenschaftTextPanel(String beschriftung, String starttext)
 	{
 		this(beschriftung, starttext, null);
 	}
 
+	/**
+	 * Erstellt ein neues {@link EigenschaftTextPanel} mit Beschriftung, Starttext und Beobachter.
+	 * @param starttext der initial eingestellte und angezeigte Text.
+	 * @param beobachter ein Beobachter, der über Änderungen in diesem Element informiert werden soll.
+	 */
 	public EigenschaftTextPanel(String beschriftung, String starttext,
 			EditorBeobachter beobachter)
 	{
@@ -53,6 +62,9 @@ public class EigenschaftTextPanel extends EigenschaftsPanel
 		_text.setMinimumSize(dim);
 	}
 
+	/**
+	 * Gibt den momentan eingestellten Text zurück.
+	 */
 	public String getText()
 	{
 		return _text.getText();
