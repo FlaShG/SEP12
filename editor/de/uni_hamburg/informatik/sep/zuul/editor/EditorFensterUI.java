@@ -4,9 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +23,6 @@ public class EditorFensterUI
 
 	private EditorMenuBar _menubar;
 	private EditorMap _map;
-	private RaumVerschiebenPanel _verschieben;
 	private JButton _raumhinzu;
 	private RaumBearbeitenPanel _bearbeiten;
 	private LevelPanel _levelPanel;
@@ -69,8 +65,6 @@ public class EditorFensterUI
 
 		_frame.add(_map = new EditorMap(width, height), BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
-		
-		_verschieben = new RaumVerschiebenPanel(_beobachter);
 
 		_raumhinzu = new JButton("Raum anlegen");
 
@@ -166,13 +160,5 @@ public class EditorFensterUI
 	public LevelPanel getLevelPanel()
 	{
 		return _levelPanel;
-	}
-	
-	public void zeigeVerschiebenPanel(boolean zeigen)
-	{
-		if(zeigen)
-			_frame.add(_verschieben, BorderLayout.EAST);
-		else
-			_frame.remove(_verschieben);
 	}
 }
