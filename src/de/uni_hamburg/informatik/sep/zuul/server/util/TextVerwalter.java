@@ -6,8 +6,12 @@ package de.uni_hamburg.informatik.sep.zuul.server.util;
  * @author 0klein, 1jost
  * 
  */
-public class TextVerwalter
+public final class TextVerwalter
 {
+	private TextVerwalter()
+	{
+	}
+
 	public static final String LYRISCHEREINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteurspiel mit Dr. Little.\n\nNach einem fatalen Unfall in seinem Chemielabor ist der Wissenschaftler Dr. Little dazu verdammt, in geringer Körpergröße eine Lösung seines Dilemmas zu finden. Er weiß, dass sein Kollege Prof. Dr. Evenbigger bei seinen Forschungen über das Verhalten von Sonnenblumen unter Aussetzung von Beta-Strahlung zufälligerweise auf ein Mittel gestoßen ist, mithilfe dessen Dr. Little seine normale Größe zurückerlangen könnte."
 			+ "\nProf. Dr. Evenbiggers Labor befindet sich jedoch auf der anderen Seite des Universitätscampus und in Dr. Littles aktueller körperlichen Verfassung stellt die Reise eine große Herausforderung für ihn dar. Er muss sich nun mit seiner mäßigen Orientierung das Labor des Professors finden."
 			+ "\nIhnen obliegt die Verantwortung, Dr. Little sicher durch das Labyrinth von Räumen zu seinem Ziel zu bringen."
