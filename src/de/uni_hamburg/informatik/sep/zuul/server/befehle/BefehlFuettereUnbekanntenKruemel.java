@@ -13,8 +13,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlFuettereUnbekanntenKruemel implements Befehl
 {
 
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE + " "
-			+ "maus";
+	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE
+			+ " " + "maus";
 
 	/**
 	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der
@@ -47,14 +47,16 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 
 		return null;
 	}
-	
+
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus()) && (spieler.getInventar().has(Item.UKuchen)||spieler.getInventar().has(Item.UGiftkuchen));
+		return (raum.hasKatze() || raum.hasMaus())
+				&& (spieler.getInventar().has(Item.UKuchen) || spieler
+						.getInventar().has(Item.UGiftkuchen));
 	}
 
 	@Override
@@ -65,17 +67,18 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 			// Versuche eine Katze oder eine Maus zu füttern
 
 			Raum raum = kontext.getAktuellenRaumZu(spieler);
-			
+
 			//wenn katze im raum
-			
+
 			if(raum.hasKatze())
 			{
-				
+
 				Katze katze = raum.getKatze();
 
 				if(katze.isSatt())
 				{
-					kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+					kontext.schreibeAnSpieler(spieler,
+							TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
 					return false;
 				}
 				Item kuchen = spieler.getInventar().getAnyUKuchen();
@@ -86,24 +89,27 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 			else if(raum.hasMaus())
 			{
 				Item kuchen = null;
-				
-				if(spieler.getInventar().has(Item.UKuchen) && spieler.getInventar().has(Item.UGiftkuchen))
+
+				if(spieler.getInventar().has(Item.UKuchen)
+						&& spieler.getInventar().has(Item.UGiftkuchen))
 				{
-				kuchen = spieler.getInventar().getAnyUKuchen();
+					kuchen = spieler.getInventar().getAnyUKuchen();
 				}
 				else if(spieler.getInventar().has(Item.UKuchen))
-						{
-					       kuchen = spieler.getInventar().getKuchen(Item.UKuchen);
-						}
-				else{
-				          kuchen = spieler.getInventar().getKuchen(Item.UGiftkuchen);
+				{
+					kuchen = spieler.getInventar().getKuchen(Item.UKuchen);
 				}
-			
+				else
+				{
+					kuchen = spieler.getInventar().getKuchen(Item.UGiftkuchen);
+				}
+
 				Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 				String richtigeRichtung = aktuellerRaum.getMaus().getRichtung();
 
-				String[] moeglicheRichtungen = aktuellerRaum.getMoeglicheAusgaenge();
+				String[] moeglicheRichtungen = aktuellerRaum
+						.getMoeglicheAusgaenge();
 
 				String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
 						moeglicheRichtungen);
@@ -125,14 +131,15 @@ public class BefehlFuettereUnbekanntenKruemel implements Befehl
 	{
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
 
-		if(!spieler.getInventar().has(Item.UKuchen)||!spieler.getInventar().has(Item.UGiftkuchen))
+		if(!spieler.getInventar().has(Item.UKuchen)
+				|| !spieler.getInventar().has(Item.UGiftkuchen))
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.MAUS_KEIN_KRUEMEL);
 		}
 		else if(!raum.hasKatze() && !raum.hasMaus())
 		{
-			//TODO: Keine Katze zum Füttern!
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
 		}
 	}
 

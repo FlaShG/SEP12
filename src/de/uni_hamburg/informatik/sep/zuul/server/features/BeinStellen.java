@@ -21,7 +21,6 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	{
 		if(!spieler.getAktiv())
 		{
-			// TODO: Spieler kann sich nicht bewegen.
 			kontext.schreibeAnSpieler(
 					spieler,
 					spieler.getName()
@@ -75,7 +74,6 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		// TODO
 		kontext.schreibeAnSpieler(spieler,
 				"Hier ist niemand, dem du ein Bein stellen könntest.");
 	}
@@ -83,14 +81,13 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	@Override
 	public String[] getBefehlsnamen()
 	{
-		// TODO Auto-generated method stub
 		return new String[] { "bein stellen", "bs" };
 	}
 
 	@Override
 	public String getHilfe()
 	{
-		// TODO Auto-generated method stub
+		// TODO Hilfetext zu Bein Stellen
 		return "";
 	}
 

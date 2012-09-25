@@ -411,7 +411,6 @@ public class ClientGUI extends Client
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				// TODO: bild neuzeichen ohne client paket
 				int val = getOptimalIconSize();
 
 				_bildPanel.setRaumanzeige(_bilderzeuger.zeichneBildErneut(val));
@@ -582,7 +581,6 @@ public class ClientGUI extends Client
 		{
 			_bildPanel.setRaumanzeige(_bilderzeuger.getGameOverScreen(val));
 		}
-		//TODO continue
 
 		for(JButton button : _befehlButtonMap.values())
 		{
