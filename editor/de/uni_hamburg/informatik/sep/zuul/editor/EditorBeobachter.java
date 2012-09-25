@@ -7,5 +7,4 @@ public interface EditorBeobachter
 	public void eigenschaftUpdate();
 
 	public void verschiebenUpdate();
-	public void verschiebenUpdate(int x, int y);
 }
