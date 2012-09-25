@@ -122,7 +122,7 @@ public class EditorMap extends JPanel
 	 * Größe abgeändert werden.
 	 * @param breite die neue Breite
 	 * @param hoehe die neue Höhe
-	 * @return
+	 * @return ob bei einer Größenänderung Räume flöten gehen würden. 
 	 */
 	public boolean istGroesseAendernUnproblematisch(int breite, int hoehe)
 	{
@@ -321,11 +321,17 @@ public class EditorMap extends JPanel
 		});
 	}
 
+	/**
+	 * Gibt die Breite der Map zurück.
+	 */
 	public int getBreite()
 	{
 		return _buttons.length;
 	}
 
+	/**
+	 * Gibt die Höhe der Map zurück.
+	 */
 	public int getHoehe()
 	{
 		return _buttons[0].length;
