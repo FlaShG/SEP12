@@ -21,25 +21,31 @@ public class StartConsole
 		switch (consoleLesen())
 		{
 		case "einzelspiel":
+		case "einzelspieler":
 		case "allein":
 		case "e":
 			new Server();
-			new ClientConsole("RmiServer", "127.0.0.1", 1090, "Dr. Little");
+			new ClientConsole("RmiServer", "127.0.0.1", 1090, "Dr.Little");
 			break;
 		case "multispiel":
 		case "mehrspieler":
 		case "m":
 		case "multiplayer":
-			consoleAnzeigen("Wollen Sie denn Server(Host) starten(j/n). Standard ist n: ");
+			String ip = "127.0.0.1";
+			String port = "1090";
+			consoleAnzeigen("Wollen sie einen Öffentliches Spiel erstellen?. Standard ist n: ");
 			String server = consoleLesen();
 			if(server.equals("j"))
 			{
 				new Server();
 			}
-			consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
-			String ip = consoleLesen();
-			consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
-			String port = consoleLesen();
+			else
+			{
+				consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
+				ip = consoleLesen();
+				consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
+				port = consoleLesen();
+			}
 			consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
 			String name = consoleLesen();
 			new ClientConsole("RmiServer", ip, Integer.parseInt(port), name);
