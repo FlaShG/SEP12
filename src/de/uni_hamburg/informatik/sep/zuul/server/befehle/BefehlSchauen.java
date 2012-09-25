@@ -31,7 +31,7 @@ public final class BefehlSchauen implements Befehl
 	/**
 	 * @param befehlszeile
 	 */
-	private String extrahiereRichtung(Befehlszeile befehlszeile)
+	public String extrahiereRichtung(Befehlszeile befehlszeile)
 	{
 
 		String richtung = befehlszeile.getGeparsteZeile().get(1);

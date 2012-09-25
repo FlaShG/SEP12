@@ -1,8 +1,11 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
@@ -16,10 +19,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
  */
 public class EditorMap extends JPanel
 {
-	EditorBeobachter _beobachter;
+	private EditorBeobachter _beobachter;
 	private GridButton[][] _buttons;
-	int _activeX = -1;
-	int _activeY = -1;
+	private int _activeX = -1;
+	private int _activeY = -1;
+	
+	private GridButton dragDropSource = null;
+	private GridButton dragDropTarget = null;
 
 	/**
 	 * Erstellt eine neue EditorMap mit gegebener Höhe und Breite
@@ -51,6 +57,90 @@ public class EditorMap extends JPanel
 						_activeY = ((GridButton) arg0.getSource()).getGridY();
 						_buttons[_activeX][_activeY].setAusgewaehlt(true);
 						informiereBeobachter();
+					}
+				});
+				
+				_buttons[x][y].addMouseListener(new MouseAdapter()
+				{
+					
+					@Override
+					public void mouseReleased(MouseEvent arg0)
+					{
+						boolean moved = false;
+						if(dragDropSource != null && dragDropTarget != null)
+						{
+							if(dragDropSource != dragDropTarget)
+							{
+								if(dragDropTarget.getRaum() == null)
+								{
+									dragDropTarget.setRaum(dragDropSource.getRaum());
+									dragDropSource.loescheRaum();
+									
+									dragDropSource.setAusgewaehlt(false);
+									if(buttonAusgewaehlt())
+									{
+										getAktivenButton().setAusgewaehlt(false);
+										_activeX = dragDropTarget.getGridX();
+										_activeY = dragDropTarget.getGridY();
+										dragDropTarget.setAusgewaehlt(true);
+										_beobachter.verschiebenUpdate();
+									}
+									else
+									{
+										dragDropTarget.setAusgewaehlt(false);
+									}
+									
+									moved = true;
+								}
+							}
+						}
+						if(!moved && dragDropSource != null)
+						{
+							dragDropSource.setAusgewaehlt(true);
+						}
+						dragDropSource = null;
+						dragDropTarget = null;
+					}
+					
+					@Override
+					public void mousePressed(MouseEvent arg0)
+					{
+						if(dragDropSource == null)
+						{
+							GridButton source = ((GridButton)arg0.getSource());
+							if(source.getRaum() != null)
+							{
+								dragDropSource = source;
+								source.setAusgewaehlt(false);
+							}
+						}
+					}
+					
+					@Override
+					public void mouseExited(MouseEvent arg0)
+					{
+						if(dragDropSource != null && dragDropSource != arg0.getSource())
+						{
+							((GridButton)arg0.getSource()).setAusgewaehlt(false);
+						}
+					}
+					
+					@Override
+					public void mouseEntered(MouseEvent arg0)
+					{
+						if(dragDropSource != null && dragDropSource != arg0.getSource())
+						{
+							GridButton destination = ((GridButton)arg0.getSource());
+							if(destination.getRaum() == null)
+							{
+								dragDropTarget = destination;
+								destination.setBackground(new Color(1, 0.6f, 0.4f));
+							}
+							else
+							{
+								dragDropTarget = null;
+							}
+						}
 					}
 				});
 			}
