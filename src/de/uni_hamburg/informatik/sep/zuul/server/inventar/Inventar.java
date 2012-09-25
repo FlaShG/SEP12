@@ -218,4 +218,20 @@ public class Inventar
 			builder.setLength(builder.length() -2);
 		return builder.toString();
 	}
+
+	public boolean hasAnyUKuchen()
+	{
+		for(Item item : _inhalt)
+		{
+			switch (item)
+			{
+			case UKuchen:
+			case UGiftkuchen:
+				return true;
+			default:
+				break;
+			}
+		}
+		return false;
+	}
 }
