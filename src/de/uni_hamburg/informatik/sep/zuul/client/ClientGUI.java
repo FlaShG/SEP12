@@ -545,6 +545,8 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
+		
+		
 
 		// Nimmt diese Zeichen aus der Eingabe heraus...
 		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
@@ -580,7 +582,7 @@ public class ClientGUI extends Client
 						if(e.getID() == KeyEvent.KEY_PRESSED)
 						{
 							if (e.isShiftDown())
-							{
+							{// schauen
 								switch (e.getKeyCode())
 								{
 									case KeyEvent.VK_NUMPAD8:
@@ -611,6 +613,7 @@ public class ClientGUI extends Client
 										break;
 									}
 							}
+							// gehen
 							switch (e.getKeyCode())
 							{
 								case KeyEvent.VK_NUMPAD8:
@@ -619,6 +622,7 @@ public class ClientGUI extends Client
 											+ TextVerwalter.RICHTUNG_NORDEN; 
 									sendeEingabe(befehl_up);
 									_bilderzeuger.setGehRichtung(befehl_up);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD2:
 								case KeyEvent.VK_DOWN:
@@ -626,6 +630,7 @@ public class ClientGUI extends Client
 											+ TextVerwalter.RICHTUNG_SUEDEN;
 									sendeEingabe(befehl_down);
 									_bilderzeuger.setGehRichtung(befehl_down);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD6:
 								case KeyEvent.VK_RIGHT:
@@ -633,6 +638,7 @@ public class ClientGUI extends Client
 											+ TextVerwalter.RICHTUNG_OSTEN;
 									sendeEingabe(befehl_right);
 									_bilderzeuger.setGehRichtung(befehl_right);
+									_bildPanel.versteckeSchauen();
 									return true;
 								case KeyEvent.VK_NUMPAD4:
 								case KeyEvent.VK_LEFT:
@@ -640,10 +646,12 @@ public class ClientGUI extends Client
 											+ TextVerwalter.RICHTUNG_WESTEN;
 									sendeEingabe(befehl_left);
 									_bilderzeuger.setGehRichtung(befehl_left);
+									_bildPanel.versteckeSchauen();
 									return true;
 								default:
 									break;
 							}
+							// der rest
 							switch (e.getKeyChar())
 							{
 							case '+':
