@@ -21,7 +21,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class Katze implements Feature, TickListener, BefehlAusgefuehrtListener
 {
 	public static final int KATZE_SCHADEN = 2;
-	public static final long SCHLAFZEIT_IN_SEKUNDEN = 5;
+	public static final long SCHLAFZEIT_IN_SEKUNDEN = 10;
 	Raum _raum;
 	boolean _satt = false;
 
