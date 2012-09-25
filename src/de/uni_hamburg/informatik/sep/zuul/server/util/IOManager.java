@@ -28,9 +28,10 @@ public class IOManager
 	 * @param raumStruktur
 	 *            die aktuelle RaumStruktur
 	 * @param level
-	 * 			  das EditorLevel, welches die Levelinformationen enthält
+	 *            das EditorLevel, welches die Levelinformationen enthält
 	 */
-	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur, EditorLevel level)
+	public void schreibeLevelStruktur(String path, RaumStruktur raumStruktur,
+			EditorLevel level)
 	{
 		_strukParser = new RaumStrukturParser(path);
 		_strukParser.setAnzahlMaeuse(level.getMaeuse());
@@ -68,17 +69,17 @@ public class IOManager
 				_sammlParser.getSammlung().add(raum);
 			}
 		}
-		
+
 		// vorhandene Räume ersetzen
 		List<Raum> raeume = _sammlParser.getSammlung();
 		int l = raeume.size();
-		
-		for (Raum raum : raumListe)	// gehen neue räume durch
+
+		for(Raum raum : raumListe) // gehen neue räume durch
 		{
-			for (int i = 0; i < l; i++)	// und vergleichen mit den vorhandenen
+			for(int i = 0; i < l; i++) // und vergleichen mit den vorhandenen
 			{
 				Raum r = raeume.get(i);
-				if (raum.getId() == r.getId())	// wenn gleich, so solls überschreiben
+				if(raum.getId() == r.getId()) // wenn gleich, so solls überschreiben
 				{
 					_sammlParser.getSammlung().set(i, raum);
 					break;
@@ -108,18 +109,17 @@ public class IOManager
 	}
 
 	/**
-	 * Gibt true zurück, wenn die angegebene .xml
-	 * einen valide Struktur besitzt.
+	 * Gibt true zurück, wenn die angegebene .xml einen valide Struktur besitzt.
 	 * Es geht hierbei um die LevelXml!
 	 * 
 	 * @param path
-	 * 			Pfad der xml-Datei
+	 *            Pfad der xml-Datei
 	 */
 	public static boolean validiereLevel(String path)
 	{
 		return RaumStrukturParser.validiere(path);
 	}
-	
+
 	/**
 	 * Getter für die XML-Raum Liste die eingelesen wurde.
 	 * 
@@ -139,10 +139,9 @@ public class IOManager
 	{
 		return _sammlParser.getSammlung();
 	}
-	
+
 	/**
-	 * Gibt das {@link EditorLevel} zurück, welches die
-	 * Levelinformationen hält
+	 * Gibt das {@link EditorLevel} zurück, welches die Levelinformationen hält
 	 */
 	public EditorLevel getEditorLevel()
 	{
@@ -152,12 +151,12 @@ public class IOManager
 		level.setLeben(_strukParser.getLebenspunkte());
 		return level;
 	}
-	
+
 	public int getAnzahlMaeuse()
 	{
 		return _strukParser.getAnzahlMaeuse();
 	}
-	
+
 	public int getAnzahlKatzen()
 	{
 		return _strukParser.getAnzahlKatzen();

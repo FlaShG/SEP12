@@ -2,12 +2,13 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction.SuperFancyRe
  * @author 1roebe
  * 
  */
-public class Raumbilderzeuger
+class Raumbilderzeuger
 {
 
 	//	private final String PATH = getClass().getResource("bilder/").getPath();
@@ -58,13 +59,12 @@ public class Raumbilderzeuger
 	private LinkedList<Tupel> _itemPositionen;
 
 	private int _breitehoehe;
-	private Random _random;
-	private int _raumID;
-	private int[] _besuchteRaeume;
-	private String _gegangeneRichtung;
+	private String _gegangeneRichtung = "nord";
 
 	private ClientPaket _paket;
 	private boolean _schauenAnsicht;
+	private ArrayList<String> _aktuelleSpieler;
+	
 	private final Color[] KITTELFARBEN = new Color[] { Color.BLUE, Color.RED,
 			Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA };
 
@@ -73,8 +73,7 @@ public class Raumbilderzeuger
 		_drlittlepositionen = new LinkedList<Tupel>();
 		_mauspositionen = new LinkedList<Tupel>();
 		_itemPositionen = new LinkedList<Tupel>();
-		_random = new Random();
-
+		
 	}
 
 	/**
@@ -107,6 +106,7 @@ public class Raumbilderzeuger
 				_paket.buildUniqueID());
 
 		BufferedImage raum = null;
+		_aktuelleSpieler =  (ArrayList<String>) _paket.getAndereSpieler();
 
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
@@ -151,21 +151,40 @@ public class Raumbilderzeuger
 		int y = 0;
 		Tupel position;
 
-		// Male Dr.Little
-
-		//		Tupel position = _drlittlepositionen.get(_random.nextInt((_drlittlepositionen.size())));
-		//		int x = position.getX();
-		//		int y = position.getY();
-		//		g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
-
-		//andere spieler malen
-		for(String s : _paket.getAndereSpieler())
+		//male DRLittle
+		if(_gegangeneRichtung.equals("nord"))
 		{
-			position = entryPicker.pickAndRemoveFromList(_drlittlepositionen);
-			x = position.getX();
-			y = position.getY();
-			g2d.drawImage(DRLITTLE, x, y, 54, 54, null);
+			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 320, 520, 54, 54, null);
 		}
+		else if(_gegangeneRichtung.equals("ost"))
+		{
+			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 73, 320, 54, 54, null);
+		}
+		else if(_gegangeneRichtung.equals("süd"))
+		{
+			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 320, 70, 54, 54, null);
+		}
+		else if(_gegangeneRichtung.equals("west"))
+		{
+			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 520, 320, 54, 54, null);
+		}
+
+		
+		
+		for(int i = 0; i < _paket.getAndereSpieler().size();i++)
+		{
+			if(!_paket.getAndereSpieler().get(i).equals(_paket.getSpielerName()))
+			{
+				position = entryPicker.pick(_drlittlepositionen);
+				x = position.getX();
+				y = position.getY();
+				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler().get(i)), x, y, 54, 54, null);
+			}
+
+		}
+		
+		
+
 
 		//Male Maus
 
@@ -196,21 +215,10 @@ public class Raumbilderzeuger
 
 		for(Item item : raumItems)
 		{
-			switch (item)
-			{
-			case IKuchen:
-			case UKuchen:
-			case IGiftkuchen:
-			case UGiftkuchen:
+			if(item.isAnyKuchen())
 				anzahlKruemel++;
-				break;
-			case Gegengift:
+			if(item == Item.Gegengift)
 				gegengiftDa = true;
-				break;
-			default:
-				break;
-			}
-
 		}
 
 		for(int i = 0; i < anzahlKruemel; i++)
@@ -248,6 +256,50 @@ public class Raumbilderzeuger
 		return raum;
 
 	}
+
+	private Image getFarbigenDrLittle(String name)
+	{
+		BufferedImage drlittle = ladeBild(getClass().getResource("bilder/drlittle.png"));
+		int farbenauswahl =_aktuelleSpieler.indexOf(name);
+		
+		if(farbenauswahl != -1 && farbenauswahl < 10)
+		{
+			for(int i = 17; i < 54;i++)
+			{
+				for(int j = 0; j < 54;j++)
+				{
+					if(drlittle.getRGB(j, i) == Color.white.getRGB())
+					{
+						drlittle.setRGB(j, i, KITTELFARBEN[farbenauswahl].getRGB());
+					}
+				}
+			}
+			
+		}
+		else
+		{
+			for(int i = 17; i < 54;i++)
+			{
+				for(int j = 0; j < 54;j++)
+				{
+					if(drlittle.getRGB(j, i) == Color.white.getRGB())
+					{
+						drlittle.setRGB(j, i, Color.black.getRGB());
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		return drlittle;
+	}
+	
+
 
 	private void setPositionen()
 	{
@@ -393,6 +445,26 @@ public class Raumbilderzeuger
 	public void setPaket(ClientPaket paket)
 	{
 		_paket = paket;
+	}
+
+	public void setGehRichtung(String richtungsbefehl)
+	{
+		if(richtungsbefehl.contains("nord"))
+		{
+			_gegangeneRichtung = "nord";
+		}
+		else if(richtungsbefehl.contains("ost"))
+		{
+			_gegangeneRichtung = "ost";
+		}
+		else if(richtungsbefehl.contains("süd"))
+		{
+			_gegangeneRichtung = "süd";
+		}
+		else if(richtungsbefehl.contains("west"))
+		{
+			_gegangeneRichtung = "west";
+		}
 	}
 
 }

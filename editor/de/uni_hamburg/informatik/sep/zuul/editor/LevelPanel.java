@@ -3,9 +3,11 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import javax.swing.JPanel;
 
 /**
- * Zeigt die Einstellmöglichkeiten für levelglobale Einstellungen an. Siehe {@link EditorLevel}.
+ * Zeigt die Einstellmöglichkeiten für levelglobale Einstellungen an. Siehe
+ * {@link EditorLevel}.
+ * 
  * @author 0graeff
- *
+ * 
  */
 public class LevelPanel extends JPanel
 {
@@ -44,7 +46,7 @@ public class LevelPanel extends JPanel
 	{
 		return _maeuse.getWert();
 	}
-	
+
 	/**
 	 * Setzt die Katzenzahl.
 	 */

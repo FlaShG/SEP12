@@ -49,8 +49,8 @@ class BefehlFuettere implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus())
-				&& spieler.getInventar().hasAnyKuchen();
+		return ((raum.hasKatze() && !raum.getKatze().isSatt()) || raum
+				.hasMaus()) && spieler.getInventar().hasAnyKuchen();
 	}
 
 	@Override
@@ -70,7 +70,8 @@ class BefehlFuettere implements Befehl
 
 		if(raum.hasKatze())
 		{
-			return fuettereKatze(kontext, spieler, raum.getKatze(), kuchen);
+			raum.getKatze().fuettere(kontext, spieler, kuchen);
+			return true;
 		}
 		else if(raum.hasMaus())
 		{
@@ -100,12 +101,6 @@ class BefehlFuettere implements Befehl
 	static boolean fuettereKatze(ServerKontext kontext, Spieler spieler,
 			Katze katze, Item kuchen)
 	{
-		if(katze.isSatt())
-		{
-			kontext.schreibeAnSpieler(spieler,
-					TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
-			return false;
-		}
 		katze.fuettere(kontext, spieler, kuchen);
 
 		return true;
@@ -125,6 +120,11 @@ class BefehlFuettere implements Befehl
 		{
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
+		}
+		else if(raum.hasKatze() && raum.getKatze().isSatt())
+		{
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
 		}
 	}
 

@@ -15,12 +15,13 @@ public final class RaumBeschreibungAnzeigen implements Feature,
 	public static void zeigeRaumbeschreibung(ServerKontext kontext,
 			Spieler spieler)
 	{
-		kontext.schreibeAnSpieler(spieler, kontext.getAktuellenRaumZu(spieler).getBeschreibung());
+		kontext.schreibeAnSpieler(spieler, kontext.getAktuellenRaumZu(spieler)
+				.getBeschreibung());
 	}
 
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, Befehl befehl,
-			boolean hasRoomChanged)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			Befehl befehl, boolean hasRoomChanged)
 	{
 		if(hasRoomChanged)
 			RaumBeschreibungAnzeigen.zeigeRaumbeschreibung(kontext, spieler);

@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 /**
  * Hält levelglobale (raumunabhängige) Eigenschaften eines Levels.
+ * 
  * @author 0graeff
  */
 public class EditorLevel
@@ -25,7 +26,7 @@ public class EditorLevel
 	{
 		_maeuse = maeuse;
 	}
-	
+
 	/**
 	 * Gibt die Anzahl der Katzen des Levels zurück.
 	 */
@@ -33,7 +34,7 @@ public class EditorLevel
 	{
 		return _katzen;
 	}
-	
+
 	/**
 	 * Setzt die Anzahl der Katzen des Levels.
 	 */
@@ -43,15 +44,17 @@ public class EditorLevel
 	}
 
 	/**
-	 * Gibt die Start-Lebespunkte-Anzahl zurück, die der Spieler in diesem Level hat.
+	 * Gibt die Start-Lebespunkte-Anzahl zurück, die der Spieler in diesem Level
+	 * hat.
 	 */
 	public int getLeben()
 	{
 		return _leben;
 	}
-	
+
 	/**
-	 * Setzt die Start-Lebensenergie, die der Spieler in diesem Level haben wird. 
+	 * Setzt die Start-Lebensenergie, die der Spieler in diesem Level haben
+	 * wird.
 	 */
 	public void setLeben(int leben)
 	{
