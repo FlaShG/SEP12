@@ -8,6 +8,4 @@ public interface EditorBeobachter
 
 	public void verschiebenUpdate();
 	public void verschiebenUpdate(int x, int y);
-	
-	public void warpUpdate();
 }

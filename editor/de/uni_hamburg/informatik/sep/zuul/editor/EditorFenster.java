@@ -243,13 +243,6 @@ public class EditorFenster implements EditorBeobachter
 	{
 		unsavedChanges(true);
 	}
-	
-	@Override
-	public void warpUpdate()
-	{
-		if(_ui.getMap().buttonAusgewaehlt())
-			_warpModeSourceButton = _ui.getMap().getAktivenButton();
-	}
 
 	public EditorFensterUI getUI()
 	{
