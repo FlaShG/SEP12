@@ -211,6 +211,8 @@ public class EditorFenster implements EditorBeobachter
 								unsavedChanges(true);
 							}
 						});
+				//geht net.
+				_ui.getBearbeitenPanel().setzeFokusAufNamensFeld();
 			}
 		}
 

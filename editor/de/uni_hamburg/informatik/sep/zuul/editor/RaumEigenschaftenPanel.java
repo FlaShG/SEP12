@@ -91,4 +91,12 @@ public class RaumEigenschaftenPanel extends JPanel
 	{
 		return RaumArt.values()[_typ.getWert()];
 	}
+
+	/**
+	 * Setzt den Fokus auf das Namensfeld.
+	 */
+	public void setzeFokusAufNamensFeld()
+	{
+		_name.requestFocus();
+	}
 }
