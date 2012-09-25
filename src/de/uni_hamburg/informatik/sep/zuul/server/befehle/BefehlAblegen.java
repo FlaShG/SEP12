@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -17,8 +18,16 @@ final class BefehlAblegen implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.getAktuellenRaumZu(spieler).addItem(
-				spieler.getInventar().getAnyKuchen());
+		Item item = spieler.getInventar().getAnyKuchen();
+		switch (item)
+		{
+		case IKuchen:
+			item = Item.UKuchen;
+			break;
+		case IGiftkuchen:
+			item = Item.UGiftkuchen;
+		}
+		kontext.getAktuellenRaumZu(spieler).addItem(item);
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 
 		return true;
@@ -34,7 +43,7 @@ final class BefehlAblegen implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().isGefuellt()
+		return spieler.getInventar().hasAnyKuchen()
 				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN);
 	}
 
