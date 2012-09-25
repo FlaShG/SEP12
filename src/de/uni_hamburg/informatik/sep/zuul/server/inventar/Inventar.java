@@ -1,6 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.inventar;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ public class Inventar
 	 */
 	public Inventar()
 	{
-		_inhalt = new LinkedList<Item>();
+		_inhalt = new ArrayList<Item>();
 	}
 
 	/**
@@ -80,20 +80,7 @@ public class Inventar
 	 */
 	public boolean hasAnyKuchen()
 	{
-		for(Item item : _inhalt)
-		{
-			switch (item)
-			{
-			case UKuchen:
-			case IKuchen:
-			case UGiftkuchen:
-			case IGiftkuchen:
-				return true;
-			default:
-				break;
-			}
-		}
-		return false;
+		return hasAnyIKuchen() || hasAnyUKuchen();
 	}
 
 	/**
@@ -102,47 +89,13 @@ public class Inventar
 	 * @param item
 	 * @return
 	 * 
-	 * @require hasAnyKuchen(item)
+	 * @require has(item)
 	 */
 	public Item getKuchen(Item item)
 	{
-		assert hasAnyKuchen();
-
-		switch (item)
-		{
-		case IKuchen:
-			if(has(Item.IKuchen))
-			{
-				_inhalt.remove(Item.IKuchen);
-				return (Item.IKuchen);
-			}
-			break;
-		case UKuchen:
-			if(has(Item.UKuchen))
-			{
-				_inhalt.remove(Item.UKuchen);
-				return (Item.UKuchen);
-			}
-			break;
-		case IGiftkuchen:
-			if(has(Item.IGiftkuchen))
-			{
-				_inhalt.remove(Item.IGiftkuchen);
-				return (Item.IGiftkuchen);
-			}
-			break;
-		case UGiftkuchen:
-			if(has(Item.UGiftkuchen))
-			{
-				_inhalt.remove(Item.UGiftkuchen);
-				return (Item.UGiftkuchen);
-			}
-			break;
-		default:
-
-
-		}
-		return null;
+		assert has(item);
+		_inhalt.remove(item);
+		return item;
 	}
 
 	/**
@@ -152,11 +105,7 @@ public class Inventar
 	public Item getAnyKuchen()
 	{
 		assert hasAnyKuchen();
-
-		Item i = _inhalt.get(_inhalt.size()-1);
-		
-		_inhalt.remove(i);
-		return i;
+		return nehmeLetztesItem();
 	}
 
 	/**
@@ -165,23 +114,18 @@ public class Inventar
 	 */
 	public Item getAnyUKuchen()
 	{
-	    assert hasAnyKuchen();
+		assert hasAnyKuchen();
 
 		for(Item item : _inhalt)
 		{
-			switch (item)
+			if(item.isUKuchen())
 			{
-			case UKuchen:
-			case UGiftkuchen:
-				_inhalt.remove(item);
-				return item;
-			default:
-				break;
+				getKuchen(item);
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gibt an, ob die Liste das Item enthält
 	 * 
@@ -197,30 +141,24 @@ public class Inventar
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		
+
 		for(Item i : _inhalt)
 		{
 			builder.append(i).append(", ");
 		}
 
-		if (builder.length() > 2)
-			builder.setLength(builder.length() -2);
+		if(builder.length() > 2)
+			builder.setLength(builder.length() - 2);
 		return builder.toString();
 	}
 
 	public boolean hasAnyUKuchen()
 	{
-		for(Item item : _inhalt)
-		{
-			switch (item)
-			{
-			case UKuchen:
-			case UGiftkuchen:
-				return true;
-			default:
-				break;
-			}
-		}
-		return false;
+		return has(Item.UGiftkuchen) || has(Item.UKuchen);
+	}
+
+	public boolean hasAnyIKuchen()
+	{
+		return has(Item.IGiftkuchen) || has(Item.IKuchen);
 	}
 }

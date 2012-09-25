@@ -22,9 +22,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
 public class Server extends UnicastRemoteObject implements ServerInterface,
 		Observer
 {
-	
+
 	// Dummy
-	
+
 	/**
 	 * UID
 	 */
@@ -94,14 +94,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	{
 		boolean result;
 
-		
 		//Der Host connected sich zuerst
-		if (_connectedClients.isEmpty())
+		if(_connectedClients.isEmpty())
 		{
 			_hostName = name;
 			System.out.println("Host" + _hostName);
 		}
-		
+
 		if(_connectedClients.containsKey(name)
 				|| _connectedClients.containsValue(client))
 		{
@@ -129,8 +128,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_connectedClients.remove(name);
 
 		_spiel.meldeSpielerAb(name);
-		
-		if (name.equals(_hostName))
+
+		if(name.equals(_hostName))
 		{
 			for(ClientInterface client : _connectedClients.values())
 			{

@@ -174,7 +174,7 @@ public class StartFenster extends StartUp
 			{
 				try
 				{
-					new Server();
+					_server = new Server();
 					_client = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
 				}
 				catch(Exception e1)

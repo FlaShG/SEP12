@@ -52,13 +52,14 @@ public class SpeicherWerkzeug
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(new JPanel(), "Level erfüllt nicht die Anforderungen.", "Ungültiges Level", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JPanel(),
+					"Level erfüllt nicht die Anforderungen.",
+					"Ungültiges Level", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	/**
-	 * Validiert die Räume.
-	 * Folgendes gilt als valide:<br>
+	 * Validiert die Räume. Folgendes gilt als valide:<br>
 	 * - Ein einzelner Startraum vorhanden<br>
 	 * - Ein einzelner Endraum vorhanden<br>
 	 * - Verbindung zw. Start- und Endraum besteht<br>
@@ -70,21 +71,21 @@ public class SpeicherWerkzeug
 		int start = 0;
 		int ende = 0;
 		Raum startRaum = null;
-		
-		for (Raum r : _verbindungen.getRaumListe())
+
+		for(Raum r : _verbindungen.getRaumListe())
 		{
-			if (r.getRaumart() == RaumArt.Start)
+			if(r.getRaumart() == RaumArt.Start)
 			{
 				startRaum = r;
 				start++;
 			}
-			else if (r.getRaumart() == RaumArt.Ende)
+			else if(r.getRaumart() == RaumArt.Ende)
 				ende++;
 		}
-		
-		if (start == 1 && ende == 1)
+
+		if(start == 1 && ende == 1)
 		{//^-- überprüfe Anzahl von start- und endräumen
-			
+
 			PathFinder pf = new PathFinder()
 			{
 				@Override
@@ -93,24 +94,25 @@ public class SpeicherWerkzeug
 					return raum.getRaumart() == RaumArt.Ende;
 				}
 			};
-			
+
 			if(_ef.getEditorLevel().getLeben() > 0)
 				valid = false;
-			
+
 			if(pf.findPath(startRaum) != null)
 			{//^-- überprüfe Verbindung von start- und endraum
-				
+
 				int anzahlKatzen = _ef.getEditorLevel().getKatzen();
-				int zulAnzahlMaeuse = _verbindungen.getRaumListe().size() - 2 - anzahlKatzen;
+				int zulAnzahlMaeuse = _verbindungen.getRaumListe().size() - 2
+						- anzahlKatzen;
 				valid = zulAnzahlMaeuse >= _ef.getEditorLevel().getMaeuse();
 			}
 			else
 				valid = false;
-			
+
 		}
 		else
 			valid = false;
-		
+
 		return valid;
 	}
 

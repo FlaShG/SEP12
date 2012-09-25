@@ -1,21 +1,19 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettere implements Befehl
+class BefehlFuettere implements Befehl
 {
-
-	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE
-			+ " " + "maus";
-
 	/**
 	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der
 	 * Kuchen giftig ist.
@@ -29,10 +27,7 @@ public class BefehlFuettere implements Befehl
 		}
 		if(kuchen == Item.UGiftkuchen || kuchen == Item.IGiftkuchen)
 		{
-			LinkedList<String> richtungen = new LinkedList<String>();
-
-			for(String richtung : moeglicheRichtungen)
-				richtungen.add(richtung);
+			List<String> richtungen = Arrays.asList(moeglicheRichtungen);
 
 			richtungen.remove(richtigeRichtung);
 
@@ -54,59 +49,61 @@ public class BefehlFuettere implements Befehl
 	{
 		// Wenn eine Katze oder eine Maus gefüttert werden könnte
 		Raum raum = kontext.getAktuellenRaumZu(spieler);
-		return (raum.hasKatze() || raum.hasMaus())
-				&& spieler.getInventar().hasAnyKuchen();
+		return ((raum.hasKatze() && !raum.getKatze().isSatt()) || raum
+				.hasMaus()) && spieler.getInventar().hasAnyKuchen();
 	}
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
+		// Versuche eine Katze oder eine Maus zu füttern
+
+		Item kuchen = spieler.getInventar().getAnyKuchen();
+		return fuettereTierMit(kontext, spieler, kuchen);
+	}
+
+	static boolean fuettereTierMit(ServerKontext kontext, Spieler spieler,
+			Item kuchen)
+	{
+		Raum raum = kontext.getAktuellenRaumZu(spieler);
+
+		if(raum.hasKatze())
 		{
-			// Versuche eine Katze oder eine Maus zu füttern
-
-			Raum raum = kontext.getAktuellenRaumZu(spieler);
-
-			//wenn katze im raum
-
-			if(raum.hasKatze())
-			{
-
-				Katze katze = raum.getKatze();
-
-				if(katze.isSatt())
-				{
-					kontext.schreibeAnSpieler(spieler,
-							TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
-					return false;
-				}
-				Item kuchen = spieler.getInventar().getAnyKuchen();
-				katze.fuettere(kontext, spieler, kuchen);
-
-				return true;
-			}
-			else if(raum.hasMaus())
-			{
-				Item kuchen = spieler.getInventar().getAnyKuchen();
-				Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-
-				String richtigeRichtung = aktuellerRaum.getMaus().getRichtung();
-
-				String[] moeglicheRichtungen = aktuellerRaum
-						.getMoeglicheAusgaenge();
-
-				String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
-						moeglicheRichtungen);
-
-				String richtungsangabe = String.format(
-						TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
-
-				kontext.schreibeAnSpieler(spieler, richtungsangabe);
-
-				return true;
-			}
-			return false;
+			raum.getKatze().fuettere(kontext, spieler, kuchen);
+			return true;
 		}
+		else if(raum.hasMaus())
+		{
+			return fuettereMaus(kontext, spieler, kuchen, raum, raum.getMaus());
+		}
+		return false;
+	}
+
+	static boolean fuettereMaus(ServerKontext kontext, Spieler spieler,
+			Item kuchen, Raum aktuellerRaum, Maus maus)
+	{
+		String richtigeRichtung = maus.getRichtung();
+
+		String[] moeglicheRichtungen = aktuellerRaum.getMoeglicheAusgaenge();
+
+		String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
+				moeglicheRichtungen);
+
+		String richtungsangabe = String.format(
+				TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);
+
+		kontext.schreibeAnSpieler(spieler, richtungsangabe);
+
+		return true;
+	}
+
+	static boolean fuettereKatze(ServerKontext kontext, Spieler spieler,
+			Katze katze, Item kuchen)
+	{
+		katze.fuettere(kontext, spieler, kuchen);
+
+		return true;
 	}
 
 	@Override
@@ -124,6 +121,11 @@ public class BefehlFuettere implements Befehl
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN);
 		}
+		else if(raum.hasKatze() && raum.getKatze().isSatt())
+		{
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.KATZE_HAT_KEINEN_HUNGER);
+		}
 	}
 
 	@Override
@@ -137,5 +139,4 @@ public class BefehlFuettere implements Befehl
 	{
 		return TextVerwalter.HILFE_FEED;
 	}
-
 }

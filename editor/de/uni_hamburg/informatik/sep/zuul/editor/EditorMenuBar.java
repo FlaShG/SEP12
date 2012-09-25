@@ -14,11 +14,14 @@ import javax.swing.JPanel;
  */
 public class EditorMenuBar extends JPanel
 {
-	private JButton _new;
-	private JButton _save;
-	private JButton _load;
-	private JButton _resize;
+	private final JButton _new;
+	private final JButton _save;
+	private final JButton _load;
+	private final JButton _resize;
 
+	/**
+	 * Erstellt eine neue {@link EditorMenuBar}.
+	 */
 	public EditorMenuBar()
 	{
 		FlowLayout layout = new FlowLayout();
@@ -31,21 +34,41 @@ public class EditorMenuBar extends JPanel
 		add(_resize = new JButton("Kartengröße"));
 	}
 
+	/**
+	 * Gibt den "Neu"-Button zurück.
+	 * 
+	 * @ensure result != null
+	 */
 	public JButton getNeuButton()
 	{
 		return _new;
 	}
 
+	/**
+	 * Gibt den "Speichern"-Button zurück.
+	 * 
+	 * @ensure result != null
+	 */
 	public JButton getSpeicherButton()
 	{
 		return _save;
 	}
 
+	/**
+	 * Gibt den "Laden"-Button zurück.
+	 * 
+	 * @ensure result != null
+	 */
 	public JButton getLadenButton()
 	{
 		return _load;
 	}
-	
+
+	/**
+	 * Gibt den "Kartengröße"-Button zurück.
+	 * 
+	 * @ensure result != null
+	 */
 	public JButton getResizeButton()
 	{
 		return _resize;

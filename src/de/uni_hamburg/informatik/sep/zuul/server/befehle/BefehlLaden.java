@@ -21,7 +21,7 @@ public class BefehlLaden implements Befehl
 		//TODO Level laden
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
-			
+
 			String level = FileChooser.oeffneDatei();
 			//			Spiel.getInstance().spielen(level);
 		}

@@ -12,8 +12,8 @@ final class BefehlGehe implements Befehl
 {
 	String[] _shortcuts = new String[] { "n", "w", "s", "o" };
 	String[] _richtungen = new String[] { TextVerwalter.RICHTUNG_NORDEN,
-			TextVerwalter.RICHTUNG_OSTEN, TextVerwalter.RICHTUNG_SUEDEN,
-			TextVerwalter.RICHTUNG_WESTEN };
+			TextVerwalter.RICHTUNG_WESTEN, TextVerwalter.RICHTUNG_SUEDEN,
+			TextVerwalter.RICHTUNG_OSTEN };
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,

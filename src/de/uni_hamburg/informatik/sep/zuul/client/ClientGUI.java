@@ -272,14 +272,13 @@ public class ClientGUI extends Client
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
 
 		_hf.setVisible(true);
-		
+
 		_hf.addWindowListener(new WindowAdapter()
 		{
 			@Override
 			public void windowClosing(WindowEvent e)
 			{
-				
-				
+
 				try
 				{
 					_server.logoutClient(_clientName);
@@ -291,7 +290,7 @@ public class ClientGUI extends Client
 				}
 				System.exit(0);
 			}
-			
+
 		});
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
@@ -311,6 +310,8 @@ public class ClientGUI extends Client
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				_bilderzeuger.setGehRichtung(str);
 
 			}
 		});
@@ -328,18 +329,63 @@ public class ClientGUI extends Client
 		_bildPanel.getTuerNordButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_NORDEN));
+		
+		_bildPanel.getTuerNordButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe nord");
+			}
+		});
+		
+		
 
 		_bildPanel.getTuerOstButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_OSTEN));
+		
+		_bildPanel.getTuerOstButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe ost");
+			}
+		});
+		
+		
+		
 
 		_bildPanel.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+		
+		_bildPanel.getTuerSuedButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe süd");
+			}
+		});
 
 		_bildPanel.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		_bildPanel.getTuerWestButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe west");
+			}
+		});
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -437,7 +483,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue nord");
+					if(_bildPanel.getTuerNordButton().isEnabled())
+						sendeEingabe("schaue nord");
 				}
 
 			}
@@ -452,7 +499,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue ost");
+					if(_bildPanel.getTuerOstButton().isEnabled())
+						sendeEingabe("schaue ost");
 				}
 
 			}
@@ -467,7 +515,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue süd");
+					if(_bildPanel.getTuerSuedButton().isEnabled())
+						sendeEingabe("schaue süd");
 				}
 
 			}
@@ -482,7 +531,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue west");
+					if(_bildPanel.getTuerWestButton().isEnabled())
+						sendeEingabe("schaue west");
 				}
 			}
 		});
@@ -495,37 +545,120 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
-		
-		
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
+
+		// Nimmt diese Zeichen aus der Eingabe heraus...
+		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
 		{
 			@Override
-			public boolean dispatchKeyEvent(KeyEvent e)
+			public void keyTyped(KeyEvent e)
 			{
-				if (e.getID() == KeyEvent.KEY_PRESSED)
+				switch (e.getKeyChar())
 				{
-					switch(e.getKeyCode())
-					{
-						case KeyEvent.VK_UP:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
-							return true;
-						case KeyEvent.VK_DOWN:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
-							return true;
-						case KeyEvent.VK_RIGHT:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
-							return true;
-						case KeyEvent.VK_LEFT:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
-							return true;
-						default:
-							return false;
-					}
+				case '2':
+				case '4':
+				case '6':
+				case '8':
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+					e.consume();
+					break;
+				default:
+					break;
 				}
-				else
-					return false;
 			}
 		});
+
+		// global Keylistener
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+				.addKeyEventDispatcher(new KeyEventDispatcher()
+				{
+					@Override
+					public boolean dispatchKeyEvent(KeyEvent e)
+					{
+						if(e.getID() == KeyEvent.KEY_PRESSED)
+						{
+							if (e.isShiftDown())
+							{
+								switch (e.getKeyCode())
+								{
+									case KeyEvent.VK_NUMPAD8:
+									case KeyEvent.VK_UP:
+										if (_bildPanel.getTuerNordButton().isEnabled())
+											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
+													+ TextVerwalter.RICHTUNG_NORDEN);
+										return true;
+									case KeyEvent.VK_NUMPAD2:
+									case KeyEvent.VK_DOWN:
+										if (_bildPanel.getTuerSuedButton().isEnabled())
+											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
+													+ TextVerwalter.RICHTUNG_SUEDEN);
+										return true;
+									case KeyEvent.VK_NUMPAD6:
+									case KeyEvent.VK_RIGHT:
+										if(_bildPanel.getTuerOstButton().isEnabled())
+											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
+													+ TextVerwalter.RICHTUNG_OSTEN);
+										return true;
+									case KeyEvent.VK_NUMPAD4:
+									case KeyEvent.VK_LEFT:
+										if(_bildPanel.getTuerWestButton().isEnabled())
+											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
+													+ TextVerwalter.RICHTUNG_WESTEN);
+										return true;
+									default:
+										break;
+									}
+							}
+							switch (e.getKeyCode())
+							{
+								case KeyEvent.VK_NUMPAD8:
+								case KeyEvent.VK_UP:
+									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_NORDEN);
+									return true;
+								case KeyEvent.VK_NUMPAD2:
+								case KeyEvent.VK_DOWN:
+									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_SUEDEN);
+									return true;
+								case KeyEvent.VK_NUMPAD6:
+								case KeyEvent.VK_RIGHT:
+									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_OSTEN);
+									return true;
+								case KeyEvent.VK_NUMPAD4:
+								case KeyEvent.VK_LEFT:
+									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_WESTEN);
+									return true;
+								default:
+									break;
+							}
+							switch (e.getKeyChar())
+							{
+							case '+':
+								sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
+								return true;
+							case '-':
+								sendeEingabe(TextVerwalter.BEFEHL_ABLEGEN);
+								return true;
+							case '*':
+								sendeEingabe(TextVerwalter.BEFEHL_ESSEN + " "
+										+ TextVerwalter.ORT_TASCHE);
+								return true;
+							case '/':
+								sendeEingabe(TextVerwalter.BEFEHL_FUETTERE);
+								return true;
+							default:
+								return false;
+							}
+						}
+						else
+							return false;
+					}
+				});
 
 		createActionListenerMap();
 
@@ -613,10 +746,10 @@ public class ClientGUI extends Client
 	@Override
 	public void serverBeendet()
 	{
-		
+
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
@@ -631,6 +764,6 @@ public class ClientGUI extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		
+
 	}
 }
