@@ -225,41 +225,4 @@ public class EditorMap extends JPanel
 	{
 		return _buttons;
 	}
-
-	public void verschiebeAktuellenRaumRelativ(int x, int y)
-	{
-		if(!buttonAusgewaehlt())
-			return;
-		
-		if(_activeX + x < 0
-		|| _activeX + x >= _buttons.length
-		|| _activeY + y < 0
-		|| _activeY + y >= _buttons[0].length)
-			return;
-		
-		GridButton vorherigerButton = getAktivenButton();
-		
-		if(vorherigerButton != null)
-		{
-			GridButton neuerButton = _buttons[_activeX+x][_activeY+y];
-			
-			Raum raum = vorherigerButton.getRaum();
-			if(raum != null)
-			{
-				if(neuerButton.getRaum() == null)
-				{
-					_activeX += x;
-					_activeY += y;
-					
-					neuerButton.setRaum(raum);
-					//setRaum statt loscheRaum wegen setAusgewaehlt()
-					vorherigerButton.setRaum(null);
-	
-					vorherigerButton.setAusgewaehlt(false);
-					neuerButton.setAusgewaehlt(true);
-				}
-			}
-		}
-			
-	}
 }
