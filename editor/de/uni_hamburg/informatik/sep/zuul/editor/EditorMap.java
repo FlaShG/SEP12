@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -221,17 +222,34 @@ public class EditorMap extends JPanel
 	}
 
 	private void initialisiereButton(GridButton button, int x, int y)
-	{
-		button.addActionListener(new ActionListener()
+	{		
+		button.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void mouseClicked(MouseEvent arg0)
 			{
-				if(buttonAusgewaehlt())
-					_buttons[_activeX][_activeY].setAusgewaehlt(false);
-				_activeX = ((GridButton) arg0.getSource()).getGridX();
-				_activeY = ((GridButton) arg0.getSource()).getGridY();
-				_buttons[_activeX][_activeY].setAusgewaehlt(true);
+				switch(arg0.getClickCount())
+				{
+					case 1:
+						if(buttonAusgewaehlt())
+						{
+							_buttons[_activeX][_activeY].setAusgewaehlt(false);
+						}
+						_activeX = ((GridButton) arg0.getSource()).getGridX();
+						_activeY = ((GridButton) arg0.getSource()).getGridY();
+						_buttons[_activeX][_activeY].setAusgewaehlt(true);
+					break;
+					
+					case 2:
+						if(_buttons[_activeX][_activeY].getRaum() == null)
+						{
+							_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
+							informiereBeobachter();
+						}
+					break;
+					
+					default: return;
+				}
 				informiereBeobachter();
 			}
 		});
@@ -316,17 +334,19 @@ public class EditorMap extends JPanel
 			@Override
 			public void mouseEntered(MouseEvent arg0)
 			{
-				if(dragDropSource != null && dragDropSource != arg0.getSource())
+				if(dragDropSource != null)
 				{
 					GridButton destination = ((GridButton) arg0.getSource());
-					if(destination.getRaum() == null)
+					if(destination.getRaum() == null && dragDropSource != arg0.getSource())
 					{
 						dragDropTarget = destination;
 						destination.setBackground(new Color(1, 0.6f, 0.4f));
+						dragDropSource.setAusgewaehlt(false);
 					}
 					else
 					{
 						dragDropTarget = null;
+						dragDropSource.setAusgewaehlt(true);
 					}
 				}
 			}

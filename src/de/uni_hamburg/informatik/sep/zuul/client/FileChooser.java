@@ -35,17 +35,17 @@ public class FileChooser
 	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei
 	 *         ungültig ist.
 	 */
-	public static String oeffneDatei()
+	public static String oeffneDatei(JFileChooser chooser)
 	{
 		String level = null;
-		final JFileChooser fileChooser = konfiguriereFileChooser();
+		//		final JFileChooser fileChooser = konfiguriereFileChooser();
 
-		int returnVal = fileChooser.showOpenDialog(new JPanel());
+		int returnVal = chooser.showOpenDialog(new JPanel());
 
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
 
-			File file = fileChooser.getSelectedFile();
+			File file = chooser.getSelectedFile();
 			level = file.getAbsolutePath();
 		}
 		return level;
@@ -58,10 +58,9 @@ public class FileChooser
 	 * @return Den Dateipfad als String oder <code>null</code>, wenn die Datei
 	 *         ungültig ist.
 	 */
-	public static String speichereDatei()
+	public static String speichereDatei(JFileChooser fileChooser)
 	{
 		String level = null;
-		final JFileChooser fileChooser = konfiguriereFileChooser();
 
 		int returnVal = fileChooser.showSaveDialog(new JPanel());
 
@@ -74,7 +73,7 @@ public class FileChooser
 		return level;
 	}
 
-	private static JFileChooser konfiguriereFileChooser()
+	public static JFileChooser konfiguriereFileChooser()
 	{
 		final JFileChooser fileChooser = new JFileChooser("./xml_dateien/");
 		fileChooser.setFileFilter(new FileFilter()

@@ -58,7 +58,7 @@ public class ClientGUI extends Client
 		else
 		{
 			login();
-			_server.empfangeStartEingabe(_clientName);
+			_server.empfangeStartEingabe(getClientName());
 		}
 
 	}
@@ -91,7 +91,7 @@ public class ClientGUI extends Client
 
 				try
 				{
-					_server.empfangeStartEingabe(_clientName);
+					_server.empfangeStartEingabe(getClientName());
 				}
 				catch(RemoteException e)
 				{
@@ -281,7 +281,7 @@ public class ClientGUI extends Client
 
 				try
 				{
-					_server.logoutClient(_clientName);
+					_server.logoutClient(getClientName());
 				}
 				catch(RemoteException e1)
 				{
@@ -312,6 +312,7 @@ public class ClientGUI extends Client
 				}
 				
 				_bilderzeuger.setGehRichtung(str);
+				_bildPanel.versteckeSchauen();
 
 			}
 		});
@@ -336,7 +337,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe nord");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
 			}
 		});
 		
@@ -352,7 +353,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe ost");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
 			}
 		});
 		
@@ -369,7 +370,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe süd");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
 			}
 		});
 
@@ -383,9 +384,13 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe west");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
 			}
 		});
+		
+		
+		_bp.getBeinstellenButton().addActionListener(new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_BEINSTELLEN));
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -556,6 +561,7 @@ public class ClientGUI extends Client
 			{
 				switch (e.getKeyChar())
 				{
+				case '0':
 				case '2':
 				case '4':
 				case '6':
@@ -654,6 +660,9 @@ public class ClientGUI extends Client
 							// der rest
 							switch (e.getKeyChar())
 							{
+							case '0':
+								sendeEingabe(TextVerwalter.BEFEHL_BEINSTELLEN);
+								return true;
 							case '+':
 								sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
 								return true;

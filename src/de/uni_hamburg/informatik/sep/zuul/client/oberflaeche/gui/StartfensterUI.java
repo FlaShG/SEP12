@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -20,6 +21,8 @@ public class StartfensterUI extends JFrame
 	private JButton _eingabeBestaetigen;
 	private JButton _abbrechen;
 	private JButton _serverStarten;
+	private JButton _fileChooserButton;
+	private JButton _defaultMapButton;
 
 	public StartfensterUI()
 	{
@@ -30,6 +33,8 @@ public class StartfensterUI extends JFrame
 		_singlePlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_SINGLEPLAYER);
 		_multiPlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_MULTIPLAYER);
 		_serverStarten = new JButton("Erstelle öffentliches Spiel");
+		_fileChooserButton = new JButton("Level aus Datei laden");
+		_defaultMapButton = new JButton("StandardLevel");
 
 		add(_singlePlayer);
 		add(_multiPlayer);
@@ -79,6 +84,36 @@ public class StartfensterUI extends JFrame
 		add(_abbrechen);
 
 	}
+	
+	public void levelWaehlen()
+	{
+		//JPanel panel = new JPanel();
+		
+		//panel.setLayout(new GridLayout(0,1));
+		
+		//panel.add(_fileChooserButton);
+		//panel.add(_defaultMapButton);
+		
+		remove(_singlePlayer);
+		remove(_multiPlayer);
+		remove(_benutzerName);
+		remove(_serverStarten);
+		remove(_eingabeIP);
+		remove(_eingabeBestaetigen);
+		remove(_eingabePort);
+		remove(_multiPlayer);
+		remove(_singlePlayer);
+		
+		add(getFileChooserButton());
+		add(getDefaultMapButton());
+		
+		//setContentPane(panel);
+		setMinimumSize(new Dimension(300, 40));
+		setSize(new Dimension(300, 40));
+
+		
+		pack();
+	}
 
 	public JTextField getIPTextField()
 	{
@@ -109,5 +144,16 @@ public class StartfensterUI extends JFrame
 	{
 		return _serverStarten;
 	}
+
+	public JButton getDefaultMapButton()
+	{
+		return _defaultMapButton;
+	}
+
+	public JButton getFileChooserButton()
+	{
+		return _fileChooserButton;
+	}
+
 
 }

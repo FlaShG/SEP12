@@ -1,14 +1,26 @@
 package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+
+import javax.swing.JFileChooser;
+
+import org.junit.internal.runners.statements.RunAfters;
 
 import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
+import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 
 public class StartFenster extends StartUp
 {
@@ -45,29 +57,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				try
-				{
-					_server = new Server();
-				}
-				catch(Exception e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				try
-				{
-					_client = new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
-				}
-				catch(Exception e1)
-				{
-					e1.printStackTrace();
-				}
-
-				finally
-				{
-					_ui.dispose();
-				}
+				starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
 			}
 		});
 
@@ -90,18 +80,7 @@ public class StartFenster extends StartUp
 
 				_spielername = _ui.getSpielerNameTextField().getText();
 
-				try
-				{
-					_client = new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-				finally
-				{
-					_ui.dispose();
-				}
+				starteRMI("RmiServer", _ipAdresse, _port, _spielername, false);
 
 			}
 
@@ -172,23 +151,51 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				try
-				{
-					_server = new Server();
-					_client = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
-				}
-				catch(Exception e1)
-				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				finally
-				{
-					_ui.dispose();
-				}
+				_ui.levelWaehlen();
 			}
 		});
 
+		_ui.getFileChooserButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				dateiAuswaehlen();
+			}
+
+		});
+
+		_ui.getDefaultMapButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
+			}
+
+		});
+
+	}
+
+	private void dateiAuswaehlen()
+	{
+
+		Runnable run = new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				JFileChooser chooser;
+				chooser = FileChooser.konfiguriereFileChooser();
+				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
+				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
+			}
+		};
+
+		EventQueue.invokeLater(run);
 	}
 
 	private void pruefeEingabe()
@@ -210,5 +217,37 @@ public class StartFenster extends StartUp
 			_ui.getBestaetigen().setEnabled(false);
 		}
 
+	}
+
+	private void starteRMI(final String serverName, final String serverIP,
+			final int port, final String clientName, final boolean serverStarten)
+	{
+		Runnable run = new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				try
+				{
+					if(serverStarten)
+					{
+						_server = new Server();
+					}
+					_client = new ClientGUI(serverName, serverIP, port, clientName);
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				finally
+				{
+					_ui.dispose();
+				}
+			}
+		};
+
+		Thread rmiThread = new Thread(run, "ZuulRMIThread");
+		rmiThread.start();
 	}
 }

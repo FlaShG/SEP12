@@ -159,4 +159,17 @@ public final class TextVerwalter
 	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
 	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie ein Port ein: ";
 
+	public static final String BEFEHL_BEINSTELLEN = "bein stellen";
+	public static final String BEINSTELLEN_KEINER_DA = "Hier ist niemand, dem du ein Bein stellen könntest.";
+	public static final String BEINSTELLEN_AUFSTEHEN = "Du stehst langsam wieder auf und kannst weiterspielen.";
+	public static final String BEINSTELLEN_GEFALLEN_INAKTIV = " liegt am Boden und kann sich vor Schmerzen nicht bewegen.";
+	public static final String beinstellenAnderemSpieler(String spielername)
+	{
+		return "Du schmeißt " + spielername + " zu Boden.";
+	}
+	public static final String beinstellenBekommen(String spielername)
+	{
+		return "Du wirst von " + spielername + " zu Boden geschmissen.";
+	}
+
 }
