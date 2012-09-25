@@ -33,6 +33,9 @@ public class BefehlsPanel extends JPanel
 			"bilder/kruemel_schlecht.png"));
 	private final ImageIcon UNBEKANNT = new ImageIcon(getClass().getResource(
 			"bilder/kruemel.png"));
+	private final ImageIcon BEINSTELLEN = new ImageIcon(getClass().getResource(
+			"bilder/beinstellen.png"));
+	
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;
@@ -52,6 +55,7 @@ public class BefehlsPanel extends JPanel
 	private JButton _ablegenSchlechtButton;
 	private JButton _ablegenUnbekanntButton;
 	private JButton _inventarButton;
+	private JButton _beinstellenButton;
 	private JButton[] _normalButtons;
 	private JButton[] _extraButtons;
 	private JButton[] _systemButtons;
@@ -123,6 +127,9 @@ public class BefehlsPanel extends JPanel
 		_quitButton = new JButton(new ImageIcon(getClass().getResource(
 				"bilder/exitIcon.gif")));
 		_quitButton.setBackground(new Color(0, 175, 0));
+		
+		_beinstellenButton = new JButton(BEINSTELLEN);
+		
 
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
@@ -132,7 +139,7 @@ public class BefehlsPanel extends JPanel
 				_fuettereSchlechtButton, _fuettereUnbekanntButton,
 				_ablegenGutButton, _ablegenSchlechtButton,
 				_ablegenUnbekanntButton, _essenTascheGutButton,
-				_essenTascheSchlechtButton, _essenTascheUnbekanntButton };
+				_essenTascheSchlechtButton, _essenTascheUnbekanntButton};
 		_systemButtons = new JButton[] { _helpButton, _ladenButton, _quitButton };
 
 		for(JButton b : _normalButtons)
@@ -156,7 +163,15 @@ public class BefehlsPanel extends JPanel
 			b.setSize(50, 50);
 			add(b);
 		}
-
+		
+		_beinstellenButton.setSize(50, 50);
+		_beinstellenButton.setFocusable(false);
+		_beinstellenButton.setToolTipText("Einem Gegner ein Bein stellen");
+		
+		
+		
+		
+		add(_beinstellenButton);
 		add(_labelFuerLebensenergie);
 
 		addComponentListener(new ComponentAdapter()
@@ -208,6 +223,12 @@ public class BefehlsPanel extends JPanel
 						_fuettereSchlechtButton.getLocation().x
 								+ _fuettereSchlechtButton.getWidth() + 1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
+				
+				
+				_beinstellenButton.setSize(48,48);
+				_beinstellenButton.setLocation(_fuettereGutButton.getX(), _fuettereGutButton.getY() + buttonhoeheExtra);
+				
+				
 
 				//rechte Spalte
 
@@ -414,4 +435,11 @@ public class BefehlsPanel extends JPanel
 	{
 		return _systemButtons;
 	}
+
+	public JButton getBeinstellenButton()
+	{
+		return _beinstellenButton;
+	}
+
+	
 }

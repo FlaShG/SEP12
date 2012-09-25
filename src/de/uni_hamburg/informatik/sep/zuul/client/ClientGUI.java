@@ -337,7 +337,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe nord");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
 			}
 		});
 		
@@ -353,7 +353,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe ost");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
 			}
 		});
 		
@@ -370,7 +370,7 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe süd");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
 			}
 		});
 
@@ -384,9 +384,13 @@ public class ClientGUI extends Client
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_bilderzeuger.setGehRichtung("gehe west");
+				_bilderzeuger.setGehRichtung(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
 			}
 		});
+		
+		
+		_bp.getBeinstellenButton().addActionListener(new ActionListenerBefehlAusfuehren(""));
+		
 
 		_bp.getQuitButton()
 				.addActionListener(
