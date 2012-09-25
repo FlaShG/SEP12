@@ -34,7 +34,7 @@ public class EditorFenster implements EditorBeobachter
 	private WindowListener _windowListener;
 	
 	/**
-	 * Erstellt ein neues EditorFenster.
+	 * Erstellt ein neues {@link EditorFenster}.
 	 */
 	public EditorFenster()
 	{
@@ -247,7 +247,7 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	/**
-	 * Gibt die UI dieses Werkzeugs zurück
+	 * Gibt die UI dieses Werkzeugs zurück.
 	 */
 	public EditorFensterUI getUI()
 	{
@@ -255,7 +255,7 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	/**
-	 * Gibt den aktuellen EditorLevel zurück, der die levelglobalen Infos hält.
+	 * Gibt den aktuellen {@link EditorLevel} zurück, der die levelglobalen Infos hält.
 	 */
 	public EditorLevel getEditorLevel()
 	{
@@ -263,8 +263,8 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	/**
-	 * Setzt den EditorLevel und passt die GUI daran an.
-	 * @param editorLevel der neue EditorLevel
+	 * Setzt den {@link EditorLevel} und passt die GUI daran an.
+	 * @param editorLevel der neue {@link EditorLevel}
 	 */
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
@@ -279,7 +279,7 @@ public class EditorFenster implements EditorBeobachter
 	/**
 	 * Setzt, ob es ungespeicherte Änderungen im Editor gibt
 	 * und zeigt diese Info im Fenstzer an.
-	 * @param yes ob es ungespeicherte Änderung gibt
+	 * @param yes ob es ungespeicherte Änderungen gibt
 	 */
 	public void unsavedChanges(boolean yes)
 	{
