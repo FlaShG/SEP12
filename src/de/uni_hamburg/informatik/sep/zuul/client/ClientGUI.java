@@ -312,6 +312,7 @@ public class ClientGUI extends Client
 				}
 				
 				_bilderzeuger.setGehRichtung(str);
+				_bildPanel.versteckeSchauen();
 
 			}
 		});

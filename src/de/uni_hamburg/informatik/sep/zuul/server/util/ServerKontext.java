@@ -106,7 +106,6 @@ public class ServerKontext
 	public List<String> getSpielerNamenInRaum(Raum aktuellerRaum)
 	{
 		ArrayList<String> result = new ArrayList<String>();
-		assert _spielerPosition.containsValue(aktuellerRaum);
 
 		for(Spieler s : _spielerPosition.keySet())
 		{

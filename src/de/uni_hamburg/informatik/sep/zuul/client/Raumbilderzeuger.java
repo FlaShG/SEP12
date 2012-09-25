@@ -212,6 +212,11 @@ class Raumbilderzeuger
 				
 				
 				position = entryPicker.pick(_drlittlepositionen);
+				_drlittlepositionen.remove(position);
+				
+				if(position == null)
+					position = new Tupel(245, 238);
+				
 				x = position.getX();
 				y = position.getY();
 				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler()
@@ -226,6 +231,8 @@ class Raumbilderzeuger
 		{
 			Tupel mausposition = entryPicker
 					.pickAndRemoveFromList(_mauspositionen);
+			if(mausposition == null);
+				mausposition = new Tupel(70, 70);
 			x = mausposition.getX();
 			y = mausposition.getY();
 
@@ -236,6 +243,9 @@ class Raumbilderzeuger
 		if(_paket.hasKatze())
 		{
 			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			if(pos == null)
+				pos = new Tupel(70, 470);
+				
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
@@ -258,6 +268,9 @@ class Raumbilderzeuger
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
 			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
+			if(itempos == null)
+				itempos = new Tupel(200, 180);
+				
 			x = itempos.getX();
 			y = itempos.getY();
 
@@ -268,6 +281,9 @@ class Raumbilderzeuger
 		{
 			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
 			_itemPositionen.remove(itempos);
+			if(itempos == null)
+				itempos = new Tupel(200, 180);
+			
 			x = itempos.getX();
 			y = itempos.getY();
 
@@ -344,7 +360,7 @@ class Raumbilderzeuger
 		_itemPositionen.add(new Tupel(220, 300));
 		_itemPositionen.add(new Tupel(165, 395));
 		_itemPositionen.add(new Tupel(380, 155));
-		_itemPositionen.add(new Tupel(330, 230));
+		_itemPositionen.add(new Tupel(234, 419));
 		_itemPositionen.add(new Tupel(430, 205));
 		_itemPositionen.add(new Tupel(300, 375));
 		_itemPositionen.add(new Tupel(400, 330));
@@ -357,10 +373,11 @@ class Raumbilderzeuger
 		_mauspositionen.add(new Tupel(470, 470));
 
 		_drlittlepositionen = new LinkedList<Tupel>();
-		_drlittlepositionen.add(new Tupel(73, 320));
-		_drlittlepositionen.add(new Tupel(520, 320));
-		_drlittlepositionen.add(new Tupel(320, 70));
-		_drlittlepositionen.add(new Tupel(320, 520));
+		_drlittlepositionen.add(new Tupel(245,238));
+		_drlittlepositionen.add(new Tupel(252,325));
+		_drlittlepositionen.add(new Tupel(324,214));
+		_drlittlepositionen.add(new Tupel(346,285));
+		_drlittlepositionen.add(new Tupel(340,355));
 
 	}
 

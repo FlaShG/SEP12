@@ -232,9 +232,9 @@ public class StartFenster extends StartUp
 				{
 					if(serverStarten)
 					{
-						new Server();
+						_server = new Server();
 					}
-					new ClientGUI(serverName, serverIP, port, clientName);
+					_client = new ClientGUI(serverName, serverIP, port, clientName);
 				}
 				catch(Exception e1)
 				{

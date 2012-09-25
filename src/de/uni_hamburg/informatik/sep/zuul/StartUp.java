@@ -1,5 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul;
 
+import java.awt.DefaultKeyboardFocusManager;
+import java.awt.KeyboardFocusManager;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -73,6 +75,7 @@ public class StartUp
 		startUp._client.serverBeendet();
 		startUp._client = null;
 		System.gc();
+		KeyboardFocusManager.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
 		runnable.run();
 	}
 	
