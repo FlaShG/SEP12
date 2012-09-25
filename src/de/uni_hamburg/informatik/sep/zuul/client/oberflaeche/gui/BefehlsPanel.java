@@ -57,6 +57,8 @@ public class BefehlsPanel extends JPanel
 	private JButton[] _systemButtons;
 
 	private JLabel _labelFuerLebensenergie;
+	private int _lebensenergieMaximum;
+	private int _lebensenergieAktuell;
 
 	private static final long serialVersionUID = 1L;
 
@@ -67,6 +69,8 @@ public class BefehlsPanel extends JPanel
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
+		_lebensenergieMaximum = 8;
+		_lebensenergieAktuell = _lebensenergieMaximum;
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -253,7 +257,7 @@ public class BefehlsPanel extends JPanel
 
 				_labelFuerLebensenergie.setSize(50,
 						BefehlsPanel.this.getHeight());
-				setLebensenergie(16);
+				setLebensenergie(_lebensenergieAktuell);
 
 			}
 
@@ -320,10 +324,9 @@ public class BefehlsPanel extends JPanel
 					_labelFuerLebensenergie.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
 
-			int maxLife = 8;
-			int currentlife = lebensenergie;
+			_lebensenergieAktuell = lebensenergie;
 
-			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (currentlife / (maxLife / 100.0)));
+			int balkenhoehe = (int) (_labelFuerLebensenergie.getHeight() / 100.0 * (_lebensenergieAktuell / (_lebensenergieMaximum / 100.0)));
 
 			GradientPaint gp = new GradientPaint(new Point2D.Double(0,
 					_labelFuerLebensenergie.getHeight() - balkenhoehe),

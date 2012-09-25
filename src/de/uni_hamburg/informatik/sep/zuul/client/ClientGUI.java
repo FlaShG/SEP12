@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +109,7 @@ public class ClientGUI extends Client
 		_bilderzeuger = new Raumbilderzeuger();
 		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
+		aktualisiereUI(paket, false);
 	}
 
 	@Override
@@ -215,10 +215,8 @@ public class ClientGUI extends Client
 		}
 	}
 
-	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	private void aktualisiereMoeglicheAusgaenge(List<String> list)
 	{
-		List<String> list = Arrays.asList(ausgaenge);
-
 		boolean n = list.contains(TextVerwalter.RICHTUNG_NORDEN);
 		boolean o = list.contains(TextVerwalter.RICHTUNG_OSTEN);
 		boolean s = list.contains(TextVerwalter.RICHTUNG_SUEDEN);
