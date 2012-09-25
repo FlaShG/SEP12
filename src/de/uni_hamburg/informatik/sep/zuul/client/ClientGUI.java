@@ -483,7 +483,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue nord");
+					if(_bildPanel.getTuerNordButton().isEnabled())
+						sendeEingabe("schaue nord");
 				}
 
 			}
@@ -498,7 +499,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue ost");
+					if(_bildPanel.getTuerOstButton().isEnabled())
+						sendeEingabe("schaue ost");
 				}
 
 			}
@@ -513,7 +515,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue süd");
+					if(_bildPanel.getTuerSuedButton().isEnabled())
+						sendeEingabe("schaue süd");
 				}
 
 			}
@@ -528,7 +531,8 @@ public class ClientGUI extends Client
 				if(SwingUtilities.isRightMouseButton(m)
 						&& m.getClickCount() == 1)
 				{
-					sendeEingabe("schaue west");
+					if(_bildPanel.getTuerWestButton().isEnabled())
+						sendeEingabe("schaue west");
 				}
 			}
 		});
