@@ -17,7 +17,7 @@ public final class EditorStartup
 	}
 
 	/**
-	 * @param args
+	 * @param args ignoriert.
 	 */
 	public static void main(String[] args)
 	{
