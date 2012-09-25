@@ -31,10 +31,20 @@ public class ClientPaket implements Remote, Serializable
 	private String _spielerName;
 	private String[] _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
-	
+	private boolean _dead;
+	private boolean _showLoseScreen;
+	private boolean _showWinScreen;
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
+		_dead = !spieler.isAlive();
+		if(!spieler.isAlive())
+		{
+			// TODO: win / lose screen
+			_showLoseScreen = true;
+			_showWinScreen = false;
+		}
+
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 
 		_raumID = aktuellerRaum.getId();
@@ -54,8 +64,10 @@ public class ClientPaket implements Remote, Serializable
 			String befehlsname = entry.getKey();
 			Befehl befehl = entry.getValue();
 
-			_verfuegbareBefehle.put(befehlsname, befehl.vorbedingungErfuellt(
-					kontext, spieler, new Befehlszeile(befehlsname)));
+			_verfuegbareBefehle.put(
+					befehlsname,
+					_dead ? false : befehl.vorbedingungErfuellt(kontext,
+							spieler, new Befehlszeile(befehlsname)));
 		}
 	}
 
@@ -116,4 +128,21 @@ public class ClientPaket implements Remote, Serializable
 	{
 		return _verfuegbareBefehle;
 	}
+
+	/**
+	 * @return the showLoseScreen
+	 */
+	public boolean isShowLoseScreen()
+	{
+		return _showLoseScreen;
+	}
+
+	/**
+	 * @return the showWinScreen
+	 */
+	public boolean isShowWinScreen()
+	{
+		return _showWinScreen;
+	}
+
 }

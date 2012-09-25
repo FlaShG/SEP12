@@ -132,9 +132,16 @@ public class Spiel extends Observable
 	 */
 	public void verarbeiteEingabe(String benutzerName, String eingabe)
 	{
+
 		System.err.println(benutzerName + ": " + eingabe);
-		
+
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+
+		if(!spieler.isAlive())
+		{
+			// TODO: Spieler tod, was tun?
+			return;
+		}
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
@@ -143,7 +150,7 @@ public class Spiel extends Observable
 		{
 			if(!_logik.fuehreBefehlAusgefuehrenListenerAus(spieler, befehl))
 				return;
-			
+
 			Raum alterRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			boolean result = Spiel.versucheBefehlAusfuehrung(
@@ -152,7 +159,7 @@ public class Spiel extends Observable
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
-			if(result)
+			if(result && spieler.isAlive())
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
 

@@ -62,8 +62,8 @@ public class BefehlEssenTasche implements Befehl
 			}
 			else
 			{
-				BefehlFactory.beendeSpielFuer(kontext, spieler,
-						TextVerwalter.KUCHENTODTEXT);
+				spieler.die();
+				kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENTODTEXT);
 			}
 			break;
 		}
