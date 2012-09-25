@@ -22,13 +22,14 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class BefehlsPanel extends JPanel
 {
 	//TODO ANZAHLBUTTONS BEI NEUEN BEFEHLEN ANPASSEN!!!
-	private final String PATH = getClass().getResource("bilder/").getPath();
-	private final int ZEILENANZAHL = 5;
-	private final int ABSTAND_NORMAL = 5;
-	private final int ABSTAND_EXTRA = 2;
-	private final String GUT = "Gut";
-	private final String SCHLECHT = "Giftig";
-	private final String UNBEKANNT = "Unbekannt";
+	public static final String PATH = BefehlsPanel.class.getResource("bilder/")
+			.getPath();
+	public static final int ZEILENANZAHL = 5;
+	public static final int ABSTAND_NORMAL = 5;
+	public static final int ABSTAND_EXTRA = 2;
+	public static final String GUT = "Gut";
+	public static final String SCHLECHT = "Giftig";
+	public static final String UNBEKANNT = "Unbekannt";
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;

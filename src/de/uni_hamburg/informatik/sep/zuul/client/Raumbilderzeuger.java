@@ -314,7 +314,7 @@ public class Raumbilderzeuger
 	 * @return ein neu skaliertes Bild vom zuletzt gemaltem Raum
 	 */
 
-	public BufferedImage ZeichneBildErneut(int hoehebreite)
+	public BufferedImage zeichneBildErneut(int hoehebreite)
 	{
 		_breitehoehe = hoehebreite;
 		return erzeugeRaumansicht();
