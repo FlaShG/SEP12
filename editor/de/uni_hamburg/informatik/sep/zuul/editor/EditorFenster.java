@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Stack;
 
+import javax.swing.JFileChooser;
+
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -98,7 +100,9 @@ public class EditorFenster implements EditorBeobachter
 												"Level laden",
 												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
-							String str = FileChooser.oeffneDatei();
+							JFileChooser chooser = FileChooser
+									.konfiguriereFileChooser();
+							String str = FileChooser.oeffneDatei(chooser);
 							if(str != null && !str.equals(""))
 							{
 								resetEditorFenster(1, 1);
@@ -278,14 +282,16 @@ public class EditorFenster implements EditorBeobachter
 
 	/**
 	 * Setzt den {@link EditorLevel} und passt die GUI daran an.
-	 * @param editorLevel der neue {@link EditorLevel}
+	 * 
+	 * @param editorLevel
+	 *            der neue {@link EditorLevel}
 	 * 
 	 * @require editorLevel != null
 	 */
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
 		assert editorLevel != null : "Vorbedingung verletzt: editorLevel != null";
-		
+
 		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
