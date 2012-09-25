@@ -615,23 +615,31 @@ public class ClientGUI extends Client
 							{
 								case KeyEvent.VK_NUMPAD8:
 								case KeyEvent.VK_UP:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_NORDEN);
+									String befehl_up = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_NORDEN; 
+									sendeEingabe(befehl_up);
+									_bilderzeuger.setGehRichtung(befehl_up);
 									return true;
 								case KeyEvent.VK_NUMPAD2:
 								case KeyEvent.VK_DOWN:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_SUEDEN);
+									String befehl_down = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_SUEDEN;
+									sendeEingabe(befehl_down);
+									_bilderzeuger.setGehRichtung(befehl_down);
 									return true;
 								case KeyEvent.VK_NUMPAD6:
 								case KeyEvent.VK_RIGHT:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_OSTEN);
+									String befehl_right = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_OSTEN;
+									sendeEingabe(befehl_right);
+									_bilderzeuger.setGehRichtung(befehl_right);
 									return true;
 								case KeyEvent.VK_NUMPAD4:
 								case KeyEvent.VK_LEFT:
-									sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_WESTEN);
+									String befehl_left = TextVerwalter.BEFEHL_GEHEN + " "
+											+ TextVerwalter.RICHTUNG_WESTEN;
+									sendeEingabe(befehl_left);
+									_bilderzeuger.setGehRichtung(befehl_left);
 									return true;
 								default:
 									break;
