@@ -124,4 +124,9 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 
 	}
+	
+	public void serverBeendet()
+	{
+		
+	}
 }

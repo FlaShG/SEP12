@@ -11,6 +11,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -21,6 +23,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -269,6 +272,27 @@ public class ClientGUI extends Client
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
 
 		_hf.setVisible(true);
+		
+		_hf.addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				
+				
+				try
+				{
+					_server.logoutClient(_clientName);
+				}
+				catch(RemoteException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+			
+		});
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
 
@@ -584,5 +608,28 @@ public class ClientGUI extends Client
 			// TODO: exception verarbeiten
 			e1.printStackTrace();
 		}
+	}
+
+	@Override
+	public void serverBeendet()
+	{
+		
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			
+			@Override
+			public void run()
+			{
+				JOptionPane.showMessageDialog(null, "Server wurde beendet");
+				System.exit(0);
+			}
+		});
+		_hf.dispose();
+	}
+
+	@Override
+	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
+	{
+		
 	}
 }

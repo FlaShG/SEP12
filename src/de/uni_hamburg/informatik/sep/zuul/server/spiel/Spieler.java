@@ -10,6 +10,7 @@ public class Spieler
 	private Inventar _inventar;
 	private boolean _aktiv; // zustand des Spielers (Bein gestellt - disabled,
 							// sonst enabled).
+	private boolean _gewonnen;
 
 	/**
 	 * Erzeuge einen neuen Spieler, der ein Inventar, Lebensenergie und einen
@@ -68,9 +69,22 @@ public class Spieler
 		_lebensEnergie = 0;
 	}
 
-	public boolean isAlive()
+	public boolean lebendig()
 	{
 		return _lebensEnergie > 0;
+	}
+
+	public void gewinnt()
+	{
+		_gewonnen = true;
+	}
+
+	/**
+	 * @return the gewonnen
+	 */
+	public boolean hatGewonnen()
+	{
+		return _gewonnen;
 	}
 
 }
