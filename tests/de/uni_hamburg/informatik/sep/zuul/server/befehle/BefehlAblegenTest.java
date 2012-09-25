@@ -36,13 +36,12 @@ public class BefehlAblegenTest
 	@Before
 	public void setUp() throws Exception
 	{
-		kontext.setAktuellenRaumZu(spieler, raum);
-		inventar.fuegeItemHinzu(Item.UKuchen);
-		//		   inventar.fuegeItemHinzu(Item.UGiftkuchen);
-		//		   inventar.fuegeItemHinzu(Item.IKuchen);
-		//		   inventar.fuegeItemHinzu(Item.IGiftkuchen);
-		spieler.setInventar(inventar);
-		spielerleeresInventar.setInventar(inventar2);
+
+		   kontext.setAktuellenRaumZu(spieler, raum);
+		   inventar.fuegeItemHinzu(Item.UKuchen);
+		   spieler.setInventar(inventar);
+		   spielerleeresInventar.setInventar(inventar2);
+		     
 
 	}
 
