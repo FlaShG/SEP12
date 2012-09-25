@@ -18,19 +18,20 @@ public class StartConsole
 			MalformedURLException, NotBoundException
 	{
 		consoleAnzeigen("Wie wollen sie spielen?(einzelspieler oder mehrspieler): ");
-		switch (consoleLesen())
+		String eingabe = consoleLesen();
+		if(eingabe.equals("einzelspiel")
+		|| eingabe.equals("einzelspieler")
+		|| eingabe.equals("allein")
+		|| eingabe.equals("e"))
 		{
-		case "einzelspiel":
-		case "einzelspieler":
-		case "allein":
-		case "e":
 			new Server();
 			new ClientConsole("RmiServer", "127.0.0.1", 1090, "Dr.Little");
-			break;
-		case "multispiel":
-		case "mehrspieler":
-		case "m":
-		case "multiplayer":
+		}
+		else if(eingabe.equals("multispiel")
+		|| eingabe.equals("mehrspieler")
+		|| eingabe.equals("multiplayer")
+		|| eingabe.equals("m"))
+		{
 			String ip = "127.0.0.1";
 			String port = "1090";
 			consoleAnzeigen("Wollen sie einen Öffentliches Spiel erstellen?. Standard ist n: ");
@@ -49,8 +50,6 @@ public class StartConsole
 			consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
 			String name = consoleLesen();
 			new ClientConsole("RmiServer", ip, Integer.parseInt(port), name);
-			break;
-
 		}
 	}
 
