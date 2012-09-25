@@ -38,11 +38,6 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		{
 			bewegeKatze(kontext);
 		}
-		if(_raum == null)
-		{
-			System.err.println("Katze tot.");
-		}
-
 	}
 
 	private void bewegeKatze(ServerKontext kontext)
