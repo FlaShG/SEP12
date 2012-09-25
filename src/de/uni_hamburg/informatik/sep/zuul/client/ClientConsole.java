@@ -16,7 +16,7 @@ public class ClientConsole extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
-		if(!serverIP.equals("127.0.0.1"))
+		if(!clientName.equals("Dr.Little"))
 		{
 			warteFenster();
 		}
@@ -85,7 +85,7 @@ public class ClientConsole extends Client
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		if (paket.getNachricht() != null)
+		if(paket.getNachricht() != null)
 		{
 			for(String zeile : paket.getNachricht().split("\n"))
 				System.out.println(zeile);
