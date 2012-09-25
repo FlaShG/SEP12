@@ -101,7 +101,7 @@ public class EditorMap extends JPanel
 	{
 		if(buttonAusgewaehlt())
 		{
-			_buttons[_activeX][_activeY].loescheRaum();
+			_buttons[_activeX][_activeY].loescheRaumUndSetzeAufAusgewaehlt();
 			informiereBeobachter();
 		}
 	}
@@ -237,7 +237,7 @@ public class EditorMap extends JPanel
 						if(dragDropTarget.getRaum() == null)
 						{
 							dragDropTarget.setRaum(dragDropSource.getRaum());
-							dragDropSource.loescheRaum();
+							dragDropSource.loescheRaumUndSetzeAufAusgewaehlt();
 							
 							dragDropSource.setAusgewaehlt(false);
 							if(buttonAusgewaehlt())
