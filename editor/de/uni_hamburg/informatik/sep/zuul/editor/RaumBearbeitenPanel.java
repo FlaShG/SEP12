@@ -29,9 +29,7 @@ public class RaumBearbeitenPanel extends JPanel
 	private final Raum _raum;
 
 	/**
-	 * Erzeugt ein RaumBearbeitenPanel für einen bestimmten Raum.
-	 * 
-	 * @param raum
+	 * Erzeugt ein {@link RaumBearbeitenPanel} für einen bestimmten {@link Raum}.
 	 */
 	public RaumBearbeitenPanel(Raum raum, final EditorBeobachter beobachter)
 	{
@@ -85,7 +83,7 @@ public class RaumBearbeitenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt den bearbeiteten Raum zurück
+	 * Gibt den bearbeiteten {@link Raum} zurück.
 	 */
 	public Raum getRaum()
 	{
@@ -93,9 +91,7 @@ public class RaumBearbeitenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt den Löschen-Button des Panels zurück
-	 * 
-	 * @return
+	 * Gibt den Löschen-Button des Panels zurück.
 	 */
 	public JButton getLoeschenButton()
 	{
@@ -103,7 +99,7 @@ public class RaumBearbeitenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt das Raumbeschreibungs-TextArea zurück
+	 * Gibt das Raumbeschreibungs-TextArea zurück.
 	 */
 	public JTextArea getBeschreibung()
 	{
@@ -111,7 +107,7 @@ public class RaumBearbeitenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt das Eigenschaften-Panel zurück
+	 * Gibt das {@link RaumEigenschaftenPanel} zurück.
 	 */
 	public RaumEigenschaftenPanel getEigenschaftenPanel()
 	{

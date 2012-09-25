@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.xml.XmlRaum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
@@ -191,6 +192,10 @@ public class RaumStruktur
 				west = _connected.get(raum)[3].getId();
 			}
 
+			// müsste eigentlich woanders stehen, geht aber so auch gut.
+			if (raum.getRaumart() == RaumArt.Ende)
+				raum.addItem(Item.Gegengift);
+			
 			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west,
 					raum.getX(), raum.getY(), raum.getItems());
 			result.add(xmlRaum);

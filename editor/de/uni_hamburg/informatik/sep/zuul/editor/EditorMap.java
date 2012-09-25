@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
- * Hält ein zweidimensionales Feld auf GridButtons, die die Räume auf der Karte
- * darstellen.
+ * Hält ein zweidimensionales Feld aus {@link GridButton}s, die die Räume auf
+ * der Karte darstellen.
  * 
  * @author 0graeff
  */
@@ -28,7 +28,7 @@ public class EditorMap extends JPanel
 	private GridButton dragDropTarget = null;
 
 	/**
-	 * Erstellt eine neue EditorMap mit gegebener Höhe und Breite
+	 * Erstellt eine neue {@link EditorMap} mit gegebener Höhe und Breite.
 	 * 
 	 * @param breite
 	 * @param hoehe
@@ -39,7 +39,8 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Setzt den Beobachter, der über Änderungen im Grid informiert werden soll
+	 * Setzt den {@link EditorBeobachter}, der über Änderungen im Grid
+	 * informiert werden soll.
 	 */
 	public void setBeobachter(EditorBeobachter beobachter)
 	{
@@ -55,7 +56,7 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Gibt zurück, ob gerade ein GridButton ausgewählt ist
+	 * Gibt zurück, ob gerade ein {@link GridButton} ausgewählt ist.
 	 */
 	public boolean buttonAusgewaehlt()
 	{
@@ -63,7 +64,7 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Gibt den aktiven Button zurück
+	 * Gibt den aktiven {@link GridButton} zurück.
 	 * 
 	 * @return
 	 */
@@ -75,7 +76,7 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Gibt den Raum des aktuell angewählten GridButtons zurück.
+	 * Gibt den {@link Raum} des aktuell angewählten {@link GridButton}s zurück.
 	 */
 	public Raum getAktivenRaum()
 	{
@@ -85,8 +86,8 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Fügt dem aktuell ausgewählten GridButton einen Raum hinzu, wenn einer
-	 * ausgewählt ist.
+	 * Fügt dem aktuell ausgewählten {@link GridButton} einen Raum hinzu, wenn
+	 * einer ausgewählt ist.
 	 */
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
@@ -95,22 +96,20 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Löscht den Raum des aktiven Butons
+	 * Löscht den {@link Raum} des aktiven {@link GridButton}s.
 	 */
 	public void loescheRaumDesAktivenButtons()
 	{
 		if(buttonAusgewaehlt())
 		{
-			_buttons[_activeX][_activeY].loescheRaum();
+			_buttons[_activeX][_activeY].loescheRaumUndSetzeAufAusgewaehlt();
 			informiereBeobachter();
 		}
 	}
 
 	/**
-	 * Getter für das zweidimensionale ButtonArray, in dem alle Raum-Buttons
-	 * gehalten werden.
-	 * 
-	 * @return
+	 * Getter für das zweidimensionale ButtonArray, in dem alle {@link Raum}-
+	 * {@link GridButton}s gehalten werden.
 	 */
 	public GridButton[][] getButtonArray()
 	{
@@ -118,14 +117,21 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die
-	 * gegebene Größe abgeändert werden.
+	 * <<<<<<< HEAD Gibt zurück, ob keine Räume gelöscht würde, sollte die Map
+	 * auf die gegebene Größe abgeändert werden.
 	 * 
 	 * @param breite
 	 *            die neue Breite
 	 * @param hoehe
 	 *            die neue Höhe
-	 * @return
+	 * @return ======= Gibt zurück, ob keine Räume gelöscht würde, sollte die
+	 *         Map auf die gegebene Größe abgeändert werden.
+	 * @param breite
+	 *            die neue Breite
+	 * @param hoehe
+	 *            die neue Höhe
+	 * @return ob bei einer Größenänderung Räume flöten gehen würden. >>>>>>>
+	 *         branch 'master' of git@github.com:FlaShG/SEP12.git
 	 */
 	public boolean istGroesseAendernUnproblematisch(int breite, int hoehe)
 	{
@@ -245,7 +251,7 @@ public class EditorMap extends JPanel
 						if(dragDropTarget.getRaum() == null)
 						{
 							dragDropTarget.setRaum(dragDropSource.getRaum());
-							dragDropSource.loescheRaum();
+							dragDropSource.loescheRaumUndSetzeAufAusgewaehlt();
 
 							dragDropSource.setAusgewaehlt(false);
 							if(buttonAusgewaehlt())
@@ -327,11 +333,17 @@ public class EditorMap extends JPanel
 		});
 	}
 
+	/**
+	 * Gibt die Breite der Map zurück.
+	 */
 	public int getBreite()
 	{
 		return _buttons.length;
 	}
 
+	/**
+	 * Gibt die Höhe der Map zurück.
+	 */
 	public int getHoehe()
 	{
 		return _buttons[0].length;

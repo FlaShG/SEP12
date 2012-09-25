@@ -21,10 +21,7 @@ public class GridButton extends JButton
 	private Raum _raum;
 
 	/**
-	 * Erstellt einen neuen GridButton und übergibt dessen Position
-	 * 
-	 * @param x
-	 * @param y
+	 * Erstellt einen neuen {@link GridButton} und setzt dessen Position auf dem Grid.
 	 */
 	public GridButton(int x, int y)
 	{
@@ -44,9 +41,7 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Gibt die übergebene x-Position auf dem Grid zurück
-	 * 
-	 * @return
+	 * Gibt die übergebene x-Position auf dem Grid zurück.
 	 */
 	public int getGridX()
 	{
@@ -54,9 +49,7 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Gibt die übergebene y-Position auf dem Grid zurück
-	 * 
-	 * @return
+	 * Gibt die übergebene y-Position auf dem Grid zurück.
 	 */
 	public int getGridY()
 	{
@@ -67,8 +60,7 @@ public class GridButton extends JButton
 	 * Färbt den Button in Abhängigkeit davon, ob er einen Raum referenziert und
 	 * ob er markiert ist.
 	 * 
-	 * @param aktiv
-	 *            ob der Button gerade markiert ist.
+	 * @param aktiv ob der Button gerade markiert ist.
 	 */
 	public void setAusgewaehlt(boolean aktiv)
 	{
@@ -78,7 +70,7 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Legt einen neuen Raum an und lässt den GridButton ihn referenzieren.
+	 * Legt einen neuen {@link Raum} an und lässt den {@link GridButton} ihn referenzieren.
 	 */
 	public void fuegeLeerenRaumHinzu()
 	{
@@ -87,6 +79,10 @@ public class GridButton extends JButton
 		_raum.setKoordinaten(_x, _y);
 	}
 
+	/**
+	 * Setzt den {@link Raum} dieses {@link GridButton}s neu.
+	 * @param raum Der neue Raum. Kann null sein, um den Raum zu löschen, ohne dessen Markierung zu ändern.
+	 */
 	public void setRaum(Raum raum)
 	{
 		_raum = raum;
@@ -101,10 +97,8 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Gibt den referenzierten Raum zurück. Ist null, wenn keiner referenziert
+	 * Gibt den referenzierten {@link Raum} zurück. Ist null, wenn keiner referenziert
 	 * wird.
-	 * 
-	 * @return
 	 */
 	public Raum getRaum()
 	{
@@ -112,9 +106,9 @@ public class GridButton extends JButton
 	}
 
 	/**
-	 * Setzt die Raumreferenz auf null.
+	 * Setzt die Raumreferenz auf null und ändert die Färbung auf "ausgewählt".
 	 */
-	public void loescheRaum()
+	public void loescheRaumUndSetzeAufAusgewaehlt()
 	{
 		setRaum(null);
 		setAusgewaehlt(true);

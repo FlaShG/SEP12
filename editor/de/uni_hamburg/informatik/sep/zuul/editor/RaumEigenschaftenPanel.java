@@ -10,7 +10,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 
 /**
  * Ein Panel, in dem Eigenschaftsfelder stecken, die zum Setzen der
- * Einstellungen eines Raumes benötigt werden.
+ * Einstellungen eines {@link Raum}es benötigt werden.
  * 
  * @author 0graeff
  */
@@ -23,12 +23,10 @@ public class RaumEigenschaftenPanel extends JPanel
 
 	/**
 	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen
-	 * Raumes
+	 * {@link Raum}es.
 	 * 
-	 * @param raum
-	 *            Der Raum, der bearbeitet werden soll
-	 * @param beobachter
-	 *            Der Observer, der über Änderungen informiert werden will
+	 * @param raum der {@link Raum}, der bearbeitet werden soll.
+	 * @param beobachter der {@link EditorBeobachter}, der über Änderungen informiert werden will.
 	 * 
 	 * @require raum != null
 	 */
@@ -57,7 +55,7 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt den Namen zurück, die eingestellt wurde
+	 * Gibt den Namen zurück, der eingestellt wurde.
 	 */
 	public String getRaumname()
 	{
@@ -65,8 +63,8 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt die Anzahl der im Raum vorhandenen Kuchen zurück, die eingestellt
-	 * wurde
+	 * Gibt die Anzahl der im {@link Raum} vorhandenen Kuchen zurück, die eingestellt
+	 * wurde.
 	 */
 	public int getKuchenzahl()
 	{
@@ -74,8 +72,8 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt die Anzahl der im Raum vorhandenen giftigen Kuchen zurück, die
-	 * eingestellt wurde
+	 * Gibt die Anzahl der im {@link Raum} vorhandenen giftigen Kuchen zurück, die
+	 * eingestellt wurde.
 	 */
 	public int getGiftkuchenzahl()
 	{
@@ -83,7 +81,7 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt die RaumArt zurück, die eingestellt wurde
+	 * Gibt die {@link RaumArt} zurück, die eingestellt wurde.
 	 */
 	public RaumArt getTyp()
 	{
