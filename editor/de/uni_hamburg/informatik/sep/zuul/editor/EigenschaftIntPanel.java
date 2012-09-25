@@ -15,15 +15,12 @@ import javax.swing.event.ChangeListener;
 public class EigenschaftIntPanel extends EigenschaftsPanel
 {
 	private JSpinner _zahl;
-	private int _wert = 0;
 
 	/**
-	 * Erzeugt ein Eigenschaftsfeld mit Startwert
+	 * Erzeugt ein neues {@link EigenschaftIntPanel} mit Startwert.
 	 * 
-	 * @param beschriftung
-	 *            Der Text des davorstehenden Labels
-	 * @param startwert
-	 *            Der Wert, den die Komponente annimmt
+	 * @param beschriftung der Text des davorstehenden Labels
+	 * @param startwert der Wert, den die Komponente annimmt
 	 */
 	public EigenschaftIntPanel(String beschriftung, int startwert)
 	{
@@ -33,19 +30,14 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	/**
 	 * Erzeugt ein Eigenschaftsfeld mit einem Default-wert und Observer
 	 * 
-	 * @param beschriftung
-	 *            Der Text des davorstehenden Labels
-	 * @param startwert
-	 *            Der Wert, den die Komponente annimmt
-	 * @param observer
-	 *            Der Observer, der über Änderungen im Eingabefeld informiert
-	 *            werden soll
+	 * @param beschriftung der Text des davorstehenden Labels
+	 * @param startwert der Wert, den die Komponente annimmt
+	 * @param beobachter der {@link EditorBeobachter}, der über Änderungen im Eingabefeld informiert werden soll
 	 */
 	public EigenschaftIntPanel(String beschriftung, int startwert,
 			EditorBeobachter beobachter)
 	{
 		super(beschriftung, beobachter);
-		_wert = startwert;
 
 		_zahl = new JSpinner();
 		_zahl.setModel(new SpinnerNumberModel(startwert, 0, 99, 1));
@@ -55,7 +47,6 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 			@Override
 			public void stateChanged(ChangeEvent arg0)
 			{
-				_wert = (Integer) _zahl.getValue();
 				informiereBeobachter();
 			}
 		});
@@ -73,13 +64,11 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	 */
 	public int getWert()
 	{
-		return _wert;
+		return (Integer)_zahl.getValue();
 	}
 
 	/**
-	 * Setzt den aktuellen Wert
-	 * 
-	 * @param wert
+	 * Setzt den aktuellen Wert.
 	 */
 	public void setWert(int wert)
 	{

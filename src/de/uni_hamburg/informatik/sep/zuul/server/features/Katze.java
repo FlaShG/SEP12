@@ -45,6 +45,13 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		_raum.setKatze(null);
 		_raum = waehleNeuenRaum(kontext, _raum);
 		_raum.setKatze(this);
+
+		List<Spieler> spielerInRaum = kontext.getSpielerInRaum(_raum);
+		for(Spieler spieler : spielerInRaum)
+		{
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.KATZE_IM_AKTUELLEN_RAUM);
+		}
 	}
 
 	private Raum waehleNeuenRaum(ServerKontext kontext, Raum raum)

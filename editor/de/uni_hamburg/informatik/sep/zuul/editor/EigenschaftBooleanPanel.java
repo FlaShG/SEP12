@@ -15,11 +15,18 @@ public class EigenschaftBooleanPanel extends EigenschaftsPanel
 {
 	private boolean _wert;
 
+	/**
+	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung und Startwert.
+	 */
 	public EigenschaftBooleanPanel(String beschriftung, boolean startwert)
 	{
 		this(beschriftung, startwert, null);
 	}
 
+	/**
+	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung, Startwert und Beobachter.
+	 * @param beobachter {@link EditorBeobachter}, der über Änderungen dieses Elements informiert werden soll.
+	 */
 	public EigenschaftBooleanPanel(String beschriftung, boolean startwert,
 			EditorBeobachter beobachter)
 	{
@@ -41,6 +48,9 @@ public class EigenschaftBooleanPanel extends EigenschaftsPanel
 		add(checkbox);
 	}
 
+	/**
+	 * Gibt den in diesem Element eingestellten Wert zurück.
+	 */
 	public boolean getWert()
 	{
 		return _wert;

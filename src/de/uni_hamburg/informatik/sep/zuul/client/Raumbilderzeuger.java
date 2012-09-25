@@ -180,6 +180,7 @@ public class Raumbilderzeuger
 				y = position.getY();
 				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler().get(i)), x, y, 54, 54, null);
 			}
+
 		}
 		
 		
@@ -189,7 +190,8 @@ public class Raumbilderzeuger
 
 		if(_paket.hasMaus())
 		{
-			Tupel mausposition = entryPicker.pick(_mauspositionen);
+			Tupel mausposition = entryPicker
+					.pickAndRemoveFromList(_mauspositionen);
 			x = mausposition.getX();
 			y = mausposition.getY();
 
@@ -197,9 +199,9 @@ public class Raumbilderzeuger
 		}
 
 		//Male Katze
-		else if(_paket.hasKatze())
+		if(_paket.hasKatze())
 		{
-			Tupel pos = entryPicker.pick(_mauspositionen);
+			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
@@ -232,8 +234,7 @@ public class Raumbilderzeuger
 
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
-			Tupel itempos = entryPicker.pick(_itemPositionen);
-			_itemPositionen.remove(itempos);
+			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
 			x = itempos.getX();
 			y = itempos.getY();
 
@@ -242,14 +243,14 @@ public class Raumbilderzeuger
 
 		if(gegengiftDa)
 		{
-			Tupel itempos = entryPicker.pick(_itemPositionen);
+			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
 			_itemPositionen.remove(itempos);
 			x = itempos.getX();
 			y = itempos.getY();
 
 			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
 
-			Tupel pos = entryPicker.pick(_mauspositionen);
+			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
 			x = pos.getX();
 			y = pos.getY();
 			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
