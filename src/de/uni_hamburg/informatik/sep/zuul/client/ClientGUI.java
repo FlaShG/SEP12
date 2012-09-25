@@ -272,14 +272,13 @@ public class ClientGUI extends Client
 		_hf = new Hauptfenster(_bildPanel, _kp, _bp);
 
 		_hf.setVisible(true);
-		
+
 		_hf.addWindowListener(new WindowAdapter()
 		{
 			@Override
 			public void windowClosing(WindowEvent e)
 			{
-				
-				
+
 				try
 				{
 					_server.logoutClient(_clientName);
@@ -291,7 +290,7 @@ public class ClientGUI extends Client
 				}
 				System.exit(0);
 			}
-			
+
 		});
 		_kp.getEnterButton().addActionListener(new ActionListener()
 		{
@@ -546,7 +545,7 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
-		
+
 		// Nimmt diese Zeichen aus der Eingabe heraus...
 		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
 		{
@@ -555,73 +554,79 @@ public class ClientGUI extends Client
 			{
 				switch (e.getKeyChar())
 				{
-					case '2':
-					case '4':
-					case '6':
-					case '8':
-					case '+':
-					case '-':
-					case '*':
-					case '/':
-						e.consume();
-						break;
-					default:
-						break;
+				case '2':
+				case '4':
+				case '6':
+				case '8':
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+					e.consume();
+					break;
+				default:
+					break;
 				}
 			}
 		});
-		
+
 		// global Keylistener
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
-		{
-			@Override
-			public boolean dispatchKeyEvent(KeyEvent e)
-			{
-				if (e.getID() == KeyEvent.KEY_PRESSED)
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+				.addKeyEventDispatcher(new KeyEventDispatcher()
 				{
-					switch(e.getKeyCode())
+					@Override
+					public boolean dispatchKeyEvent(KeyEvent e)
 					{
-						case KeyEvent.VK_NUMPAD8: 
-						case KeyEvent.VK_UP:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_NORDEN);
-							return true;
-						case KeyEvent.VK_NUMPAD2:
-						case KeyEvent.VK_DOWN:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_SUEDEN);
-							return true;
-						case KeyEvent.VK_NUMPAD6:
-						case KeyEvent.VK_RIGHT:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_OSTEN);
-							return true;
-						case KeyEvent.VK_NUMPAD4:
-						case KeyEvent.VK_LEFT:
-							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
-							return true;
-						default:
-							break;
-					}
-					switch(e.getKeyChar())
-					{
-						case '+':
-							sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
-							return true;
-						case '-':
-							sendeEingabe(TextVerwalter.BEFEHL_ABLEGEN);
-							return true;
-						case '*':
-							sendeEingabe(TextVerwalter.BEFEHL_ESSEN + " " + TextVerwalter.ORT_TASCHE);
-							return true;
-						case '/':
-							sendeEingabe(TextVerwalter.BEFEHL_FUETTERE);
-							return true;
-						default:
+						if(e.getID() == KeyEvent.KEY_PRESSED)
+						{
+							switch (e.getKeyCode())
+							{
+							case KeyEvent.VK_NUMPAD8:
+							case KeyEvent.VK_UP:
+								sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+										+ TextVerwalter.RICHTUNG_NORDEN);
+								return true;
+							case KeyEvent.VK_NUMPAD2:
+							case KeyEvent.VK_DOWN:
+								sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+										+ TextVerwalter.RICHTUNG_SUEDEN);
+								return true;
+							case KeyEvent.VK_NUMPAD6:
+							case KeyEvent.VK_RIGHT:
+								sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+										+ TextVerwalter.RICHTUNG_OSTEN);
+								return true;
+							case KeyEvent.VK_NUMPAD4:
+							case KeyEvent.VK_LEFT:
+								sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " "
+										+ TextVerwalter.RICHTUNG_WESTEN);
+								return true;
+							default:
+								break;
+							}
+							switch (e.getKeyChar())
+							{
+							case '+':
+								sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
+								return true;
+							case '-':
+								sendeEingabe(TextVerwalter.BEFEHL_ABLEGEN);
+								return true;
+							case '*':
+								sendeEingabe(TextVerwalter.BEFEHL_ESSEN + " "
+										+ TextVerwalter.ORT_TASCHE);
+								return true;
+							case '/':
+								sendeEingabe(TextVerwalter.BEFEHL_FUETTERE);
+								return true;
+							default:
+								return false;
+							}
+						}
+						else
 							return false;
 					}
-				}
-				else
-					return false;
-			}
-		});
+				});
 
 		createActionListenerMap();
 
@@ -709,10 +714,10 @@ public class ClientGUI extends Client
 	@Override
 	public void serverBeendet()
 	{
-		
+
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
@@ -726,6 +731,6 @@ public class ClientGUI extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		
+
 	}
 }

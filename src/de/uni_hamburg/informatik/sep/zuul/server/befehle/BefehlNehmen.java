@@ -25,9 +25,10 @@ final class BefehlNehmen implements Befehl
 		Item item = raum.getNaechstesItem();
 
 		spieler.getInventar().fuegeItemHinzu(item);
-		
+
 		// TODO: und wenn das item, das gegengift ist?
-		if(item == Item.Gegengift){
+		if(item == Item.Gegengift)
+		{
 			kontext.spielerGewinnt(spieler);
 			return true;
 		}
@@ -36,7 +37,8 @@ final class BefehlNehmen implements Befehl
 		raum.loescheItem();
 		if(raum.getNaechstesItem() != Item.Keins)
 		{
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.IMMERNOCHKUCHENTEXT);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.IMMERNOCHKUCHENTEXT);
 		}
 		return true;
 	}

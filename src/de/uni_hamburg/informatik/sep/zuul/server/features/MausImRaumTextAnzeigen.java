@@ -10,8 +10,8 @@ public final class MausImRaumTextAnzeigen implements Feature,
 {
 
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, Befehl befehl,
-			boolean hasRoomChanged)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			Befehl befehl, boolean hasRoomChanged)
 	{
 		// Maus
 		if(hasRoomChanged && kontext.getAktuellenRaumZu(spieler).hasMaus())

@@ -7,7 +7,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlEssenBoden implements Befehl
+public class BefehlEssenBoden extends BefehlEssen
 {
 
 	private static final String BEFEHLSNAME = TextVerwalter.BEFEHL_ESSEN + " "
@@ -19,7 +19,7 @@ public class BefehlEssenBoden implements Befehl
 	{
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 		boolean hasKuchen = false;
-		for(Item item: aktuellerRaum.getItems())
+		for(Item item : aktuellerRaum.getItems())
 		{
 			if(isKuchen(item))
 			{
@@ -36,7 +36,8 @@ public class BefehlEssenBoden implements Befehl
 	 */
 	private boolean isKuchen(Item item)
 	{
-		return item == Item.IGiftkuchen || item == Item.UGiftkuchen || item == Item.IKuchen || item == Item.UKuchen;
+		return item == Item.IGiftkuchen || item == Item.UGiftkuchen
+				|| item == Item.IKuchen || item == Item.UKuchen;
 	}
 
 	@Override
@@ -44,48 +45,47 @@ public class BefehlEssenBoden implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-		Item item = aktuellerRaum.getNaechstesItem();
+		Item kuchen = aktuellerRaum.getNaechstesItem();
 		int energie = spieler.getLebensEnergie();
 
-		switch (item)
+		if(kuchen.isKuchen())
 		{
-		case UKuchen:
-		case IKuchen:
 			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
 			aktuellerRaum.loescheItem();
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.kuchenVomBodenGegessenText(energie));
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.kuchenVomBodenGegessenText(energie));
 			if(aktuellerRaum.getNaechstesItem() != Item.Keins)
 			{
-				kontext.schreibeAnSpieler(spieler, TextVerwalter.IMMERNOCHKUCHENTEXT);
+				kontext.schreibeAnSpieler(spieler,
+						TextVerwalter.IMMERNOCHKUCHENTEXT);
 			}
+		}
 
-			break;
-		case IGiftkuchen:
-		case UGiftkuchen:
+		if(kuchen.isGiftkuchen())
+		{
+
 			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
 			aktuellerRaum.loescheItem();
 			if(energie > 0)
 			{
-				kontext.schreibeAnSpieler(spieler, TextVerwalter.giftkuchenVomBodenGegessenText(energie));
+				kontext.schreibeAnSpieler(spieler,
+						TextVerwalter.giftkuchenVomBodenGegessenText(energie));
 			}
 			else
 			{
 				spieler.die();
 				kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENTODTEXT);
 			}
-			break;
 		}
-
-		spieler.setLebensEnergie(energie);
 		return true;
-		//		return false;
 	}
 
 	@Override
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTSZUMESSENTEXTBODEN);
+		kontext.schreibeAnSpieler(spieler,
+				TextVerwalter.NICHTSZUMESSENTEXTBODEN);
 
 	}
 
@@ -94,11 +94,4 @@ public class BefehlEssenBoden implements Befehl
 	{
 		return new String[] { BEFEHLSNAME };
 	}
-
-	@Override
-	public String getHilfe()
-	{
-		return TextVerwalter.HILFE_EAT;
-	}
-
 }

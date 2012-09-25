@@ -3,9 +3,11 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import javax.swing.JPanel;
 
 /**
- * Zeigt die Einstellmöglichkeiten für levelglobale Einstellungen an. Siehe {@link EditorLevel}.
+ * Zeigt die Einstellmöglichkeiten für levelglobale Einstellungen an. Siehe
+ * {@link EditorLevel}.
+ * 
  * @author 0graeff
- *
+ * 
  */
 public class LevelPanel extends JPanel
 {
@@ -17,9 +19,13 @@ public class LevelPanel extends JPanel
 	 * Erstellt ein neues {@link LevelPanel}.
 	 * @param beobachter ein {@link EditorBeobachter}, der über Änderungen informiert wird.
 	 * @param level das {@link EditorLevel}, das die Startwerte hält. Wird nicht verändert! Das muss der beobachter machen.
+	 * 
+	 * @require level != null
 	 */
 	public LevelPanel(EditorBeobachter beobachter, EditorLevel level)
 	{
+		assert level != null : "Vorbedingung verletzt: level != null";
+		
 		add(_leben = new EigenschaftIntPanel("Lebenspunkte", level.getLeben(), beobachter));
 		add(_maeuse = new EigenschaftIntPanel("Mäuse", level.getMaeuse(), beobachter));
 		add(_katzen = new EigenschaftIntPanel("Katzen", level.getKatzen(), beobachter));
@@ -40,7 +46,7 @@ public class LevelPanel extends JPanel
 	{
 		return _maeuse.getWert();
 	}
-	
+
 	/**
 	 * Setzt die Katzenzahl.
 	 */

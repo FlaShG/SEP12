@@ -8,9 +8,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Stack;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -24,7 +21,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 public class EditorFenster implements EditorBeobachter
 {
 	public static final String EDITOR_TITEL = "Zuul-Editor";
-	
+
 	private EditorFensterUI _ui;
 	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
@@ -32,7 +29,7 @@ public class EditorFenster implements EditorBeobachter
 	private boolean _unsavedChanges;
 
 	private WindowListener _windowListener;
-	
+
 	/**
 	 * Erstellt ein neues {@link EditorFenster}.
 	 */
@@ -44,7 +41,7 @@ public class EditorFenster implements EditorBeobachter
 		_speicherWerkzeug = new SpeicherWerkzeug(this);
 		_ladenWerkzeug = new LadenWerkzeug(this);
 
-		resetEditorFenster(8,8);
+		resetEditorFenster(8, 8);
 	}
 
 	private void resetEditorFenster(int width, int height)
@@ -54,7 +51,7 @@ public class EditorFenster implements EditorBeobachter
 			_ui.getFrame().removeWindowListener(_windowListener);
 		}
 		_ui.init(_leveldaten, width, height);
-		
+
 		registriereUIAktionen();
 	}
 
@@ -96,12 +93,15 @@ public class EditorFenster implements EditorBeobachter
 					public void actionPerformed(ActionEvent e)
 					{
 						if(!_unsavedChanges
-						|| BestaetigungsDialog.erstelle("Level laden", "Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
+								|| BestaetigungsDialog
+										.erstelle(
+												"Level laden",
+												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
 							String str = FileChooser.oeffneDatei();
 							if(str != null && !str.equals(""))
 							{
-								resetEditorFenster(1,1);
+								resetEditorFenster(1, 1);
 								//markiert auch, dass geladen wird
 								_leveldaten = null;
 								_ladenWerkzeug.lade(str);
@@ -117,7 +117,10 @@ public class EditorFenster implements EditorBeobachter
 			public void actionPerformed(ActionEvent e)
 			{
 				if(!_unsavedChanges
-				|| BestaetigungsDialog.erstelle("Neues Level", "Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
+						|| BestaetigungsDialog
+								.erstelle(
+										"Neues Level",
+										"Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
 					if(!mapsize.getClickedOK())
@@ -127,35 +130,46 @@ public class EditorFenster implements EditorBeobachter
 				}
 			}
 		});
-		
-		_ui.getMenuBar().getResizeButton().addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap().getBreite(), _ui.getMap().getHoehe());
-				if(!mapsize.getClickedOK())
-					return;
-				
-				boolean problematisch = !_ui.getMap().istGroesseAendernUnproblematisch(mapsize.getBreite(), mapsize.getHoehe());
-				if(!problematisch
-				|| BestaetigungsDialog.erstelle("Kartengröße ändern", "Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?"))
+
+		_ui.getMenuBar().getResizeButton()
+				.addActionListener(new ActionListener()
 				{
-					_ui.getMap().setGroesse(mapsize.getBreite(), mapsize.getHoehe());
-					_ui.getFrame().setVisible(true);
-					if(problematisch)
-						unsavedChanges(true);
-				}
-			}
-		});
-		
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						MapSizeDialog mapsize = new MapSizeDialog(_ui.getMap()
+								.getBreite(), _ui.getMap().getHoehe());
+						if(!mapsize.getClickedOK())
+							return;
+
+						boolean problematisch = !_ui
+								.getMap()
+								.istGroesseAendernUnproblematisch(
+										mapsize.getBreite(), mapsize.getHoehe());
+						if(!problematisch
+								|| BestaetigungsDialog
+										.erstelle("Kartengröße ändern",
+												"Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?"))
+						{
+							_ui.getMap().setGroesse(mapsize.getBreite(),
+									mapsize.getHoehe());
+							_ui.getFrame().setVisible(true);
+							if(problematisch)
+								unsavedChanges(true);
+						}
+					}
+				});
+
 		_ui.getFrame().addWindowListener(_windowListener = new WindowAdapter()
 		{
 			@Override
 			public void windowClosing(WindowEvent arg0)
 			{
 				if(!_unsavedChanges
-				|| BestaetigungsDialog.erstelle("Editor beenden", "Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen."))
+						|| BestaetigungsDialog
+								.erstelle(
+										"Editor beenden",
+										"Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen."))
 				{
 					System.exit(0);
 				}
@@ -197,7 +211,7 @@ public class EditorFenster implements EditorBeobachter
 						});
 			}
 		}
-		
+
 		_ui.getFrame().setVisible(true);
 	}
 
@@ -207,8 +221,7 @@ public class EditorFenster implements EditorBeobachter
 		//early out, wenn wir gerade laden.
 		if(_leveldaten == null)
 			return;
-		
-		
+
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
 		if(_ui.getMap().buttonAusgewaehlt() && bearbeitenPanel != null)
 		{
@@ -229,17 +242,17 @@ public class EditorFenster implements EditorBeobachter
 				items.push(Item.UGiftkuchen);
 
 			raum.setItems(items);
-			
+
 			raum.setBescheibung(bearbeitenPanel.getBeschreibung().getText());
 		}
 
 		_leveldaten.setLeben(_ui.getLevelPanel().getLebenspunkte());
 		_leveldaten.setMaeuse(_ui.getLevelPanel().getMauszahl());
 		_leveldaten.setKatzen(_ui.getLevelPanel().getKatzenzahl());
-		
+
 		unsavedChanges(true);
 	}
-	
+
 	@Override
 	public void verschiebenUpdate()
 	{
@@ -255,7 +268,8 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	/**
-	 * Gibt den aktuellen {@link EditorLevel} zurück, der die levelglobalen Infos hält.
+	 * Gibt den aktuellen {@link EditorLevel} zurück, der die levelglobalen
+	 * Infos hält.
 	 */
 	public EditorLevel getEditorLevel()
 	{
@@ -265,9 +279,13 @@ public class EditorFenster implements EditorBeobachter
 	/**
 	 * Setzt den {@link EditorLevel} und passt die GUI daran an.
 	 * @param editorLevel der neue {@link EditorLevel}
+	 * 
+	 * @require editorLevel != null
 	 */
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
+		assert editorLevel != null : "Vorbedingung verletzt: editorLevel != null";
+		
 		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());
@@ -275,15 +293,18 @@ public class EditorFenster implements EditorBeobachter
 		//Obige Anweisungen würden sonst Dinge triggern.
 		_leveldaten = editorLevel;
 	}
-	
+
 	/**
-	 * Setzt, ob es ungespeicherte Änderungen im Editor gibt
-	 * und zeigt diese Info im Fenstzer an.
-	 * @param yes ob es ungespeicherte Änderungen gibt
+	 * Setzt, ob es ungespeicherte Änderungen im Editor gibt und zeigt diese
+	 * Info im Fenstzer an.
+	 * 
+	 * @param yes
+	 *            ob es ungespeicherte Änderungen gibt
 	 */
 	public void unsavedChanges(boolean yes)
 	{
 		_unsavedChanges = yes;
-		_ui.getFrame().setTitle(EDITOR_TITEL+(yes ? " (ungespeicherte Änderungen)" : ""));
+		_ui.getFrame().setTitle(
+				EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 }

@@ -14,7 +14,7 @@ import javax.swing.event.ChangeListener;
  */
 public class EigenschaftIntPanel extends EigenschaftsPanel
 {
-	private JSpinner _zahl;
+	protected JSpinner _zahl;
 
 	/**
 	 * Erzeugt ein neues {@link EigenschaftIntPanel} mit Startwert.

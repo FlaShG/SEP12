@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
- * Hält ein zweidimensionales Feld aus {@link GridButton}s,
- * die die Räume auf der Karte darstellen.
+ * Hält ein zweidimensionales Feld aus {@link GridButton}s, die die Räume auf
+ * der Karte darstellen.
  * 
  * @author 0graeff
  */
@@ -23,23 +23,27 @@ public class EditorMap extends JPanel
 	private GridButton[][] _buttons;
 	private int _activeX = -1;
 	private int _activeY = -1;
-	
+
 	private GridButton dragDropSource = null;
 	private GridButton dragDropTarget = null;
 
 	/**
 	 * Erstellt eine neue {@link EditorMap} mit gegebener Höhe und Breite.
 	 * 
-	 * @param breite
-	 * @param hoehe
+	 * @require breite > 0
+	 * 1require hoehe > 0
 	 */
 	public EditorMap(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		setGroesse(breite, hoehe);
 	}
 
 	/**
-	 * Setzt den {@link EditorBeobachter}, der über Änderungen im Grid informiert werden soll.
+	 * Setzt den {@link EditorBeobachter}, der über Änderungen im Grid
+	 * informiert werden soll.
 	 */
 	public void setBeobachter(EditorBeobachter beobachter)
 	{
@@ -64,8 +68,6 @@ public class EditorMap extends JPanel
 
 	/**
 	 * Gibt den aktiven {@link GridButton} zurück.
-	 * 
-	 * @return
 	 */
 	public GridButton getAktivenButton()
 	{
@@ -85,8 +87,8 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Fügt dem aktuell ausgewählten {@link GridButton} einen Raum hinzu, wenn einer
-	 * ausgewählt ist.
+	 * Fügt dem aktuell ausgewählten {@link GridButton} einen Raum hinzu, wenn
+	 * einer ausgewählt ist.
 	 */
 	public void fuegeRaumZuAktivemButtonHinzu()
 	{
@@ -107,23 +109,29 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Getter für das zweidimensionale ButtonArray, in dem alle {@link Raum}-{@link GridButton}s
-	 * gehalten werden.
+	 * Getter für das zweidimensionale ButtonArray, in dem alle {@link Raum}-
+	 * {@link GridButton}s gehalten werden.
 	 */
 	public GridButton[][] getButtonArray()
 	{
 		return _buttons;
 	}
-	
+
 	/**
 	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die gegebene
 	 * Größe abgeändert werden.
 	 * @param breite die neue Breite
 	 * @param hoehe die neue Höhe
-	 * @return ob bei einer Größenänderung Räume flöten gehen würden. 
+	 * @return ob bei einer Größenänderung Räume flöten gehen würden.
+	 * 
+	 * @require breite > 0
+	 * @require hoehe > 0
 	 */
 	public boolean istGroesseAendernUnproblematisch(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		if(breite < _buttons.length)
 		{
 			for(int y = 0; y < getHoehe(); ++y)
@@ -137,7 +145,7 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		if(hoehe < _buttons[0].length)
 		{
 			for(int y = hoehe; y < getHoehe(); ++y)
@@ -151,17 +159,23 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Setzt die Größe der Map.
 	 * @param breite die neue Breite
 	 * @param hoehe die neue Höhe
+	 * 
+	 * @require breite > 0
+	 * @require hoehe > 0
 	 */
 	public void setGroesse(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		//alte entfernen
 		if(_buttons != null)
 		{
@@ -173,9 +187,9 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		setLayout(new GridLayout(hoehe, breite)); //dammit kids
-		
+
 		GridButton[][] neueButtons = new GridButton[breite][hoehe];
 
 		for(int y = 0; y < hoehe; ++y)
@@ -187,10 +201,10 @@ public class EditorMap extends JPanel
 				initialisiereButton(neueButtons[x][y], x, y);
 			}
 		}
-		
+
 		_activeX = -1;
 		_activeY = -1;
-		
+
 		if(_buttons != null)
 		{
 			for(int y = 0; y < hoehe && y < getHoehe(); ++y)
@@ -202,10 +216,10 @@ public class EditorMap extends JPanel
 				}
 			}
 		}
-		
+
 		_buttons = neueButtons;
 	}
-	
+
 	private void initialisiereButton(GridButton button, int x, int y)
 	{
 		button.addActionListener(new ActionListener()
@@ -221,11 +235,11 @@ public class EditorMap extends JPanel
 				informiereBeobachter();
 			}
 		});
-		
+
 		//drag&drop
 		button.addMouseListener(new MouseAdapter()
 		{
-			
+
 			@Override
 			public void mouseReleased(MouseEvent arg0)
 			{
@@ -238,7 +252,7 @@ public class EditorMap extends JPanel
 						{
 							dragDropTarget.setRaum(dragDropSource.getRaum());
 							dragDropSource.loescheRaumUndSetzeAufAusgewaehlt();
-							
+
 							dragDropSource.setAusgewaehlt(false);
 							if(buttonAusgewaehlt())
 							{
@@ -255,14 +269,14 @@ public class EditorMap extends JPanel
 									_activeX = -1;
 									_activeY = -1;
 								}
-								
+
 								_beobachter.raumwahlUpdate();
 							}
 							else
 							{
 								dragDropTarget.setAusgewaehlt(false);
 							}
-							
+
 							_beobachter.verschiebenUpdate();
 							moved = true;
 						}
@@ -275,13 +289,13 @@ public class EditorMap extends JPanel
 				dragDropSource = null;
 				dragDropTarget = null;
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0)
 			{
 				if(dragDropSource == null)
 				{
-					GridButton source = ((GridButton)arg0.getSource());
+					GridButton source = ((GridButton) arg0.getSource());
 					if(source.getRaum() != null)
 					{
 						dragDropSource = source;
@@ -289,22 +303,22 @@ public class EditorMap extends JPanel
 					}
 				}
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent arg0)
 			{
 				if(dragDropSource != null && dragDropSource != arg0.getSource())
 				{
-					((GridButton)arg0.getSource()).setAusgewaehlt(false);
+					((GridButton) arg0.getSource()).setAusgewaehlt(false);
 				}
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0)
 			{
 				if(dragDropSource != null && dragDropSource != arg0.getSource())
 				{
-					GridButton destination = ((GridButton)arg0.getSource());
+					GridButton destination = ((GridButton) arg0.getSource());
 					if(destination.getRaum() == null)
 					{
 						dragDropTarget = destination;

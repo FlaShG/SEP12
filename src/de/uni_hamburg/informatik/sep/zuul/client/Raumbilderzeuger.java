@@ -22,7 +22,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction.SuperFancyRe
  * @author 1roebe
  * 
  */
-public class Raumbilderzeuger
+class Raumbilderzeuger
 {
 
 	//	private final String PATH = getClass().getResource("bilder/").getPath();
@@ -222,21 +222,10 @@ public class Raumbilderzeuger
 
 		for(Item item : raumItems)
 		{
-			switch (item)
-			{
-			case IKuchen:
-			case UKuchen:
-			case IGiftkuchen:
-			case UGiftkuchen:
+			if(item.isAnyKuchen())
 				anzahlKruemel++;
-				break;
-			case Gegengift:
+			if(item == Item.Gegengift)
 				gegengiftDa = true;
-				break;
-			default:
-				break;
-			}
-
 		}
 
 		for(int i = 0; i < anzahlKruemel; i++)

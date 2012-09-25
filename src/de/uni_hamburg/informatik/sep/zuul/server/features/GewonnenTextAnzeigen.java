@@ -9,8 +9,8 @@ public final class GewonnenTextAnzeigen implements Feature,
 		BefehlAusgefuehrtListener
 {
 	@Override
-	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler, Befehl befehl, 
-			boolean hasRoomChanged)
+	public boolean befehlAusgefuehrt(ServerKontext kontext, Spieler spieler,
+			Befehl befehl, boolean hasRoomChanged)
 	{
 		if(kontext.getAktuellenRaumZu(spieler).getNaechstesItem() == Item.Gegengift)
 		{

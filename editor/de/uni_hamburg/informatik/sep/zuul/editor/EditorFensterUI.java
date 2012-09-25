@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,9 +44,15 @@ public class EditorFensterUI
 	 * @param level ein {@link EditorLevel} für die levelglobalen Infos
 	 * @param width die Breite der Karte
 	 * @param height die Höhe der Karte
+	 * 
+	 * @require width > 0
+	 * @require heigth > 0
 	 */
 	public void init(EditorLevel level, int width, int height)
 	{
+		assert width > 0 : "Vorbedingung verletzt: width > 0";
+		assert height > 0 : "Vorbedingung verletzt: height > 0";
+		
 		JFrame newFrame = new JFrame(EditorFenster.EDITOR_TITEL);
 
 		newFrame.getContentPane().setLayout(new BorderLayout());
@@ -68,28 +73,28 @@ public class EditorFensterUI
 
 		newFrame.setMinimumSize(new Dimension(900, 600));
 		newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		if(_frame != null)
 		{
 			newFrame.setLocation(_frame.getLocation());
 			newFrame.setSize(_frame.getSize());
-			newFrame.setExtendedState(_frame.getExtendedState()); 
+			newFrame.setExtendedState(_frame.getExtendedState());
 			_frame.dispose();
 		}
 		else
 		{
 			newFrame.setLocationRelativeTo(SwingUtilities.getRoot(newFrame));
 		}
-		
+
 		_frame = newFrame;
-		
+
 		_frame.setVisible(true);
 	}
 
 	/**
 	 * Gibt die obere {@link EditorMenuBar} zurück.
 	 * 
-	 * @return
+	 * @ensure result != null
 	 */
 	public EditorMenuBar getMenuBar()
 	{
@@ -98,9 +103,13 @@ public class EditorFensterUI
 
 	/**
 	 * Setzt die Map neu.
+	 * 
+	 * @require map != null
 	 */
 	public void setMap(EditorMap map)
 	{
+		assert map != null : "Vorbedingung verletzt: map != null";
+		
 		_frame.remove(_map);
 		_frame.add(_map = map, BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
