@@ -11,8 +11,6 @@ final class BefehlHilfe implements Befehl
 			Befehlszeile befehlszeile)
 	{
 
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.HILFETEXT);
-
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.HILFETEXT);
