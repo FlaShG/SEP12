@@ -67,6 +67,7 @@ class Raumbilderzeuger
 	private ArrayList<String> _aktuelleSpieler;
 	private HashMap<String, Color> _spielerfarben;
 
+	private LinkedList<Color> _verfuegbareFarben;
 	private final Color[] KITTELFARBEN = new Color[] { Color.BLUE, Color.RED,
 			Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA };
 
@@ -76,6 +77,17 @@ class Raumbilderzeuger
 		_mauspositionen = new LinkedList<Tupel>();
 		_itemPositionen = new LinkedList<Tupel>();
 		_spielerfarben = new HashMap<>();
+		_verfuegbareFarben = new LinkedList<Color>();
+		_verfuegbareFarben.add( Color.BLUE);
+		_verfuegbareFarben.add( Color.RED);
+		_verfuegbareFarben.add( Color.GREEN);
+		_verfuegbareFarben.add( Color.YELLOW);
+		_verfuegbareFarben.add( Color.PINK);
+		_verfuegbareFarben.add( Color.GRAY);
+		_verfuegbareFarben.add( Color.BLACK);
+		_verfuegbareFarben.add( Color.MAGENTA);
+		_verfuegbareFarben.add( Color.ORANGE);
+		_verfuegbareFarben.add( Color.CYAN);
 
 	}
 
@@ -110,6 +122,11 @@ class Raumbilderzeuger
 
 		BufferedImage raum = null;
 		_aktuelleSpieler = (ArrayList<String>) _paket.getAndereSpieler();
+		
+		if(!_spielerfarben.containsKey(_paket.getSpielerName()))
+		{
+			_spielerfarben.put(_paket.getSpielerName(), Color.white);
+		}
 
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
@@ -179,11 +196,21 @@ class Raumbilderzeuger
 			}
 		}
 
+		
+	
+		
 		for(int i = 0; i < _paket.getAndereSpieler().size(); i++)
 		{
 			if(!_paket.getAndereSpieler().get(i)
 					.equals(_paket.getSpielerName()))
 			{
+				
+				if(!_spielerfarben.containsKey(_paket.getAndereSpieler().get(i)))
+				{
+					_spielerfarben.put(_paket.getAndereSpieler().get(i), getUnverbrauchteFarbe());
+				}
+				
+				
 				position = entryPicker.pick(_drlittlepositionen);
 				x = position.getX();
 				y = position.getY();
@@ -264,13 +291,19 @@ class Raumbilderzeuger
 
 	}
 
+	private Color getUnverbrauchteFarbe()
+	{
+		
+		return _verfuegbareFarben.remove();
+	}
+
 	private Image getFarbigenDrLittle(String name)
 	{
 		BufferedImage drlittle = ladeBild(getClass().getResource(
 				"bilder/drlittle.png"));
-		int farbenauswahl = _aktuelleSpieler.indexOf(name);
+		Color farbe = _spielerfarben.get(name);
 
-		if(farbenauswahl != -1 && farbenauswahl < 10)
+		if(farbe != null)
 		{
 			for(int i = 17; i < 54; i++)
 			{
@@ -279,7 +312,7 @@ class Raumbilderzeuger
 					if(drlittle.getRGB(j, i) == Color.white.getRGB())
 					{
 						drlittle.setRGB(j, i,
-								KITTELFARBEN[farbenauswahl].getRGB());
+								farbe.getRGB());
 					}
 				}
 			}
