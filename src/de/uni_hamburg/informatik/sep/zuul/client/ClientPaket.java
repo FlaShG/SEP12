@@ -164,7 +164,6 @@ public class ClientPaket implements Remote, Serializable
 		{
 			hashCode = hashCode * 31 + code;
 		}
-		System.err.println(hashCode);
 		return hashCode;
 	}
 
