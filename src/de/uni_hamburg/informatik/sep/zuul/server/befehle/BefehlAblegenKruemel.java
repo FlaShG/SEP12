@@ -5,16 +5,15 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlAblegenKruemel implements Befehl
+public class BefehlAblegenKruemel extends BefehlAblegen
 {
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.getAktuellenRaumZu(spieler).addItem(
-				spieler.getInventar().getAnyUKuchen());
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
+		Item kuchen = spieler.getInventar().getAnyUKuchen();
+		legeItemInAktuellenRaum(kontext, spieler, kuchen);
 
 		return true;
 	}
@@ -29,10 +28,7 @@ public class BefehlAblegenKruemel implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return (spieler.getInventar().has(Item.UGiftkuchen) || spieler
-				.getInventar().has(Item.UKuchen))
-				&& befehlszeile.getZeile().equals(
-						TextVerwalter.BEFEHL_ABLEGEN + " krümel");
+		return spieler.getInventar().hasAnyUKuchen();
 	}
 
 	@Override
@@ -41,11 +37,5 @@ public class BefehlAblegenKruemel implements Befehl
 	{
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN
 				+ " krümel");
-	}
-
-	@Override
-	public String getHilfe()
-	{
-		return TextVerwalter.HILFE_ABLEGEN;
 	}
 }

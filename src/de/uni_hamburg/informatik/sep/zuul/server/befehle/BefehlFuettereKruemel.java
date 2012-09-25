@@ -1,12 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import java.util.LinkedList;
-
 import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
@@ -15,38 +12,6 @@ public class BefehlFuettereKruemel implements Befehl
 
 	public static final String BEFEHLSNAME = TextVerwalter.BEFEHL_FUETTERE
 			+ " " + "maus";
-
-	/**
-	 * Bestimmt die Richtung, die die Maus empfiehlt abhängig davon, ob der
-	 * Kuchen giftig ist.
-	 */
-	static String bestimmeRichtung(Item kuchen, String richtigeRichtung,
-			String[] moeglicheRichtungen)
-	{
-		if(kuchen == Item.UKuchen || kuchen == Item.IKuchen)
-		{
-			return richtigeRichtung;
-		}
-		if(kuchen == Item.UGiftkuchen || kuchen == Item.IGiftkuchen)
-		{
-			LinkedList<String> richtungen = new LinkedList<String>();
-
-			for(String richtung : moeglicheRichtungen)
-				richtungen.add(richtung);
-
-			richtungen.remove(richtigeRichtung);
-
-			String falscheRichtung = FancyFunction.getRandomEntry(richtungen);
-
-			// Falls der Raum nur einen Ausgang hat.
-			if(falscheRichtung == null)
-				falscheRichtung = richtigeRichtung;
-
-			return falscheRichtung;
-		}
-
-		return null;
-	}
 
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
@@ -95,8 +60,8 @@ public class BefehlFuettereKruemel implements Befehl
 				String[] moeglicheRichtungen = aktuellerRaum
 						.getMoeglicheAusgaenge();
 
-				String richtung = bestimmeRichtung(kuchen, richtigeRichtung,
-						moeglicheRichtungen);
+				String richtung = BefehlFuettere.bestimmeRichtung(kuchen,
+						richtigeRichtung, moeglicheRichtungen);
 
 				String richtungsangabe = String.format(
 						TextVerwalter.MAUS_RICHTUNGSANGABE, richtung);

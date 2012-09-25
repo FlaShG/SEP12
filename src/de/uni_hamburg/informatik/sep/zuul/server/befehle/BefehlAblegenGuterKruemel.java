@@ -5,17 +5,15 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlAblegenGuterKruemel implements Befehl
+public class BefehlAblegenGuterKruemel extends BefehlAblegen
 {
 
 	@Override
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-
-		spieler.getInventar().getKuchen(Item.IKuchen);
-		kontext.getAktuellenRaumZu(spieler).addItem(Item.UKuchen);
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
+		Item kuchen = spieler.getInventar().getKuchen(Item.IKuchen);
+		legeItemInAktuellenRaum(kontext, spieler, kuchen);
 
 		return true;
 	}
@@ -30,20 +28,14 @@ public class BefehlAblegenGuterKruemel implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext serverKontext,
 			Spieler spieler, Befehlszeile befehlszeile)
 	{
-		return spieler.getInventar().has(Item.IKuchen)
-				&& befehlszeile.getZeile().equals(TextVerwalter.BEFEHL_ABLEGEN + " guter krümel");
+		return spieler.getInventar().has(Item.IKuchen);
 	}
 
 	@Override
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN + " guter krümel");
-	}
-
-	@Override
-	public String getHilfe()
-	{
-		return TextVerwalter.HILFE_ABLEGEN;
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.NICHTS_ZUM_ABLEGEN
+				+ " guter krümel");
 	}
 }
