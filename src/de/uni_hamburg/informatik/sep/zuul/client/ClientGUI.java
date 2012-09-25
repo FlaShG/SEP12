@@ -496,7 +496,27 @@ public class ClientGUI extends Client
 			}
 		});
 		
+		// Nimmt diese Zeichen aus der Eingabe heraus...
+		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
+		{
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				switch (e.getKeyChar())
+				{
+					case '+':
+					case '-':
+					case '*':
+					case '/':
+						e.consume();
+						break;
+					default:
+						break;
+				}
+			}
+		});
 		
+		// global Keylistener
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
 		{
 			@Override
@@ -517,6 +537,23 @@ public class ClientGUI extends Client
 							return true;
 						case KeyEvent.VK_LEFT:
 							sendeEingabe(TextVerwalter.BEFEHL_GEHEN + " " + TextVerwalter.RICHTUNG_WESTEN);
+							return true;
+						default:
+							break;
+					}
+					switch(e.getKeyChar())
+					{
+						case '+':
+							sendeEingabe(TextVerwalter.BEFEHL_NEHMEN);
+							return true;
+						case '-':
+							sendeEingabe(TextVerwalter.BEFEHL_ABLEGEN);
+							return true;
+						case '*':
+							sendeEingabe(TextVerwalter.BEFEHL_ESSEN + " " + TextVerwalter.ORT_TASCHE);
+							return true;
+						case '/':
+							sendeEingabe(TextVerwalter.BEFEHL_FUETTERE);
 							return true;
 						default:
 							return false;
