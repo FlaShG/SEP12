@@ -57,7 +57,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		_readyClients = new ArrayList<String>();
 
 		_spiel = new Spiel();
-		System.out.println(_spiel.isGestartet());
 		_spiel.addObserver(this);
 	}
 
@@ -94,7 +93,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			throws RemoteException
 	{
 		boolean result;
-		System.out.println(_spiel.toString());
 
 		//Der Host connected sich zuerst
 		if(_connectedClients.isEmpty())

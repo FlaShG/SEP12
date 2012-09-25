@@ -70,7 +70,15 @@ public class StartUp
 	public static void restart()
 	{
 		// TODO shutdown server
-		startUp._server.beendeServer();
+		try
+		{
+			startUp._server.logoutClient(startUp._client.getClientName());
+		}
+		catch(RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
