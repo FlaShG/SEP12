@@ -85,7 +85,7 @@ public class ClientConsole extends Client
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		if(!(paket.getNachricht() == null))
+		if (paket.getNachricht() != null)
 		{
 			for(String zeile : paket.getNachricht().split("\n"))
 				System.out.println(zeile);
