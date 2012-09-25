@@ -316,17 +316,19 @@ public class EditorMap extends JPanel
 			@Override
 			public void mouseEntered(MouseEvent arg0)
 			{
-				if(dragDropSource != null && dragDropSource != arg0.getSource())
+				if(dragDropSource != null)
 				{
 					GridButton destination = ((GridButton) arg0.getSource());
-					if(destination.getRaum() == null)
+					if(destination.getRaum() == null && dragDropSource != arg0.getSource())
 					{
 						dragDropTarget = destination;
 						destination.setBackground(new Color(1, 0.6f, 0.4f));
+						dragDropSource.setAusgewaehlt(false);
 					}
 					else
 					{
 						dragDropTarget = null;
+						dragDropSource.setAusgewaehlt(true);
 					}
 				}
 			}
