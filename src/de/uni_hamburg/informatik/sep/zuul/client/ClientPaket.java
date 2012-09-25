@@ -38,14 +38,19 @@ public class ClientPaket implements Remote, Serializable
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
 		_dead = !spieler.isAlive();
+		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
 		if(!spieler.isAlive())
 		{
 			// TODO: win / lose screen
 			_showLoseScreen = true;
 			_showWinScreen = false;
-		}
+			_moeglicheAusgaenge = new String[0];
 
-		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
+		}
+		else
+		{
+			_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
+		}
 
 		_raumID = aktuellerRaum.getId();
 		_katze = aktuellerRaum.hasKatze();
@@ -56,7 +61,6 @@ public class ClientPaket implements Remote, Serializable
 		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
 		_raumArt = aktuellerRaum.getRaumart();
 		_spielerName = spieler.getName();
-		_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
 
 		_verfuegbareBefehle = new HashMap<String, Boolean>();
 		for(Entry<String, Befehl> entry : BefehlFactory.getMap().entrySet())
@@ -64,10 +68,11 @@ public class ClientPaket implements Remote, Serializable
 			String befehlsname = entry.getKey();
 			Befehl befehl = entry.getValue();
 
-			_verfuegbareBefehle.put(
-					befehlsname,
-					_dead ? false : befehl.vorbedingungErfuellt(kontext,
-							spieler, new Befehlszeile(befehlsname)));
+			boolean befehlVerfuegbar = _dead ? false : befehl
+					.vorbedingungErfuellt(kontext, spieler, new Befehlszeile(
+							befehlsname));
+
+			_verfuegbareBefehle.put(befehlsname, befehlVerfuegbar);
 		}
 	}
 
