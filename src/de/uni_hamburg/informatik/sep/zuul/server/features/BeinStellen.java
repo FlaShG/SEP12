@@ -51,7 +51,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 					"Du schmeißt " + fremderSpieler.getName() + " zu Boden.");
 			kontext.schreibeAnSpieler(fremderSpieler,
 					"Du wirst von " + spieler.getName()
-							+ " zu Boden geschmißen.");
+							+ " zu Boden geschmissen.");
 			fremderSpieler.setAktiv(false);
 
 			new Timer().schedule(new TimerTask()
