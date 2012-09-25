@@ -79,11 +79,4 @@ public class ClientConsole extends Client
 
 	}
 
-	@Override
-	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 }

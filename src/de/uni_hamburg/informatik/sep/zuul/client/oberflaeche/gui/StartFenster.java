@@ -16,6 +16,7 @@ public class StartFenster
 	private String _ipAdresse;
 	private int _port;
 	private String _spielername;
+	public ClientGUI _gui;
 
 	/**
 	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und
@@ -54,7 +55,7 @@ public class StartFenster
 
 				try
 				{
-					new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
+					_gui = new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{
@@ -89,7 +90,7 @@ public class StartFenster
 
 				try
 				{
-					new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
+					_gui = new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
 				}
 				catch(Exception e)
 				{

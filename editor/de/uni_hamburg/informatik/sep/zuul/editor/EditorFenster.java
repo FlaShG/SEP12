@@ -173,7 +173,6 @@ public class EditorFenster implements EditorBeobachter
 				if(raum == null)
 				{
 					_ui.getFrame().add(_ui.getRaumhinzu(), BorderLayout.SOUTH);
-					_ui.zeigeVerschiebenPanel(false);
 				}
 				else
 				{
@@ -189,7 +188,6 @@ public class EditorFenster implements EditorBeobachter
 									unsavedChanges(true);
 								}
 							});
-					_ui.zeigeVerschiebenPanel(true);
 				}
 			}
 		}
@@ -259,6 +257,12 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_ui.getMap().verschiebeAktuellenRaumRelativ(x, y);
 		
+		verschiebenUpdate();
+	}
+	
+	@Override
+	public void verschiebenUpdate()
+	{
 		unsavedChanges(true);
 	}
 	
