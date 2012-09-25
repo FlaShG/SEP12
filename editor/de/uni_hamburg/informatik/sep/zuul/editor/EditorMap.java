@@ -224,6 +224,7 @@ public class EditorMap extends JPanel
 			}
 		});
 		
+		//drag&drop
 		button.addMouseListener(new MouseAdapter()
 		{
 			
@@ -244,16 +245,27 @@ public class EditorMap extends JPanel
 							if(buttonAusgewaehlt())
 							{
 								getAktivenButton().setAusgewaehlt(false);
-								_activeX = dragDropTarget.getGridX();
-								_activeY = dragDropTarget.getGridY();
-								dragDropTarget.setAusgewaehlt(true);
-								_beobachter.verschiebenUpdate();
+								if(dragDropSource == getAktivenButton())
+								{
+									dragDropTarget.setAusgewaehlt(true);
+									_activeX = dragDropTarget.getGridX();
+									_activeY = dragDropTarget.getGridY();
+								}
+								else
+								{
+									dragDropTarget.setAusgewaehlt(false);
+									_activeX = -1;
+									_activeY = -1;
+								}
+								
+								_beobachter.raumwahlUpdate();
 							}
 							else
 							{
 								dragDropTarget.setAusgewaehlt(false);
 							}
 							
+							_beobachter.verschiebenUpdate();
 							moved = true;
 						}
 					}
