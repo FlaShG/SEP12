@@ -311,6 +311,8 @@ public class ClientGUI extends Client
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				_bilderzeuger.setGehRichtung(str);
 
 			}
 		});
@@ -328,18 +330,63 @@ public class ClientGUI extends Client
 		_bildPanel.getTuerNordButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_NORDEN));
+		
+		_bildPanel.getTuerNordButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe nord");
+			}
+		});
+		
+		
 
 		_bildPanel.getTuerOstButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_OSTEN));
+		
+		_bildPanel.getTuerOstButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe ost");
+			}
+		});
+		
+		
+		
 
 		_bildPanel.getTuerSuedButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
+		
+		_bildPanel.getTuerSuedButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe süd");
+			}
+		});
 
 		_bildPanel.getTuerWestButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
 						+ " " + TextVerwalter.RICHTUNG_WESTEN));
+		
+		_bildPanel.getTuerWestButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				_bilderzeuger.setGehRichtung("gehe west");
+			}
+		});
 
 		_bp.getQuitButton()
 				.addActionListener(
