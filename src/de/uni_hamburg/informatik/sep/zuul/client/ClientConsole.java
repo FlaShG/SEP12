@@ -53,7 +53,8 @@ public class ClientConsole extends Client
 		{
 			String nachricht = leseZeileEin();
 
-			verarbeiteEingabe(nachricht);
+			if(!nachricht.equals(""))
+				verarbeiteEingabe(nachricht);
 
 			//TODO warten einbauen
 		}
@@ -84,9 +85,12 @@ public class ClientConsole extends Client
 	@Override
 	public boolean zeigeAn(ClientPaket paket) throws RemoteException
 	{
-		for(String zeile : paket.getNachricht().split("\n"))
-			System.out.println(zeile);
-		run();
+		if (paket.getNachricht() != null)
+		{
+			for(String zeile : paket.getNachricht().split("\n"))
+				System.out.println(zeile);
+			run();
+		}
 		return true;
 	}
 
@@ -113,7 +117,7 @@ public class ClientConsole extends Client
 	public void serverBeendet()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
