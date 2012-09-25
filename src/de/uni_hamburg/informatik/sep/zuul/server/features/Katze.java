@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,6 +10,7 @@ import javax.swing.SwingUtilities;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
@@ -22,7 +24,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 {
 	public static final int KATZE_SCHADEN = 2;
 	public static final long SCHLAFZEIT_IN_SEKUNDEN = 10;
-	Raum _raum;
+	public Raum _raum;
 	boolean _satt = false;
 
 	private Katze(Raum startRaum)
@@ -46,11 +48,22 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		_raum = waehleNeuenRaum(kontext, _raum);
 		_raum.setKatze(this);
 
-		List<Spieler> spielerInRaum = kontext.getSpielerInRaum(_raum);
-		for(Spieler spieler : spielerInRaum)
+		kontext.schreibeAnAlleSpielerInRaum(_raum,
+				TextVerwalter.KATZE_IM_AKTUELLEN_RAUM);
+
+		if(_raum.hasMaus())
 		{
-			kontext.schreibeAnSpieler(spieler,
-					TextVerwalter.KATZE_IM_AKTUELLEN_RAUM);
+			// TODO: Better selection of rooms ( No start and end point, ... )
+			Maus maus = _raum.getMaus();
+			ArrayList<Raum> moeglicheRaeumeFuerMaus = _raum.getAusgaenge();
+			Raum neuerRaumFuerMaus = FancyFunction
+					.getRandomEntry(moeglicheRaeumeFuerMaus);
+			_raum.setMaus(null);
+			neuerRaumFuerMaus.setMaus(maus);
+
+			kontext.schreibeAnAlleSpielerInRaum(_raum,
+					TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
+
 		}
 	}
 
