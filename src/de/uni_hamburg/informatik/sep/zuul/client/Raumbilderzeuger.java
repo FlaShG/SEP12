@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
@@ -64,7 +65,8 @@ public class Raumbilderzeuger
 	private ClientPaket _paket;
 	private boolean _schauenAnsicht;
 	private ArrayList<String> _aktuelleSpieler;
-	
+	private HashMap<String, Color> _spielerfarben;
+
 	private final Color[] KITTELFARBEN = new Color[] { Color.BLUE, Color.RED,
 			Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA };
 
@@ -73,7 +75,8 @@ public class Raumbilderzeuger
 		_drlittlepositionen = new LinkedList<Tupel>();
 		_mauspositionen = new LinkedList<Tupel>();
 		_itemPositionen = new LinkedList<Tupel>();
-		
+		_spielerfarben = new HashMap<>();
+
 	}
 
 	/**
@@ -106,7 +109,7 @@ public class Raumbilderzeuger
 				_paket.buildUniqueID());
 
 		BufferedImage raum = null;
-		_aktuelleSpieler =  (ArrayList<String>) _paket.getAndereSpieler();
+		_aktuelleSpieler = (ArrayList<String>) _paket.getAndereSpieler();
 
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
@@ -152,39 +155,43 @@ public class Raumbilderzeuger
 		Tupel position;
 
 		//male DRLittle
-		if(_gegangeneRichtung.equals("nord"))
+		if(!_schauenAnsicht)
 		{
-			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 320, 520, 54, 54, null);
-		}
-		else if(_gegangeneRichtung.equals("ost"))
-		{
-			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 73, 320, 54, 54, null);
-		}
-		else if(_gegangeneRichtung.equals("süd"))
-		{
-			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 320, 70, 54, 54, null);
-		}
-		else if(_gegangeneRichtung.equals("west"))
-		{
-			g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 520, 320, 54, 54, null);
+			if(_gegangeneRichtung.equals("nord"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						320, 520, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("ost"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 73,
+						320, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("süd"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						320, 70, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("west"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						520, 320, 54, 54, null);
+			}
 		}
 
-		
-		
-		for(int i = 0; i < _paket.getAndereSpieler().size();i++)
+		for(int i = 0; i < _paket.getAndereSpieler().size(); i++)
 		{
-			if(!_paket.getAndereSpieler().get(i).equals(_paket.getSpielerName()))
+			if(!_paket.getAndereSpieler().get(i)
+					.equals(_paket.getSpielerName()))
 			{
 				position = entryPicker.pick(_drlittlepositionen);
 				x = position.getX();
 				y = position.getY();
-				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler().get(i)), x, y, 54, 54, null);
+				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler()
+						.get(i)), x, y, 54, 54, null);
 			}
 
 		}
-		
-		
-
 
 		//Male Maus
 
@@ -270,28 +277,30 @@ public class Raumbilderzeuger
 
 	private Image getFarbigenDrLittle(String name)
 	{
-		BufferedImage drlittle = ladeBild(getClass().getResource("bilder/drlittle.png"));
-		int farbenauswahl =_aktuelleSpieler.indexOf(name);
-		
+		BufferedImage drlittle = ladeBild(getClass().getResource(
+				"bilder/drlittle.png"));
+		int farbenauswahl = _aktuelleSpieler.indexOf(name);
+
 		if(farbenauswahl != -1 && farbenauswahl < 10)
 		{
-			for(int i = 17; i < 54;i++)
+			for(int i = 17; i < 54; i++)
 			{
-				for(int j = 0; j < 54;j++)
+				for(int j = 0; j < 54; j++)
 				{
 					if(drlittle.getRGB(j, i) == Color.white.getRGB())
 					{
-						drlittle.setRGB(j, i, KITTELFARBEN[farbenauswahl].getRGB());
+						drlittle.setRGB(j, i,
+								KITTELFARBEN[farbenauswahl].getRGB());
 					}
 				}
 			}
-			
+
 		}
 		else
 		{
-			for(int i = 17; i < 54;i++)
+			for(int i = 17; i < 54; i++)
 			{
-				for(int j = 0; j < 54;j++)
+				for(int j = 0; j < 54; j++)
 				{
 					if(drlittle.getRGB(j, i) == Color.white.getRGB())
 					{
@@ -300,17 +309,9 @@ public class Raumbilderzeuger
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
+
 		return drlittle;
 	}
-	
-
 
 	private void setPositionen()
 	{
