@@ -124,7 +124,7 @@ public class RaumTest
 	public void testHasMaus()
 	{
 		assertFalse(raum.hasMaus());
-		raum.setMaus(new Maus(raum));
+		raum.setMaus(new Maus(raum, raumOsten));
 		assertTrue(raum.hasMaus());
 	}
 
@@ -133,7 +133,7 @@ public class RaumTest
 	{
 		assertFalse(raumWesten.hasMaus());
 
-		raumWesten.setMaus(new Maus(raumWesten));
+		raumWesten.setMaus(new Maus(raum, raumWesten));
 		assertTrue(raumWesten.hasMaus());
 	}
 
@@ -141,7 +141,7 @@ public class RaumTest
 	public void testGetMaus()
 	{
 		assertFalse(raumNorden.hasMaus());
-		Maus nordmaus = new Maus(raumNorden);
+		Maus nordmaus = new Maus(raum, raumNorden);
 
 		raumNorden.setMaus(nordmaus);
 

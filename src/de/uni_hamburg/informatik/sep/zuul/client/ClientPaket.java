@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ClientPaket implements Remote, Serializable
 	private List<String> _andereSpieler;
 	private RaumArt _raumArt;
 	private String _spielerName;
-	private String[] _moeglicheAusgaenge;
+	private List<String> _moeglicheAusgaenge;
 	private Map<String, Boolean> _verfuegbareBefehle;
 	private boolean _dead;
 	private boolean _showLoseScreen;
@@ -44,12 +45,14 @@ public class ClientPaket implements Remote, Serializable
 			// TODO: win / lose screen
 			_showLoseScreen = true;
 			_showWinScreen = false;
-			_moeglicheAusgaenge = new String[0];
+			_moeglicheAusgaenge = new ArrayList<String>();
+			;
 
 		}
 		else
 		{
-			_moeglicheAusgaenge = aktuellerRaum.getMoeglicheAusgaenge();
+			_moeglicheAusgaenge = Arrays.asList(aktuellerRaum
+					.getMoeglicheAusgaenge());
 		}
 
 		_raumID = aktuellerRaum.getId();
@@ -116,7 +119,7 @@ public class ClientPaket implements Remote, Serializable
 		return _spielerName;
 	}
 
-	public String[] getMoeglicheAusgaenge()
+	public List<String> getMoeglicheAusgaenge()
 	{
 		return _moeglicheAusgaenge;
 	}
@@ -148,6 +151,20 @@ public class ClientPaket implements Remote, Serializable
 	public boolean isShowWinScreen()
 	{
 		return _showWinScreen;
+	}
+
+	public int buildUniqueID()
+	{
+		int[] subHashCodes = new int[] { _andereSpieler.hashCode(),
+				_items.hashCode(), _katze ? 1 : 0, _maus ? 1 : 0,
+				_moeglicheAusgaenge.hashCode(), _raumID, };
+
+		int hashCode = 1;
+		for(int code : subHashCodes)
+		{
+			hashCode = hashCode * 31 + code;
+		}
+		return hashCode;
 	}
 
 }

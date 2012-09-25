@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +109,7 @@ public class ClientGUI extends Client
 		_bilderzeuger = new Raumbilderzeuger();
 		_bilderzeuger.setPaket(paket);
 		initialisiereUI();
+		aktualisiereUI(paket, false);
 	}
 
 	@Override
@@ -170,16 +170,16 @@ public class ClientGUI extends Client
 	 */
 	private void aktualisiereUI(ClientPaket paket, boolean vorschau)
 	{
-		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
-		_bp.setLebensenergie(paket.getLebensEnergie());
-
 		String nachricht = paket.getNachricht();
 		if(nachricht != null)
 			schreibeText(nachricht);
 
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
-		int val = getOptimalIconSize();
+		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+		_bp.setLebensenergie(paket.getLebensEnergie());
+
+		int val = _bildPanel.getQuadraticSize();
 
 		if(paket.isShowWinScreen())
 		{
@@ -215,10 +215,8 @@ public class ClientGUI extends Client
 		}
 	}
 
-	private void aktualisiereMoeglicheAusgaenge(String[] ausgaenge)
+	private void aktualisiereMoeglicheAusgaenge(List<String> list)
 	{
-		List<String> list = Arrays.asList(ausgaenge);
-
 		boolean n = list.contains(TextVerwalter.RICHTUNG_NORDEN);
 		boolean o = list.contains(TextVerwalter.RICHTUNG_OSTEN);
 		boolean s = list.contains(TextVerwalter.RICHTUNG_SUEDEN);
@@ -395,7 +393,7 @@ public class ClientGUI extends Client
 			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
-				int val = getOptimalIconSize();
+				int val = _bildPanel.getQuadraticSize();
 
 				_bildPanel.setRaumanzeige(_bilderzeuger.zeichneBildErneut(val));
 			}
@@ -551,19 +549,5 @@ public class ClientGUI extends Client
 			// TODO: exception verarbeiten
 			e1.printStackTrace();
 		}
-	}
-
-	/**
-	 * @return
-	 */
-	private int getOptimalIconSize()
-	{
-		int val = 0;
-		if(_bildPanel.getWidth() > _bildPanel.getHeight()
-				&& _bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getHeight();
-		else if(_bildPanel.getHeight() != 0 && _bildPanel.getWidth() != 0)
-			val = _bildPanel.getLabelFuerIcon().getWidth();
-		return val;
 	}
 }

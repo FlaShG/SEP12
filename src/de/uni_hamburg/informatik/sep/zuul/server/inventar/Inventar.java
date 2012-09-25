@@ -153,21 +153,10 @@ public class Inventar
 	{
 		assert hasAnyKuchen();
 
-		for(Item item : _inhalt)
-		{
-			switch (item)
-			{
-			case UKuchen:
-			case IKuchen:
-			case UGiftkuchen:
-			case IGiftkuchen:
-				_inhalt.remove(item);
-				return item;
-			default:
-				break;
-			}
-		}
-		return null;
+		Item i = _inhalt.get(_inhalt.size()-1);
+		
+		_inhalt.remove(i);
+		return i;
 	}
 
 	/**
@@ -217,5 +206,21 @@ public class Inventar
 		if (builder.length() > 2)
 			builder.setLength(builder.length() -2);
 		return builder.toString();
+	}
+
+	public boolean hasAnyUKuchen()
+	{
+		for(Item item : _inhalt)
+		{
+			switch (item)
+			{
+			case UKuchen:
+			case UGiftkuchen:
+				return true;
+			default:
+				break;
+			}
+		}
+		return false;
 	}
 }
