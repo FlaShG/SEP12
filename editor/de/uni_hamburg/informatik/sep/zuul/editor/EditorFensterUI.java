@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
- * Die UI-Klasse des Editor-Fensters.
+ * Die UI-Klasse des {@link EditorFenster}s.
  * 
  * @author 0graeff
  * 
@@ -31,11 +31,9 @@ public class EditorFensterUI
 	private EditorBeobachter _beobachter;
 
 	/**
-	 * Erzeugt eine neue EditorFensterUI.
+	 * Erzeugt eine neue {@link EditorFensterUI}.
 	 * 
-	 * @param beobachter
-	 *            ein Observer, der über alle Änderungen in der UI informiert
-	 *            wird.
+	 * @param beobachter ein {@link EditorBeobachter}, der über alle Änderungen in der UI informiert wird.
 	 */
 	public EditorFensterUI(EditorBeobachter beobachter)
 	{
@@ -44,7 +42,7 @@ public class EditorFensterUI
 
 	/**
 	 * (Re-)Initialisiert die UI.
-	 * @param level ein Editorlevel für die levelglobalen Infos
+	 * @param level ein {@link EditorLevel} für die levelglobalen Infos
 	 * @param width die Breite der Karte
 	 * @param height die Höhe der Karte
 	 */
@@ -89,7 +87,7 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Gibt die obere Menüleiste zurück.
+	 * Gibt die obere {@link EditorMenuBar} zurück.
 	 * 
 	 * @return
 	 */
