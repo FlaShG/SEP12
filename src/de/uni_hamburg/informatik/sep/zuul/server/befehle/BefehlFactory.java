@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public final class BefehlFactory
 {
@@ -19,13 +17,15 @@ public final class BefehlFactory
 	{
 		Befehl[] befehle = new Befehl[] { new BefehlGehe(), new BefehlHilfe(),
 				new BefehlNehmen(), new BefehlEssenBoden(),
-				new BefehlEssenTasche(), new BefehlEssenTascheGuterKruemel(), new BefehlEssenTascheSchlechterKruemel(),
+				new BefehlEssenTasche(), new BefehlEssenTascheGuterKruemel(),
+				new BefehlEssenTascheSchlechterKruemel(),
 				new BefehlEssenTascheUnbekannterKruemel(), new BefehlLaden(),
 				new BefehlBeenden(), new BefehlUntersuche(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
-				new BefehlFuettereSchlechterKruemel(), new BefehlFuettereGuterKruemel(), new BefehlFuettereUnbekanntenKruemel(),
-				new BefehlAblegen(), new BefehlAblegenKruemel(),
-				new BefehlAblegenGuterKruemel(),
+				new BefehlFuettereSchlechterKruemel(),
+				new BefehlFuettereGuterKruemel(),
+				new BefehlFuettereUnbekanntenKruemel(), new BefehlAblegen(),
+				new BefehlAblegenKruemel(), new BefehlAblegenGuterKruemel(),
 				new BefehlAblegenSchlechterKruemel(), new BefehlSchauen(),
 				new BefehlGibMirMehrLeben(), new BeinStellen() };
 
@@ -101,12 +101,6 @@ public final class BefehlFactory
 		}
 		Collections.reverse(befehlsnamen);
 		return befehlsnamen;
-	}
-
-	public static void beendeSpielFuer(ServerKontext kontext, Spieler spieler,
-			String nachricht)
-	{
-
 	}
 
 	public static Befehl gibBefehl(String string)
