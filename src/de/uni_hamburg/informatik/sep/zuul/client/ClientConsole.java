@@ -86,6 +86,7 @@ public class ClientConsole extends Client
 	{
 		for(String zeile : paket.getNachricht().split("\n"))
 			System.out.println(zeile);
+		run();
 		return true;
 	}
 
