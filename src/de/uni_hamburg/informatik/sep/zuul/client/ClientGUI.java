@@ -414,7 +414,7 @@ public class ClientGUI extends Client
 				// TODO: bild neuzeichen ohne client paket
 				int val = getOptimalIconSize();
 
-				_bildPanel.setRaumanzeige(_bilderzeuger.ZeichneBildErneut(val));
+				_bildPanel.setRaumanzeige(_bilderzeuger.zeichneBildErneut(val));
 			}
 
 		});
