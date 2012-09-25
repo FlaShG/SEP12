@@ -4,11 +4,20 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.editor.EditorFenster;
 
-public class EditorStartup
+/**
+ * main-Klasse für Editor.
+ * @author 0graeff
+ *
+ */
+public final class EditorStartup
 {
+	private EditorStartup()
+	{
+		
+	}
 
 	/**
-	 * @param args
+	 * @param args ignoriert.
 	 */
 	public static void main(String[] args)
 	{
@@ -17,7 +26,7 @@ public class EditorStartup
 			@Override
 			public void run()
 			{
-				EditorFenster fenster = new EditorFenster();
+				new EditorFenster();
 			}
 		});
 	}
