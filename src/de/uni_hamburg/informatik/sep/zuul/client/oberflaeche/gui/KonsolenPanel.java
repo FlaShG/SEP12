@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 
+import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -10,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
@@ -36,7 +39,7 @@ public class KonsolenPanel extends JPanel
 		_eingabeZeile = new JTextField();
 		_eingabeZeile.setLocation(0, 0);
 
-		_enterButton = new JButton(TextVerwalter.BUTTON_EINGEBEN);
+		_enterButton = new JButton(StringUtils.capitalize(TextVerwalter.BUTTON_EINGEBEN));
 		_enterButton.setFocusable(false);
 		_enterButton.setVisible(true);
 		_enterButton.setSize(100, 30);
