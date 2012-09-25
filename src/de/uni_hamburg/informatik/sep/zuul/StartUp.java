@@ -14,7 +14,7 @@ public class StartUp
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
-		if(args.equals("console"))
+		if(args.length == 1 && args[0].equals("console"))
 		{
 			new StartConsole();
 		}
