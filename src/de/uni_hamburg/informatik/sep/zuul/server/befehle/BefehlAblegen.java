@@ -29,6 +29,7 @@ final class BefehlAblegen implements Befehl
 		case UGiftkuchen:
 		case IGiftkuchen:
 			li = Item.UGiftkuchen;
+			break;
 		default:
 			break;
 		}
