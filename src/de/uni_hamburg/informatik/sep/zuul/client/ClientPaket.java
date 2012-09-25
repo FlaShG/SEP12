@@ -38,16 +38,14 @@ public class ClientPaket implements Remote, Serializable
 
 	public ClientPaket(ServerKontext kontext, Spieler spieler, String nachricht)
 	{
-		_dead = !spieler.isAlive();
+		_dead = !spieler.lebendig();
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-		if(!spieler.isAlive())
+		if(!spieler.lebendig())
 		{
 			// TODO: win / lose screen
-			_showLoseScreen = true;
-			_showWinScreen = false;
+			_showWinScreen = spieler.hatGewonnen();
+			_showLoseScreen = !_showWinScreen;
 			_moeglicheAusgaenge = new ArrayList<String>();
-			;
-
 		}
 		else
 		{

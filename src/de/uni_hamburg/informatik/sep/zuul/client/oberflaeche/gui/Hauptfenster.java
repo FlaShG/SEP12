@@ -24,7 +24,7 @@ public class Hauptfenster extends JFrame
 
 	private void initialisiereUI()
 	{
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLayout(null);
 		setSize(1024, 720);
 
