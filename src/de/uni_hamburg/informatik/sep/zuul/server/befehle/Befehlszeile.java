@@ -14,12 +14,6 @@ public class Befehlszeile
 		_geparsteZeile = Befehlszeile.split(zeile);
 	}
 
-	private Befehlszeile(List<String> geparsteZeile)
-	{
-		_geparsteZeile = geparsteZeile;
-		_zeile = join(geparsteZeile);
-	}
-
 	public static List<String> split(String zeile)
 	{
 		String[] input = zeile.split(" ");

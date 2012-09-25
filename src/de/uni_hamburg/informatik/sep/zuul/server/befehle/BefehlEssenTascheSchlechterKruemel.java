@@ -20,7 +20,7 @@ class BefehlEssenTascheSchlechterKruemel extends BefehlEssenTasche
 			Befehlszeile befehlszeile)
 	{
 		Item kuchen = spieler.getInventar().getKuchen(Item.IGiftkuchen);
-		return esseKuchen(kontext, spieler, kuchen);
+		return BefehlEssen.esseKuchen(kontext, spieler, kuchen);
 	}
 
 	@Override

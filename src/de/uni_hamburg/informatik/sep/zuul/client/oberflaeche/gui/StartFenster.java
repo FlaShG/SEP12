@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
+import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
-public class StartFenster
+public class StartFenster extends StartUp
 {
 
 	private StartfensterUI _ui;
@@ -16,7 +18,6 @@ public class StartFenster
 	private String _ipAdresse;
 	private int _port;
 	private String _spielername;
-	public ClientGUI _gui;
 
 	/**
 	 * Erstellt ein neues Startfenster zum auswählen zwischen Single - und
@@ -40,12 +41,13 @@ public class StartFenster
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				try
 				{
-					new Server();
+					_server = new Server();
 				}
 				catch(Exception e1)
 				{
@@ -55,7 +57,7 @@ public class StartFenster
 
 				try
 				{
-					_gui = new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
+					_client = new ClientGUI("RmiServer", "127.0.0.1", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{
@@ -90,7 +92,7 @@ public class StartFenster
 
 				try
 				{
-					_gui = new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
+					_client = new ClientGUI("RmiServer", _ipAdresse, _port, _spielername);
 				}
 				catch(Exception e)
 				{
@@ -172,8 +174,8 @@ public class StartFenster
 			{
 				try
 				{
-					new Server();
-					_gui = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
+					_server = new Server();
+					_client = new ClientGUI("RmiServer", "localhost", 1090, "Dr. Little");
 				}
 				catch(Exception e1)
 				{

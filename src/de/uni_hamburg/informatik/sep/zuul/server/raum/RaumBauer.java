@@ -95,9 +95,9 @@ public class RaumBauer
 					&& raum.getRaumart() != RaumArt.Start)
 				kannMausEnthaltenRaum.add(raum);
 		}
-		
+
 		if(kannMausEnthaltenRaum.size() > 0)
 			mausInRaumSetzen(kannMausEnthaltenRaum, anzahlMaeuse);
-		
+
 	}
 }

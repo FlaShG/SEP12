@@ -25,15 +25,7 @@ class BefehlAblegen implements Befehl
 	static boolean legeItemInAktuellenRaum(ServerKontext kontext,
 			Spieler spieler, Item item)
 	{
-		switch (item)
-		{
-		case IKuchen:
-			item = Item.UKuchen;
-			break;
-		case IGiftkuchen:
-			item = Item.UGiftkuchen;
-			break;
-		}
+		item = Item.convertIToUKuchen(item);
 		kontext.getAktuellenRaumZu(spieler).addItem(item);
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.ABLEGEN_TEXT);
 

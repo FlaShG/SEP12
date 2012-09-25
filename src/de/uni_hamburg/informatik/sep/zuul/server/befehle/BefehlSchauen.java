@@ -53,7 +53,7 @@ public final class BefehlSchauen implements Befehl
 				+ "en.");
 		kontext.schreibeAnSpieler(spieler, "Er sieht: " + nebenRaum.getName());
 
-		Stack<Item> raumItems = (Stack<Item>) nebenRaum.getItems().clone();
+		Stack<Item> raumItems = nebenRaum.getItems();
 		kontext.schreibeAnSpieler(spieler, "Zu sehen "
 				+ (raumItems.size() == 1 ? "ist" : "sind") + ":");
 
@@ -61,27 +61,19 @@ public final class BefehlSchauen implements Befehl
 		boolean gegengift = false;
 		boolean hatDinge = false;
 
-		if(raumItems.size() != 0)
+		for(Item item : raumItems)
 		{
 
-			while(raumItems.size() != 0)
+			if(item.isAnyKuchen())
 			{
-				if(raumItems.get(0) == Item.UKuchen
-						|| raumItems.get(0) == Item.UGiftkuchen
-						|| raumItems.get(0) == Item.IKuchen
-						|| raumItems.get(0) == Item.UKuchen)
-				{
-					anzahlKruemel++;
-				}
-				else if(raumItems.get(0) == Item.Gegengift)
-				{
-					gegengift = true;
-				}
-
-				raumItems.remove(0);
+				anzahlKruemel++;
 			}
-
+			else if(item == Item.Gegengift)
+			{
+				gegengift = true;
+			}
 		}
+
 		if(gegengift)
 		{
 			kontext.schreibeAnSpieler(spieler, "Das Gegengift!");

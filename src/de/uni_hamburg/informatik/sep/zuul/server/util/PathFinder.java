@@ -36,8 +36,8 @@ public abstract class PathFinder
 		ArrayList<Raum> kuerzesterWegZumZiel = null;
 		for(Raum ausgang : ausgaenge)
 		{
-			ArrayList<Raum> path = findPath(ausgang,
-					(ArrayList<Raum>) begangeneRaeume.clone());
+			ArrayList<Raum> path = findPath(ausgang, new ArrayList<Raum>(
+					begangeneRaeume));
 			if(path != null)
 			{
 				if(kuerzesterWegZumZiel == null
@@ -52,17 +52,17 @@ public abstract class PathFinder
 
 	public static String getRichtung(ArrayList<Raum> raums)
 	{
-		if(raums==null || raums.size()<2)
+		if(raums == null || raums.size() < 2)
 			return null;
-		
+
 		Raum raum1 = raums.get(0);
 		Raum raum2 = raums.get(1);
-		for(String richtung: raum1.getMoeglicheAusgaenge())
+		for(String richtung : raum1.getMoeglicheAusgaenge())
 		{
 			if(raum1.getAusgang(richtung) == raum2)
 				return richtung;
 		}
-		
+
 		return null;
 	}
 }

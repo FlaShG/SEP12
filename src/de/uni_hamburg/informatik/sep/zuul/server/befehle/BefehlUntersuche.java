@@ -13,7 +13,8 @@ final class BefehlUntersuche implements Befehl
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start && spieler.getInventar().hasAnyUKuchen();
+		return kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start
+				&& spieler.getInventar().hasAnyUKuchen();
 	}
 
 	@Override
@@ -21,26 +22,19 @@ final class BefehlUntersuche implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		Item kuchen = spieler.getInventar().getAnyUKuchen();
-		switch (kuchen)
-		{
 
-		case UKuchen:
+		if(kuchen == Item.UKuchen)
+		{
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.LABOR_GESUNDER_KUCHEN);
 			spieler.getInventar().fuegeItemHinzu(Item.IKuchen);
-			break;
 
-		case UGiftkuchen:
+		}
+		else if(kuchen == Item.UGiftkuchen)
+		{
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.LABOR_GIFTIGER_KUCHEN);
 			spieler.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
-			break;
-			
-//			Dank der vorhergehenden abfrage von getAnyUKuchen() treten diese fälle nicht auf. 
-//		case IKuchen:
-//		case IGiftkuchen:
-//			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
-//			spieler.getInventar().fuegeItemHinzu(kuchen);
 		}
 		return true;
 	}
@@ -52,9 +46,10 @@ final class BefehlUntersuche implements Befehl
 
 		if(!spieler.getInventar().hasAnyKuchen())
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.LABOR_KEIN_KRUEMEL);
-		
+
 		if(!(kontext.getAktuellenRaumZu(spieler).getRaumart() == RaumArt.Start))
-			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
+			kontext.schreibeAnSpieler(spieler,
+					TextVerwalter.BEFEHL_GIB_KEIN_OBJEKT);
 	}
 
 	@Override
