@@ -29,7 +29,7 @@ public class MapSizeDialog
 	}
 
 	/**
-	 * Erstellt einen neuen MapSizedialog mit gegebenen Startwerten.
+	 * Erstellt einen neuen {@link MapSizeDialog} mit gegebenen Startwerten.
 	 * @param breite vorgeschlagene Breite
 	 * @param hoehe vorgeschlagene Höhe
 	 */
@@ -39,8 +39,8 @@ public class MapSizeDialog
 		_dialog.setTitle("Kartengröße wählen");
 		_dialog.setModal(true);
 		_dialog.setLayout(new FlowLayout());
-		_dialog.add(_width = new EigenschaftIntPanel("Breite", breite));
-		_dialog.add(_height = new EigenschaftIntPanel("Höhe", hoehe));
+		_dialog.add(_width = new EigenschaftIntPanelGT0("Breite", breite));
+		_dialog.add(_height = new EigenschaftIntPanelGT0("Höhe", hoehe));
 		
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener()

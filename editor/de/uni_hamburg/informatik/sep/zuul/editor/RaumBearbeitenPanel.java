@@ -31,9 +31,13 @@ public class RaumBearbeitenPanel extends JPanel
 
 	/**
 	 * Erzeugt ein {@link RaumBearbeitenPanel} für einen bestimmten {@link Raum}.
+	 * 
+	 * @require raum != null
 	 */
 	public RaumBearbeitenPanel(Raum raum, final EditorBeobachter beobachter)
 	{
+		assert raum != null : "Vorbedingung verletzt: raum != null";
+		
 		_raum = raum;
 
 		setLayout(new BorderLayout());
@@ -84,6 +88,8 @@ public class RaumBearbeitenPanel extends JPanel
 
 	/**
 	 * Gibt den bearbeiteten {@link Raum} zurück.
+	 * 
+	 * @ensure result != null
 	 */
 	public Raum getRaum()
 	{
@@ -92,6 +98,8 @@ public class RaumBearbeitenPanel extends JPanel
 
 	/**
 	 * Gibt den Löschen-Button des Panels zurück.
+	 * 
+	 * @ensure result != null
 	 */
 	public JButton getLoeschenButton()
 	{
@@ -100,6 +108,8 @@ public class RaumBearbeitenPanel extends JPanel
 	
 	/**
 	 * Gibt das Raumbeschreibungs-TextArea zurück.
+	 * 
+	 * @ensure result != null
 	 */
 	public JTextArea getBeschreibung()
 	{
@@ -108,6 +118,8 @@ public class RaumBearbeitenPanel extends JPanel
 
 	/**
 	 * Gibt das {@link RaumEigenschaftenPanel} zurück.
+	 * 
+	 * @ensure result != null
 	 */
 	public RaumEigenschaftenPanel getEigenschaftenPanel()
 	{

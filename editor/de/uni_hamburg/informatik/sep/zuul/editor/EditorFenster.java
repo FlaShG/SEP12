@@ -265,9 +265,13 @@ public class EditorFenster implements EditorBeobachter
 	/**
 	 * Setzt den {@link EditorLevel} und passt die GUI daran an.
 	 * @param editorLevel der neue {@link EditorLevel}
+	 * 
+	 * @require editorLevel != null
 	 */
 	public void setEditorLevel(EditorLevel editorLevel)
 	{
+		assert editorLevel != null : "Vorbedingung verletzt: editorLevel != null";
+		
 		_ui.getLevelPanel().setLebenspunkte(editorLevel.getLeben());
 		_ui.getLevelPanel().setMauszahl(editorLevel.getMaeuse());
 		_ui.getLevelPanel().setKatzenzahl(editorLevel.getKatzen());

@@ -30,11 +30,14 @@ public class EditorMap extends JPanel
 	/**
 	 * Erstellt eine neue {@link EditorMap} mit gegebener Höhe und Breite.
 	 * 
-	 * @param breite
-	 * @param hoehe
+	 * @require breite > 0
+	 * 1require hoehe > 0
 	 */
 	public EditorMap(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		setGroesse(breite, hoehe);
 	}
 
@@ -64,8 +67,6 @@ public class EditorMap extends JPanel
 
 	/**
 	 * Gibt den aktiven {@link GridButton} zurück.
-	 * 
-	 * @return
 	 */
 	public GridButton getAktivenButton()
 	{
@@ -120,10 +121,16 @@ public class EditorMap extends JPanel
 	 * Größe abgeändert werden.
 	 * @param breite die neue Breite
 	 * @param hoehe die neue Höhe
-	 * @return ob bei einer Größenänderung Räume flöten gehen würden. 
+	 * @return ob bei einer Größenänderung Räume flöten gehen würden.
+	 * 
+	 * @require breite > 0
+	 * @require hoehe > 0
 	 */
 	public boolean istGroesseAendernUnproblematisch(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		if(breite < _buttons.length)
 		{
 			for(int y = 0; y < getHoehe(); ++y)
@@ -159,9 +166,15 @@ public class EditorMap extends JPanel
 	 * Setzt die Größe der Map.
 	 * @param breite die neue Breite
 	 * @param hoehe die neue Höhe
+	 * 
+	 * @require breite > 0
+	 * @require hoehe > 0
 	 */
 	public void setGroesse(int breite, int hoehe)
 	{
+		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
+		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
+		
 		//alte entfernen
 		if(_buttons != null)
 		{

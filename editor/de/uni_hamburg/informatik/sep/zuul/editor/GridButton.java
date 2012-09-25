@@ -71,10 +71,12 @@ public class GridButton extends JButton
 
 	/**
 	 * Legt einen neuen {@link Raum} an und lässt den {@link GridButton} ihn referenzieren.
+	 * 
+	 * @ensure getRaum() != null
 	 */
 	public void fuegeLeerenRaumHinzu()
 	{
-		_raum = new Raum("", "");
+		setRaum(new Raum("", ""));
 		setAusgewaehlt(true);
 		_raum.setKoordinaten(_x, _y);
 	}
@@ -82,6 +84,8 @@ public class GridButton extends JButton
 	/**
 	 * Setzt den {@link Raum} dieses {@link GridButton}s neu.
 	 * @param raum Der neue Raum. Kann null sein, um den Raum zu löschen, ohne dessen Markierung zu ändern.
+	 * 
+	 * @ensure getRaum() == raum
 	 */
 	public void setRaum(Raum raum)
 	{

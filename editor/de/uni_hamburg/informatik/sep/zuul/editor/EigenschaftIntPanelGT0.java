@@ -8,7 +8,7 @@ import javax.swing.SpinnerNumberModel;
  * 
  * @author 0graeff
  */
-public class EigenschaftIntPanelGT1 extends EigenschaftIntPanel
+public class EigenschaftIntPanelGT0 extends EigenschaftIntPanel
 {
 	/**
 	 * Erzeugt ein neues {@link EigenschaftIntPanel} mit Startwert.
@@ -16,7 +16,7 @@ public class EigenschaftIntPanelGT1 extends EigenschaftIntPanel
 	 * @param beschriftung der Text des davorstehenden Labels
 	 * @param startwert der Wert, den die Komponente annimmt
 	 */
-	public EigenschaftIntPanelGT1(String beschriftung, int startwert)
+	public EigenschaftIntPanelGT0(String beschriftung, int startwert)
 	{
 		this(beschriftung, startwert, null);
 	}
@@ -28,7 +28,7 @@ public class EigenschaftIntPanelGT1 extends EigenschaftIntPanel
 	 * @param startwert der Wert, den die Komponente annimmt
 	 * @param beobachter der {@link EditorBeobachter}, der über Änderungen im Eingabefeld informiert werden soll
 	 */
-	public EigenschaftIntPanelGT1(String beschriftung, int startwert,
+	public EigenschaftIntPanelGT0(String beschriftung, int startwert,
 			EditorBeobachter beobachter)
 	{
 		super(beschriftung, startwert, beobachter);

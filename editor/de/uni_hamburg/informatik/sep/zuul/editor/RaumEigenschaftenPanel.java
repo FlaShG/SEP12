@@ -61,6 +61,8 @@ public class RaumEigenschaftenPanel extends JPanel
 
 	/**
 	 * Gibt den Namen zurück, der eingestellt wurde.
+	 * 
+	 * @ensure result != null
 	 */
 	public String getRaumname()
 	{
@@ -87,6 +89,8 @@ public class RaumEigenschaftenPanel extends JPanel
 
 	/**
 	 * Gibt die {@link RaumArt} zurück, die eingestellt wurde.
+	 * 
+	 * @ensure result != null
 	 */
 	public RaumArt getTyp()
 	{
