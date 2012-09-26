@@ -107,7 +107,9 @@ public class RaumStrukturParser
 		{
 			File file = new File(XMLPATH);
 			if(!file.exists())
+			{
 				erstelleXml();
+			}
 
 			JAXBContext jcontext = JAXBContext.newInstance(XmlStruktur.class);
 			Unmarshaller junmarshaller = jcontext.createUnmarshaller();

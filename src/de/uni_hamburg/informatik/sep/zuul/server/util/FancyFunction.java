@@ -26,9 +26,12 @@ public final class FancyFunction
 
 	public static <T> T getRandomEntryAndRemove(List<T> entries)
 	{
-		T entry = getRandomEntry(entries);
-		entries.remove(entry);
-		return entry;
+		int size = entries.size();
+		if(size == 0)
+			return null;
+
+		int nextInt = RANDOM.nextInt(size);
+		return entries.remove(nextInt);
 	}
 
 	public static class SuperFancyReproducibleRandomEntryPicker
