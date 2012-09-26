@@ -63,7 +63,23 @@ public class StartUp
 
 			}
 		};
-		runnable.run();
+		tryToRun();
+	}
+
+	/**
+	 * 
+	 */
+	static void tryToRun()
+	{
+		try
+		{
+			runnable.run();
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
 	public static void restart()
@@ -87,6 +103,6 @@ public class StartUp
 		System.gc();
 		KeyboardFocusManager
 				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
-		runnable.run();
+		tryToRun();
 	}
 }
