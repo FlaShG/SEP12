@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
+
 public class RaumStrukturParserTest
 {
 
@@ -12,7 +14,7 @@ public class RaumStrukturParserTest
 	public void testValidiere()
 	{
 		assertTrue(RaumStrukturParser
-				.validiere("./xml_dateien/testStruktur.xml"));
+				.validiere("./level/testStruktur."+FileChooser.ZUUL_ENDUNG));
 		assertFalse(RaumStrukturParser
 				.validiere("./xml_dateien/RaumSammlung.xml"));
 	}

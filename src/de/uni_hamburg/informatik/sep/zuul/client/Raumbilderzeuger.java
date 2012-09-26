@@ -3,10 +3,10 @@ package de.uni_hamburg.informatik.sep.zuul.client;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -55,39 +55,35 @@ class Raumbilderzeuger
 	private final BufferedImage DREVENBIGGER = ladeBild(getClass().getResource(
 			"bilder/drevenbigger.png"));
 
-	private LinkedList<Tupel> _drlittlepositionen;
-	private LinkedList<Tupel> _mauspositionen;
-	private LinkedList<Tupel> _itemPositionen;
+	private LinkedList<Point> _drlittlepositionen;
+	private LinkedList<Point> _mauspositionen;
+	private LinkedList<Point> _itemPositionen;
 
 	private int _breitehoehe;
 	private String _gegangeneRichtung = "nord";
 
 	private ClientPaket _paket;
 	private boolean _schauenAnsicht;
-	private ArrayList<String> _aktuelleSpieler;
 	private HashMap<String, Color> _spielerfarben;
-
 	private LinkedList<Color> _verfuegbareFarben;
-	private final Color[] KITTELFARBEN = new Color[] { Color.BLUE, Color.RED,
-			Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA };
 
 	public Raumbilderzeuger()
 	{
-		_drlittlepositionen = new LinkedList<Tupel>();
-		_mauspositionen = new LinkedList<Tupel>();
-		_itemPositionen = new LinkedList<Tupel>();
-		_spielerfarben = new HashMap<>();
+		_drlittlepositionen = new LinkedList<Point>();
+		_mauspositionen = new LinkedList<Point>();
+		_itemPositionen = new LinkedList<Point>();
+		_spielerfarben = new HashMap<String, Color>();
 		_verfuegbareFarben = new LinkedList<Color>();
-		_verfuegbareFarben.add( Color.BLUE);
-		_verfuegbareFarben.add( Color.RED);
-		_verfuegbareFarben.add( Color.GREEN);
-		_verfuegbareFarben.add( Color.YELLOW);
-		_verfuegbareFarben.add( Color.PINK);
-		_verfuegbareFarben.add( Color.GRAY);
-		_verfuegbareFarben.add( Color.BLACK);
-		_verfuegbareFarben.add( Color.MAGENTA);
-		_verfuegbareFarben.add( Color.ORANGE);
-		_verfuegbareFarben.add( Color.CYAN);
+		_verfuegbareFarben.add(Color.BLUE);
+		_verfuegbareFarben.add(Color.RED);
+		_verfuegbareFarben.add(Color.GREEN);
+		_verfuegbareFarben.add(Color.YELLOW);
+		_verfuegbareFarben.add(Color.PINK);
+		_verfuegbareFarben.add(Color.GRAY);
+		_verfuegbareFarben.add(Color.BLACK);
+		_verfuegbareFarben.add(Color.MAGENTA);
+		_verfuegbareFarben.add(Color.ORANGE);
+		_verfuegbareFarben.add(Color.CYAN);
 
 	}
 
@@ -119,15 +115,18 @@ class Raumbilderzeuger
 	{
 		SuperFancyReproducibleRandomEntryPicker entryPicker = new SuperFancyReproducibleRandomEntryPicker(
 				_paket.buildUniqueID());
-
 		BufferedImage raum = null;
-		_aktuelleSpieler = (ArrayList<String>) _paket.getAndereSpieler();
-		
+		Point position = new Point(0, 0);
+		int x = 0;
+		int y = 0;
+
+		//Dem Spieler die farbe weiß zuordnen
 		if(!_spielerfarben.containsKey(_paket.getSpielerName()))
 		{
 			_spielerfarben.put(_paket.getSpielerName(), Color.white);
 		}
 
+		//Je nach RaumTyp ein anderes Grundbild malen
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
 		{
@@ -141,6 +140,8 @@ class Raumbilderzeuger
 			raum = ladeBild(getClass().getResource("bilder/raum_ende.png"));
 			break;
 		}
+
+		// Türen falls vorhanden auf den Raum malen
 
 		Graphics2D g2d = (Graphics2D) raum.getGraphics();
 
@@ -166,12 +167,10 @@ class Raumbilderzeuger
 
 		}
 
+		//Positionen für Items,Katzen DR.Littles neu setzen
 		setPositionen();
-		int x = 0;
-		int y = 0;
-		Tupel position;
 
-		//male DRLittle
+		//Den Dr.Little des Spielers an der jeweiligen Tür malen
 		if(!_schauenAnsicht)
 		{
 			if(_gegangeneRichtung.equals("nord"))
@@ -196,62 +195,68 @@ class Raumbilderzeuger
 			}
 		}
 
-		
-	
-		
+		//Die anderen Dr.Littles in der mitte des Raumes malen
 		for(int i = 0; i < _paket.getAndereSpieler().size(); i++)
 		{
 			if(!_paket.getAndereSpieler().get(i)
 					.equals(_paket.getSpielerName()))
 			{
-				
-				if(!_spielerfarben.containsKey(_paket.getAndereSpieler().get(i)))
+
+				if(!_spielerfarben
+						.containsKey(_paket.getAndereSpieler().get(i)))
 				{
-					_spielerfarben.put(_paket.getAndereSpieler().get(i), getUnverbrauchteFarbe());
+					_spielerfarben.put(_paket.getAndereSpieler().get(i),
+							getUnverbrauchteFarbe());
 				}
-				
-				
-				position = entryPicker.pick(_drlittlepositionen);
-				_drlittlepositionen.remove(position);
-				
-				if(position == null)
-					position = new Tupel(245, 238);
-				
-				x = position.getX();
-				y = position.getY();
+
+				if(_drlittlepositionen.size() != 0)
+				{
+					position = entryPicker.pick(_drlittlepositionen);
+					_drlittlepositionen.remove(position);
+				}
+				else
+				{
+					position = new Point(245, 238);
+				}
+
+				x = position.x;
+				y = position.y;
 				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler()
 						.get(i)), x, y, 54, 54, null);
 			}
 
 		}
 
-		//Male Maus
-
+		//Die Maus malen
 		if(_paket.hasMaus())
 		{
-			Tupel mausposition = entryPicker
-					.pickAndRemoveFromList(_mauspositionen);
-			if(mausposition == null);
-				mausposition = new Tupel(70, 70);
-			x = mausposition.getX();
-			y = mausposition.getY();
+
+			position = entryPicker.pickAndRemoveFromList(_mauspositionen);
+
+			if(position == null)
+				;
+			position = new Point(70, 70);
+			x = position.x;
+			y = position.y;
 
 			g2d.drawImage(MAUS, x, y, 100, 51, null);
 		}
 
-		//Male Katze
+		//Die Katze malen
 		if(_paket.hasKatze())
 		{
-			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			Point pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			_mauspositionen.remove(pos);
+
 			if(pos == null)
-				pos = new Tupel(70, 470);
-				
-			x = pos.getX();
-			y = pos.getY();
+				pos = new Point(70, 470);
+
+			x = pos.x;
+			y = pos.y;
 			g2d.drawImage(KATZE, x, y, 100, 100, null);
 		}
 
-		// Male Gegenstände
+		// Die Gegenstände malen
 		int anzahlKruemel = 0;
 		boolean gegengiftDa = false;
 
@@ -267,31 +272,34 @@ class Raumbilderzeuger
 
 		for(int i = 0; i < anzahlKruemel; i++)
 		{
-			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
-			if(itempos == null)
-				itempos = new Tupel(200, 180);
-				
-			x = itempos.getX();
-			y = itempos.getY();
+			position = entryPicker.pickAndRemoveFromList(_itemPositionen);
+			_itemPositionen.remove(position);
+
+			if(position == null)
+				position = new Point(200, 180);
+
+			x = position.x;
+			y = position.y;
 
 			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
 		}
 
 		if(gegengiftDa)
 		{
-			Tupel itempos = entryPicker.pickAndRemoveFromList(_itemPositionen);
-			_itemPositionen.remove(itempos);
-			if(itempos == null)
-				itempos = new Tupel(200, 180);
-			
-			x = itempos.getX();
-			y = itempos.getY();
+			position = entryPicker.pickAndRemoveFromList(_itemPositionen);
+			_itemPositionen.remove(position);
+
+			if(position == null)
+				position = new Point(200, 180);
+
+			x = position.x;
+			y = position.y;
 
 			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
 
-			Tupel pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
-			x = pos.getX();
-			y = pos.getY();
+			Point pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			x = pos.x;
+			y = pos.y;
 			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
 
 		}
@@ -309,7 +317,7 @@ class Raumbilderzeuger
 
 	private Color getUnverbrauchteFarbe()
 	{
-		
+
 		return _verfuegbareFarben.remove();
 	}
 
@@ -327,8 +335,7 @@ class Raumbilderzeuger
 				{
 					if(drlittle.getRGB(j, i) == Color.white.getRGB())
 					{
-						drlittle.setRGB(j, i,
-								farbe.getRGB());
+						drlittle.setRGB(j, i, farbe.getRGB());
 					}
 				}
 			}
@@ -353,31 +360,31 @@ class Raumbilderzeuger
 
 	private void setPositionen()
 	{
-		_itemPositionen = new LinkedList<Tupel>();
+		_itemPositionen = new LinkedList<Point>();
 
-		_itemPositionen.add(new Tupel(200, 180));
-		_itemPositionen.add(new Tupel(155, 250));
-		_itemPositionen.add(new Tupel(220, 300));
-		_itemPositionen.add(new Tupel(165, 395));
-		_itemPositionen.add(new Tupel(380, 155));
-		_itemPositionen.add(new Tupel(234, 419));
-		_itemPositionen.add(new Tupel(430, 205));
-		_itemPositionen.add(new Tupel(300, 375));
-		_itemPositionen.add(new Tupel(400, 330));
-		_itemPositionen.add(new Tupel(430, 440));
+		_itemPositionen.add(new Point(200, 180));
+		_itemPositionen.add(new Point(155, 250));
+		_itemPositionen.add(new Point(220, 300));
+		_itemPositionen.add(new Point(165, 395));
+		_itemPositionen.add(new Point(380, 155));
+		_itemPositionen.add(new Point(234, 419));
+		_itemPositionen.add(new Point(430, 205));
+		_itemPositionen.add(new Point(300, 375));
+		_itemPositionen.add(new Point(400, 330));
+		_itemPositionen.add(new Point(430, 440));
 
-		_mauspositionen = new LinkedList<Tupel>();
-		_mauspositionen.add(new Tupel(70, 70));
-		_mauspositionen.add(new Tupel(70, 470));
-		_mauspositionen.add(new Tupel(470, 70));
-		_mauspositionen.add(new Tupel(470, 470));
+		_mauspositionen = new LinkedList<Point>();
+		_mauspositionen.add(new Point(70, 70));
+		_mauspositionen.add(new Point(70, 470));
+		_mauspositionen.add(new Point(470, 70));
+		_mauspositionen.add(new Point(470, 470));
 
-		_drlittlepositionen = new LinkedList<Tupel>();
-		_drlittlepositionen.add(new Tupel(245,238));
-		_drlittlepositionen.add(new Tupel(252,325));
-		_drlittlepositionen.add(new Tupel(324,214));
-		_drlittlepositionen.add(new Tupel(346,285));
-		_drlittlepositionen.add(new Tupel(340,355));
+		_drlittlepositionen = new LinkedList<Point>();
+		_drlittlepositionen.add(new Point(245, 238));
+		_drlittlepositionen.add(new Point(252, 325));
+		_drlittlepositionen.add(new Point(324, 214));
+		_drlittlepositionen.add(new Point(346, 285));
+		_drlittlepositionen.add(new Point(340, 355));
 
 	}
 
@@ -471,33 +478,17 @@ class Raumbilderzeuger
 
 	}
 
-	private static class Tupel
-	{
-		private int _x;
-		private int _y;
-
-		public Tupel(int x, int y)
-		{
-			_x = x;
-			_y = y;
-		}
-
-		public int getX()
-		{
-			return _x;
-		}
-
-		public int getY()
-		{
-			return _y;
-		}
-	}
-
 	public void setPaket(ClientPaket paket)
 	{
 		_paket = paket;
 	}
 
+	/**
+	 * Setzt die Richtung, in die als nächstes gegangen werden soll
+	 * 
+	 * @param richtungsbefehl
+	 *            der Befehl (gehe richtung)
+	 */
 	public void setGehRichtung(String richtungsbefehl)
 	{
 		if(richtungsbefehl.contains("nord"))
@@ -517,5 +508,4 @@ class Raumbilderzeuger
 			_gegangeneRichtung = "west";
 		}
 	}
-
 }

@@ -23,13 +23,11 @@ public class BefehlLaden implements Befehl
 		{
 
 			String level = FileChooser.oeffneDatei();
-			//			Spiel.getInstance().spielen(level);
+			//Spiel.getInstance().spielen(level);
 		}
 		else
 		{
 			String level = befehlszeile.getGeparsteZeile().get(1);
-
-			//			Spiel.getInstance().spielen("./xml_dateien/" + level + ".xml");
 		}
 		return true;
 	}

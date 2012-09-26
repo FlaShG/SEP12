@@ -27,7 +27,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	public Raum _raum;
 	boolean _satt = false;
 
-	private Katze(Raum startRaum)
+	public Katze(Raum startRaum)
 	{
 		_raum = startRaum;
 	}

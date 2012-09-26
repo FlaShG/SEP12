@@ -236,10 +236,29 @@ public class ClientGUI extends Client
 
 	}
 
-	private final class ActionListenerBefehlAusfuehren implements
-			ActionListener
+	private final class MouseAdapterBefehlSchaue extends MouseAdapter
 	{
-		private String _befehlszeile;
+		private final String _richtung;
+
+		public MouseAdapterBefehlSchaue(String richtung)
+		{
+			_richtung = richtung;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent m)
+		{
+			if(SwingUtilities.isRightMouseButton(m) && m.getClickCount() == 1
+					&& ((JButton) m.getSource()).isEnabled())
+			{
+				sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " " + _richtung);
+			}
+		}
+	}
+
+	private class ActionListenerBefehlAusfuehren implements ActionListener
+	{
+		protected String _befehlszeile;
 
 		public ActionListenerBefehlAusfuehren(String befehlszeile)
 		{
@@ -250,6 +269,7 @@ public class ClientGUI extends Client
 		public void actionPerformed(ActionEvent e)
 		{
 			sendeEingabe(_befehlszeile);
+
 		}
 
 		/**
@@ -258,6 +278,24 @@ public class ClientGUI extends Client
 		public String getBefehlszeile()
 		{
 			return _befehlszeile;
+		}
+	}
+
+	private final class ActionListenerBefehlGeheAusfuehren extends
+			ActionListenerBefehlAusfuehren
+	{
+		public ActionListenerBefehlGeheAusfuehren(String befehlszeile)
+		{
+			super(befehlszeile);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			_bildPanel.versteckeSchauen();
+			super.actionPerformed(e);
+			_bilderzeuger.setGehRichtung(_befehlszeile);
+
 		}
 	}
 
@@ -310,7 +348,7 @@ public class ClientGUI extends Client
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				_bilderzeuger.setGehRichtung(str);
 				_bildPanel.versteckeSchauen();
 
@@ -328,65 +366,28 @@ public class ClientGUI extends Client
 		});
 
 		_bildPanel.getTuerNordButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_NORDEN));
-		
-		_bildPanel.getTuerNordButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				_bilderzeuger.setGehRichtung("gehe nord");
-			}
-		});
-		
-		
+				new ActionListenerBefehlGeheAusfuehren(
+						TextVerwalter.BEFEHL_GEHEN + " "
+								+ TextVerwalter.RICHTUNG_NORDEN));
 
 		_bildPanel.getTuerOstButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_OSTEN));
-		
-		_bildPanel.getTuerOstButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				_bilderzeuger.setGehRichtung("gehe ost");
-			}
-		});
-		
-		
-		
+				new ActionListenerBefehlGeheAusfuehren(
+						TextVerwalter.BEFEHL_GEHEN + " "
+								+ TextVerwalter.RICHTUNG_OSTEN));
 
 		_bildPanel.getTuerSuedButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_SUEDEN));
-		
-		_bildPanel.getTuerSuedButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				_bilderzeuger.setGehRichtung("gehe süd");
-			}
-		});
+				new ActionListenerBefehlGeheAusfuehren(
+						TextVerwalter.BEFEHL_GEHEN + " "
+								+ TextVerwalter.RICHTUNG_SUEDEN));
 
 		_bildPanel.getTuerWestButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_GEHEN
-						+ " " + TextVerwalter.RICHTUNG_WESTEN));
-		
-		_bildPanel.getTuerWestButton().addActionListener(new ActionListener()
-		{
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				_bilderzeuger.setGehRichtung("gehe west");
-			}
-		});
+				new ActionListenerBefehlGeheAusfuehren(
+						TextVerwalter.BEFEHL_GEHEN + " "
+								+ TextVerwalter.RICHTUNG_WESTEN));
+
+		_bp.getBeinstellenButton().addActionListener(
+				new ActionListenerBefehlAusfuehren(
+						TextVerwalter.BEFEHL_BEINSTELLEN));
 
 		_bp.getQuitButton()
 				.addActionListener(
@@ -475,68 +476,17 @@ public class ClientGUI extends Client
 
 		});
 
-		_bildPanel.getTuerNordButton().addMouseListener(new MouseAdapter()
-		{
+		_bildPanel.getTuerNordButton().addMouseListener(
+				new MouseAdapterBefehlSchaue(TextVerwalter.RICHTUNG_NORDEN));
 
-			@Override
-			public void mouseClicked(MouseEvent m)
-			{
-				if(SwingUtilities.isRightMouseButton(m)
-						&& m.getClickCount() == 1)
-				{
-					if(_bildPanel.getTuerNordButton().isEnabled())
-						sendeEingabe("schaue nord");
-				}
+		_bildPanel.getTuerOstButton().addMouseListener(
+				new MouseAdapterBefehlSchaue(TextVerwalter.RICHTUNG_OSTEN));
 
-			}
-		});
+		_bildPanel.getTuerSuedButton().addMouseListener(
+				new MouseAdapterBefehlSchaue(TextVerwalter.RICHTUNG_SUEDEN));
 
-		_bildPanel.getTuerOstButton().addMouseListener(new MouseAdapter()
-		{
-
-			@Override
-			public void mouseClicked(MouseEvent m)
-			{
-				if(SwingUtilities.isRightMouseButton(m)
-						&& m.getClickCount() == 1)
-				{
-					if(_bildPanel.getTuerOstButton().isEnabled())
-						sendeEingabe("schaue ost");
-				}
-
-			}
-		});
-
-		_bildPanel.getTuerSuedButton().addMouseListener(new MouseAdapter()
-		{
-
-			@Override
-			public void mouseClicked(MouseEvent m)
-			{
-				if(SwingUtilities.isRightMouseButton(m)
-						&& m.getClickCount() == 1)
-				{
-					if(_bildPanel.getTuerSuedButton().isEnabled())
-						sendeEingabe("schaue süd");
-				}
-
-			}
-		});
-
-		_bildPanel.getTuerWestButton().addMouseListener(new MouseAdapter()
-		{
-
-			@Override
-			public void mouseClicked(MouseEvent m)
-			{
-				if(SwingUtilities.isRightMouseButton(m)
-						&& m.getClickCount() == 1)
-				{
-					if(_bildPanel.getTuerWestButton().isEnabled())
-						sendeEingabe("schaue west");
-				}
-			}
-		});
+		_bildPanel.getTuerWestButton().addMouseListener(
+				new MouseAdapterBefehlSchaue(TextVerwalter.RICHTUNG_WESTEN));
 
 		_bildPanel.getSchauenLabel().addMouseListener(new MouseAdapter()
 		{
@@ -546,8 +496,6 @@ public class ClientGUI extends Client
 				_bildPanel.versteckeSchauen();
 			}
 		});
-		
-		
 
 		// Nimmt diese Zeichen aus der Eingabe heraus...
 		_kp.getEingabeZeile().addKeyListener(new KeyAdapter()
@@ -582,76 +530,36 @@ public class ClientGUI extends Client
 					public boolean dispatchKeyEvent(KeyEvent e)
 					{
 						if(e.getID() == KeyEvent.KEY_PRESSED)
-						{
-							if (e.isShiftDown())
-							{// schauen
-								switch (e.getKeyCode())
-								{
-									case KeyEvent.VK_NUMPAD8:
-									case KeyEvent.VK_UP:
-										if (_bildPanel.getTuerNordButton().isEnabled())
-											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
-													+ TextVerwalter.RICHTUNG_NORDEN);
-										return true;
-									case KeyEvent.VK_NUMPAD2:
-									case KeyEvent.VK_DOWN:
-										if (_bildPanel.getTuerSuedButton().isEnabled())
-											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
-													+ TextVerwalter.RICHTUNG_SUEDEN);
-										return true;
-									case KeyEvent.VK_NUMPAD6:
-									case KeyEvent.VK_RIGHT:
-										if(_bildPanel.getTuerOstButton().isEnabled())
-											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
-													+ TextVerwalter.RICHTUNG_OSTEN);
-										return true;
-									case KeyEvent.VK_NUMPAD4:
-									case KeyEvent.VK_LEFT:
-										if(_bildPanel.getTuerWestButton().isEnabled())
-											sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " "
-													+ TextVerwalter.RICHTUNG_WESTEN);
-										return true;
-									default:
-										break;
-									}
-							}
-							// gehen
+						{// schauen und gehen
+							boolean isSchaue = e.isShiftDown();
+
 							switch (e.getKeyCode())
 							{
-								case KeyEvent.VK_NUMPAD8:
-								case KeyEvent.VK_UP:
-									String befehl_up = TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_NORDEN; 
-									sendeEingabe(befehl_up);
-									_bilderzeuger.setGehRichtung(befehl_up);
-									_bildPanel.versteckeSchauen();
-									return true;
-								case KeyEvent.VK_NUMPAD2:
-								case KeyEvent.VK_DOWN:
-									String befehl_down = TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_SUEDEN;
-									sendeEingabe(befehl_down);
-									_bilderzeuger.setGehRichtung(befehl_down);
-									_bildPanel.versteckeSchauen();
-									return true;
-								case KeyEvent.VK_NUMPAD6:
-								case KeyEvent.VK_RIGHT:
-									String befehl_right = TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_OSTEN;
-									sendeEingabe(befehl_right);
-									_bilderzeuger.setGehRichtung(befehl_right);
-									_bildPanel.versteckeSchauen();
-									return true;
-								case KeyEvent.VK_NUMPAD4:
-								case KeyEvent.VK_LEFT:
-									String befehl_left = TextVerwalter.BEFEHL_GEHEN + " "
-											+ TextVerwalter.RICHTUNG_WESTEN;
-									sendeEingabe(befehl_left);
-									_bilderzeuger.setGehRichtung(befehl_left);
-									_bildPanel.versteckeSchauen();
-									return true;
-								default:
-									break;
+							case KeyEvent.VK_ESCAPE:
+								_bildPanel.versteckeSchauen();
+								return true;
+							case KeyEvent.VK_NUMPAD8:
+							case KeyEvent.VK_UP:
+								keyEventBefehlGeheSchaueAusfuehren(isSchaue,
+										TextVerwalter.RICHTUNG_NORDEN);
+								return true;
+							case KeyEvent.VK_NUMPAD2:
+							case KeyEvent.VK_DOWN:
+								keyEventBefehlGeheSchaueAusfuehren(isSchaue,
+										TextVerwalter.RICHTUNG_SUEDEN);
+								return true;
+							case KeyEvent.VK_NUMPAD6:
+							case KeyEvent.VK_RIGHT:
+								keyEventBefehlGeheSchaueAusfuehren(isSchaue,
+										TextVerwalter.RICHTUNG_OSTEN);
+								return true;
+							case KeyEvent.VK_NUMPAD4:
+							case KeyEvent.VK_LEFT:
+								keyEventBefehlGeheSchaueAusfuehren(isSchaue,
+										TextVerwalter.RICHTUNG_WESTEN);
+								return true;
+							default:
+								break;
 							}
 							// der rest
 							switch (e.getKeyChar())
@@ -690,6 +598,9 @@ public class ClientGUI extends Client
 		createActionListenerMap(_bp.getNormalButtons());
 		createActionListenerMap(_bp.getSystemButtons());
 		createActionListenerMap(_bp.getExtraButtons());
+		createActionListenerMap(new JButton[] { _bildPanel.getTuerNordButton(),
+				_bildPanel.getTuerSuedButton(), _bildPanel.getTuerOstButton(),
+				_bildPanel.getTuerWestButton() });
 	}
 
 	private void createActionListenerMap(JButton[] buttons)
@@ -775,7 +686,7 @@ public class ClientGUI extends Client
 			public void run()
 			{
 				JOptionPane.showMessageDialog(null, "Server wurde beendet");
-//				System.exit(0);
+				//				System.exit(0);
 			}
 		});
 		_hf.hide();
@@ -786,5 +697,21 @@ public class ClientGUI extends Client
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
 
+	}
+
+	private void keyEventBefehlGeheSchaueAusfuehren(boolean isSchaue,
+			String richtung)
+	{
+		JButton button = _befehlButtonMap.get(TextVerwalter.BEFEHL_GEHEN + " "
+				+ richtung);
+		if(!button.isEnabled())
+			return;
+
+		if(isSchaue)
+			sendeEingabe(TextVerwalter.BEFEHL_SCHAUEN + " " + richtung);
+		else
+		{
+			button.doClick();
+		}
 	}
 }

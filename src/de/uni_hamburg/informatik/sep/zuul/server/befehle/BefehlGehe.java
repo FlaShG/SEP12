@@ -99,7 +99,15 @@ final class BefehlGehe implements Befehl
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
+		String richtung = extrahiereRichtung(befehlszeile);
+		if(richtung == null)
+		{
 		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINERICHTUNG);
+		}
+		else
+		{
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.DAISTKEINRAUM);
+		}
 	}
 
 	@Override

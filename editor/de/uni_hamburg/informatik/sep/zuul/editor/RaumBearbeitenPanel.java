@@ -125,4 +125,12 @@ public class RaumBearbeitenPanel extends JPanel
 	{
 		return _eigenschaften;
 	}
+
+	/**
+	 * Setzt den Fokus auf das Namensfeld.
+	 */
+	public void setzeFokusAufNamensFeld()
+	{
+		getEigenschaftenPanel().setzeFokusAufNamensFeld();
+	}
 }
