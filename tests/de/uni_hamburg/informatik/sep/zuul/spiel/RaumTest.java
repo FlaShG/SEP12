@@ -1,9 +1,17 @@
 package de.uni_hamburg.informatik.sep.zuul.spiel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
  * @author Felix Wiedemann<1wiedema@informatik.uni-hamburg.de>
@@ -88,25 +96,25 @@ public class RaumTest
 		assertEquals(Item.Keins, raum.getNaechstesItem());
 		assertEquals(Item.Keins, raumWesten.getNaechstesItem());
 
-		raumOsten.addItem(Item.Kuchen);
+		raumOsten.addItem(Item.UKuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 	}
 
 	@Test
 	public void testSetItem()
 	{
-		raumOsten.addItem(Item.Kuchen);
+		raumOsten.addItem(Item.UKuchen);
 
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 
 	}
 
 	@Test
 	public void testLoescheItem()
 	{
-		raumOsten.addItem(Item.Kuchen);
-		assertEquals(Item.Kuchen, raumOsten.getNaechstesItem());
+		raumOsten.addItem(Item.UKuchen);
+		assertEquals(Item.UKuchen, raumOsten.getNaechstesItem());
 
 		raumOsten.loescheItem();
 		assertEquals(Item.Keins, raumOsten.getNaechstesItem());
@@ -116,7 +124,7 @@ public class RaumTest
 	public void testHasMaus()
 	{
 		assertFalse(raum.hasMaus());
-		raum.setMaus(new Maus(raum));
+		raum.setMaus(new Maus(raum, raumOsten));
 		assertTrue(raum.hasMaus());
 	}
 
@@ -125,7 +133,7 @@ public class RaumTest
 	{
 		assertFalse(raumWesten.hasMaus());
 
-		raumWesten.setMaus(new Maus(raumWesten));
+		raumWesten.setMaus(new Maus(raum, raumWesten));
 		assertTrue(raumWesten.hasMaus());
 	}
 
@@ -133,7 +141,7 @@ public class RaumTest
 	public void testGetMaus()
 	{
 		assertFalse(raumNorden.hasMaus());
-		Maus nordmaus = new Maus(raumNorden);
+		Maus nordmaus = new Maus(raum, raumNorden);
 
 		raumNorden.setMaus(nordmaus);
 

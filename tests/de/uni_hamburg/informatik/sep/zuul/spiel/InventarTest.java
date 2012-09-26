@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+
 public class InventarTest
 {
 
@@ -21,13 +24,13 @@ public class InventarTest
 	public void testFuegeItemHinzu()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Kuchen;
-		
+		Item it = Item.UKuchen;
+
 		inv.fuegeItemHinzu(Item.Keins);
 		assertFalse(inv.isGefuellt());
-		
+
 		inv.fuegeItemHinzu(it);
-		
+
 		assertTrue(inv.isGefuellt());
 		assertEquals(it, inv.nehmeLetztesItem());
 	}
@@ -36,33 +39,33 @@ public class InventarTest
 	public void testNehmeLetztesItem()
 	{
 		Inventar inv = new Inventar();
-		Item it = Item.Kuchen;
-		
+		Item it = Item.UKuchen;
+
 		inv.fuegeItemHinzu(it);
-		
+
 		assertEquals(it, inv.nehmeLetztesItem());
 		assertFalse(inv.isGefuellt());
-		
+
 		assertEquals(Item.Keins, inv.nehmeLetztesItem());
 	}
 
 	@Test
 	public void testIsGefuellt()
 	{
-		Inventar inv  = new Inventar();
+		Inventar inv = new Inventar();
 		assertFalse(inv.isGefuellt());
-		
-		inv.fuegeItemHinzu(Item.Kuchen);
+
+		inv.fuegeItemHinzu(Item.UKuchen);
 		assertTrue(inv.isGefuellt());
 	}
-	
+
 	@Test
 	public void testHasAnyKuchen()
 	{
 		Inventar neuesInv = new Inventar();
 		assertFalse(neuesInv.hasAnyKuchen());
 
-		neuesInv.fuegeItemHinzu(Item.Kuchen);
+		neuesInv.fuegeItemHinzu(Item.UKuchen);
 
 		assertTrue(neuesInv.hasAnyKuchen());
 	}
@@ -73,7 +76,7 @@ public class InventarTest
 		Inventar neuesInv = new Inventar();
 		assertFalse(neuesInv.hasAnyKuchen());
 
-		neuesInv.fuegeItemHinzu(Item.Kuchen);
+		neuesInv.fuegeItemHinzu(Item.UKuchen);
 
 		assertTrue(neuesInv.hasAnyKuchen());
 
