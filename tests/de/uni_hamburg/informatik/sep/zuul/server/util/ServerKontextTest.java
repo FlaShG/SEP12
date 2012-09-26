@@ -11,7 +11,11 @@ import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
-
+/**
+ * 
+ * @author 0ortmann
+ *
+ */
 public class ServerKontextTest {
 	
 	ServerKontext _kontext;
