@@ -34,6 +34,7 @@ public class BefehlEssenBodenTest
 //		raum.addItem(Item.IKuchen);
 //		raum.addItem(Item.IGiftkuchen);
 		spieler.setLebensEnergie(8);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raum);
 	}
 

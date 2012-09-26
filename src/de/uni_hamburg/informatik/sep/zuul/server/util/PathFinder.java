@@ -9,10 +9,18 @@ public abstract class PathFinder
 
 	protected abstract boolean isZielRaum(Raum raum);
 
+	/**
+	 * Gibt eine geordnente Liste zurück, beginnend mit dem
+	 * startraum und endend mit dem zielraum. dazwischen liegen
+	 * die räume welche auf dem kürzesten weg zum ziel durchgangen wurden.
+	 * @param start startraum
+	 * @return
+	 */
 	public ArrayList<Raum> findPath(Raum start)
 	{
 		return findPath(start, null);
 	}
+
 
 	private ArrayList<Raum> findPath(Raum start, ArrayList<Raum> begangeneRaeume)
 	{
@@ -50,6 +58,12 @@ public abstract class PathFinder
 
 	}
 
+	/**
+	 * gibt die richtung zurück, in welcher der erste und zweite Raum
+	 * der übergebenen Liste mit einander verbunden sind.
+	 * @param raums raumliste
+	 * @return verbindungsrichtung zwischen erstem und zweiten raum der liste.S
+	 */
 	public static String getRichtung(ArrayList<Raum> raums)
 	{
 		if(raums == null || raums.size() < 2)
