@@ -30,7 +30,7 @@ public class ServerKontext
 	{
 		this(startRaum, null);
 	}
-	
+
 	public ServerKontext(Raum startRaum, RaumStruktur struktur)
 	{
 		_startRaum = startRaum;
@@ -62,6 +62,7 @@ public class ServerKontext
 			if(name.equals(spieler.getName()))
 			{
 				_spielerPosition.remove(spieler);
+				return;
 			}
 		}
 	}
@@ -233,6 +234,11 @@ public class ServerKontext
 	public List<Raum> getRaeume()
 	{
 		return new ArrayList<Raum>(_struktur.getConnections().keySet());
+	}
+
+	public void entferneSpieler(Spieler spieler)
+	{
+		_spielerPosition.remove(spieler);
 	}
 
 }
