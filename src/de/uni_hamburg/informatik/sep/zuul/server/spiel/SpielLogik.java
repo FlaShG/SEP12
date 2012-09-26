@@ -27,7 +27,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 
 public class SpielLogik
 {
-	public static String _levelPfad;
+	public static String _levelPfad = null;
 	public ServerKontext _kontext;
 	private RaumStruktur _struktur;
 
@@ -57,7 +57,7 @@ public class SpielLogik
 	public void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();
-		_kontext = new ServerKontext(start);
+		_kontext = new ServerKontext(start,_struktur);
 
 	}
 
@@ -103,7 +103,7 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer(_struktur,
 				manager.getAnzahlMaeuse());
 
-		for(int i = 0; i < 1 /*manager.getAnzahlKatzen()*/; i++)
+		for(int i = 0; i <  5 /*manager.getAnzahlKatzen()*/; i++)
 			// TODO mehr als eine katze nicht unterstützt atm
 			Katze.erzeugeKatze(this);
 

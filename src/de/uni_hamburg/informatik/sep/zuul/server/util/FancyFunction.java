@@ -24,6 +24,16 @@ public final class FancyFunction
 		return entries.get(nextInt);
 	}
 
+	public static <T> T getRandomEntryAndRemove(List<T> entries)
+	{
+		int size = entries.size();
+		if(size == 0)
+			return null;
+
+		int nextInt = RANDOM.nextInt(size);
+		return entries.remove(nextInt);
+	}
+
 	public static class SuperFancyReproducibleRandomEntryPicker
 	{
 		private Random _random;
@@ -52,10 +62,12 @@ public final class FancyFunction
 
 		public <T> T pickAndRemoveFromList(List<T> entries)
 		{
-			T pick = pick(entries);
-			if(pick != null)
-				entries.remove(pick);
-			return pick;
+			int size = entries.size();
+			if(size == 0)
+				return null;
+
+			int nextInt = _random.nextInt(size);
+			return entries.remove(nextInt);
 		}
 	}
 }
