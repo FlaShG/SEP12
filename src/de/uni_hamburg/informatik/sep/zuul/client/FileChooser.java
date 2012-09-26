@@ -26,7 +26,7 @@ public class FileChooser
 
 	}
 	
-	public static final String ENDUNG = "zuul";
+	public static final String ZUUL_ENDUNG = "zuul";
 
 	/**
 	 * Öffnet eine Datei, und gibt den Pfad als String zurück. Wenn die
@@ -70,9 +70,9 @@ public class FileChooser
 		{
 			File file = fileChooser.getSelectedFile();
 			level = file.getAbsolutePath();
-			if(!level.toLowerCase().endsWith("."+ENDUNG))
+			if(!level.toLowerCase().endsWith("."+ZUUL_ENDUNG))
 			{
-				level += "."+ENDUNG;
+				level += "."+ZUUL_ENDUNG;
 			}
 		}
 		return level;
@@ -115,7 +115,7 @@ public class FileChooser
 	 */
 	private static boolean isFileXML(File file)
 	{
-		return file.getName().toLowerCase().endsWith("."+ENDUNG);
+		return file.getName().toLowerCase().endsWith("."+ZUUL_ENDUNG);
 	}
 
 	/**
