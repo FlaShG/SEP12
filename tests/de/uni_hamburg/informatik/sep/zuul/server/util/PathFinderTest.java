@@ -9,7 +9,11 @@ import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
-
+/**
+ * 
+ * @author 0ortmann
+ *
+ */
 public class PathFinderTest {
 	
 	Raum _raum1 = new Raum("1", "beschreibung");
