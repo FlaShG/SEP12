@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
@@ -73,7 +72,7 @@ public class StartUp
 		try
 		{
 			startUp._client.logout();
-			
+
 			//startUp._server.logoutClient(startUp._client.getClientName());
 		}
 		catch(RemoteException e)
@@ -81,7 +80,7 @@ public class StartUp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
