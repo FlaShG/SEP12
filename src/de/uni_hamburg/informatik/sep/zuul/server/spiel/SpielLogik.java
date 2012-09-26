@@ -3,6 +3,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.features.AusgaengeAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusfuehrenListener;
@@ -89,13 +90,13 @@ public class SpielLogik
 		IOManager manager = new IOManager();
 		if(_levelPfad == null)
 		{
-			manager.readLevel("./xml_dateien/testStruktur.xml");
+			manager.readLevel("./level/testStruktur."+FileChooser.ZUUL_ENDUNG);
 		}
 		else
 		{
 			manager.readLevel(_levelPfad);
 		}
-		// TODO: noch statisch - datei mit filechooser auswählen!!
+		// TODO: immernoch statisch - datei mit NUR NOCH filechooser auswählen!!
 
 		_struktur = new RaumStruktur(manager.getXmlRaeume(),
 				manager.getRaeume());

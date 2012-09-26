@@ -11,14 +11,14 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlLadenTest
+public class BefehlHilfeTest
 {
-
-	BefehlLaden laden = new BefehlLaden();
+	BefehlHilfe hilfe = new BefehlHilfe();
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurladen = new Befehlszeile("laden");
+	Befehlszeile nurHilfe = new Befehlszeile("hilfe");
+	Befehlszeile zweiMalHilfe = new Befehlszeile("hilfe hilfe");
 
 	@Before
 	public void setUp() throws Exception
@@ -26,38 +26,39 @@ public class BefehlLadenTest
 	}
 
 	@Test
-	public void testVorbedingungErfuellt()
+	public void testAusfuehren()
 	{
-		assertTrue(laden.vorbedingungErfuellt(kontext, spieler, nurladen));
+		assertTrue(hilfe.ausfuehren(kontext, spieler, nurHilfe));
+		assertTrue(hilfe.ausfuehren(kontext, spieler, zweiMalHilfe));
 	}
 
 	@Test
-	public void testAusfuehren()
+	public void testVorbedingungErfuellt()
 	{
-		assertTrue(laden.ausfuehren(kontext, spieler, nurladen));
+		assertTrue(hilfe.vorbedingungErfuellt(kontext, spieler, nurHilfe));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
 		//TODO Fehlerausgabe beim laden Test
-		laden.gibFehlerAus(kontext, spieler, nurladen);
+		hilfe.gibFehlerAus(kontext, spieler, nurHilfe);
 		//		assertEquals(
-		//				TextVerwalter.NICHTSZUMNEHMENTEXT,
+		//				TextVerwalter.***,
 		//				kontext.getNachrichtFuer(spieler).substring(0,
-		//						TextVerwalter.NICHTSZUMNEHMENTEXT.length()));
+		//						TextVerwalter.***.length()));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals(TextVerwalter.BEFEHL_LADEN, laden.getBefehlsnamen()[0]);
+		assertEquals(TextVerwalter.BEFEHL_HILFE, hilfe.getBefehlsnamen()[0]);
 	}
 
 	@Test
 	public void testGetHilfe()
 	{
-		assertEquals(TextVerwalter.HILFE_LOAD, laden.getHilfe());
+		assertEquals(TextVerwalter.HILFE_HELP, hilfe.getHilfe());
 	}
 
 }

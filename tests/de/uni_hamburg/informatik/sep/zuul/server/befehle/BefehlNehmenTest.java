@@ -18,7 +18,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlNehmenTest
 {
-
 	BefehlNehmen nehmen = new BefehlNehmen();
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
@@ -36,6 +35,7 @@ public class BefehlNehmenTest
 		stack.push(Item.IKuchen);
 		raumC.setItems(stack);
 		spieler.setInventar(inventar);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raumC);
 	}
 

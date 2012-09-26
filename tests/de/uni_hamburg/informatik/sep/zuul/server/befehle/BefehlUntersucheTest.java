@@ -27,6 +27,7 @@ public class BefehlUntersucheTest
 	@Before
 	public void setUp() throws Exception
 	{
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		raum.setRaumart(RaumArt.Start);
 		kontext.setAktuellenRaumZu(spieler, raum);
 		inventar.fuegeItemHinzu(Item.UKuchen);

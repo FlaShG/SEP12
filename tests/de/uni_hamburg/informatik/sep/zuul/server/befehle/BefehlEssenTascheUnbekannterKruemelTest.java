@@ -22,33 +22,32 @@ public class BefehlEssenTascheUnbekannterKruemelTest
 	Spieler spieler2 = new Spieler("peter");
     Inventar inventar = new Inventar();
     Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("essen tasche unbekannter krümel");
+    Befehlszeile befehlszeile= new Befehlszeile("essen tasche krümel");
     
     SpielLogik spiellogi = new SpielLogik();
 
 	@Before
 	public void setUp() throws Exception
 	{
-		inventar.fuegeItemHinzu(Item.UGiftkuchen);
+		//inventar.fuegeItemHinzu(Item.UGiftkuchen);
 		inventar.fuegeItemHinzu(Item.UKuchen);
-		inventar.fuegeItemHinzu(Item.IGiftkuchen);
-		inventar.fuegeItemHinzu(Item.IKuchen);
+		//inventar.fuegeItemHinzu(Item.IGiftkuchen);
+		//inventar.fuegeItemHinzu(Item.IKuchen);
 		spieler.setInventar(inventar);
 		spieler2.setInventar(inventar2);
 		spieler.setLebensEnergie(10);
 		spieler2.setLebensEnergie(1);
+		
 	}
 //TODO: auf unbekannttest umbauen
 	@Test
 	public void testAusfuehren()
 	{
-	assertTrue(spieler.getInventar().has(Item.IKuchen));
+	assertTrue(spieler.getInventar().has(Item.UKuchen));
 	assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
-	assertFalse(spieler.getInventar().has(Item.IKuchen));
+	assertFalse(spieler.getInventar().has(Item.UKuchen));
 	
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
-	assertTrue(essentasche.ausfuehren(kontext, spieler2, befehlszeile));
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
+
 	}
 
 	@Test
