@@ -35,24 +35,8 @@ public class StartUp
 					{
 						startUp = new StartConsole();
 					}
-					catch(RemoteException e)
+					catch(Exception e)
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(MalformedURLException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(AlreadyBoundException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(NotBoundException e)
-					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
