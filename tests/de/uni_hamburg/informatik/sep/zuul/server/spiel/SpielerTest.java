@@ -35,7 +35,6 @@ public class SpielerTest {
 		assertEquals("testname", _tester.getName());
 		assertEquals(8, _tester.getLebensEnergie());
 		
-//		when(_tester.getInventar()).thenReturn(inv);		
 		assertEquals(inv, _tester.getInventar());
 	}
 	
