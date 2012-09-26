@@ -14,7 +14,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -65,11 +64,8 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAn(String name)
 	{
-		// TODO: StartEnergie dynamisch setzen (XML!)
-		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
-				new Inventar());
-		_spielerMap.put(name, neuerSpieler);
-		_logik.registriereSpieler(neuerSpieler);
+		Spieler spieler = _logik.erstelleNeuenSpieler(name);
+		_spielerMap.put(name, spieler);
 	}
 
 	/**
@@ -175,6 +171,10 @@ public class Spiel extends Observable
 					setChanged();
 					notifyObservers(ar);
 				}
+
+				// Entferne tote Spieler von Landkarte
+				if(!spieler.lebendig())
+					_logik.getKontext().entferneSpieler(spieler);
 			}
 		}
 		else
