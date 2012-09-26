@@ -65,8 +65,8 @@ public class GridButton extends JButton
 	public void setAusgewaehlt(boolean aktiv)
 	{
 		setBackground(aktiv ? (_raum != null ? new Color(0.8f, 0.8f, 1f)
-				: Color.lightGray) : (_raum != null ? new Color(0.3f, 0.3f, 1f)
-				: Color.gray));
+				: Color.lightGray) : (_raum != null ? new Color(0.5f, 0.5f, 1f)
+				: new Color(0.3f, 0.3f, 0.3f)));
 	}
 
 	/**
