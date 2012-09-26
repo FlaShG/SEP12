@@ -28,6 +28,7 @@ public class BefehlAblegenSchlechterKruemelTest
 	@Before
 	public void setUp() throws Exception
 	{
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raum);
 		inventar.fuegeItemHinzu(Item.UKuchen);
 		inventar.fuegeItemHinzu(Item.UGiftkuchen);

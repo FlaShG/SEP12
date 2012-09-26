@@ -46,9 +46,6 @@ public class BefehlEssenTascheSchlechterKruemelTest
 		assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
 		assertFalse(spieler.getInventar().has(Item.IGiftkuchen));
 		
-		assertFalse(spieler2.getInventar().has(Item.IGiftkuchen));
-		assertTrue(essentasche.ausfuehren(kontext, spieler2, befehlszeile));
-		assertFalse(spieler2.getInventar().has(Item.IGiftkuchen));
 		}
 
 		@Test
