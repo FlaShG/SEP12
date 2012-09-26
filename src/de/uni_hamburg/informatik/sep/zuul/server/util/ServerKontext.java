@@ -7,6 +7,7 @@ import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 
 /**
@@ -23,11 +24,13 @@ public class ServerKontext
 	private Map<Spieler, Raum> _spielerPosition;
 	private Raum _startRaum;
 	private ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
+	private final RaumStruktur _struktur;
 
-	public ServerKontext(Raum startRaum)
+	public ServerKontext(Raum startRaum, RaumStruktur struktur)
 	{
 
 		_startRaum = startRaum;
+		_struktur = struktur;
 		_spielerPosition = new HashMap<Spieler, Raum>();
 	}
 
@@ -221,6 +224,11 @@ public class ServerKontext
 		{
 			schreibeAnSpieler(spieler, nachricht);
 		}
+	}
+
+	public List<Raum> getRaeume()
+	{
+		return new ArrayList<Raum>(_struktur.getConnections().keySet());
 	}
 
 }

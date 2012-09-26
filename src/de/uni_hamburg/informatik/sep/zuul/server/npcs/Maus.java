@@ -1,7 +1,13 @@
 package de.uni_hamburg.informatik.sep.zuul.server.npcs;
 
+import java.util.ArrayList;
+
+import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.PathFinder;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class Maus
 {
@@ -47,6 +53,23 @@ public class Maus
 	{
 		_aktuellerRaum = neuerRaum;
 		berechneNeuenWeg();
+	}
+
+	public void wirdVonKatzeVerjagt(ServerKontext kontext)
+	{
+		// TODO: Better selection of rooms ( No start and end point, ... )
+		ArrayList<Raum> moeglicheRaeumeFuerMaus = _aktuellerRaum.getAusgaenge();
+		
+		Raum neuerRaumFuerMaus = Katze.selectRaumOhneKatze(moeglicheRaeumeFuerMaus);
+		
+		_aktuellerRaum.setMaus(null);
+		if(neuerRaumFuerMaus == null)
+			return;
+			
+		neuerRaumFuerMaus.setMaus(this);
+	
+		kontext.schreibeAnAlleSpielerInRaum(_aktuellerRaum,
+				TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
 	}
 
 }
