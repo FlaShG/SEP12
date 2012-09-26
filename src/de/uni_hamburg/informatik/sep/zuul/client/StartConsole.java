@@ -40,6 +40,8 @@ public class StartConsole extends StartUp
 			String server = consoleLesen();
 			if(server.equals("j"))
 			{
+				
+				starteRMI("RmiServer", ip, port, _client, true);
 				_server = new Server();
 			}
 			else
@@ -74,6 +76,42 @@ public class StartConsole extends StartUp
 	private static void consoleAnzeigen(String text)
 	{
 		System.out.print(text);
-
 	}
+	
+	@Override
+	protected void beendeStartEingabe()
+	{
+		System.out.close();
+	}
+//	private void starteRMI(final String serverName, final String serverIP,
+//			final int port, final String clientName, final boolean serverStarten)
+//	{
+//		Runnable run = new Runnable()
+//		{
+//
+//			@Override
+//			public void run()
+//			{
+//				try
+//				{
+//					if(serverStarten)
+//					{
+//						_server = new Server();
+//					}
+//					_client = new ClientGUI(serverName, serverIP, port, clientName);
+//				}
+//				catch(Exception e1)
+//				{
+//					e1.printStackTrace();
+//				}
+//				finally
+//				{
+//					_ui.dispose();
+//				}
+//			}
+//		};
+//
+//		Thread rmiThread = new Thread(run, "ZuulRMIThread");
+//		rmiThread.start();
+//	}
 }

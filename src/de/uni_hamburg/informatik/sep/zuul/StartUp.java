@@ -8,6 +8,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
+import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
@@ -85,6 +86,47 @@ public class StartUp
 		System.gc();
 		KeyboardFocusManager.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
 		runnable.run();
+	}
+	
+	public void starteRMI(final String serverName, final String serverIP,
+			final int port, final String clientName, final boolean serverStarten)
+	{
+		Runnable run = new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				try
+				{
+					if(serverStarten)
+					{
+						_server = new Server();
+					}
+					_client = new ClientGUI(serverName, serverIP, port, clientName);
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				//finally
+				//{
+				//	_ui.dispose();
+				//}
+				finally
+				{
+					beendeStartEingabe();
+				}
+			}
+		};
+
+		Thread rmiThread = new Thread(run, "ZuulRMIThread");
+		rmiThread.start();
+	}
+	
+	protected void beendeStartEingabe()
+	{
+
 	}
 	
 }

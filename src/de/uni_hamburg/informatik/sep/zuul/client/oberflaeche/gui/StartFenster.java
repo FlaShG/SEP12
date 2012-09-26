@@ -218,36 +218,42 @@ public class StartFenster extends StartUp
 		}
 
 	}
-
-	private void starteRMI(final String serverName, final String serverIP,
-			final int port, final String clientName, final boolean serverStarten)
+	
+	@Override
+	protected void beendeStartEingabe()
 	{
-		Runnable run = new Runnable()
-		{
-
-			@Override
-			public void run()
-			{
-				try
-				{
-					if(serverStarten)
-					{
-						_server = new Server();
-					}
-					_client = new ClientGUI(serverName, serverIP, port, clientName);
-				}
-				catch(Exception e1)
-				{
-					e1.printStackTrace();
-				}
-				finally
-				{
-					_ui.dispose();
-				}
-			}
-		};
-
-		Thread rmiThread = new Thread(run, "ZuulRMIThread");
-		rmiThread.start();
+		_ui.dispose();
 	}
+
+//	private void starteRMI(final String serverName, final String serverIP,
+//			final int port, final String clientName, final boolean serverStarten)
+//	{
+//		Runnable run = new Runnable()
+//		{
+//
+//			@Override
+//			public void run()
+//			{
+//				try
+//				{
+//					if(serverStarten)
+//					{
+//						_server = new Server();
+//					}
+//					_client = new ClientGUI(serverName, serverIP, port, clientName);
+//				}
+//				catch(Exception e1)
+//				{
+//					e1.printStackTrace();
+//				}
+//				finally
+//				{
+//					_ui.dispose();
+//				}
+//			}
+//		};
+//
+//		Thread rmiThread = new Thread(run, "ZuulRMIThread");
+//		rmiThread.start();
+//	}
 }
