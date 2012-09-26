@@ -48,9 +48,6 @@ public class BefehlEssenTascheGuterKruemelTest
 	assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
 	assertFalse(spieler.getInventar().has(Item.IKuchen));
 	
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
-	assertTrue(essentasche.ausfuehren(kontext, spieler2, befehlszeile));
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
 	}
 
 	@Test
