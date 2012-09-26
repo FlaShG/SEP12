@@ -45,12 +45,11 @@ public class StartFenster extends StartUp
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				_ui.getSinglePlayerButton().setEnabled(false);
-				starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
+				dateiAuswaehlen(true);
+				//starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
 			}
 		});
 
@@ -155,7 +154,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				dateiAuswaehlen();
+				dateiAuswaehlen(false);
 			}
 
 		});
@@ -166,14 +165,14 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
+				starteRMI("RmiServer", "localhost", 1090, "Dr.Little", true);
 			}
 
 		});
 
 	}
 
-	private void dateiAuswaehlen()
+	private void dateiAuswaehlen(final boolean modus)
 	{
 
 		Runnable run = new Runnable()
@@ -185,7 +184,16 @@ public class StartFenster extends StartUp
 				JFileChooser chooser;
 				chooser = FileChooser.konfiguriereFileChooser(false);
 				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
-				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
+				String name;
+				if(modus)
+				{
+					name = "Dr. Little";
+				}
+				else
+				{
+					name = "Dr.Little";
+				}
+				starteRMI("RmiServer", "localhost", 1090, name, true);
 			}
 		};
 
@@ -198,8 +206,9 @@ public class StartFenster extends StartUp
 		String eingabeIP = _ui.getIPTextField().getText();
 		String eingabePort = _ui.getPortTextField().getText();
 
-		if(eingabeIP
-				.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}")
+		if((eingabeIP
+				.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}") || eingabeIP
+				.equals("localhost"))
 				&& eingabePort.matches("109[0-9]"))
 		{
 			_ui.getBestaetigen().setEnabled(true);
@@ -228,7 +237,8 @@ public class StartFenster extends StartUp
 					{
 						_server = new Server();
 					}
-					_client = new ClientGUI(serverName, serverIP, port, clientName);
+					_client = new ClientGUI(serverName, serverIP, port,
+							clientName);
 				}
 				catch(Exception e1)
 				{

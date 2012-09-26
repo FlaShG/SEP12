@@ -1,3 +1,4 @@
+
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;

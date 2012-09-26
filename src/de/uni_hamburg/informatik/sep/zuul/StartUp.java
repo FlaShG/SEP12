@@ -68,7 +68,6 @@ public class StartUp
 
 	public static void restart()
 	{
-
 		// TODO shutdown server
 		try
 		{
@@ -81,6 +80,7 @@ public class StartUp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
@@ -89,5 +89,4 @@ public class StartUp
 				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
 		runnable.run();
 	}
-
 }
