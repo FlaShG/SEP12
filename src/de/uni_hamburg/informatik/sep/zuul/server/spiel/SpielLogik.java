@@ -46,18 +46,18 @@ public class SpielLogik
 	private void registriereListeners()
 	{
 		registriereFeature(new GewonnenTextAnzeigen());
-		registriereFeature(new Lebensenergie());
 		registriereFeature(new RaumBeschreibungAnzeigen());
+		registriereFeature(new Lebensenergie());
 		registriereFeature(new AusgaengeAnzeigen());
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());
 		registriereFeature(new BeinStellen());
 	}
 
-	public void erstelleKontext()
+	private void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();
-		_kontext = new ServerKontext(start,_struktur);
+		_kontext = new ServerKontext(start, _struktur);
 
 	}
 
@@ -90,7 +90,7 @@ public class SpielLogik
 		IOManager manager = new IOManager();
 		if(_levelPfad == null)
 		{
-			manager.readLevel("./level/testStruktur."+FileChooser.ZUUL_ENDUNG);
+			manager.readLevel("./level/testStruktur." + FileChooser.ZUUL_ENDUNG);
 		}
 		else
 		{
@@ -103,8 +103,7 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer(_struktur,
 				manager.getAnzahlMaeuse());
 
-		for(int i = 0; i <  1 /*manager.getAnzahlKatzen()*/; i++)
-			// TODO mehr als eine katze nicht unterstützt atm
+		for(int i = 0; i < manager.getAnzahlKatzen(); i++)
 			Katze.erzeugeKatze(this);
 
 		return raumbauer.getStartRaum();

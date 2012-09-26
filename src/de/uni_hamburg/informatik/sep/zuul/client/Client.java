@@ -86,32 +86,6 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 	}
 
-	/**
-	 * 
-	 * @param args
-	 *            [Oberfläche, Servername, Serverip, Clientport, Clientname]
-	 * @throws NotBoundException
-	 * @throws RemoteException
-	 * @throws MalformedURLException
-	 * @throws NumberFormatException
-	 */
-	public static void main(String[] args) throws NumberFormatException,
-			MalformedURLException, RemoteException, NotBoundException
-	{
-
-		// TODO: ugly
-		if(args.length == 5 && args[4].equals("console"))
-		{
-			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
-					args[3]);
-		}
-		else
-		{
-			new ClientGUI(args[0], args[1], Integer.parseInt(args[2]), args[3]);
-		}
-
-	}
-
 	public void serverBeendet()
 	{
 
