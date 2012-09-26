@@ -12,7 +12,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class Maus
 {
 
-	private String _richtung;
 	private PathFinder _pathFinder;
 	private Raum _aktuellerRaum;
 	private Raum _endRaum;
@@ -21,8 +20,6 @@ public class Maus
 	{
 		_aktuellerRaum = aktuellerRaum;
 		_endRaum = endRaum;
-
-		berechneNeuenWeg();
 	}
 
 	/**
@@ -30,14 +27,8 @@ public class Maus
 	 */
 	public String getRichtung()
 	{
-		return _richtung;
-	}
-
-	public void berechneNeuenWeg()
-	{
 		_pathFinder = new PathFinder()
 		{
-
 			@Override
 			protected boolean isZielRaum(Raum raum)
 			{
@@ -45,14 +36,8 @@ public class Maus
 			}
 		};
 
-		_richtung = PathFinder
+		return PathFinder
 				.getRichtung(_pathFinder.findPath(_aktuellerRaum));
-	}
-
-	public void setNeuerRaum(Raum neuerRaum)
-	{
-		_aktuellerRaum = neuerRaum;
-		berechneNeuenWeg();
 	}
 
 	public void wirdVonKatzeVerjagt(ServerKontext kontext)
@@ -66,9 +51,11 @@ public class Maus
 		if(neuerRaumFuerMaus == null)
 			return;
 			
+		_aktuellerRaum = neuerRaumFuerMaus;
 		neuerRaumFuerMaus.setMaus(this);
 	
-		kontext.schreibeAnAlleSpielerInRaum(_aktuellerRaum,
+		if(kontext != null)
+			kontext.schreibeAnAlleSpielerInRaum(_aktuellerRaum,
 				TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
 	}
 
