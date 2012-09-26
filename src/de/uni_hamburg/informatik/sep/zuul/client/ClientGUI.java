@@ -51,14 +51,14 @@ public class ClientGUI extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
-		if(clientName.equals("Dr. Little"))
+		if(!serverIP.equals("127.0.0.1"))
 		{
-			login();
-			_server.empfangeStartEingabe(getClientName());
+			startFenster();
 		}
 		else
 		{
-			startFenster();
+			login();
+			_server.empfangeStartEingabe(getClientName());
 		}
 
 	}

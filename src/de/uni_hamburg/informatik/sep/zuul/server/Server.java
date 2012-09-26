@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
@@ -133,9 +132,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			{
 				client.serverBeendet();
 			}
-			
 		}
-
 		if(_connectedClients.isEmpty())
 			beendeServer();
 
