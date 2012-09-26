@@ -207,7 +207,6 @@ public class RaumStruktur
 
 	public List<Raum> getRaeume()
 	{
-		// TODO Auto-generated method stub
 		return new ArrayList<Raum>(_connected.keySet());
 	}
 }
