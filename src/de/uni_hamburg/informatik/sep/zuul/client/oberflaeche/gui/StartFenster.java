@@ -189,7 +189,7 @@ public class StartFenster extends StartUp
 			public void run()
 			{
 				JFileChooser chooser;
-				chooser = FileChooser.konfiguriereFileChooser();
+				chooser = FileChooser.konfiguriereFileChooser(false);
 				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
 				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
 			}

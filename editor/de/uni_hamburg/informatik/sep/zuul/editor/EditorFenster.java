@@ -79,7 +79,7 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser());
+						String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser(true));
 						if(str != null)
 						{
 							_speicherWerkzeug.speichern(str);
@@ -100,7 +100,7 @@ public class EditorFenster implements EditorBeobachter
 												"Level laden",
 												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
-							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser());
+							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser(false));
 							if(str != null && !str.equals(""))
 							{
 								resetEditorFenster(1, 1);
