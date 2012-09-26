@@ -600,7 +600,7 @@ public class ClientGUI extends Client
 		createActionListenerMap(_bp.getExtraButtons());
 		createActionListenerMap(new JButton[] { _bildPanel.getTuerNordButton(),
 				_bildPanel.getTuerSuedButton(), _bildPanel.getTuerOstButton(),
-				_bildPanel.getTuerWestButton() });
+				_bildPanel.getTuerWestButton(), _bp.getBeinstellenButton() });
 	}
 
 	private void createActionListenerMap(JButton[] buttons)

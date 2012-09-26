@@ -65,6 +65,7 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAn(String name)
 	{
+		// TODO: StartEnergie dynamisch setzen (XML!)
 		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
 				new Inventar());
 		_spielerMap.put(name, neuerSpieler);
@@ -168,11 +169,9 @@ public class Spiel extends Observable
 			{
 				String richtung = ((BefehlSchauen) befehl)
 						.extrahiereRichtung(befehlszeile);
-				if (alterRaum.getAusgang(richtung) != null)
+				if(alterRaum.getAusgang(richtung) != null)
 				{
-					String[] ar = {
-							spieler.getName(),
-							richtung };
+					String[] ar = { spieler.getName(), richtung };
 					setChanged();
 					notifyObservers(ar);
 				}
