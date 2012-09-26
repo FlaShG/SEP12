@@ -165,13 +165,25 @@ public final class TextVerwalter
 	public static final String BEINSTELLEN_GEFALLEN_INAKTIV = " liegt am Boden und kann sich vor Schmerzen nicht bewegen.";
 
 	public static final String DAISTKEINRAUM = "In dieser Richtung ist keine Tür.";
+
 	public static final String beinstellenAnderemSpieler(String spielername)
 	{
 		return "Du schmeißt " + spielername + " zu Boden.";
 	}
+
 	public static final String beinstellenBekommen(String spielername)
 	{
 		return "Du wirst von " + spielername + " zu Boden geschmissen.";
+	}
+
+	/**
+	 * @param spieler
+	 * @return
+	 */
+	public static final String beinStellenSchaden(String name)
+	{
+		return "Das Bein Stellen war für " + name
+				+ " so anstrengend, so dass er ein Lebenspunkt verloren hat.";
 	}
 
 }
