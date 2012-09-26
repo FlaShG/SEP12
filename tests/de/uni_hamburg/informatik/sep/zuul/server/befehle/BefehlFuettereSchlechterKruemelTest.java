@@ -15,20 +15,26 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettereUnbekanntenKruemelTest
+public class BefehlFuettereSchlechterKruemelTest
 {
-	BefehlFuettereUnbekanntenKruemel futterUK = new BefehlFuettereUnbekanntenKruemel();
+	BefehlFuettereSchlechterKruemel futterSK = new BefehlFuettereSchlechterKruemel();
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("füttere");
+	Befehlszeile nurfutter = new Befehlszeile("fütter");
 	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Inventar inventar3 = new Inventar();
 	Katze katze;
 
 	@Before
 	public void setUp() throws Exception
 	{
+		inventar.fuegeItemHinzu(Item.IKuchen);
 		inventar.fuegeItemHinzu(Item.UKuchen);
+		inventar.fuegeItemHinzu(Item.UGiftkuchen);
+		inventar.fuegeItemHinzu(Item.UKuchen);
+		inventar2.fuegeItemHinzu(Item.IGiftkuchen);
 		spieler.setInventar(inventar);
 		katze = new Katze(raumC);
 		raumC.setKatze(katze);
@@ -39,40 +45,36 @@ public class BefehlFuettereUnbekanntenKruemelTest
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-		assertTrue(futterUK.vorbedingungErfuellt(kontext, spieler, nurfutter));
-		futterUK.ausfuehren(kontext, spieler, nurfutter);
-		assertFalse(futterUK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterSK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		spieler.setInventar(inventar3);
+		assertFalse(futterSK.vorbedingungErfuellt(kontext, spieler, nurfutter));
 	}
 
 	@Test
 	public void testAusfuehren()
 	{
-		assertTrue(spieler.getInventar().isGefuellt());
-		assertTrue(futterUK.ausfuehren(kontext, spieler, nurfutter));
-		assertFalse(spieler.getInventar().isGefuellt());
+		assertTrue(futterSK.ausfuehren(kontext, spieler, nurfutter));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
-		futterUK.gibFehlerAus(kontext, spieler, nurfutter);
-		assertTrue(spieler.getInventar().hasAnyKuchen());
-		raumC.setKatze(null);
-		futterUK.gibFehlerAus(kontext, spieler, nurfutter);
-		assertEquals(TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN
-				+ "\n", kontext.getNachrichtFuer(spieler));
-		assertTrue(spieler.getInventar().hasAnyKuchen());
-		futterUK.ausfuehren(kontext, spieler, nurfutter);
-		futterUK.gibFehlerAus(kontext, spieler, nurfutter);
+		futterSK.gibFehlerAus(kontext, spieler, nurfutter);
 		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
 				kontext.getNachrichtFuer(spieler));
-
+		spieler.setInventar(inventar2);
+		futterSK.ausfuehren(kontext, spieler, nurfutter);
+		futterSK.gibFehlerAus(kontext, spieler, nurfutter);
+		assertEquals(TextVerwalter.KATZE_STIRBT + "\n"
+				+ TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
+				kontext.getNachrichtFuer(spieler));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals(TextVerwalter.HILFE_FEED, futterUK.getHilfe());
+		assertEquals(TextVerwalter.BEFEHL_FUETTERE_SCHLECHT,
+				futterSK.getBefehlsnamen()[0]);
 	}
 
 }
