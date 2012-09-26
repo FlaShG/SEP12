@@ -57,6 +57,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				_ui.getSinglePlayerButton().setEnabled(false);
 				starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
 			}
 		});
@@ -78,6 +79,7 @@ public class StartFenster extends StartUp
 			public void actionPerformed(ActionEvent arg0)
 			{
 
+				_ui.getBestaetigen().setEnabled(false);
 				_spielername = _ui.getSpielerNameTextField().getText();
 
 				starteRMI("RmiServer", _ipAdresse, _port, _spielername, false);
