@@ -236,6 +236,7 @@ public class EditorMap extends JPanel
 				_activeX = ((GridButton) arg0.getSource()).getGridX();
 				_activeY = ((GridButton) arg0.getSource()).getGridY();
 				_buttons[_activeX][_activeY].setAusgewaehlt(true);
+				informiereBeobachter();
 			}
 		});
 		

@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 
@@ -38,6 +39,9 @@ public class GridButton extends JButton
 		setFocusable(false);
 
 		setAusgewaehlt(false);
+		
+		setForeground(Color.white);
+		setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 	}
 
 	/**
@@ -64,9 +68,15 @@ public class GridButton extends JButton
 	 */
 	public void setAusgewaehlt(boolean aktiv)
 	{
-		setBackground(aktiv ? (_raum != null ? new Color(0.8f, 0.8f, 1f)
-				: Color.lightGray) : (_raum != null ? new Color(0.5f, 0.5f, 1f)
-				: new Color(0.3f, 0.3f, 0.3f)));
+		Color raumAktiv = new Color(0.4f, 0.4f, 0.8f);
+		Color raumInaktiv = new Color(0.2f, 0.2f, 0.5f);
+		Color keinRaumAktiv = Color.lightGray;
+		Color keinRaumInaktiv = Color.gray;
+		
+		setBackground(aktiv ? (_raum != null ? raumAktiv
+				: keinRaumAktiv)
+				: (_raum != null ? raumInaktiv
+				: keinRaumInaktiv));
 	}
 
 	/**
