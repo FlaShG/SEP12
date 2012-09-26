@@ -21,7 +21,7 @@ public class BefehlFuettereSchlechterKruemelTest
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("fütter");
+	Befehlszeile nurfutter = new Befehlszeile("füttere schlechter krümel");
 	Inventar inventar = new Inventar();
 	Inventar inventar2 = new Inventar();
 	Inventar inventar3 = new Inventar();
@@ -53,6 +53,7 @@ public class BefehlFuettereSchlechterKruemelTest
 	@Test
 	public void testAusfuehren()
 	{
+		spieler.setInventar(inventar2);
 		assertTrue(futterSK.ausfuehren(kontext, spieler, nurfutter));
 	}
 

@@ -17,9 +17,14 @@ public final class EditorStartup
 	}
 
 	/**
-	 * @param args ignoriert.
+	 * @param string ignoriert.
 	 */
 	public static void main(String[] args)
+	{
+		start();
+	}
+
+	public static void start()
 	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
