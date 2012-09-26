@@ -79,15 +79,15 @@ public class StartFenster extends StartUp
 			}
 
 		});
-		
+
 		_ui.getEditorButton().addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				EditorStartup.start();
-				
+
 				_ui.dispose();
 			}
 		});

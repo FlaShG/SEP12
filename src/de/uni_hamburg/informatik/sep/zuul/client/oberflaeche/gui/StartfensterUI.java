@@ -23,7 +23,7 @@ public class StartfensterUI extends JFrame
 	private JButton _fileChooserButton;
 	private JButton _defaultMapButton;
 	private JButton _editorButton;
-	
+
 	public StartfensterUI()
 	{
 		super("Zuul-Spielmodus Auswahl");
@@ -86,16 +86,16 @@ public class StartfensterUI extends JFrame
 		add(_abbrechen);
 
 	}
-	
+
 	public void levelWaehlen()
 	{
 		//JPanel panel = new JPanel();
-		
+
 		//panel.setLayout(new GridLayout(0,1));
-		
+
 		//panel.add(_fileChooserButton);
 		//panel.add(_defaultMapButton);
-		
+
 		remove(_singlePlayer);
 		remove(_multiPlayer);
 		remove(_benutzerName);
@@ -105,15 +105,14 @@ public class StartfensterUI extends JFrame
 		remove(_eingabePort);
 		remove(_multiPlayer);
 		remove(_singlePlayer);
-		
+
 		add(getFileChooserButton());
 		add(getDefaultMapButton());
-		
+
 		//setContentPane(panel);
 		setMinimumSize(new Dimension(300, 40));
 		setSize(new Dimension(300, 40));
 
-		
 		pack();
 	}
 
@@ -156,11 +155,10 @@ public class StartfensterUI extends JFrame
 	{
 		return _fileChooserButton;
 	}
-	
+
 	public JButton getEditorButton()
 	{
 		return _editorButton;
 	}
-
 
 }
