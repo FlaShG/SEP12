@@ -23,7 +23,8 @@ public class StartfensterUI extends JFrame
 	private JButton _serverStarten;
 	private JButton _fileChooserButton;
 	private JButton _defaultMapButton;
-
+	private JButton _editorButton;
+	
 	public StartfensterUI()
 	{
 		super("Zuul-Spielmodus Auswahl");
@@ -35,12 +36,14 @@ public class StartfensterUI extends JFrame
 		_serverStarten = new JButton("Erstelle öffentliches Spiel");
 		_fileChooserButton = new JButton("Level aus Datei laden");
 		_defaultMapButton = new JButton("StandardLevel");
+		_editorButton = new JButton("Editor Starten");
 
 		add(_singlePlayer);
 		add(_multiPlayer);
 		add(_serverStarten);
+		add(_editorButton);
 
-		setMinimumSize(new Dimension(300, 100));
+		setMinimumSize(new Dimension(300, 130));
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
 		_eingabePort = new JTextField("1090");
@@ -153,6 +156,11 @@ public class StartfensterUI extends JFrame
 	public JButton getFileChooserButton()
 	{
 		return _fileChooserButton;
+	}
+	
+	public JButton getEditorButton()
+	{
+		return _editorButton;
 	}
 
 

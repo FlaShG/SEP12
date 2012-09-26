@@ -7,10 +7,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
 
+import de.uni_hamburg.informatik.sep.zuul.EditorStartup;
 import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
+import de.uni_hamburg.informatik.sep.zuul.editor.EditorFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 
@@ -77,6 +80,18 @@ public class StartFenster extends StartUp
 
 			}
 
+		});
+		
+		_ui.getEditorButton().addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				EditorStartup.main(null);
+				
+				_ui.dispose();
+			}
 		});
 
 		_ui.getAbbrechenButton().addActionListener(new ActionListener()
