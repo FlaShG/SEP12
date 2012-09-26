@@ -18,7 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class nurschauennTest
+public class BefehlSchauenTest
 {
 	BefehlSchauen schauen = new BefehlSchauen();
 	Raum raumC = new Raum("Center", "blubb");
@@ -98,6 +98,11 @@ public class nurschauennTest
 	{
 		schauen.gibFehlerAus(kontext, spieler, falsch);
 		assertEquals(
+				TextVerwalter.KEINRAUMZUMSCHAUN,
+				kontext.getNachrichtFuer(spieler).substring(0,
+						TextVerwalter.KEINRAUMZUMSCHAUN.length()));
+		schauen.gibFehlerAus(kontext, spieler, nurschauen);
+		assertEquals(
 				TextVerwalter.KEINESCHAURICHTUNG,
 				kontext.getNachrichtFuer(spieler).substring(0,
 						TextVerwalter.KEINESCHAURICHTUNG.length()));
@@ -106,13 +111,13 @@ public class nurschauennTest
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		//		fail("Not yet implemented");
+		assertEquals(TextVerwalter.BEFEHL_SCHAUEN, schauen.getBefehlsnamen()[0]);
 	}
 
 	@Test
 	public void testGetHilfe()
 	{
-		//		fail("Not yet implemented");
+		assertEquals(TextVerwalter.HILFE_LOOK, schauen.getHilfe());
 	}
 
 }
