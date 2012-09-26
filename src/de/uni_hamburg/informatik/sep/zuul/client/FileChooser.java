@@ -25,6 +25,8 @@ public class FileChooser
 	{
 
 	}
+	
+	public static final String ZUUL_ENDUNG = "zuul";
 
 	/**
 	 * Öffnet eine Datei, und gibt den Pfad als String zurück. Wenn die
@@ -66,16 +68,25 @@ public class FileChooser
 
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
-
 			File file = fileChooser.getSelectedFile();
 			level = file.getAbsolutePath();
+			if(!level.toLowerCase().endsWith("."+ZUUL_ENDUNG))
+			{
+				level += "."+ZUUL_ENDUNG;
+			}
 		}
 		return level;
 	}
 
-	public static JFileChooser konfiguriereFileChooser()
+	/**
+	 * Gibt einen JFileChooser zurück
+	 * @param save ob der FileChooser zum Speichern da ist.
+	 * 			   Wenn true, wird ggf. .zuul an den Dateinamen angehängt.
+	 * @return
+	 */
+	public static JFileChooser konfiguriereFileChooser(final boolean save)
 	{
-		final JFileChooser fileChooser = new JFileChooser("./xml_dateien/");
+		final JFileChooser fileChooser = new JFileChooser("./level/");
 		fileChooser.setFileFilter(new FileFilter()
 		{
 
@@ -88,8 +99,7 @@ public class FileChooser
 			@Override
 			public boolean accept(File arg0)
 			{
-				return (isFileXML(arg0) && isFileValidLevel(arg0))
-						|| isDirectory(arg0);
+				return save || (isFileXML(arg0) && isFileValidLevel(arg0)) || isDirectory(arg0);
 			}
 
 		});
@@ -98,14 +108,14 @@ public class FileChooser
 	}
 
 	/**
-	 * Gibt an, ob die Datei eine XML ist.
+	 * Gibt an, ob die Datei eine zuul-File ist.
 	 * 
 	 * @param file
-	 * @return boolean, ist Datei XML oder nicht
+	 * @return boolean, ist Datei zuul-File oder nicht
 	 */
 	private static boolean isFileXML(File file)
 	{
-		return file.getName().toLowerCase().endsWith(".xml");
+		return file.getName().toLowerCase().endsWith("."+ZUUL_ENDUNG);
 	}
 
 	/**
