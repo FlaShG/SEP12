@@ -427,9 +427,6 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_UNTERSUCHE));
 
-		_bp.getLadenButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
-
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_FUETTERE));
