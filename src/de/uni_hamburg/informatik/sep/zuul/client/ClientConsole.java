@@ -16,7 +16,7 @@ public class ClientConsole extends Client
 	{
 		super(serverName, serverIP, clientport, clientName);
 
-		if(!clientName.equals("Dr.Little"))
+		if(!clientName.equals("Dr. Little"))
 		{
 			warteFenster();
 		}

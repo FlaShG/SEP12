@@ -19,14 +19,14 @@ public class StartUp
 	static Runnable runnable;
 	protected Client _client;
 	protected Server _server;
-	
+
 	public static void main(final String args[]) throws RemoteException,
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
 		runnable = new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
@@ -61,15 +61,14 @@ public class StartUp
 				{
 					startUp = new StartFenster();
 				}
-				
+
 			}
 		};
 		runnable.run();
 	}
-	
+
 	public static void restart()
 	{
-
 		// TODO shutdown server
 		try
 		{
@@ -82,12 +81,13 @@ public class StartUp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
 		System.gc();
-		KeyboardFocusManager.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
+		KeyboardFocusManager
+				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
 		runnable.run();
 	}
-	
 }
