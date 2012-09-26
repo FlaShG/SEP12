@@ -54,6 +54,7 @@ public class BefehlSchauenTest
 		raumW.setKatze(katze);
 		maus = new Maus(raumO, raumW);
 		raumO.setMaus(maus);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raumC);
 	}
 

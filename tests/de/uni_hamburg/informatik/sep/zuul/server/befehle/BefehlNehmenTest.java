@@ -35,6 +35,7 @@ public class BefehlNehmenTest
 		stack.push(Item.IKuchen);
 		raumC.setItems(stack);
 		spieler.setInventar(inventar);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raumC);
 	}
 

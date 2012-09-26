@@ -48,10 +48,11 @@ public class BefehlEssenTest
 		assertEquals(TextVerwalter.HILFE_EAT, essen.getHilfe());
 		
 	}
+	@Test
 	public void testGibFehlerAus()
 	{
 		essen.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.NICHTSZUMESSENTEXT, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.NICHTSZUMESSENTEXT.length()));
+		assertEquals(TextVerwalter.KEINORT, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.KEINORT.length()));
 	}
 	
 	@Test
