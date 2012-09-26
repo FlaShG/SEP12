@@ -15,6 +15,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 {
 
 	public static final int INAKTIV_ZEIT = 10;
+	public static final int BEIN_STELLEN_SCHADEN = 1;
 
 	@Override
 	public boolean befehlSollAusgefuehrtWerden(ServerKontext kontext,
@@ -68,6 +69,12 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 				}
 			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);
 		}
+
+		spieler.setLebensEnergie(spieler.getLebensEnergie()
+				- BEIN_STELLEN_SCHADEN);
+		kontext.schreibeAnSpieler(spieler,
+				TextVerwalter.beinStellenSchaden(spieler.getName()));
+
 		return true;
 	}
 
