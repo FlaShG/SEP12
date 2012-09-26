@@ -1,11 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFactoryTest
 {

@@ -30,7 +30,6 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 	{
 		if(spieler.getLebensEnergie() <= 0)
 		{
-			spieler.die();
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.NIEDERLAGETEXT);
 			return false;
 		}

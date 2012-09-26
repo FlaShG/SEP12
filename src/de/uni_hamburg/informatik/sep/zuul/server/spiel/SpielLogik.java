@@ -46,8 +46,8 @@ public class SpielLogik
 	private void registriereListeners()
 	{
 		registriereFeature(new GewonnenTextAnzeigen());
-		registriereFeature(new Lebensenergie());
 		registriereFeature(new RaumBeschreibungAnzeigen());
+		registriereFeature(new Lebensenergie());
 		registriereFeature(new AusgaengeAnzeigen());
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());

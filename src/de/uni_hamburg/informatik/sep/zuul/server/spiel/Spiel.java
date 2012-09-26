@@ -161,7 +161,7 @@ public class Spiel extends Observable
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
-			if(result && spieler.lebendig())
+			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
 

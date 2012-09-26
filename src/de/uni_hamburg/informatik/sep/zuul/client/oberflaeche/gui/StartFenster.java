@@ -5,18 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 
 import javax.swing.JFileChooser;
 
-import org.junit.internal.runners.statements.RunAfters;
-
 import de.uni_hamburg.informatik.sep.zuul.StartUp;
-import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;

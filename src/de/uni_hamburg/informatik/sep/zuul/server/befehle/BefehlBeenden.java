@@ -6,7 +6,6 @@ import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 
 
 final class BefehlBeenden implements Befehl
