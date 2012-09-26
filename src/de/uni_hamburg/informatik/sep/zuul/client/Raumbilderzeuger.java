@@ -72,7 +72,7 @@ class Raumbilderzeuger
 		_drlittlepositionen = new LinkedList<Point>();
 		_mauspositionen = new LinkedList<Point>();
 		_itemPositionen = new LinkedList<Point>();
-		_spielerfarben = new HashMap<>();
+		_spielerfarben = new HashMap<String, Color>();
 		_verfuegbareFarben = new LinkedList<Color>();
 		_verfuegbareFarben.add(Color.BLUE);
 		_verfuegbareFarben.add(Color.RED);

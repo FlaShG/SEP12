@@ -77,6 +77,7 @@ public class BefehlEssenBoden extends BefehlEssen
 				kontext.schreibeAnSpieler(spieler, TextVerwalter.KUCHENTODTEXT);
 			}
 		}
+		spieler.setLebensEnergie(energie);
 		return true;
 	}
 

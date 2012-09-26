@@ -150,19 +150,21 @@ public final class TextVerwalter
 
 	public static final String BEFEHL_INVENTAR = "inventar";
 
-	public static final String KEINRAUMZUMSCHAUN = "Dort ist leider kein Raum, wohin Dr. Little schauen kann.";
+	public static final String KEINRAUMZUMSCHAUN = "Dort ist leider kein Raum, in den Dr. Little schauen kann.";
 
 	public static final String MODUS_AUSWAHL_SINGLEPLAYER = "Einzelspieler";
 
 	public static final String MODUS_AUSWAHL_MULTIPLAYER = "Mehrspieler";
-	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host IP ein: ";
-	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spieler Name ein: ";
-	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie ein Port ein: ";
+	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host-IP ein: ";
+	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spielernamen ein: ";
+	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie den Host-Port ein: ";
 
 	public static final String BEFEHL_BEINSTELLEN = "bein stellen";
 	public static final String BEINSTELLEN_KEINER_DA = "Hier ist niemand, dem du ein Bein stellen könntest.";
 	public static final String BEINSTELLEN_AUFSTEHEN = "Du stehst langsam wieder auf und kannst weiterspielen.";
 	public static final String BEINSTELLEN_GEFALLEN_INAKTIV = " liegt am Boden und kann sich vor Schmerzen nicht bewegen.";
+
+	public static final String DAISTKEINRAUM = "In dieser Richtung ist keine Tür.";
 	public static final String beinstellenAnderemSpieler(String spielername)
 	{
 		return "Du schmeißt " + spielername + " zu Boden.";

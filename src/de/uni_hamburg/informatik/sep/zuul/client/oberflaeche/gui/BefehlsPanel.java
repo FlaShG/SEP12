@@ -73,8 +73,23 @@ public class BefehlsPanel extends JPanel
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
+		_labelFuerLebensenergie.setSize(50,
+				BefehlsPanel.this.getHeight()-50);
+		
+		
+		_beinstellenButton = new JButton(BEINSTELLEN);
+		_beinstellenButton.setSize(50, 50);
+		_beinstellenButton.setLocation(ABSTAND_NORMAL, 462);
+		_beinstellenButton.setFocusable(false);
+		_beinstellenButton.setToolTipText("Allen Gegnern im Raum ein Bein stellen");
+		_beinstellenButton.setVisible(true);
+		
+		repaint();
+		
+		
 		_lebensenergieMaximum = 8;
 		_lebensenergieAktuell = _lebensenergieMaximum;
+		
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -128,7 +143,8 @@ public class BefehlsPanel extends JPanel
 				"bilder/exitIcon.gif")));
 		_quitButton.setBackground(new Color(0, 175, 0));
 		
-		_beinstellenButton = new JButton(BEINSTELLEN);
+		
+	
 		
 
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
@@ -164,15 +180,13 @@ public class BefehlsPanel extends JPanel
 			add(b);
 		}
 		
-		_beinstellenButton.setSize(50, 50);
-		_beinstellenButton.setFocusable(false);
-		_beinstellenButton.setToolTipText("Einem Gegner ein Bein stellen");
 		
 		
 		
 		
-		add(_beinstellenButton);
 		add(_labelFuerLebensenergie);
+		add(_beinstellenButton);
+		
 
 		addComponentListener(new ComponentAdapter()
 		{
@@ -225,8 +239,7 @@ public class BefehlsPanel extends JPanel
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 				
 				
-				_beinstellenButton.setSize(48,48);
-				_beinstellenButton.setLocation(_fuettereGutButton.getX(), _fuettereGutButton.getY() + buttonhoeheExtra);
+				
 				
 				
 
@@ -277,13 +290,15 @@ public class BefehlsPanel extends JPanel
 						+ _ladenButton.getHeight() + 5);
 
 				_labelFuerLebensenergie.setSize(50,
-						BefehlsPanel.this.getHeight());
+						BefehlsPanel.this.getHeight()-50);
 				setLebensenergie(_lebensenergieAktuell);
+				
+				_beinstellenButton.setSize(50,50);
+				_beinstellenButton.setLocation(_labelFuerLebensenergie.getX(), _labelFuerLebensenergie.getHeight());
 
 			}
 
 		});
-
 	}
 
 	public JButton getQuitButton()
