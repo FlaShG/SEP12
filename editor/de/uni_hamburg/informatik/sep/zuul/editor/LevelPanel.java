@@ -26,7 +26,7 @@ public class LevelPanel extends JPanel
 	{
 		assert level != null : "Vorbedingung verletzt: level != null";
 		
-		add(_leben = new EigenschaftIntPanel("Lebenspunkte", level.getLeben(), beobachter));
+		add(_leben = new EigenschaftIntPanelGT0("Lebenspunkte", level.getLeben(), beobachter));
 		add(_maeuse = new EigenschaftIntPanel("Mäuse", level.getMaeuse(), beobachter));
 		add(_katzen = new EigenschaftIntPanel("Katzen", level.getKatzen(), beobachter));
 	}
