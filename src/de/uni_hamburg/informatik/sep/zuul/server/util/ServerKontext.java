@@ -26,12 +26,16 @@ public class ServerKontext
 	private ArrayList<RaumGeaendertListener> _raumGeaendertListeners = new ArrayList<RaumGeaendertListener>();
 	private final RaumStruktur _struktur;
 
+	public ServerKontext(Raum startRaum)
+	{
+		this(startRaum, null);
+	}
+	
 	public ServerKontext(Raum startRaum, RaumStruktur struktur)
 	{
-
 		_startRaum = startRaum;
-		_struktur = struktur;
 		_spielerPosition = new HashMap<Spieler, Raum>();
+		_struktur = struktur;
 	}
 
 	/**
