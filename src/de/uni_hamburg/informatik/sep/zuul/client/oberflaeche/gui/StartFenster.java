@@ -70,6 +70,7 @@ public class StartFenster extends StartUp
 			public void actionPerformed(ActionEvent arg0)
 			{
 
+				_ui.getBestaetigen().setEnabled(false);
 				_spielername = _ui.getSpielerNameTextField().getText();
 
 				starteRMI("RmiServer", _ipAdresse, _port, _spielername, false);

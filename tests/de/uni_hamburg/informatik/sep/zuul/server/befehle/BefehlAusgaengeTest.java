@@ -32,6 +32,7 @@ public class BefehlAusgaengeTest
 	@Before
 	public void setUp() throws Exception
 	{
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raum);
 		inventar.fuegeItemHinzu(Item.UKuchen);
 		spieler.setInventar(inventar);
