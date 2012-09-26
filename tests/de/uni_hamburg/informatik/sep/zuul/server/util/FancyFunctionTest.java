@@ -18,8 +18,8 @@ public class FancyFunctionTest {
 	@Before
 	public void setUp()
 	{
-		_linkedListe = new LinkedList<>();
-		_arrayListe = new ArrayList<>();
+		_linkedListe = new LinkedList<Object>();
+		_arrayListe = new ArrayList<Object>();
 		o = new Object();
 		_linkedListe.add(o);
 		_arrayListe.add(o);
