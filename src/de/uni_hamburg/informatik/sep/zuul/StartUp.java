@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
@@ -19,14 +18,14 @@ public class StartUp
 	static Runnable runnable;
 	protected Client _client;
 	protected Server _server;
-	
+
 	public static void main(final String args[]) throws RemoteException,
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
 		runnable = new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
@@ -61,20 +60,35 @@ public class StartUp
 				{
 					startUp = new StartFenster();
 				}
-				
+
 			}
 		};
-		runnable.run();
+		tryToRun();
 	}
-	
+
+	/**
+	 * 
+	 */
+	static void tryToRun()
+	{
+		try
+		{
+			runnable.run();
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+			System.exit(-1);
+		}
+	}
+
 	public static void restart()
 	{
-
 		// TODO shutdown server
 		try
 		{
 			startUp._client.logout();
-			
+
 			//startUp._server.logoutClient(startUp._client.getClientName());
 		}
 		catch(RemoteException e)
@@ -82,12 +96,13 @@ public class StartUp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
 		System.gc();
-		KeyboardFocusManager.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
-		runnable.run();
+		KeyboardFocusManager
+				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
+		tryToRun();
 	}
-	
 }

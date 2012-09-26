@@ -22,10 +22,8 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	{
 		if(!spieler.getAktiv())
 		{
-			kontext.schreibeAnSpieler(
-					spieler,
-					spieler.getName()
-							+ TextVerwalter.BEINSTELLEN_GEFALLEN_INAKTIV);
+			kontext.schreibeAnSpieler(spieler, spieler.getName()
+					+ TextVerwalter.BEINSTELLEN_GEFALLEN_INAKTIV);
 			return false;
 		}
 		return true;
@@ -48,8 +46,13 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 		spielerInRaum.remove(spieler);
 		for(final Spieler fremderSpieler : spielerInRaum)
 		{
-			kontext.schreibeAnSpieler(spieler,TextVerwalter.beinstellenAnderemSpieler(fremderSpieler.getName()));
-			kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.beinstellenBekommen(spieler.getName()));
+			if(!fremderSpieler.getAktiv())
+				continue;
+
+			kontext.schreibeAnSpieler(spieler, TextVerwalter
+					.beinstellenAnderemSpieler(fremderSpieler.getName()));
+			kontext.schreibeAnSpieler(fremderSpieler,
+					TextVerwalter.beinstellenBekommen(spieler.getName()));
 			fremderSpieler.setAktiv(false);
 
 			new Timer().schedule(new TimerTask()
@@ -59,7 +62,8 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 				public void run()
 				{
 					fremderSpieler.setAktiv(true);
-					kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.BEINSTELLEN_AUFSTEHEN);
+					kontext.schreibeAnSpieler(fremderSpieler,
+							TextVerwalter.BEINSTELLEN_AUFSTEHEN);
 
 				}
 			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);

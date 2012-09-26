@@ -132,6 +132,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			{
 				client.serverBeendet();
 			}
+
 		}
 		if(_connectedClients.isEmpty())
 			beendeServer();
@@ -198,11 +199,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			paketListe.add(_spiel.packePaket(name));
 		}
 		sendeAenderungen(paketListe);
-	}
-
-	public static void main(String[] args) throws Exception
-	{
-		new Server();
 	}
 
 	public Map<String, ClientInterface> getConnectedClients()
