@@ -88,7 +88,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				EditorStartup.main(null);
+				EditorStartup.start();
 				
 				_ui.dispose();
 			}

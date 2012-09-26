@@ -21,6 +21,11 @@ public final class EditorStartup
 	 */
 	public static void main(String[] args)
 	{
+		start();
+	}
+
+	public static void start()
+	{
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			@Override
