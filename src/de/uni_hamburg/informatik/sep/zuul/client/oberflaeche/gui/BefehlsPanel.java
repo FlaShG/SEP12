@@ -73,6 +73,7 @@ public class BefehlsPanel extends JPanel
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
+		_labelFuerLebensenergie.setSize(50, this.getHeight()-50);
 		_lebensenergieMaximum = 8;
 		_lebensenergieAktuell = _lebensenergieMaximum;
 
@@ -165,8 +166,10 @@ public class BefehlsPanel extends JPanel
 		}
 		
 		_beinstellenButton.setSize(50, 50);
+		_beinstellenButton.setLocation(_labelFuerLebensenergie.getX(), this.getHeight()-50);
 		_beinstellenButton.setFocusable(false);
 		_beinstellenButton.setToolTipText("Einem Gegner ein Bein stellen");
+		
 		
 		
 		
@@ -225,8 +228,8 @@ public class BefehlsPanel extends JPanel
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
 				
 				
-				_beinstellenButton.setSize(48,48);
-				_beinstellenButton.setLocation(_fuettereGutButton.getX(), _fuettereGutButton.getY() + buttonhoeheExtra);
+				_beinstellenButton.setSize(50,50);
+				_beinstellenButton.setLocation(_labelFuerLebensenergie.getX(), _labelFuerLebensenergie.getHeight());
 				
 				
 
@@ -277,7 +280,7 @@ public class BefehlsPanel extends JPanel
 						+ _ladenButton.getHeight() + 5);
 
 				_labelFuerLebensenergie.setSize(50,
-						BefehlsPanel.this.getHeight());
+						BefehlsPanel.this.getHeight()-50);
 				setLebensenergie(_lebensenergieAktuell);
 
 			}
