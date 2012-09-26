@@ -110,19 +110,6 @@ public class Spiel extends Observable
 	}
 
 	/**
-	 * Übergib dem Spieler spieler eine nachricht als String
-	 * 
-	 * @param spieler
-	 *            der Spieler für den die Nachricht ist
-	 * @param nachricht
-	 *            die Nachricht für den Spieler
-	 */
-	public void setNachrichtFuer(Spieler spieler, String nachricht)
-	{
-		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
-	}
-
-	/**
 	 * Verarbeite die Eingabe eines Spielers.
 	 * 
 	 * @param eingabezeile
@@ -135,11 +122,9 @@ public class Spiel extends Observable
 
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 
-		if(!spieler.lebendig())
-		{
-			// TODO: Spieler tod, was tun?
+		// Spieler von der Karte entfernt?
+		if(spieler == null)
 			return;
-		}
 
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
@@ -171,14 +156,18 @@ public class Spiel extends Observable
 					setChanged();
 					notifyObservers(ar);
 				}
+			}
 
-				// Entferne tote Spieler von Landkarte
-				if(!spieler.lebendig())
-					_logik.getKontext().entferneSpieler(spieler);
+			// Entferne tote Spieler von Landkarte
+			// TODO wird nicht ausgeführt
+			if(!spieler.lebendig())
+			{
+				_logik.getKontext().entferneSpieler(spieler);
 			}
 		}
 		else
-			setNachrichtFuer(spieler, TextVerwalter.FALSCHEEINGABE);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**
@@ -201,7 +190,7 @@ public class Spiel extends Observable
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
-		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
+		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nachricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
