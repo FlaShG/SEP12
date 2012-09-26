@@ -45,7 +45,6 @@ public class BefehlsPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
-	private JButton _ladenButton;
 	private JButton _fuettereButton;
 	private JButton _fuettereGutButton;
 	private JButton _fuettereSchlechtButton;
@@ -136,8 +135,6 @@ public class BefehlsPanel extends JPanel
 		_helpButton = new JButton(new ImageIcon(getClass().getResource(
 				"bilder/faq-icon.png")));
 
-		_ladenButton = new JButton(new ImageIcon(getClass().getResource(
-				"bilder/disk.gif")));
 
 		_quitButton = new JButton(new ImageIcon(getClass().getResource(
 				"bilder/exitIcon.gif")));
@@ -156,7 +153,7 @@ public class BefehlsPanel extends JPanel
 				_ablegenGutButton, _ablegenSchlechtButton,
 				_ablegenUnbekanntButton, _essenTascheGutButton,
 				_essenTascheSchlechtButton, _essenTascheUnbekanntButton};
-		_systemButtons = new JButton[] { _helpButton, _ladenButton, _quitButton };
+		_systemButtons = new JButton[] { _helpButton,_quitButton };
 
 		for(JButton b : _normalButtons)
 		{
@@ -281,13 +278,10 @@ public class BefehlsPanel extends JPanel
 				_helpButton.setLocation(_inventarButton.getX()
 						+ _inventarButton.getWidth() + 5, 5);
 
-				_ladenButton.setLocation(_inventarButton.getX()
+	
+				_quitButton.setLocation(_inventarButton.getX()
 						+ _inventarButton.getWidth() + 5, _helpButton.getY()
 						+ _helpButton.getHeight() + 5);
-
-				_quitButton.setLocation(_inventarButton.getX()
-						+ _inventarButton.getWidth() + 5, _ladenButton.getY()
-						+ _ladenButton.getHeight() + 5);
 
 				_labelFuerLebensenergie.setSize(50,
 						BefehlsPanel.this.getHeight()-50);
@@ -331,10 +325,6 @@ public class BefehlsPanel extends JPanel
 		return _essenBodenButton;
 	}
 
-	public JButton getLadenButton()
-	{
-		return _ladenButton;
-	}
 
 	public JButton getFuettereButton()
 	{

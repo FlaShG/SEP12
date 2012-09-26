@@ -1,13 +1,11 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
-import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class SpielLogikTest {
 	
