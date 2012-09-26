@@ -3,17 +3,15 @@ package de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.EditorStartup;
 import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
-import de.uni_hamburg.informatik.sep.zuul.editor.EditorFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 
@@ -104,52 +102,21 @@ public class StartFenster extends StartUp
 			}
 		});
 
-		_ui.getIPTextField().addKeyListener(new KeyListener()
+		_ui.getIPTextField().addKeyListener(new KeyAdapter()
 		{
-
-			@Override
-			public void keyTyped(KeyEvent arg0)
-			{
-				// TODO Auto-generated method stub
-
-			}
-
 			@Override
 			public void keyReleased(KeyEvent arg0)
 			{
 				pruefeEingabe();
 			}
-
-			@Override
-			public void keyPressed(KeyEvent arg0)
-			{
-				// TODO Auto-generated method stub
-
-			}
-
 		});
 
-		_ui.getPortTextField().addKeyListener(new KeyListener()
+		_ui.getPortTextField().addKeyListener(new KeyAdapter()
 		{
-
-			@Override
-			public void keyTyped(KeyEvent e)
-			{
-				// TODO Auto-generated method stub
-
-			}
-
 			@Override
 			public void keyReleased(KeyEvent e)
 			{
 				pruefeEingabe();
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				// TODO Auto-generated method stub
-
 			}
 		});
 
