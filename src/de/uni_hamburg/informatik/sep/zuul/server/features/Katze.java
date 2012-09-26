@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,18 +50,15 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		kontext.schreibeAnAlleSpielerInRaum(_raum,
 				TextVerwalter.KATZE_IM_AKTUELLEN_RAUM);
 
-		if(_raum.hasMaus())
-		{
-			// TODO: Better selection of rooms ( No start and end point, ... )
-			Maus maus = _raum.getMaus();
-			ArrayList<Raum> moeglicheRaeumeFuerMaus = _raum.getAusgaenge();
-			Raum neuerRaumFuerMaus = FancyFunction
-					.getRandomEntry(moeglicheRaeumeFuerMaus);
-			_raum.setMaus(null);
-			neuerRaumFuerMaus.setMaus(maus);
+		verjageMausImRaum(_raum, kontext);
+	}
 
-			kontext.schreibeAnAlleSpielerInRaum(_raum,
-					TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
+	private static void verjageMausImRaum(Raum raum, ServerKontext kontext)
+	{
+		if(raum.hasMaus())
+		{
+			Maus maus = raum.getMaus();
+			maus.wirdVonKatzeVerjagt(kontext);
 
 		}
 	}
@@ -71,7 +67,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	{
 		// Normaler Weise zwei Felder weiter, es sei denn, im ersten Feld ist
 		// der Spieler
-		Raum neuerRaum1 = FancyFunction.getRandomEntry(raum.getAusgaenge());
+		Raum neuerRaum1 = selectRaumOhneKatze(raum.getAusgaenge());
 
 		// Kann sich die Katze nicht bewegen?
 		if(neuerRaum1 == null)
@@ -81,7 +77,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		if(istEinSpielerImRaum(kontext, neuerRaum1))
 			return neuerRaum1;
 
-		Raum neuerRaum2 = FancyFunction.getRandomEntry(neuerRaum1
+		Raum neuerRaum2 = selectRaumOhneKatze(neuerRaum1
 				.getAusgaenge());
 
 		// Hat neuerRaum1 keine Ausgänge?
@@ -154,12 +150,32 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	{
 		RaumStruktur raumStruktur = spielLogik.getStruktur();
 		List<Raum> raeume = raumStruktur.getRaeume();
-		Raum raum = FancyFunction.getRandomEntry(raeume);
+		
+		Raum raum = selectRaumOhneKatze(raeume);
+		
+		// Keine freie Position mehr möglich
+		if(raum == null)
+			throw new NullPointerException("Keine freie Position für Katze.");
+		
+		verjageMausImRaum(raum, spielLogik.getKontext());
 
 		Katze katze = new Katze(raum);
 		raum.setKatze(katze);
 		spielLogik.registriereFeature(katze);
 		return katze;
+	}
+
+	public static Raum selectRaumOhneKatze(List<Raum> raeume)
+	{
+		Raum raum;
+		do
+		{
+			raum = FancyFunction.getRandomEntryAndRemove(raeume);
+			if(raum==null)
+				return null;
+		}
+		while(raum.hasKatze());
+		return raum;
 	}
 
 	@Override
