@@ -22,7 +22,7 @@ public class BefehlLaden implements Befehl
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
 
-			String level = FileChooser.oeffneDatei();
+//			String level = FileChooser.oeffneDatei();
 			//Spiel.getInstance().spielen(level);
 		}
 		else
