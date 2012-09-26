@@ -1,9 +1,9 @@
 package de.uni_hamburg.informatik.sep.zuul.server.spiel;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,41 +49,89 @@ public class SpielerTest {
 
 	@Test
 	public void testSetLebensEnergie() {
+		//selber test wie beim getter.
+		assertEquals(8, _tester.getLebensEnergie());
+		_tester.setLebensEnergie(Integer.MAX_VALUE);
+		assertEquals(Integer.MAX_VALUE, _tester.getLebensEnergie());
+		_tester.setLebensEnergie(Integer.MIN_VALUE);
+		assertEquals(Integer.MIN_VALUE, _tester.getLebensEnergie());
 	}
 
 	@Test
 	public void testGetInventar() {
+		assertEquals(inv, _tester.getInventar());
+		Inventar inv2 = mock(Inventar.class);
+		
+		_tester.setInventar(inv2);
+		assertEquals(inv2, _tester.getInventar());
 	}
 
 	@Test
 	public void testSetInventar() {
+		Inventar inv2 = mock(Inventar.class);
+		_tester.setInventar(inv2);
+		_tester.setInventar(inv2); //zweimal.. 
+		
+		assertEquals(inv2, _tester.getInventar());
 	}
 
 	@Test
 	public void testSetAktiv() {
+		_tester.setAktiv(false);
+		assertFalse(_tester.getAktiv());
+		
+		_tester.setAktiv(true);
+		assertTrue(_tester.getAktiv());
 	}
 
 	@Test
 	public void testGetAktiv() {
+		_tester.setAktiv(false);
+		assertFalse(_tester.getAktiv());
+		
+		_tester.setAktiv(true);
+		assertTrue(_tester.getAktiv());
 	}
 	@Test
 	public void testGetName() {
+		assertEquals("testname", _tester.getName());
 	}
 
 	@Test
 	public void testDie() {
+		assertTrue(_tester.getLebensEnergie() != 0);
+		
+		_tester.die();
+		
+		assertEquals(0, _tester.getLebensEnergie());
+		assertFalse(_tester.lebendig());
 	}
 
 	@Test
 	public void testLebendig() {
+		assertTrue(_tester.lebendig());
+		
+		_tester.die();
+		
+		assertFalse(_tester.lebendig());
 	}
 
 	@Test
 	public void testGewinnt() {
+		assertFalse(_tester.hatGewonnen());
+		
+		_tester.gewinnt();
+		
+		assertTrue(_tester.hatGewonnen());
 	}
 
 	@Test
 	public void testHatGewonnen() {
+		assertFalse(_tester.hatGewonnen());
+		
+		_tester.gewinnt();
+		
+		assertTrue(_tester.hatGewonnen());
 	}
 
 }
