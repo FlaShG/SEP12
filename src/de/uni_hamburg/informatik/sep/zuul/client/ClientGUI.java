@@ -181,9 +181,20 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
+		if(_bildPanel.getSchauenLabel().isVisible())
+		{
+			// Gehe Buttons sind beim Schauen deaktiviert.
+			for(String befehl : paket.getVerfuegbareBefehle().keySet())
+			{
+				if(befehl.startsWith(TextVerwalter.BEFEHL_GEHEN))
+					paket.getVerfuegbareBefehle().put(befehl, false);
+			}
+		}
+
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
 		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+
 		_bp.setLebensenergie(paket.getLebensEnergie());
 
 		int val = _bildPanel.getQuadraticSize();

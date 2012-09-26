@@ -54,7 +54,7 @@ public class SpielLogik
 		registriereFeature(new BeinStellen());
 	}
 
-	public void erstelleKontext()
+	private void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();
 		_kontext = new ServerKontext(start, _struktur);
