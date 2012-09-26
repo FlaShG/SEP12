@@ -25,7 +25,7 @@ public class FileChooser
 	{
 
 	}
-	
+
 	public static final String ZUUL_ENDUNG = "zuul";
 
 	/**
@@ -70,9 +70,9 @@ public class FileChooser
 		{
 			File file = fileChooser.getSelectedFile();
 			level = file.getAbsolutePath();
-			if(!level.toLowerCase().endsWith("."+ZUUL_ENDUNG))
+			if(!level.toLowerCase().endsWith("." + ZUUL_ENDUNG))
 			{
-				level += "."+ZUUL_ENDUNG;
+				level += "." + ZUUL_ENDUNG;
 			}
 		}
 		return level;
@@ -80,8 +80,10 @@ public class FileChooser
 
 	/**
 	 * Gibt einen JFileChooser zurück
-	 * @param save ob der FileChooser zum Speichern da ist.
-	 * 			   Wenn true, wird ggf. .zuul an den Dateinamen angehängt.
+	 * 
+	 * @param save
+	 *            ob der FileChooser zum Speichern da ist. Wenn true, wird ggf.
+	 *            .zuul an den Dateinamen angehängt.
 	 * @return
 	 */
 	public static JFileChooser konfiguriereFileChooser(final boolean save)
@@ -99,7 +101,8 @@ public class FileChooser
 			@Override
 			public boolean accept(File arg0)
 			{
-				return save || (isFileXML(arg0) && isFileValidLevel(arg0)) || isDirectory(arg0);
+				return save || (isFileXML(arg0) && isFileValidLevel(arg0))
+						|| isDirectory(arg0);
 			}
 
 		});
@@ -115,7 +118,7 @@ public class FileChooser
 	 */
 	private static boolean isFileXML(File file)
 	{
-		return file.getName().toLowerCase().endsWith("."+ZUUL_ENDUNG);
+		return file.getName().toLowerCase().endsWith("." + ZUUL_ENDUNG);
 	}
 
 	/**
