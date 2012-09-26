@@ -19,7 +19,7 @@ public final class BefehlFactory
 				new BefehlNehmen(), new BefehlEssenBoden(),
 				new BefehlEssenTasche(), new BefehlEssenTascheGuterKruemel(),
 				new BefehlEssenTascheSchlechterKruemel(),
-				new BefehlEssenTascheUnbekannterKruemel(),
+				new BefehlEssenTascheUnbekannterKruemel(), new BefehlLaden(),
 				new BefehlBeenden(), new BefehlUntersuche(),
 				new BefehlInventarAnzeigen(), new BefehlFuettere(),
 				new BefehlFuettereSchlechterKruemel(),

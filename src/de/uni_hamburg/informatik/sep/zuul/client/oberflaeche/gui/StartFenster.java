@@ -5,10 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 import javax.swing.JFileChooser;
 
+import org.junit.internal.runners.statements.RunAfters;
+
 import de.uni_hamburg.informatik.sep.zuul.StartUp;
+import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientGUI;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
@@ -45,11 +53,12 @@ public class StartFenster extends StartUp
 		_ui.getSinglePlayerButton().addActionListener(new ActionListener()
 		{
 
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				dateiAuswaehlen(true);
-				//starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
+				_ui.getSinglePlayerButton().setEnabled(false);
+				starteRMI("RmiServer", "127.0.0.1", 1090, "Dr. Little", true);
 			}
 		});
 
@@ -154,7 +163,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				dateiAuswaehlen(false);
+				dateiAuswaehlen();
 			}
 
 		});
@@ -165,14 +174,14 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				starteRMI("RmiServer", "localhost", 1090, "Dr.Little", true);
+				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
 			}
 
 		});
 
 	}
 
-	private void dateiAuswaehlen(final boolean modus)
+	private void dateiAuswaehlen()
 	{
 
 		Runnable run = new Runnable()
@@ -184,16 +193,7 @@ public class StartFenster extends StartUp
 				JFileChooser chooser;
 				chooser = FileChooser.konfiguriereFileChooser(false);
 				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
-				String name;
-				if(modus)
-				{
-					name = "Dr. Little";
-				}
-				else
-				{
-					name = "Dr.Little";
-				}
-				starteRMI("RmiServer", "localhost", 1090, name, true);
+				starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
 			}
 		};
 
@@ -206,9 +206,8 @@ public class StartFenster extends StartUp
 		String eingabeIP = _ui.getIPTextField().getText();
 		String eingabePort = _ui.getPortTextField().getText();
 
-		if((eingabeIP
-				.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}") || eingabeIP
-				.equals("localhost"))
+		if(eingabeIP
+				.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}")
 				&& eingabePort.matches("109[0-9]"))
 		{
 			_ui.getBestaetigen().setEnabled(true);
@@ -237,8 +236,7 @@ public class StartFenster extends StartUp
 					{
 						_server = new Server();
 					}
-					_client = new ClientGUI(serverName, serverIP, port,
-							clientName);
+					_client = new ClientGUI(serverName, serverIP, port, clientName);
 				}
 				catch(Exception e1)
 				{

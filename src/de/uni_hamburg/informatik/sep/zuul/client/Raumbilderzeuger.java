@@ -61,15 +61,11 @@ class Raumbilderzeuger
 
 	private int _breitehoehe;
 	private String _gegangeneRichtung = "nord";
-	private String _letzteRichtigeRichtung = "nord";
-	private BufferedImage _raum;
-	private SuperFancyReproducibleRandomEntryPicker entryPicker;
-	private Graphics2D _g2d;
+
 	private ClientPaket _paket;
 	private boolean _schauenAnsicht;
 	private HashMap<String, Color> _spielerfarben;
 	private LinkedList<Color> _verfuegbareFarben;
-	private int _letzteRaumID;
 
 	public Raumbilderzeuger()
 	{
@@ -107,7 +103,6 @@ class Raumbilderzeuger
 			boolean vorschau)
 	{
 		_paket = paket;
-		;
 		if(breitehoehe == 0)
 			_breitehoehe = 3;
 		_breitehoehe = breitehoehe;
@@ -118,9 +113,9 @@ class Raumbilderzeuger
 
 	private BufferedImage erzeugeRaumansicht()
 	{
-		entryPicker = new SuperFancyReproducibleRandomEntryPicker(
+		SuperFancyReproducibleRandomEntryPicker entryPicker = new SuperFancyReproducibleRandomEntryPicker(
 				_paket.buildUniqueID());
-		_raum = null;
+		BufferedImage raum = null;
 		Point position = new Point(0, 0);
 		int x = 0;
 		int y = 0;
@@ -131,141 +126,76 @@ class Raumbilderzeuger
 			_spielerfarben.put(_paket.getSpielerName(), Color.white);
 		}
 
-		_raum = maleRaumTyp();
-		_g2d = (Graphics2D) _raum.getGraphics();
-		maleTueren();
+		//Je nach RaumTyp ein anderes Grundbild malen
+		RaumArt raumArt = _paket.getRaumArt();
+		switch (raumArt)
+		{
+		case Normal:
+			raum = ladeBild(getClass().getResource("bilder/raum_normal.png"));
+			break;
+		case Start:
+			raum = ladeBild(getClass().getResource("bilder/raum_labor.png"));
+			break;
+		case Ende:
+			raum = ladeBild(getClass().getResource("bilder/raum_ende.png"));
+			break;
+		}
+
+		// Türen falls vorhanden auf den Raum malen
+
+		Graphics2D g2d = (Graphics2D) raum.getGraphics();
+
+		for(String richtung : _paket.getMoeglicheAusgaenge())
+		{
+
+			if(richtung.equals("nord"))
+			{
+				g2d.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
+			}
+			else if(richtung.equals("ost"))
+			{
+				g2d.drawImage(RAUMTUEROST, 570, 272, 50, 97, null);
+			}
+			else if(richtung.equals("süd"))
+			{
+				g2d.drawImage(RAUMTUERSUED, 272, 570, 97, 50, null);
+			}
+			else if(richtung.equals("west"))
+			{
+				g2d.drawImage(RAUMTUERWEST, 20, 272, 50, 97, null);
+			}
+
+		}
+
+		//Positionen für Items,Katzen DR.Littles neu setzen
 		setPositionen();
-		maleEigenenDrLittle();
-		maleGegnerDrLittles();
-		maleMaus();
-		maleKatze();
-		maleItems();
 
-		if(_schauenAnsicht)
+		//Den Dr.Little des Spielers an der jeweiligen Tür malen
+		if(!_schauenAnsicht)
 		{
-			_g2d.drawImage(SCHAUENSCHATTEN, 0, 0, 640, 640, null);
+			if(_gegangeneRichtung.equals("nord"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						320, 520, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("ost"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()), 73,
+						320, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("süd"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						320, 70, 54, 54, null);
+			}
+			else if(_gegangeneRichtung.equals("west"))
+			{
+				g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
+						520, 320, 54, 54, null);
+			}
 		}
 
-		_raum = skaliereBild(_raum, _breitehoehe);
-
-		return _raum;
-
-	}
-
-	private void maleItems()
-	{
-		Point position;
-		int x;
-		int y;
-		int anzahlKruemel = 0;
-		boolean gegengiftDa = false;
-
-		Collection<Item> raumItems = _paket.getItems();
-
-		for(Item item : raumItems)
-		{
-			if(item.isAnyKuchen())
-				anzahlKruemel++;
-			if(item == Item.Gegengift)
-				gegengiftDa = true;
-		}
-
-		for(int i = 0; i < anzahlKruemel; i++)
-		{
-			if(_itemPositionen.size() != 0)
-			{
-				position = entryPicker.pickAndRemoveFromList(_itemPositionen);
-				_itemPositionen.remove(position);
-			}
-			else
-			{
-				position = new Point(200, 180);
-			}
-
-			x = position.x;
-			y = position.y;
-
-			_g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
-		}
-
-		if(gegengiftDa)
-		{
-			if(_itemPositionen.size() != 0)
-			{
-				position = entryPicker.pickAndRemoveFromList(_itemPositionen);
-				_itemPositionen.remove(position);
-			}
-			else
-			{
-				position = new Point(200, 180);
-			}
-
-			x = position.x;
-			y = position.y;
-
-			_g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
-
-			Point pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
-			x = pos.x;
-			y = pos.y;
-			_g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
-
-		}
-	}
-
-	private void maleKatze()
-	{
-		Point position;
-		int x;
-		int y;
-		if(_paket.hasKatze())
-		{
-
-			if(_mauspositionen.size() != 0)
-			{
-				position = entryPicker.pickAndRemoveFromList(_mauspositionen);
-				_mauspositionen.remove();
-			}
-			else
-			{
-				position = new Point(70, 470);
-			}
-
-			x = position.x;
-			y = position.y;
-			_g2d.drawImage(KATZE, x, y, 100, 100, null);
-		}
-	}
-
-	private void maleMaus()
-	{
-		Point position;
-		int x;
-		int y;
-		if(_paket.hasMaus())
-		{
-			if(_mauspositionen.size() != 0)
-			{
-				position = entryPicker.pickAndRemoveFromList(_mauspositionen);
-				_mauspositionen.remove();
-			}
-			else
-			{
-				position = new Point(70, 70);
-			}
-
-			x = position.x;
-			y = position.y;
-
-			_g2d.drawImage(MAUS, x, y, 100, 51, null);
-		}
-	}
-
-	private void maleGegnerDrLittles()
-	{
-		Point position;
-		int x;
-		int y;
+		//Die anderen Dr.Littles in der mitte des Raumes malen
 		for(int i = 0; i < _paket.getAndereSpieler().size(); i++)
 		{
 			if(!_paket.getAndereSpieler().get(i)
@@ -291,99 +221,98 @@ class Raumbilderzeuger
 
 				x = position.x;
 				y = position.y;
-				_g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler()
+				g2d.drawImage(getFarbigenDrLittle(_paket.getAndereSpieler()
 						.get(i)), x, y, 54, 54, null);
 			}
 
 		}
-	}
 
-	private void maleEigenenDrLittle()
-	{
-
-		String richtung = "";
-
-		if(_paket.getRaumID() != _letzteRaumID)
-		{
-			richtung = _gegangeneRichtung;
-			_letzteRichtigeRichtung = _gegangeneRichtung;
-			//male mit neuer Richtung
-			//setze richtige neue alte
-		}
-		else
-		{
-			richtung = _letzteRichtigeRichtung;
-			//male mit alter Richtung
-		}
-
-		if(!_schauenAnsicht)
-		{
-			if(richtung.equals("nord"))
-			{
-				_g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
-						320, 520, 54, 54, null);
-			}
-			else if(richtung.equals("ost"))
-			{
-				_g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
-						73, 320, 54, 54, null);
-			}
-			else if(richtung.equals("süd"))
-			{
-				_g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
-						320, 70, 54, 54, null);
-			}
-			else if(richtung.equals("west"))
-			{
-				_g2d.drawImage(getFarbigenDrLittle(_paket.getSpielerName()),
-						520, 320, 54, 54, null);
-			}
-		}
-	}
-
-	private void maleTueren()
-	{
-
-		for(String richtung : _paket.getMoeglicheAusgaenge())
+		//Die Maus malen
+		if(_paket.hasMaus())
 		{
 
-			if(richtung.equals("nord"))
-			{
-				_g2d.drawImage(RAUMTUERNORD, 272, 20, 97, 50, null);
-			}
-			else if(richtung.equals("ost"))
-			{
-				_g2d.drawImage(RAUMTUEROST, 570, 272, 50, 97, null);
-			}
-			else if(richtung.equals("süd"))
-			{
-				_g2d.drawImage(RAUMTUERSUED, 272, 570, 97, 50, null);
-			}
-			else if(richtung.equals("west"))
-			{
-				_g2d.drawImage(RAUMTUERWEST, 20, 272, 50, 97, null);
-			}
+			position = entryPicker.pickAndRemoveFromList(_mauspositionen);
 
+			if(position == null)
+				;
+			position = new Point(70, 70);
+			x = position.x;
+			y = position.y;
+
+			g2d.drawImage(MAUS, x, y, 100, 51, null);
 		}
 
-	}
-
-	private BufferedImage maleRaumTyp()
-	{
-		RaumArt raumArt = _paket.getRaumArt();
-		switch (raumArt)
+		//Die Katze malen
+		if(_paket.hasKatze())
 		{
-		case Normal:
-			_raum = ladeBild(getClass().getResource("bilder/raum_normal.png"));
-			break;
-		case Start:
-			_raum = ladeBild(getClass().getResource("bilder/raum_labor.png"));
-			break;
-		case Ende:
-			_raum = ladeBild(getClass().getResource("bilder/raum_ende.png"));
-			break;
+			Point pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			_mauspositionen.remove(pos);
+
+			if(pos == null)
+				pos = new Point(70, 470);
+
+			x = pos.x;
+			y = pos.y;
+			g2d.drawImage(KATZE, x, y, 100, 100, null);
 		}
-		return _raum;
+
+		// Die Gegenstände malen
+		int anzahlKruemel = 0;
+		boolean gegengiftDa = false;
+
+		Collection<Item> raumItems = _paket.getItems();
+
+		for(Item item : raumItems)
+		{
+			if(item.isAnyKuchen())
+				anzahlKruemel++;
+			if(item == Item.Gegengift)
+				gegengiftDa = true;
+		}
+
+		for(int i = 0; i < anzahlKruemel; i++)
+		{
+			position = entryPicker.pickAndRemoveFromList(_itemPositionen);
+			_itemPositionen.remove(position);
+
+			if(position == null)
+				position = new Point(200, 180);
+
+			x = position.x;
+			y = position.y;
+
+			g2d.drawImage(KRUEMEL, x, y, 30, 30, null);
+		}
+
+		if(gegengiftDa)
+		{
+			position = entryPicker.pickAndRemoveFromList(_itemPositionen);
+			_itemPositionen.remove(position);
+
+			if(position == null)
+				position = new Point(200, 180);
+
+			x = position.x;
+			y = position.y;
+
+			g2d.drawImage(GEGENGIFT, x, y, 30, 30, null);
+
+			Point pos = entryPicker.pickAndRemoveFromList(_mauspositionen);
+			x = pos.x;
+			y = pos.y;
+			g2d.drawImage(DREVENBIGGER, x, y, 100, 100, null);
+
+		}
+
+		if(_schauenAnsicht)
+		{
+			g2d.drawImage(SCHAUENSCHATTEN, 0, 0, 640, 640, null);
+		}
+
+		raum = skaliereBild(raum, _breitehoehe);
+
+		return raum;
+
 	}
 
 	private Color getUnverbrauchteFarbe()
@@ -425,9 +354,6 @@ class Raumbilderzeuger
 				}
 			}
 		}
-
-		if(_paket.getRaumID() != _letzteRaumID)
-			_letzteRaumID = _paket.getRaumID();
 
 		return drlittle;
 	}
@@ -565,7 +491,6 @@ class Raumbilderzeuger
 	 */
 	public void setGehRichtung(String richtungsbefehl)
 	{
-
 		if(richtungsbefehl.contains("nord"))
 		{
 			_gegangeneRichtung = "nord";
