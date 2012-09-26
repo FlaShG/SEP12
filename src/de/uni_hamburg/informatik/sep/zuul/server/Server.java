@@ -133,7 +133,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 				client.serverBeendet();
 			}
 		}
-
 		if(_connectedClients.isEmpty())
 			beendeServer();
 

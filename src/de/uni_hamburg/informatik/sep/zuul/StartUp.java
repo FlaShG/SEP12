@@ -69,10 +69,13 @@ public class StartUp
 	
 	public static void restart()
 	{
+
 		// TODO shutdown server
 		try
 		{
-			startUp._server.logoutClient(startUp._client.getClientName());
+			startUp._client.logout();
+			
+			//startUp._server.logoutClient(startUp._client.getClientName());
 		}
 		catch(RemoteException e)
 		{
