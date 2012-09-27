@@ -129,12 +129,21 @@ public class Spiel extends Observable
 		System.err.println(benutzerName + ": " + eingabe);
 
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 
+
+		if (eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
+		{
+			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(_logik.getKontext(), spieler, befehlszeile);
+			return;
+		}
+		
 		// Spieler von der Karte entfernt?
 		if(spieler == null)
-			return;
+		{
+				return;
+		}
 
-		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)
@@ -167,7 +176,6 @@ public class Spiel extends Observable
 			}
 
 			// Entferne tote Spieler von Landkarte
-			// TODO wird nicht ausgeführt
 			if(!spieler.lebendig())
 			{
 				_logik.getKontext().entferneSpieler(spieler);

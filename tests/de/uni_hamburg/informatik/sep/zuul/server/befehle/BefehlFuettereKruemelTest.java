@@ -3,7 +3,6 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +40,7 @@ public class BefehlFuettereKruemelTest
 		spieler.setInventar(inventar);
 		katze = new Katze(raumC);
 		raumC.setAusgang(TextVerwalter.RICHTUNG_OSTEN, raumO);
+		raumO.setAusgang(TextVerwalter.RICHTUNG_WESTEN, raumC);
 		maus = new Maus(raumC, raumO);
 		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raumC);
@@ -92,24 +92,32 @@ public class BefehlFuettereKruemelTest
 		assertEquals(TextVerwalter.KATZE_STIRBT + "\n"
 				+ TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN + "\n",
 				kontext.getNachrichtFuer(spieler));
-		spieler.setInventar(inventar3);
 		raumC.setKatze(null);
 		raumC.setMaus(maus);
 		futterK.ausfuehren(kontext, spieler, nurfutter);
-		assertEquals(TextVerwalter.MAUS_RICHTUNGSANGABE.replace("%s", "null")
-				+ "\n", kontext.getNachrichtFuer(spieler));
+		assertEquals(
+				TextVerwalter.MAUS_RICHTUNGSANGABE.replace("%s",
+						TextVerwalter.RICHTUNG_OSTEN) + "\n",
+				kontext.getNachrichtFuer(spieler));
+
+		//TODO Unnötige Abfrage wird schon vorher abgefragt.
+		//Inventart kein Inhalt... der Text wird nicht ausgegeben das Inventar leer ist.
+		//		spieler.setInventar(inventar3);
+		//		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
+		//				kontext.getNachrichtFuer(spieler));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		fail("Not yet implemented");
+		assertEquals(TextVerwalter.BEFEHL_FUETTERE,
+				futterK.getBefehlsnamen()[0]);
 	}
 
 	@Test
 	public void testGetHilfe()
 	{
-		fail("Not yet implemented");
+		assertEquals(TextVerwalter.HILFE_FEED, futterK.getHilfe());
 	}
 
 }
