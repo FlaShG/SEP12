@@ -154,7 +154,11 @@ public class StartFenster extends StartUp
 			{
 				JFileChooser chooser;
 				chooser = FileChooser.konfiguriereFileChooser(false);
-				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
+				String fcString = FileChooser.oeffneDatei(chooser);
+				if (fcString == null)
+					return;
+				
+				SpielLogik._levelPfad = fcString;
 				String name;
 				if(modus)
 				{

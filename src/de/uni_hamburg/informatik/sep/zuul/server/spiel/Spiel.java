@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientVorschauPaket;
+import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
@@ -106,7 +107,14 @@ public class Spiel extends Observable
 		{
 			_logik.getKontext().schreibeAnSpieler(spieler,
 					TextVerwalter.EINLEITUNGSTEXT);
+			String raumNachricht = _logik.getKontext()
+					.getAktuellenRaumZu(spieler).getBeschreibung();
+			_logik.getKontext().schreibeAnSpieler(spieler, raumNachricht);
+			
+			
 		}
+		
+		
 	}
 
 	/**
@@ -121,12 +129,21 @@ public class Spiel extends Observable
 		System.err.println(benutzerName + ": " + eingabe);
 
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 
+
+		if (eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
+		{
+			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(_logik.getKontext(), spieler, befehlszeile);
+			return;
+		}
+		
 		// Spieler von der Karte entfernt?
 		if(spieler == null)
-			return;
+		{
+				return;
+		}
 
-		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)

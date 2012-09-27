@@ -9,7 +9,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
  * @author felix
  * 
  */
-public interface TickListener
+public interface TickListener extends Feature
 {
 	/**
 	 * Ein TickEvent wurde ausgelöst.
