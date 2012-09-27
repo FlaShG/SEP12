@@ -236,6 +236,7 @@ public class EditorMap extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
+				System.out.println("lo");
 				if(buttonAusgewaehlt())
 				{
 					_buttons[_activeX][_activeY].setAusgewaehlt(false);
@@ -307,7 +308,7 @@ public class EditorMap extends JPanel
 						}
 					}
 				}
-				if(!moved && dragDropSource != null)
+				if(!moved && dragDropSource != null && dragDropTarget != null)
 				{
 					dragDropSource.setAusgewaehlt(true);
 				}

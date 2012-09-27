@@ -11,11 +11,7 @@ public interface ClientInterface extends Remote
 	 */
 	public void login() throws RemoteException;
 
-	/**
-	 * trennt die Verbindung zum Server
-	 */
-	public void logout() throws RemoteException;
-
+	
 	/**
 	 * registriere die änderungen am Client
 	 * 

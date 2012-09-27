@@ -56,7 +56,7 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 				informiereBeobachter();
 			}
 		});
-		Dimension dim = new Dimension(80, 18);
+		Dimension dim = new Dimension(50, 18);
 		_zahl.setSize(dim);
 		_zahl.setPreferredSize(dim);
 		_zahl.setMinimumSize(dim);
