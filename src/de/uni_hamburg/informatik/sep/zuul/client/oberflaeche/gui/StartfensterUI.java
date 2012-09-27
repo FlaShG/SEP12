@@ -19,7 +19,6 @@ public class StartfensterUI extends JFrame
 	private JButton _multiPlayer;
 	private JTextField _benutzerName;
 	private JTextField _eingabeIP;
-	private JTextField _eingabePort;
 	private JButton _eingabeBestaetigen;
 	private JButton _abbrechen;
 	private JButton _abbrechen2; // leider nötig... sonst müssten die Panels jedesmal neu gemacht werden 
@@ -27,12 +26,11 @@ public class StartfensterUI extends JFrame
 	private JButton _fileChooserButton;
 	private JButton _defaultMapButton;
 	private JButton _editorButton;
-	
+
 	private JPanel _hauptPanel;
 	//Paneeeele ^^
 	private JPanel _multiPlayerPanel;
 	private JPanel _serverPanel;
-	
 
 	public StartfensterUI()
 	{
@@ -46,7 +44,7 @@ public class StartfensterUI extends JFrame
 		_hauptPanel = new JPanel();
 		_multiPlayerPanel = new JPanel();
 		_serverPanel = new JPanel();
-		
+
 		_singlePlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_SINGLEPLAYER);
 		_multiPlayer = new JButton(TextVerwalter.MODUS_AUSWAHL_MULTIPLAYER);
 		_serverStarten = new JButton("Erstelle öffentliches Spiel");
@@ -56,28 +54,27 @@ public class StartfensterUI extends JFrame
 
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
-		_eingabePort = new JTextField("1090");
 		_eingabeBestaetigen = new JButton("Bestaetigen");
 		_abbrechen = new JButton("Abbrechen");
 		_abbrechen2 = new JButton("Abbrechen");
 		_abbrechen2.addActionListener(new ActionListener()
-		{	// unsauber, aber funktioniert!
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_abbrechen.doClick();
-			}
-		});
+		{ // unsauber, aber funktioniert!
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						_abbrechen.doClick();
+					}
+				});
 
 		// hauptpanel zu Anfang
 		initHauptPanel();
 		add(_hauptPanel);
-		
+
 		// initialisiere alle anderen auch,
 		// füge sie aber noch nicht hinzu
 		initMultiPanel();
 		initServerPanel();
-		
+
 		setVisible(true);
 	}
 
@@ -89,14 +86,14 @@ public class StartfensterUI extends JFrame
 		_hauptPanel.add(_serverStarten);
 		_hauptPanel.add(_editorButton);
 	}
-	
+
 	private void initMultiPanel()
 	{
 		_multiPlayerPanel.setLayout(new GridLayout(0, 1));
 		JLabel labelserver = new JLabel(
 				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
-		
+
 		_multiPlayerPanel.add(labelname);
 		_multiPlayerPanel.add(_benutzerName);
 		_benutzerName.setCaretPosition(_benutzerName.getText().length());
@@ -104,14 +101,10 @@ public class StartfensterUI extends JFrame
 		_multiPlayerPanel.add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
-
-		_multiPlayerPanel.add(new JLabel("Port:"));
-		_multiPlayerPanel.add(_eingabePort);
-		
 		_multiPlayerPanel.add(_eingabeBestaetigen);
 		_multiPlayerPanel.add(_abbrechen);
 	}
-	
+
 	private void initServerPanel()
 	{
 		_serverPanel.setLayout(new GridLayout(0, 1));
@@ -119,7 +112,7 @@ public class StartfensterUI extends JFrame
 		_serverPanel.add(_defaultMapButton);
 		_serverPanel.add(_abbrechen2);
 	}
-	
+
 	public void startDarstellung()
 	{
 		this.getContentPane().removeAll();
@@ -140,7 +133,7 @@ public class StartfensterUI extends JFrame
 		this.add(_serverPanel);
 		this.pack();
 	}
-	
+
 	public JButton getSinglePlayerButton()
 	{
 		return _singlePlayer;
@@ -159,11 +152,6 @@ public class StartfensterUI extends JFrame
 	public JTextField getSpielerNameTextField()
 	{
 		return _benutzerName;
-	}
-
-	public JTextField getPortTextField()
-	{
-		return _eingabePort;
 	}
 
 	public JButton getAbbrechenButton()

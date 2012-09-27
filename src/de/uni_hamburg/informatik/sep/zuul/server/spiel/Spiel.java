@@ -29,7 +29,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  */
 public class Spiel extends Observable
 {
-	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	//	private Map<Spieler, String> _nachrichtenMap;
@@ -108,11 +107,9 @@ public class Spiel extends Observable
 			String raumNachricht = _logik.getKontext()
 					.getAktuellenRaumZu(spieler).getBeschreibung();
 			_logik.getKontext().schreibeAnSpieler(spieler, raumNachricht);
-			
-			
+
 		}
-		
-		
+
 	}
 
 	/**
@@ -129,17 +126,17 @@ public class Spiel extends Observable
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 
-
-		if (eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
+		if(eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
 		{
-			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(_logik.getKontext(), spieler, befehlszeile);
+			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(
+					_logik.getKontext(), spieler, befehlszeile);
 			return;
 		}
-		
+
 		// Spieler von der Karte entfernt?
 		if(spieler == null)
 		{
-				return;
+			return;
 		}
 
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
@@ -271,7 +268,8 @@ public class Spiel extends Observable
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, ONE_SECOND, ONE_SECOND);
+			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND,
+					SpielKonstanten.ONE_SECOND);
 		}
 		_gestartet = gestartet;
 	}

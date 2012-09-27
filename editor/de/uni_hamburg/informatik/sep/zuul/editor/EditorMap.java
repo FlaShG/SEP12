@@ -30,14 +30,13 @@ public class EditorMap extends JPanel
 	/**
 	 * Erstellt eine neue {@link EditorMap} mit gegebener Höhe und Breite.
 	 * 
-	 * @require breite > 0
-	 * 1require hoehe > 0
+	 * @require breite > 0 1require hoehe > 0
 	 */
 	public EditorMap(int breite, int hoehe)
 	{
 		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
 		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
-		
+
 		setGroesse(breite, hoehe);
 	}
 
@@ -118,10 +117,13 @@ public class EditorMap extends JPanel
 	}
 
 	/**
-	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die gegebene
-	 * Größe abgeändert werden.
-	 * @param breite die neue Breite
-	 * @param hoehe die neue Höhe
+	 * Gibt zurück, ob keine Räume gelöscht würde, sollte die Map auf die
+	 * gegebene Größe abgeändert werden.
+	 * 
+	 * @param breite
+	 *            die neue Breite
+	 * @param hoehe
+	 *            die neue Höhe
 	 * @return ob bei einer Größenänderung Räume flöten gehen würden.
 	 * 
 	 * @require breite > 0
@@ -131,7 +133,7 @@ public class EditorMap extends JPanel
 	{
 		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
 		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
-		
+
 		if(breite < _buttons.length)
 		{
 			for(int y = 0; y < getHoehe(); ++y)
@@ -165,8 +167,11 @@ public class EditorMap extends JPanel
 
 	/**
 	 * Setzt die Größe der Map.
-	 * @param breite die neue Breite
-	 * @param hoehe die neue Höhe
+	 * 
+	 * @param breite
+	 *            die neue Breite
+	 * @param hoehe
+	 *            die neue Höhe
 	 * 
 	 * @require breite > 0
 	 * @require hoehe > 0
@@ -175,7 +180,7 @@ public class EditorMap extends JPanel
 	{
 		assert breite > 0 : "Vorbedingung verletzt: breite > 0";
 		assert hoehe > 0 : "Vorbedingung verletzt: hoehe > 0";
-		
+
 		//alte entfernen
 		if(_buttons != null)
 		{
@@ -221,10 +226,10 @@ public class EditorMap extends JPanel
 	}
 
 	private void initialisiereButton(GridButton button, int x, int y)
-	{		
+	{
 		button.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -238,7 +243,7 @@ public class EditorMap extends JPanel
 				informiereBeobachter(false);
 			}
 		});
-		
+
 		button.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -338,7 +343,8 @@ public class EditorMap extends JPanel
 				if(dragDropSource != null)
 				{
 					GridButton destination = ((GridButton) arg0.getSource());
-					if(destination.getRaum() == null && dragDropSource != arg0.getSource())
+					if(destination.getRaum() == null
+							&& dragDropSource != arg0.getSource())
 					{
 						dragDropTarget = destination;
 						destination.setBackground(new Color(1, 0.6f, 0.4f));

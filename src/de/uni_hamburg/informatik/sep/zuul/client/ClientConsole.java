@@ -12,11 +12,10 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, int clientport,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public ClientConsole(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, clientport, clientName);
+		super(serverName, serverIP, clientName);
 
 		if(!clientName.equals("Dr. Little"))
 		{
@@ -111,7 +110,7 @@ public class ClientConsole extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		if (duHastGewonnen)
+		if(duHastGewonnen)
 		{
 			System.out.println(TextVerwalter.SIEGTEXT);
 		}
@@ -128,7 +127,7 @@ public class ClientConsole extends Client
 		System.out.println("Server wurde beendet.");
 		System.exit(0);
 	}
-	
+
 	@Override
 	public void serverNichtGefunden()
 	{

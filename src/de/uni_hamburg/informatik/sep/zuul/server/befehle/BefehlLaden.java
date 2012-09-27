@@ -1,4 +1,3 @@
-
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
@@ -22,7 +21,7 @@ public class BefehlLaden implements Befehl
 		if(befehlszeile.getGeparsteZeile().size() == 1)
 		{
 
-//			String level = FileChooser.oeffneDatei();
+			//			String level = FileChooser.oeffneDatei();
 			//Spiel.getInstance().spielen(level);
 		}
 		else

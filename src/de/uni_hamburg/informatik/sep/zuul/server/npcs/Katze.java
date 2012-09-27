@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.server.features;
+package de.uni_hamburg.informatik.sep.zuul.server.npcs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusfuehrenListener;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -22,14 +22,29 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 {
-	public static final int KATZE_SCHADEN = 2;
-	public static final long SCHLAFZEIT_IN_SEKUNDEN = 10;
-	public Raum _raum;
-	boolean _satt = false;
+	private Raum _raum;
+	private boolean _satt = false;
 
-	public Katze(Raum startRaum)
+	/**
+	 * Erzeugt eine Katze, registriert sie bei der SpielLogik und setzt sie
+	 * zufällig in einen Raum.
+	 */
+	public Katze(List<Raum> raeume)
 	{
-		_raum = startRaum;
+		_raum = selectRaumOhneKatze(raeume);
+
+		// Keine freie Position mehr möglich
+		if(_raum == null)
+			throw new NullPointerException("Keine freie Position für Katze.");
+
+		verjageMausImRaum(_raum, null);
+
+		_raum.setKatze(this);
+	}
+
+	public Katze(Raum raum)
+	{
+		_raum = raum;
 	}
 
 	@Override
@@ -129,7 +144,8 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 					}
 				});
 			}
-		}, SCHLAFZEIT_IN_SEKUNDEN * Spiel.ONE_SECOND);
+		}, SpielKonstanten.KATZE_SCHLAFZEIT_IN_SEKUNDEN
+				* SpielKonstanten.ONE_SECOND);
 	}
 
 	public Raum getRaum()
@@ -140,29 +156,6 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	public boolean isSatt()
 	{
 		return _satt;
-	}
-
-	/**
-	 * Erzeugt eine Katze, registriert sie bei der SpielLogik und setzt sie
-	 * zufällig in einen Raum.
-	 */
-	public static Katze erzeugeKatze(SpielLogik spielLogik)
-	{
-		RaumStruktur raumStruktur = spielLogik.getStruktur();
-		List<Raum> raeume = raumStruktur.getRaeume();
-
-		Raum raum = selectRaumOhneKatze(raeume);
-
-		// Keine freie Position mehr möglich
-		if(raum == null)
-			throw new NullPointerException("Keine freie Position für Katze.");
-
-		verjageMausImRaum(raum, spielLogik.getKontext());
-
-		Katze katze = new Katze(raum);
-		raum.setKatze(katze);
-		spielLogik.registriereFeature(katze);
-		return katze;
 	}
 
 	public static Raum selectRaumOhneKatze(List<Raum> raeume)
@@ -185,7 +178,8 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		if(!_satt && _raum == kontext.getAktuellenRaumZu(spieler)
 				&& befehl instanceof BefehlSchauen)
 		{
-			spieler.setLebensEnergie(spieler.getLebensEnergie() - KATZE_SCHADEN);
+			spieler.setLebensEnergie(spieler.getLebensEnergie()
+					- SpielKonstanten.KATZE_SCHADEN);
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_GREIFT_AN);
 
 			bewegeKatze(kontext);

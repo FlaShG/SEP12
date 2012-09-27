@@ -17,8 +17,8 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class StartConsole extends StartUp
 {
 
-	private static final BufferedReader CONSOLE = new BufferedReader(new InputStreamReader(
-			System.in));
+	private static final BufferedReader CONSOLE = new BufferedReader(
+			new InputStreamReader(System.in));
 
 	public StartConsole() throws RemoteException, AlreadyBoundException,
 			MalformedURLException, NotBoundException
@@ -117,7 +117,7 @@ public class StartConsole extends StartUp
 					{
 						_server = new Server();
 					}
-					_client = new ClientConsole(serverName, serverIP, 1090,
+					_client = new ClientConsole(serverName, serverIP,
 							clientName);
 				}
 				catch(Exception e1)
