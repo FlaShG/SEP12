@@ -1,7 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import de.uni_hamburg.informatik.sep.zuul.editor.EditorFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 public abstract class PathFinder
@@ -9,48 +16,84 @@ public abstract class PathFinder
 
 	protected abstract boolean isZielRaum(Raum raum);
 
-	public ArrayList<Raum> findPath(Raum start)
+	public LinkedList<Raum> findPath(Raum start)
 	{
-		return findPath(start, null);
+		LinkedList<Raum> result = findPath(start, new HashMap<Raum, LinkedList<Raum>>(), new HashSet<Raum>());
+		return result;
 	}
 
-	private ArrayList<Raum> findPath(Raum start, ArrayList<Raum> begangeneRaeume)
+	private LinkedList<Raum> findPath(Raum start, Map<Raum, LinkedList<Raum>> begangeneRaeume, Set<Raum> betrachtete)
 	{
-		if(begangeneRaeume == null)
+		//wenn für diesen Raum bereits ein kürzester Pfad gefunden wurde
+		if(begangeneRaeume.get(start) != null)
 		{
-			begangeneRaeume = new ArrayList<Raum>();
+			//gib diesen zurück
+			return new LinkedList<Raum>(begangeneRaeume.get(start));
 		}
-		begangeneRaeume.add(start);
-
+		
+		if(start.getName().equals("int"))
+		{
+			System.out.println("");
+		}
+		
+		LinkedList<Raum> kuerzesterPfadDiesesRaums = null;
+		
+		//wenn der Raum ein Ziel ist
 		if(isZielRaum(start))
 		{
-			return begangeneRaeume;
+			//ist der kürzeste Pfad trivial
+			kuerzesterPfadDiesesRaums = new LinkedList<Raum>();
+			kuerzesterPfadDiesesRaums.add(start);		
 		}
-
-		ArrayList<Raum> ausgaenge = start.getAusgaenge();
-		ausgaenge.removeAll(begangeneRaeume);
-
-		if(ausgaenge.size() == 0)
-			return null;
-
-		ArrayList<Raum> kuerzesterWegZumZiel = null;
-		for(Raum ausgang : ausgaenge)
+		//ansonsten muss für diesen Raum ein kürzester Pfad gefunden werden
+		else
 		{
-			ArrayList<Raum> path = findPath(ausgang, new ArrayList<Raum>(
-					begangeneRaeume));
-			if(path != null)
+			betrachtete.add(start);
+			ArrayList<Raum> ausgaenge = start.getAusgaenge();
+			
+			//überprüfe alle Ausgänge des Raumes
+			for(Raum ausgang : ausgaenge)
 			{
-				if(kuerzesterWegZumZiel == null
-						|| path.size() < kuerzesterWegZumZiel.size())
-					kuerzesterWegZumZiel = path;
+				LinkedList<Raum> kuerzesterPfadDiesesAusgangs = null;
+				
+				//wenn für den Raum nebenan schon ein gültiger Pfad gefunden wurde
+				if(begangeneRaeume.get(ausgang) != null)
+				{
+					//benutze diesen
+					kuerzesterPfadDiesesAusgangs = new LinkedList<Raum>(begangeneRaeume.get(ausgang));
+				}
+				//wenn wir mit weiterer Betrachtung des Raumes keinen Zyklus bilden
+				else if(!betrachtete.contains(ausgang))
+				{
+					//finde dessen kürzesten Weg
+					kuerzesterPfadDiesesAusgangs = findPath(ausgang, begangeneRaeume, betrachtete);
+				}
+				
+				//wenn ein kürzester Pfad gefunden wurde
+				if(kuerzesterPfadDiesesAusgangs != null)
+				{
+					//und dieser kürzer ist als von den anderen Ausgängen
+					if(kuerzesterPfadDiesesRaums == null || kuerzesterPfadDiesesAusgangs.size() + 1 < kuerzesterPfadDiesesRaums.size())
+					{
+						//benutze ihn als Pfad für diesen Raum
+						kuerzesterPfadDiesesRaums = kuerzesterPfadDiesesAusgangs;
+						kuerzesterPfadDiesesRaums.add(0, start);
+					}
+				}
 			}
+
+			betrachtete.remove(start);
 		}
-
-		return kuerzesterWegZumZiel;
-
+		
+		begangeneRaeume.put(start, kuerzesterPfadDiesesRaums);
+		
+		//fancy debugging view
+		//start.setName(""+ (kuerzesterPfadDiesesRaums != null ? (kuerzesterPfadDiesesRaums.size()) : "X"));
+		
+		return kuerzesterPfadDiesesRaums == null ? null : new LinkedList<Raum>(kuerzesterPfadDiesesRaums);
 	}
 
-	public static String getRichtung(ArrayList<Raum> raums)
+	public static String getRichtung(List<Raum> raums)
 	{
 		if(raums == null || raums.size() < 2)
 			return null;
