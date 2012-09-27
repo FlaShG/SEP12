@@ -25,21 +25,26 @@ public abstract class Client extends UnicastRemoteObject implements
 	private String _clientName;
 	int _port;
 
-	public Client(String serverName, String serverIP, int clientPort,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	protected Client(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-
-		super(clientPort);
+		// anonymous port
+		super(0);
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
-		_port = clientPort;
 
 		_clientName = clientName;
 
-		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
-				+ _serverName);
+		try
+		{
+			_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
+					+ _serverName);
+		}
+		catch(NotBoundException notBoundException)
+		{
+			serverNichtGefunden();
+		}
 
 		//login();
 	}
@@ -76,6 +81,8 @@ public abstract class Client extends UnicastRemoteObject implements
 			//TODO ausgabe auf gui
 		}
 
+		beendeFenster();
+
 	}
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
@@ -86,33 +93,12 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 	}
 
-	/**
-	 * 
-	 * @param args
-	 *            [Oberfläche, Servername, Serverip, Clientport, Clientname]
-	 * @throws NotBoundException
-	 * @throws RemoteException
-	 * @throws MalformedURLException
-	 * @throws NumberFormatException
-	 */
-	public static void main(String[] args) throws NumberFormatException,
-			MalformedURLException, RemoteException, NotBoundException
+	public void serverBeendet()
 	{
-
-		// TODO: ugly
-		if(args.length == 5 && args[4].equals("console"))
-		{
-			new ClientConsole(args[0], args[1], Integer.parseInt(args[2]),
-					args[3]);
-		}
-		else
-		{
-			new ClientGUI(args[0], args[1], Integer.parseInt(args[2]), args[3]);
-		}
 
 	}
 
-	public void serverBeendet()
+	protected void beendeFenster()
 	{
 
 	}
@@ -120,6 +106,11 @@ public abstract class Client extends UnicastRemoteObject implements
 	public String getClientName()
 	{
 		return _clientName;
+	}
+
+	protected void serverNichtGefunden()
+	{
+
 	}
 
 }

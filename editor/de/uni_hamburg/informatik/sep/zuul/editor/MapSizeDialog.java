@@ -33,8 +33,11 @@ public class MapSizeDialog
 
 	/**
 	 * Erstellt einen neuen {@link MapSizeDialog} mit gegebenen Startwerten.
-	 * @param breite vorgeschlagene Breite
-	 * @param hoehe vorgeschlagene Höhe
+	 * 
+	 * @param breite
+	 *            vorgeschlagene Breite
+	 * @param hoehe
+	 *            vorgeschlagene Höhe
 	 */
 	public MapSizeDialog(int breite, int hoehe)
 	{
@@ -45,7 +48,7 @@ public class MapSizeDialog
 
 		_dialog.add(_width = new EigenschaftIntPanelGT0("Breite", breite));
 		_dialog.add(_height = new EigenschaftIntPanelGT0("Höhe", hoehe));
-		
+
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener()
 		{

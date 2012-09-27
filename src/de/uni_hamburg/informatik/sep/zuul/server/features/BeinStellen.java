@@ -6,26 +6,21 @@ import java.util.TimerTask;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 {
-
-	public static final int INAKTIV_ZEIT = 10;
-
 	@Override
 	public boolean befehlSollAusgefuehrtWerden(ServerKontext kontext,
 			Spieler spieler, Befehl befehl)
 	{
 		if(!spieler.getAktiv())
 		{
-			kontext.schreibeAnSpieler(
-					spieler,
-					spieler.getName()
-							+ TextVerwalter.BEINSTELLEN_GEFALLEN_INAKTIV);
+			kontext.schreibeAnSpieler(spieler, spieler.getName()
+					+ TextVerwalter.BEINSTELLEN_GEFALLEN_INAKTIV);
 			return false;
 		}
 		return true;
@@ -48,8 +43,13 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 		spielerInRaum.remove(spieler);
 		for(final Spieler fremderSpieler : spielerInRaum)
 		{
-			kontext.schreibeAnSpieler(spieler,TextVerwalter.beinstellenAnderemSpieler(fremderSpieler.getName()));
-			kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.beinstellenBekommen(spieler.getName()));
+			if(!fremderSpieler.getAktiv())
+				continue;
+
+			kontext.schreibeAnSpieler(spieler, TextVerwalter
+					.beinstellenAnderemSpieler(fremderSpieler.getName()));
+			kontext.schreibeAnSpieler(fremderSpieler,
+					TextVerwalter.beinstellenBekommen(spieler.getName()));
 			fremderSpieler.setAktiv(false);
 
 			new Timer().schedule(new TimerTask()
@@ -59,11 +59,19 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 				public void run()
 				{
 					fremderSpieler.setAktiv(true);
-					kontext.schreibeAnSpieler(fremderSpieler, TextVerwalter.BEINSTELLEN_AUFSTEHEN);
+					kontext.schreibeAnSpieler(fremderSpieler,
+							TextVerwalter.BEINSTELLEN_AUFSTEHEN);
 
 				}
-			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);
+			}, SpielKonstanten.BEIN_STELLEN_INAKTIV_ZEIT
+					* SpielKonstanten.ONE_SECOND);
 		}
+
+		spieler.setLebensEnergie(spieler.getLebensEnergie()
+				- SpielKonstanten.BEIN_STELLEN_SCHADEN);
+		kontext.schreibeAnSpieler(spieler,
+				TextVerwalter.beinStellenSchaden(spieler.getName()));
+
 		return true;
 	}
 
@@ -83,7 +91,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	@Override
 	public String getHilfe()
 	{
-		// TODO Hilfetext zu Bein Stellen
+		// TODO Hilfetext zu Bein Stellen und dann bei Test ergänzen.
 		return "";
 	}
 

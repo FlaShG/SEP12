@@ -6,13 +6,10 @@ import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
-
 
 final class BefehlBeenden implements Befehl
 {
 
-	
 	@Override
 	public boolean vorbedingungErfuellt(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
@@ -24,20 +21,23 @@ final class BefehlBeenden implements Befehl
 	public boolean ausfuehren(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		spieler.die();
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.BEENDENTEXT);
+		if(spieler != null)
+		{
+			spieler.die();
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.BEENDENTEXT);
+		}
 		// TODO: Schließe Verbindung zu Spieler
 		SwingUtilities.invokeLater(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
-				StartUp.restart();
+				StartUp.restart(true);
 			}
 		});
-		
-		return true;
+
+		return false;
 	}
 
 	@Override

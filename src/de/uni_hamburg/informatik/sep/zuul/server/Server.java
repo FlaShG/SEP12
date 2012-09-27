@@ -81,7 +81,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		{
 			ClientInterface client = _connectedClients.get(paket
 					.getSpielerName());
-			client.zeigeAn(paket);
+			if(client != null)
+				client.zeigeAn(paket);
 		}
 		return result;
 	}
@@ -112,7 +113,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			}
 
 			result = true;
-			System.out.println("eingeloggt");
+			System.err.println("eingeloggt");
 		}
 
 		return result;
@@ -132,9 +133,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			{
 				client.serverBeendet();
 			}
-		}
-		if(_connectedClients.isEmpty())
 			beendeServer();
+		}
+		//if(_connectedClients.isEmpty())
+		//	beendeServer();
 
 		return true;
 	}
@@ -198,11 +200,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			paketListe.add(_spiel.packePaket(name));
 		}
 		sendeAenderungen(paketListe);
-	}
-
-	public static void main(String[] args) throws Exception
-	{
-		new Server();
 	}
 
 	public Map<String, ClientInterface> getConnectedClients()

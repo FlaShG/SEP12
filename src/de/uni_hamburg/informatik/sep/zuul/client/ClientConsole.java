@@ -7,16 +7,17 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
+
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, int clientport,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public ClientConsole(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, clientport, clientName);
+		super(serverName, serverIP, clientName);
 
-		if(!clientName.equals("Dr.Little"))
+		if(!clientName.equals("Dr. Little"))
 		{
 			warteFenster();
 		}
@@ -88,7 +89,7 @@ public class ClientConsole extends Client
 		if(paket.getNachricht() != null)
 		{
 			for(String zeile : paket.getNachricht().split("\n"))
-				System.out.println(zeile);
+				schreibeText(zeile);
 			run();
 		}
 		return true;
@@ -109,15 +110,29 @@ public class ClientConsole extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		// TODO Auto-generated method stub
-
+		if(duHastGewonnen)
+		{
+			schreibeText(TextVerwalter.SIEGTEXT);
+		}
+		else
+		{
+			schreibeText(TextVerwalter.NIEDERLAGETEXT);
+		}
+		System.exit(0);
 	}
 
 	@Override
 	public void serverBeendet()
 	{
-		// TODO Auto-generated method stub
+		schreibeText("Server wurde beendet.");
+		System.exit(0);
+	}
 
+	@Override
+	public void serverNichtGefunden()
+	{
+		schreibeText("Konnte Server nicht finden");
+		System.exit(0);
 	}
 
 }

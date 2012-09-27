@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
  * Die UI-Klasse des {@link EditorFenster}s.
@@ -24,6 +27,7 @@ public class EditorFensterUI
 	private EditorMenuBar _menubar;
 	private EditorMap _map;
 	private JButton _raumhinzu;
+	private JLabel _fueller;
 	private RaumBearbeitenPanel _bearbeiten;
 	private LevelPanel _levelPanel;
 
@@ -32,7 +36,9 @@ public class EditorFensterUI
 	/**
 	 * Erzeugt eine neue {@link EditorFensterUI}.
 	 * 
-	 * @param beobachter ein {@link EditorBeobachter}, der über alle Änderungen in der UI informiert wird.
+	 * @param beobachter
+	 *            ein {@link EditorBeobachter}, der über alle Änderungen in der
+	 *            UI informiert wird.
 	 */
 	public EditorFensterUI(EditorBeobachter beobachter)
 	{
@@ -41,9 +47,13 @@ public class EditorFensterUI
 
 	/**
 	 * (Re-)Initialisiert die UI.
-	 * @param level ein {@link EditorLevel} für die levelglobalen Infos
-	 * @param width die Breite der Karte
-	 * @param height die Höhe der Karte
+	 * 
+	 * @param level
+	 *            ein {@link EditorLevel} für die levelglobalen Infos
+	 * @param width
+	 *            die Breite der Karte
+	 * @param height
+	 *            die Höhe der Karte
 	 * 
 	 * @require width > 0
 	 * @require heigth > 0
@@ -52,8 +62,8 @@ public class EditorFensterUI
 	{
 		assert width > 0 : "Vorbedingung verletzt: width > 0";
 		assert height > 0 : "Vorbedingung verletzt: height > 0";
-		
-		JFrame newFrame = new JFrame(EditorFenster.EDITOR_TITEL);
+
+		JFrame newFrame = new JFrame(TextVerwalter.EDITOR_TITEL);
 
 		newFrame.getContentPane().setLayout(new BorderLayout());
 
@@ -70,6 +80,18 @@ public class EditorFensterUI
 		_map.setBeobachter(_beobachter);
 
 		_raumhinzu = new JButton("Raum anlegen");
+		Dimension dim = new Dimension(500, 80);
+		_raumhinzu.setSize(dim);
+		_raumhinzu.setMinimumSize(dim);
+		_raumhinzu.setPreferredSize(dim);
+
+		newFrame.add(_fueller = new JLabel(
+				EditorTextVerwalter.KLICKE_AUF_RAUM_ZUM_BEGINNEN),
+				BorderLayout.SOUTH);
+		_fueller.setSize(dim);
+		_fueller.setMinimumSize(dim);
+		_fueller.setPreferredSize(dim);
+		_fueller.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		newFrame.setMinimumSize(new Dimension(900, 600));
 		newFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -109,7 +131,7 @@ public class EditorFensterUI
 	public void setMap(EditorMap map)
 	{
 		assert map != null : "Vorbedingung verletzt: map != null";
-		
+
 		_frame.remove(_map);
 		_frame.add(_map = map, BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
@@ -130,6 +152,14 @@ public class EditorFensterUI
 	public JButton getRaumhinzu()
 	{
 		return _raumhinzu;
+	}
+
+	/**
+	 * Gibt den Füller für SOUTH zurück, wenn gerade nichts anderes drin ist.
+	 */
+	public JLabel getFueller()
+	{
+		return _fueller;
 	}
 
 	/**
@@ -170,7 +200,9 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Gibt das Panel zurück, auf dem die levelglobalen Einstellungen getätigt werden.
+	 * Gibt das Panel zurück, auf dem die levelglobalen Einstellungen getätigt
+	 * werden.
+	 * 
 	 * @return
 	 */
 	public LevelPanel getLevelPanel()

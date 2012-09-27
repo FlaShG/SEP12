@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,11 +22,11 @@ public class BefehlEssenTascheGuterKruemelTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spieler2 = new Spieler("peter");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("essen tasche guter krümel");
-    
-    SpielLogik spiellogi = new SpielLogik();
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("essen tasche guter krümel");
+
+	SpielLogik spiellogi = new SpielLogik();
 
 	@Before
 	public void setUp() throws Exception
@@ -42,41 +44,48 @@ public class BefehlEssenTascheGuterKruemelTest
 	@Test
 	public void testAusfuehren()
 	{
-	assertTrue(spieler.getInventar().has(Item.IKuchen));
-	assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
-	assertFalse(spieler.getInventar().has(Item.IKuchen));
-	
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
-	assertTrue(essentasche.ausfuehren(kontext, spieler2, befehlszeile));
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
+		assertTrue(spieler.getInventar().has(Item.IKuchen));
+		assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
+		assertFalse(spieler.getInventar().has(Item.IKuchen));
+
 	}
 
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-         assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler, befehlszeile));
-         assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
-         spieler2.getInventar().fuegeItemHinzu(Item.UKuchen);
-         assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
-         spieler2.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
-         assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
-         spieler2.getInventar().fuegeItemHinzu(Item.UGiftkuchen);
-         assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
-         spieler2.getInventar().fuegeItemHinzu(Item.IKuchen);
-         assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
+		assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler,
+				befehlszeile));
+		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
+		spieler2.getInventar().fuegeItemHinzu(Item.UKuchen);
+		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
+		spieler2.getInventar().fuegeItemHinzu(Item.IGiftkuchen);
+		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
+		spieler2.getInventar().fuegeItemHinzu(Item.UGiftkuchen);
+		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
+		spieler2.getInventar().fuegeItemHinzu(Item.IKuchen);
+		assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
 		essentasche.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.KEINIDENTIFIZIERTERKUCHEN, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.KEINIDENTIFIZIERTERKUCHEN.length()));
+		assertEquals(
+				TextVerwalter.KEIN_KUCHEN_DIESER_ART,
+				kontext.getNachrichtFuer(spieler).substring(0,
+						TextVerwalter.KEIN_KUCHEN_DIESER_ART.length()));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals( "essen tasche guter krümel", essentasche.getBefehlsnamen()[0]);
+		assertEquals("essen tasche guter krümel",
+				essentasche.getBefehlsnamen()[0]);
 	}
 
 }

@@ -1,8 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,14 +22,12 @@ public class BefehlEssenTascheTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spieler2 = new Spieler("peter");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("essen tasche");
-    
-    SpielLogik spiellogi = new SpielLogik();
-    
-    
-    
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("essen tasche");
+
+	SpielLogik spiellogi = new SpielLogik();
+
 	@Before
 	public void setUp() throws Exception
 	{
@@ -46,8 +44,10 @@ public class BefehlEssenTascheTest
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-		assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler, befehlszeile));
-		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2, befehlszeile));
+		assertTrue(essentasche.vorbedingungErfuellt(kontext, spieler,
+				befehlszeile));
+		assertFalse(essentasche.vorbedingungErfuellt(kontext, spieler2,
+				befehlszeile));
 	}
 
 	@Test
@@ -56,41 +56,43 @@ public class BefehlEssenTascheTest
 		assertTrue(spieler.getInventar().has(Item.IKuchen));
 		assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(13, spieler.getLebensEnergie());
-		
-		
+
 	}
 
 	@Test
 	public void testEsseKuchen()
 	{
-		int energie = spieler.getLebensEnergie();
-		essentasche.esseKuchen(kontext, spieler, Item.UKuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.UKuchen);
 		assertEquals(13, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.UGiftkuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.UGiftkuchen);
 		assertEquals(12, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.IKuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.IKuchen);
 		assertEquals(15, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.IGiftkuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.IGiftkuchen);
 		assertEquals(14, spieler.getLebensEnergie());
-		assertTrue(essentasche.esseKuchen(kontext, spieler2, Item.IGiftkuchen));
+		assertTrue(BefehlEssenTasche.esseKuchen(kontext, spieler2, Item.IGiftkuchen));
 		assertEquals(0, spieler2.getLebensEnergie());
-		assertEquals(TextVerwalter.KUCHENTODTEXT,  kontext.getNachrichtFuer(spieler2).substring(0, TextVerwalter.KUCHENTODTEXT.length()));
-		
+		assertEquals(
+				TextVerwalter.KUCHENTODTEXT,
+				kontext.getNachrichtFuer(spieler2).substring(0,
+						TextVerwalter.KUCHENTODTEXT.length()));
 
-		
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
 		essentasche.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.NICHTSZUMESSENTEXT, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.NICHTSZUMESSENTEXT.length()));
+		assertEquals(
+				TextVerwalter.NICHTSZUMESSENTEXT,
+				kontext.getNachrichtFuer(spieler).substring(0,
+						TextVerwalter.NICHTSZUMESSENTEXT.length()));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals( "essen tasche", essentasche.getBefehlsnamen()[0]);
+		assertEquals("essen tasche", essentasche.getBefehlsnamen()[0]);
 	}
 
 	@Test

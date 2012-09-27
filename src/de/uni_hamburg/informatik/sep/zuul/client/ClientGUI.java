@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -24,10 +26,10 @@ import java.util.Map.Entry;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
@@ -45,20 +47,19 @@ public class ClientGUI extends Client
 	private Raumbilderzeuger _bilderzeuger;
 	private Map<String, JButton> _befehlButtonMap = new HashMap<String, JButton>();
 
-	public ClientGUI(String serverName, String serverIP, int clientport,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public ClientGUI(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, clientport, clientName);
+		super(serverName, serverIP, clientName);
 
-		if(!serverIP.equals("127.0.0.1"))
-		{
-			startFenster();
-		}
-		else
+		if(clientName.equals("Dr. Little"))
 		{
 			login();
 			_server.empfangeStartEingabe(getClientName());
+		}
+		else
+		{
+			startFenster();
 		}
 
 	}
@@ -67,27 +68,27 @@ public class ClientGUI extends Client
 	{
 		final JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
-		JPanel panel = new JPanel();
-		startFrame.setMinimumSize(new Dimension(300, 150));
+		startFrame.setLayout(new GridLayout(0, 1));
+		startFrame.setMinimumSize(new Dimension(300, 100));
 		startFrame.setLocationRelativeTo(null);
 
-		final JButton _startButton = new JButton("Los gehts!");
+		final JButton startButton = new JButton("Los gehts!");
+		startButton.setFocusPainted(false);
+		startButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 
-		panel.add(_startButton);
-
-		startFrame.setContentPane(panel);
+		startFrame.add(startButton);
 
 		startFrame.setVisible(true);
 
 		login();
 
-		_startButton.addActionListener(new ActionListener()
+		startButton.addActionListener(new ActionListener()
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_startButton.setEnabled(false);
+				startButton.setEnabled(false);
 
 				try
 				{
@@ -181,9 +182,20 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
+		if(_bildPanel.getSchauenLabel().isVisible())
+		{
+			// Gehe Buttons sind beim Schauen deaktiviert.
+			for(String befehl : paket.getVerfuegbareBefehle().keySet())
+			{
+				if(befehl.startsWith(TextVerwalter.BEFEHL_GEHEN))
+					paket.getVerfuegbareBefehle().put(befehl, false);
+			}
+		}
+
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
 		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+
 		_bp.setLebensenergie(paket.getLebensEnergie());
 
 		int val = _bildPanel.getQuadraticSize();
@@ -389,10 +401,15 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_BEINSTELLEN));
 
-		_bp.getQuitButton()
-				.addActionListener(
-						new ActionListenerBefehlAusfuehren(
-								TextVerwalter.BEFEHL_BEENDEN));
+		_bp.getQuitButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				StartUp.restart(true);
+			}
+		});
 
 		_bp.getHelpButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
@@ -426,9 +443,6 @@ public class ClientGUI extends Client
 		_bp.getGibButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_UNTERSUCHE));
-
-		_bp.getLadenButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
 
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
@@ -600,7 +614,7 @@ public class ClientGUI extends Client
 		createActionListenerMap(_bp.getExtraButtons());
 		createActionListenerMap(new JButton[] { _bildPanel.getTuerNordButton(),
 				_bildPanel.getTuerSuedButton(), _bildPanel.getTuerOstButton(),
-				_bildPanel.getTuerWestButton() });
+				_bildPanel.getTuerWestButton(), _bp.getBeinstellenButton() });
 	}
 
 	private void createActionListenerMap(JButton[] buttons)
@@ -689,8 +703,8 @@ public class ClientGUI extends Client
 				//				System.exit(0);
 			}
 		});
-		_hf.hide();
 		_hf.dispose();
+		StartUp.restart(false);
 	}
 
 	@Override
@@ -713,5 +727,20 @@ public class ClientGUI extends Client
 		{
 			button.doClick();
 		}
+	}
+
+	@Override
+	protected void serverNichtGefunden()
+	{
+
+		JOptionPane.showMessageDialog(null, "Server wurde nicht gefunden");
+		System.exit(0);
+
+	}
+
+	@Override
+	protected void beendeFenster()
+	{
+		_hf.dispose();
 	}
 }

@@ -2,7 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.features;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -18,7 +18,7 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 			Raum alterRaum, Raum neuerRaum)
 	{
 		spieler.setLebensEnergie(spieler.getLebensEnergie()
-				- SpielLogik.RAUMWECHSEL_ENERGIE_KOSTEN);
+				- SpielKonstanten.RAUMWECHSEL_ENERGIE_KOSTEN);
 	}
 
 	/**
@@ -30,7 +30,6 @@ final public class Lebensenergie implements Feature, BefehlAusgefuehrtListener,
 	{
 		if(spieler.getLebensEnergie() <= 0)
 		{
-			spieler.die();
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.NIEDERLAGETEXT);
 			return false;
 		}

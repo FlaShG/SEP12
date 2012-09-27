@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
@@ -18,11 +15,13 @@ public class SpeicherWerkzeug
 {
 
 	private VerbindungsWerkzeug _verbindungen;
-	private EditorFenster _ef;
+	private EditorLevel _level;
+	private EditorFensterUI _ui;
 
-	public SpeicherWerkzeug(EditorFenster ef)
+	public SpeicherWerkzeug(EditorLevel level, EditorFensterUI ui)
 	{
-		_ef = ef;
+		_level = level;
+		_ui = ui;
 		_verbindungen = new VerbindungsWerkzeug();
 	}
 
@@ -32,30 +31,28 @@ public class SpeicherWerkzeug
 	 * @param path
 	 *            Directory Only! darf nur zwei XMLs beinhalten oder muss leer
 	 *            sein.
+	 * 
+	 * @require valide()
 	 */
 	public void speichern(String path)
 	{
+		assert valide() : "Vorbedingung verletzt: valide()";
+
 		IOManager manager = new IOManager();
 		vergebeIDs(manager);
 
-		_verbindungen.verbindeRaeume(_ef.getUI().getMap());
+		//hier war
+		//_verbindungen.verbindeRaeume(_ef.getUI().getMap());
 
 		RaumStruktur raumstruktur = new RaumStruktur(
 				_verbindungen.getRaumListe());
 
-		if(valide())
-		{
-			manager.schreibeLevelStruktur(path, raumstruktur,
-					_ef.getEditorLevel());
+		manager.schreibeLevelStruktur(path, raumstruktur, _level);
 
-			manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(new JPanel(),
-					"Level erfüllt nicht die Anforderungen.",
-					"Ungültiges Level", JOptionPane.ERROR_MESSAGE);
-		}
+		manager.schreibeLevelRaeume(_verbindungen.getRaumListe());
+
+		//Gegen Garbage-Räume, die von anderen Räumen referenziert werden.
+		_verbindungen.loescheAlleVerbindungen();
 	}
 
 	/**
@@ -65,12 +62,14 @@ public class SpeicherWerkzeug
 	 * - Verbindung zw. Start- und Endraum besteht<br>
 	 * - Mäuse lassen sich setzen ((|Räume| - 2 - |Katzen|) >= |Mäuse|)
 	 */
-	private boolean valide()
+	public boolean valide()
 	{
 		boolean valid = false;
 		int start = 0;
 		int ende = 0;
 		Raum startRaum = null;
+
+		_verbindungen.verbindeRaeume(_ui.getMap());
 
 		for(Raum r : _verbindungen.getRaumListe())
 		{
@@ -95,23 +94,27 @@ public class SpeicherWerkzeug
 				}
 			};
 
-			if(_ef.getEditorLevel().getLeben() > 0)
+			if(_level.getLeben() > 0)
 				valid = false;
 
 			if(pf.findPath(startRaum) != null)
 			{//^-- überprüfe Verbindung von start- und endraum
 
-				int anzahlKatzen = _ef.getEditorLevel().getKatzen();
+				int anzahlKatzen = _level.getKatzen();
 				int zulAnzahlMaeuse = _verbindungen.getRaumListe().size() - 2
 						- anzahlKatzen;
-				valid = zulAnzahlMaeuse >= _ef.getEditorLevel().getMaeuse();
+				valid = zulAnzahlMaeuse >= _level.getMaeuse();
 			}
-			else
-				valid = false;
-
 		}
-		else
-			valid = false;
+
+		//Gegen Garbage-Räume, die von anderen Räumen dank unseres
+		//Pathfindings eben referenziert wurden.
+		//Wäre valid true, bräuchten wir die Infos noch und die
+		//Verbindungen werden in speichern() gelöscht.
+		if(!valid)
+		{
+			_verbindungen.loescheAlleVerbindungen();
+		}
 
 		return valid;
 	}
@@ -130,7 +133,7 @@ public class SpeicherWerkzeug
 		Random rand = new Random();
 		int newid;
 
-		GridButton[][] buttons = _ef.getUI().getMap().getButtonArray();
+		GridButton[][] buttons = _ui.getMap().getButtonArray();
 		for(int y = 0; y < buttons[0].length; ++y)
 		{
 			for(int x = 0; x < buttons.length; ++x)

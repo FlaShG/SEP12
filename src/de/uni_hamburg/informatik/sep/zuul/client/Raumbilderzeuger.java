@@ -8,8 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -66,14 +68,17 @@ class Raumbilderzeuger
 	private boolean _schauenAnsicht;
 	private HashMap<String, Color> _spielerfarben;
 	private LinkedList<Color> _verfuegbareFarben;
+	private boolean _erstespaket;
 
 	public Raumbilderzeuger()
 	{
+		_erstespaket = true;
 		_drlittlepositionen = new LinkedList<Point>();
 		_mauspositionen = new LinkedList<Point>();
 		_itemPositionen = new LinkedList<Point>();
 		_spielerfarben = new HashMap<String, Color>();
 		_verfuegbareFarben = new LinkedList<Color>();
+		_verfuegbareFarben.add(Color.WHITE);
 		_verfuegbareFarben.add(Color.BLUE);
 		_verfuegbareFarben.add(Color.RED);
 		_verfuegbareFarben.add(Color.GREEN);
@@ -84,6 +89,8 @@ class Raumbilderzeuger
 		_verfuegbareFarben.add(Color.MAGENTA);
 		_verfuegbareFarben.add(Color.ORANGE);
 		_verfuegbareFarben.add(Color.CYAN);
+		_verfuegbareFarben.add(Color.DARK_GRAY);
+		_verfuegbareFarben.add(Color.LIGHT_GRAY);
 
 	}
 
@@ -120,13 +127,18 @@ class Raumbilderzeuger
 		int x = 0;
 		int y = 0;
 
-		//Dem Spieler die farbe weiß zuordnen
-		if(!_spielerfarben.containsKey(_paket.getSpielerName()))
+		if(_erstespaket)
 		{
-			_spielerfarben.put(_paket.getSpielerName(), Color.white);
+			List<String> spieler = _paket.getAndereSpieler();
+			Collections.sort(spieler);
+
+			for(String s : spieler)
+			{
+				_spielerfarben.put(s, getUnverbrauchteFarbe());
+			}
+			_erstespaket = false;
 		}
 
-		//Je nach RaumTyp ein anderes Grundbild malen
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
 		{
@@ -202,13 +214,6 @@ class Raumbilderzeuger
 					.equals(_paket.getSpielerName()))
 			{
 
-				if(!_spielerfarben
-						.containsKey(_paket.getAndereSpieler().get(i)))
-				{
-					_spielerfarben.put(_paket.getAndereSpieler().get(i),
-							getUnverbrauchteFarbe());
-				}
-
 				if(_drlittlepositionen.size() != 0)
 				{
 					position = entryPicker.pick(_drlittlepositionen);
@@ -234,8 +239,8 @@ class Raumbilderzeuger
 			position = entryPicker.pickAndRemoveFromList(_mauspositionen);
 
 			if(position == null)
-				;
-			position = new Point(70, 70);
+				position = new Point(70, 70);
+
 			x = position.x;
 			y = position.y;
 
@@ -318,7 +323,10 @@ class Raumbilderzeuger
 	private Color getUnverbrauchteFarbe()
 	{
 
-		return _verfuegbareFarben.remove();
+		if(_verfuegbareFarben.size() != 0)
+			return _verfuegbareFarben.remove();
+		else
+			return Color.black;
 	}
 
 	private Image getFarbigenDrLittle(String name)

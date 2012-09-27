@@ -47,6 +47,8 @@ public class VerbindungsWerkzeug
 
 		_raumArray = liesRaeumeAusButtonArray();
 
+		loescheAlleVerbindungen();
+
 		for(int y = 0; y < _arrayZeilenzahl; ++y)
 		{
 			for(int x = 0; x < _arraySpaltenzahl; ++x)
@@ -160,6 +162,24 @@ public class VerbindungsWerkzeug
 	public List<Raum> getRaumListe()
 	{
 		return _raumListe;
+	}
+
+	/**
+	 * Löscht alle Verbindungen zwischen zwei Räumen.
+	 */
+	public void loescheAlleVerbindungen()
+	{
+		for(int y = 0; y < _arrayZeilenzahl; ++y)
+		{
+			for(int x = 0; x < _arraySpaltenzahl; ++x)
+			{
+				if(existiertRaumAnPosition(x, y))
+				{
+					_raumArray[x][y].loescheVerbindungen();
+				}
+			}
+		}
+		_raumListe.clear();
 	}
 
 }

@@ -10,36 +10,40 @@ import org.junit.Test;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 
-public class SpielerTest {
+public class SpielerTest
+{
 	Spieler _tester;
 	Inventar inv = mock(Inventar.class);
-	
+
 	@Before
 	public void setUp()
 	{
 		//standardspieler hat mehr als nur namen.
 		_tester = new Spieler("testname", 8, inv);
 	}
-	
+
 	@Test
-	public void testSpielerString() {
+	public void testSpielerString()
+	{
 		_tester = new Spieler("testname");
-		
+
 		assertEquals("testname", _tester.getName());
 	}
 
 	@Test
-	public void testSpielerStringIntInventar() {
+	public void testSpielerStringIntInventar()
+	{
 		_tester = new Spieler("testname", 8, inv);
-		
+
 		assertEquals("testname", _tester.getName());
 		assertEquals(8, _tester.getLebensEnergie());
-		
+
 		assertEquals(inv, _tester.getInventar());
 	}
-	
+
 	@Test
-	public void testGetLebensEnergie() {
+	public void testGetLebensEnergie()
+	{
 		assertEquals(8, _tester.getLebensEnergie());
 		_tester.setLebensEnergie(Integer.MAX_VALUE);
 		assertEquals(Integer.MAX_VALUE, _tester.getLebensEnergie());
@@ -48,7 +52,8 @@ public class SpielerTest {
 	}
 
 	@Test
-	public void testSetLebensEnergie() {
+	public void testSetLebensEnergie()
+	{
 		//selber test wie beim getter.
 		assertEquals(8, _tester.getLebensEnergie());
 		_tester.setLebensEnergie(Integer.MAX_VALUE);
@@ -58,79 +63,89 @@ public class SpielerTest {
 	}
 
 	@Test
-	public void testGetInventar() {
+	public void testGetInventar()
+	{
 		assertEquals(inv, _tester.getInventar());
 		Inventar inv2 = mock(Inventar.class);
-		
+
 		_tester.setInventar(inv2);
 		assertEquals(inv2, _tester.getInventar());
 	}
 
 	@Test
-	public void testSetInventar() {
+	public void testSetInventar()
+	{
 		Inventar inv2 = mock(Inventar.class);
 		_tester.setInventar(inv2);
 		_tester.setInventar(inv2); //zweimal.. 
-		
+
 		assertEquals(inv2, _tester.getInventar());
 	}
 
 	@Test
-	public void testSetAktiv() {
+	public void testSetAktiv()
+	{
 		_tester.setAktiv(false);
 		assertFalse(_tester.getAktiv());
-		
+
 		_tester.setAktiv(true);
 		assertTrue(_tester.getAktiv());
 	}
 
 	@Test
-	public void testGetAktiv() {
+	public void testGetAktiv()
+	{
 		_tester.setAktiv(false);
 		assertFalse(_tester.getAktiv());
-		
+
 		_tester.setAktiv(true);
 		assertTrue(_tester.getAktiv());
 	}
+
 	@Test
-	public void testGetName() {
+	public void testGetName()
+	{
 		assertEquals("testname", _tester.getName());
 	}
 
 	@Test
-	public void testDie() {
+	public void testDie()
+	{
 		assertTrue(_tester.getLebensEnergie() != 0);
-		
+
 		_tester.die();
-		
+
 		assertEquals(0, _tester.getLebensEnergie());
 		assertFalse(_tester.lebendig());
 	}
 
 	@Test
-	public void testLebendig() {
+	public void testLebendig()
+	{
 		assertTrue(_tester.lebendig());
-		
+
 		_tester.die();
-		
+
 		assertFalse(_tester.lebendig());
 	}
 
 	@Test
-	public void testGewinnt() {
+	public void testGewinnt()
+	{
 		assertFalse(_tester.hatGewonnen());
-		
+
 		_tester.gewinnt();
-		
+
 		assertTrue(_tester.hatGewonnen());
 	}
 
 	@Test
-	public void testHatGewonnen() {
+	public void testHatGewonnen()
+	{
 		assertFalse(_tester.hatGewonnen());
-		
+
 		_tester.gewinnt();
-		
+
 		assertTrue(_tester.hatGewonnen());
 	}
 

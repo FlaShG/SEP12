@@ -35,7 +35,7 @@ public class BefehlsPanel extends JPanel
 			"bilder/kruemel.png"));
 	private final ImageIcon BEINSTELLEN = new ImageIcon(getClass().getResource(
 			"bilder/beinstellen.png"));
-	
+
 	private JButton _quitButton;
 	private JButton _helpButton;
 	private JButton _essenTascheButton;
@@ -45,7 +45,6 @@ public class BefehlsPanel extends JPanel
 	private JButton _nehmenButton;
 	private JButton _gibButton;
 	private JButton _essenBodenButton;
-	private JButton _ladenButton;
 	private JButton _fuettereButton;
 	private JButton _fuettereGutButton;
 	private JButton _fuettereSchlechtButton;
@@ -73,23 +72,20 @@ public class BefehlsPanel extends JPanel
 
 		_labelFuerLebensenergie = new JLabel();
 		_labelFuerLebensenergie.setLocation(ABSTAND_NORMAL, 0);
-		_labelFuerLebensenergie.setSize(50,
-				BefehlsPanel.this.getHeight()-50);
-		
-		
+		_labelFuerLebensenergie.setSize(50, BefehlsPanel.this.getHeight() - 50);
+
 		_beinstellenButton = new JButton(BEINSTELLEN);
 		_beinstellenButton.setSize(50, 50);
 		_beinstellenButton.setLocation(ABSTAND_NORMAL, 462);
 		_beinstellenButton.setFocusable(false);
-		_beinstellenButton.setToolTipText("Allen Gegnern im Raum ein Bein stellen");
+		_beinstellenButton
+				.setToolTipText("Allen Gegnern im Raum ein Bein stellen");
 		_beinstellenButton.setVisible(true);
-		
+
 		repaint();
-		
-		
+
 		_lebensenergieMaximum = 8;
 		_lebensenergieAktuell = _lebensenergieMaximum;
-		
 
 		_nehmenButton = new JButton(
 				StringUtils.capitalize(TextVerwalter.BEFEHL_NEHMEN));
@@ -136,16 +132,9 @@ public class BefehlsPanel extends JPanel
 		_helpButton = new JButton(new ImageIcon(getClass().getResource(
 				"bilder/faq-icon.png")));
 
-		_ladenButton = new JButton(new ImageIcon(getClass().getResource(
-				"bilder/disk.gif")));
-
 		_quitButton = new JButton(new ImageIcon(getClass().getResource(
 				"bilder/exitIcon.gif")));
 		_quitButton.setBackground(new Color(0, 175, 0));
-		
-		
-	
-		
 
 		_normalButtons = new JButton[] { _nehmenButton, _gibButton,
 				_fuettereButton, _essenBodenButton, _essenTascheButton,
@@ -155,8 +144,8 @@ public class BefehlsPanel extends JPanel
 				_fuettereSchlechtButton, _fuettereUnbekanntButton,
 				_ablegenGutButton, _ablegenSchlechtButton,
 				_ablegenUnbekanntButton, _essenTascheGutButton,
-				_essenTascheSchlechtButton, _essenTascheUnbekanntButton};
-		_systemButtons = new JButton[] { _helpButton, _ladenButton, _quitButton };
+				_essenTascheSchlechtButton, _essenTascheUnbekanntButton };
+		_systemButtons = new JButton[] { _helpButton, _quitButton };
 
 		for(JButton b : _normalButtons)
 		{
@@ -179,14 +168,9 @@ public class BefehlsPanel extends JPanel
 			b.setSize(50, 50);
 			add(b);
 		}
-		
-		
-		
-		
-		
+
 		add(_labelFuerLebensenergie);
 		add(_beinstellenButton);
-		
 
 		addComponentListener(new ComponentAdapter()
 		{
@@ -237,11 +221,6 @@ public class BefehlsPanel extends JPanel
 						_fuettereSchlechtButton.getLocation().x
 								+ _fuettereSchlechtButton.getWidth() + 1,
 						(int) (_fuettereButton.getY() + buttonhoehe + 2));
-				
-				
-				
-				
-				
 
 				//rechte Spalte
 
@@ -281,20 +260,17 @@ public class BefehlsPanel extends JPanel
 				_helpButton.setLocation(_inventarButton.getX()
 						+ _inventarButton.getWidth() + 5, 5);
 
-				_ladenButton.setLocation(_inventarButton.getX()
+				_quitButton.setLocation(_inventarButton.getX()
 						+ _inventarButton.getWidth() + 5, _helpButton.getY()
 						+ _helpButton.getHeight() + 5);
 
-				_quitButton.setLocation(_inventarButton.getX()
-						+ _inventarButton.getWidth() + 5, _ladenButton.getY()
-						+ _ladenButton.getHeight() + 5);
-
 				_labelFuerLebensenergie.setSize(50,
-						BefehlsPanel.this.getHeight()-50);
+						BefehlsPanel.this.getHeight() - 50);
 				setLebensenergie(_lebensenergieAktuell);
-				
-				_beinstellenButton.setSize(50,50);
-				_beinstellenButton.setLocation(_labelFuerLebensenergie.getX(), _labelFuerLebensenergie.getHeight());
+
+				_beinstellenButton.setSize(50, 50);
+				_beinstellenButton.setLocation(_labelFuerLebensenergie.getX(),
+						_labelFuerLebensenergie.getHeight());
 
 			}
 
@@ -331,11 +307,6 @@ public class BefehlsPanel extends JPanel
 		return _essenBodenButton;
 	}
 
-	public JButton getLadenButton()
-	{
-		return _ladenButton;
-	}
-
 	public JButton getFuettereButton()
 	{
 		return _fuettereButton;
@@ -367,7 +338,7 @@ public class BefehlsPanel extends JPanel
 			GradientPaint gp = new GradientPaint(new Point2D.Double(0,
 					_labelFuerLebensenergie.getHeight() - balkenhoehe),
 					Color.red, new Point2D.Double(50,
-							_labelFuerLebensenergie.getHeight()), Color.blue);
+							_labelFuerLebensenergie.getHeight()), Color.GREEN);
 
 			Graphics2D g2d = (Graphics2D) lebensbalken.getGraphics();
 			g2d.setPaint(gp);
@@ -456,5 +427,4 @@ public class BefehlsPanel extends JPanel
 		return _beinstellenButton;
 	}
 
-	
 }

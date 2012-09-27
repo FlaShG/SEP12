@@ -14,30 +14,21 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
- * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
- * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
- * sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf jeden Fall
- * ausgebaut werden, damit es interessanter wird!
+ * Erstelle ein neues Spiel, bestehend aus Spielern und einer Spiellogik. 
+ * Spieler können an- und abgemeldet werden. Es werden alle weiteren Vorgänge 
+ * die zum Spielen nötig sind angestoßen und können auch wieder beendet werden. 
+ * Ein Spiel wird vom erzeugenden Server beobachtet.
  * 
- * Zum Spielen muss eine Instanz dieser Klasse erzeugt werden und an ihr die
- * Methode "spielen" aufgerufen werden.
- * 
- * Diese Instanz erzeugt und initialisiert alle anderen Objekte der Anwendung:
- * Sie legt alle Räume und einen Parser an und startet das Spiel. Sie wertet
- * auch die Befehle aus, die der Parser liefert, und sorgt für ihre Ausführung.
- * 
- * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
- * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
+ * @author 0ortmann
+ *
  */
 public class Spiel extends Observable
 {
-	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	//	private Map<Spieler, String> _nachrichtenMap;
@@ -65,10 +56,11 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAn(String name)
 	{
-		Spieler neuerSpieler = new Spieler(name, SpielLogik.START_ENERGIE,
-				new Inventar());
-		_spielerMap.put(name, neuerSpieler);
-		_logik.registriereSpieler(neuerSpieler);
+		if(!_spielerMap.containsKey(name))
+		{
+			Spieler spieler = _logik.erstelleNeuenSpieler(name);
+			_spielerMap.put(name, spieler);
+		}
 	}
 
 	/**
@@ -79,8 +71,11 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAb(String name)
 	{
-		_logik.meldeSpielerAb(name);
-		_spielerMap.remove(name);
+		if(_spielerMap.containsKey(name))
+		{
+			_logik.meldeSpielerAb(name);
+			_spielerMap.remove(name);
+		}
 	}
 
 	/**
@@ -109,20 +104,12 @@ public class Spiel extends Observable
 		{
 			_logik.getKontext().schreibeAnSpieler(spieler,
 					TextVerwalter.EINLEITUNGSTEXT);
-		}
-	}
+			String raumNachricht = _logik.getKontext()
+					.getAktuellenRaumZu(spieler).getBeschreibung();
+			_logik.getKontext().schreibeAnSpieler(spieler, raumNachricht);
 
-	/**
-	 * Übergib dem Spieler spieler eine nachricht als String
-	 * 
-	 * @param spieler
-	 *            der Spieler für den die Nachricht ist
-	 * @param nachricht
-	 *            die Nachricht für den Spieler
-	 */
-	public void setNachrichtFuer(Spieler spieler, String nachricht)
-	{
-		_logik.getKontext().schreibeAnSpieler(spieler, nachricht);
+		}
+
 	}
 
 	/**
@@ -137,14 +124,21 @@ public class Spiel extends Observable
 		System.err.println(benutzerName + ": " + eingabe);
 
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
+		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 
-		if(!spieler.lebendig())
+		if(eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
 		{
-			// TODO: Spieler tod, was tun?
+			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(
+					_logik.getKontext(), spieler, befehlszeile);
 			return;
 		}
 
-		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
+		// Spieler von der Karte entfernt?
+		if(spieler == null)
+		{
+			return;
+		}
+
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
 
 		if(befehl != null)
@@ -160,7 +154,7 @@ public class Spiel extends Observable
 			Raum neuerRaum = _logik.getKontext().getAktuellenRaumZu(spieler);
 
 			// Wenn der Befehl erfolgreich ausgeführt wurde, rufe die Listener auf.
-			if(result && spieler.lebendig())
+			if(result)
 				_logik.fuehreBefehlAusgefuehrtListenerAus(spieler, befehl,
 						alterRaum != neuerRaum);
 
@@ -168,18 +162,23 @@ public class Spiel extends Observable
 			{
 				String richtung = ((BefehlSchauen) befehl)
 						.extrahiereRichtung(befehlszeile);
-				if (alterRaum.getAusgang(richtung) != null)
+				if(alterRaum.getAusgang(richtung) != null)
 				{
-					String[] ar = {
-							spieler.getName(),
-							richtung };
+					String[] ar = { spieler.getName(), richtung };
 					setChanged();
 					notifyObservers(ar);
 				}
 			}
+
+			// Entferne tote Spieler von Landkarte
+			if(!spieler.lebendig())
+			{
+				_logik.getKontext().entferneSpieler(spieler);
+			}
 		}
 		else
-			setNachrichtFuer(spieler, TextVerwalter.FALSCHEEINGABE);
+			_logik.getKontext().schreibeAnSpieler(spieler,
+					TextVerwalter.FALSCHEEINGABE);
 	}
 
 	/**
@@ -187,7 +186,7 @@ public class Spiel extends Observable
 	 * 
 	 * @param level
 	 */
-	protected void restart(String level)
+	protected void restart()
 	{
 		_logik.beendeSpiel();
 		spielen();
@@ -202,7 +201,7 @@ public class Spiel extends Observable
 	public ClientPaket packePaket(String name)
 	{
 		Spieler spieler = _spielerMap.get(name); //hole den Spieler mit dem namen
-		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nacricht für den spieler
+		String nachricht = _logik.getKontext().getNachrichtFuer(spieler); // hole die nachricht für den spieler
 		return new ClientPaket(_logik.getKontext(), spieler, nachricht); //packe
 
 	}
@@ -269,7 +268,8 @@ public class Spiel extends Observable
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, ONE_SECOND, ONE_SECOND);
+			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND,
+					SpielKonstanten.ONE_SECOND);
 		}
 		_gestartet = gestartet;
 	}

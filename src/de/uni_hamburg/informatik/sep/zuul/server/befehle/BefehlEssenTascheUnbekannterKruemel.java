@@ -26,8 +26,7 @@ class BefehlEssenTascheUnbekannterKruemel extends BefehlEssenTasche
 	public void gibFehlerAus(ServerKontext kontext, Spieler spieler,
 			Befehlszeile befehlszeile)
 	{
-		kontext.schreibeAnSpieler(spieler,
-				TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEIN_KUCHEN_DIESER_ART);
 	}
 
 	@Override

@@ -40,27 +40,30 @@ public class ClientPaket implements Remote, Serializable
 	{
 		_dead = !spieler.lebendig();
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-		if(!spieler.lebendig())
+		if(_dead)
 		{
 			// TODO: win / lose screen
 			_showWinScreen = spieler.hatGewonnen();
 			_showLoseScreen = !_showWinScreen;
 			_moeglicheAusgaenge = new ArrayList<String>();
+			_items = new ArrayList<Item>();
+			_andereSpieler = new ArrayList<String>();
+			_raumArt = RaumArt.Normal;
 		}
 		else
 		{
 			_moeglicheAusgaenge = Arrays.asList(aktuellerRaum
 					.getMoeglicheAusgaenge());
+			_raumID = aktuellerRaum.getId();
+			_katze = aktuellerRaum.hasKatze();
+			_maus = aktuellerRaum.hasMaus();
+			_items = new ArrayList<Item>(aktuellerRaum.getItems());
+			_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
+			_raumArt = aktuellerRaum.getRaumart();
 		}
 
-		_raumID = aktuellerRaum.getId();
-		_katze = aktuellerRaum.hasKatze();
-		_maus = aktuellerRaum.hasMaus();
-		_items = new ArrayList<Item>(aktuellerRaum.getItems());
 		_nachricht = nachricht;
 		_lebensEnergie = spieler.getLebensEnergie();
-		_andereSpieler = kontext.getSpielerNamenInRaum(aktuellerRaum);
-		_raumArt = aktuellerRaum.getRaumart();
 		_spielerName = spieler.getName();
 
 		_verfuegbareBefehle = new HashMap<String, Boolean>();

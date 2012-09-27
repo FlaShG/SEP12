@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
@@ -21,7 +21,7 @@ public class BefehlFuettereUnbekanntenKruemelTest
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("fütter");
+	Befehlszeile nurfutter = new Befehlszeile("füttere");
 	Inventar inventar = new Inventar();
 	Katze katze;
 

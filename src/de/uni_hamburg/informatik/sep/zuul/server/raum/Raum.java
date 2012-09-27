@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 
 /**
@@ -341,5 +341,13 @@ public class Raum
 	{
 		_x = x;
 		_y = y;
+	}
+
+	/**
+	 * Löscht alle Verbindungen zu anderen Räumen.
+	 */
+	public void loescheVerbindungen()
+	{
+		_ausgaenge.clear();
 	}
 }

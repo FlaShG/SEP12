@@ -19,15 +19,15 @@ public final class BefehlFactory
 				new BefehlNehmen(), new BefehlEssenBoden(),
 				new BefehlEssenTasche(), new BefehlEssenTascheGuterKruemel(),
 				new BefehlEssenTascheSchlechterKruemel(),
-				new BefehlEssenTascheUnbekannterKruemel(),
-				new BefehlBeenden(), new BefehlUntersuche(),
-				new BefehlInventarAnzeigen(), new BefehlFuettere(),
-				new BefehlFuettereSchlechterKruemel(),
+				new BefehlEssenTascheUnbekannterKruemel(), new BefehlBeenden(),
+				new BefehlUntersuche(), new BefehlInventarAnzeigen(),
+				new BefehlFuettere(), new BefehlFuettereSchlechterKruemel(),
 				new BefehlFuettereGuterKruemel(),
 				new BefehlFuettereUnbekanntenKruemel(), new BefehlAblegen(),
 				new BefehlAblegenKruemel(), new BefehlAblegenGuterKruemel(),
 				new BefehlAblegenSchlechterKruemel(), new BefehlSchauen(),
-				new BefehlGibMirMehrLeben(), new BeinStellen(), new BefehlDebug() };
+				new BefehlGibMirMehrLeben(), new BeinStellen(),
+				new BefehlDebug() };
 
 		_map = new HashMap<String, Befehl>();
 		for(Befehl befehl : befehle)

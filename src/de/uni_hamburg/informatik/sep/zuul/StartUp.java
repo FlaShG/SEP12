@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
@@ -17,43 +16,30 @@ public class StartUp
 {
 	static StartUp startUp;
 	static Runnable runnable;
+	static String[] _param;
 	protected Client _client;
 	protected Server _server;
-	
+
 	public static void main(final String args[]) throws RemoteException,
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
+		_param = args;
+
 		runnable = new Runnable()
 		{
-			
 			@Override
 			public void run()
 			{
+
 				if(args.length == 1 && args[0].equals("console"))
 				{
 					try
 					{
 						startUp = new StartConsole();
 					}
-					catch(RemoteException e)
+					catch(Exception e)
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(MalformedURLException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(AlreadyBoundException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(NotBoundException e)
-					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -61,33 +47,58 @@ public class StartUp
 				{
 					startUp = new StartFenster();
 				}
-				
+
 			}
 		};
-		runnable.run();
+		tryToRun();
 	}
-	
-	public static void restart()
-	{
 
-		// TODO shutdown server
+	/**
+	 * 
+	 */
+	static void tryToRun()
+	{
 		try
 		{
-			startUp._client.logout();
-			
-			//startUp._server.logoutClient(startUp._client.getClientName());
+			runnable.run();
 		}
-		catch(RemoteException e)
+		catch(Exception exception)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			exception.printStackTrace();
+			System.exit(-1);
+		}
+	}
+
+	public static void restart(boolean ausloggen)
+	{
+
+		if(ausloggen)
+		{
+			try
+			{
+				startUp._client.logout();
+			}
+			catch(RemoteException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		startUp._server = null;
-		startUp._client.serverBeendet();
 		startUp._client = null;
+		startUp = null;
+		
 		System.gc();
-		KeyboardFocusManager.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
-		runnable.run();
+		KeyboardFocusManager
+				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
+
+		try
+		{
+			StartUp.main(StartUp._param);
+		}
+		catch(NumberFormatException | RemoteException | MalformedURLException
+				| AlreadyBoundException | NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
-	
 }

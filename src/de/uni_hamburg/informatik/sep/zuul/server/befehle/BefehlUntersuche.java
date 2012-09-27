@@ -61,7 +61,7 @@ final class BefehlUntersuche implements Befehl
 	@Override
 	public String getHilfe()
 	{
-		return TextVerwalter.HILFE_GIVE;
+		return TextVerwalter.HILFE_UNTERSUCHE;
 	}
 
 }
