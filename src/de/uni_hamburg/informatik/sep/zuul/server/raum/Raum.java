@@ -13,8 +13,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import de.uni_hamburg.informatik.sep.zuul.editor.SpeicherWerkzeug;
 import de.uni_hamburg.informatik.sep.zuul.editor.VerbindungsWerkzeug;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 
 /**
