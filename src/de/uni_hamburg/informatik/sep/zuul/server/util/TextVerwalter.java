@@ -13,14 +13,14 @@ public final class TextVerwalter
 	{
 	}
 
-	public static final String LYRISCHEREINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteurspiel mit Dr. Little.\n\nNach einem fatalen Unfall in seinem Chemielabor ist der Wissenschaftler Dr. Little dazu verdammt, in geringer Körpergröße eine Lösung seines Dilemmas zu finden. Er weiß, dass sein Kollege Prof. Dr. Evenbigger bei seinen Forschungen über das Verhalten von Sonnenblumen unter Aussetzung von Beta-Strahlung zufälligerweise auf ein Mittel gestoßen ist, mithilfe dessen Dr. Little seine normale Größe zurückerlangen könnte."
+	public static final String LYRISCHEREINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteuerspiel mit Dr. Little.\n\nNach einem fatalen Unfall in seinem Chemielabor ist der Wissenschaftler Dr. Little dazu verdammt, in geringer Körpergröße eine Lösung seines Dilemmas zu finden. Er weiß, dass sein Kollege Prof. Dr. Evenbigger bei seinen Forschungen über das Verhalten von Sonnenblumen unter Aussetzung von Beta-Strahlung zufälligerweise auf ein Mittel gestoßen ist, mithilfe dessen Dr. Little seine normale Größe zurückerlangen könnte."
 			+ "\nProf. Dr. Evenbiggers Labor befindet sich jedoch auf der anderen Seite des Universitätscampus und in Dr. Littles aktueller körperlichen Verfassung stellt die Reise eine große Herausforderung für ihn dar. Er muss sich nun mit seiner mäßigen Orientierung das Labor des Professors finden."
 			+ "\nIhnen obliegt die Verantwortung, Dr. Little sicher durch das Labyrinth von Räumen zu seinem Ziel zu bringen."
 			+ "\nDabei besteht aber noch ein Problem: Dr. Little leidet stark unter dem Einfluss seines fehlgeschlagenen Experiments und die körperliche Anstrengung des Durchreisens der Räume setzt so zu, dass er nach 8 Räumen ohne Nahrungsaufnahme den qualvollen Tod erwarten muss."
 			+ "\nDoch zum Glück haben unachtsame Studenten Kuchenkrümel in verschiedenen Teilen des Campus liegengelassen. Wenn es Dr. Little gelingt, einige davon zu erwischen, so verbessert sich sein Gesundheitszustand, sodass er weitere Räume durchqueren kann."
 			+ "\n\nSo starten Sie nun furchtlos in ein spannendes Abenteuer und retten Sie den Doktor vor seinem Verderben.";
 
-	public static final String EINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteurspiel mit Dr. Little."
+	public static final String EINLEITUNGSTEXT = "Willkommen zu Zuul, dem Abenteuerspiel mit Dr. Little."
 			+ "\n\nNach einem fatalen Unfall in seinem Chemielabor ist der Wissenschaftler Dr. Little geschrumpft. Er weiß, dass sein Kollege Prof. Dr. Evenbigger bei seinen Forschungen über das Verhalten von Sonnenblumen unter Aussetzung von Beta-Strahlung zufälligerweise auf ein Mittel gestoßen ist, mithilfe dessen Dr. Little seine normale Größe zurückerlangen könnte."
 			+ "\nProf. Dr. Evenbiggers Labor befindet sich jedoch auf der anderen Seite des Universitätscampus und in Dr. Littles aktueller körperlichen Verfassung stellt die Reise eine große Herausforderung für ihn dar. Er muss sich nun mit seiner mäßigen Orientierung das Labor des Professors finden."
 			+ "\nIhnen obliegt die Verantwortung, Dr. Little sicher durch das Labyrinth von Räumen zu seinem Ziel zu bringen."
