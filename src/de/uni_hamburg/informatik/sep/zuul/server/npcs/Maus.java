@@ -35,27 +35,27 @@ public class Maus
 			}
 		};
 
-		return PathFinder
-				.getRichtung(_pathFinder.findPath(_aktuellerRaum));
+		return PathFinder.getRichtung(_pathFinder.findPath(_aktuellerRaum));
 	}
 
 	public void wirdVonKatzeVerjagt(ServerKontext kontext)
 	{
-		// TODO: Better selection of rooms ( No start and end point, ... )
 		ArrayList<Raum> moeglicheRaeumeFuerMaus = _aktuellerRaum.getAusgaenge();
-		
-		Raum neuerRaumFuerMaus = Katze.selectRaumOhneKatze(moeglicheRaeumeFuerMaus);
-		
+
+		// TODO: Better selection of rooms ( No start and end point, ... )
+		Raum neuerRaumFuerMaus = Katze
+				.selectRaumOhneKatze(moeglicheRaeumeFuerMaus);
+
 		_aktuellerRaum.setMaus(null);
 		if(neuerRaumFuerMaus == null)
 			return;
-			
+
 		_aktuellerRaum = neuerRaumFuerMaus;
 		neuerRaumFuerMaus.setMaus(this);
-	
+
 		if(kontext != null)
 			kontext.schreibeAnAlleSpielerInRaum(_aktuellerRaum,
-				TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
+					TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
 	}
 
 }

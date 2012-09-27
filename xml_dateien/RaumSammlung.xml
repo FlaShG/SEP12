@@ -585,4 +585,22 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
         <beschreibung></beschreibung>
         <raumart>Ende</raumart>
     </raum>
+    <raum>
+        <name></name>
+        <id>-319916899</id>
+        <beschreibung></beschreibung>
+        <raumart>Start</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-1471822741</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>1030631242</id>
+        <beschreibung></beschreibung>
+        <raumart>Ende</raumart>
+    </raum>
 </raumsammlung>
