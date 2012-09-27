@@ -113,7 +113,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			}
 
 			result = true;
-			System.out.println("eingeloggt");
+			System.err.println("eingeloggt");
 		}
 
 		return result;
@@ -133,10 +133,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			{
 				client.serverBeendet();
 			}
-
-		}
-		if(_connectedClients.isEmpty())
 			beendeServer();
+		}
+		//if(_connectedClients.isEmpty())
+		//	beendeServer();
 
 		return true;
 	}

@@ -16,7 +16,8 @@ public class EigenschaftBooleanPanel extends EigenschaftsPanel
 	private boolean _wert;
 
 	/**
-	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung und Startwert.
+	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung und
+	 * Startwert.
 	 */
 	public EigenschaftBooleanPanel(String beschriftung, boolean startwert)
 	{
@@ -24,8 +25,12 @@ public class EigenschaftBooleanPanel extends EigenschaftsPanel
 	}
 
 	/**
-	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung, Startwert und Beobachter.
-	 * @param beobachter {@link EditorBeobachter}, der über Änderungen dieses Elements informiert werden soll.
+	 * Erstellt ein neues {@link EigenschaftBooleanPanel} mit Beschriftung,
+	 * Startwert und Beobachter.
+	 * 
+	 * @param beobachter
+	 *            {@link EditorBeobachter}, der über Änderungen dieses Elements
+	 *            informiert werden soll.
 	 */
 	public EigenschaftBooleanPanel(String beschriftung, boolean startwert,
 			EditorBeobachter beobachter)

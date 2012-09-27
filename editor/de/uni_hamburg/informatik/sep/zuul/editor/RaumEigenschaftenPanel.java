@@ -25,8 +25,11 @@ public class RaumEigenschaftenPanel extends JPanel
 	 * Erzeugt ein neues Panel zum Einstellen der Eigenschaften des übergebenen
 	 * {@link Raum}es.
 	 * 
-	 * @param raum der {@link Raum}, der bearbeitet werden soll.
-	 * @param beobachter der {@link EditorBeobachter}, der über Änderungen informiert werden will.
+	 * @param raum
+	 *            der {@link Raum}, der bearbeitet werden soll.
+	 * @param beobachter
+	 *            der {@link EditorBeobachter}, der über Änderungen informiert
+	 *            werden will.
 	 * 
 	 * @require raum != null
 	 */
@@ -65,8 +68,8 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt die Anzahl der im {@link Raum} vorhandenen Kuchen zurück, die eingestellt
-	 * wurde.
+	 * Gibt die Anzahl der im {@link Raum} vorhandenen Kuchen zurück, die
+	 * eingestellt wurde.
 	 */
 	public int getKuchenzahl()
 	{
@@ -74,8 +77,8 @@ public class RaumEigenschaftenPanel extends JPanel
 	}
 
 	/**
-	 * Gibt die Anzahl der im {@link Raum} vorhandenen giftigen Kuchen zurück, die
-	 * eingestellt wurde.
+	 * Gibt die Anzahl der im {@link Raum} vorhandenen giftigen Kuchen zurück,
+	 * die eingestellt wurde.
 	 */
 	public int getGiftkuchenzahl()
 	{

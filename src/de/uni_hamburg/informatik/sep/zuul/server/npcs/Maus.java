@@ -30,7 +30,8 @@ public class Maus
 			}
 		};
 
-		return PathFinder.getRichtung(_pathFinder.findPath(_aktuellerRaum));
+		return PathFinder
+				.getRichtung(_pathFinder.findPath(_aktuellerRaum));
 	}
 
 	public Raum getAktuellerRaum()

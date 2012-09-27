@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
+
 /**
  * Zentraler Speicher der Ausgabetexte, sowie der Befehls- und Richtungstexte.
  * 
@@ -164,6 +165,8 @@ public final class TextVerwalter
 	public static final String BEINSTELLEN_GEFALLEN_INAKTIV = " liegt am Boden und kann sich vor Schmerzen nicht bewegen.";
 
 	public static final String DAISTKEINRAUM = "In dieser Richtung ist keine Tür.";
+
+	public static final String EDITOR_TITEL = "Zuul Editor";
 
 	public static final String beinstellenAnderemSpieler(String spielername)
 	{

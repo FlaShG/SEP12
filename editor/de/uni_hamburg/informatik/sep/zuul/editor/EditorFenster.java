@@ -40,8 +40,8 @@ public class EditorFenster implements EditorBeobachter
 		_leveldaten = new EditorLevel();
 		_ui = new EditorFensterUI(this);
 
-		_speicherWerkzeug = new SpeicherWerkzeug(this);
-		_ladenWerkzeug = new LadenWerkzeug(this);
+		_speicherWerkzeug = new SpeicherWerkzeug(_leveldaten, _ui);
+		_ladenWerkzeug = new LadenWerkzeug();
 
 		resetEditorFenster(8, 8);
 	}
@@ -80,7 +80,8 @@ public class EditorFenster implements EditorBeobachter
 					{
 						if(_speicherWerkzeug.valide())
 						{
-							String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser(true));
+							String str = FileChooser.speichereDatei(FileChooser
+									.konfiguriereFileChooser(true));
 							if(str != null)
 							{
 								_speicherWerkzeug.speichern(str);
@@ -91,7 +92,8 @@ public class EditorFenster implements EditorBeobachter
 						{
 							JOptionPane.showMessageDialog(new JPanel(),
 									EditorTextVerwalter.UNGUELTIGES_LEVEL_TEXT,
-									EditorTextVerwalter.UNGUELTIGES_LEVEL, JOptionPane.ERROR_MESSAGE);
+									EditorTextVerwalter.UNGUELTIGES_LEVEL,
+									JOptionPane.ERROR_MESSAGE);
 						}
 						
 						//TODO: debugging, raus machen
@@ -113,18 +115,23 @@ public class EditorFenster implements EditorBeobachter
 					public void actionPerformed(ActionEvent e)
 					{
 						if(!_unsavedChanges
-								|| BestaetigungsDialog
-										.erstelle(
-												EditorTextVerwalter.LEVEL_LADEN,
-												EditorTextVerwalter.LEVEL_LADEN_CHECK))
+								|| BestaetigungsDialog.erstelle(
+										EditorTextVerwalter.LEVEL_LADEN,
+										EditorTextVerwalter.LEVEL_LADEN_CHECK))
 						{
-							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser(false));
+							String str = FileChooser.oeffneDatei(FileChooser
+									.konfiguriereFileChooser(false));
 							if(str != null && !str.equals(""))
 							{
 								resetEditorFenster(1, 1);
 								//markiert auch, dass geladen wird
 								_leveldaten = null;
 								_ladenWerkzeug.lade(str);
+
+								getUI().setMap(_ladenWerkzeug.getMap());
+								setEditorLevel(_ladenWerkzeug.getManager()
+										.getEditorLevel());
+
 								unsavedChanges(false);
 							}
 						}
@@ -137,10 +144,9 @@ public class EditorFenster implements EditorBeobachter
 			public void actionPerformed(ActionEvent e)
 			{
 				if(!_unsavedChanges
-						|| BestaetigungsDialog
-								.erstelle(
-										EditorTextVerwalter.NEUES_LEVEL,
-										EditorTextVerwalter.NEUES_LEVEL_CHECK))
+						|| BestaetigungsDialog.erstelle(
+								EditorTextVerwalter.NEUES_LEVEL,
+								EditorTextVerwalter.NEUES_LEVEL_CHECK))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
 					if(!mapsize.getClickedOK())
@@ -168,7 +174,8 @@ public class EditorFenster implements EditorBeobachter
 										mapsize.getBreite(), mapsize.getHoehe());
 						if(!problematisch
 								|| BestaetigungsDialog
-										.erstelle(EditorTextVerwalter.KARTENGROESSE_AENDERN,
+										.erstelle(
+												EditorTextVerwalter.KARTENGROESSE_AENDERN,
 												EditorTextVerwalter.KARTENGROESSE_AENDERN_CHECK))
 						{
 							_ui.getMap().setGroesse(mapsize.getBreite(),
@@ -186,10 +193,9 @@ public class EditorFenster implements EditorBeobachter
 			public void windowClosing(WindowEvent arg0)
 			{
 				if(!_unsavedChanges
-						|| BestaetigungsDialog
-								.erstelle(
-										EditorTextVerwalter.EDITOR_BEENDEN,
-										EditorTextVerwalter.EDITOR_BEENDEN_CHECK))
+						|| BestaetigungsDialog.erstelle(
+								EditorTextVerwalter.EDITOR_BEENDEN,
+								EditorTextVerwalter.EDITOR_BEENDEN_CHECK))
 				{
 					System.exit(0);
 				}
@@ -276,7 +282,7 @@ public class EditorFenster implements EditorBeobachter
 			raum.setItems(items);
 
 			raum.setBescheibung(bearbeitenPanel.getBeschreibung().getText());
-			
+
 			_ui.getMap().getAktivenButton().setAusgewaehlt(true);
 		}
 
@@ -341,7 +347,8 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
-				EditorTextVerwalter.EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+				EditorTextVerwalter.EDITOR_TITEL
+						+ (yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 
 	private String randomHilfetext()

@@ -1,4 +1,3 @@
-
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
@@ -19,16 +18,16 @@ public class BefehlLaden implements Befehl
 			Befehlszeile befehlszeile)
 	{
 		//TODO Level laden
-		if(befehlszeile.getGeparsteZeile().size() == 1)
-		{
-
-//			String level = FileChooser.oeffneDatei();
-			//Spiel.getInstance().spielen(level);
-		}
-		else
-		{
-			String level = befehlszeile.getGeparsteZeile().get(1);
-		}
+		//		if(befehlszeile.getGeparsteZeile().size() == 1)
+		//		{
+		//
+		//			//			String level = FileChooser.oeffneDatei();
+		//			//Spiel.getInstance().spielen(level);
+		//		}
+		//		else
+		//		{
+		//			String level = befehlszeile.getGeparsteZeile().get(1);
+		//		}
 		return true;
 	}
 

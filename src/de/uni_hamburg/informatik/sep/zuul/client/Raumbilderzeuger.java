@@ -91,7 +91,6 @@ class Raumbilderzeuger
 		_verfuegbareFarben.add(Color.CYAN);
 		_verfuegbareFarben.add(Color.DARK_GRAY);
 		_verfuegbareFarben.add(Color.LIGHT_GRAY);
-		
 
 	}
 
@@ -127,21 +126,18 @@ class Raumbilderzeuger
 		Point position = new Point(0, 0);
 		int x = 0;
 		int y = 0;
-		
-		
+
 		if(_erstespaket)
 		{
 			List<String> spieler = _paket.getAndereSpieler();
 			Collections.sort(spieler);
-			
+
 			for(String s : spieler)
 			{
 				_spielerfarben.put(s, getUnverbrauchteFarbe());
 			}
 			_erstespaket = false;
 		}
-		
-		
 
 		RaumArt raumArt = _paket.getRaumArt();
 		switch (raumArt)
@@ -218,8 +214,6 @@ class Raumbilderzeuger
 					.equals(_paket.getSpielerName()))
 			{
 
-				
-
 				if(_drlittlepositionen.size() != 0)
 				{
 					position = entryPicker.pick(_drlittlepositionen);
@@ -245,8 +239,8 @@ class Raumbilderzeuger
 			position = entryPicker.pickAndRemoveFromList(_mauspositionen);
 
 			if(position == null)
-				;
-			position = new Point(70, 70);
+				position = new Point(70, 70);
+
 			x = position.x;
 			y = position.y;
 

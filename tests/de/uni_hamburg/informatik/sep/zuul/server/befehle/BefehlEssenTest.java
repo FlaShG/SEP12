@@ -20,20 +20,20 @@ public class BefehlEssenTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spielerleeresInventar = new Spieler("keininventar");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("essen");
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("essen");
 
 	@Before
 	public void setUp() throws Exception
 	{
-		
+
 	}
 
 	@Test
 	public void testAusfuehren()
 	{
-      assertFalse(essen.ausfuehren(kontext, spieler, befehlszeile));
+		assertFalse(essen.ausfuehren(kontext, spieler, befehlszeile));
 	}
 
 	@Test
@@ -41,25 +41,28 @@ public class BefehlEssenTest
 	{
 		assertEquals(TextVerwalter.BEFEHL_ESSEN, essen.getBefehlsnamen()[0]);
 	}
-	
+
 	@Test
 	public void testGetHilfe()
 	{
 		assertEquals(TextVerwalter.HILFE_EAT, essen.getHilfe());
-		
+
 	}
+
 	@Test
 	public void testGibFehlerAus()
 	{
 		essen.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.KEINORT, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.KEINORT.length()));
+		assertEquals(TextVerwalter.KEINORT, kontext.getNachrichtFuer(spieler)
+				.substring(0, TextVerwalter.KEINORT.length()));
 	}
-	
+
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-		
-		assertFalse(essen.vorbedingungErfuellt(kontext, spielerleeresInventar, befehlszeile));
+
+		assertFalse(essen.vorbedingungErfuellt(kontext, spielerleeresInventar,
+				befehlszeile));
 	}
 
 }

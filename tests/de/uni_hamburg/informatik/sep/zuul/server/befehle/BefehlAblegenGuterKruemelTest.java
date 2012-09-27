@@ -27,7 +27,7 @@ public class BefehlAblegenGuterKruemelTest
 
 	@Before
 	public void setUp() throws Exception
-	
+
 	{
 		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raum);

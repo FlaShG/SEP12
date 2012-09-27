@@ -33,7 +33,7 @@ final class BefehlBeenden implements Befehl
 			@Override
 			public void run()
 			{
-				StartUp.restart();
+				StartUp.restart(true);
 			}
 		});
 

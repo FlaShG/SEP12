@@ -13,8 +13,8 @@ public class RaumStrukturParserTest
 	@Test
 	public void testValidiere()
 	{
-		assertTrue(RaumStrukturParser
-				.validiere("./level/testStruktur."+FileChooser.ZUUL_ENDUNG));
+		assertTrue(RaumStrukturParser.validiere("./level/testStruktur."
+				+ FileChooser.ZUUL_ENDUNG));
 		assertFalse(RaumStrukturParser
 				.validiere("./xml_dateien/RaumSammlung.xml"));
 	}

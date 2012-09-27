@@ -28,9 +28,9 @@ public class BefehlszeileTest
 	@Test
 	public void testJoin()
 	{
-		assertEquals("schwupp wupp", befehlszeile.join(stringlist));
+		assertEquals("schwupp wupp", Befehlszeile.join(stringlist));
 		List<String> stringlist1 = new ArrayList<String>();
-		assertEquals("", befehlszeile.join(stringlist1));
+		assertEquals("", Befehlszeile.join(stringlist1));
 	}
 
 	@Test

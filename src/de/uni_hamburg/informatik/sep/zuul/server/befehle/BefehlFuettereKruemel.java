@@ -5,7 +5,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettereKruemel extends BefehlFuettere
+class BefehlFuettereKruemel extends BefehlFuettere
 {
 
 	@Override

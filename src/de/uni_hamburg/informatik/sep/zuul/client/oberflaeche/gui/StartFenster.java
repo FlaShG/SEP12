@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import de.uni_hamburg.informatik.sep.zuul.EditorStartup;
@@ -155,9 +154,9 @@ public class StartFenster extends StartUp
 				JFileChooser chooser;
 				chooser = FileChooser.konfiguriereFileChooser(false);
 				String fcString = FileChooser.oeffneDatei(chooser);
-				if (fcString == null)
+				if(fcString == null)
 					return;
-				
+
 				SpielLogik._levelPfad = fcString;
 				String name;
 				if(modus)
