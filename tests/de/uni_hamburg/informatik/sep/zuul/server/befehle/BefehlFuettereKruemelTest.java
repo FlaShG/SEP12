@@ -75,7 +75,7 @@ public class BefehlFuettereKruemelTest
 		assertFalse(futterK.ausfuehren(kontext, spieler, nurfutter));
 		raumC.setKatze(null);
 		raumC.setMaus(maus);
-		spieler.setInventar(inventar);
+		spieler.setInventar(inventar2);
 		assertTrue(futterK.ausfuehren(kontext, spieler, nurfutter));
 	}
 
@@ -100,8 +100,8 @@ public class BefehlFuettereKruemelTest
 						TextVerwalter.RICHTUNG_OSTEN) + "\n",
 				kontext.getNachrichtFuer(spieler));
 
-		//TODO Unnötige Abfrage wird schon vorher abgefragt.
-		//Inventart kein Inhalt... der Text wird nicht ausgegeben das Inventar leer ist.
+		//		TODO Unnötige Abfrage wird schon vorher abgefragt.
+		//		Inventart kein Inhalt... der Text wird nicht ausgegeben das Inventar leer ist.
 		//		spieler.setInventar(inventar3);
 		//		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
 		//				kontext.getNachrichtFuer(spieler));
