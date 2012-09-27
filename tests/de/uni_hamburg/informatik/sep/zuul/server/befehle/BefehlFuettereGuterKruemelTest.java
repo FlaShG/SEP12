@@ -21,7 +21,7 @@ public class BefehlFuettereGuterKruemelTest
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("fütter");
+	Befehlszeile nurfutter = new Befehlszeile("füttere guter krümel");
 	Inventar inventar = new Inventar();
 	Inventar inventar2 = new Inventar();
 	Inventar inventar3 = new Inventar();
