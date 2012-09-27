@@ -72,7 +72,6 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 	}
 
-	@Override
 	public void logout() throws RemoteException
 	{
 		if(!_server.logoutClient(_clientName))
