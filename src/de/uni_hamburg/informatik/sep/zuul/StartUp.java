@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 
 import de.uni_hamburg.informatik.sep.zuul.client.Client;
 import de.uni_hamburg.informatik.sep.zuul.client.StartConsole;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.StartFenster;
 import de.uni_hamburg.informatik.sep.zuul.server.Server;
 
@@ -36,24 +35,8 @@ public class StartUp
 					{
 						startUp = new StartConsole();
 					}
-					catch(RemoteException e)
+					catch(Exception e)
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(MalformedURLException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(AlreadyBoundException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					catch(NotBoundException e)
-					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -64,7 +47,23 @@ public class StartUp
 
 			}
 		};
-		runnable.run();
+		tryToRun();
+	}
+
+	/**
+	 * 
+	 */
+	static void tryToRun()
+	{
+		try
+		{
+			runnable.run();
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
 	public static void restart()
@@ -73,7 +72,7 @@ public class StartUp
 		try
 		{
 			startUp._client.logout();
-			
+
 			//startUp._server.logoutClient(startUp._client.getClientName());
 		}
 		catch(RemoteException e)
@@ -81,13 +80,13 @@ public class StartUp
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		startUp._server = null;
 		startUp._client.serverBeendet();
 		startUp._client = null;
 		System.gc();
 		KeyboardFocusManager
 				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
-		runnable.run();
+		tryToRun();
 	}
 }

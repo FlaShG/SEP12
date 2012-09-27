@@ -15,13 +15,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class BefehlFuettereSchlechterKruemelTest
+public class BefehlFuettereGuterKruemelTest
 {
-	BefehlFuettereSchlechterKruemel futterSK = new BefehlFuettereSchlechterKruemel();
+	BefehlFuettereGuterKruemel futterGK = new BefehlFuettereGuterKruemel();
 	Raum raumC = new Raum("Center", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("füttere schlechter krümel");
+	Befehlszeile nurfutter = new Befehlszeile("fütter");
 	Inventar inventar = new Inventar();
 	Inventar inventar2 = new Inventar();
 	Inventar inventar3 = new Inventar();
@@ -30,11 +30,9 @@ public class BefehlFuettereSchlechterKruemelTest
 	@Before
 	public void setUp() throws Exception
 	{
-		inventar.fuegeItemHinzu(Item.IKuchen);
 		inventar.fuegeItemHinzu(Item.UKuchen);
 		inventar.fuegeItemHinzu(Item.UGiftkuchen);
-		inventar.fuegeItemHinzu(Item.UKuchen);
-		inventar2.fuegeItemHinzu(Item.IGiftkuchen);
+		inventar2.fuegeItemHinzu(Item.IKuchen);
 		spieler.setInventar(inventar);
 		katze = new Katze(raumC);
 		raumC.setKatze(katze);
@@ -45,28 +43,27 @@ public class BefehlFuettereSchlechterKruemelTest
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-		assertFalse(futterSK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterGK.vorbedingungErfuellt(kontext, spieler, nurfutter));
 		spieler.setInventar(inventar3);
-		assertFalse(futterSK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterGK.vorbedingungErfuellt(kontext, spieler, nurfutter));
 	}
 
 	@Test
 	public void testAusfuehren()
 	{
-		spieler.setInventar(inventar2);
-		assertTrue(futterSK.ausfuehren(kontext, spieler, nurfutter));
+		assertTrue(futterGK.ausfuehren(kontext, spieler, nurfutter));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
-		futterSK.gibFehlerAus(kontext, spieler, nurfutter);
+		futterGK.gibFehlerAus(kontext, spieler, nurfutter);
 		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
 				kontext.getNachrichtFuer(spieler));
 		spieler.setInventar(inventar2);
-		futterSK.ausfuehren(kontext, spieler, nurfutter);
-		futterSK.gibFehlerAus(kontext, spieler, nurfutter);
-		assertEquals(TextVerwalter.KATZE_STIRBT + "\n"
+		futterGK.ausfuehren(kontext, spieler, nurfutter);
+		futterGK.gibFehlerAus(kontext, spieler, nurfutter);
+		assertEquals(TextVerwalter.KATZE_IST_SATT_GEWORDEN + "\n"
 				+ TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
 				kontext.getNachrichtFuer(spieler));
 	}
@@ -74,8 +71,8 @@ public class BefehlFuettereSchlechterKruemelTest
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals(TextVerwalter.BEFEHL_FUETTERE_SCHLECHT,
-				futterSK.getBefehlsnamen()[0]);
+		assertEquals(TextVerwalter.BEFEHL_FUETTERE_GUT,
+				futterGK.getBefehlsnamen()[0]);
 	}
 
 }

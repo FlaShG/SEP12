@@ -54,38 +54,44 @@ public class SpielLogikTest {
 	@Test
 	public void testRegistriereSpieler() {
 		assertEquals(0, _testLogik.getKontext().getSpielerListe().size());
-		_testLogik.registriereSpieler(_spieler1);
-		_testLogik.registriereSpieler(_spieler2);
+		_testLogik.erstelleNeuenSpieler("name1");
+		_testLogik.erstelleNeuenSpieler("name2");
 		assertEquals(2, _testLogik.getKontext().getSpielerListe().size());
-		assertTrue(_testLogik.getKontext().getSpielerListe().contains(_spieler1));
-		assertTrue(_testLogik.getKontext().getSpielerListe().contains(_spieler2));
 	}
 
 	@Test
 	public void testMeldeSpielerAb() {
 		//registrieren
 		assertEquals(0, _testLogik.getKontext().getSpielerListe().size());
-		_testLogik.registriereSpieler(_spieler1);
-		_testLogik.registriereSpieler(_spieler2);
+		Spieler s1 = _testLogik.erstelleNeuenSpieler("name1");
+		Spieler s2 = _testLogik.erstelleNeuenSpieler("name2");
 		assertEquals(2, _testLogik.getKontext().getSpielerListe().size());
-		assertTrue(_testLogik.getKontext().getSpielerListe().contains(_spieler1));
-		assertTrue(_testLogik.getKontext().getSpielerListe().contains(_spieler2));
+		assertTrue(_testLogik.getKontext().getSpielerListe().contains(s1));
+		assertTrue(_testLogik.getKontext().getSpielerListe().contains(s2));
 		//abmelden
-		_testLogik.meldeSpielerAb(_spieler1.getName());
+		_testLogik.meldeSpielerAb("name1");
 		assertEquals(1, _testLogik.getKontext().getSpielerListe().size());
-		assertTrue(_testLogik.getKontext().getSpielerListe().contains(_spieler2));
+		assertFalse(_testLogik.getKontext().getSpielerListe().contains(s1));
+		assertTrue(_testLogik.getKontext().getSpielerListe().contains(s2));
 		
+		_testLogik.meldeSpielerAb("name2");
+		assertEquals(0, _testLogik.getKontext().getSpielerListe().size());
+		assertFalse(_testLogik.getKontext().getSpielerListe().contains(s1));
+		assertFalse(_testLogik.getKontext().getSpielerListe().contains(s2));
+		
+		_testLogik.meldeSpielerAb("gibts nicht");
+		assertEquals(0, _testLogik.getKontext().getSpielerListe().size());
 		
 	
 	}
 
 	@Test
 	public void testZeigeAktuelleAusgaenge() {
-		_testLogik.registriereSpieler(_spieler1);
+		Spieler s1 = _testLogik.erstelleNeuenSpieler("name1");
 		
 		//Anzahl der Ausgänge abhängig vom Standardlevel 
 		//- wird dies geändert schlägt auch der test fehl...
-		assertEquals(4, _testLogik.zeigeAktuelleAusgaenge(_spieler1).size());
+		assertEquals(4, _testLogik.zeigeAktuelleAusgaenge(s1).size());
 	}
 
 	@Test

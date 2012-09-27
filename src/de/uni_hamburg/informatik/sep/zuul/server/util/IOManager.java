@@ -161,4 +161,9 @@ public class IOManager
 	{
 		return _strukParser.getAnzahlKatzen();
 	}
+
+	public int getLebenspunkte()
+	{
+		return _strukParser.getLebenspunkte();
+	}
 }

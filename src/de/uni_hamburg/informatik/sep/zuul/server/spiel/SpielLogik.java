@@ -18,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
+import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
@@ -34,7 +35,7 @@ public class SpielLogik
 	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
 	public static final int KUCHEN_ENERGIE_GEWINN = 3;
 	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
-	public static final int START_ENERGIE = 8;
+	private int _startLebenspunkte = 8;
 
 	public SpielLogik()
 	{
@@ -46,29 +47,19 @@ public class SpielLogik
 	private void registriereListeners()
 	{
 		registriereFeature(new GewonnenTextAnzeigen());
-		registriereFeature(new Lebensenergie());
 		registriereFeature(new RaumBeschreibungAnzeigen());
+		registriereFeature(new Lebensenergie());
 		registriereFeature(new AusgaengeAnzeigen());
 		registriereFeature(new KuchenImRaumTextAnzeigen());
 		registriereFeature(new MausImRaumTextAnzeigen());
 		registriereFeature(new BeinStellen());
 	}
 
-	public void erstelleKontext()
+	private void erstelleKontext()
 	{
 		Raum start = legeRaeumeAn();
-		_kontext = new ServerKontext(start,_struktur);
+		_kontext = new ServerKontext(start, _struktur);
 
-	}
-
-	/**
-	 * Reistriere einen neuen Spieler
-	 * 
-	 * @param spieler
-	 */
-	public void registriereSpieler(Spieler spieler)
-	{
-		_kontext.fuegeNeuenSpielerHinzu(spieler);
 	}
 
 	/**
@@ -90,7 +81,7 @@ public class SpielLogik
 		IOManager manager = new IOManager();
 		if(_levelPfad == null)
 		{
-			manager.readLevel("./level/testStruktur."+FileChooser.ZUUL_ENDUNG);
+			manager.readLevel("./level/testStruktur." + FileChooser.ZUUL_ENDUNG);
 		}
 		else
 		{
@@ -103,9 +94,10 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer(_struktur,
 				manager.getAnzahlMaeuse());
 
-		for(int i = 0; i <  1 /*manager.getAnzahlKatzen()*/; i++)
-			// TODO mehr als eine katze nicht unterstützt atm
+		for(int i = 0; i < manager.getAnzahlKatzen(); i++)
 			Katze.erzeugeKatze(this);
+
+		_startLebenspunkte = manager.getLebenspunkte();
 
 		return raumbauer.getStartRaum();
 	}
@@ -236,6 +228,14 @@ public class SpielLogik
 					.befehlSollAusgefuehrtWerden(_kontext, spieler, befehl);
 		}
 		return befehlAusfuehren;
+	}
+
+	public Spieler erstelleNeuenSpieler(String name)
+	{
+		Spieler spieler = new Spieler(name, _startLebenspunkte, new Inventar());
+
+		_kontext.fuegeNeuenSpielerHinzu(spieler);
+		return spieler;
 	}
 
 }

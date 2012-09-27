@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,9 +48,6 @@ public class BefehlEssenTascheGuterKruemelTest
 	assertTrue(essentasche.ausfuehren(kontext, spieler, befehlszeile));
 	assertFalse(spieler.getInventar().has(Item.IKuchen));
 	
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
-	assertTrue(essentasche.ausfuehren(kontext, spieler2, befehlszeile));
-	assertFalse(spieler2.getInventar().has(Item.IKuchen));
 	}
 
 	@Test

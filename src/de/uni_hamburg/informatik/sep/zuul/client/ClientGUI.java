@@ -181,9 +181,20 @@ public class ClientGUI extends Client
 		if(nachricht != null)
 			schreibeText(nachricht);
 
+		if(_bildPanel.getSchauenLabel().isVisible())
+		{
+			// Gehe Buttons sind beim Schauen deaktiviert.
+			for(String befehl : paket.getVerfuegbareBefehle().keySet())
+			{
+				if(befehl.startsWith(TextVerwalter.BEFEHL_GEHEN))
+					paket.getVerfuegbareBefehle().put(befehl, false);
+			}
+		}
+
 		setzeBefehlsverfuegbarkeit(paket.getVerfuegbareBefehle());
 
 		aktualisiereMoeglicheAusgaenge(paket.getMoeglicheAusgaenge());
+
 		_bp.setLebensenergie(paket.getLebensEnergie());
 
 		int val = _bildPanel.getQuadraticSize();
@@ -427,9 +438,6 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_UNTERSUCHE));
 
-		_bp.getLadenButton().addActionListener(
-				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_LADEN));
-
 		_bp.getFuettereButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_FUETTERE));
@@ -600,7 +608,7 @@ public class ClientGUI extends Client
 		createActionListenerMap(_bp.getExtraButtons());
 		createActionListenerMap(new JButton[] { _bildPanel.getTuerNordButton(),
 				_bildPanel.getTuerSuedButton(), _bildPanel.getTuerOstButton(),
-				_bildPanel.getTuerWestButton() });
+				_bildPanel.getTuerWestButton(), _bp.getBeinstellenButton() });
 	}
 
 	private void createActionListenerMap(JButton[] buttons)
