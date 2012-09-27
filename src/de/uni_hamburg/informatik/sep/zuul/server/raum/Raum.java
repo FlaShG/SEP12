@@ -350,4 +350,14 @@ public class Raum
 	{
 		_ausgaenge.clear();
 	}
+
+	public boolean hasKuchen()
+	{
+		for(Item item : _items)
+		{
+			if(item.isAnyKuchen())
+				return true;
+		}
+		return false;
+	}
 }
