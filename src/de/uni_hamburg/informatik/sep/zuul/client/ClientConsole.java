@@ -10,11 +10,10 @@ import java.rmi.RemoteException;
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, int clientport,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public ClientConsole(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, clientport, clientName);
+		super(serverName, serverIP, clientName);
 
 		if(!clientName.equals("Dr. Little"))
 		{

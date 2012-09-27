@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -27,6 +28,8 @@ public class BefehlBeendenTest
 	public void setUp() throws Exception
 	{
 		spieler.setLebensEnergie(100);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
+		kontext.setAktuellenRaumZu(spieler, raum);
 	}
 
 	@Test
@@ -39,7 +42,7 @@ public class BefehlBeendenTest
 	public void testAusfuehren()
 	{
 		assertTrue(spieler.getLebensEnergie() != 0);
-		assertTrue(beenden.ausfuehren(kontext, spieler, befehlszeile));
+		assertFalse(beenden.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(spieler.getLebensEnergie(), 0);
 
 		assertEquals(

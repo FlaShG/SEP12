@@ -51,6 +51,7 @@ public class BefehlFuettereGuterKruemelTest
 	@Test
 	public void testAusfuehren()
 	{
+		spieler.setInventar(inventar2);
 		assertTrue(futterGK.ausfuehren(kontext, spieler, nurfutter));
 	}
 
