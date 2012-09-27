@@ -266,6 +266,8 @@ public class EditorFenster implements EditorBeobachter
 			raum.setItems(items);
 
 			raum.setBescheibung(bearbeitenPanel.getBeschreibung().getText());
+			
+			_ui.getMap().getAktivenButton().setAusgewaehlt(true);
 		}
 
 		_leveldaten.setLeben(_ui.getLevelPanel().getLebenspunkte());
