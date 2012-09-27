@@ -8,6 +8,8 @@ package de.uni_hamburg.informatik.sep.zuul.server.util;
  */
 public final class TextVerwalter
 {
+	public static final String EDITOR_TITEL = "Zuul-Editor";
+
 	private TextVerwalter()
 	{
 	}

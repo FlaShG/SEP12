@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
  * Die Werkzeugklasse für das Editorfenser.
@@ -23,8 +24,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
  */
 public class EditorFenster implements EditorBeobachter
 {
-	public static final String EDITOR_TITEL = "Zuul-Editor";
-
 	private EditorFensterUI _ui;
 	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
@@ -324,6 +323,6 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
-				EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+				TextVerwalter.EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 }
