@@ -1,6 +1,8 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,6 @@ import java.util.Map.Entry;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
@@ -66,27 +67,27 @@ public class ClientGUI extends Client
 	{
 		final JFrame startFrame = new JFrame("Warten auf Start des Spiels");
 
-		JPanel panel = new JPanel();
-		startFrame.setMinimumSize(new Dimension(300, 150));
+		startFrame.setLayout(new GridLayout(0, 1));
+		startFrame.setMinimumSize(new Dimension(300, 100));
 		startFrame.setLocationRelativeTo(null);
 
-		final JButton _startButton = new JButton("Los gehts!");
+		final JButton startButton = new JButton("Los gehts!");
+		startButton.setFocusPainted(false);
+		startButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 
-		panel.add(_startButton);
-
-		startFrame.setContentPane(panel);
+		startFrame.add(startButton);
 
 		startFrame.setVisible(true);
 
 		login();
 
-		_startButton.addActionListener(new ActionListener()
+		startButton.addActionListener(new ActionListener()
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				_startButton.setEnabled(false);
+				startButton.setEnabled(false);
 
 				try
 				{

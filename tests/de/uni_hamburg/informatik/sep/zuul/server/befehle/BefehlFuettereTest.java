@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
@@ -46,26 +46,26 @@ public class BefehlFuettereTest
 	@Test
 	public void testBestimmeRichtung()
 	{
-		assertEquals("süd", fuetter.bestimmeRichtung(Item.IKuchen, "süd",
+		assertEquals("süd", BefehlFuettere.bestimmeRichtung(Item.IKuchen,
+				"süd", moeglicheRichtung));
+		assertEquals("süd", BefehlFuettere.bestimmeRichtung(Item.UKuchen,
+				"süd", moeglicheRichtung));
+		assertTrue("süd" != BefehlFuettere.bestimmeRichtung(Item.IGiftkuchen,
+				"süd", moeglicheRichtung));
+		assertTrue("süd" != BefehlFuettere.bestimmeRichtung(Item.UGiftkuchen,
+				"süd", moeglicheRichtung));
+		assertEquals(null, BefehlFuettere.bestimmeRichtung(Item.Keins, "süd",
 				moeglicheRichtung));
-		assertEquals("süd", fuetter.bestimmeRichtung(Item.UKuchen, "süd",
-				moeglicheRichtung));
-		assertTrue("süd" != fuetter.bestimmeRichtung(Item.IGiftkuchen, "süd",
-				moeglicheRichtung));
-		assertTrue("süd" != fuetter.bestimmeRichtung(Item.UGiftkuchen, "süd",
-				moeglicheRichtung));
-		assertEquals(null,
-				fuetter.bestimmeRichtung(Item.Keins, "süd", moeglicheRichtung));
 
-		assertEquals("nord", fuetter.bestimmeRichtung(Item.IKuchen, "nord",
-				moeglicheRichtung1));
-		assertEquals("nord", fuetter.bestimmeRichtung(Item.UKuchen, "nord",
-				moeglicheRichtung1));
-		assertEquals("nord", fuetter.bestimmeRichtung(Item.IGiftkuchen, "nord",
-				moeglicheRichtung1));
-		assertEquals("nord", fuetter.bestimmeRichtung(Item.UGiftkuchen, "nord",
-				moeglicheRichtung1));
-		assertEquals(null, fuetter.bestimmeRichtung(Item.Keins, "nord",
+		assertEquals("nord", BefehlFuettere.bestimmeRichtung(Item.IKuchen,
+				"nord", moeglicheRichtung1));
+		assertEquals("nord", BefehlFuettere.bestimmeRichtung(Item.UKuchen,
+				"nord", moeglicheRichtung1));
+		assertEquals("nord", BefehlFuettere.bestimmeRichtung(Item.IGiftkuchen,
+				"nord", moeglicheRichtung1));
+		assertEquals("nord", BefehlFuettere.bestimmeRichtung(Item.UGiftkuchen,
+				"nord", moeglicheRichtung1));
+		assertEquals(null, BefehlFuettere.bestimmeRichtung(Item.Keins, "nord",
 				moeglicheRichtung1));
 
 	}
@@ -91,43 +91,49 @@ public class BefehlFuettereTest
 	@Test
 	public void testFuettereTierMit()
 	{
-		assertTrue(fuetter.fuettereTierMit(kontext, spieler, Item.IKuchen));
+		assertTrue(BefehlFuettere.fuettereTierMit(kontext, spieler,
+				Item.IKuchen));
 		raum.setKatze(null);
-		assertFalse(fuetter.fuettereTierMit(kontext, spieler, Item.IKuchen));
+		assertFalse(BefehlFuettere.fuettereTierMit(kontext, spieler,
+				Item.IKuchen));
 		raum.setMaus(maus);
-		assertTrue(fuetter.fuettereTierMit(kontext, spieler, Item.IKuchen));
+		assertTrue(BefehlFuettere.fuettereTierMit(kontext, spieler,
+				Item.IKuchen));
 	}
 
 	@Test
 	public void testFuettereMaus()
 	{
-		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.IKuchen, raum,
-				maus));
-		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.UKuchen, raum,
-				maus));
-		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.IGiftkuchen,
+		assertTrue(BefehlFuettere.fuettereMaus(kontext, spieler, Item.IKuchen,
 				raum, maus));
-		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.UGiftkuchen,
+		assertTrue(BefehlFuettere.fuettereMaus(kontext, spieler, Item.UKuchen,
 				raum, maus));
-		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.Keins, raum,
-				maus));
+		assertTrue(BefehlFuettere.fuettereMaus(kontext, spieler,
+				Item.IGiftkuchen, raum, maus));
+		assertTrue(BefehlFuettere.fuettereMaus(kontext, spieler,
+				Item.UGiftkuchen, raum, maus));
+		assertTrue(BefehlFuettere.fuettereMaus(kontext, spieler, Item.Keins,
+				raum, maus));
 
 	}
 
 	@Test
 	public void testFuettereKatze()
 	{
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen));
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
+				Item.IKuchen));
 		katze = new Katze(raum);
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.UKuchen));
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
+				Item.UKuchen));
 		katze = new Katze(raum);
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze,
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
 				Item.IGiftkuchen));
 		katze = new Katze(raum);
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze,
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
 				Item.UGiftkuchen));
 		katze = new Katze(raum);
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.Keins));
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
+				Item.Keins));
 
 	}
 
@@ -148,11 +154,12 @@ public class BefehlFuettereTest
 				+ "\n", kontext.getNachrichtFuer(spieler));
 
 		raum.setKatze(katze);
-		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen));
-		fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen);
-		fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen);
+		assertTrue(BefehlFuettere.fuettereKatze(kontext, spieler, katze,
+				Item.IKuchen));
 		assertTrue(katze.isSatt());
-
+		assertEquals(TextVerwalter.KATZE_IST_SATT_GEWORDEN + "\n",
+				kontext.getNachrichtFuer(spieler));
+		fuetter.gibFehlerAus(kontext, spieler, befehlszeile);
 		assertEquals(TextVerwalter.KATZE_HAT_KEINEN_HUNGER + "\n",
 				kontext.getNachrichtFuer(spieler));
 	}

@@ -11,7 +11,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListe
 import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.features.GewonnenTextAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.features.KuchenImRaumTextAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Lebensenergie;
 import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen;
@@ -19,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeig
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;

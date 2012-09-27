@@ -101,6 +101,7 @@ public class StartfensterUI extends JFrame
 		_multiPlayerPanel.add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
+
 		_multiPlayerPanel.add(_eingabeBestaetigen);
 		_multiPlayerPanel.add(_abbrechen);
 	}

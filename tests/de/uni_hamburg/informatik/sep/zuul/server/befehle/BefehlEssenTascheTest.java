@@ -62,16 +62,15 @@ public class BefehlEssenTascheTest
 	@Test
 	public void testEsseKuchen()
 	{
-		int energie = spieler.getLebensEnergie();
-		essentasche.esseKuchen(kontext, spieler, Item.UKuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.UKuchen);
 		assertEquals(13, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.UGiftkuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.UGiftkuchen);
 		assertEquals(12, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.IKuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.IKuchen);
 		assertEquals(15, spieler.getLebensEnergie());
-		essentasche.esseKuchen(kontext, spieler, Item.IGiftkuchen);
+		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.IGiftkuchen);
 		assertEquals(14, spieler.getLebensEnergie());
-		assertTrue(essentasche.esseKuchen(kontext, spieler2, Item.IGiftkuchen));
+		assertTrue(BefehlEssenTasche.esseKuchen(kontext, spieler2, Item.IGiftkuchen));
 		assertEquals(0, spieler2.getLebensEnergie());
 		assertEquals(
 				TextVerwalter.KUCHENTODTEXT,

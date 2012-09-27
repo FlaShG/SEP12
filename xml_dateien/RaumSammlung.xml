@@ -603,4 +603,94 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
         <beschreibung></beschreibung>
         <raumart>Ende</raumart>
     </raum>
+    <raum>
+        <name>Haus F</name>
+        <id>2139124147</id>
+        <beschreibung>Sie betreten Haus F. Vielleicht sollten sie nich auf das Dach gehen. Es könnte gefährlihc werden...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Küche</name>
+        <id>-373256725</id>
+        <beschreibung>Sie betreten die Küche der Mensa. Hier wird gekocht...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Mülltonnen</name>
+        <id>972277655</id>
+        <beschreibung>HIer stehen die Mülltonnen. Sollte man wirklich daraus essen?</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Serverraum</name>
+        <id>672689153</id>
+        <beschreibung>Ein Serverraum. Hier ist es ihnen zu kalt...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Labor</name>
+        <id>-1797807418</id>
+        <beschreibung>H. Es lassen sich hier Krümmel untersuchen.</beschreibung>
+        <raumart>Start</raumart>
+    </raum>
+    <raum>
+        <name>Pförtnerloge</name>
+        <id>660995691</id>
+        <beschreibung>Sie kommen an der Pförtnerloge vorbei. Der Pförtner siehr nicht auf; Er liest eine Zeitung.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Auffahrt</name>
+        <id>-1913969019</id>
+        <beschreibung>Sie stehen in der Auffahrt. Es kommt eine Auto angefahren, schnell weg...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Mensa</name>
+        <id>-1681222951</id>
+        <beschreibung>Die Mensa auf dem Campus. Die Öffnungszeiten sind zu kurz...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Haus D Keller</name>
+        <id>-1622358983</id>
+        <beschreibung>Der Keller von Haus D. Das Summen von Pcs ist zu hören.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Haus D</name>
+        <id>396646746</id>
+        <beschreibung>Dies ist Haus D.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Treppenhaus</name>
+        <id>-1393385344</id>
+        <beschreibung>Sie stehen im Treppenhaus. Die Stufen sind ziemlich hoch...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Abwasserkanal</name>
+        <id>-275807542</id>
+        <beschreibung>Sie haben den Abwasserkanal gefunden. Sie fahren mit einem Papierschiff hindurch.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Bibliothek</name>
+        <id>-1293220423</id>
+        <beschreibung>Die Bibliothek des Fachbereiches. Hier gibt es viel informatives Material.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Konrad Zuse Hörsaal</name>
+        <id>-846710756</id>
+        <beschreibung>Der Konrad-Zuse Hörsaal. Wir sind fast am Ziel...</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Labor von Dr. Evenbigger</name>
+        <id>-1508840043</id>
+        <beschreibung>Sie haben das Labor von Dr. Evenbigger betreten.</beschreibung>
+        <raumart>Ende</raumart>
+    </raum>
 </raumsammlung>

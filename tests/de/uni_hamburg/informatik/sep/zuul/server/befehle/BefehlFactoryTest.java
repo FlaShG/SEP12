@@ -30,26 +30,26 @@ public class BefehlFactoryTest
 	@Test
 	public void testGibBefehlClassOfQ()
 	{
-		assertArrayEquals(befehlgehe.getBefehlsnamen(),
-				factory.gibBefehl(befehl.getClass()).getBefehlsnamen());
-		assertEquals(null, factory.gibBefehl(befehlszeilegn.getClass()));
+		assertArrayEquals(befehlgehe.getBefehlsnamen(), BefehlFactory
+				.gibBefehl(befehl.getClass()).getBefehlsnamen());
+		assertEquals(null, BefehlFactory.gibBefehl(befehlszeilegn.getClass()));
 	}
 
 	@Test
 	public void testGibBefehlBefehlszeile()
 	{
-		assertArrayEquals(befehlgehe.getBefehlsnamen(),
-				factory.gibBefehl(befehlszeilegn).getBefehlsnamen());
-		assertEquals(null, factory.gibBefehl(befehlszeileleer));
-		assertArrayEquals(befehlhilfe.getBefehlsnamen(),
-				factory.gibBefehl(befehlszeilehilfe).getBefehlsnamen());
+		assertArrayEquals(befehlgehe.getBefehlsnamen(), BefehlFactory
+				.gibBefehl(befehlszeilegn).getBefehlsnamen());
+		assertEquals(null, BefehlFactory.gibBefehl(befehlszeileleer));
+		assertArrayEquals(befehlhilfe.getBefehlsnamen(), BefehlFactory
+				.gibBefehl(befehlszeilehilfe).getBefehlsnamen());
 	}
 
 	@Test
 	public void testGibBefehlString()
 	{
-		assertArrayEquals(befehlgehe.getBefehlsnamen(),
-				factory.gibBefehl("gehe").getBefehlsnamen());
+		assertArrayEquals(befehlgehe.getBefehlsnamen(), BefehlFactory
+				.gibBefehl("gehe").getBefehlsnamen());
 	}
 
 }

@@ -34,12 +34,6 @@ public class SpielLogikTest
 	@Before
 	public void setUp()
 	{
-		_spieler1 = mock(Spieler.class);
-		_spieler2 = mock(Spieler.class);
-
-		when(_spieler1.getName()).thenReturn("name1");
-		when(_spieler2.getName()).thenReturn("name2");
-
 		_start = mock(Raum.class);
 		_ziel = mock(Raum.class);
 

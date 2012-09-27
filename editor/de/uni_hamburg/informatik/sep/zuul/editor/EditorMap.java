@@ -49,11 +49,11 @@ public class EditorMap extends JPanel
 		_beobachter = beobachter;
 	}
 
-	private void informiereBeobachter()
+	private void informiereBeobachter(boolean neuerRaum)
 	{
 		if(_beobachter != null)
 		{
-			_beobachter.raumwahlUpdate();
+			_beobachter.raumwahlUpdate(neuerRaum);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class EditorMap extends JPanel
 		if(buttonAusgewaehlt())
 		{
 			_buttons[_activeX][_activeY].loescheRaumUndSetzeAufAusgewaehlt();
-			informiereBeobachter();
+			informiereBeobachter(false);
 		}
 	}
 
@@ -240,7 +240,7 @@ public class EditorMap extends JPanel
 				_activeX = ((GridButton) arg0.getSource()).getGridX();
 				_activeY = ((GridButton) arg0.getSource()).getGridY();
 				_buttons[_activeX][_activeY].setAusgewaehlt(true);
-				informiereBeobachter();
+				informiereBeobachter(false);
 			}
 		});
 
@@ -254,7 +254,7 @@ public class EditorMap extends JPanel
 					if(_buttons[_activeX][_activeY].getRaum() == null)
 					{
 						_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
-						informiereBeobachter();
+						informiereBeobachter(true);
 					}
 				}
 			}
@@ -294,7 +294,7 @@ public class EditorMap extends JPanel
 									_activeY = -1;
 								}
 
-								_beobachter.raumwahlUpdate();
+								_beobachter.raumwahlUpdate(false);
 							}
 							else
 							{

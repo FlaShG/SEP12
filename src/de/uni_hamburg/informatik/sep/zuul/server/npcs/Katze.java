@@ -1,4 +1,4 @@
-package de.uni_hamburg.informatik.sep.zuul.server.features;
+package de.uni_hamburg.informatik.sep.zuul.server.npcs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,10 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
+import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusfuehrenListener;
+import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
+import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
-import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
