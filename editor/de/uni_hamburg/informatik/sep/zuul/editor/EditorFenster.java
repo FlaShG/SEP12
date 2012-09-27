@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -14,6 +17,7 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 
 /**
  * Die Werkzeugklasse für das Editorfenser.
@@ -30,6 +34,7 @@ public class EditorFenster implements EditorBeobachter
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	private boolean _unsavedChanges;
+	private Random _rand;
 
 	private WindowListener _windowListener;
 
@@ -38,6 +43,7 @@ public class EditorFenster implements EditorBeobachter
 	 */
 	public EditorFenster()
 	{
+		_rand = new Random();
 		_leveldaten = new EditorLevel();
 		_ui = new EditorFensterUI(this);
 
@@ -199,6 +205,7 @@ public class EditorFenster implements EditorBeobachter
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
 		if(bearbeitenPanel != null)
 			_ui.getFrame().remove(bearbeitenPanel);
+		_ui.getFrame().remove(_ui.getFueller());
 
 		_ui.getFrame().setVisible(true);
 
@@ -227,6 +234,11 @@ public class EditorFenster implements EditorBeobachter
 				//geht net.
 				_ui.getBearbeitenPanel().setzeFokusAufNamensFeld();
 			}
+		}
+		else
+		{
+			_ui.getFrame().add(_ui.getFueller(), BorderLayout.SOUTH);
+			_ui.getFueller().setText(randomHilfetext());
 		}
 
 		_ui.getFrame().setVisible(true);
@@ -325,5 +337,17 @@ public class EditorFenster implements EditorBeobachter
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
 				EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+	}
+
+	private String randomHilfetext()
+	{
+		List<String> entries = new ArrayList<String>();
+		entries.add("Du kannst Räume per Drag&Drop verschieben.");
+		entries.add("Jedes Level darf nur einen Start- und einen Endraum haben.");
+		entries.add("Lange Raumbeschreibungen schrecken den Spieler ab. Think Twitter.");
+		entries.add("Räume können per Doppelklick hinzugefügt werden.");
+		entries.add("Deutschland hat mit über 400 Stück die meisten Zoos der Welt.");
+		entries.add("Die letzte Domestizierung einer Tierspezies war vor über 4000 Jahren.");
+		return FancyFunction.getRandomEntry(entries);
 	}
 }
