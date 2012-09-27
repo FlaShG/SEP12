@@ -236,9 +236,9 @@ public class ServerKontext
 		return new ArrayList<Raum>(_struktur.getConnections().keySet());
 	}
 
-	public void entferneSpieler(Spieler spieler)
+	public boolean entferneSpieler(Spieler spieler)
 	{
-		_spielerPosition.remove(spieler);
+		return _spielerPosition.remove(spieler) != null;
 	}
 
 }

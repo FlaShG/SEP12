@@ -40,7 +40,7 @@ public class ClientPaket implements Remote, Serializable
 	{
 		_dead = !spieler.lebendig();
 		Raum aktuellerRaum = kontext.getAktuellenRaumZu(spieler);
-		if(!spieler.lebendig())
+		if(_dead)
 		{
 			// TODO: win / lose screen
 			_showWinScreen = spieler.hatGewonnen();
