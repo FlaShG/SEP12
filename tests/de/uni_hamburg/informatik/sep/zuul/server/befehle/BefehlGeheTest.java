@@ -44,6 +44,7 @@ public class BefehlGeheTest
 		raumN.setAusgang(TextVerwalter.RICHTUNG_SUEDEN, raumC);
 		raumC.setAusgang(TextVerwalter.RICHTUNG_WESTEN, raumW);
 		raumW.setAusgang(TextVerwalter.RICHTUNG_OSTEN, raumC);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raumC);
 	}
 
