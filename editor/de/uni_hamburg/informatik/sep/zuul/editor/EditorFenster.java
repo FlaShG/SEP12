@@ -342,12 +342,13 @@ public class EditorFenster implements EditorBeobachter
 	private String randomHilfetext()
 	{
 		List<String> entries = new ArrayList<String>();
-		entries.add("Du kannst Räume per Drag&Drop verschieben.");
-		entries.add("Jedes Level darf nur einen Start- und einen Endraum haben.");
-		entries.add("Lange Raumbeschreibungen schrecken den Spieler ab. Think Twitter.");
-		entries.add("Räume können per Doppelklick hinzugefügt werden.");
-		entries.add("Deutschland hat mit über 400 Stück die meisten Zoos der Welt.");
-		entries.add("Die letzte Domestizierung einer Tierspezies war vor über 4000 Jahren.");
+		entries.add("Tipp: Du kannst Räume per Drag&Drop verschieben.");
+		entries.add("Tipp: Jedes Level darf nur einen Start- und einen Endraum haben.");
+		entries.add("Tipp: Lange Raumbeschreibungen schrecken den Spieler ab. Think Twitter.");
+		entries.add("Tipp: Räume können per Doppelklick hinzugefügt werden.");
+		entries.add("Tipp: Der Startraum ist immer auch gleichzeitig das Labor.");
+		entries.add("Tipp: Räume können per Doppelklick hinzugefügt werden.");
+		entries.add("Tipp: Flamingos können nur mit kopfüber gedrehtem Kopf essen.");
 		return FancyFunction.getRandomEntry(entries);
 	}
 }

@@ -1,7 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -79,7 +78,7 @@ public class EditorFensterUI
 		_raumhinzu.setMinimumSize(dim);
 		_raumhinzu.setPreferredSize(dim);
 		
-		newFrame.add(_fueller = new JLabel("Klicke auf einen Raum, um mit dem editieren zu beginnen."), BorderLayout.SOUTH);
+		newFrame.add(_fueller = new JLabel(EditorTextVerwalter.KLICKEAUFRAUMZUMBEGINNEN), BorderLayout.SOUTH);
 		_fueller.setSize(dim);
 		_fueller.setMinimumSize(dim);
 		_fueller.setPreferredSize(dim);
