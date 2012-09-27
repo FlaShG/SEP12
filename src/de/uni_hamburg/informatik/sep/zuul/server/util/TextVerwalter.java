@@ -131,7 +131,7 @@ public final class TextVerwalter
 	public static final String ABLEGEN_TEXT = "Sie legen einen Krümel ab.";
 	public static final String NICHTS_ZUM_ABLEGEN = "Sie haben nichts zum ablegen...";
 
-	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little angestarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
+	public static final String KATZE_IM_AKTUELLEN_RAUM = "Plötzlich erscheint eine grimmige Katze, die Dr. Little anstarrt. Vielleicht lässt sie sich mit einem Krümel besänftigen.";
 	public static final String KATZE_GREIFT_AN = "Als Dr. Little in den nächsten Raum schielte, griff ihn die Katze an.";
 	public static final String KATZE_STIRBT = "Die Katze fällt taumelnd zu Boden. Es scheint so, als sei der Krümel für Katzen nicht sonderlich gesund.";
 	public static final String KATZE_IST_SATT_GEWORDEN = "Die Katze frisst den Krümel und sieht jetzt sehr satt aus.";
