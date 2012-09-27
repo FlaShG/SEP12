@@ -28,6 +28,8 @@ public class BefehlBeendenTest
 	public void setUp() throws Exception
 	{
 		spieler.setLebensEnergie(100);
+		kontext.fuegeNeuenSpielerHinzu(spieler);
+		kontext.setAktuellenRaumZu(spieler, raum);
 	}
 
 	@Test
@@ -40,7 +42,6 @@ public class BefehlBeendenTest
 	public void testAusfuehren()
 	{
 		assertTrue(spieler.getLebensEnergie() != 0);
-		//TODO Warum ist die antwort False??
 		assertFalse(beenden.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(spieler.getLebensEnergie(), 0);
 
