@@ -4,9 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -106,6 +104,10 @@ public class StartfensterUI extends JFrame
 		_multiPlayerPanel.add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
+
+		_multiPlayerPanel.add(new JLabel("Port:"));
+		_multiPlayerPanel.add(_eingabePort);
+		
 		_multiPlayerPanel.add(_eingabeBestaetigen);
 		_multiPlayerPanel.add(_abbrechen);
 	}
