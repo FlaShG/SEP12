@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.raum;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
+
 
 import java.util.ArrayList;
 import java.util.List;
