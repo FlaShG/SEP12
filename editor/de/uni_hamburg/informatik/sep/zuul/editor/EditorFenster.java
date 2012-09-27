@@ -6,9 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -27,14 +24,11 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
  */
 public class EditorFenster implements EditorBeobachter
 {
-	public static final String EDITOR_TITEL = "Zuul-Editor";
-
 	private EditorFensterUI _ui;
 	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	private boolean _unsavedChanges;
-	private Random _rand;
 
 	private WindowListener _windowListener;
 
@@ -43,7 +37,6 @@ public class EditorFenster implements EditorBeobachter
 	 */
 	public EditorFenster()
 	{
-		_rand = new Random();
 		_leveldaten = new EditorLevel();
 		_ui = new EditorFensterUI(this);
 
@@ -333,7 +326,7 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
-				EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+				EditorTextVerwalter.EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 
 	private String randomHilfetext()

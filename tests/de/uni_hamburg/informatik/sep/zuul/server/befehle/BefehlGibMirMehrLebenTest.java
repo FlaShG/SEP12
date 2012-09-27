@@ -34,13 +34,13 @@ public class BefehlGibMirMehrLebenTest
 	public void testAusfuehren()
 	{
 		assertTrue(mehrLeben.ausfuehren(kontext, spieler, gibMirMehrLeben));
-		assertTrue(spieler.getLebensEnergie() == 100);
+		assertEquals(spieler.getLebensEnergie(), 100);
 		assertEquals(
 				"Schwupp.",
 				kontext.getNachrichtFuer(spieler).substring(0,
 						"Schwupp.".length()));
 		assertTrue(mehrLeben.ausfuehren(kontext, spieler, gibMirMehrLeben));
-		assertTrue(spieler.getLebensEnergie() == 100);
+		assertEquals(spieler.getLebensEnergie(), 100);
 	}
 
 	@Test

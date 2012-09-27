@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
  * Die UI-Klasse des {@link EditorFenster}s.
@@ -56,7 +57,7 @@ public class EditorFensterUI
 		assert width > 0 : "Vorbedingung verletzt: width > 0";
 		assert height > 0 : "Vorbedingung verletzt: height > 0";
 		
-		JFrame newFrame = new JFrame(EditorFenster.EDITOR_TITEL);
+		JFrame newFrame = new JFrame(EditorTextVerwalter.EDITOR_TITEL);
 
 		newFrame.getContentPane().setLayout(new BorderLayout());
 

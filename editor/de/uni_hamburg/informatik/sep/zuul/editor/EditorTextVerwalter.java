@@ -7,6 +7,8 @@ public final class EditorTextVerwalter
 {
 	private EditorTextVerwalter() {}
 
+	public static final String EDITOR_TITEL = "Zuul-Editor";
+	
 	public static final List<String> EDITOR_TIPPS;
 	static
 	{

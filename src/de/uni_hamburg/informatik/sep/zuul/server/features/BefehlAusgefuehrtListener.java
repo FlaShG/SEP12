@@ -11,7 +11,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
  * @author felix
  * 
  */
-public interface BefehlAusgefuehrtListener
+public interface BefehlAusgefuehrtListener extends Feature
 {
 
 	/**

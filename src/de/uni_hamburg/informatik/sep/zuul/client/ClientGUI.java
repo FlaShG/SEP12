@@ -45,11 +45,10 @@ public class ClientGUI extends Client
 	private Raumbilderzeuger _bilderzeuger;
 	private Map<String, JButton> _befehlButtonMap = new HashMap<String, JButton>();
 
-	public ClientGUI(String serverName, String serverIP, int clientport,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public ClientGUI(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-		super(serverName, serverIP, clientport, clientName);
+		super(serverName, serverIP, clientName);
 
 		if(clientName.equals("Dr. Little"))
 		{
@@ -721,5 +720,14 @@ public class ClientGUI extends Client
 		{
 			button.doClick();
 		}
+	}
+
+	@Override
+	protected void serverNichtGefunden()
+	{
+
+		JOptionPane.showMessageDialog(null, "Server wurde nicht gefunden");
+		System.exit(0);
+
 	}
 }

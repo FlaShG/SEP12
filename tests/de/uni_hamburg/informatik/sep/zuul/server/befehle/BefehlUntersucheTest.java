@@ -93,6 +93,6 @@ public class BefehlUntersucheTest
 	@Test
 	public void testGetHilfe()
 	{
-		assertEquals(TextVerwalter.HILFE_GIVE, untersuche.getHilfe());
+		assertEquals(TextVerwalter.HILFE_UNTERSUCHE, untersuche.getHilfe());
 	}
 }

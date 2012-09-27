@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import de.uni_hamburg.informatik.sep.zuul.EditorStartup;
@@ -21,7 +22,6 @@ public class StartFenster extends StartUp
 	private StartfensterUI _ui;
 
 	private String _ipAdresse;
-	private int _port;
 	private String _spielername;
 
 	/**
@@ -33,7 +33,6 @@ public class StartFenster extends StartUp
 		_ui = new StartfensterUI();
 
 		_ipAdresse = "127.0.0.1";
-		_port = 1090;
 
 		_spielername = "Dr. Little";
 
@@ -74,7 +73,7 @@ public class StartFenster extends StartUp
 				_ui.getBestaetigen().setEnabled(false);
 				_spielername = _ui.getSpielerNameTextField().getText();
 
-				starteRMI("RmiServer", _ipAdresse, _port, _spielername, false);
+				starteRMI("RmiServer", _ipAdresse, _spielername, false);
 
 			}
 
@@ -94,11 +93,10 @@ public class StartFenster extends StartUp
 
 		_ui.getAbbrechenButton().addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.exit(0);
+				_ui.startDarstellung();
 			}
 		});
 
@@ -106,15 +104,6 @@ public class StartFenster extends StartUp
 		{
 			@Override
 			public void keyReleased(KeyEvent arg0)
-			{
-				pruefeEingabe();
-			}
-		});
-
-		_ui.getPortTextField().addKeyListener(new KeyAdapter()
-		{
-			@Override
-			public void keyReleased(KeyEvent e)
 			{
 				pruefeEingabe();
 			}
@@ -147,7 +136,7 @@ public class StartFenster extends StartUp
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				starteRMI("RmiServer", "localhost", 1090, "Dr.Little", true);
+				starteRMI("RmiServer", "localhost", "Dr.Little", true);
 			}
 
 		});
@@ -165,7 +154,11 @@ public class StartFenster extends StartUp
 			{
 				JFileChooser chooser;
 				chooser = FileChooser.konfiguriereFileChooser(false);
-				SpielLogik._levelPfad = FileChooser.oeffneDatei(chooser);
+				String fcString = FileChooser.oeffneDatei(chooser);
+				if (fcString == null)
+					return;
+				
+				SpielLogik._levelPfad = fcString;
 				String name;
 				if(modus)
 				{
@@ -175,7 +168,7 @@ public class StartFenster extends StartUp
 				{
 					name = "Dr.Little";
 				}
-				starteRMI("RmiServer", "localhost", 1090, name, true);
+				starteRMI("RmiServer", "localhost", name, true);
 			}
 		};
 
@@ -186,16 +179,13 @@ public class StartFenster extends StartUp
 	{
 
 		String eingabeIP = _ui.getIPTextField().getText();
-		String eingabePort = _ui.getPortTextField().getText();
 
 		if((eingabeIP
 				.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}") || eingabeIP
-				.equals("localhost"))
-				&& eingabePort.matches("109[0-9]"))
+				.equals("localhost")))
 		{
 			_ui.getBestaetigen().setEnabled(true);
 			_ipAdresse = eingabeIP;
-			_port = Integer.parseInt(eingabePort);
 		}
 		else
 		{
@@ -205,7 +195,7 @@ public class StartFenster extends StartUp
 	}
 
 	private void starteRMI(final String serverName, final String serverIP,
-			final int port, final String clientName, final boolean serverStarten)
+			final String clientName, final boolean serverStarten)
 	{
 		Runnable run = new Runnable()
 		{
@@ -219,8 +209,7 @@ public class StartFenster extends StartUp
 					{
 						_server = new Server();
 					}
-					_client = new ClientGUI(serverName, serverIP, port,
-							clientName);
+					_client = new ClientGUI(serverName, serverIP, clientName);
 				}
 				catch(Exception e1)
 				{

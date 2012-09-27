@@ -1,11 +1,14 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.net.MalformedURLException;
+import java.rmi.AccessException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.server.ServerInterface;
 
 /**
@@ -23,23 +26,27 @@ public abstract class Client extends UnicastRemoteObject implements
 	boolean _isSpielzuEnde;
 	ServerInterface _server;
 	private String _clientName;
-	int _port;
 
-	public Client(String serverName, String serverIP, int clientPort,
-			String clientName) throws MalformedURLException, RemoteException,
-			NotBoundException
+	public Client(String serverName, String serverIP, String clientName)
+			throws MalformedURLException, RemoteException, NotBoundException
 	{
-
-		super(clientPort);
+		// choose anonymous port
+		super(0);
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
-		_port = clientPort;
 
 		_clientName = clientName;
 
-		_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
-				+ _serverName);
+		if(bestehtServer(serverName))
+		{
+			_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
+					+ _serverName);
+		}
+		else
+		{
+			serverNichtGefunden();
+		}
 
 		//login();
 	}
@@ -94,6 +101,25 @@ public abstract class Client extends UnicastRemoteObject implements
 	public String getClientName()
 	{
 		return _clientName;
+	}
+
+	public boolean bestehtServer(String serverName)
+	{
+		//geht anscheinend nicht besser
+		try
+		{
+			LocateRegistry.getRegistry().lookup(serverName);
+			return true;
+		}
+		catch(RemoteException | NotBoundException e)
+		{
+			return false;
+		}
+	}
+
+	protected void serverNichtGefunden()
+	{
+
 	}
 
 }
