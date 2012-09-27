@@ -94,7 +94,7 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 	@Override
 	public String getHilfe()
 	{
-		// TODO Hilfetext zu Bein Stellen
+		// TODO Hilfetext zu Bein Stellen und dann bei Test ergänzen.
 		return "";
 	}
 
