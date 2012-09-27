@@ -12,14 +12,6 @@ import javax.swing.JPanel;
 
 public class BildPanel extends JPanel
 {
-
-	private final String PATH = getClass().getResource("bilder/").getPath();
-	private final ImageIcon FENSTERNS = new ImageIcon(getClass().getResource(
-			"bilder/").getPath()
-			+ "fenster25.png");
-	private final ImageIcon FENSTEROW = new ImageIcon(getClass().getResource(
-			"bilder/").getPath()
-			+ "fenster20.png");
 	private JButton _tuerNordButton;
 	private JButton _tuerOstButton;
 	private JButton _tuerSuedButton;
