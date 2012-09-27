@@ -520,90 +520,6 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
         <raumart>Ende</raumart>
     </raum>
     <raum>
-        <name></name>
-        <id>1942301138</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name>swfadsf</name>
-        <id>-225841598</id>
-        <beschreibung>214324234</beschreibung>
-        <raumart>Start</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-1262112284</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-69108825</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>1663698851</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-434391624</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>608537278</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-1277385203</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-1773791409</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>1049892357</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-933546043</id>
-        <beschreibung></beschreibung>
-        <raumart>Ende</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-319916899</id>
-        <beschreibung></beschreibung>
-        <raumart>Start</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>-1471822741</id>
-        <beschreibung></beschreibung>
-        <raumart>Normal</raumart>
-    </raum>
-    <raum>
-        <name></name>
-        <id>1030631242</id>
-        <beschreibung></beschreibung>
-        <raumart>Ende</raumart>
-    </raum>
-    <raum>
         <name>Haus F</name>
         <id>2139124147</id>
         <beschreibung>Sie betreten Haus F. Vielleicht sollten sie nich auf das Dach gehen. Es könnte gefährlihc werden...</beschreibung>
@@ -630,7 +546,7 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
     <raum>
         <name>Labor</name>
         <id>-1797807418</id>
-        <beschreibung>H. Es lassen sich hier Krümmel untersuchen.</beschreibung>
+        <beschreibung>Dies ist das Labor von Dr. Little. Es lassen sich hier Krümmel untersuchen.</beschreibung>
         <raumart>Start</raumart>
     </raum>
     <raum>
