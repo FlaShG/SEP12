@@ -17,6 +17,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class StartConsole extends StartUp
 {
 
+	private static final BufferedReader CONSOLE = new BufferedReader(new InputStreamReader(
+			System.in));
+
 	public StartConsole() throws RemoteException, AlreadyBoundException,
 			MalformedURLException, NotBoundException
 	{
@@ -43,31 +46,27 @@ public class StartConsole extends StartUp
 			String clientName = consoleLesen();
 
 			String ip = "localhost";
-			int port = 1090;
 			consoleAnzeigen("Wollen Sie einen Öffentliches Spiel erstellen?(j/n)");
-			String server = consoleLesen();
-			if(server.equals("j"))
+			boolean serverStarten = consoleLesen().equals("j");
+			if(serverStarten)
 			{
 				ladeLevel();
-				starteRMI("RmiServer", ip, clientName, true);
 			}
 			else
 			{
 				consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 				ip = consoleLesen();
-				starteRMI("RmiServer", ip, clientName, false);
 			}
+			starteRMI("RmiServer", ip, clientName, serverStarten);
 		}
 	}
 
 	private static String consoleLesen()
 	{
-		BufferedReader console = new BufferedReader(new InputStreamReader(
-				System.in));
 		String zeile = null;
 		try
 		{
-			zeile = console.readLine();
+			zeile = CONSOLE.readLine();
 		}
 		catch(IOException e)
 		{
