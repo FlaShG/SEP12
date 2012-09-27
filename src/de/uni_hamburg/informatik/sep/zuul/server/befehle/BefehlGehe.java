@@ -102,7 +102,7 @@ final class BefehlGehe implements Befehl
 		String richtung = extrahiereRichtung(befehlszeile);
 		if(richtung == null)
 		{
-		kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINERICHTUNG);
+			kontext.schreibeAnSpieler(spieler, TextVerwalter.KEINERICHTUNG);
 		}
 		else
 		{

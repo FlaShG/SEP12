@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientVorschauPaket;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
@@ -109,11 +108,9 @@ public class Spiel extends Observable
 			String raumNachricht = _logik.getKontext()
 					.getAktuellenRaumZu(spieler).getBeschreibung();
 			_logik.getKontext().schreibeAnSpieler(spieler, raumNachricht);
-			
-			
+
 		}
-		
-		
+
 	}
 
 	/**
@@ -130,17 +127,17 @@ public class Spiel extends Observable
 		Spieler spieler = _logik.getKontext().getSpielerByName(benutzerName);
 		Befehlszeile befehlszeile = new Befehlszeile(eingabe);
 
-
-		if (eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
+		if(eingabe.equals(TextVerwalter.BEFEHL_BEENDEN))
 		{
-			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(_logik.getKontext(), spieler, befehlszeile);
+			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(
+					_logik.getKontext(), spieler, befehlszeile);
 			return;
 		}
-		
+
 		// Spieler von der Karte entfernt?
 		if(spieler == null)
 		{
-				return;
+			return;
 		}
 
 		Befehl befehl = BefehlFactory.gibBefehl(befehlszeile);
@@ -272,7 +269,8 @@ public class Spiel extends Observable
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND, SpielKonstanten.ONE_SECOND);
+			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND,
+					SpielKonstanten.ONE_SECOND);
 		}
 		_gestartet = gestartet;
 	}

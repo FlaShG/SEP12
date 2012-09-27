@@ -1,14 +1,12 @@
 package de.uni_hamburg.informatik.sep.zuul.client;
 
 import java.net.MalformedURLException;
-import java.rmi.AccessException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
-import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.server.ServerInterface;
 
 /**
@@ -27,7 +25,7 @@ public abstract class Client extends UnicastRemoteObject implements
 	ServerInterface _server;
 	private String _clientName;
 
-	public Client(String serverName, String serverIP, String clientName)
+	protected Client(String serverName, String serverIP, String clientName)
 			throws MalformedURLException, RemoteException, NotBoundException
 	{
 		// choose anonymous port

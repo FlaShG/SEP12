@@ -33,7 +33,9 @@ public class EditorFensterUI
 	/**
 	 * Erzeugt eine neue {@link EditorFensterUI}.
 	 * 
-	 * @param beobachter ein {@link EditorBeobachter}, der über alle Änderungen in der UI informiert wird.
+	 * @param beobachter
+	 *            ein {@link EditorBeobachter}, der über alle Änderungen in der
+	 *            UI informiert wird.
 	 */
 	public EditorFensterUI(EditorBeobachter beobachter)
 	{
@@ -42,9 +44,13 @@ public class EditorFensterUI
 
 	/**
 	 * (Re-)Initialisiert die UI.
-	 * @param level ein {@link EditorLevel} für die levelglobalen Infos
-	 * @param width die Breite der Karte
-	 * @param height die Höhe der Karte
+	 * 
+	 * @param level
+	 *            ein {@link EditorLevel} für die levelglobalen Infos
+	 * @param width
+	 *            die Breite der Karte
+	 * @param height
+	 *            die Höhe der Karte
 	 * 
 	 * @require width > 0
 	 * @require heigth > 0
@@ -53,7 +59,7 @@ public class EditorFensterUI
 	{
 		assert width > 0 : "Vorbedingung verletzt: width > 0";
 		assert height > 0 : "Vorbedingung verletzt: height > 0";
-		
+
 		JFrame newFrame = new JFrame(TextVerwalter.EDITOR_TITEL);
 
 		newFrame.getContentPane().setLayout(new BorderLayout());
@@ -110,7 +116,7 @@ public class EditorFensterUI
 	public void setMap(EditorMap map)
 	{
 		assert map != null : "Vorbedingung verletzt: map != null";
-		
+
 		_frame.remove(_map);
 		_frame.add(_map = map, BorderLayout.CENTER);
 		_map.setBeobachter(_beobachter);
@@ -171,7 +177,9 @@ public class EditorFensterUI
 	}
 
 	/**
-	 * Gibt das Panel zurück, auf dem die levelglobalen Einstellungen getätigt werden.
+	 * Gibt das Panel zurück, auf dem die levelglobalen Einstellungen getätigt
+	 * werden.
+	 * 
 	 * @return
 	 */
 	public LevelPanel getLevelPanel()

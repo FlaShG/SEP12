@@ -40,8 +40,8 @@ public class EditorFenster implements EditorBeobachter
 		_leveldaten = new EditorLevel();
 		_ui = new EditorFensterUI(this);
 
-		_speicherWerkzeug = new SpeicherWerkzeug(this);
-		_ladenWerkzeug = new LadenWerkzeug(this);
+		_speicherWerkzeug = new SpeicherWerkzeug(_leveldaten, _ui);
+		_ladenWerkzeug = new LadenWerkzeug();
 
 		resetEditorFenster(8, 8);
 	}
@@ -81,7 +81,8 @@ public class EditorFenster implements EditorBeobachter
 					{
 						if(_speicherWerkzeug.valide())
 						{
-							String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser(true));
+							String str = FileChooser.speichereDatei(FileChooser
+									.konfiguriereFileChooser(true));
 							if(str != null)
 							{
 								_speicherWerkzeug.speichern(str);
@@ -90,12 +91,15 @@ public class EditorFenster implements EditorBeobachter
 						}
 						else
 						{
-							JOptionPane.showMessageDialog(new JPanel(),
-									"Level erfüllt nicht die Anforderungen.\nErforderlich sind:\n" +
-									"- Ein Start- und ein Zielraum\n" +
-									"- Ein Weg zwischen Start- und Zielraum\n" +
-									"- Eine unbedenkliche Menge wilder Tiere",
-									"Ungültiges Level", JOptionPane.ERROR_MESSAGE);
+							JOptionPane
+									.showMessageDialog(
+											new JPanel(),
+											"Level erfüllt nicht die Anforderungen.\nErforderlich sind:\n"
+													+ "- Ein Start- und ein Zielraum\n"
+													+ "- Ein Weg zwischen Start- und Zielraum\n"
+													+ "- Eine unbedenkliche Menge wilder Tiere",
+											"Ungültiges Level",
+											JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
@@ -112,13 +116,19 @@ public class EditorFenster implements EditorBeobachter
 												"Level laden",
 												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
 						{
-							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser(false));
+							String str = FileChooser.oeffneDatei(FileChooser
+									.konfiguriereFileChooser(false));
 							if(str != null && !str.equals(""))
 							{
 								resetEditorFenster(1, 1);
 								//markiert auch, dass geladen wird
 								_leveldaten = null;
 								_ladenWerkzeug.lade(str);
+
+								getUI().setMap(_ladenWerkzeug.getMap());
+								setEditorLevel(_ladenWerkzeug.getManager()
+										.getEditorLevel());
+
 								unsavedChanges(false);
 							}
 						}
@@ -323,6 +333,7 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
-				TextVerwalter.EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+				TextVerwalter.EDITOR_TITEL
+						+ (yes ? " (ungespeicherte Änderungen)" : ""));
 	}
 }

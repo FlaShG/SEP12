@@ -110,7 +110,7 @@ public class ClientConsole extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		if (duHastGewonnen)
+		if(duHastGewonnen)
 		{
 			System.out.println(TextVerwalter.SIEGTEXT);
 		}
@@ -127,7 +127,7 @@ public class ClientConsole extends Client
 		System.out.println("Server wurde beendet.");
 		System.exit(0);
 	}
-	
+
 	@Override
 	public void serverNichtGefunden()
 	{

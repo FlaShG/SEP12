@@ -63,7 +63,8 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 							TextVerwalter.BEINSTELLEN_AUFSTEHEN);
 
 				}
-			}, SpielKonstanten.BEIN_STELLEN_INAKTIV_ZEIT * SpielKonstanten.ONE_SECOND);
+			}, SpielKonstanten.BEIN_STELLEN_INAKTIV_ZEIT
+					* SpielKonstanten.ONE_SECOND);
 		}
 
 		spieler.setLebensEnergie(spieler.getLebensEnergie()

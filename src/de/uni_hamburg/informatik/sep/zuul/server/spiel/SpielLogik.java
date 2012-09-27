@@ -91,8 +91,11 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer(_struktur,
 				manager.getAnzahlMaeuse());
 
+		List<Raum> raeume = _struktur.getRaeume();
 		for(int i = 0; i < manager.getAnzahlKatzen(); i++)
-			Katze.erzeugeKatze(this);
+		{
+			registriereFeature(new Katze(raeume));
+		}
 
 		_startLebenspunkte = manager.getLebenspunkte();
 

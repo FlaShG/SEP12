@@ -3,11 +3,12 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
 /**
- * Beobachter-Interface für Editor-Ereignisse.
- * Räume können ausgewählt (beinhaltet abwählen, erstellen und löschen),
- * verändert oder verschoben werden.
+ * Beobachter-Interface für Editor-Ereignisse. Räume können ausgewählt
+ * (beinhaltet abwählen, erstellen und löschen), verändert oder verschoben
+ * werden.
+ * 
  * @author 0graeff
- *
+ * 
  */
 public interface EditorBeobachter
 {

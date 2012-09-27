@@ -29,14 +29,15 @@ public class RaumBearbeitenPanel extends JPanel
 	private final Raum _raum;
 
 	/**
-	 * Erzeugt ein {@link RaumBearbeitenPanel} für einen bestimmten {@link Raum}.
+	 * Erzeugt ein {@link RaumBearbeitenPanel} für einen bestimmten {@link Raum}
+	 * .
 	 * 
 	 * @require raum != null
 	 */
 	public RaumBearbeitenPanel(Raum raum, final EditorBeobachter beobachter)
 	{
 		assert raum != null : "Vorbedingung verletzt: raum != null";
-		
+
 		_raum = raum;
 
 		setLayout(new BorderLayout());

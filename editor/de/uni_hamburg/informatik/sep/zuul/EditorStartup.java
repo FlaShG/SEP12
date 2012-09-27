@@ -6,18 +6,20 @@ import de.uni_hamburg.informatik.sep.zuul.editor.EditorFenster;
 
 /**
  * main-Klasse für Editor.
+ * 
  * @author 0graeff
- *
+ * 
  */
 public final class EditorStartup
 {
 	private EditorStartup()
 	{
-		
+
 	}
 
 	/**
-	 * @param string ignoriert.
+	 * @param string
+	 *            ignoriert.
 	 */
 	public static void main(String[] args)
 	{

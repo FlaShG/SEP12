@@ -19,8 +19,10 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	/**
 	 * Erzeugt ein neues {@link EigenschaftIntPanel} mit Startwert.
 	 * 
-	 * @param beschriftung der Text des davorstehenden Labels
-	 * @param startwert der Wert, den die Komponente annimmt
+	 * @param beschriftung
+	 *            der Text des davorstehenden Labels
+	 * @param startwert
+	 *            der Wert, den die Komponente annimmt
 	 */
 	public EigenschaftIntPanel(String beschriftung, int startwert)
 	{
@@ -30,9 +32,13 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	/**
 	 * Erzeugt ein Eigenschaftsfeld mit einem Default-wert und Observer
 	 * 
-	 * @param beschriftung der Text des davorstehenden Labels
-	 * @param startwert der Wert, den die Komponente annimmt
-	 * @param beobachter der {@link EditorBeobachter}, der über Änderungen im Eingabefeld informiert werden soll
+	 * @param beschriftung
+	 *            der Text des davorstehenden Labels
+	 * @param startwert
+	 *            der Wert, den die Komponente annimmt
+	 * @param beobachter
+	 *            der {@link EditorBeobachter}, der über Änderungen im
+	 *            Eingabefeld informiert werden soll
 	 */
 	public EigenschaftIntPanel(String beschriftung, int startwert,
 			EditorBeobachter beobachter)
@@ -64,7 +70,7 @@ public class EigenschaftIntPanel extends EigenschaftsPanel
 	 */
 	public int getWert()
 	{
-		return (Integer)_zahl.getValue();
+		return (Integer) _zahl.getValue();
 	}
 
 	/**

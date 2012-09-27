@@ -22,17 +22,17 @@ public class BefehlEssenBodenTest
 	ServerKontext kontext = new ServerKontext(raum);
 	Spieler spieler = new Spieler("hans");
 	Spieler spielerleeresInventar = new Spieler("keininventar");
-    Inventar inventar = new Inventar();
-    Inventar inventar2 = new Inventar();
-    Befehlszeile befehlszeile= new Befehlszeile("essen boden");
-    
+	Inventar inventar = new Inventar();
+	Inventar inventar2 = new Inventar();
+	Befehlszeile befehlszeile = new Befehlszeile("essen boden");
+
 	@Before
 	public void setUp() throws Exception
 	{
 		raum.addItem(Item.UKuchen);
-//		raum.addItem(Item.UGiftkuchen);
-//		raum.addItem(Item.IKuchen);
-//		raum.addItem(Item.IGiftkuchen);
+		//		raum.addItem(Item.UGiftkuchen);
+		//		raum.addItem(Item.IKuchen);
+		//		raum.addItem(Item.IGiftkuchen);
 		spieler.setLebensEnergie(8);
 		kontext.fuegeNeuenSpielerHinzu(spieler);
 		kontext.setAktuellenRaumZu(spieler, raum);
@@ -41,20 +41,21 @@ public class BefehlEssenBodenTest
 	@Test
 	public void testVorbedingungErfuellt()
 	{
-		assertTrue(essenboden.vorbedingungErfuellt(kontext, spieler, befehlszeile));
+		assertTrue(essenboden.vorbedingungErfuellt(kontext, spieler,
+				befehlszeile));
 		raum.loescheItem();
-		assertFalse(essenboden.vorbedingungErfuellt(kontext, spieler, befehlszeile));
+		assertFalse(essenboden.vorbedingungErfuellt(kontext, spieler,
+				befehlszeile));
 	}
 
 	@Test
 	public void testAusfuehren()
-	{ 
+	{
 		assertTrue(raum.getItems().contains(Item.UKuchen));
 		assertEquals(8, spieler.getLebensEnergie());
 		assertTrue(essenboden.ausfuehren(kontext, spieler, befehlszeile));
 		assertEquals(11, spieler.getLebensEnergie());
-		
-		
+
 		raum.addItem(Item.UGiftkuchen);
 		raum.addItem(Item.UGiftkuchen);
 		assertTrue(raum.getItems().contains(Item.UGiftkuchen));
@@ -67,13 +68,16 @@ public class BefehlEssenBodenTest
 	public void testGibFehlerAus()
 	{
 		essenboden.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.NICHTSZUMESSENTEXTBODEN, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.NICHTSZUMESSENTEXTBODEN.length()));
+		assertEquals(
+				TextVerwalter.NICHTSZUMESSENTEXTBODEN,
+				kontext.getNachrichtFuer(spieler).substring(0,
+						TextVerwalter.NICHTSZUMESSENTEXTBODEN.length()));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals( "essen boden", essenboden.getBefehlsnamen()[0]);
+		assertEquals("essen boden", essenboden.getBefehlsnamen()[0]);
 	}
 
 	@Test
