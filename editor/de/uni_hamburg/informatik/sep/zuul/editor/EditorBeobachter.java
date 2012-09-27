@@ -13,8 +13,9 @@ public interface EditorBeobachter
 {
 	/**
 	 * Ein {@link Raum} wurde ausgewählt.
+	 * @param neuerRaum ob der Raum brandneu ist.
 	 */
-	public void raumwahlUpdate();
+	public void raumwahlUpdate(boolean neuerRaum);
 
 	/**
 	 * Eine Eigenschaft eines {@link Raum}es oder des Levels wurde geändert.

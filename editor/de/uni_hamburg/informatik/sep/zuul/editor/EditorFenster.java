@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 
 /**
  * Die Werkzeugklasse für das Editorfenser.
@@ -23,8 +24,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
  */
 public class EditorFenster implements EditorBeobachter
 {
-	public static final String EDITOR_TITEL = "Zuul-Editor";
-
 	private EditorFensterUI _ui;
 	private EditorLevel _leveldaten;
 	private SpeicherWerkzeug _speicherWerkzeug;
@@ -68,8 +67,7 @@ public class EditorFenster implements EditorBeobachter
 				_ui.getMap().fuegeRaumZuAktivemButtonHinzu();
 				if(_ui.getMap().getAktivenRaum() != null)
 				{
-					raumwahlUpdate();
-					unsavedChanges(true);
+					raumwahlUpdate(true);
 				}
 			}
 		});
@@ -92,11 +90,8 @@ public class EditorFenster implements EditorBeobachter
 						else
 						{
 							JOptionPane.showMessageDialog(new JPanel(),
-									"Level erfüllt nicht die Anforderungen.\nErforderlich sind:\n" +
-									"- Ein Start- und ein Zielraum\n" +
-									"- Ein Weg zwischen Start- und Zielraum\n" +
-									"- Eine unbedenkliche Menge wilder Tiere",
-									"Ungültiges Level", JOptionPane.ERROR_MESSAGE);
+									EditorTextVerwalter.UNGUELTIGES_LEVEL_TEXT,
+									EditorTextVerwalter.UNGUELTIGES_LEVEL, JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
@@ -110,8 +105,8 @@ public class EditorFenster implements EditorBeobachter
 						if(!_unsavedChanges
 								|| BestaetigungsDialog
 										.erstelle(
-												"Level laden",
-												"Möchten Sie wirklich ein anderes Level laden? Ungespeicherte Änderungen werden verloren gehen."))
+												EditorTextVerwalter.LEVEL_LADEN,
+												EditorTextVerwalter.LEVEL_LADEN_CHECK))
 						{
 							String str = FileChooser.oeffneDatei(FileChooser.konfiguriereFileChooser(false));
 							if(str != null && !str.equals(""))
@@ -134,8 +129,8 @@ public class EditorFenster implements EditorBeobachter
 				if(!_unsavedChanges
 						|| BestaetigungsDialog
 								.erstelle(
-										"Neues Level",
-										"Möchten Sie wirklich ein neues Level erstellen? Ungespeicherte Änderungen werden verloren gehen."))
+										EditorTextVerwalter.NEUES_LEVEL,
+										EditorTextVerwalter.NEUES_LEVEL_CHECK))
 				{
 					MapSizeDialog mapsize = new MapSizeDialog();
 					if(!mapsize.getClickedOK())
@@ -163,8 +158,8 @@ public class EditorFenster implements EditorBeobachter
 										mapsize.getBreite(), mapsize.getHoehe());
 						if(!problematisch
 								|| BestaetigungsDialog
-										.erstelle("Kartengröße ändern",
-												"Durch diese Änderung werden Räume gelöscht. Wollen Sie wirklich fortfahren?"))
+										.erstelle(EditorTextVerwalter.KARTENGROESSE_AENDERN,
+												EditorTextVerwalter.KARTENGROESSE_AENDERN_CHECK))
 						{
 							_ui.getMap().setGroesse(mapsize.getBreite(),
 									mapsize.getHoehe());
@@ -183,8 +178,8 @@ public class EditorFenster implements EditorBeobachter
 				if(!_unsavedChanges
 						|| BestaetigungsDialog
 								.erstelle(
-										"Editor beenden",
-										"Möchten Sie wirklich den Editor beenden? Ungespeicherte Änderungen werden verloren gehen."))
+										EditorTextVerwalter.EDITOR_BEENDEN,
+										EditorTextVerwalter.EDITOR_BEENDEN_CHECK))
 				{
 					System.exit(0);
 				}
@@ -193,12 +188,13 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	@Override
-	public void raumwahlUpdate()
+	public void raumwahlUpdate(boolean neuerRaum)
 	{
 		_ui.getFrame().remove(_ui.getRaumhinzu());
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
 		if(bearbeitenPanel != null)
 			_ui.getFrame().remove(bearbeitenPanel);
+		_ui.getFrame().remove(_ui.getFueller());
 
 		_ui.getFrame().setVisible(true);
 
@@ -212,6 +208,10 @@ public class EditorFenster implements EditorBeobachter
 			}
 			else
 			{
+				if(neuerRaum)
+				{
+					unsavedChanges(true);
+				}
 				_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
 						BorderLayout.SOUTH);
 				_ui.getBearbeitenPanel().getLoeschenButton()
@@ -227,6 +227,11 @@ public class EditorFenster implements EditorBeobachter
 				//geht net.
 				_ui.getBearbeitenPanel().setzeFokusAufNamensFeld();
 			}
+		}
+		else
+		{
+			_ui.getFrame().add(_ui.getFueller(), BorderLayout.SOUTH);
+			_ui.getFueller().setText(randomHilfetext());
 		}
 
 		_ui.getFrame().setVisible(true);
@@ -324,6 +329,11 @@ public class EditorFenster implements EditorBeobachter
 	{
 		_unsavedChanges = yes;
 		_ui.getFrame().setTitle(
-				EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+				EditorTextVerwalter.EDITOR_TITEL + (yes ? " (ungespeicherte Änderungen)" : ""));
+	}
+
+	private String randomHilfetext()
+	{
+		return FancyFunction.getRandomEntry(EditorTextVerwalter.EDITOR_TIPPS);
 	}
 }

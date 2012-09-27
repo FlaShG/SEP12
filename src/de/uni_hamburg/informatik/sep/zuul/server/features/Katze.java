@@ -1,5 +1,6 @@
 package de.uni_hamburg.informatik.sep.zuul.server.features;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,7 +59,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		if(raum.hasMaus())
 		{
 			Maus maus = raum.getMaus();
-			maus.wirdVonKatzeVerjagt(kontext);
+			mausWirdVonKatzeVerjagt(maus, kontext);
 
 		}
 	}
@@ -77,8 +78,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		if(istEinSpielerImRaum(kontext, neuerRaum1))
 			return neuerRaum1;
 
-		Raum neuerRaum2 = selectRaumOhneKatze(neuerRaum1
-				.getAusgaenge());
+		Raum neuerRaum2 = selectRaumOhneKatze(neuerRaum1.getAusgaenge());
 
 		// Hat neuerRaum1 keine Ausgänge?
 		if(neuerRaum2 == null)
@@ -150,13 +150,13 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 	{
 		RaumStruktur raumStruktur = spielLogik.getStruktur();
 		List<Raum> raeume = raumStruktur.getRaeume();
-		
+
 		Raum raum = selectRaumOhneKatze(raeume);
-		
+
 		// Keine freie Position mehr möglich
 		if(raum == null)
 			throw new NullPointerException("Keine freie Position für Katze.");
-		
+
 		verjageMausImRaum(raum, spielLogik.getKontext());
 
 		Katze katze = new Katze(raum);
@@ -171,10 +171,9 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		do
 		{
 			raum = FancyFunction.getRandomEntryAndRemove(raeume);
-			if(raum==null)
+			if(raum == null)
 				return null;
-		}
-		while(raum.hasKatze());
+		} while(raum.hasKatze());
 		return raum;
 	}
 
@@ -193,5 +192,26 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 			return false;
 		}
 		return true;
+	}
+
+	public static void mausWirdVonKatzeVerjagt(Maus maus, ServerKontext kontext)
+	{
+		ArrayList<Raum> moeglicheRaeumeFuerMaus = maus.getAktuellerRaum()
+				.getAusgaenge();
+
+		// TODO: Better selection of rooms ( No start and end point, ... )
+		Raum neuerRaumFuerMaus = Katze
+				.selectRaumOhneKatze(moeglicheRaeumeFuerMaus);
+
+		maus.getAktuellerRaum().setMaus(null);
+		if(neuerRaumFuerMaus == null)
+			return;
+
+		maus.setAktuellerRaum(neuerRaumFuerMaus);
+		neuerRaumFuerMaus.setMaus(maus);
+
+		if(kontext != null)
+			kontext.schreibeAnAlleSpielerInRaum(maus.getAktuellerRaum(),
+					TextVerwalter.KATZE_VERJAGT_DIE_MAUS);
 	}
 }
