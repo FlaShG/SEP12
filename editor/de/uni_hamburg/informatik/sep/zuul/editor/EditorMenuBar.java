@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.FlowLayout;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,6 +19,7 @@ public class EditorMenuBar extends JPanel
 	private final JButton _save;
 	private final JButton _load;
 	private final JButton _resize;
+	private final JButton _pathfinding;
 
 	/**
 	 * Erstellt eine neue {@link EditorMenuBar}.
@@ -32,6 +34,7 @@ public class EditorMenuBar extends JPanel
 		add(_load = new JButton("Laden"));
 		add(_save = new JButton("Speichern"));
 		add(_resize = new JButton("Kartengröße"));
+		add(_pathfinding = new JButton("Pathfinder"));
 	}
 
 	/**
@@ -72,5 +75,15 @@ public class EditorMenuBar extends JPanel
 	public JButton getResizeButton()
 	{
 		return _resize;
+	}
+	
+	/**
+	 * Gibt den Pathfinding-Button zurück. 
+	 * 
+	 * @ensure result != null
+	 */
+	public JButton getPathfindingButton()
+	{
+		return _pathfinding;
 	}
 }
