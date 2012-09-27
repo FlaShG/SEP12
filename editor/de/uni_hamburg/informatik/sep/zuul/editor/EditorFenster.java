@@ -67,8 +67,7 @@ public class EditorFenster implements EditorBeobachter
 				_ui.getMap().fuegeRaumZuAktivemButtonHinzu();
 				if(_ui.getMap().getAktivenRaum() != null)
 				{
-					raumwahlUpdate();
-					unsavedChanges(true);
+					raumwahlUpdate(true);
 				}
 			}
 		});
@@ -189,7 +188,7 @@ public class EditorFenster implements EditorBeobachter
 	}
 
 	@Override
-	public void raumwahlUpdate()
+	public void raumwahlUpdate(boolean neuerRaum)
 	{
 		_ui.getFrame().remove(_ui.getRaumhinzu());
 		RaumBearbeitenPanel bearbeitenPanel = _ui.getBearbeitenPanel();
@@ -209,6 +208,10 @@ public class EditorFenster implements EditorBeobachter
 			}
 			else
 			{
+				if(neuerRaum)
+				{
+					unsavedChanges(true);
+				}
 				_ui.getFrame().add(_ui.neuesBearbeitenPanel(raum),
 						BorderLayout.SOUTH);
 				_ui.getBearbeitenPanel().getLoeschenButton()
