@@ -58,7 +58,7 @@ public final class TextVerwalter
 				+ energie + " Räume betreten können wird.";
 	}
 
-	public static final String KEINIDENTIFIZIERTERKUCHEN = "Dr. Little hat keinen identifizierten Krümel dieser Art.";
+	public static final String KEIN_KUCHEN_DIESER_ART = "Dr. Little hat keinen Krümel dieser Art.";
 
 	public static final String NIEDERLAGETEXT = "Dr. Little ist vor Erschöpfung und Hunger zusammengebrochen. Starte erneut.";
 	public static final String BEENDENTEXT = "Dr. Little dankt Ihnen für Ihre Hilfe bei seinem aufregenden Abenteuer. Bis zum nächsten Mal bei Zuul.";
