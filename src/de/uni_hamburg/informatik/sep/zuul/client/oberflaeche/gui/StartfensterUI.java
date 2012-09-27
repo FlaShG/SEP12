@@ -4,9 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +19,7 @@ public class StartfensterUI extends JFrame
 	private JButton _multiPlayer;
 	private JTextField _benutzerName;
 	private JTextField _eingabeIP;
+	private JTextField _eingabePort;
 	private JButton _eingabeBestaetigen;
 	private JButton _abbrechen;
 	private JButton _abbrechen2; // leider nötig... sonst müssten die Panels jedesmal neu gemacht werden 
@@ -57,6 +56,7 @@ public class StartfensterUI extends JFrame
 
 		_benutzerName = new JTextField("Dr.Little");
 		_eingabeIP = new JTextField("127.0.0.1");
+		_eingabePort = new JTextField("1090");
 		_eingabeBestaetigen = new JButton("Bestaetigen");
 		_abbrechen = new JButton("Abbrechen");
 		_abbrechen2 = new JButton("Abbrechen");
@@ -104,6 +104,10 @@ public class StartfensterUI extends JFrame
 		_multiPlayerPanel.add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
+
+		_multiPlayerPanel.add(new JLabel("Port:"));
+		_multiPlayerPanel.add(_eingabePort);
+		
 		_multiPlayerPanel.add(_eingabeBestaetigen);
 		_multiPlayerPanel.add(_abbrechen);
 	}
@@ -155,6 +159,11 @@ public class StartfensterUI extends JFrame
 	public JTextField getSpielerNameTextField()
 	{
 		return _benutzerName;
+	}
+
+	public JTextField getPortTextField()
+	{
+		return _eingabePort;
 	}
 
 	public JButton getAbbrechenButton()

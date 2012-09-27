@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientVorschauPaket;
-import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.KonsolenPanel;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlFactory;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
@@ -20,20 +19,13 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
- * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
- * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
- * sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf jeden Fall
- * ausgebaut werden, damit es interessanter wird!
+ * Erstelle ein neues Spiel, bestehend aus Spielern und einer Spiellogik. 
+ * Spieler können an- und abgemeldet werden. Es werden alle weiteren Vorgänge 
+ * die zum Spielen nötig sind angestoßen und können auch wieder beendet werden. 
+ * Ein Spiel wird vom erzeugenden Server beobachtet.
  * 
- * Zum Spielen muss eine Instanz dieser Klasse erzeugt werden und an ihr die
- * Methode "spielen" aufgerufen werden.
- * 
- * Diese Instanz erzeugt und initialisiert alle anderen Objekte der Anwendung:
- * Sie legt alle Räume und einen Parser an und startet das Spiel. Sie wertet
- * auch die Befehle aus, die der Parser liefert, und sorgt für ihre Ausführung.
- * 
- * Das Ausgangssystem basiert auf einem Beispielprojekt aus dem Buch
- * "Java lernen mit BlueJ" von D. J. Barnes und M. Kölling.
+ * @author 0ortmann
+ *
  */
 public class Spiel extends Observable
 {
@@ -65,8 +57,11 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAn(String name)
 	{
-		Spieler spieler = _logik.erstelleNeuenSpieler(name);
-		_spielerMap.put(name, spieler);
+		if(!_spielerMap.containsKey(name))
+		{
+			Spieler spieler = _logik.erstelleNeuenSpieler(name);
+			_spielerMap.put(name, spieler);
+		}
 	}
 
 	/**
@@ -77,8 +72,11 @@ public class Spiel extends Observable
 	 */
 	public void meldeSpielerAb(String name)
 	{
-		_logik.meldeSpielerAb(name);
-		_spielerMap.remove(name);
+		if(_spielerMap.containsKey(name))
+		{
+			_logik.meldeSpielerAb(name);
+			_spielerMap.remove(name);
+		}
 	}
 
 	/**
@@ -191,7 +189,7 @@ public class Spiel extends Observable
 	 * 
 	 * @param level
 	 */
-	protected void restart(String level)
+	protected void restart()
 	{
 		_logik.beendeSpiel();
 		spielen();

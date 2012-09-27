@@ -26,15 +26,18 @@ public abstract class Client extends UnicastRemoteObject implements
 	boolean _isSpielzuEnde;
 	ServerInterface _server;
 	private String _clientName;
+	int _port;
 
-	public Client(String serverName, String serverIP, String clientName)
-			throws MalformedURLException, RemoteException, NotBoundException
+	public Client(String serverName, String serverIP, int clientPort,
+			String clientName) throws MalformedURLException, RemoteException,
+			NotBoundException
 	{
-		// choose anonymous port
-		super(0);
+
+		super(clientPort);
 		_serverName = serverName;
 		_serverIP = serverIP;
 		_isSpielzuEnde = false;
+		_port = clientPort;
 
 		_clientName = clientName;
 
