@@ -94,7 +94,7 @@ public final class BefehlFactory
 			for(int j = i; j < geparsteZeile.size(); j++)
 			{
 				String previous = befehlsnamen.get(j);
-				if(previous != "")
+				if(!previous.isEmpty())
 					previous += " ";
 				befehlsnamen.set(j, previous + geparsteZeile.get(i));
 			}
