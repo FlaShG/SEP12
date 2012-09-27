@@ -32,9 +32,6 @@ public class SpielLogik
 	public ServerKontext _kontext;
 	private RaumStruktur _struktur;
 
-	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
-	public static final int KUCHEN_ENERGIE_GEWINN = 3;
-	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	private int _startLebenspunkte = 8;
 
 	public SpielLogik()

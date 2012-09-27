@@ -13,7 +13,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumStruktur;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
@@ -22,8 +22,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 {
-	public static final int KATZE_SCHADEN = 2;
-	public static final long SCHLAFZEIT_IN_SEKUNDEN = 10;
 	public Raum _raum;
 	boolean _satt = false;
 
@@ -129,7 +127,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 					}
 				});
 			}
-		}, SCHLAFZEIT_IN_SEKUNDEN * Spiel.ONE_SECOND);
+		}, SpielKonstanten.KATZE_SCHLAFZEIT_IN_SEKUNDEN * SpielKonstanten.ONE_SECOND);
 	}
 
 	public Raum getRaum()
@@ -185,7 +183,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 		if(!_satt && _raum == kontext.getAktuellenRaumZu(spieler)
 				&& befehl instanceof BefehlSchauen)
 		{
-			spieler.setLebensEnergie(spieler.getLebensEnergie() - KATZE_SCHADEN);
+			spieler.setLebensEnergie(spieler.getLebensEnergie() - SpielKonstanten.KATZE_SCHADEN);
 			kontext.schreibeAnSpieler(spieler, TextVerwalter.KATZE_GREIFT_AN);
 
 			bewegeKatze(kontext);

@@ -37,7 +37,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
  */
 public class Spiel extends Observable
 {
-	public static final long ONE_SECOND = 1000;
 	private SpielLogik _logik;
 	private Map<String, Spieler> _spielerMap;
 	//	private Map<Spieler, String> _nachrichtenMap;
@@ -273,7 +272,7 @@ public class Spiel extends Observable
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, ONE_SECOND, ONE_SECOND);
+			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND, SpielKonstanten.ONE_SECOND);
 		}
 		_gestartet = gestartet;
 	}
