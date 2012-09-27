@@ -157,7 +157,6 @@ public final class TextVerwalter
 	public static final String MODUS_AUSWAHL_MULTIPLAYER = "Mehrspieler";
 	public static final String MODUS_AUSWAHL_SERVERIPLABEL = "Geben Sie die Host-IP ein: ";
 	public static final String MODUS_AUSWAHL_NAMEPLABEL = "Geben Sie Ihren Spielernamen ein: ";
-	public static final String MODUS_AUSWAHL_SERVERPORTLABEL = "Geben sie den Host-Port ein: ";
 
 	public static final String BEFEHL_BEINSTELLEN = "bein stellen";
 	public static final String BEINSTELLEN_KEINER_DA = "Hier ist niemand, dem du ein Bein stellen könntest.";

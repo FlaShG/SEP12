@@ -17,6 +17,9 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class StartConsole extends StartUp
 {
 
+	private static final BufferedReader CONSOLE = new BufferedReader(new InputStreamReader(
+			System.in));
+
 	public StartConsole() throws RemoteException, AlreadyBoundException,
 			MalformedURLException, NotBoundException
 	{
@@ -33,7 +36,7 @@ public class StartConsole extends StartUp
 				ladeLevel();
 			}
 
-			starteRMI("RmiServer", "localhost", 1090, "Dr. Little", true);
+			starteRMI("RmiServer", "localhost", "Dr. Little", true);
 		}
 		else if(eingabe.equals("multispiel") || eingabe.equals("mehrspieler")
 				|| eingabe.equals("multiplayer") || eingabe.equals("m"))
@@ -43,34 +46,27 @@ public class StartConsole extends StartUp
 			String clientName = consoleLesen();
 
 			String ip = "localhost";
-			int port = 1090;
 			consoleAnzeigen("Wollen Sie einen Öffentliches Spiel erstellen?(j/n)");
-			String server = consoleLesen();
-			if(server.equals("j"))
+			boolean serverStarten = consoleLesen().equals("j");
+			if(serverStarten)
 			{
 				ladeLevel();
-				starteRMI("RmiServer", ip, port, clientName, true);
 			}
 			else
 			{
 				consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 				ip = consoleLesen();
-				consoleAnzeigen(TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
-				String portEingabe = consoleLesen();
-				starteRMI("RmiServer", ip, Integer.parseInt(portEingabe),
-						clientName, false);
 			}
+			starteRMI("RmiServer", ip, clientName, serverStarten);
 		}
 	}
 
 	private static String consoleLesen()
 	{
-		BufferedReader console = new BufferedReader(new InputStreamReader(
-				System.in));
 		String zeile = null;
 		try
 		{
-			zeile = console.readLine();
+			zeile = CONSOLE.readLine();
 		}
 		catch(IOException e)
 		{
@@ -107,7 +103,7 @@ public class StartConsole extends StartUp
 	}
 
 	public void starteRMI(final String serverName, final String serverIP,
-			final int port, final String clientName, final boolean serverStarten)
+			final String clientName, final boolean serverStarten)
 	{
 		Runnable run = new Runnable()
 		{
