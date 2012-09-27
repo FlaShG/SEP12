@@ -66,7 +66,7 @@ public final class TextVerwalter
 	public static final String HILFE_EAT = "Geben sie \"essen tasche\" oder \"essen boden\" um von der gegebenen Lokalität einen zufälligen Krümel zu Essen. \nTippen sie \"essen tasche guter krümel\" oder \"essen tasche schlechter krümel\" um einen entsprechenden Krümel aus ihrer Tasche zu essen.";
 	public static final String HILFE_LOOK = "Geben sie \"schauen\" und eine Himmelsrichtung ein, um in den Raum zu schauen, wenn dort einer ist. \nDie Richtungen sind: \n\"nord\", \"ost\", \"süd\", \"west\"";
 	public static final String HILFE_TAKE = "Geben sie \"nehmen\" ein, um einen Krümel aus dem Raum aufzuheben.";
-	public static final String HILFE_GIVE = "Geben sie \"gib\" ein um einen Krümel an das Labor zu geben. Dort wird er untersucht.";
+	public static final String HILFE_UNTERSUCHE = "Geben sie \"untersuche\" ein, um einen Krümel an das Labor zu geben. Dort wird er untersucht.";
 	public static final String HILFE_FEED = "Geben sie \"füttere\" ein um einen Krümel an die Katze oder die Maus zu geben. \nTippen sie \"füttere krümel\" ein, um einen zufälligen Krümel zu füttern.\nAlternativ können sie \"füttere guter krümel\" oder \"füttere schlechter krümel\" tippen, wenn sie einen entsprechend identifizierten Krümel haben.";
 	public static final String HILFE_INVENTAR = "Geben sie \"Inventar\" ein, um zu sehen, welche Gegenstände sie bei sich tragen.";
 	public static final String HILFE_ABLEGEN = "Geben sie \"ablegen\" ein, um einen zufälligen Krümel abzulegen.\nTippen sie \"ablegen guter krümel\" oder \"ablegen schlechter krümel\" um einen solchen abzulegen, wenn sie über einen verfügen.";
@@ -183,7 +183,7 @@ public final class TextVerwalter
 	public static final String beinStellenSchaden(String name)
 	{
 		return "Das Bein Stellen war für " + name
-				+ " so anstrengend, so dass er ein Lebenspunkt verloren hat.";
+				+ " so anstrengend, dass er ein Lebenspunkt verloren hat.";
 	}
 
 }
