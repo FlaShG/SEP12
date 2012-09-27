@@ -111,7 +111,7 @@ public abstract class Client extends UnicastRemoteObject implements
 			LocateRegistry.getRegistry().lookup(serverName);
 			return true;
 		}
-		catch(RemoteException | NotBoundException e)
+		catch(Exception e)
 		{
 			return false;
 		}
