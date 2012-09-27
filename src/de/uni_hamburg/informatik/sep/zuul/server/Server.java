@@ -113,7 +113,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 			}
 
 			result = true;
-			System.out.println("eingeloggt");
+			System.err.println("eingeloggt");
 		}
 
 		return result;

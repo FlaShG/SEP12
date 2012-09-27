@@ -239,8 +239,8 @@ class Raumbilderzeuger
 			position = entryPicker.pickAndRemoveFromList(_mauspositionen);
 
 			if(position == null)
-				;
-			position = new Point(70, 70);
+				position = new Point(70, 70);
+
 			x = position.x;
 			y = position.y;
 

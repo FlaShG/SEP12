@@ -41,7 +41,7 @@ public abstract class Client extends UnicastRemoteObject implements
 			_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
 					+ _serverName);
 		}
-		catch(Exception exception)
+		catch(NotBoundException notBoundException)
 		{
 			serverNichtGefunden();
 		}
@@ -80,7 +80,7 @@ public abstract class Client extends UnicastRemoteObject implements
 			System.err.println("Fehler beim Ausloggen!");
 			//TODO ausgabe auf gui
 		}
-		
+
 		beendeFenster();
 
 	}
@@ -100,9 +100,9 @@ public abstract class Client extends UnicastRemoteObject implements
 
 	protected void beendeFenster()
 	{
-		
+
 	}
-	
+
 	public String getClientName()
 	{
 		return _clientName;
