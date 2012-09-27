@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import de.uni_hamburg.informatik.sep.zuul.EditorStartup;
@@ -92,11 +93,10 @@ public class StartFenster extends StartUp
 
 		_ui.getAbbrechenButton().addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.exit(0);
+				_ui.startDarstellung();
 			}
 		});
 

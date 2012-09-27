@@ -721,4 +721,13 @@ public class ClientGUI extends Client
 			button.doClick();
 		}
 	}
+
+	@Override
+	protected void serverNichtGefunden()
+	{
+
+		JOptionPane.showMessageDialog(null, "Server wurde nicht gefunden");
+		System.exit(0);
+
+	}
 }
