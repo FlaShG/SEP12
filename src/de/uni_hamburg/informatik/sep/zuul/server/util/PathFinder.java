@@ -1,6 +1,10 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 
@@ -9,48 +13,43 @@ public abstract class PathFinder
 
 	protected abstract boolean isZielRaum(Raum raum);
 
-	public ArrayList<Raum> findPath(Raum start)
+	public LinkedList<Raum> findPath(Raum start)
 	{
-		return findPath(start, null);
+		return findPath(start, new HashMap<Raum, LinkedList<Raum>>());
 	}
 
-	private ArrayList<Raum> findPath(Raum start, ArrayList<Raum> begangeneRaeume)
+	private LinkedList<Raum> findPath(Raum start, Map<Raum, LinkedList<Raum>> begangeneRaeume)
 	{
-		if(begangeneRaeume == null)
-		{
-			begangeneRaeume = new ArrayList<Raum>();
-		}
-		begangeneRaeume.add(start);
-
-		if(isZielRaum(start))
-		{
-			return begangeneRaeume;
-		}
-
+		begangeneRaeume.put(start, null);
+		
 		ArrayList<Raum> ausgaenge = start.getAusgaenge();
-		ausgaenge.removeAll(begangeneRaeume);
-
-		if(ausgaenge.size() == 0)
-			return null;
-
-		ArrayList<Raum> kuerzesterWegZumZiel = null;
+		LinkedList<Raum> kuerzesterPfadDiesesRaums = null;
 		for(Raum ausgang : ausgaenge)
 		{
-			ArrayList<Raum> path = findPath(ausgang, new ArrayList<Raum>(
-					begangeneRaeume));
-			if(path != null)
+			LinkedList<Raum> kuerzesterPfadDiesesAusgangs;
+			if(begangeneRaeume.containsKey(ausgang))
 			{
-				if(kuerzesterWegZumZiel == null
-						|| path.size() < kuerzesterWegZumZiel.size())
-					kuerzesterWegZumZiel = path;
+				kuerzesterPfadDiesesAusgangs = begangeneRaeume.get(ausgang);
+			}
+			else
+			{
+				kuerzesterPfadDiesesAusgangs = findPath(ausgang, begangeneRaeume);
+			}
+			if(kuerzesterPfadDiesesAusgangs != null)
+			{
+				if(kuerzesterPfadDiesesRaums == null || kuerzesterPfadDiesesAusgangs.size() + 1 < kuerzesterPfadDiesesRaums.size())
+				{
+					kuerzesterPfadDiesesRaums = kuerzesterPfadDiesesAusgangs;
+					kuerzesterPfadDiesesRaums.add(0, start);
+				}
 			}
 		}
-
-		return kuerzesterWegZumZiel;
-
+		begangeneRaeume.put(start, kuerzesterPfadDiesesRaums);
+		
+		return kuerzesterPfadDiesesRaums;
 	}
 
-	public static String getRichtung(ArrayList<Raum> raums)
+	public static String getRichtung(List<Raum> raums)
 	{
 		if(raums == null || raums.size() < 2)
 			return null;
