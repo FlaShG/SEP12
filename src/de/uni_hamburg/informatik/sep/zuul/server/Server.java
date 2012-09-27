@@ -63,6 +63,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		try
 		{
 			_rmireg.unbind("RmiServer");
+			UnicastRemoteObject.unexportObject(this, true);
 		}
 		catch(Exception e)
 		{
