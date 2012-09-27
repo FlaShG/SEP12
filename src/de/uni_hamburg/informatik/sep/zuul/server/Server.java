@@ -81,7 +81,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		{
 			ClientInterface client = _connectedClients.get(paket
 					.getSpielerName());
-			client.zeigeAn(paket);
+			if(client != null)
+				client.zeigeAn(paket);
 		}
 		return result;
 	}
