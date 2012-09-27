@@ -16,6 +16,7 @@ import java.util.Observer;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerManager;
 
 public class Server extends UnicastRemoteObject implements ServerInterface,
 		Observer
@@ -62,6 +63,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	{
 		try
 		{
+			_spiel.setGestartet(false);
 			_rmireg.unbind("RmiServer");
 			UnicastRemoteObject.unexportObject(this, true);
 		}
@@ -72,24 +74,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		}
 	}
 
-	// sinnlos?
-	public boolean sendeAenderungen(List<ClientPaket> paketListe)
-			throws RemoteException
-	{
-		boolean result = true;
-
-		for(ClientPaket paket : paketListe)
-		{
-			ClientInterface client = _connectedClients.get(paket
-					.getSpielerName());
-			if(client != null)
-				client.zeigeAn(paket);
-		}
-		return result;
-	}
-
 	@Override
-	public boolean loginClient(ClientInterface client, String name)
+	public synchronized boolean loginClient(ClientInterface client, String name)
 			throws RemoteException
 	{
 		boolean result;
@@ -122,41 +108,92 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 	}
 
 	@Override
-	public boolean logoutClient(String name) throws RemoteException
+	public boolean logoutClient(final String name) throws RemoteException
 	{
-		_connectedClients.remove(name);
-
-		_spiel.meldeSpielerAb(name);
-
-		if(name.equals(_hostName))
+		ServerManager.invokeLater(new Runnable()
 		{
-			for(ClientInterface client : _connectedClients.values())
+
+			@Override
+			public void run()
 			{
-				client.serverBeendet();
+				_connectedClients.remove(name);
+
+				_spiel.meldeSpielerAb(name);
+
+				if(name.equals(_hostName))
+				{
+					for(ClientInterface client : _connectedClients.values())
+					{
+						try
+						{
+							client.serverBeendet();
+						}
+						catch(RemoteException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					beendeServer();
+				}
+				//if(_connectedClients.isEmpty())
+				//	beendeServer();
+
 			}
-			beendeServer();
-		}
-		//if(_connectedClients.isEmpty())
-		//	beendeServer();
+		});
 
 		return true;
 	}
 
 	@Override
-	public boolean empfangeNutzerEingabe(String eingabe, String benuzterName)
-			throws RemoteException
+	public boolean empfangeNutzerEingabe(final String eingabe,
+			final String benuzterName) throws RemoteException
 	{
-		_spiel.verarbeiteEingabe(benuzterName, eingabe);
-		sendeAenderungenAnAlle();
+		ServerManager.invokeLater(new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				_spiel.verarbeiteEingabe(benuzterName, eingabe);
+				try
+				{
+					sendeAenderungenAnAlle();
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
 		return true;
 	}
 
 	@Override
-	public void empfangeStartEingabe(String benutzerName)
+	public void empfangeStartEingabe(final String benutzerName)
 			throws RemoteException
 	{
-		_readyClients.add(benutzerName);
-		tryStarteSpiel();
+		ServerManager.invokeLater(new Runnable()
+		{
+
+			@Override
+			public void run()
+			{
+				_readyClients.add(benutzerName);
+				try
+				{
+					tryStarteSpiel();
+				}
+				catch(RemoteException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
 	}
 
 	private void tryStarteSpiel() throws RemoteException
@@ -200,7 +237,14 @@ public class Server extends UnicastRemoteObject implements ServerInterface,
 		{
 			paketListe.add(_spiel.packePaket(name));
 		}
-		sendeAenderungen(paketListe);
+
+		for(ClientPaket paket : paketListe)
+		{
+			ClientInterface client = _connectedClients.get(paket
+					.getSpielerName());
+			if(client != null)
+				client.zeigeAn(paket);
+		}
 	}
 
 	public Map<String, ClientInterface> getConnectedClients()

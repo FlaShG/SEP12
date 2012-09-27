@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.SwingUtilities;
-
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusfuehrenListener;
@@ -18,6 +16,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.FancyFunction;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
@@ -134,7 +133,7 @@ public class Katze implements Feature, TickListener, BefehlAusfuehrenListener
 			@Override
 			public void run()
 			{
-				SwingUtilities.invokeLater(new Runnable()
+				ServerManager.invokeLater(new Runnable()
 				{
 
 					@Override
