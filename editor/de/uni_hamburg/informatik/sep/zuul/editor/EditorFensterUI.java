@@ -78,7 +78,7 @@ public class EditorFensterUI
 		_raumhinzu.setMinimumSize(dim);
 		_raumhinzu.setPreferredSize(dim);
 		
-		newFrame.add(_fueller = new JLabel(EditorTextVerwalter.KLICKEAUFRAUMZUMBEGINNEN), BorderLayout.SOUTH);
+		newFrame.add(_fueller = new JLabel(EditorTextVerwalter.KLICKE_AUF_RAUM_ZUM_BEGINNEN), BorderLayout.SOUTH);
 		_fueller.setSize(dim);
 		_fueller.setMinimumSize(dim);
 		_fueller.setPreferredSize(dim);
