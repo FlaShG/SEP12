@@ -8,6 +8,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import de.uni_hamburg.informatik.sep.zuul.client.FileChooser;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
@@ -77,11 +80,23 @@ public class EditorFenster implements EditorBeobachter
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser(true));
-						if(str != null)
+						if(_speicherWerkzeug.valide())
 						{
-							_speicherWerkzeug.speichern(str);
-							unsavedChanges(false);
+							String str = FileChooser.speichereDatei(FileChooser.konfiguriereFileChooser(true));
+							if(str != null)
+							{
+								_speicherWerkzeug.speichern(str);
+								unsavedChanges(false);
+							}
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(new JPanel(),
+									"Level erfüllt nicht die Anforderungen.\nErforderlich sind:\n" +
+									"- Ein Start- und ein Zielraum\n" +
+									"- Ein Weg zwischen Start- und Zielraum\n" +
+									"- Eine unbedenkliche Menge wilder Tiere",
+									"Ungültiges Level", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
