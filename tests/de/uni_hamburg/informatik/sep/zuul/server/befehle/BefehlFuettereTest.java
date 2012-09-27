@@ -12,6 +12,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.npcs.Maus;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BefehlFuettereTest
 {
@@ -89,31 +90,65 @@ public class BefehlFuettereTest
 	@Test
 	public void testFuettereMaus()
 	{
-		//TODO: Test fail("Not yet implemented");
+		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.IKuchen, raum, maus));
+		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.UKuchen, raum, maus));
+		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.IGiftkuchen, raum, maus));
+		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.UGiftkuchen, raum, maus));
+		assertTrue(fuetter.fuettereMaus(kontext, spieler, Item.Keins, raum, maus));
+		
 	}
 
 	@Test
 	public void testFuettereKatze()
 	{
-		//TODO: Test fail("Not yet implemented");
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen));
+		katze = new Katze(raum);
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.UKuchen));
+		katze = new Katze(raum);
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.IGiftkuchen));
+		katze = new Katze(raum);
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.UGiftkuchen));
+		katze = new Katze(raum);
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.Keins));
+		
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
-		//TODO: Test fail("Not yet implemented");
+		Inventar inventar3 = new Inventar();
+	    spieler.setInventar(inventar3);
+		fuetter.gibFehlerAus(kontext, spieler, befehlszeile);
+		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n", kontext
+				.getNachrichtFuer(spieler));
+		
+		spieler.getInventar().fuegeItemHinzu(Item.IKuchen);
+		raum.setKatze(null);
+		raum.setMaus(null);
+		fuetter.gibFehlerAus(kontext, spieler, befehlszeile);
+		assertEquals(TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN + "\n", kontext
+				.getNachrichtFuer(spieler));
+		
+		raum.setKatze(katze);
+		assertTrue(fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen));
+		fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen);
+		fuetter.fuettereKatze(kontext, spieler, katze, Item.IKuchen);
+	    assertTrue(katze.isSatt());
+	    
+		assertEquals(TextVerwalter.KATZE_HAT_KEINEN_HUNGER + "\n", kontext
+				.getNachrichtFuer(spieler));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		//TODO: Test fail("Not yet implemented");
+		assertEquals("füttere", fuetter.getBefehlsnamen()[0]);
 	}
 
 	@Test
 	public void testGetHilfe()
 	{
-		//TODO: Test fail("Not yet implemented");
+		assertEquals(TextVerwalter.HILFE_FEED, fuetter.getHilfe());
 	}
 
 }
