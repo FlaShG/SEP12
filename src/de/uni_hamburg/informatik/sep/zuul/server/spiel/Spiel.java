@@ -159,7 +159,6 @@ public class Spiel extends Observable
 			}
 
 			// Entferne tote Spieler von Landkarte
-			// TODO wird nicht ausgeführt
 			if(!spieler.lebendig())
 			{
 				_logik.getKontext().entferneSpieler(spieler);

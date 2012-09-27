@@ -183,7 +183,7 @@ public final class TextVerwalter
 	public static final String beinStellenSchaden(String name)
 	{
 		return "Das Bein Stellen war für " + name
-				+ " so anstrengend, so dass er ein Lebenspunkt verloren hat.";
+				+ " so anstrengend, dass er ein Lebenspunkt verloren hat.";
 	}
 
 }
