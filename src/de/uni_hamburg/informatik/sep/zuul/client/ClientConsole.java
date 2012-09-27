@@ -12,10 +12,11 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 public class ClientConsole extends Client
 {
 
-	public ClientConsole(String serverName, String serverIP, String clientName)
-			throws MalformedURLException, RemoteException, NotBoundException
+	public ClientConsole(String serverName, String serverIP, int clientport,
+			String clientName) throws MalformedURLException, RemoteException,
+			NotBoundException
 	{
-		super(serverName, serverIP, clientName);
+		super(serverName, serverIP, clientport, clientName);
 
 		if(!clientName.equals("Dr. Little"))
 		{

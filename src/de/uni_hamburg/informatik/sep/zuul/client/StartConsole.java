@@ -117,7 +117,7 @@ public class StartConsole extends StartUp
 					{
 						_server = new Server();
 					}
-					_client = new ClientConsole(serverName, serverIP,
+					_client = new ClientConsole(serverName, serverIP, 1090,
 							clientName);
 				}
 				catch(Exception e1)
