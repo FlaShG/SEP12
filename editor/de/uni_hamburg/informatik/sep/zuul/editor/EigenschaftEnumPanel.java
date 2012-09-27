@@ -6,10 +6,10 @@ import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
 
 /**
- * Ein Panel, das eine mit JLabel beschriftete JComboBox anzeigt.
- * Es können die Elemente einer Enumeration übergeben werden.
- * Der Benutzer sucht mit diesem Element einen der Werte dieser Enumeration aus.
- * Der Index dieses Wertes wird von getWert zurück gegeben.
+ * Ein Panel, das eine mit JLabel beschriftete JComboBox anzeigt. Es können die
+ * Elemente einer Enumeration übergeben werden. Der Benutzer sucht mit diesem
+ * Element einen der Werte dieser Enumeration aus. Der Index dieses Wertes wird
+ * von getWert zurück gegeben.
  * 
  * @author 0graeff
  */
@@ -19,10 +19,14 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 	private JComboBox<String> _enum;
 
 	/**
-	 * Erstellt ein neues {@link EigenschaftEnumPanel} mit Beschriftung, Auswahlmöglichkeiten und Startindex.
-	 * @param enumValues die Auswahlmöglichkeiten, die angezeigt werden sollen.
-	 * 					 Empfohlen: EINE_ENUM.values(). 
-	 * @param startwert der Startindex.
+	 * Erstellt ein neues {@link EigenschaftEnumPanel} mit Beschriftung,
+	 * Auswahlmöglichkeiten und Startindex.
+	 * 
+	 * @param enumValues
+	 *            die Auswahlmöglichkeiten, die angezeigt werden sollen.
+	 *            Empfohlen: EINE_ENUM.values().
+	 * @param startwert
+	 *            der Startindex.
 	 */
 	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues,
 			int startwert)
@@ -31,11 +35,17 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 	}
 
 	/**
-	 * Erstellt ein neues {@link EigenschaftEnumPanel} mit Beschriftung, Auswahlmöglichkeiten, Startindex und einem Beobachter.
-	 * @param enumValues die Auswahlmöglichkeiten, die angezeigt werden sollen.
-	 * 					 Empfohlen: EINE_ENUM.values().
-	 * @param startwert der Startindex.
-	 * @param beobachter ein Beobachter, der über Änderungen in diesem Element informiert werden soll.
+	 * Erstellt ein neues {@link EigenschaftEnumPanel} mit Beschriftung,
+	 * Auswahlmöglichkeiten, Startindex und einem Beobachter.
+	 * 
+	 * @param enumValues
+	 *            die Auswahlmöglichkeiten, die angezeigt werden sollen.
+	 *            Empfohlen: EINE_ENUM.values().
+	 * @param startwert
+	 *            der Startindex.
+	 * @param beobachter
+	 *            ein Beobachter, der über Änderungen in diesem Element
+	 *            informiert werden soll.
 	 */
 	public EigenschaftEnumPanel(String beschriftung, Object[] enumValues,
 			int startwert, EditorBeobachter beobachter)
@@ -73,8 +83,8 @@ public class EigenschaftEnumPanel extends EigenschaftsPanel
 	}
 
 	/**
-	 * Gibt den ausgewählten Index zurück.
-	 * Empfehlung zur Verwendung: EINE_ENUM.values()[result]
+	 * Gibt den ausgewählten Index zurück. Empfehlung zur Verwendung:
+	 * EINE_ENUM.values()[result]
 	 */
 	public int getWert()
 	{

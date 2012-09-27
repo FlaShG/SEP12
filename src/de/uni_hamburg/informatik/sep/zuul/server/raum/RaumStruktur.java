@@ -193,9 +193,9 @@ public class RaumStruktur
 			}
 
 			// müsste eigentlich woanders stehen, geht aber so auch gut.
-			if (raum.getRaumart() == RaumArt.Ende)
+			if(raum.getRaumart() == RaumArt.Ende)
 				raum.addItem(Item.Gegengift);
-			
+
 			XmlRaum xmlRaum = new XmlRaum(raum.getId(), nord, ost, sued, west,
 					raum.getX(), raum.getY(), raum.getItems());
 			result.add(xmlRaum);

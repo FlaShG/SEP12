@@ -11,7 +11,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.BefehlAusgefuehrtListe
 import de.uni_hamburg.informatik.sep.zuul.server.features.BeinStellen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Feature;
 import de.uni_hamburg.informatik.sep.zuul.server.features.GewonnenTextAnzeigen;
-import de.uni_hamburg.informatik.sep.zuul.server.features.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.features.KuchenImRaumTextAnzeigen;
 import de.uni_hamburg.informatik.sep.zuul.server.features.Lebensenergie;
 import de.uni_hamburg.informatik.sep.zuul.server.features.MausImRaumTextAnzeigen;
@@ -19,6 +18,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.features.RaumBeschreibungAnzeig
 import de.uni_hamburg.informatik.sep.zuul.server.features.RaumGeaendertListener;
 import de.uni_hamburg.informatik.sep.zuul.server.features.TickListener;
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Inventar;
+import de.uni_hamburg.informatik.sep.zuul.server.npcs.Katze;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumBauer;
@@ -32,9 +32,6 @@ public class SpielLogik
 	public ServerKontext _kontext;
 	private RaumStruktur _struktur;
 
-	public static final int RAUMWECHSEL_ENERGIE_KOSTEN = 1;
-	public static final int KUCHEN_ENERGIE_GEWINN = 3;
-	public static final int GIFTKUCHEN_ENERGIE_VERLUST = 1;
 	private int _startLebenspunkte = 8;
 
 	public SpielLogik()
@@ -94,8 +91,11 @@ public class SpielLogik
 		RaumBauer raumbauer = new RaumBauer(_struktur,
 				manager.getAnzahlMaeuse());
 
+		List<Raum> raeume = _struktur.getRaeume();
 		for(int i = 0; i < manager.getAnzahlKatzen(); i++)
-			Katze.erzeugeKatze(this);
+		{
+			registriereFeature(new Katze(raeume));
+		}
 
 		_startLebenspunkte = manager.getLebenspunkte();
 

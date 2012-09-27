@@ -6,17 +6,13 @@ import java.util.TimerTask;
 
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spiel;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 {
-
-	public static final int INAKTIV_ZEIT = 10;
-	public static final int BEIN_STELLEN_SCHADEN = 1;
-
 	@Override
 	public boolean befehlSollAusgefuehrtWerden(ServerKontext kontext,
 			Spieler spieler, Befehl befehl)
@@ -67,11 +63,12 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 							TextVerwalter.BEINSTELLEN_AUFSTEHEN);
 
 				}
-			}, INAKTIV_ZEIT * Spiel.ONE_SECOND);
+			}, SpielKonstanten.BEIN_STELLEN_INAKTIV_ZEIT
+					* SpielKonstanten.ONE_SECOND);
 		}
 
 		spieler.setLebensEnergie(spieler.getLebensEnergie()
-				- BEIN_STELLEN_SCHADEN);
+				- SpielKonstanten.BEIN_STELLEN_SCHADEN);
 		kontext.schreibeAnSpieler(spieler,
 				TextVerwalter.beinStellenSchaden(spieler.getName()));
 

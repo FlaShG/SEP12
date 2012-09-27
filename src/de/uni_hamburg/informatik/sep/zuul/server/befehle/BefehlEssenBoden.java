@@ -2,7 +2,7 @@ package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import de.uni_hamburg.informatik.sep.zuul.server.inventar.Item;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
-import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielLogik;
+import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
@@ -50,7 +50,7 @@ public class BefehlEssenBoden extends BefehlEssen
 
 		if(kuchen.isKuchen())
 		{
-			energie += SpielLogik.KUCHEN_ENERGIE_GEWINN;
+			energie += SpielKonstanten.KUCHEN_ENERGIE_GEWINN;
 			aktuellerRaum.loescheItem();
 			kontext.schreibeAnSpieler(spieler,
 					TextVerwalter.kuchenVomBodenGegessenText(energie));
@@ -64,7 +64,7 @@ public class BefehlEssenBoden extends BefehlEssen
 		if(kuchen.isGiftkuchen())
 		{
 
-			energie -= SpielLogik.GIFTKUCHEN_ENERGIE_VERLUST;
+			energie -= SpielKonstanten.GIFTKUCHEN_ENERGIE_VERLUST;
 			aktuellerRaum.loescheItem();
 			if(energie > 0)
 			{

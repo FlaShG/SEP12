@@ -46,7 +46,7 @@ public class VerbindungsWerkzeug
 		_raumListe = new ArrayList<Raum>();
 
 		_raumArray = liesRaeumeAusButtonArray();
-		
+
 		loescheAlleVerbindungen();
 
 		for(int y = 0; y < _arrayZeilenzahl; ++y)
