@@ -82,6 +82,8 @@ public abstract class Client extends UnicastRemoteObject implements
 			System.err.println("Fehler beim Ausloggen!");
 			//TODO ausgabe auf gui
 		}
+		
+		beendeFenster();
 
 	}
 
@@ -98,6 +100,11 @@ public abstract class Client extends UnicastRemoteObject implements
 
 	}
 
+	protected void beendeFenster()
+	{
+		
+	}
+	
 	public String getClientName()
 	{
 		return _clientName;

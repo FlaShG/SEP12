@@ -16,6 +16,7 @@ public class StartUp
 {
 	static StartUp startUp;
 	static Runnable runnable;
+	static String[] _param;
 	protected Client _client;
 	protected Server _server;
 
@@ -23,12 +24,14 @@ public class StartUp
 			AlreadyBoundException, NumberFormatException,
 			MalformedURLException, NotBoundException
 	{
+		_param = args;
+
 		runnable = new Runnable()
 		{
-
 			@Override
 			public void run()
 			{
+
 				if(args.length == 1 && args[0].equals("console"))
 				{
 					try
@@ -66,27 +69,36 @@ public class StartUp
 		}
 	}
 
-	public static void restart()
+	public static void restart(boolean ausloggen)
 	{
-		// TODO shutdown server
-		try
-		{
-			startUp._client.logout();
 
-			//startUp._server.logoutClient(startUp._client.getClientName());
-		}
-		catch(RemoteException e)
+		if(ausloggen)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try
+			{
+				startUp._client.logout();
+			}
+			catch(RemoteException e)
+			{
+				e.printStackTrace();
+			}
 		}
-
 		startUp._server = null;
-		startUp._client.serverBeendet();
 		startUp._client = null;
+		startUp = null;
+		
 		System.gc();
 		KeyboardFocusManager
 				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());
-		tryToRun();
+
+		try
+		{
+			StartUp.main(StartUp._param);
+		}
+		catch(NumberFormatException | RemoteException | MalformedURLException
+				| AlreadyBoundException | NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

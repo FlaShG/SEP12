@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+import de.uni_hamburg.informatik.sep.zuul.StartUp;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BefehlsPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.BildPanel;
 import de.uni_hamburg.informatik.sep.zuul.client.oberflaeche.gui.Hauptfenster;
@@ -399,10 +400,15 @@ public class ClientGUI extends Client
 				new ActionListenerBefehlAusfuehren(
 						TextVerwalter.BEFEHL_BEINSTELLEN));
 
-		_bp.getQuitButton()
-				.addActionListener(
-						new ActionListenerBefehlAusfuehren(
-								TextVerwalter.BEFEHL_BEENDEN));
+		_bp.getQuitButton().addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				StartUp.restart(true);
+			}
+		});
 
 		_bp.getHelpButton().addActionListener(
 				new ActionListenerBefehlAusfuehren(TextVerwalter.BEFEHL_HILFE));
@@ -696,8 +702,8 @@ public class ClientGUI extends Client
 				//				System.exit(0);
 			}
 		});
-		_hf.hide();
 		_hf.dispose();
+		StartUp.restart(false);
 	}
 
 	@Override
@@ -729,5 +735,11 @@ public class ClientGUI extends Client
 		JOptionPane.showMessageDialog(null, "Server wurde nicht gefunden");
 		System.exit(0);
 
+	}
+
+	@Override
+	protected void beendeFenster()
+	{
+		_hf.dispose();
 	}
 }
