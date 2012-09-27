@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 
 import java.awt.FlowLayout;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 

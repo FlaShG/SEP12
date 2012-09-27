@@ -31,11 +31,6 @@ public abstract class PathFinder
 			return new LinkedList<Raum>(begangeneRaeume.get(start));
 		}
 		
-		if(start.getName().equals("int"))
-		{
-			System.out.println("");
-		}
-		
 		LinkedList<Raum> kuerzesterPfadDiesesRaums = null;
 		
 		//wenn der Raum ein Ziel ist
@@ -88,7 +83,7 @@ public abstract class PathFinder
 		begangeneRaeume.put(start, kuerzesterPfadDiesesRaums);
 		
 		//fancy debugging view
-		//start.setName(""+ (kuerzesterPfadDiesesRaums != null ? (kuerzesterPfadDiesesRaums.size()) : "X"));
+		start.setPathToFinishLength((kuerzesterPfadDiesesRaums != null ? (kuerzesterPfadDiesesRaums.size()-1) : "X")+"");
 		
 		return kuerzesterPfadDiesesRaums == null ? null : new LinkedList<Raum>(kuerzesterPfadDiesesRaums);
 	}
