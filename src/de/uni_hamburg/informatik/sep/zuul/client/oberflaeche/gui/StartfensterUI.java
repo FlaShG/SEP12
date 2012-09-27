@@ -67,8 +67,6 @@ public class StartfensterUI extends JFrame
 		JLabel labelserver = new JLabel(
 				TextVerwalter.MODUS_AUSWAHL_SERVERIPLABEL);
 		JLabel labelname = new JLabel(TextVerwalter.MODUS_AUSWAHL_NAMEPLABEL);
-		JLabel labelport = new JLabel(
-				TextVerwalter.MODUS_AUSWAHL_SERVERPORTLABEL);
 		setSize(new Dimension(300, 290));
 		add(labelname);
 		add(_benutzerName);
@@ -77,7 +75,6 @@ public class StartfensterUI extends JFrame
 		add(_eingabeIP);
 		_eingabeIP.setCaretPosition(_eingabeIP.getText().length());
 		_eingabeIP.requestFocus();
-		add(labelport);
 		add(_eingabeBestaetigen);
 		add(_abbrechen);
 
