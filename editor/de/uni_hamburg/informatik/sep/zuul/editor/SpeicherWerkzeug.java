@@ -99,7 +99,6 @@ public class SpeicherWerkzeug
 			if(_ef.getEditorLevel().getLeben() > 0)
 				valid = false;
 
-			List<Raum> rs = pf.findPath(startRaum);
 			if(pf.findPath(startRaum) != null)
 			{//^-- überprüfe Verbindung von start- und endraum
 
