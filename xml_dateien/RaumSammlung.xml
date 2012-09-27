@@ -546,7 +546,7 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
     <raum>
         <name>Labor</name>
         <id>-1797807418</id>
-        <beschreibung>Dies ist das Labor von Dr. Little. Es lassen sich hier Krümmel untersuchen.</beschreibung>
+        <beschreibung>Dies ist das Labor von Dr. Little. Es lassen sich hier Krümel untersuchen.</beschreibung>
         <raumart>Start</raumart>
     </raum>
     <raum>
@@ -607,6 +607,60 @@ Dr. Little läuft der kalte Schauer den Rücken herunter, als sich in seinem Kop
         <name>Labor von Dr. Evenbigger</name>
         <id>-1508840043</id>
         <beschreibung>Sie haben das Labor von Dr. Evenbigger betreten.</beschreibung>
+        <raumart>Ende</raumart>
+    </raum>
+    <raum>
+        <name>Start</name>
+        <id>-892499026</id>
+        <beschreibung></beschreibung>
+        <raumart>Start</raumart>
+    </raum>
+    <raum>
+        <name>Flur</name>
+        <id>220016901</id>
+        <beschreibung>Es stinkt nach Polyester.</beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-644703263</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-168730629</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-1693638073</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-1382331576</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>-93668116</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name></name>
+        <id>34414923</id>
+        <beschreibung></beschreibung>
+        <raumart>Normal</raumart>
+    </raum>
+    <raum>
+        <name>Ziel</name>
+        <id>-917378225</id>
+        <beschreibung></beschreibung>
         <raumart>Ende</raumart>
     </raum>
 </raumsammlung>
