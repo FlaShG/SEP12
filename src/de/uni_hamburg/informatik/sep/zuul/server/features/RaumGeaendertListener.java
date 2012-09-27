@@ -11,7 +11,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
  * @author felix
  * 
  */
-public interface RaumGeaendertListener
+public interface RaumGeaendertListener extends Feature
 {
 	void raumGeaendert(ServerKontext kontext, Spieler spieler, Raum alterRaum,
 			Raum neuerRaum);
