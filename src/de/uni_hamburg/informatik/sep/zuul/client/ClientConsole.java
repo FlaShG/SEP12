@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
+
 public class ClientConsole extends Client
 {
 
@@ -108,15 +110,29 @@ public class ClientConsole extends Client
 	@Override
 	public void beendeSpiel(boolean duHastGewonnen) throws RemoteException
 	{
-		// TODO Auto-generated method stub
-
+		if (duHastGewonnen)
+		{
+			System.out.println(TextVerwalter.SIEGTEXT);
+		}
+		else
+		{
+			System.out.println(TextVerwalter.NIEDERLAGETEXT);
+		}
+		System.exit(0);
 	}
 
 	@Override
 	public void serverBeendet()
 	{
-		// TODO Auto-generated method stub
-
+		System.out.println("Server wurde beendet.");
+		System.exit(0);
+	}
+	
+	@Override
+	public void serverNichtGefunden()
+	{
+		System.out.println("Konnte Server nicht finden");
+		System.exit(0);
 	}
 
 }
