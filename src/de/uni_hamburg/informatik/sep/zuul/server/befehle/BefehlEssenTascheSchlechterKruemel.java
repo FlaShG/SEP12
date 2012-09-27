@@ -28,7 +28,7 @@ class BefehlEssenTascheSchlechterKruemel extends BefehlEssenTasche
 			Befehlszeile befehlszeile)
 	{
 		kontext.schreibeAnSpieler(spieler,
-				TextVerwalter.KEINIDENTIFIZIERTERKUCHEN);
+				TextVerwalter.KEIN_KUCHEN_DIESER_ART);
 	}
 
 	@Override

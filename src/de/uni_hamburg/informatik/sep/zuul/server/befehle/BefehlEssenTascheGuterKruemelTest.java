@@ -69,7 +69,7 @@ public class BefehlEssenTascheGuterKruemelTest
 	public void testGibFehlerAus()
 	{
 		essentasche.gibFehlerAus(kontext, spieler, befehlszeile);
-		assertEquals(TextVerwalter.KEINIDENTIFIZIERTERKUCHEN, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.KEINIDENTIFIZIERTERKUCHEN.length()));
+		assertEquals(TextVerwalter.KEIN_KUCHEN_DIESER_ART, kontext.getNachrichtFuer(spieler).substring(0, TextVerwalter.KEIN_KUCHEN_DIESER_ART.length()));
 	}
 
 	@Test
