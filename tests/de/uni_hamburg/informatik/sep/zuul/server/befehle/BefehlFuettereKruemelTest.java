@@ -23,7 +23,7 @@ public class BefehlFuettereKruemelTest
 	Raum raumO = new Raum("Ost", "blubb");
 	ServerKontext kontext = new ServerKontext(raumC);
 	Spieler spieler = new Spieler("hans");
-	Befehlszeile nurfutter = new Befehlszeile("fütter");
+	Befehlszeile fuettereK = new Befehlszeile("fütter krümel");
 	Inventar inventar = new Inventar();
 	Inventar inventar2 = new Inventar();
 	Inventar inventar3 = new Inventar();
@@ -33,10 +33,11 @@ public class BefehlFuettereKruemelTest
 	@Before
 	public void setUp() throws Exception
 	{
+		spieler.setLebensEnergie(10);
+		inventar.fuegeItemHinzu(Item.UGiftkuchen);
 		inventar.fuegeItemHinzu(Item.UKuchen);
-		//		inventar.fuegeItemHinzu(Item.UGiftkuchen);
-		inventar2.fuegeItemHinzu(Item.IKuchen);
 		inventar2.fuegeItemHinzu(Item.IGiftkuchen);
+		inventar2.fuegeItemHinzu(Item.IKuchen);
 		spieler.setInventar(inventar);
 		katze = new Katze(raumC);
 		raumC.setAusgang(TextVerwalter.RICHTUNG_OSTEN, raumO);
@@ -50,67 +51,65 @@ public class BefehlFuettereKruemelTest
 	public void testVorbedingungErfuellt()
 	{
 		spieler.setInventar(inventar3);
-		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
 		spieler.setInventar(inventar);
-		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
 		spieler.setInventar(inventar3);
 		raumC.setKatze(katze);
-		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
 		spieler.setInventar(inventar);
-		assertTrue(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertTrue(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
 		spieler.setInventar(inventar3);
 		raumC.setKatze(null);
 		raumC.setMaus(maus);
-		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
-		spieler.setInventar(inventar);
-		assertTrue(futterK.vorbedingungErfuellt(kontext, spieler, nurfutter));
+		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
+		spieler.setInventar(inventar2);
+		assertFalse(futterK.vorbedingungErfuellt(kontext, spieler, fuettereK));
 	}
 
 	@Test
 	public void testAusfuehren()
 	{
-		assertFalse(futterK.ausfuehren(kontext, spieler, nurfutter));
+		assertFalse(futterK.ausfuehren(kontext, spieler, fuettereK));
 		raumC.setKatze(katze);
-		futterK.ausfuehren(kontext, spieler, nurfutter);
-		assertFalse(futterK.ausfuehren(kontext, spieler, nurfutter));
+		spieler.setInventar(inventar);
+		assertTrue(futterK.ausfuehren(kontext, spieler, fuettereK));
 		raumC.setKatze(null);
 		raumC.setMaus(maus);
 		spieler.setInventar(inventar2);
-		assertTrue(futterK.ausfuehren(kontext, spieler, nurfutter));
+		assertTrue(futterK.ausfuehren(kontext, spieler, fuettereK));
 	}
 
 	@Test
 	public void testGibFehlerAus()
 	{
-		futterK.gibFehlerAus(kontext, spieler, nurfutter);
+		futterK.gibFehlerAus(kontext, spieler, fuettereK);
 		assertEquals(TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN
 				+ "\n", kontext.getNachrichtFuer(spieler));
-		spieler.setInventar(inventar2);
+		spieler.setInventar(inventar);
 		raumC.setKatze(katze);
-		futterK.ausfuehren(kontext, spieler, nurfutter);
-		futterK.gibFehlerAus(kontext, spieler, nurfutter);
+		futterK.ausfuehren(kontext, spieler, fuettereK);
+		futterK.gibFehlerAus(kontext, spieler, fuettereK);
 		assertEquals(TextVerwalter.KATZE_STIRBT + "\n"
 				+ TextVerwalter.BEFEHL_FUETTERE_NICHTS_DA_ZUM_FUETTERN + "\n",
 				kontext.getNachrichtFuer(spieler));
 		raumC.setKatze(null);
 		raumC.setMaus(maus);
-		futterK.ausfuehren(kontext, spieler, nurfutter);
+		futterK.ausfuehren(kontext, spieler, fuettereK);
 		assertEquals(
 				TextVerwalter.MAUS_RICHTUNGSANGABE.replace("%s",
 						TextVerwalter.RICHTUNG_OSTEN) + "\n",
 				kontext.getNachrichtFuer(spieler));
-
-		//		TODO Unnötige Abfrage wird schon vorher abgefragt.
-		//		Inventart kein Inhalt... der Text wird nicht ausgegeben das Inventar leer ist.
-		//		spieler.setInventar(inventar3);
-		//		assertEquals(TextVerwalter.MAUS_KEIN_KRUEMEL + "\n",
-		//				kontext.getNachrichtFuer(spieler));
+		spieler.setInventar(inventar2);
+		futterK.gibFehlerAus(kontext, spieler, fuettereK);
+		assertEquals(TextVerwalter.KEIN_KUCHEN_DIESER_ART + "\n",
+				kontext.getNachrichtFuer(spieler));
 	}
 
 	@Test
 	public void testGetBefehlsnamen()
 	{
-		assertEquals(TextVerwalter.BEFEHL_FUETTERE,
+		assertEquals(TextVerwalter.BEFEHL_FUETTERE + " krümel",
 				futterK.getBefehlsnamen()[0]);
 	}
 
