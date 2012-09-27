@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Stack;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -29,6 +30,7 @@ public class EditorFenster implements EditorBeobachter
 	private SpeicherWerkzeug _speicherWerkzeug;
 	private LadenWerkzeug _ladenWerkzeug;
 	private boolean _unsavedChanges;
+	private boolean _pathDisplay;
 
 	private WindowListener _windowListener;
 
@@ -95,18 +97,38 @@ public class EditorFenster implements EditorBeobachter
 									EditorTextVerwalter.UNGUELTIGES_LEVEL,
 									JOptionPane.ERROR_MESSAGE);
 						}
-						
-						//TODO: debugging, raus machen
-						//GridButton[][] buttons = _ui.getMap().getButtonArray();
-//						for(GridButton[] line : buttons)
-//						{
-//							for(GridButton button : line)
-//							{
-//								button.setText(button.getRaum() != null ? button.getRaum().getName() : "");
-//							}
-//						}
 					}
 				});
+		
+		_ui.getMenuBar().getPathfindingButton().addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				_pathDisplay = !_pathDisplay;
+				if(_pathDisplay)
+				{
+					//macht Pathfinding
+					_speicherWerkzeug.valide();
+				}
+				
+				GridButton[][] buttons = _ui.getMap().getButtonArray();
+				for(GridButton[] line : buttons)
+				{
+					for(GridButton button : line)
+					{
+						Raum raum = button.getRaum();
+						if(raum != null)
+						{
+							button.setText(_pathDisplay ? raum.getPathToFinishLength() : raum.getName());
+							button.setEnabled(!_pathDisplay);
+						}
+					}
+				}
+				
+				((JButton)e.getSource()).setText(_pathDisplay ? "zurück" : "Pathfinder");
+			}
+		});
 
 		_ui.getMenuBar().getLadenButton()
 				.addActionListener(new ActionListener()
