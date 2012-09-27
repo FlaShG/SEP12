@@ -41,7 +41,7 @@ public abstract class Client extends UnicastRemoteObject implements
 			_server = (ServerInterface) Naming.lookup("//" + _serverIP + "/"
 					+ _serverName);
 		}
-		catch(Exception exception)
+		catch(NotBoundException notBoundException)
 		{
 			serverNichtGefunden();
 		}
@@ -81,6 +81,8 @@ public abstract class Client extends UnicastRemoteObject implements
 			//TODO ausgabe auf gui
 		}
 
+		beendeFenster();
+
 	}
 
 	public void verarbeiteEingabe(String eingabezeile) throws RemoteException
@@ -92,6 +94,11 @@ public abstract class Client extends UnicastRemoteObject implements
 	}
 
 	public void serverBeendet()
+	{
+
+	}
+
+	protected void beendeFenster()
 	{
 
 	}

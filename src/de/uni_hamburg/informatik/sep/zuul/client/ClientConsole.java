@@ -89,7 +89,7 @@ public class ClientConsole extends Client
 		if(paket.getNachricht() != null)
 		{
 			for(String zeile : paket.getNachricht().split("\n"))
-				System.out.println(zeile);
+				schreibeText(zeile);
 			run();
 		}
 		return true;
@@ -112,11 +112,11 @@ public class ClientConsole extends Client
 	{
 		if(duHastGewonnen)
 		{
-			System.out.println(TextVerwalter.SIEGTEXT);
+			schreibeText(TextVerwalter.SIEGTEXT);
 		}
 		else
 		{
-			System.out.println(TextVerwalter.NIEDERLAGETEXT);
+			schreibeText(TextVerwalter.NIEDERLAGETEXT);
 		}
 		System.exit(0);
 	}
@@ -124,14 +124,14 @@ public class ClientConsole extends Client
 	@Override
 	public void serverBeendet()
 	{
-		System.out.println("Server wurde beendet.");
+		schreibeText("Server wurde beendet.");
 		System.exit(0);
 	}
 
 	@Override
 	public void serverNichtGefunden()
 	{
-		System.out.println("Konnte Server nicht finden");
+		schreibeText("Konnte Server nicht finden");
 		System.exit(0);
 	}
 

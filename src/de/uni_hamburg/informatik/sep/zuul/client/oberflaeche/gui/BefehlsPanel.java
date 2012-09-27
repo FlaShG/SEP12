@@ -338,7 +338,7 @@ public class BefehlsPanel extends JPanel
 			GradientPaint gp = new GradientPaint(new Point2D.Double(0,
 					_labelFuerLebensenergie.getHeight() - balkenhoehe),
 					Color.red, new Point2D.Double(50,
-							_labelFuerLebensenergie.getHeight()), Color.blue);
+							_labelFuerLebensenergie.getHeight()), Color.GREEN);
 
 			Graphics2D g2d = (Graphics2D) lebensbalken.getGraphics();
 			g2d.setPaint(gp);

@@ -17,8 +17,6 @@ import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class KonsolenPanel extends JPanel
 {
-	private JPanel _eingabePanel;
-	private JPanel _ausgabePanel;
 
 	//eingabe
 	private JTextField _eingabeZeile;
