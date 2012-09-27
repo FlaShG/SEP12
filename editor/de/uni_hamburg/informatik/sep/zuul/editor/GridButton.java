@@ -3,10 +3,20 @@ package de.uni_hamburg.informatik.sep.zuul.editor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Paint;
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
 
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
+import de.uni_hamburg.informatik.sep.zuul.server.raum.RaumArt;
 
 /**
  * JButton, der seine Position auf einem Grid (vornehmlich auf einer EditorMap)
@@ -68,15 +78,37 @@ public class GridButton extends JButton
 	 */
 	public void setAusgewaehlt(boolean aktiv)
 	{
-		Color raumAktiv = new Color(0.4f, 0.4f, 0.8f);
-		Color raumInaktiv = new Color(0.2f, 0.2f, 0.5f);
-		Color keinRaumAktiv = Color.lightGray;
-		Color keinRaumInaktiv = Color.gray;
+		Color[] mitRaum = new Color[]{new Color(0.4f, 0.4f, 0.8f), new Color(0.2f, 0.2f, 0.5f)};
+		Color[] ohneRaum = new Color[]{Color.lightGray, Color.gray};
+		Color[] startRaum = new Color[]{new Color(0.4f, 0.8f, 0.4f), new Color(0.2f, 0.5f, 0.2f)};
+		Color[] endRaum = new Color[]{new Color(0.8f, 0.4f, 0.4f), new Color(0.5f, 0.2f, 0.2f)};
 		
-		setBackground(aktiv ? (_raum != null ? raumAktiv
-				: keinRaumAktiv)
-				: (_raum != null ? raumInaktiv
-				: keinRaumInaktiv));
+		Color[] set = ohneRaum;
+		
+		if(_raum != null)
+		{
+			switch(_raum.getRaumart())
+			{
+				case Start:
+					set = startRaum;
+				break;
+				case Ende:
+					set = endRaum;
+				break;
+				default:
+					set = mitRaum;
+			}
+		}
+		
+		setBackground(set[aktiv ? 0 : 1]);
+		//setBorderPainted(aktiv);
+		//setBorder(aktiv ? BorderFactory.createLineBorder(Color.white, 3)
+		//				: BorderFactory.createLineBorder(Color.lightGray, 1));
+		
+		//setBorder(aktiv ? BorderFactory.createBevelBorder(BevelBorder.RAISED, set[1], Color.black)
+		//				: BorderFactory.createSoftBevelBorder(BevelBorder.RAISED));
+		
+		setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, _raum != null ? set[aktiv ? 1 : 0] : new Color(0.6f,0.6f,0.6f), Color.black));
 	}
 
 	/**

@@ -19,6 +19,7 @@ public final class EditorTextVerwalter
 		EDITOR_TIPPS.add("Tipp: Räume können per Doppelklick hinzugefügt werden.");
 		EDITOR_TIPPS.add("Tipp: Der Startraum ist immer auch gleichzeitig das Labor.");
 		EDITOR_TIPPS.add("Tipp: Räume können per Doppelklick hinzugefügt werden.");
+		EDITOR_TIPPS.add("Tipp: Starträume sind grün, Endräume rot.");
 		EDITOR_TIPPS.add("Tipp: Flamingos können nur mit kopfüber gedrehtem Kopf essen.");
 	}
 	
