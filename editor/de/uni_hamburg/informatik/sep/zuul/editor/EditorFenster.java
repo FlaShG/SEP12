@@ -93,6 +93,16 @@ public class EditorFenster implements EditorBeobachter
 									EditorTextVerwalter.UNGUELTIGES_LEVEL_TEXT,
 									EditorTextVerwalter.UNGUELTIGES_LEVEL, JOptionPane.ERROR_MESSAGE);
 						}
+						
+						//TODO: debugging, raus machen
+						//GridButton[][] buttons = _ui.getMap().getButtonArray();
+//						for(GridButton[] line : buttons)
+//						{
+//							for(GridButton button : line)
+//							{
+//								button.setText(button.getRaum() != null ? button.getRaum().getName() : "");
+//							}
+//						}
 					}
 				});
 
