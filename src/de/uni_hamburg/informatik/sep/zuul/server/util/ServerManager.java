@@ -11,7 +11,7 @@ public final class ServerManager
 
 	private ServerManager()
 	{
-		System.err.println("Creating ServerManager");
+		//System.err.println("Creating ServerManager");
 		_thread = new Thread(new Runnable()
 		{
 			@Override
@@ -20,7 +20,7 @@ public final class ServerManager
 				threadRunner();
 			}
 		}, "ServerManager-Thread-1");
-		System.err.println("Running Thread.");
+		//System.err.println("Running Thread.");
 		_thread.start();
 	}
 
@@ -33,8 +33,8 @@ public final class ServerManager
 			while(true)
 			{
 				Runnable runnable = _queue.take();
-				System.err.println(Thread.currentThread().getName()
-						+ ": Executing event.");
+				//System.err.println(Thread.currentThread().getName()
+						//+ ": Executing event.");
 				try
 				{
 					runnable.run();
