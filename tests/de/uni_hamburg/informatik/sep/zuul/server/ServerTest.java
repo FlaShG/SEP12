@@ -9,11 +9,11 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,24 +30,13 @@ public class ServerTest {
 		_server = new Server();
 
 	}
+	
 
 	@Test
 	public void testServer() throws RemoteException, AlreadyBoundException {
 		assertNotNull(_server);
-		_server.beendeServer();
 	}
 
-	@Test
-	public void testBeendeServer() throws AccessException, RemoteException {
-		_server.beendeServer();
-		assertEquals(0, LocateRegistry.getRegistry(1099).list().length);
-		// Registry muss nach abmelden leer sein.
-	}
-
-	@Test
-	public void testSendeAenderungen() {
-		_server.beendeServer();
-	}
 
 	@Test
 	public void testLoginClient() throws RemoteException {
@@ -61,11 +50,11 @@ public class ServerTest {
 
 		assertTrue(_server.getConnectedClients().containsValue(c1));
 		assertTrue(_server.getConnectedClients().containsValue(c2));
-		_server.beendeServer();
+//		_server.beendeServer();
 	}
 
 	@Test
-	public void testLogoutClient() throws RemoteException {
+	public void testLogoutClient() throws RemoteException, InterruptedException {
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
 		ClientInterface c2 = mock(ClientInterface.class);
@@ -80,16 +69,21 @@ public class ServerTest {
 
 		// ausloggen
 		_server.logoutClient("c1");
+
+		Thread.sleep(2000);
 		assertFalse(_server.getConnectedClients().containsValue(c1));
 		assertTrue(_server.getConnectedClients().containsValue(c2));
 
 		_server.logoutClient("c2");
+		Thread.sleep(2000);
 		assertFalse(_server.getConnectedClients().containsValue(c1));
 		assertFalse(_server.getConnectedClients().containsValue(c2));
+		
+//		_server.beendeServer();
 	}
 
 	@Test
-	public void testEmpfangeNutzerEingabe() throws RemoteException {
+	public void testEmpfangeNutzerEingabe() throws RemoteException, InterruptedException {
 
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
@@ -102,14 +96,15 @@ public class ServerTest {
 
 		assertTrue(_server.empfangeNutzerEingabe("gehe nord", "c1"));
 		assertTrue(_server.empfangeNutzerEingabe("eingabe", "c2"));
+		Thread.sleep(1000);
 		verify(c1, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 		verify(c2, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 
-		_server.beendeServer();
+//		_server.beendeServer();
 	}
 
 	@Test
-	public void testEmpfangeStartEingabe() throws RemoteException {
+	public void testEmpfangeStartEingabe() throws RemoteException, InterruptedException {
 		// nur ein spieler loggt ein und startet:
 		ClientInterface c1 = mock(ClientInterface.class);
 
@@ -117,7 +112,7 @@ public class ServerTest {
 
 		_server.loginClient(c1, "c1");
 		_server.empfangeStartEingabe("c1");
-
+		Thread.sleep(1000);
 		verify(c1, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 
 		_server.beendeServer();
@@ -138,7 +133,7 @@ public class ServerTest {
 		assertTrue(_server.getConnectedClients().values().contains(c1));
 		assertTrue(_server.getConnectedClients().values().contains(c2));
 
-		_server.beendeServer();
+//		_server.beendeServer();
 	}
 
 	@Test
@@ -160,7 +155,17 @@ public class ServerTest {
 		_server.update(null, array);
 		verify(c1, atLeastOnce()).zeigeVorschau(any(ClientPaket.class));
 
-		_server.beendeServer();
+//		_server.beendeServer();
 	}
 
+	@After
+	public void tearDown() throws Exception
+	{
+		Thread.sleep(1000);
+		if(LocateRegistry.getRegistry(1099).lookup("RmiServer") != null)
+		{
+			_server.beendeServer();
+		}
+		assertEquals(0, LocateRegistry.getRegistry(1099).list().length);
+	}
 }
