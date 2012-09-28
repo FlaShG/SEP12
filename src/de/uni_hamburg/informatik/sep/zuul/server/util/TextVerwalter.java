@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.sep.zuul.server.util;
 
-
 /**
  * Zentraler Speicher der Ausgabetexte, sowie der Befehls- und Richtungstexte.
  * 

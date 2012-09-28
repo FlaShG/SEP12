@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.sep.zuul.server.befehle;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import org.junit.Test;
 public class BefehlszeileTest
 {
 	Befehlszeile befehlszeile = new Befehlszeile("test test");
-	
+
 	String teil1 = "schwupp";
 	String teil2 = "wupp";
-	
-	List<String> stringlist = new ArrayList<String>(); 
+
+	List<String> stringlist = new ArrayList<String>();
 
 	@Before
 	public void setUp() throws Exception
@@ -36,7 +36,7 @@ public class BefehlszeileTest
 	@Test
 	public void testBeginntMit()
 	{
-	  assertTrue(befehlszeile.beginntMit("t"));
+		assertTrue(befehlszeile.beginntMit("t"));
 	}
 
 }

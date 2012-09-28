@@ -14,7 +14,9 @@ public interface EditorBeobachter
 {
 	/**
 	 * Ein {@link Raum} wurde ausgewählt.
-	 * @param neuerRaum ob der Raum brandneu ist.
+	 * 
+	 * @param neuerRaum
+	 *            ob der Raum brandneu ist.
 	 */
 	public void raumwahlUpdate(boolean neuerRaum);
 

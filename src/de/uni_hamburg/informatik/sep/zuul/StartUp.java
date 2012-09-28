@@ -86,7 +86,7 @@ public class StartUp
 		startUp._server = null;
 		startUp._client = null;
 		startUp = null;
-		
+
 		System.gc();
 		KeyboardFocusManager
 				.setCurrentKeyboardFocusManager(new DefaultKeyboardFocusManager());

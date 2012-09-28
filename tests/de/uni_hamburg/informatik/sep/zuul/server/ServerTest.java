@@ -20,26 +20,28 @@ import org.junit.Test;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientInterface;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 
-public class ServerTest {
+public class ServerTest
+{
 
 	Server _server;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		_server = null;
 		_server = new Server();
 
 	}
-	
 
 	@Test
-	public void testServer() throws RemoteException, AlreadyBoundException {
+	public void testServer() throws RemoteException, AlreadyBoundException
+	{
 		assertNotNull(_server);
 	}
 
-
 	@Test
-	public void testLoginClient() throws RemoteException {
+	public void testLoginClient() throws RemoteException
+	{
 		ClientInterface c1 = mock(ClientInterface.class);
 		ClientInterface c2 = mock(ClientInterface.class);
 
@@ -50,11 +52,12 @@ public class ServerTest {
 
 		assertTrue(_server.getConnectedClients().containsValue(c1));
 		assertTrue(_server.getConnectedClients().containsValue(c2));
-//		_server.beendeServer();
+		//		_server.beendeServer();
 	}
 
 	@Test
-	public void testLogoutClient() throws RemoteException, InterruptedException {
+	public void testLogoutClient() throws RemoteException, InterruptedException
+	{
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
 		ClientInterface c2 = mock(ClientInterface.class);
@@ -78,12 +81,14 @@ public class ServerTest {
 		Thread.sleep(2000);
 		assertFalse(_server.getConnectedClients().containsValue(c1));
 		assertFalse(_server.getConnectedClients().containsValue(c2));
-		
-//		_server.beendeServer();
+
+		//		_server.beendeServer();
 	}
 
 	@Test
-	public void testEmpfangeNutzerEingabe() throws RemoteException, InterruptedException {
+	public void testEmpfangeNutzerEingabe() throws RemoteException,
+			InterruptedException
+	{
 
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
@@ -100,11 +105,13 @@ public class ServerTest {
 		verify(c1, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 		verify(c2, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 
-//		_server.beendeServer();
+		//		_server.beendeServer();
 	}
 
 	@Test
-	public void testEmpfangeStartEingabe() throws RemoteException, InterruptedException {
+	public void testEmpfangeStartEingabe() throws RemoteException,
+			InterruptedException
+	{
 		// nur ein spieler loggt ein und startet:
 		ClientInterface c1 = mock(ClientInterface.class);
 
@@ -119,7 +126,8 @@ public class ServerTest {
 	}
 
 	@Test
-	public void testGetConnectedClients() throws RemoteException {
+	public void testGetConnectedClients() throws RemoteException
+	{
 
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
@@ -133,11 +141,12 @@ public class ServerTest {
 		assertTrue(_server.getConnectedClients().values().contains(c1));
 		assertTrue(_server.getConnectedClients().values().contains(c2));
 
-//		_server.beendeServer();
+		//		_server.beendeServer();
 	}
 
 	@Test
-	public void testUpdate() throws RemoteException {
+	public void testUpdate() throws RemoteException
+	{
 		// einloggen
 		ClientInterface c1 = mock(ClientInterface.class);
 		ClientInterface c2 = mock(ClientInterface.class);
@@ -146,16 +155,16 @@ public class ServerTest {
 
 		_server.loginClient(c1, "c1");
 		_server.loginClient(c2, "c2");
-		
+
 		_server.update(null, null);
 		verify(c1, atLeastOnce()).zeigeAn(any(ClientPaket.class));
 		verify(c2, atLeastOnce()).zeigeAn(any(ClientPaket.class));
-		
-		String[] array = {"c1", "nord"};
+
+		String[] array = { "c1", "nord" };
 		_server.update(null, array);
 		verify(c1, atLeastOnce()).zeigeVorschau(any(ClientPaket.class));
 
-//		_server.beendeServer();
+		//		_server.beendeServer();
 	}
 
 	@After

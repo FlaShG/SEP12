@@ -361,13 +361,14 @@ public class Raum
 				return true;
 		}
 		return false;
-	
+	}
+
 	@XmlTransient
 	public String getPathToFinishLength()
 	{
 		return _pathToFinishLength;
 	}
-	
+
 	public void setPathToFinishLength(String s)
 	{
 		_pathToFinishLength = s;

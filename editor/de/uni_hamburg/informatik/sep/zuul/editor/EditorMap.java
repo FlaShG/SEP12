@@ -228,6 +228,7 @@ public class EditorMap extends JPanel
 	//doubleclick-a-doo
 	private Object lastClickedButton = null;
 	private long lastButtonClick = 0;
+
 	private void initialisiereButton(GridButton button, int x, int y)
 	{
 		button.addActionListener(new ActionListener()
@@ -245,7 +246,7 @@ public class EditorMap extends JPanel
 				_activeY = ((GridButton) arg0.getSource()).getGridY();
 				_buttons[_activeX][_activeY].setAusgewaehlt(true);
 				informiereBeobachter(false);
-	
+
 				if(lastClickedButton == arg0.getSource())
 				{
 					if(arg0.getWhen() - lastButtonClick < 500)

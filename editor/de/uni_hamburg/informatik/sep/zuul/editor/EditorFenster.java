@@ -99,36 +99,40 @@ public class EditorFenster implements EditorBeobachter
 						}
 					}
 				});
-		
-		_ui.getMenuBar().getPathfindingButton().addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				_pathDisplay = !_pathDisplay;
-				if(_pathDisplay)
+
+		_ui.getMenuBar().getPathfindingButton()
+				.addActionListener(new ActionListener()
 				{
-					//macht Pathfinding
-					_speicherWerkzeug.valide();
-				}
-				
-				GridButton[][] buttons = _ui.getMap().getButtonArray();
-				for(GridButton[] line : buttons)
-				{
-					for(GridButton button : line)
+					@Override
+					public void actionPerformed(ActionEvent e)
 					{
-						Raum raum = button.getRaum();
-						if(raum != null)
+						_pathDisplay = !_pathDisplay;
+						if(_pathDisplay)
 						{
-							button.setText(_pathDisplay ? raum.getPathToFinishLength() : raum.getName());
-							button.setEnabled(!_pathDisplay);
+							//macht Pathfinding
+							_speicherWerkzeug.valide();
 						}
+
+						GridButton[][] buttons = _ui.getMap().getButtonArray();
+						for(GridButton[] line : buttons)
+						{
+							for(GridButton button : line)
+							{
+								Raum raum = button.getRaum();
+								if(raum != null)
+								{
+									button.setText(_pathDisplay ? raum
+											.getPathToFinishLength() : raum
+											.getName());
+									button.setEnabled(!_pathDisplay);
+								}
+							}
+						}
+
+						((JButton) e.getSource())
+								.setText(_pathDisplay ? "zurück" : "Pathfinder");
 					}
-				}
-				
-				((JButton)e.getSource()).setText(_pathDisplay ? "zurück" : "Pathfinder");
-			}
-		});
+				});
 
 		_ui.getMenuBar().getLadenButton()
 				.addActionListener(new ActionListener()

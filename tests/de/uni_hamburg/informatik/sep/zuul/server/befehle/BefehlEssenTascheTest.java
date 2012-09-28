@@ -70,7 +70,8 @@ public class BefehlEssenTascheTest
 		assertEquals(15, spieler.getLebensEnergie());
 		BefehlEssenTasche.esseKuchen(kontext, spieler, Item.IGiftkuchen);
 		assertEquals(14, spieler.getLebensEnergie());
-		assertTrue(BefehlEssenTasche.esseKuchen(kontext, spieler2, Item.IGiftkuchen));
+		assertTrue(BefehlEssenTasche.esseKuchen(kontext, spieler2,
+				Item.IGiftkuchen));
 		assertEquals(0, spieler2.getLebensEnergie());
 		assertEquals(
 				TextVerwalter.KUCHENTODTEXT,

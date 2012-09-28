@@ -75,9 +75,9 @@ public class EditorMenuBar extends JPanel
 	{
 		return _resize;
 	}
-	
+
 	/**
-	 * Gibt den Pathfinding-Button zurück. 
+	 * Gibt den Pathfinding-Button zurück.
 	 * 
 	 * @ensure result != null
 	 */

@@ -17,10 +17,11 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
-public class SpielTest {
-	
+public class SpielTest
+{
+
 	Spiel _testSpiel;
-	
+
 	@Before
 	public void setUp()
 	{
@@ -28,41 +29,45 @@ public class SpielTest {
 	}
 
 	@Test
-	public void testSpiel() {
+	public void testSpiel()
+	{
 		assertNotNull(_testSpiel);
 		assertFalse(_testSpiel.isGestartet());
 	}
 
 	@Test
-	public void testMeldeSpielerAn() {
+	public void testMeldeSpielerAn()
+	{
 		String name = "name";
 		_testSpiel.meldeSpielerAn(name);
 		//wenn der Spieler erfolgreich angemeldet wurde, gibt es ihn im System
 		//also können wir paekte packen
 		assertNotNull(_testSpiel.packePaket(name));
-		
+
 		_testSpiel.meldeSpielerAn(name); //es darf keinen Fehler geben
 		assertNotNull(_testSpiel.packePaket(name));
 	}
 
 	@Test
-	public void testMeldeSpielerAb() {
+	public void testMeldeSpielerAb()
+	{
 		String name = "name";
 		_testSpiel.meldeSpielerAb(name); //es darf keinen fehler geben
-		
+
 		_testSpiel.meldeSpielerAn(name);
 		//wenn der Spieler erfolgreich angemeldet wurde, gibt es ihn im System
 		//also können wir paekte packen
 		assertNotNull(_testSpiel.packePaket(name));
-		
+
 		_testSpiel.meldeSpielerAb(name);
 		//noch nicht testbar!!
 		//TODO testen!
-		
+
 	}
 
 	@Test
-	public void testBeendeSpiel() {
+	public void testBeendeSpiel()
+	{
 		assertFalse(_testSpiel.isGestartet());
 		_testSpiel.spielen();
 		assertTrue(_testSpiel.isGestartet());
@@ -71,19 +76,22 @@ public class SpielTest {
 	}
 
 	@Test
-	public void testSpielen() {
+	public void testSpielen()
+	{
 		assertFalse(_testSpiel.isGestartet());
 		_testSpiel.spielen();
 		assertTrue(_testSpiel.isGestartet());
 	}
 
 	@Test
-	public void testVerarbeiteEingabe() {
+	public void testVerarbeiteEingabe()
+	{
 		//TODO untestbar bei jetziger impl!! 
 	}
 
 	@Test
-	public void testRestart() {
+	public void testRestart()
+	{
 		assertFalse(_testSpiel.isGestartet());
 		_testSpiel.spielen();
 		assertTrue(_testSpiel.isGestartet());
@@ -92,72 +100,76 @@ public class SpielTest {
 	}
 
 	@Test
-	public void testPackePaket() {
+	public void testPackePaket()
+	{
 		String name = "spielername";
-		
+
 		_testSpiel.meldeSpielerAn(name);
 		ClientPaket paket = _testSpiel.packePaket(name);
-		
+
 		assertNotNull(paket);
 		//TODO in clientpaket test tun...
-//		assertEquals(8, paket.getLebensEnergie());
-//		assertEquals(name, paket.getSpielerName());
-//		assertEquals(any(Boolean.class), paket.hasKatze());
-//		assertEquals(any(Boolean.class), paket.hasMaus());
-//		assertEquals(RaumArt.Start, paket.getRaumArt());
-//		assertEquals(1, paket.getAndereSpieler().size());
-		
-		
-		
+		//		assertEquals(8, paket.getLebensEnergie());
+		//		assertEquals(name, paket.getSpielerName());
+		//		assertEquals(any(Boolean.class), paket.hasKatze());
+		//		assertEquals(any(Boolean.class), paket.hasMaus());
+		//		assertEquals(RaumArt.Start, paket.getRaumArt());
+		//		assertEquals(1, paket.getAndereSpieler().size());
+
 	}
 
 	@Test
-	public void testPackeVorschauPaket() {
+	public void testPackeVorschauPaket()
+	{
 		String name = "name";
 		_testSpiel.meldeSpielerAn(name);
-		
-		ClientPaket paket = _testSpiel.packeVorschauPaket(name, TextVerwalter.RICHTUNG_NORDEN);
-		
+
+		ClientPaket paket = _testSpiel.packeVorschauPaket(name,
+				TextVerwalter.RICHTUNG_NORDEN);
+
 		assertNotNull(paket);
-		
+
 	}
 
 	@Test
-	public void testVersucheBefehlAusfuehrung() {
+	public void testVersucheBefehlAusfuehrung()
+	{
 		Spieler s = mock(Spieler.class);
 		ServerKontext kon = mock(ServerKontext.class);
 		Befehlszeile zeile = mock(Befehlszeile.class);
 		Befehl bef = mock(Befehl.class);
-		
+
 		Spiel.versucheBefehlAusfuehrung(kon, s, zeile, bef);
 		verify(bef, atLeastOnce()).vorbedingungErfuellt(kon, s, zeile);
-		
+
 		when(bef.vorbedingungErfuellt(kon, s, zeile)).thenReturn(true);
 		Spiel.versucheBefehlAusfuehrung(kon, s, zeile, bef);
 		verify(bef, atLeastOnce()).ausfuehren(kon, s, zeile);
-		
+
 		when(bef.vorbedingungErfuellt(kon, s, zeile)).thenReturn(false);
 		Spiel.versucheBefehlAusfuehrung(kon, s, zeile, bef);
 		verify(bef, atLeastOnce()).gibFehlerAus(kon, s, zeile);
-		
+
 	}
 
 	@Test
-	public void testIsGestartet() {
+	public void testIsGestartet()
+	{
 		assertFalse(_testSpiel.isGestartet());
 		_testSpiel.setGestartet(true);
 		assertTrue(_testSpiel.isGestartet());
-		
+
 	}
 
 	@Test
-	public void testSetGestartet() {
+	public void testSetGestartet()
+	{
 		assertFalse(_testSpiel.isGestartet());
 		_testSpiel.setGestartet(true);
 		assertTrue(_testSpiel.isGestartet());
 		_testSpiel.setGestartet(false);
 		assertFalse(_testSpiel.isGestartet());
-		
-		}
+
+	}
 
 }

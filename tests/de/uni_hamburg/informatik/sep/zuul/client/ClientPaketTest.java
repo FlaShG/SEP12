@@ -55,9 +55,8 @@ public class ClientPaketTest
 		{
 			String befehlsname = entry.getKey();
 			Befehl befehl = entry.getValue();
-			boolean befehlVerfuegbar = false ? false : befehl
-					.vorbedingungErfuellt(kontext, spieler, new Befehlszeile(
-							befehlsname));
+			boolean befehlVerfuegbar = befehl.vorbedingungErfuellt(kontext,
+					spieler, new Befehlszeile(befehlsname));
 			verfuegbareBefehle.put(befehlsname, befehlVerfuegbar);
 		}
 		cp = new ClientPaket(kontext, spieler, "Ich CP");
