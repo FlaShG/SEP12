@@ -9,6 +9,7 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.SpielKonstanten;
 import de.uni_hamburg.informatik.sep.zuul.server.spiel.Spieler;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
@@ -58,9 +59,17 @@ public class BeinStellen implements BefehlAusfuehrenListener, Befehl, Feature
 				@Override
 				public void run()
 				{
-					fremderSpieler.setAktiv(true);
-					kontext.schreibeAnSpieler(fremderSpieler,
-							TextVerwalter.BEINSTELLEN_AUFSTEHEN);
+					ServerManager.invokeLater(new Runnable()
+					{
+
+						@Override
+						public void run()
+						{
+							fremderSpieler.setAktiv(true);
+							kontext.schreibeAnSpieler(fremderSpieler,
+									TextVerwalter.BEINSTELLEN_AUFSTEHEN);
+						}
+					});
 
 				}
 			}, SpielKonstanten.BEIN_STELLEN_INAKTIV_ZEIT

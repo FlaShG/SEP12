@@ -95,8 +95,7 @@ public class StartUp
 		{
 			StartUp.main(StartUp._param);
 		}
-		catch(NumberFormatException | RemoteException | MalformedURLException
-				| AlreadyBoundException | NotBoundException e)
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

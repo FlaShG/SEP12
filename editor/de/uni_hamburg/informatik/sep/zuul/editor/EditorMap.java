@@ -225,6 +225,9 @@ public class EditorMap extends JPanel
 		_buttons = neueButtons;
 	}
 
+	//doubleclick-a-doo
+	private Object lastClickedButton = null;
+	private long lastButtonClick = 0;
 	private void initialisiereButton(GridButton button, int x, int y)
 	{
 		button.addActionListener(new ActionListener()
@@ -233,6 +236,7 @@ public class EditorMap extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
+				System.out.println("lo");
 				if(buttonAusgewaehlt())
 				{
 					_buttons[_activeX][_activeY].setAusgewaehlt(false);
@@ -241,22 +245,20 @@ public class EditorMap extends JPanel
 				_activeY = ((GridButton) arg0.getSource()).getGridY();
 				_buttons[_activeX][_activeY].setAusgewaehlt(true);
 				informiereBeobachter(false);
-			}
-		});
-
-		button.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent arg0)
-			{
-				if(arg0.getClickCount() == 2)
+	
+				if(lastClickedButton == arg0.getSource())
 				{
-					if(_buttons[_activeX][_activeY].getRaum() == null)
+					if(arg0.getWhen() - lastButtonClick < 500)
 					{
-						_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
-						informiereBeobachter(true);
+						if(_buttons[_activeX][_activeY].getRaum() == null)
+						{
+							_buttons[_activeX][_activeY].fuegeLeerenRaumHinzu();
+							informiereBeobachter(true);
+						}
 					}
 				}
+				lastClickedButton = arg0.getSource();
+				lastButtonClick = arg0.getWhen();
 			}
 		});
 
@@ -306,7 +308,7 @@ public class EditorMap extends JPanel
 						}
 					}
 				}
-				if(!moved && dragDropSource != null)
+				if(!moved && dragDropSource != null && dragDropTarget != null)
 				{
 					dragDropSource.setAusgewaehlt(true);
 				}

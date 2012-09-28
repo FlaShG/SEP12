@@ -221,7 +221,10 @@ public class StartFenster extends StartUp
 			}
 		};
 
-		Thread rmiThread = new Thread(run, "ZuulRMIThread");
-		rmiThread.start();
+		//		SwingUtilities.invokeLater(run);
+		run.run();
+
+		//		Thread rmiThread = new Thread(run, "ZuulRMIThread");
+		//		rmiThread.start();
 	}
 }

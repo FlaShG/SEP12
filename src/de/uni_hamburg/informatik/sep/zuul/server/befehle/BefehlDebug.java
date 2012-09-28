@@ -43,7 +43,8 @@ public class BefehlDebug implements Befehl
 			for(Spieler fremderSpieler : kontext.getSpielerListe())
 			{
 				kontext.schreibeAnSpieler(spieler, fremderSpieler.getName()
-						+ ": " + kontext.getAktuellenRaumZu(spieler).getName());
+						+ ": "
+						+ kontext.getAktuellenRaumZu(fremderSpieler).getName());
 			}
 		}
 		if("lebensenergie".equals(string))

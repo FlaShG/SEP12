@@ -6,8 +6,6 @@ import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.SwingUtilities;
-
 import de.uni_hamburg.informatik.sep.zuul.client.ClientPaket;
 import de.uni_hamburg.informatik.sep.zuul.client.ClientVorschauPaket;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehl;
@@ -16,16 +14,17 @@ import de.uni_hamburg.informatik.sep.zuul.server.befehle.BefehlSchauen;
 import de.uni_hamburg.informatik.sep.zuul.server.befehle.Befehlszeile;
 import de.uni_hamburg.informatik.sep.zuul.server.raum.Raum;
 import de.uni_hamburg.informatik.sep.zuul.server.util.ServerKontext;
+import de.uni_hamburg.informatik.sep.zuul.server.util.ServerManager;
 import de.uni_hamburg.informatik.sep.zuul.server.util.TextVerwalter;
 
 /**
- * Erstelle ein neues Spiel, bestehend aus Spielern und einer Spiellogik. 
- * Spieler können an- und abgemeldet werden. Es werden alle weiteren Vorgänge 
- * die zum Spielen nötig sind angestoßen und können auch wieder beendet werden. 
+ * Erstelle ein neues Spiel, bestehend aus Spielern und einer Spiellogik.
+ * Spieler können an- und abgemeldet werden. Es werden alle weiteren Vorgänge
+ * die zum Spielen nötig sind angestoßen und können auch wieder beendet werden.
  * Ein Spiel wird vom erzeugenden Server beobachtet.
  * 
  * @author 0ortmann
- *
+ * 
  */
 public class Spiel extends Observable
 {
@@ -130,6 +129,8 @@ public class Spiel extends Observable
 		{
 			BefehlFactory.gibBefehl(befehlszeile).ausfuehren(
 					_logik.getKontext(), spieler, befehlszeile);
+			setGestartet(false);
+
 			return;
 		}
 
@@ -236,13 +237,13 @@ public class Spiel extends Observable
 		return _gestartet;
 	}
 
-	TimerTask _tickTimer = new TimerTask()
+	private final TimerTask _tickTimerTask = new TimerTask()
 	{
 
 		@Override
 		public void run()
 		{
-			SwingUtilities.invokeLater(new Runnable()
+			ServerManager.invokeLater(new Runnable()
 			{
 
 				@Override
@@ -255,6 +256,7 @@ public class Spiel extends Observable
 			});
 		}
 	};
+	private Timer _timer;
 
 	/**
 	 * @param gestartet
@@ -264,11 +266,12 @@ public class Spiel extends Observable
 	{
 		if(!gestartet && _gestartet)
 		{
-			_tickTimer.cancel();
+			_timer.cancel();
 		}
 		else if(gestartet && !_gestartet)
 		{
-			new Timer().schedule(_tickTimer, SpielKonstanten.ONE_SECOND,
+			_timer = new Timer();
+			_timer.schedule(_tickTimerTask, SpielKonstanten.ONE_SECOND,
 					SpielKonstanten.ONE_SECOND);
 		}
 		_gestartet = gestartet;

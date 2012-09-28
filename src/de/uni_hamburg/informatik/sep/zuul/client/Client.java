@@ -72,9 +72,9 @@ public abstract class Client extends UnicastRemoteObject implements
 		}
 	}
 
-	@Override
 	public void logout() throws RemoteException
 	{
+		// TODO returns always true
 		if(!_server.logoutClient(_clientName))
 		{
 			System.err.println("Fehler beim Ausloggen!");
